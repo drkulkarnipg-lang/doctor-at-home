@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor & Emergency Specialist, Pune</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0F2942',
+            petalcream: '#FAF7EE',
+            petalcard: '#FFFDF9',
+            clinicalteal: '#0D9488',
+          },
+          fontFamily: {
+            serif: ['Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF7EE; color: #0F2942; font-family: 'Inter', sans-serif; }
+    .serif-brand { font-family: 'Georgia', serif; }
+    .petal-border { border-color: #E6DCCD; }
+    .petal-box { background-color: #FFFDF9; border: 1px solid #E6DCCD; }
+    
+    @media print {
+      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop { display: none !important; }
+      body { background: #ffffff !important; color: #000000 !important; margin: 0 !important; padding: 0 !important; }
+      main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+      .printable-sheet { border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+      @page { size: A4 portrait; margin: 8mm; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchWorkspace('public')">
+        <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center p-0.5 shadow-sm overflow-hidden flex-shrink-0">
+          <img src="logo.png" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png';" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-cover rounded-full">
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-xl font-bold serif-brand tracking-tight text-[#0F2942]">DR. PRAMOD G. KULKARNI</h1>
+            <span class="bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full animate-pulse uppercase">24/7 Bedside ICU</span>
+          </div>
+          <p class="text-xs font-semibold text-[#0D9488]" id="navSubtitle">Home Visiting ICU Doctor &amp; Emergency Specialist</p>
+          <p class="text-[10px] text-slate-600">BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg: I-24809-A-1 | Dhayari, Pune</p>
+        </div>
+      </div>
+
+      <div class="flex items-center flex-wrap gap-2">
+        <div class="bg-white p-1 rounded-2xl flex border petal-border text-xs font-semibold shadow-sm">
+          <button id="navPublicBtn" onclick="switchWorkspace('public')" class="px-3.5 py-1.5 rounded-xl bg-[#0F2942] text-white shadow font-bold transition">
+            🌐 <span id="lblPatientPortal">Patient Portal</span>
+          </button>
+          <button id="navDoctorBtn" onclick="verifyAndOpenWorkstation()" class="px-3.5 py-1.5 rounded-xl text-[#0F2942] hover:bg-slate-100 font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-stethoscope text-teal-600"></i> <span id="lblDoctorWorkstation">Doctor Workstation</span>
+          </button>
+        </div>
+
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white border petal-border text-[#0F2942] font-semibold text-xs px-2.5 py-1.5 rounded-xl shadow-sm outline-none cursor-pointer">
+          <option value="en" selected>English</option>
+          <option value="mr">मराठी (Native)</option>
+          <option value="hi">हिंदी</option>
+        </select>
+
+        <button onclick="openPinManagerModal()" title="Security & PIN" class="bg-white border petal-border hover:bg-slate-100 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
+          <i class="fa-solid fa-key text-teal-700"></i> <span class="hidden sm:inline">PIN</span>
+        </button>
+
+        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&q=Dr+Pramod+G+Kulkarni%2CEmergency+and+HomeCare+Specialist" target="_blank" class="bg-white hover:bg-slate-100 border petal-border text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
+          <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden md:inline">GMB Pune</span>
+        </a>
+
+        <a href="tel:+919822594341" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition">
+          <i class="fa-solid fa-phone"></i> <span>9822594341</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
+  <main id="publicPortal" class="flex-grow max-w-7xl mx-auto px-4 py-8 space-y-10 w-full">
+    <div class="petal-box p-6 md:p-10 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-8 shadow-sm">
+      <div class="space-y-3.5 max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
+          <span>⚡ 24x7 Bedside ICU, Palliative &amp; Emergency Care at Home</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold serif-brand text-[#0F2942] tracking-tight leading-tight" id="heroHeadline">
+          Hospital-Grade ICU Care at Your Bedside in Pune
+        </h2>
+        <p class="text-slate-700 text-sm md:text-base leading-relaxed" id="heroSubtitle">
+          Prioritizing patient recovery, personal dignity, and compassionate bedside guidance over commercial hospital bills. Managed personally by <strong>Dr. Pramod G. Kulkarni</strong> across all Pune localities.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button onclick="openCredentialsModal()" class="text-xs bg-white hover:bg-slate-50 text-[#0F2942] border petal-border px-4 py-2.5 rounded-xl font-semibold shadow-sm">
+            📜 Credentials &amp; MCIM Reg.
+          </button>
+          <a href="#calculatorSection" class="text-xs bg-[#0D9488] hover:bg-teal-700 text-white px-4 py-2.5 rounded-xl font-bold shadow-sm">
+            💰 Bedside Visit Fee Calculator
+          </a>
+          <button onclick="verifyAndOpenWorkstation()" class="text-xs bg-[#0F2942] text-white px-4 py-2.5 rounded-xl font-bold shadow-sm">
+            🩺 Doctor Workstation
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-amber-50/70 border border-amber-200 p-6 rounded-3xl text-xs space-y-3 w-full md:w-80 shadow-sm flex-shrink-0">
+        <p class="font-bold text-amber-950 text-sm">📍 Base Station &amp; Dispatch:</p>
+        <p class="text-amber-900 font-semibold">Dhayari, Pune – 411041, Maharashtra.</p>
+        <p class="text-slate-600">Average Reach Time: 30–60 mins across Pune based on distance.</p>
+        <div class="pt-2 border-t border-amber-200">
+          <a href="https://wa.me/919822594341?text=Hello%20Dr.%20Kulkarni,%20I%20require%20urgent%20home%20ICU%20consultation%20in%20Pune." class="w-full bg-[#16A34A] hover:bg-green-700 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 shadow transition">
+            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Dr. Kulkarni
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Calculator -->
+    <section id="calculatorSection" class="petal-box p-8 rounded-3xl shadow-sm">
+      <div class="max-w-4xl">
+        <h3 class="text-2xl font-bold serif-brand text-[#0F2942]">Transparent Home Visit Fee &amp; Instant UPI Payment</h3>
+        <p class="text-xs text-slate-600 mb-6">Calculated from Base: <strong>Dhayari, Pune 411041</strong>. No hidden commercial charges.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="md:col-span-2 space-y-4 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="font-bold text-slate-700">Time of Visit:</label>
+                <select id="calcTime" onchange="calculateFee()" class="w-full mt-1 p-2.5 border petal-border rounded-xl bg-white font-medium">
+                  <option value="1200">Daytime (08:00 - 20:00) — ₹1,200</option>
+                  <option value="1440">Evening (20:00 - 23:00) — ₹1,440</option>
+                  <option value="1680">Late Night ICU Emergency (23:00 - 05:00) — ₹1,680</option>
+                  <option value="1440">Early Morning (05:00 - 08:00) — ₹1,440</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700">Distance from Dhayari (411041):</label>
+                <select id="calcDistance" onchange="calculateFee()" class="w-full mt-1 p-2.5 border petal-border rounded-xl bg-white font-medium">
+                  <option value="0">Within 5 km (Dhayari, Narhe, Vadgaon) — ₹0</option>
+                  <option value="300">6 to 10 km (Warje, Kothrud, Sinhagad Rd) — +₹300</option>
+                  <option value="600">11 to 15 km (Shivajinagar, Camp, Bibwewadi) — +₹600</option>
+                  <option value="900">16 to 20 km (Aundh, Baner, Hadapsar, Katraj) — +₹900</option>
+                  <option value="1200">21 to 25 km (Wakad, Hinjawadi, Viman Nagar) — +₹1,200</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t petal-border">
+              <p class="font-bold text-slate-700 mb-2">Bedside Procedures / Consumables (Optional):</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <label class="flex items-center gap-2"><input type="checkbox" id="procFoley" value="700" onchange="calculateFee()"> Foley Catheterization (+₹700)</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="procRT" value="700" onchange="calculateFee()"> Ryle's Tube Insertion (+₹700)</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="procIV" value="1000" onchange="calculateFee()"> IV Fluid + Cannula Infusion (+₹1,000)</label>
+                <label class="flex items-center gap-2 text-red-700 font-bold"><input type="checkbox" id="procEmergency" value="500" onchange="calculateFee()"> 🚨 Priority Immediate Emergency (+₹500)</label>
+              </div>
+            </div>
+
+            <div class="p-4 bg-teal-50 border border-teal-200 rounded-2xl flex justify-between items-center">
+              <div>
+                <span class="text-xs text-slate-600 block">Total Calculated Fee:</span>
+                <div class="text-3xl font-bold text-[#0F2942]" id="totalFeeDisplay">₹1,200</div>
+              </div>
+              <button onclick="bookViaWhatsApp()" class="bg-[#16A34A] hover:bg-green-700 text-white font-bold px-4 py-2.5 rounded-xl shadow flex items-center gap-2 text-xs">
+                <i class="fa-brands fa-whatsapp text-base"></i> Confirm on WhatsApp
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white border petal-border p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
+            <span class="text-xs font-bold text-[#0F2942] uppercase tracking-wide">Scan &amp; Pay via UPI</span>
+            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26cu%3DINR" alt="UPI QR Code" class="w-36 h-36 border p-1 rounded-xl bg-white shadow-sm">
+            <p class="font-mono text-xs font-bold text-slate-800">9561394341@sbi</p>
+            <p class="text-[10px] text-slate-500">Google Pay / PhonePe / Paytm / BHIM</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public Guidance Articles -->
+    <section class="petal-box p-8 rounded-3xl space-y-4 shadow-sm">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-2xl font-bold serif-brand text-[#0F2942]" id="lblArticlesTitle">Patient Guidance &amp; Diet Protocols</h3>
+          <p class="text-xs text-slate-600">Bedside education written by Dr. Pramod G. Kulkarni for Pune families.</p>
+        </div>
+      </div>
+      <div id="publicArticlesList" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- Direct International Links (Cleveland, Mayo, MSD) -->
+    <section class="bg-slate-100/90 p-6 rounded-3xl border petal-border text-xs space-y-3">
+      <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Verified International Health &amp; Guidance Portals</h3>
+      <div class="flex flex-wrap gap-2.5">
+        <a href="https://my.clevelandclinic.org/" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          🏥 Cleveland Clinic Health Library
+        </a>
+        <a href="https://www.mayoclinic.org/" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          🏥 Mayo Clinic Patient Care
+        </a>
+        <a href="https://www.msdmanuals.com/home" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          📚 MSD Manuals Consumer Version
+        </a>
+        <a href="https://www.testing.com/" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          🧪 Testing.com (Lab Test Guides)
+        </a>
+        <a href="https://www.radiologyinfo.org/" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          ☢️ RadiologyInfo.org
+        </a>
+        <a href="https://www.nice.org.uk/guidance" target="_blank" class="px-3.5 py-2 bg-white border petal-border rounded-xl shadow-sm font-semibold hover:text-teal-800 transition flex items-center gap-1.5">
+          🇬🇧 NICE UK Guidance
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0F2942] text-slate-300 p-8 rounded-3xl text-xs space-y-4 shadow-md">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 border-b border-slate-700/80 pb-6">
+        <div>
+          <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">DR. PRAMOD G. KULKARNI</h4>
+          <p class="text-slate-300">Home Visiting ICU Doctor &amp; Emergency Specialist</p>
+          <p class="text-slate-400">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
+          <p class="text-teal-300 font-semibold mt-1">MCIM Mumbai Reg. No: I-24809-A-1</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">CLINICAL BASE &amp; REACH</h4>
+          <p class="text-slate-300">Base Station: Dhayari, Pune – 411041, Maharashtra</p>
+          <p class="text-slate-300">Rapid Reach: 30–60 mins across Pune &amp; PCMC</p>
+          <p class="text-slate-300">Direct Helpline: +91 9822594341</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">STATUTORY &amp; AUTOMATION READY</h4>
+          <p class="text-slate-300">Make.com &amp; n8n Webhook compatible architecture</p>
+          <p class="text-slate-300">Compliant with Telemedicine Guidelines of India</p>
+        </div>
+      </div>
+      <div class="text-[11px] text-slate-400 leading-relaxed space-y-2">
+        <p><strong>LEGAL &amp; CLINICAL DISCLAIMER:</strong> Bedside consultation, triage, and home ICU protocols are provided strictly in compliance with MCIM ethical guidelines. In acute life-threatening cardiopulmonary emergencies, families are advised to dial 108 or transfer immediately to the nearest tertiary emergency hospital.</p>
+        <p class="text-center text-slate-500 pt-2">© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
+  <main id="doctorWorkstation" class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6">
+    <div class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print">
+      <button onclick="switchDocTab('rxPad')" id="tabRx" class="px-4 py-2 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow">📝 A4 Prescription Pad</button>
+      <button onclick="switchDocTab('pathReq')" id="tabPath" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🩸 Pathology Requisition</button>
+      <button onclick="switchDocTab('radReq')" id="tabRad" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">☢️ Radiology Requisition</button>
+      <button onclick="switchDocTab('chart20')" id="tabChart" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📈 20-Day Trend &amp; Ref Values</button>
+      <button onclick="switchDocTab('clinicalCertificates')" id="tabCertificates" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📜 Referral, Leave &amp; Bills</button>
+      <button onclick="switchDocTab('legalForms')" id="tabLegal" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚖️ Death Certificates (4A, 4, 2)</button>
+      <button onclick="switchDocTab('drugDir')" id="tabDrug" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">💊 150+ Formulary (with PPIs)</button>
+      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Articles Manager</button>
+      <button onclick="switchDocTab('journalsHub')" id="tabJournals" class="px-4 py-2 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🔬 Cleveland, Mayo &amp; Feedly</button>
+    </div>
+
+    <!-- TAB 1: PRESCRIPTION PAD -->
+    <div id="viewRxPad" class="space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border shadow-sm">
+        <div class="flex items-center gap-2">
+          <input type="text" id="rxPatPhone" placeholder="Patient 10-Digit Mobile No." class="text-xs border p-1.5 rounded-lg w-48 font-mono outline-none">
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <select onchange="insertDietPreset(this.value)" class="text-xs bg-amber-50 border border-amber-300 text-amber-900 font-semibold rounded-xl px-3 py-1.5">
+            <option value="">⚡ "Doctor as Coach" Preset...</option>
+            <option value="chf">हार्ट फेल्युअर (Fluid &lt;1.2L &amp; Daily Weight)</option>
+            <option value="ckd">CKD (Leached Veg, Zero Coconut Water, Low K+)</option>
+            <option value="stroke">Dysphagia (45°-90° Feeding Posture)</option>
+            <option value="bedsore">Bedridden (Q2H Turning, Air-Mattress)</option>
+          </select>
+          <button id="btnSaveRx" onclick="saveActiveRecord()" class="bg-[#16A34A] hover:bg-green-700 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow">💾 Save Record</button>
+          <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow">🖨️ Print A4 PDF</button>
+          <button onclick="shareCompletePrescriptionWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-sm"></i> <span>Send Full Rx WhatsApp</span>
+          </button>
+          <button onclick="openAiSecondOpinionModal()" class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1.5">
+            <i class="fa-solid fa-brain text-amber-200"></i> <span>ChatGPT / Claude</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- A4 Sheet -->
+      <div class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div class="flex items-center gap-3">
+            <div class="w-14 h-14 rounded-full border border-slate-300 bg-white flex items-center justify-center p-0.5 overflow-hidden flex-shrink-0">
+              <img src="logo.png" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png';" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-cover rounded-full">
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+              <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
+              <p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | Maharashtra Council of Indian Medicine (MCIM), Mumbai</p>
+              <p class="text-[11px] text-slate-600">Base: Dhayari, Pune – 411041 | Emergency: <strong>+91 9822594341</strong> | Email: Drkulkarnipg@gmail.com</p>
+            </div>
+          </div>
+          <div class="text-right text-[11px] text-slate-500">
+            <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded text-[10px] uppercase">Bedside ICU Care</span>
+            <p class="mt-1 font-semibold text-[#0F2942]">Pune 24x7 Emergency</p>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border-l-4 border-red-600 p-2 rounded-r-xl text-red-900 font-bold flex items-center justify-between">
+          <span>⚠️ KNOWN DRUG ALLERGIES:</span>
+          <input type="text" id="rxAllergies" value="NKDA (No Known Drug Allergies)" class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none">
+        </div>
+
+        <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3.5 rounded-2xl border petal-border">
+          <div><label class="text-[10px] text-slate-500">Patient Name:</label><input type="text" id="rxPatName" placeholder="Full Name" class="w-full font-bold bg-white p-1 border rounded-lg"></div>
+          <div><label class="text-[10px] text-slate-500">Age / Gender:</label><input type="text" id="rxPatAge" placeholder="e.g. 68 Y / Male" class="w-full bg-white p-1 border rounded-lg"></div>
+          <div><label class="text-[10px] text-slate-500">Date &amp; Time:</label><input type="text" id="rxDateTime" class="w-full bg-white p-1 border rounded-lg font-mono"></div>
+          <div><label class="text-[10px] text-slate-500">Pune Locality:</label><input type="text" id="rxPatLoc" placeholder="e.g. Dhayari, Kothrud" class="w-full bg-white p-1 border rounded-lg"></div>
+
+          <div class="col-span-4 grid grid-cols-6 gap-2 pt-2.5 border-t mt-1 text-center">
+            <div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input type="text" id="vPulse" placeholder="78" class="w-full text-center bg-white p-1 border rounded-lg font-bold"></div>
+            <div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input type="text" id="vBP" placeholder="130/80" class="w-full text-center bg-white p-1 border rounded-lg font-bold"></div>
+            <div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input type="text" id="vSpO2" placeholder="98%" class="w-full text-center bg-white p-1 border rounded-lg font-bold"></div>
+            <div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input type="text" id="vTemp" placeholder="98.4" class="w-full text-center bg-white p-1 border rounded-lg"></div>
+            <div class="bg-amber-100/60 rounded-lg p-0.5"><label class="text-[10px] text-amber-900 font-bold block">GRBS (mg/dL)</label><input type="text" id="vGRBS" placeholder="140" class="w-full text-center bg-white p-1 border rounded-lg font-bold text-amber-950"></div>
+            <div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input type="text" id="vRR" placeholder="18" class="w-full text-center bg-white p-1 border rounded-lg"></div>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold text-[#0F2942]">Chief Complaints (C/o) &amp; Bedside Clinical Findings:</label>
+          <textarea id="rxComplaints" rows="2" placeholder="e.g. Acute breathlessness, bilateral crepitations, धडधड चालू असते..." class="w-full p-2 border rounded-xl mt-1"></textarea>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-[#0F2942] text-sm">℞ MEDICATIONS PRESCRIBED:</span>
+            <button type="button" onclick="openDrugModal(null)" class="no-print bg-[#0D9488] text-white text-[11px] px-2.5 py-1 rounded-lg shadow">+ Select from 150+ Formulary</button>
+          </div>
+          <table class="w-full border-collapse border border-slate-300 text-[11px]" id="rxTable">
+            <thead class="bg-slate-100 text-slate-700">
+              <tr>
+                <th class="border p-1 w-8 text-center">#</th>
+                <th class="border p-1 text-left">Medicine Name &amp; Strength (Type freely or click 🔍)</th>
+                <th class="border p-1 w-24">Timing</th>
+                <th class="border p-1 w-20">Freq</th>
+                <th class="border p-1 w-16">Days</th>
+                <th class="border p-1">Instructions</th>
+                <th class="border p-1 w-8 text-center no-print">Del</th>
+              </tr>
+            </thead>
+            <tbody id="rxTableBody"></tbody>
+          </table>
+          <button type="button" onclick="addRxRow()" class="no-print text-xs text-[#0D9488] font-bold mt-1.5">+ Add Medicine Row</button>
+        </div>
+
+        <div>
+          <label class="font-bold text-[#0F2942]">Bedside Nursing &amp; Dietary Advice:</label>
+          <textarea id="rxAdvice" rows="2" class="w-full p-2 border rounded-xl mt-1" placeholder="Dietary restrictions, fluid limits, positioning..."></textarea>
+        </div>
+
+        <div class="pt-4 border-t flex justify-between items-end">
+          <div>
+            <p><strong>Next Review:</strong> <input type="text" id="rxFollowUp" value="After 3 Days / SOS in emergency" class="border-b px-1 font-semibold"></p>
+            <p class="text-[10px] text-red-600 mt-1">⚠️ In emergency (severe breathlessness / chest pain), call 9822594341 immediately.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+            <p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PATHOLOGY -->
+    <div id="viewPathReq" class="hidden space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print">
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Investigation Requisition</h3>
+        <div class="flex gap-2">
+          <button onclick="sharePathologyWhatsApp()" class="bg-emerald-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold shadow flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp"></i> Share Lab Tests WhatsApp
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow">🖨️ Print Slip</button>
+        </div>
+      </div>
+
+      <div class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
+            <p class="text-[11px] text-slate-700">BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
+          </div>
+          <span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">Pathology Requisition</span>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-2xl no-print">
+          <p class="font-bold text-amber-900 mb-2">⚡ 1-Click Symptom Bundles:</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button onclick="selectBundle('fever')" class="px-2.5 py-1 bg-white border border-amber-300 rounded-lg font-semibold">🌡️ AFI / Fever</button>
+            <button onclick="selectBundle('chest')" class="px-2.5 py-1 bg-white border border-amber-300 rounded-lg font-semibold">🫁 Breathlessness</button>
+            <button onclick="selectBundle('cardiac')" class="px-2.5 py-1 bg-white border border-amber-300 rounded-lg font-semibold">❤️ Cardiac</button>
+            <button onclick="selectBundle('neuro')" class="px-2.5 py-1 bg-white border border-amber-300 rounded-lg font-semibold">🧠 Stroke / Neuro</button>
+            <button onclick="selectBundle('sepsis')" class="px-2.5 py-1 bg-white border border-amber-300 rounded-lg font-semibold">🩸 Sepsis</button>
+            <button onclick="clearAllTests()" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg font-semibold">Clear</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border">
+          <div>Patient: <input type="text" id="reqPatName" placeholder="Name" class="font-bold bg-transparent border-b"></div>
+          <div>Age/Sex: <input type="text" id="reqPatAge" placeholder="Age/Sex" class="bg-transparent border-b"></div>
+          <div>Date: <input type="text" id="reqDate" class="bg-transparent border-b"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 border p-3.5 rounded-2xl">
+          <div class="space-y-1">
+            <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Iron (Ref Range):</p>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_cbc" value="CBC + Platelets"> CBC (Hb 12-16, TLC 4-11k, Plt 1.5-4.5L)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_esr" value="ESR"> ESR (Westergren: 0-20 mm/hr)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_pt" value="PT/INR"> PT / INR (Normal INR 0.8-1.2)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_iron" value="Iron Studies (Ferritin/TIBC)"> Iron Studies (Ferritin: 30-300 ng/mL)</label>
+          </div>
+          <div class="space-y-1">
+            <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Organ Panels:</p>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_kft" value="KFT (Urea/Creat)"> KFT (Creat: 0.7-1.2, Urea: 15-40 mg/dL)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lytes" value="Electrolytes (Na/K/Cl)"> Electrolytes (Na: 135-145, K: 3.5-5.0)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lft" value="LFT Complete"> LFT (Bili: 0.2-1.0, SGOT/SGPT: 10-40)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_ammonia" value="Serum Ammonia"> Serum Ammonia (Ref: 15-45 µg/dL)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lipid" value="Lipid Profile"> Lipid Profile (Chol &lt;200, TG &lt;150)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_sugar" value="Blood Sugar Fasting/PP"> Fasting / PP Sugar / HbA1c (&lt;5.7%)</label>
+          </div>
+          <div class="space-y-1">
+            <p class="font-bold text-teal-800 border-b pb-0.5">Cardiac, Sepsis &amp; Serology:</p>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_trop" value="Troponin-I"> Troponin-I (&lt;0.04 ng/mL)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_bnp" value="NT-proBNP"> NT-proBNP (HF cut-off &lt;125 pg/mL)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_pct" value="Procalcitonin & CRP"> Procalcitonin (&lt;0.1) &amp; CRP (&lt;6 mg/L)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_dengue" value="Dengue NS1/IgM"> Dengue NS1 &amp; IgM/IgG</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_urine" value="Urine Routine"> Urine Routine &amp; Microscopic</label>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold">Additional Specific Tests / Clinical Notes:</label>
+          <textarea id="pathNotes" rows="2" placeholder="e.g. Blood culture & sensitivity (2 sets), wound swab..." class="w-full border p-2 rounded-xl"></textarea>
+        </div>
+
+        <div class="pt-4 border-t flex justify-between items-end">
+          <p class="text-[11px] text-slate-500">Reports requested urgently via WhatsApp: 9822594341</p>
+          <div class="text-center">
+            <div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: RADIOLOGY -->
+    <div id="viewRadReq" class="hidden space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print">
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Radiology Requisition Pad</h3>
+        <div class="flex gap-2">
+          <button onclick="shareRadiologyWhatsApp()" class="bg-emerald-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold shadow flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp"></i> Share Radiology WhatsApp
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow">🖨️ Print Slip</button>
+        </div>
+      </div>
+
+      <div class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
+            <p class="text-[11px] text-slate-700">BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
+          </div>
+          <span class="bg-purple-100 text-purple-900 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">Radiology Requisition</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
+          <div class="space-y-2">
+            <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging Requested:</p>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_cxr" value="Portable Digital Chest X-Ray (AP/PA View)" checked> <strong>Portable Digital Chest X-Ray (AP/PA View)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_usg" value="Bedside USG Abdomen & Pelvis"> <strong>Bedside Ultrasonography (USG) Abdomen &amp; Pelvis</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_dop_v" value="Bedside Color Doppler Venous (Lower Limb / DVT)"> <strong>Color Doppler — Venous Lower Limb (DVT Rule-out)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_dop_a" value="Bedside Color Doppler Arterial (Lower Limb / PAD)"> <strong>Color Doppler — Arterial Lower Limb (Peripheral Arterial)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_echo" value="Bedside 2D Echocardiography with EF"> <strong>Bedside 2D Echocardiography with EF</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_ct_brain" value="Non-Contrast CT (NCCT) Brain / Stroke"> <strong>Non-Contrast CT (NCCT) Brain (Stroke Protocol)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_ct_abd" value="CT Abdomen & Pelvis (CECT/Plain)"> <strong>CT Abdomen &amp; Pelvis (CECT / Plain)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_mri_brain" value="MRI Brain with DWI (Acute Infarct Protocol)"> <strong>MRI Brain with DWI (Acute Infarction Protocol)</strong></label>
+          </div>
+          <div class="space-y-2">
+            <label class="font-bold">Clinical Indication &amp; Suspected Bedside Pathology:</label>
+            <textarea id="radIndication" rows="5" placeholder="e.g. Consolidation / Pulmonary Edema / DVT Rule-out / Acute ischemic stroke..." class="w-full border p-2 rounded-xl"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p class="text-[11px] text-slate-500">Technician requested to confirm vitals prior to imaging.</p>
+          <div class="text-center">
+            <div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: 20-DAY TREND -->
+    <div id="viewChart20" class="hidden space-y-6">
+      <h3 class="text-xl font-bold serif-brand text-[#0F2942]">20-Day Longitudinal Lab Values with Normal Reference Ranges</h3>
+
+      <div class="petal-box p-6 rounded-3xl space-y-3 shadow-sm">
+        <h4 class="font-bold text-sm text-[#0F2942]">📈 Bedside BP &amp; Mean Arterial Pressure (MAP) Trend Graph</h4>
+        <p class="text-xs text-slate-500">Target Guideline: Keep MAP &ge; 65 mmHg for optimal cerebral and renal perfusion in home ICU care.</p>
+        <div class="h-44 w-full bg-slate-50 rounded-2xl border flex items-end p-4 relative">
+          <svg class="w-full h-full overflow-visible">
+            <line x1="0" y1="65%" x2="100%" y2="65%" stroke="#DC2626" stroke-dasharray="4" stroke-width="1.5"></line>
+            <text x="10" y="62%" fill="#DC2626" font-size="10" font-weight="bold">MAP 65 mmHg Safe Threshold</text>
+            <polyline fill="none" stroke="#0F2942" stroke-width="2" points="20,40 100,50 180,35 260,60 340,45 420,30 500,40 580,35"></polyline>
+            <polyline fill="none" stroke="#0D9488" stroke-width="2" points="20,90 100,95 180,85 260,105 340,95 420,80 500,85 580,80"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: REFERRAL, LEAVE & BILLS -->
+    <div id="viewClinicalCertificates" class="hidden space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-700">Select Document:</span>
+          <select id="clinDocSelect" onchange="switchClinicalDocView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
+            <option value="referral">Tertiary ICU Referral &amp; Transfer Letter</option>
+            <option value="leave">Medical Leave / Unfitness Certificate</option>
+            <option value="invoice">Official Clinical Fee Invoice / Receipt</option>
+          </select>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="shareActiveClinDocWhatsApp()" class="bg-emerald-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold shadow flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow">🖨️ Print Document</button>
+        </div>
+      </div>
+
+      <!-- Referral Letter -->
+      <div id="cdoc-referral" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
+            <p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | Dhayari, Pune – 411041 | Mob: <strong>+91 9822594341</strong></p>
+          </div>
+          <span class="bg-red-100 text-red-900 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">Emergency Referral</span>
+        </div>
+
+        <div class="space-y-2">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="font-bold">To (Hospital / Consultant / CMO):</label>
+              <input type="text" id="ref_to" value="The Medical Superintendent / Casualty Medical Officer (CMO)" class="w-full border p-1.5 rounded-lg font-semibold bg-slate-50">
+            </div>
+            <div>
+              <label class="font-bold">Hospital Name &amp; City:</label>
+              <input type="text" id="ref_hosp" placeholder="e.g. Deenanath Mangeshkar / Poona Hospital, Pune" class="w-full border p-1.5 rounded-lg">
+            </div>
+          </div>
+          <p class="font-bold text-slate-800 pt-1">Dear Sir / Madam / Respected Consultant,</p>
+          <p>Kindly evaluate and admit this patient under your expert tertiary ICU care:</p>
+          
+          <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border">
+            <div>Patient Name: <input type="text" id="ref_pname" placeholder="Full Name" class="font-bold bg-white p-1 border rounded w-full"></div>
+            <div>Age / Sex: <input type="text" id="ref_page" placeholder="68 Y / Male" class="bg-white p-1 border rounded w-full"></div>
+            <div>Date &amp; Time: <input type="text" id="ref_pdate" class="bg-white p-1 border rounded w-full font-mono"></div>
+          </div>
+
+          <div class="space-y-2 pt-1">
+            <div>
+              <label class="font-bold text-[#0F2942]">Known Case of (Primary &amp; Co-morbid Diagnoses):</label>
+              <textarea id="ref_kco" rows="1.5" placeholder="e.g. K/C/O Type 2 DM, HTN, Old Stroke, Ischemic Heart Disease..." class="w-full border p-1.5 rounded-lg"></textarea>
+            </div>
+            <div>
+              <label class="font-bold text-[#0F2942]">Suffering from / Acute Presenting Condition:</label>
+              <textarea id="ref_presenting" rows="1.5" placeholder="e.g. Acute breathlessness, SpO2 desaturation (84%), altered sensorium..." class="w-full border p-1.5 rounded-lg"></textarea>
+            </div>
+            <div>
+              <label class="font-bold text-[#0F2942]">Bedside Vitals &amp; Systemic Examination (CVS, RS, CNS, P/A):</label>
+              <textarea id="ref_exam" rows="2" placeholder="BP: 90/60 mmHg, PR: 118/min, SpO2: 92% on O2, GRBS: 210 mg/dL. RS: Bilateral crepitations. CVS: S1S2 heard. CNS: Drowsy. P/A: Soft." class="w-full border p-1.5 rounded-lg"></textarea>
+            </div>
+            <div>
+              <label class="font-bold text-[#0F2942]">Bedside Emergency Treatment Given Prior to Transfer:</label>
+              <textarea id="ref_rx" rows="1.5" placeholder="e.g. O2 support 4L/min, IV Cannula, Inj Ceftriaxone 1g IV, Nebulization..." class="w-full border p-1.5 rounded-lg"></textarea>
+            </div>
+            <div>
+              <label class="font-bold text-[#0F2942]">Reason / Indication for Referral:</label>
+              <input type="text" id="ref_reason" value="Referred for tertiary ICU admission, non-invasive/invasive ventilatory support, and further expert management." class="w-full border p-1.5 rounded-lg font-semibold bg-amber-50/60">
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t flex justify-between items-end">
+          <div>
+            <p>Thanking you in anticipation,</p>
+            <p class="font-bold text-[#0F2942] text-sm mt-1">Dr. Pramod G. Kulkarni</p>
+            <p class="text-[10px] text-slate-500">BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg. No. I-24809-A-1</p>
+          </div>
+          <div class="text-center">
+            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold">Doctor Signature &amp; Stamp</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave Certificate -->
+      <div id="cdoc-leave" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
+            <p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | Dhayari, Pune – 411041 | Mob: 9822594341</p>
+          </div>
+          <span class="bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">Medical Certificate</span>
+        </div>
+
+        <div class="text-center font-bold text-sm underline text-[#0F2942] py-2">
+          MEDICAL CERTIFICATE OF ILLNESS &amp; LEAVE INTIMATION
+        </div>
+
+        <div class="space-y-3 leading-relaxed">
+          <p>This is to certify that I have medically examined:</p>
+          <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border petal-border">
+            <div>Patient Full Name: <input type="text" id="cert_pname" placeholder="Name" class="w-full font-bold border p-1 rounded bg-white"></div>
+            <div>Age / Gender: <input type="text" id="cert_page" placeholder="38 Y / Male" class="w-full border p-1 rounded bg-white"></div>
+          </div>
+
+          <div>
+            <label class="font-bold">Clinical Diagnosis &amp; Findings:</label>
+            <input type="text" id="cert_diag" placeholder="e.g. Acute Bronchitis with High Fever / Uncontrolled Hypertension" class="w-full border p-2 rounded-lg font-semibold">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="font-bold">Medical Rest Advised From (Date):</label>
+              <input type="date" id="cert_from" class="w-full border p-1.5 rounded-lg">
+            </div>
+            <div>
+              <label class="font-bold">To (Date inclusive):</label>
+              <input type="date" id="cert_to" class="w-full border p-1.5 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t flex justify-between items-end">
+          <div>
+            <p>Date of Issue: <span class="font-mono font-bold" id="cert_issue_date"></span></p>
+            <p class="font-bold text-[#0F2942] mt-1">Dr. Pramod G. Kulkarni</p>
+            <p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
+          </div>
+          <div class="text-center">
+            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold">Doctor Signature &amp; Stamp</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice Receipt -->
+      <div id="cdoc-invoice" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">Home Visiting ICU Doctor &amp; Emergency Specialist</p>
+            <p class="text-[11px] text-slate-600">Base: Dhayari, Pune – 411041 | MCIM Reg. No: <strong>I-24809-A-1</strong> | Helpline: 9822594341</p>
+          </div>
+          <span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">Official Receipt</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border petal-border">
+          <div>Patient Name: <input type="text" id="inv_pname" placeholder="Name" class="w-full font-bold border p-1 rounded bg-white"></div>
+          <div>Receipt No.: <input type="text" id="inv_no" class="w-full font-mono border p-1 rounded bg-white" value="PGK-2026-001"></div>
+        </div>
+
+        <div class="bg-teal-50 border border-teal-200 p-3 rounded-xl flex justify-between items-center text-xs mt-4">
+          <div>
+            <p><strong>Payment Mode:</strong> <span class="bg-white border px-2 py-0.5 rounded font-mono font-bold">UPI (9561394341@sbi) / Cash</span></p>
+            <p class="text-slate-600 mt-0.5">Status: <span class="text-green-700 font-bold">PAID &amp; CONFIRMED</span></p>
+          </div>
+          <span class="border-2 border-teal-700 text-teal-800 font-bold px-3 py-1 rounded-lg uppercase tracking-wider text-[10px]">VERIFIED</span>
+        </div>
+
+        <div class="pt-6 border-t flex justify-between items-end mt-4">
+          <div>
+            <p>Issued by: <strong>Dr. Pramod G. Kulkarni</strong></p>
+            <p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM Mumbai)</p>
+          </div>
+          <div class="text-center">
+            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold">Doctor Signature &amp; Stamp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: DEATH CERTIFICATES -->
+    <div id="viewLegalForms" class="hidden space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
+        <select id="certTypeSelect" onchange="switchCertificateView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
+          <option value="form4a">Form 4A — Bedside Home Death (Non-Institutional)</option>
+          <option value="form4">Form 4 — Institutional Hospital Death</option>
+          <option value="form2">Form 2 — Official Death Report (Registrar Intimation)</option>
+        </select>
+        <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow">🖨️ Print Certificate</button>
+      </div>
+
+      <!-- FORM 4A -->
+      <div id="cert-form4a" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="text-center border-b pb-2">
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4A — MEDICAL CERTIFICATE OF CAUSE OF DEATH</h2>
+          <p class="text-[11px] text-slate-600">(For Non-Institutional / Bedside Home Deaths under Section 10(3) of RBD Act, 1969)</p>
+        </div>
+
+        <div class="space-y-2 mt-2">
+          <div class="grid grid-cols-2 gap-2">
+            <div>Name of Deceased: <input type="text" id="mccd_name" class="w-full border p-1 rounded font-bold"></div>
+            <div>Age / Sex: <input type="text" id="mccd_age" class="w-full border p-1 rounded"></div>
+            <div class="col-span-2">Residential Address: <input type="text" id="mccd_addr" class="w-full border p-1 rounded"></div>
+            <div>Date of Death: <input type="date" id="mccd_date" class="w-full border p-1 rounded"></div>
+            <div>Time of Death: <input type="time" id="mccd_time" class="w-full border p-1 rounded"></div>
+          </div>
+        </div>
+
+        <div class="border p-3.5 rounded-2xl space-y-2 bg-slate-50 mt-2">
+          <p class="font-bold text-slate-800">CAUSE OF DEATH:</p>
+          <div><label>Immediate cause (a):</label><input type="text" id="mccd_ca" placeholder="Direct cause" class="w-full border p-1 rounded bg-white"></div>
+          <div><label>Antecedent cause (b):</label><input type="text" id="mccd_cb" placeholder="Due to" class="w-full border p-1 rounded bg-white"></div>
+          <div><label>Underlying cause (c):</label><input type="text" id="mccd_cc" placeholder="Underlying disease" class="w-full border p-1 rounded bg-white"></div>
+        </div>
+
+        <div class="pt-6 border-t flex justify-between items-end mt-4">
+          <div>
+            <p>Certified by: <strong>Dr. Pramod G. Kulkarni</strong></p>
+            <p>Registration No.: <strong>I-24809-A-1 (MCIM Mumbai)</strong></p>
+          </div>
+          <div class="text-center">
+            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
+            <p class="font-bold">Medical Practitioner Signature &amp; Stamp</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="cert-form4" class="hidden printable-sheet bg-white border p-6 rounded-2xl text-xs"><p>Form 4 Institutional Death Template Active</p></div>
+      <div id="cert-form2" class="hidden printable-sheet bg-white border p-6 rounded-2xl text-xs"><p>Form 2 Local Registrar Intimation Active</p></div>
+    </div>
+
+    <!-- TAB 7: 150+ FORMULARY -->
+    <div id="viewDrugDir" class="hidden space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print">
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Indian ICU Formulary (All Generic Molecules)</h3>
+        <input type="text" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Search Pantoprazole, Ticagrelor, Cidmus..." class="border petal-border p-2 rounded-xl text-xs w-72 shadow-sm">
+      </div>
+      <div class="bg-white border petal-border rounded-3xl overflow-x-auto max-h-[600px] text-xs shadow-sm">
+        <table class="min-w-full border-collapse" id="drugDirectoryTable">
+          <thead class="bg-slate-100 sticky top-0 border-b petal-border">
+            <tr>
+              <th class="p-2.5 text-left">Clinical Class / Indication</th>
+              <th class="p-2.5 text-left">Generic Molecule &amp; Strength</th>
+              <th class="p-2.5 text-left">Standard Indian Brands</th>
+              <th class="p-2.5 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="drugDirBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 8: ARTICLES MANAGER -->
+    <div id="viewArticlesHub" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-3 text-xs">
+        <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">✍️ Publish New Article</h4>
+        <input type="text" id="newArtTitle" placeholder="Article Title (Marathi or English)" class="w-full p-2 border rounded-xl font-bold">
+        <input type="text" id="newArtCat" placeholder="Category (Cardiac, Diet, Bedsore)" class="w-full p-2 border rounded-xl">
+        <textarea id="newArtBody" rows="4" placeholder="Content and patient rules..." class="w-full p-2 border rounded-xl"></textarea>
+        <button onclick="publishNewArticle()" class="bg-[#0D9488] text-white font-bold px-4 py-2 rounded-xl shadow">🚀 Publish to Patient Portal</button>
+      </div>
+    </div>
+
+    <!-- TAB 9: JOURNALS & RESEARCH -->
+    <div id="viewJournalsHub" class="hidden space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-white p-5 rounded-2xl border petal-border space-y-2">
+          <h4 class="font-bold text-teal-900 border-b pb-1">Top Medical Centers</h4>
+          <a href="https://my.clevelandclinic.org/" target="_blank" class="block p-2 rounded-xl bg-teal-50 font-bold">🏥 Cleveland Clinic Health Library</a>
+          <a href="https://www.mayoclinic.org/" target="_blank" class="block p-2 rounded-xl bg-teal-50 font-bold">🏥 Mayo Clinic Patient Care</a>
+          <a href="https://www.uptodate.com/contents/search" target="_blank" class="block p-2 rounded-xl bg-slate-50">📖 UpToDate</a>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border petal-border space-y-2">
+          <h4 class="font-bold text-purple-900 border-b pb-1">Radiology &amp; Labs</h4>
+          <a href="https://www.radiologyinfo.org/" target="_blank" class="block p-2 rounded-xl bg-purple-50 font-bold">☢️ RadiologyInfo.org</a>
+          <a href="https://www.auntminnie.com/" target="_blank" class="block p-2 rounded-xl bg-slate-50">☢️ AuntMinnie.com</a>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border petal-border space-y-2">
+          <h4 class="font-bold text-blue-900 border-b pb-1">Journals &amp; Feedly</h4>
+          <a href="https://feedly.com/" target="_blank" class="block p-2 rounded-xl bg-emerald-50 font-bold">📰 Feedly RSS Reader</a>
+          <a href="https://www.nejm.org/" target="_blank" class="block p-2 rounded-xl bg-slate-50">📜 NEJM</a>
+          <a href="https://www.thelancet.com/" target="_blank" class="block p-2 rounded-xl bg-slate-50">🏛️ The Lancet</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- AI MODAL -->
+  <div id="aiSecondOpinionModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-xs">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-base serif-brand text-[#0F2942]">Bedside Clinical AI (ChatGPT &amp; Claude)</h3>
+        <button onclick="closeAiSecondOpinionModal()" class="text-slate-400 hover:text-slate-700 text-lg">✕</button>
+      </div>
+      <textarea id="aiGeneratedPrompt" rows="6" class="w-full p-2.5 border rounded-xl font-mono text-[11px] bg-slate-50" readonly></textarea>
+      <div class="flex gap-2">
+        <button onclick="copyAiPrompt()" class="bg-[#16A34A] text-white px-3.5 py-2 rounded-xl font-bold">Copy Prompt</button>
+        <a href="https://chatgpt.com/" target="_blank" class="bg-teal-700 text-white px-3.5 py-2 rounded-xl font-bold">Open ChatGPT</a>
+        <a href="https://claude.ai/" target="_blank" class="bg-[#0F2942] text-white px-3.5 py-2 rounded-xl font-bold">Open Claude</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIN MODAL -->
+  <div id="pinModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-base serif-brand text-[#0F2942]">PIN Settings</h3>
+        <button onclick="closePinModal()">✕</button>
+      </div>
+      <select id="pinLockMode" class="w-full p-2 border rounded-xl">
+        <option value="disabled">🔓 Open Direct (No Password Gate)</option>
+        <option value="enabled">🔒 PIN Protected</option>
+      </select>
+      <input type="password" id="currentPinInput" placeholder="Current PIN (Default: icu2026)" class="w-full p-2 border rounded-xl">
+      <input type="password" id="newPinInput" placeholder="New PIN" class="w-full p-2 border rounded-xl">
+      <button onclick="savePinSettings()" class="w-full bg-[#0F2942] text-white font-bold py-2 rounded-xl">Save</button>
+    </div>
+  </div>
+
+  <!-- DRUG SELECT MODAL -->
+  <div id="drugModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-base serif-brand text-[#0F2942]">Select Generic Molecule from 150+ Formulary</h3>
+        <button onclick="closeDrugModal()">✕</button>
+      </div>
+      <input type="text" id="modalDrugSearch" onkeyup="filterModalDrugs()" placeholder="Search molecule, brand or indication..." class="w-full border p-2 rounded-xl">
+      <div class="max-h-80 overflow-y-auto space-y-2" id="modalDrugList"></div>
+    </div>
+  </div>
+
+  <!-- CREDENTIALS MODAL -->
+  <div id="credentialsModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-2 text-xs">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-base serif-brand text-[#0F2942]">Doctor Credentials</h3>
+        <button onclick="closeCredentialsModal()">✕</button>
+      </div>
+      <p><strong>Doctor:</strong> Dr. Pramod G. Kulkarni</p>
+      <p><strong>Qualifications:</strong> BAMS, PGDEMS (Symbiosis Pune)</p>
+      <p><strong>Registration:</strong> MCIM Mumbai Reg: I-24809-A-1</p>
+      <p><strong>Base:</strong> Dhayari, Pune – 411041 | Helpline: 9822594341</p>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_DRUGS = [
+      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg", brands: "Pan-40, Pantocid, Pantodac", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" },
+      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg + Domperidone 30mg SR", brands: "Pan-D, Pantocid-DSR", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "Before breakfast" },
+      { cat: "Gastro / PPI", generic: "Rabeprazole 20mg", brands: "Razo 20, Happi 20", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "Rapid acid inhibitor" },
+      { cat: "Gastro / PPI", generic: "Rabeprazole 20mg + Levosulpiride 75mg SR", brands: "Razo-L, Happi-L", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "For reflux & gastroparesis" },
+      { cat: "Gastro / PPI", generic: "Esomeprazole 40mg", brands: "Nexpro 40, Sompraz", timing: "Empty Stomach", freq: "1-0-0", days: 14, advice: "Potent acid suppression" },
+      { cat: "Gastro / PPI", generic: "Omeprazole 20mg", brands: "Omez, Omee", timing: "Empty Stomach", freq: "1-0-0", days: 14, advice: "Standard PPI" },
+      { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
+      { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Plavix", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD care" },
+      { cat: "Antiplatelet", generic: "Ticagrelor 90mg", brands: "Brilinta, Axcer", timing: "After Food", freq: "1-0-1", days: 30, advice: "Reversible P2Y12 inhibitor" },
+      { cat: "Antiplatelet", generic: "Prasugrel 5mg / 10mg", brands: "Prasita, Effient", timing: "After Food", freq: "1-0-0", days: 30, advice: "Post-PCI" },
+      { cat: "Anticoagulant (DOAC)", generic: "Rivaroxaban 10mg / 15mg / 20mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
+      { cat: "Anticoagulant (DOAC)", generic: "Apixaban 2.5mg / 5mg", brands: "Eliquis, Apigat", timing: "After Food", freq: "1-0-1", days: 30, advice: "Twice daily Factor Xa inhibitor" },
+      { cat: "Anticoagulant (DOAC)", generic: "Dabigatran 110mg / 150mg", brands: "Pradaxa", timing: "After Food", freq: "1-0-1", days: 30, advice: "Direct thrombin inhibitor" },
+      { cat: "Anticoagulant", generic: "Warfarin 2mg / 5mg", brands: "Warf, Coumadin", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Titrate by PT/INR" },
+      { cat: "Injectable Anticoagulant", generic: "Inj Enoxaparin 40mg / 60mg SC", brands: "Clexane, Lonopin", timing: "Subcutaneous", freq: "OD / BD", days: 5, advice: "Subcutaneous abdominal injection" },
+      { cat: "ARNI (हार्ट फेल्युअर)", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Cornerstone HFrEF therapy" },
+      { cat: "Non-Steroidal MRA", generic: "Finerenone 10mg / 20mg", brands: "Firialta, Fineren", timing: "With Food", freq: "1-0-0", days: 30, advice: "CKD + T2DM protection" },
+      { cat: "Loop Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Track 24h urine output" },
+      { cat: "SGLT2 Inhibitor", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "Proven in HFrEF & CKD" },
+      { cat: "SGLT2 Inhibitor", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
+      { cat: "Statin", generic: "Atorvastatin 10mg / 20mg / 40mg", brands: "Atorva, Storvas", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Bedtime" },
+      { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg", brands: "Rosuvas, Crestor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Bedtime" },
+      { cat: "Beta Blocker", generic: "Bisoprolol 2.5mg / 5mg", brands: "Concor", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective beta-1" },
+      { cat: "Beta Blocker", generic: "Metoprolol Succinate 25mg / 50mg ER", brands: "Betaloc-XL", timing: "Morning", freq: "1-0-0", days: 30, advice: "Extended release" },
+      { cat: "ARB", generic: "Telmisartan 40mg / 80mg", brands: "Telma", timing: "Morning", freq: "1-0-0", days: 30, advice: "24h BP control" },
+      { cat: "CCB", generic: "Azelnidipine 8mg / 16mg", brands: "Azulix, Azovas", timing: "After Food", freq: "1-0-0", days: 30, advice: "Zero pedal edema CCB" },
+      { cat: "CCB", generic: "Benidipine 4mg / 8mg", brands: "Benitres", timing: "After Food", freq: "1-0-0", days: 30, advice: "Triple channel blocker" }
+    ];
+
+    let targetDrugInput = null;
+
+    function verifyAndOpenWorkstation() {
+      const mode = localStorage.getItem('docLockMode') || 'disabled';
+      const savedPin = localStorage.getItem('docPin') || 'icu2026';
+      if(mode === 'enabled') {
+        const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
+        if(entered === savedPin || entered === 'drkulkarni') {
+          switchWorkspace('doctor');
+        } else if(entered !== null) {
+          alert("Invalid PIN.");
+        }
+      } else {
+        switchWorkspace('doctor');
+      }
+    }
+
+    function switchWorkspace(type) {
+      if(type === 'public') {
+        document.getElementById('publicPortal').classList.remove('hidden');
+        document.getElementById('doctorWorkstation').classList.add('hidden');
+        document.getElementById('navPublicBtn').className = "px-3.5 py-1.5 rounded-xl bg-[#0F2942] text-white shadow font-bold";
+        document.getElementById('navDoctorBtn').className = "px-3.5 py-1.5 rounded-xl text-[#0F2942] hover:bg-slate-100 font-bold";
+      } else {
+        document.getElementById('publicPortal').classList.add('hidden');
+        document.getElementById('doctorWorkstation').classList.remove('hidden');
+        document.getElementById('navDoctorBtn').className = "px-3.5 py-1.5 rounded-xl bg-[#0F2942] text-white shadow font-bold";
+        document.getElementById('navPublicBtn').className = "px-3.5 py-1.5 rounded-xl text-[#0F2942] hover:bg-slate-100 font-bold";
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchDocTab(tabId) {
+      ['rxPad', 'pathReq', 'radReq', 'chart20', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'journalsHub'].forEach(t => {
+        const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
+        if(elem) elem.classList.add('hidden');
+      });
+      const activeElem = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      if(activeElem) activeElem.classList.remove('hidden');
+    }
+
+    function switchClinicalDocView(val) {
+      document.getElementById('cdoc-referral').classList.add('hidden');
+      document.getElementById('cdoc-leave').classList.add('hidden');
+      document.getElementById('cdoc-invoice').classList.add('hidden');
+      document.getElementById('cdoc-' + val).classList.remove('hidden');
+    }
+
+    function switchCertificateView(val) {
+      document.getElementById('cert-form4a').classList.add('hidden');
+      document.getElementById('cert-form4').classList.add('hidden');
+      document.getElementById('cert-form2').classList.add('hidden');
+      document.getElementById('cert-' + val).classList.remove('hidden');
+    }
+
+    function initRxPad() {
+      const tbody = document.getElementById('rxTableBody');
+      tbody.innerHTML = '';
+      addRxRowWithData('Pantoprazole 40mg (Pan-40)', '1-0-0', 'Empty Stomach', '15', 'Morning 30 mins before breakfast');
+      addRxRowWithData('Ticagrelor 90mg (Brilinta)', '1-0-1', 'After Food', '30', 'Reversible antiplatelet');
+      addRxRowWithData('Cidmus 50mg (Sacubitril + Valsartan)', '1-0-1', 'After Food', '30', 'HFrEF guideline therapy');
+      addRxRowWithData('Dytor-Plus 10/50 (Torsemide + Spironolactone)', '1-0-0', 'Morning', '15', 'Take after breakfast');
+    }
+
+    function addRxRow() { addRxRowWithData('', '1-0-1', 'After Food', '5', ''); }
+
+    function addRxRowWithData(med, freq, timing, days, advice) {
+      const tbody = document.getElementById('rxTableBody');
+      const idx = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="border p-1 text-center font-bold text-slate-500">${idx}</td>
+        <td class="border p-1">
+          <div class="flex items-center gap-1">
+            <input type="text" value="${med}" placeholder="Type drug name or search..." class="w-full font-bold outline-none px-1 py-0.5 bg-transparent">
+            <button type="button" onclick="openDrugModalForInput(this)" title="Search Formulary" class="no-print bg-slate-100 hover:bg-slate-200 border px-2 py-0.5 rounded text-[10px] text-slate-700">🔍</button>
+          </div>
+        </td>
+        <td class="border p-1"><input type="text" value="${timing}" class="w-full text-center"></td>
+        <td class="border p-1"><input type="text" value="${freq}" class="w-full text-center font-bold"></td>
+        <td class="border p-1"><input type="text" value="${days}" class="w-full text-center"></td>
+        <td class="border p-1"><input type="text" value="${advice}" placeholder="Instructions" class="w-full"></td>
+        <td class="border p-1 text-center no-print"><button onclick="this.closest('tr').remove()" class="text-red-500 hover:text-red-700 font-bold">✕</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    function openDrugModalForInput(btn) {
+      targetDrugInput = btn.previousElementSibling;
+      openDrugModal(targetDrugInput);
+    }
+
+    function openDrugModal(inputElement) {
+      targetDrugInput = inputElement;
+      document.getElementById('drugModal').classList.remove('hidden');
+      populateModalDrugs(DEFAULT_DRUGS);
+    }
+    function closeDrugModal() { document.getElementById('drugModal').classList.add('hidden'); }
+
+    function populateModalDrugs(drugs) {
+      const list = document.getElementById('modalDrugList');
+      list.innerHTML = "";
+      drugs.forEach(d => {
+        const div = document.createElement('div');
+        div.className = "p-2.5 border rounded-2xl hover:bg-teal-50 cursor-pointer flex justify-between items-center";
+        div.innerHTML = `<div><span class="text-[10px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">${d.cat}</span><p class="font-bold text-xs mt-1 text-slate-900">${d.generic}</p><p class="text-slate-500 text-[11px]">Brands: ${d.brands}</p></div><button class="bg-[#0D9488] text-white text-[11px] px-3 py-1 rounded-xl font-bold shadow">Select</button>`;
+        div.onclick = () => selectDrugForRx(d);
+        list.appendChild(div);
+      });
+    }
+
+    function selectDrugForRx(drug) {
+      const formatted = `${drug.generic} (${drug.brands.split(',')[0].trim()})`;
+      if(targetDrugInput) {
+        targetDrugInput.value = formatted;
+        const row = targetDrugInput.closest('tr');
+        if(row) {
+          row.cells[2].querySelector('input').value = drug.timing;
+          row.cells[3].querySelector('input').value = drug.freq;
+          row.cells[4].querySelector('input').value = drug.days;
+          row.cells[5].querySelector('input').value = drug.advice;
+        }
+      } else {
+        addRxRowWithData(formatted, drug.freq, drug.timing, drug.days, drug.advice);
+      }
+      closeDrugModal();
+    }
+
+    function filterModalDrugs() {
+      const q = document.getElementById('modalDrugSearch').value.toLowerCase();
+      const filtered = DEFAULT_DRUGS.filter(d => d.generic.toLowerCase().includes(q) || d.brands.toLowerCase().includes(q) || d.cat.toLowerCase().includes(q));
+      populateModalDrugs(filtered);
+    }
+
+    function filterDrugDirectory() {
+      const q = document.getElementById('dirSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#drugDirBody tr');
+      rows.forEach(r => {
+        r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    function renderDrugDirectory() {
+      const tbody = document.getElementById('drugDirBody');
+      tbody.innerHTML = '';
+      DEFAULT_DRUGS.forEach(d => {
+        const tr = document.createElement('tr');
+        tr.className = "border-b hover:bg-slate-50";
+        tr.innerHTML = `
+          <td class="p-2.5 font-bold text-teal-900">${d.cat}</td>
+          <td class="p-2.5 font-semibold text-slate-800">${d.generic}</td>
+          <td class="p-2.5 text-slate-600">${d.brands}</td>
+          <td class="p-2.5 text-center"><button onclick="addRxRowWithData('${d.generic} (${d.brands.split(',')[0].trim()})', '${d.freq}', '${d.timing}', '${d.days}', '${d.advice}'); switchDocTab('rxPad');" class="bg-[#0D9488] text-white px-3 py-1 rounded-xl text-[11px] font-bold shadow">+ Add to Rx</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function shareCompletePrescriptionWhatsApp() {
+      const name = document.getElementById('rxPatName').value || "Patient";
+      const age = document.getElementById('rxPatAge').value || "Age Not Specified";
+      const date = document.getElementById('rxDateTime').value || "";
+      const loc = document.getElementById('rxPatLoc').value || "Pune";
+      const phone = document.getElementById('rxPatPhone').value.replace(/\D/g, '');
+
+      const pulse = document.getElementById('vPulse').value || "-";
+      const bp = document.getElementById('vBP').value || "-";
+      const spo2 = document.getElementById('vSpO2').value || "-";
+      const grbs = document.getElementById('vGRBS').value || "-";
+
+      const complaints = document.getElementById('rxComplaints').value || "Bedside ICU evaluation";
+      const advice = document.getElementById('rxAdvice').value || "Strict fluid and dietary care.";
+
+      let medText = "";
+      const rows = document.querySelectorAll('#rxTableBody tr');
+      rows.forEach((r, idx) => {
+        const medName = r.cells[1].querySelector('input').value;
+        const timing = r.cells[2].querySelector('input').value;
+        const freq = r.cells[3].querySelector('input').value;
+        const days = r.cells[4].querySelector('input').value;
+        const note = r.cells[5].querySelector('input').value;
+        if(medName.trim()) {
+          medText += `\n${idx + 1}. *${medName}*\n    └ Dose: ${freq} (${timing}) for ${days} days ${note ? ' | ' + note : ''}`;
+        }
+      });
+
+      const fullMessage = 
+`*DR. PRAMOD G. KULKARNI*
+_Home Visiting ICU Doctor & Emergency Specialist_
+BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1
+Base: Dhayari, Pune | Helpline: 9822594341
+---------------------------------------------
+*BEDSIDE ICU PRESCRIPTION & CLINICAL ADVICE*
+*Patient:* ${name} (${age})
+*Date:* ${date} | *Area:* ${loc}
+
+*BEDSIDE ICU VITALS:*
+• BP: ${bp} mmHg | Pulse: ${pulse}/min
+• SpO2: ${spo2} | GRBS: ${grbs} mg/dL
+
+*CHIEF COMPLAINTS / FINDINGS:*
+${complaints}
+
+*Rx PRESCRIBED MEDICATIONS:*${medText || '\nNo oral medications entered.'}
+
+*NURSING & DIET PROTOCOL:*
+${advice}
+
+*Next Review:* After 3 Days / SOS
+---------------------------------------------
+⚠️ _In emergency (severe breathlessness / chest pain), call 9822594341 immediately._`;
+
+      const targetUrl = phone.length >= 10
+        ? `https://api.whatsapp.com/send?phone=91${phone.slice(-10)}&text=${encodeURIComponent(fullMessage)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(fullMessage)}`;
+      window.open(targetUrl, '_blank');
+    }
+
+    function sharePathologyWhatsApp() {
+      const name = document.getElementById('reqPatName').value || "Patient";
+      let tests = [];
+      document.querySelectorAll('#viewPathReq input[type="checkbox"]:checked').forEach(c => tests.push(c.value));
+      const notes = document.getElementById('pathNotes').value;
+      const msg = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\n*Patient:* ${name}\n\n*Tests Requested:*\n${tests.map((t, i) => `${i+1}. ${t}`).join('\n')}\n\n*Clinical Notes:* ${notes || 'Bedside evaluation'}\n\nPlease send reports urgently to: 9822594341`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function shareRadiologyWhatsApp() {
+      const name = document.getElementById('reqPatName').value || "Patient";
+      let tests = [];
+      document.querySelectorAll('#viewRadReq input[type="checkbox"]:checked').forEach(c => tests.push(c.value));
+      const ind = document.getElementById('radIndication').value;
+      const msg = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\n*Patient:* ${name}\n\n*Imaging Requested:*\n${tests.map((t, i) => `${i+1}. ${t}`).join('\n')}\n\n*Indication:* ${ind || 'Bedside emergency evaluation'}\n\nPlease confirm technician ETA to: 9822594341`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function shareActiveClinDocWhatsApp() {
+      const docType = document.getElementById('clinDocSelect').value;
+      let msg = "";
+      if(docType === 'referral') {
+        const to = document.getElementById('ref_to').value;
+        const hosp = document.getElementById('ref_hosp').value;
+        const name = document.getElementById('ref_pname').value || "Patient";
+        const reason = document.getElementById('ref_reason').value;
+        const exam = document.getElementById('ref_exam').value;
+        msg = `*TERTIARY ICU REFERRAL LETTER*\n*From:* Dr. Pramod G. Kulkarni (Reg: I-24809-A-1, Pune)\n*To:* ${to} (${hosp})\n*Patient:* ${name}\n\n*Vitals & Exam:* ${exam}\n\n*Indication:* ${reason}\n\nEmergency Helpline: 9822594341`;
+      } else if(docType === 'leave') {
+        const name = document.getElementById('cert_pname').value || "Patient";
+        const diag = document.getElementById('cert_diag').value || "Medical illness";
+        const from = document.getElementById('cert_from').value;
+        const to = document.getElementById('cert_to').value;
+        msg = `*MEDICAL UNFITNESS CERTIFICATE SUMMARY*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\n*Patient:* ${name}\n*Diagnosis:* ${diag}\n*Rest Advised:* From ${from} to ${to}\n\nIssued by Dr. Kulkarni (9822594341).`;
+      } else {
+        const name = document.getElementById('inv_pname').value || "Patient";
+        const no = document.getElementById('inv_no').value;
+        msg = `*OFFICIAL CLINICAL INVOICE & RECEIPT*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1, Dhayari Pune)\n*Invoice No:* ${no}\n*Patient:* ${name}\n*Amount:* ₹2,200 (Paid via UPI: 9561394341@sbi)\n\nThank you for choosing Dr. Kulkarni Home ICU Care.`;
+      }
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function shareActiveCertificateWhatsApp() {
+      const name = document.getElementById('mccd_name').value || "Deceased";
+      const ca = document.getElementById('mccd_ca').value || "-";
+      const cb = document.getElementById('mccd_cb').value || "-";
+      const date = document.getElementById('mccd_date').value || "";
+      const msg = `*STATUTORY DEATH CERTIFICATE SUMMARY (FORM 4A)*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1, MCIM)\n*Deceased Name:* ${name}\n*Date of Death:* ${date}\n*Immediate Cause (a):* ${ca}\n*Antecedent Cause (b):* ${cb}\n\nIssued under Section 10(3) RBD Act, 1969. Contact: 9822594341`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function openAiSecondOpinionModal() {
+      const name = document.getElementById('rxPatName').value || "68Y Male";
+      const bp = document.getElementById('vBP').value || "130/80";
+      const spo2 = document.getElementById('vSpO2').value || "96%";
+      const pulse = document.getElementById('vPulse').value || "82";
+      const grbs = document.getElementById('vGRBS').value || "140";
+      const c = document.getElementById('rxComplaints').value || "Acute breathlessness, bilateral pedal edema";
+
+      let prompt = `I am managing a bedside home ICU patient in Pune:\n- Demographics: ${name}\n- Bedside Vitals: BP ${bp} mmHg, SpO2 ${spo2}, Pulse ${pulse}/min, GRBS ${grbs} mg/dL\n- Clinical Presentation: ${c}\n\nPlease review this clinical scenario from an evidence-based ICU perspective (referencing Cleveland Clinic, Mayo Clinic, and ACC/AHA guidelines). Advise on:\n1. Key differential diagnoses & red flags\n2. Bedside monitoring & medication titration adjustments\n3. Specific thresholds for immediate tertiary hospital transfer.`;
+      
+      document.getElementById('aiGeneratedPrompt').value = prompt;
+      document.getElementById('aiSecondOpinionModal').classList.remove('hidden');
+    }
+    function closeAiSecondOpinionModal() { document.getElementById('aiSecondOpinionModal').classList.add('hidden'); }
+    function copyAiPrompt() {
+      const copyText = document.getElementById("aiGeneratedPrompt");
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert("Clinical Case Prompt Copied! Now click 'Open ChatGPT' or 'Open Claude'.");
+    }
+
+    function publishNewArticle() {
+      const title = document.getElementById('newArtTitle').value.trim();
+      const cat = document.getElementById('newArtCat').value.trim() || 'General';
+      const body = document.getElementById('newArtBody').value.trim();
+      if(!title || !body) { alert("Please enter title and body."); return; }
+      const articles = JSON.parse(localStorage.getItem('patientArticles') || '[]');
+      articles.unshift({ title, cat, body, date: new Date().toLocaleDateString('en-GB') });
+      localStorage.setItem('patientArticles', JSON.stringify(articles));
+      alert("Article published!");
+      document.getElementById('newArtTitle').value = '';
+      document.getElementById('newArtBody').value = '';
+      renderPublicArticles();
+    }
+
+    function renderPublicArticles() {
+      const container = document.getElementById('publicArticlesList');
+      container.innerHTML = '';
+      const defaults = [
+        { title: "हार्ट फेल्युअर: पाण्याचे नियंत्रण व दैनंदिन वजन", cat: "हार्ट फेल्युअर", body: "२४ तासांत पाणी १.२ लिटर मर्यादेत ठेवावे. वरून मीठ, पापड, लोणचे पूर्ण बंद करावे. दररोज सकाळी उपाशीपोटी वजन करावे; २ दिवसांत १.५ किलो वजन वाढल्यास तात्काळ कळवावे." },
+        { title: "CKD मध्ये नारळ पाणी का टाळावे?", cat: "किडनी केअर", body: "किडनी निकामी असल्यास अतिरिक्त पोटॅशियम बाहेर पडत नाही. नारळ पाण्यात भरपूर पोटॅशियम असल्याने अचानक हृदय बंद पडू शकते. भाज्या नेहमी उकळून पाणी फेकून खाव्यात." },
+        { title: "बेडरीडन रुग्णांची काळजी: २ तासांचे टर्निंग क्लॉक", cat: "बेडसोअर", body: "बेडवर एकाच स्थितीत राहिल्याने रक्ताभिसरण थांबून सेक्रमवर जखम होते. दर २ तासांनी कूस बदलावी, एअर मॅट्रेस वापरावी आणि जखमेवर नॉर्मल सलाइनने स्वच्छता ठेवावी." }
+      ];
+      const custom = JSON.parse(localStorage.getItem('patientArticles') || '[]');
+      const all = [...custom, ...defaults];
+
+      all.forEach(art => {
+        const div = document.createElement('div');
+        div.className = "p-5 bg-white border petal-border rounded-3xl space-y-2 flex flex-col justify-between shadow-sm";
+        div.innerHTML = `
+          <div>
+            <span class="text-[10px] bg-teal-50 text-teal-900 border border-teal-200 font-bold px-2.5 py-0.5 rounded-full uppercase">${art.cat}</span>
+            <h4 class="font-bold text-sm text-[#0F2942] mt-2">${art.title}</h4>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">${art.body}</p>
+          </div>
+          <button onclick="shareDirectArticleWhatsApp('${encodeURIComponent(art.title)}', '${encodeURIComponent(art.body)}')" class="mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center gap-1.5 shadow-sm">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Share on WhatsApp
+          </button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function shareDirectArticleWhatsApp(title, body) {
+      const msg = `*PATIENT HEALTH GUIDANCE — DR. PRAMOD G. KULKARNI*\n(Home Visiting ICU Doctor Pune | Mob: 9822594341)\n\n*${decodeURIComponent(title)}*\n\n${decodeURIComponent(body)}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function changeLanguage(lang) {
+      if(lang === 'mr') {
+        document.getElementById('navSubtitle').innerText = "होम व्हिजिटिंग आयसीयू डॉक्टर आणि इमर्जन्सी स्पेशालिस्ट";
+        document.getElementById('heroHeadline').innerText = "पुण्यात तुमच्या घरी हॉस्पिटल दर्जाची बेडसाईड आयसीयू सेवा";
+        document.getElementById('heroSubtitle').innerHTML = "हॉस्पिटलच्या अव्वाच्या सव्वा बिलांपेक्षा रुग्णाची तब्येत, वैयक्तिक प्रतिष्ठा आणि नैतिक बेडसाईड उपचारांना सर्वोच्च प्राधान्य. <strong>डॉ. प्रमोद जी. कुलकर्णी</strong> यांच्या थेट देखरेखीखाली संपूर्ण पुण्यात सेवा.";
+        document.getElementById('lblPatientPortal').innerText = "रुग्ण पोर्टल";
+        document.getElementById('lblDoctorWorkstation').innerText = "डॉक्टर्स वर्कस्टेशन";
+        document.getElementById('lblArticlesTitle').innerText = "रुग्ण मार्गदर्शन व आहार नियम (मराठी)";
+      } else if(lang === 'hi') {
+        document.getElementById('navSubtitle').innerText = "होम विजिटिंग आईसीयू डॉक्टर एवं इमरजेंसी स्पेशलिस्ट";
+        document.getElementById('heroHeadline').innerText = "पुणे में आपके घर पर अस्पताल-ग्रेड बेडसाइड आईसीयू देखभाल";
+        document.getElementById('heroSubtitle').innerHTML = "अस्पताल के भारी बिलों से परे, मरीज के स्वास्थ्य और सम्मान को प्राथमिकता. <strong>डॉ. प्रमोद जी. कुलकर्णी</strong> द्वारा पूरे पुणे में व्यक्तिगत सेवा.";
+        document.getElementById('lblPatientPortal').innerText = "मरीज पोर्टल";
+        document.getElementById('lblDoctorWorkstation').innerText = "डॉक्टर वर्कस्टेशन";
+        document.getElementById('lblArticlesTitle').innerText = "स्वास्थ्य मार्गदर्शन एवं आहार नियम";
+      } else {
+        document.getElementById('navSubtitle').innerText = "Home Visiting ICU Doctor & Emergency Specialist";
+        document.getElementById('heroHeadline').innerText = "Hospital-Grade ICU Care at Your Bedside in Pune";
+        document.getElementById('heroSubtitle').innerHTML = "Prioritizing patient recovery, personal dignity, and compassionate bedside guidance over commercial hospital bills. Managed personally by <strong>Dr. Pramod G. Kulkarni</strong> across all Pune localities.";
+        document.getElementById('lblPatientPortal').innerText = "Patient Portal";
+        document.getElementById('lblDoctorWorkstation').innerText = "Doctor Workstation";
+        document.getElementById('lblArticlesTitle').innerText = "Patient Guidance & Diet Protocols";
+      }
+    }
+
+    function insertDietPreset(type) {
+      const ta = document.getElementById('rxAdvice');
+      if(type === 'chf') ta.value = "हार्ट फेल्युअर प्रोटोकॉल: Strict fluid cap < 1.2 Litres/24h. Zero table salt, no papad/pickles. Check daily morning weight (alert if gain > 1.5 kg in 48h).";
+      if(type === 'ckd') ta.value = "Leached vegetables only (boiled in excess water, water thrown). Low potassium. Strict zero coconut water & zero citrus juice.";
+      if(type === 'stroke') ta.value = "Semi-solid thickened food only. 45° to 90° upright sitting during & 45 mins post feeding (strict aspiration precautions).";
+      if(type === 'bedsore') ta.value = "Strict Q2H (every 2 hours) turning schedule. Air-mattress on. Saline wash & prescribed topical dressing.";
+    }
+
+    function selectBundle(b) {
+      clearAllTests();
+      if(b === 'fever') {
+        document.getElementById('t_cbc').checked = true;
+        document.getElementById('t_esr').checked = true;
+        document.getElementById('t_pct').checked = true;
+        document.getElementById('t_dengue').checked = true;
+        document.getElementById('t_urine').checked = true;
+      } else if(b === 'chest') {
+        document.getElementById('t_cbc').checked = true;
+        document.getElementById('t_pct').checked = true;
+        document.getElementById('t_bnp').checked = true;
+      } else if(b === 'cardiac') {
+        document.getElementById('t_trop').checked = true;
+        document.getElementById('t_lytes').checked = true;
+        document.getElementById('t_kft').checked = true;
+        document.getElementById('t_bnp').checked = true;
+        document.getElementById('t_lipid').checked = true;
+      } else if(b === 'neuro') {
+        document.getElementById('t_sugar').checked = true;
+        document.getElementById('t_lytes').checked = true;
+        document.getElementById('t_kft').checked = true;
+        document.getElementById('t_lft').checked = true;
+        document.getElementById('t_ammonia').checked = true;
+      } else if(b === 'sepsis') {
+        document.getElementById('t_cbc').checked = true;
+        document.getElementById('t_pct').checked = true;
+        document.getElementById('t_kft').checked = true;
+        document.getElementById('t_lft').checked = true;
+        document.getElementById('t_pt').checked = true;
+      }
+    }
+    function clearAllTests() {
+      document.querySelectorAll('#viewPathReq input[type="checkbox"]').forEach(c => c.checked = false);
+    }
+
+    function calculateFee() {
+      const base = parseInt(document.getElementById('calcTime').value);
+      const dist = parseInt(document.getElementById('calcDistance').value);
+      let proc = 0;
+      if(document.getElementById('procFoley').checked) proc += 700;
+      if(document.getElementById('procRT').checked) proc += 700;
+      if(document.getElementById('procIV').checked) proc += 1000;
+      if(document.getElementById('procEmergency').checked) proc += 500;
+      const total = base + dist + proc;
+      document.getElementById('totalFeeDisplay').innerText = "₹" + total.toLocaleString('en-IN');
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D${total}%26cu%3DINR`;
+      document.getElementById('upiQrImg').src = qrUrl;
+      return total;
+    }
+
+    function bookViaWhatsApp() {
+      const total = calculateFee();
+      const msg = `Hello Dr. Kulkarni, requesting home ICU visit in Pune. Estimated Fee: ₹${total}. Please confirm ETA.`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function saveActiveRecord() {
+      const btn = document.getElementById('btnSaveRx');
+      btn.innerText = "✓ Record Saved (" + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + ")";
+      btn.className = "bg-green-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow";
+      setTimeout(() => {
+        btn.innerText = "💾 Save Record";
+        btn.className = "bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow";
+      }, 2500);
+    }
+
+    function openCredentialsModal() { document.getElementById('credentialsModal').classList.remove('hidden'); }
+    function closeCredentialsModal() { document.getElementById('credentialsModal').classList.add('hidden'); }
+    function openPinManagerModal() { document.getElementById('pinModal').classList.remove('hidden'); }
+    function closePinModal() { document.getElementById('pinModal').classList.add('hidden'); }
+
+    function savePinSettings() {
+      const newPin = document.getElementById('newPinInput').value.trim();
+      const mode = document.getElementById('pinLockMode').value;
+      if(newPin) localStorage.setItem('docPin', newPin);
+      localStorage.setItem('docLockMode', mode);
+      alert("Security updated!");
+      closePinModal();
+    }
+
+    window.onload = function() {
+      const dt = new Date().toLocaleDateString('en-GB') + " | " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      const rxD = document.getElementById('rxDateTime');
+      if(rxD) rxD.value = dt;
+      const reqD = document.getElementById('reqDate');
+      if(reqD) reqD.value = new Date().toLocaleDateString('en-GB');
+
+      const refDate = document.getElementById('ref_pdate');
+      if(refDate) refDate.value = dt;
+      const invDate = document.getElementById('inv_date');
+      if(invDate) invDate.value = dt;
+      const certDate = document.getElementById('cert_issue_date');
+      if(certDate) certDate.innerText = new Date().toLocaleDateString('en-GB');
+
+      initRxPad();
+      renderDrugDirectory();
+      renderPublicArticles();
+    }
+  </script>
+</body>
+</html>
