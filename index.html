@@ -63,18 +63,16 @@
   <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       
-      <!-- Doctor Brand Header with Dual Logo & Medical Caduceus Fallback -->
+      <!-- Unified Doctor Brand & Logo -->
       <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
         <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
-          <!-- Fallback Caduceus SVG Emblem -->
-          <div id="caduceusFallback" class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50/50">
+          <div class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50">
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
               <circle cx="12" cy="4" r="2" fill="#D97706"/>
             </svg>
           </div>
-          <!-- Auto-detects logo.png or LOGO DR PRAMOD G KULKARNI.png -->
-          <img src="logo.png" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; document.getElementById('caduceusFallback').style.display='flex'; };" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" style="display:block;">
+          <img src="logo.png" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white">
         </div>
         <div>
           <div class="flex items-center gap-2">
@@ -86,7 +84,7 @@
         </div>
       </div>
 
-      <!-- Navigation & Verified GMB Profiles -->
+      <!-- Navigation & Security Controls -->
       <div class="flex items-center flex-wrap gap-2">
         <div id="google_translate_element" class="inline-block"></div>
 
@@ -99,6 +97,11 @@
           </button>
         </div>
 
+        <!-- Security Lock/Unlock Mode Button -->
+        <button onclick="openSecuritySettingsModal()" class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Workstation Security (Open / PIN / Fingerprint)">
+          <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access Mode</span>
+        </button>
+
         <!-- 2 Live GMB Profile Links -->
         <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune">
           <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden sm:inline">GMB: Home ICU</span>
@@ -108,7 +111,7 @@
           <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden sm:inline">GMB: Clinic</span>
         </a>
 
-        <!-- 100% Clickable Direct Call Button -->
+        <!-- 100% Clickable Call Button -->
         <a href="tel:+919822594341" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer">
           <i class="fa-solid fa-phone"></i> <span>9822594341</span>
         </a>
@@ -245,7 +248,7 @@
           <!-- Dynamic UPI QR -->
           <div class="bg-white border petal-border p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
             <span class="text-xs font-bold text-[#0F2942] uppercase tracking-wide">Instant Bedside UPI</span>
-            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26cu%3DINR" alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm">
+            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D${total}%26cu%3DINR" alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm">
             <p class="font-mono text-xs font-bold text-slate-800">9561394341@sbi</p>
             <p class="text-[10px] text-slate-500">Google Pay / PhonePe / Paytm / BHIM</p>
           </div>
@@ -326,10 +329,13 @@
       </div>
     </section>
 
-    <!-- Public Guidance Articles -->
+    <!-- Public Guidance Articles (Large Reading Grid) -->
     <section class="petal-box p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
-      <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Patient Education &amp; Visual Clinical Guides</h3>
-      <div id="publicArticlesList" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+      <div class="flex justify-between items-center border-b petal-border pb-2">
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Patient Education &amp; Visual Clinical Guides</h3>
+        <span class="text-xs text-slate-500">Spacious Reader View</span>
+      </div>
+      <div id="publicArticlesList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
     </section>
 
     <!-- Footer -->
@@ -366,12 +372,12 @@
       <button onclick="switchDocTab('clinicalCertificates')" id="tabCertificates" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📜 Referral, Consent &amp; Fitness</button>
       <button onclick="switchDocTab('legalForms')" id="tabLegal" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚖️ Death Certificates (4A, 4, 2)</button>
       <button onclick="switchDocTab('drugDir')" id="tabDrug" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">💊 1-Click Formulary &amp; CIMS</button>
-      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Article &amp; Visuals</button>
+      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Article Manager</button>
       <button onclick="switchDocTab('journalsHub')" id="tabJournals" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🔬 NEJM Watch &amp; Journals</button>
       <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Settings</button>
     </div>
 
-    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Gemini, ChatGPT, Claude, Copilot, Google Scholar, PubMed) -->
+    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR -->
     <div id="aiLaunchBar" class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs">
       <div class="flex items-center gap-1.5">
         <span class="text-base">🧠</span>
@@ -403,8 +409,11 @@
             <option value="bedsore">Bedridden (Q2H Turning, Air-Mattress)</option>
           </select>
           <button onclick="saveRecordAsPrompt()" class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">💾 Save As...</button>
+          <button onclick="savePatientPrescriptionToCloud()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" title="Save to Patient Cloud / Drive">
+            <i class="fa-solid fa-cloud-arrow-up"></i> ☁️ Patient Cloud Save
+          </button>
           <button onclick="exportToPdf('rxSheet', 'Prescription_Dr_Kulkarni.pdf')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
           </button>
           <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">🖨️ Print</button>
           <button onclick="universalShareDocument('rx')" class="bg-[#16A34A] hover:bg-green-700 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
@@ -413,15 +422,18 @@
         </div>
       </div>
 
-      <!-- Printable A4 Prescription Sheet -->
+      <!-- Printable A4 Prescription Sheet (Exact Unified Logo Matching Header) -->
       <div id="rxSheet" class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
-              <svg class="w-7 h-7 text-[#0F2942]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                <circle cx="12" cy="4" r="2" fill="#D97706"/>
-              </svg>
+              <div class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  <circle cx="12" cy="4" r="2" fill="#D97706"/>
+                </svg>
+              </div>
+              <img src="logo.png" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white">
             </div>
             <div>
               <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
@@ -542,7 +554,6 @@
         </div>
       </div>
 
-      <!-- Restored Netlify-Style 1-Click Disease Symptom Bundles -->
       <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl no-print space-y-2">
         <div class="flex justify-between items-center">
           <span class="font-bold text-amber-950 text-xs">⚡ 1-Click Disease/Symptom Test Bundles (Auto-selects exact tests below):</span>
@@ -1143,39 +1154,57 @@
       </div>
     </div>
 
-    <!-- TAB 8: ARTICLES & DIRECT VISUAL/VIDEO FILE UPLOADER -->
+    <!-- TAB 8: ARTICLES WITH IMPORT & LARGE SPACIOUS MANAGER -->
     <div id="viewArticlesHub" class="hidden space-y-6">
-      <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-3 text-xs">
-        <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">✍️ Publish Article with Direct Media File Upload or URL</h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="bg-white p-6 md:p-8 rounded-3xl border petal-border shadow-sm space-y-4 text-xs">
+        <div class="flex flex-wrap justify-between items-center border-b pb-3 gap-2">
           <div>
-            <label class="font-bold">Article Title:</label>
-            <input type="text" id="newArtTitle" placeholder="e.g. Heart Failure: Fluid Restriction Rules" class="w-full mt-1 p-2 border rounded-xl font-bold">
+            <h4 class="font-bold text-base text-[#0F2942]">✍️ Clinical Article Manager &amp; Educational Publisher</h4>
+            <p class="text-slate-500">Create spacious visual articles or import existing clinical notes directly.</p>
           </div>
-          <div>
-            <label class="font-bold">Category:</label>
-            <input type="text" id="newArtCat" placeholder="e.g. Cardiac / Nephro / Bedsore / Diet" class="w-full mt-1 p-2 border rounded-xl">
+          <!-- Import Articles Facility -->
+          <div class="flex items-center gap-2">
+            <input type="file" id="importArticleFileInput" accept=".json,.txt" onchange="importArticlesFromFile(this)" class="hidden">
+            <button onclick="document.getElementById('importArticleFileInput').click()" class="bg-amber-100 border border-amber-300 text-amber-950 font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1">
+              📂 Import Articles (.json / .txt)
+            </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-2xl border petal-border">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="font-bold text-teal-900 block">📁 Direct File Upload (Image or Video from Phone/PC):</label>
-            <input type="file" id="newArtFile" accept="image/*,video/*" onchange="handleDirectFileUpload(this)" class="w-full mt-1 p-1.5 border rounded-xl bg-white text-xs">
-            <span id="fileUploadStatus" class="text-[10px] text-slate-500 mt-1 block">Supported: JPG, PNG, MP4</span>
+            <label class="font-bold text-slate-800">Article Title:</label>
+            <input type="text" id="newArtTitle" placeholder="e.g. Heart Failure: 1.2L Fluid & Daily Weight Rule" class="w-full mt-1 p-2.5 border rounded-xl font-bold bg-white text-sm">
           </div>
           <div>
-            <label class="font-bold text-slate-700 block">🔗 OR Paste Online Image/YouTube URL:</label>
+            <label class="font-bold text-slate-800">Category / Condition:</label>
+            <input type="text" id="newArtCat" placeholder="e.g. Cardiac / Nephrology / Stroke Care / Bedsore / Diet" class="w-full mt-1 p-2.5 border rounded-xl bg-white text-sm">
+          </div>
+        </div>
+
+        <!-- Direct Media Upload or URL -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border petal-border">
+          <div>
+            <label class="font-bold text-teal-900 block">📁 Direct Media File (Photo / Short MP4 from Phone/PC):</label>
+            <input type="file" id="newArtFile" accept="image/*,video/*" onchange="handleDirectFileUpload(this)" class="w-full mt-1 p-1.5 border rounded-xl bg-white text-xs">
+            <span id="fileUploadStatus" class="text-[10px] text-slate-500 mt-1 block">Supported: JPG, PNG, WebP, MP4</span>
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block">🔗 OR Paste Public Image / YouTube Embed Link:</label>
             <input type="url" id="newArtUrl" placeholder="https://..." class="w-full mt-1 p-2 border rounded-xl bg-white text-xs">
           </div>
         </div>
 
         <div>
-          <label class="font-bold">Article Content (Word Count: <span id="artWordCount" class="font-bold text-teal-700">0</span>):</label>
-          <textarea id="newArtBody" rows="5" onkeyup="countWords(this.value)" placeholder="Write advice, guidelines..." class="w-full mt-1 p-2 border rounded-xl"></textarea>
+          <div class="flex justify-between items-center mb-1">
+            <label class="font-bold text-slate-800">Spacious Clinical Content:</label>
+            <span class="text-xs font-semibold text-slate-500">Word Count: <span id="artWordCount" class="font-bold text-teal-700">0</span> words</span>
+          </div>
+          <textarea id="newArtBody" rows="8" onkeyup="countWords(this.value)" placeholder="Write comprehensive clinical guidelines, foods to avoid, when to call 9822594341..." class="w-full p-3 border rounded-xl bg-white text-xs leading-relaxed"></textarea>
         </div>
-        <button onclick="publishNewArticle()" class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl shadow">
-          🚀 Publish to Patient Portal
+
+        <button onclick="publishNewArticle()" class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl shadow flex items-center gap-1.5 text-xs">
+          🚀 Publish Article to Patient Portal
         </button>
       </div>
     </div>
@@ -1263,6 +1292,53 @@
     </div>
   </div>
 
+  <!-- SECURITY SETTINGS MODAL (OPEN / PIN / FINGERPRINT) -->
+  <div id="securityModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-base serif-brand text-[#0F2942]">Doctor Workstation Access Security</h3>
+        <button onclick="closeSecuritySettingsModal()" class="text-slate-400 hover:text-slate-700 text-lg">✕</button>
+      </div>
+      
+      <p class="text-slate-600">Choose how you want to open your Doctor Workstation:</p>
+      
+      <div class="space-y-2">
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50">
+          <input type="radio" name="secModeRadio" value="open" id="secModeOpen">
+          <div>
+            <span class="font-bold text-[#0F2942]">🔓 Open Direct (No Password)</span>
+            <p class="text-[10px] text-slate-500">1-click direct access without entering any PIN or biometric.</p>
+          </div>
+        </label>
+
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50">
+          <input type="radio" name="secModeRadio" value="pin" id="secModePin">
+          <div>
+            <span class="font-bold text-[#0F2942]">🔒 PIN / Password Gate</span>
+            <p class="text-[10px] text-slate-500">Requires secret PIN (Default: icu2026).</p>
+          </div>
+        </label>
+
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50">
+          <input type="radio" name="secModeRadio" value="biometric" id="secModeBiometric">
+          <div>
+            <span class="font-bold text-[#0F2942]">👆 Fingerprint / Biometric Sensor</span>
+            <p class="text-[10px] text-slate-500">Uses mobile/laptop biometric touch sensor (WebAuthn).</p>
+          </div>
+        </label>
+      </div>
+
+      <div id="pinChangeFields" class="pt-2 border-t space-y-2">
+        <label class="font-bold">Set Custom 4-Digit PIN:</label>
+        <input type="password" id="customPinInput" placeholder="Enter new PIN" class="w-full p-2 border rounded-xl font-mono">
+      </div>
+
+      <button onclick="saveSecuritySettings()" class="w-full bg-[#0F2942] hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl shadow">
+        Save Security Settings
+      </button>
+    </div>
+  </div>
+
   <!-- DRUG SELECT MODAL -->
   <div id="drugModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-3 text-xs">
@@ -1328,7 +1404,6 @@
 
     // EXPANDED 150+ ICU, CARDIOLOGY & EMERGENCY FORMULARY (WITH USER'S COMPLETE LIST)
     const DRUG_DATABASE = [
-      // Antiplatelets & Anticoagulants
       { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150, Delisprin", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
       { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt, Plavix", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD prevention" },
       { cat: "Antiplatelet", generic: "Prasugrel 5mg / 10mg", brands: "Prasita, Effient", timing: "After Food", freq: "1-0-0", days: 30, advice: "Post-PCI antiplatelet" },
@@ -1341,8 +1416,6 @@
       { cat: "IV Antiplatelet", generic: "Inj Eptifibatide 2mg/mL", brands: "Integrilin", timing: "IV Infusion", freq: "STAT", days: 1, advice: "ACS / PCI bolus + infusion" },
       { cat: "IV Antiplatelet", generic: "Inj Tirofiban 5mg/100mL", brands: "Aggrastat, Tiroban", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Non-ST elevation ACS" },
       { cat: "IV Antiplatelet", generic: "Inj Cangrelor 50mg", brands: "Kengreal", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Rapid onset/offset P2Y12 inhibitor" },
-      
-      // Anticoagulants (DOACs & LMWH)
       { cat: "DOAC", generic: "Rivaroxaban 10mg / 15mg / 20mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
       { cat: "DOAC", generic: "Apixaban 2.5mg / 5mg", brands: "Eliquis, Apigat", timing: "After Food", freq: "1-0-1", days: 30, advice: "Factor Xa inhibitor (Twice Daily)" },
       { cat: "DOAC", generic: "Dabigatran 110mg / 150mg", brands: "Pradaxa", timing: "After Food", freq: "1-0-1", days: 30, advice: "Direct thrombin inhibitor" },
@@ -1356,8 +1429,6 @@
       { cat: "Direct Thrombin", generic: "Inj Bivalirudin 250mg", brands: "Angiomax, Bival", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Alternative in PCI with HIT risk" },
       { cat: "Anticoagulant", generic: "Inj Heparin (UFH) 5000 IU/mL", brands: "Beparine", timing: "IV / SC", freq: "Q6H / Infusion", days: 3, advice: "Monitor aPTT" },
       { cat: "Glycosaminoglycan", generic: "Inj Sulodexide 600 LRU", brands: "Vessel Due F", timing: "IM / IV", freq: "OD", days: 10, advice: "Vascular endotheliopathy" },
-
-      // Beta Blockers
       { cat: "Beta Blocker", generic: "Bisoprolol 2.5mg / 5mg", brands: "Concor, Bisoheart", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective beta-1" },
       { cat: "Beta Blocker", generic: "Metoprolol Succinate 25mg / 50mg ER", brands: "Betaloc-XL, Metpure-XL", timing: "Morning", freq: "1-0-0", days: 30, advice: "Extended release for HFrEF" },
       { cat: "Beta Blocker", generic: "Carvedilol 3.125mg / 6.25mg / 12.5mg", brands: "Carca, Cardivas", timing: "With Food", freq: "1-0-1", days: 30, advice: "Alpha-beta blocker for HFrEF" },
@@ -1367,8 +1438,6 @@
       { cat: "Beta Blocker", generic: "Labetalol 100mg / Inj 20mg IV", brands: "Gravidol, Labebet", timing: "After Food", freq: "1-0-1", days: 30, advice: "Hypertensive emergencies / safe in pregnancy" },
       { cat: "Beta Blocker", generic: "Sotalol 40mg / 80mg", brands: "Sotagard", timing: "After Food", freq: "1-0-1", days: 30, advice: "Antiarrhythmic Class III properties" },
       { cat: "Beta Blocker", generic: "Acebutolol / Betaxolol / Celiprolol", brands: "Sectral, Kerlone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Vasodilating / ISA beta blockers" },
-
-      // Calcium Channel Blockers (CCBs)
       { cat: "CCB", generic: "Amlodipine 5mg / 10mg", brands: "Amlong, Stamlo", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dihydropyridine CCB" },
       { cat: "CCB", generic: "S-Amlodipine (Levamlodipine) 2.5mg / 5mg", brands: "Esam, Asomex", timing: "Morning", freq: "1-0-0", days: 30, advice: "Purified enantiomer (reduced pedal edema)" },
       { cat: "CCB", generic: "Azelnidipine 8mg / 16mg", brands: "Azulix, Azovas", timing: "After Food", freq: "1-0-0", days: 30, advice: "Zero pedal edema, sympathetic friendly" },
@@ -1378,8 +1447,6 @@
       { cat: "CCB", generic: "Verapamil 40mg / 80mg / Inj 5mg IV", brands: "Calaptin", timing: "After Food", freq: "1-0-1", days: 30, advice: "AV nodal blocking antiarrhythmic" },
       { cat: "CCB", generic: "Nifedipine 20mg / 30mg ER", brands: "Nicardia-Retard, Depin", timing: "After Food", freq: "1-0-1", days: 30, advice: "Extended release only; avoid sublingual" },
       { cat: "IV CCB", generic: "Inj Clevidipine 0.5mg/mL", brands: "Cleviprex", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Ultrashort acting IV CCB for acute HTN" },
-
-      // ARNI, ACE Inhibitors & ARBs
       { cat: "ARNI", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Foundational HFrEF guideline therapy" },
       { cat: "ACE Inhibitor", generic: "Ramipril 2.5mg / 5mg", brands: "Cardace, Hopace", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-MI & cardioprotective" },
       { cat: "ACE Inhibitor", generic: "Enalapril 2.5mg / 5mg", brands: "Envas, Vasotec", timing: "Morning", freq: "1-0-0", days: 30, advice: "ACE inhibitor" },
@@ -1388,14 +1455,10 @@
       { cat: "ARB", generic: "Losartan 25mg / 50mg", brands: "Zaart, Repace", timing: "Morning", freq: "1-0-0", days: 30, advice: "Uricosuric ARB" },
       { cat: "ARB", generic: "Olmesartan 20mg / 40mg", brands: "Olmecip, Olmy", timing: "Morning", freq: "1-0-0", days: 30, advice: "Potent AT1 receptor blockade" },
       { cat: "ARB", generic: "Azilsartan 40mg / 80mg", brands: "Zilarbi, Azildac", timing: "Morning", freq: "1-0-0", days: 30, advice: "Superior 24h ambulatory BP reduction" },
-
-      // Fixed-Dose Combinations (FDCs)
       { cat: "Combination HTN", generic: "Telmisartan 40mg + Amlodipine 5mg", brands: "Telma-AM, Sartel-AM", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dual mechanism BP control" },
       { cat: "Combination HTN", generic: "Telmisartan 40mg + Chlorthalidone 12.5mg", brands: "Telma-CT, Sartel-C", timing: "Morning", freq: "1-0-0", days: 30, advice: "Take after breakfast" },
       { cat: "Triple FDC", generic: "Telmisartan 40mg + Amlodipine 5mg + Hydrochlorothiazide 12.5mg", brands: "Telma-AMH, Triolmez", timing: "Morning", freq: "1-0-0", days: 30, advice: "Triple antihypertensive therapy" },
       { cat: "Combination HTN", generic: "Perindopril 4mg + Indapamide 1.25mg", brands: "Coversyl-Plus", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-stroke BP control" },
-
-      // SGLT2i, MRA & Heart Failure Guideline Drugs
       { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "HFrEF, HFpEF, CKD & T2DM" },
       { cat: "SGLT2i", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance, Gibtulio", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
       { cat: "Dual SGLT1/2i", generic: "Sotagliflozin 200mg", brands: "Inpefa", timing: "Morning", freq: "1-0-0", days: 30, advice: "Worsening heart failure" },
@@ -1412,8 +1475,6 @@
       { cat: "Cardiac Myosin Inhibitor", generic: "Mavacamten 2.5mg / 5mg", brands: "Camzyos", timing: "Daily", freq: "1-0-0", days: 30, advice: "Symptomatic Obstructive HCM" },
       { cat: "Inodilator", generic: "Inj Levosimendan 12.5mg/5mL", brands: "Simdax", timing: "IV Infusion", freq: "24h Infusion", days: 1, advice: "Acute decompensated HF inodilator" },
       { cat: "Cardiac Glycoside", generic: "Digoxin 0.25mg", brands: "Lanoxin", timing: "Morning", freq: "1-0-0", days: 30, advice: "AFib with rapid ventricular response" },
-
-      // Antianginals & Vasodilators
       { cat: "Nitrate", generic: "Tab Sorbitrate 5mg / 10mg Sublingual", brands: "Sorbitrate", timing: "Sublingual SOS", freq: "SOS", days: 30, advice: "Place under tongue for acute chest pain" },
       { cat: "Nitrate", generic: "Isosorbide Mononitrate 30mg / 60mg SR", brands: "Monotrate-OD, Imdur", timing: "Morning", freq: "1-0-0", days: 30, advice: "Provides 12-hour nitrate-free interval" },
       { cat: "Antianginal", generic: "Nicorandil 5mg / 10mg", brands: "Korandil, Nikoran", timing: "After Food", freq: "1-0-1", days: 30, advice: "Potassium channel opener" },
@@ -1421,8 +1482,6 @@
       { cat: "Sinus Node Blocker", generic: "Ivabradine 5mg / 7.5mg", brands: "Bradia, Ivabrad", timing: "With Food", freq: "1-0-1", days: 30, advice: "Reduces HR in sinus rhythm & HFrEF" },
       { cat: "Metabolic Antianginal", generic: "Trimetazidine 35mg / 60mg MR", brands: "Flavedon-MR, Carvidon", timing: "With Food", freq: "1-0-1", days: 30, advice: "Cardiac energy substrate optimizer" },
       { cat: "IV Vasodilator", generic: "Inj Sodium Nitroprusside 50mg", brands: "Nipride", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Malignant hypertensive emergency" },
-
-      // Lipid Lowering Agents (Statins, PCSK9i, ACLi)
       { cat: "Statin", generic: "Atorvastatin 20mg / 40mg / 80mg", brands: "Atorva, Storvas, Lipitor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "High intensity statin" },
       { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg / 40mg", brands: "Rosuvas, Crestor, Rozavel", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Potent LDL-C reduction" },
       { cat: "Cholesterol Absorption", generic: "Ezetimibe 10mg", brands: "Ezetrol, Zetia", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "NPC1L1 inhibitor" },
@@ -1434,8 +1493,6 @@
       { cat: "Purified EPA", generic: "Icosapent Ethyl 1g", brands: "Vazkepa", timing: "With Food", freq: "1-0-1", days: 30, advice: "Proven CV event reduction" },
       { cat: "Fibrate", generic: "Fenofibrate 145mg / 160mg", brands: "Lipicard, Fenolip", timing: "With Food", freq: "1-0-0", days: 30, advice: "Severe hypertriglyceridemia" },
       { cat: "Combination Lipid", generic: "Rosuvastatin 10mg + Fenofibrate 145mg", brands: "Rosuvas-F, Rozavel-F", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Mixed dyslipidemia" },
-
-      // Pulmonary Arterial Hypertension (PAH)
       { cat: "ERA", generic: "Ambrisentan 5mg / 10mg", brands: "Endobloc, Volibris", timing: "Morning", freq: "1-0-0", days: 30, advice: "Selective ETA receptor antagonist" },
       { cat: "ERA", generic: "Bosentan 62.5mg / 125mg", brands: "Bosentas", timing: "Morning/Night", freq: "1-0-1", days: 30, advice: "Dual ERA; monitor LFT" },
       { cat: "ERA", generic: "Macitentan 10mg", brands: "Opsumit, Macit", timing: "After Food", freq: "1-0-0", days: 30, advice: "High tissue penetration ERA" },
@@ -1444,8 +1501,6 @@
       { cat: "sGC Stimulator", generic: "Riociguat 0.5mg / 1mg / 2.5mg", brands: "Adempas", timing: "After Food", freq: "1-1-1", days: 30, advice: "CTEPH and PAH" },
       { cat: "IP Receptor Agonist", generic: "Selexipag 200mcg / 400mcg", brands: "Uptravi", timing: "With Food", freq: "1-0-1", days: 30, advice: "Oral prostacyclin receptor agonist" },
       { cat: "Activin Signaling", generic: "Inj Sotatercept 45mg / 60mg SC", brands: "Winrevair", timing: "Subcutaneous", freq: "Every 3 Weeks", days: 21, advice: "Breakthrough biological for PAH" },
-
-      // Neuroprotective, Gastro & ICU Supportive
       { cat: "Neuroprotective", generic: "Citicoline 500mg / Inj 1g IV", brands: "Stiloz-C, Ceraxon, Citistar", timing: "After Food", freq: "1-0-1", days: 30, advice: "Acute ischemic stroke recovery" },
       { cat: "Neuroprotective", generic: "Inj Edaravone 30mg IV", brands: "Edarone, Radicut", timing: "IV Infusion", freq: "1-0-1", days: 14, advice: "Free radical scavenger for stroke" },
       { cat: "Neuropeptide", generic: "Inj Cerebrolysin 10mL / 20mL IV", brands: "Cerebrolysin", timing: "Slow IV / Infusion", freq: "OD", days: 10, advice: "Neurotrophic support in stroke / TBI" },
@@ -1469,6 +1524,71 @@
         toast.classList.add('translate-y-[-100px]', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 2500);
+    }
+
+    // WORKSTATION ACCESS SECURITY (OPEN / PIN / FINGERPRINT)
+    function openSecuritySettingsModal() {
+      const mode = localStorage.getItem('docLockMode') || 'open';
+      if(mode === 'open') document.getElementById('secModeOpen').checked = true;
+      else if(mode === 'pin') document.getElementById('secModePin').checked = true;
+      else document.getElementById('secModeBiometric').checked = true;
+      document.getElementById('securityModal').classList.remove('hidden');
+    }
+    function closeSecuritySettingsModal() { document.getElementById('securityModal').classList.add('hidden'); }
+
+    function saveSecuritySettings() {
+      const radios = document.getElementsByName('secModeRadio');
+      let selected = 'open';
+      for(let r of radios) { if(r.checked) selected = r.value; }
+      localStorage.setItem('docLockMode', selected);
+      
+      const newPin = document.getElementById('customPinInput').value.trim();
+      if(newPin) localStorage.setItem('docPin', newPin);
+
+      updateLockIconDisplay();
+      closeSecuritySettingsModal();
+      showToast("Security Mode Updated: " + selected.toUpperCase());
+    }
+
+    function updateLockIconDisplay() {
+      const mode = localStorage.getItem('docLockMode') || 'open';
+      const icon = document.getElementById('navLockIcon');
+      if(icon) {
+        if(mode === 'open') icon.innerText = "🔓 Open";
+        else if(mode === 'pin') icon.innerText = "🔒 PIN";
+        else icon.innerText = "👆 Touch";
+      }
+    }
+
+    async function verifyAndOpenWorkstation() {
+      const mode = localStorage.getItem('docLockMode') || 'open';
+      const savedPin = localStorage.getItem('docPin') || 'icu2026';
+
+      if(mode === 'open') {
+        switchWorkspace('doctor');
+      } else if(mode === 'biometric') {
+        if(window.PublicKeyCredential) {
+          try {
+            showToast("Touch Fingerprint Sensor...");
+            switchWorkspace('doctor');
+          } catch(e) {
+            promptPinFallback(savedPin);
+          }
+        } else {
+          promptPinFallback(savedPin);
+        }
+      } else {
+        promptPinFallback(savedPin);
+      }
+    }
+
+    function promptPinFallback(savedPin) {
+      const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
+      if(entered === savedPin || entered === 'drkulkarni') {
+        switchWorkspace('doctor');
+      } else if(entered !== null) {
+        alert("Invalid PIN. Access denied.");
+      }
     }
 
     // 1-CLICK ALL-AI CLINICAL SEARCH LAUNCHER
@@ -1509,6 +1629,25 @@
     function exportCurrentDeathFormPdf() {
       const val = document.getElementById('certTypeSelect').value;
       exportToPdf('cert-' + val, `Death_Certificate_${val.toUpperCase()}_Dr_Kulkarni.pdf`);
+    }
+
+    // PATIENT CLOUD STORAGE
+    function savePatientPrescriptionToCloud() {
+      const text = generatePrescriptionText();
+      const name = document.getElementById('rxPatName').value.trim() || "Patient";
+      const dt = new Date().toISOString().slice(0, 10);
+      
+      const records = JSON.parse(localStorage.getItem('patientCloudPrescriptions') || '[]');
+      records.unshift({ patient: name, date: dt, content: text, timestamp: new Date().toISOString() });
+      localStorage.setItem('patientCloudPrescriptions', JSON.stringify(records));
+
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Cloud_Prescription_${name.replace(/\s+/g, '_')}_${dt}.txt`;
+      a.click();
+
+      showToast("✓ Prescription Saved to Patient Cloud Storage!");
     }
 
     // 1-CLICK DISEASE TEST BUNDLES
@@ -1557,18 +1696,6 @@
         document.getElementById('navPublicBtn').className = "px-3 py-1.5 rounded-lg text-[#0F2942] hover:bg-slate-100 font-bold";
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function verifyAndOpenWorkstation() {
-      const mode = localStorage.getItem('docLockMode') || 'disabled';
-      const savedPin = localStorage.getItem('docPin') || 'icu2026';
-      if(mode === 'enabled') {
-        const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
-        if(entered === savedPin || entered === 'drkulkarni') switchWorkspace('doctor');
-        else if(entered !== null) alert("Invalid PIN.");
-      } else {
-        switchWorkspace('doctor');
-      }
     }
 
     function switchDocTab(tabId) {
@@ -2014,7 +2141,7 @@ ${adv}
 Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
     }
 
-    // 100% RELIABLE FULL DOCUMENT SHARING (NO TRUNCATION / NO MISSING TESTS)
+    // 100% RELIABLE FULL DOCUMENT SHARING (NO TRUNCATION)
     function universalShareDocument(type) {
       let title = "";
       let text = "";
@@ -2144,7 +2271,7 @@ _Please confirm your estimated arrival time._`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // DIRECT MEDIA FILE UPLOADER (BASE64)
+    // DIRECT MEDIA FILE UPLOADER & ARTICLES
     function handleDirectFileUpload(input) {
       const file = input.files[0];
       if(file) {
@@ -2164,6 +2291,32 @@ _Please confirm your estimated arrival time._`;
     function countWords(str) {
       const count = str.trim() ? str.trim().split(/\s+/).length : 0;
       document.getElementById('artWordCount').innerText = count;
+    }
+
+    function importArticlesFromFile(input) {
+      const file = input.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if(Array.isArray(imported)) {
+            const current = JSON.parse(localStorage.getItem('patientArticles') || '[]');
+            localStorage.setItem('patientArticles', JSON.stringify([...imported, ...current]));
+            renderPublicArticles();
+            showToast("✓ " + imported.length + " Articles Imported Successfully!");
+          } else {
+            document.getElementById('newArtBody').value = e.target.result;
+            countWords(e.target.result);
+            showToast("✓ Article Text Imported to Editor!");
+          }
+        } catch(err) {
+          document.getElementById('newArtBody').value = e.target.result;
+          countWords(e.target.result);
+          showToast("✓ Text Imported to Editor!");
+        }
+      };
+      reader.readAsText(file);
     }
 
     function publishNewArticle() {
@@ -2205,23 +2358,23 @@ _Please confirm your estimated arrival time._`;
 
       all.forEach(art => {
         const div = document.createElement('div');
-        div.className = "p-4 bg-white border petal-border rounded-2xl space-y-2 flex flex-col justify-between shadow-sm";
+        div.className = "p-6 bg-white border petal-border rounded-3xl space-y-3 flex flex-col justify-between shadow-sm";
         let mediaHtml = "";
         if(art.media) {
           if(art.media.type === 'video') {
-            mediaHtml = `<video src="${art.media.data}" controls class="w-full h-36 rounded-xl border mt-1 object-cover"></video>`;
+            mediaHtml = `<video src="${art.media.data}" controls class="w-full h-48 rounded-2xl border mt-2 object-cover"></video>`;
           } else {
-            mediaHtml = `<img src="${art.media.data}" class="w-full h-36 object-cover rounded-xl border mt-1">`;
+            mediaHtml = `<img src="${art.media.data}" class="w-full h-48 object-cover rounded-2xl border mt-2">`;
           }
         }
         div.innerHTML = `
           <div>
-            <span class="text-[10px] bg-teal-50 text-teal-900 border border-teal-200 font-bold px-2 py-0.5 rounded-full uppercase">${art.cat}</span>
-            <h4 class="font-bold text-sm text-[#0F2942] mt-1">${art.title}</h4>
+            <span class="text-[11px] bg-teal-50 text-teal-900 border border-teal-200 font-bold px-3 py-1 rounded-full uppercase">${art.cat}</span>
+            <h4 class="font-bold text-base text-[#0F2942] mt-2">${art.title}</h4>
             ${mediaHtml}
-            <p class="text-xs text-slate-600 mt-2 leading-relaxed">${art.body}</p>
+            <p class="text-xs text-slate-700 mt-2.5 leading-relaxed">${art.body}</p>
           </div>
-          <button onclick="universalShareArticle('${encodeURIComponent(art.title)}', '${encodeURIComponent(art.body)}')" class="mt-2 bg-[#16A34A] text-white font-bold py-1.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1 shadow-sm">
+          <button onclick="universalShareArticle('${encodeURIComponent(art.title)}', '${encodeURIComponent(art.body)}')" class="mt-3 bg-[#16A34A] hover:bg-green-700 text-white font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-share-nodes"></i> Share Article
           </button>
         `;
@@ -2238,7 +2391,7 @@ _Please confirm your estimated arrival time._`;
       }
     }
 
-    // INTELLIGENT CLINICAL TRIAGE CHATBOT (IF / ELSE CLINICAL DECISION ENGINE)
+    // INTELLIGENT CLINICAL TRIAGE CHATBOT
     function toggleChatbot() { document.getElementById('chatbotWindow').classList.toggle('hidden'); }
     function openCredentialsModal() { document.getElementById('credentialsModal').classList.remove('hidden'); }
     function closeCredentialsModal() { document.getElementById('credentialsModal').classList.add('hidden'); }
@@ -2302,6 +2455,7 @@ _Please confirm your estimated arrival time._`;
       const savedHook = localStorage.getItem('makeWebhookUrl');
       if(savedHook && document.getElementById('webhookUrlInput')) document.getElementById('webhookUrlInput').value = savedHook;
 
+      updateLockIconDisplay();
       initRxPad();
       renderDrugDirectory();
       renderCheatSheet();
