@@ -34,7 +34,7 @@
     .petal-box { background-color: #FFFDF9; border: 1px solid #E6DCCD; }
     
     @media print {
-      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop { display: none !important; }
+      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop, #notificationToast { display: none !important; }
       body { background: #ffffff !important; color: #000000 !important; margin: 0 !important; padding: 0 !important; }
       main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
       .printable-sheet { border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
@@ -45,21 +45,29 @@
   </style>
   <script type="text/javascript">
     function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'mr,hi,gu,ta,te,ml,kn,bn,pa,en,de,ja,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'mr,hi,ur,gu,ta,te,ml,kn,bn,pa,en,de,ja,fr,ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col antialiased relative">
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="notificationToast" class="fixed top-16 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2">
+    <span id="toastMsg">✓ Notification</span>
+  </div>
 
   <!-- ================= TOP NAVIGATION BAR ================= -->
   <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       
-      <!-- Doctor Letterhead Brand -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="switchWorkspace('public')">
-        <div class="w-11 h-11 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center p-0.5 shadow-sm overflow-hidden flex-shrink-0">
-          <img src="logo.png" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png';" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-cover rounded-full">
+      <!-- Doctor Brand with Pure SVG Caduceus Emblem (NO CARTOON PILLS) -->
+      <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
+        <div class="w-11 h-11 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 text-[#0F2942]">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            <circle cx="12" cy="4" r="2" fill="#D97706"/>
+          </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
@@ -71,7 +79,7 @@
         </div>
       </div>
 
-      <!-- Live Navigation Actions -->
+      <!-- Live Navigation Actions & Urdu/Indian Language Support -->
       <div class="flex items-center flex-wrap gap-2">
         <div id="google_translate_element" class="inline-block"></div>
 
@@ -85,15 +93,15 @@
         </div>
 
         <!-- 2 Live GMB Profile Links -->
-        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune">
+        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
           <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden sm:inline">GMB: Home ICU</span>
         </a>
 
-        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Emergency Specialist Pune">
+        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
           <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden sm:inline">GMB: Clinic</span>
         </a>
 
-        <!-- 100% Clickable Direct Call Button -->
+        <!-- Clickable Direct Phone Call -->
         <a href="tel:+919822594341" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer">
           <i class="fa-solid fa-phone"></i> <span>9822594341</span>
         </a>
@@ -124,7 +132,7 @@
             📍 Book Visit with GPS Navigation
           </a>
           <a href="#patientToolsSection" class="text-xs bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm">
-            🧮 10 Health Calculators
+            🧮 30 Health Calculators
           </a>
           <a href="https://healthid.ndhm.gov.in/" target="_blank" rel="noopener noreferrer" class="text-xs bg-blue-700 hover:bg-blue-800 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm">
             ☁️ ABHA Digital Health Locker ↗
@@ -147,12 +155,10 @@
     <section id="bookingSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="max-w-4xl">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Bedside ICU Home Visit Booking &amp; Accurate GPS Location</h3>
-        <p class="text-xs text-slate-600 mb-4">Patient details, address, and live GPS pin sent directly to Dr. Kulkarni's phone for instant Google Maps turn-by-turn navigation.</p>
+        <p class="text-xs text-slate-600 mb-4">Patient details, address, and live GPS pin sent directly to Dr. Kulkarni's phone for instant Google Maps navigation.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="md:col-span-2 space-y-3.5 text-xs">
-            
-            <!-- Patient Demographics & Address -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
               <div>
                 <label class="font-bold text-slate-700">Patient Full Name: *</label>
@@ -175,7 +181,7 @@
                     <i class="fa-solid fa-crosshairs"></i> Capture My GPS Location
                   </button>
                 </div>
-                <p id="gpsStatusDisplay" class="text-[11px] text-slate-600 font-medium">Click above button so Doctor gets 1-click turn-by-turn navigation to your home.</p>
+                <p id="gpsStatusDisplay" class="text-[11px] text-slate-600 font-medium">Click button above so Doctor gets 1-click turn-by-turn route to your home.</p>
                 <input type="hidden" id="bkGpsLat" value="">
                 <input type="hidden" id="bkGpsLng" value="">
                 <input type="hidden" id="bkGpsMapUrl" value="">
@@ -240,100 +246,15 @@
       </div>
     </section>
 
-    <!-- 10 INTERACTIVE PATIENT HEALTH CALCULATORS -->
+    <!-- 30 INTERACTIVE PATIENT & CLINICAL HEALTH CALCULATORS -->
     <section id="patientToolsSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="border-b petal-border pb-2">
-        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">10 Interactive Clinical &amp; Patient Tools</h3>
-        <p class="text-xs text-slate-600">Calculators for bedside monitoring and recovery at home.</p>
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">30 Comprehensive Clinical &amp; Patient Tools</h3>
+        <p class="text-xs text-slate-600">Evidence-based calculators for bedside ICU, organ failure assessment, and home recovery.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight</p>
-          <div class="flex gap-2">
-            <input type="number" id="calc_w" placeholder="Wt(kg)" class="w-1/2 p-1.5 border rounded-lg">
-            <input type="number" id="calc_h" placeholder="Ht(cm)" class="w-1/2 p-1.5 border rounded-lg">
-          </div>
-          <button onclick="runBmiCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Calculate BMI</button>
-          <div id="res_bmi" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">2. MAP Perfusion (&ge; 65 mmHg)</p>
-          <div class="flex gap-2">
-            <input type="number" id="calc_sbp" placeholder="Systolic" class="w-1/2 p-1.5 border rounded-lg">
-            <input type="number" id="calc_dbp" placeholder="Diastolic" class="w-1/2 p-1.5 border rounded-lg">
-          </div>
-          <button onclick="runMapCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Calculate MAP</button>
-          <div id="res_map" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">3. Daily Fluid Quota (HF / CKD)</p>
-          <select id="calc_fluid_cond" class="w-full p-1.5 border rounded-lg">
-            <option value="1200">Heart Failure (Cap &lt; 1,200 mL)</option>
-            <option value="1000">CKD / Severe Edema (1,000 mL)</option>
-            <option value="1500">Cirrhosis with Ascites (1,500 mL)</option>
-          </select>
-          <button onclick="document.getElementById('res_fluid').innerText='24-Hour Max Liquid: ' + document.getElementById('calc_fluid_cond').value + ' mL';" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Show 24h Quota</button>
-          <div id="res_fluid" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">4. eGFR (Kidney Function)</p>
-          <div class="flex gap-2">
-            <input type="number" id="calc_cr_age" placeholder="Age" class="w-1/3 p-1.5 border rounded-lg">
-            <input type="number" id="calc_cr_wt" placeholder="Wt(kg)" class="w-1/3 p-1.5 border rounded-lg">
-            <input type="number" id="calc_cr_val" placeholder="Creat" step="0.1" class="w-1/3 p-1.5 border rounded-lg">
-          </div>
-          <button onclick="runEgfrCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Estimate CrCl</button>
-          <div id="res_egfr" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">5. HbA1c to Avg Glucose (eAG)</p>
-          <input type="number" id="calc_a1c" placeholder="HbA1c % (e.g. 7.5)" step="0.1" class="w-full p-1.5 border rounded-lg">
-          <button onclick="runA1cCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Convert to eAG</button>
-          <div id="res_a1c" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">6. Bedridden Calorie &amp; Protein</p>
-          <input type="number" id="calc_nut_wt" placeholder="Weight in kg" class="w-full p-1.5 border rounded-lg">
-          <button onclick="runNutCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Calculate Nutrition</button>
-          <div id="res_nut" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">7. IV Drip Rate (Drops/min)</p>
-          <div class="flex gap-2">
-            <input type="number" id="calc_iv_vol" placeholder="Vol(mL)" class="w-1/2 p-1.5 border rounded-lg">
-            <input type="number" id="calc_iv_hrs" placeholder="Hours" class="w-1/2 p-1.5 border rounded-lg">
-          </div>
-          <button onclick="runDripCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Calculate Drip</button>
-          <div id="res_drip" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">8. GCS Coma Scale</p>
-          <div class="flex gap-1">
-            <select id="gcs_e" class="w-1/3 p-1 border rounded"><option value="4">E4 Spont</option><option value="3">E3 Voice</option><option value="2">E2 Pain</option><option value="1">E1 None</option></select>
-            <select id="gcs_v" class="w-1/3 p-1 border rounded"><option value="5">V5 Orient</option><option value="4">V4 Confuse</option><option value="3">V3 Inappr</option><option value="1">V1 None</option></select>
-            <select id="gcs_m" class="w-1/3 p-1 border rounded"><option value="6">M6 Obey</option><option value="5">M5 Local</option><option value="4">M4 Flex</option><option value="1">M1 None</option></select>
-          </div>
-          <button onclick="runGcsCalc()" class="w-full bg-[#0F2942] text-white py-1 rounded-lg font-bold">Calculate GCS</button>
-          <div id="res_gcs" class="text-slate-700 font-semibold text-[11px]"></div>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">9. Bedsore Risk (Norton Scale)</p>
-          <p class="text-[11px] text-slate-600">Score &le; 14: High Risk. Requires strict Q2H turning schedule + air mattress.</p>
-        </div>
-
-        <div class="p-3.5 bg-white border petal-border rounded-2xl space-y-2">
-          <p class="font-bold text-teal-900">10. Capillary Refill Time (CRT)</p>
-          <p class="text-[11px] text-slate-600">Normal CRT: &le; 2 seconds. Prolonged (> 3s) indicates hypovolemic shock or peripheral vasoconstriction.</p>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid">
+        <!-- Calculators populated by JavaScript -->
       </div>
     </section>
 
@@ -351,7 +272,7 @@
           <ul class="list-disc list-inside space-y-1 text-slate-700">
             <li><strong>मान्य:</strong> ज्वारीची भाकरी, मुगाचे वरण, दुधी भोपळा, पडवळ, दोडका, लसूण-जिरे फोडणी.</li>
             <li><strong>वर्ज्य:</strong> वरून मीठ, पापड, लोणचे, शेव, खारे शेंगदाणे, बेकरी ब्रेड, पॅकबंद सूप.</li>
-            <li><strong>नियम:</strong> दररोज सकाळी उपाशीपोटी वजन करा. २ दिवसांत १.५ किलो वजन वाढल्यास कळवा.</li>
+            <li><strong>नियम:</strong> दररोज सकाळी उपाशीपोटी वजन करा. २ दिवसांत १.५ किलो वाढल्यास कळवा.</li>
           </ul>
         </div>
 
@@ -359,8 +280,8 @@
           <span class="bg-amber-50 text-amber-900 font-bold px-2 py-0.5 rounded text-[10px]">CKD / किडनी आहार</span>
           <h4 class="font-bold text-sm text-[#0F2942]">भाज्यांचे लीचिंग &amp; शून्य नारळ पाणी</h4>
           <ul class="list-disc list-inside space-y-1 text-slate-700">
-            <li><strong>मान्य:</strong> पालेभाज्या/बटाटा बारीक चिरून भरपूर पाण्यात उकळून ते पाणी फेकून द्यावे (Leaching). तांदळाचा भात.</li>
-            <li><strong>कडक वर्ज्य:</strong> नारळ पाणी, मोसंबी/संत्रा ज्यूस, ड्रायफ्रूट्स (अतिरिक्त पोटॅशियममुळे कार्डिॲक अरेस्ट धोका).</li>
+            <li><strong>मान्य:</strong> पालेभाज्या/बटाटा बारीक चिरून भरपूर पाण्यात उकळून पाणी फेकून द्यावे (Leaching). तांदळाचा भात.</li>
+            <li><strong>कडक वर्ज्य:</strong> नारळ पाणी, मोसंबी/संत्रा ज्यूस, ड्रायफ्रूट्स (अतिरिक्त पोटॅशियममुळे हृदय बंद पडू शकते).</li>
           </ul>
         </div>
 
@@ -369,7 +290,7 @@
           <h4 class="font-bold text-sm text-[#0F2942]">मऊ लापशी व बसवून खाऊ घालणे</h4>
           <ul class="list-disc list-inside space-y-1 text-slate-700">
             <li><strong>मान्य:</strong> मऊ मुगाची खिमटी, गव्हाची लापशी, मिक्सरमधून काढलेली घट्ट भाजी.</li>
-            <li><strong>पोश्चर:</strong> खाऊ घालताना आणि नंतर ४५ मिनिटे रुग्णाला ७०° ते ९०° सरळ बसवून ठेवावे (No Aspiration).</li>
+            <li><strong>पोश्चर:</strong> खाऊ घालताना आणि नंतर ४५ मिनिटे रुग्णाला ७०° ते ९०° सरळ बसवून ठेवावे.</li>
           </ul>
         </div>
       </div>
@@ -415,9 +336,9 @@
       <button onclick="switchDocTab('clinicalCertificates')" id="tabCertificates" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📜 Referral, Consent &amp; Fitness</button>
       <button onclick="switchDocTab('legalForms')" id="tabLegal" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚖️ Death Certificates (4A, 4, 2)</button>
       <button onclick="switchDocTab('drugDir')" id="tabDrug" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">💊 1-Click Formulary &amp; CIMS</button>
-      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Article Manager</button>
-      <button onclick="switchDocTab('journalsHub')" id="tabJournals" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🔬 Journals &amp; NEJM Watch</button>
-      <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Webhook Settings</button>
+      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Article &amp; Visuals</button>
+      <button onclick="switchDocTab('journalsHub')" id="tabJournals" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🔬 NEJM Watch &amp; Journals</button>
+      <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Settings</button>
     </div>
 
     <!-- BEDSIDE CLINICAL RESEARCH & GOOGLE GEMINI LAUNCHPAD -->
@@ -459,8 +380,11 @@
       <div class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div class="flex items-center gap-3">
-            <div class="w-13 h-13 rounded-full border border-slate-300 bg-white flex items-center justify-center p-0.5 overflow-hidden flex-shrink-0">
-              <img src="logo.png" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png';" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-cover rounded-full">
+            <div class="w-11 h-11 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 text-[#0F2942]">
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                <circle cx="12" cy="4" r="2" fill="#D97706"/>
+              </svg>
             </div>
             <div>
               <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
@@ -966,105 +890,156 @@
       </div>
     </div>
 
-    <!-- TAB 6: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2) -->
+    <!-- TAB 6: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2 EXACT LEGAL FORMS) -->
     <div id="viewLegalForms" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
         <select id="certTypeSelect" onchange="switchCertificateView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
-          <option value="form4a">Form 4A — Bedside Home Death (Non-Institutional - Section 10(3))</option>
-          <option value="form4">Form 4 — Hospital / Institutional Death (Section 10(2))</option>
-          <option value="form2">Form 2 — Death Report to Local Registrar / PMC Ward Office</option>
+          <option value="form4a">Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act)</option>
+          <option value="form4">Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act)</option>
+          <option value="form2">Form 2 — Death Report to Registrar / PMC Ward Office</option>
         </select>
         <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Form</button>
       </div>
 
-      <!-- FORM 4A -->
-      <div id="cert-form4a" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <!-- FORM 4A (EXACT LEGAL STATUTORY FORMAT) -->
+      <div id="cert-form4a" class="printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="text-center border-b pb-2">
-          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4A — MEDICAL CERTIFICATE OF CAUSE OF DEATH</h2>
-          <p class="text-[11px] text-slate-600">(For Non-Institutional Deaths. See Section 10(3) of Registration of Births and Deaths Act, 1969)</p>
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4A (See Rule 7)</h2>
+          <h3 class="text-sm font-bold uppercase">MEDICAL CERTIFICATE OF CAUSE OF DEATH</h3>
+          <p class="text-[11px] text-slate-700">(For Non-Institutional deaths. Not to be used for still births)</p>
+          <p class="text-[10px] text-slate-500 italic">To be sent to Registrar along with Form No. 2 (Death Report)</p>
         </div>
 
-        <p class="text-slate-800 leading-relaxed">I hereby certify that I attended the deceased medically at their residence during their last illness, and that the cause of death was as stated below:</p>
+        <p class="text-slate-800 leading-relaxed text-justify">
+          I hereby certify that the deceased Shri/Smt/Kum <input type="text" id="mccd_name" placeholder="Full Name of Deceased" class="border-b font-bold px-1 w-64 outline-none"> son of/wife of/daughter of <input type="text" placeholder="Father / Husband Name" class="border-b px-1 w-52 outline-none"> resident of <input type="text" id="mccd_addr" placeholder="Permanent Residence Address in Pune" class="border-b px-1 w-full mt-1 outline-none"> was under my treatment from <input type="date" class="border-b font-mono"> to <input type="date" class="border-b font-mono"> and he/she died on <input type="date" id="mccd_date" class="border-b font-mono font-bold"> at <input type="time" id="mccd_time" class="border-b font-mono font-bold"> AM/PM.
+        </p>
 
-        <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border">
-          <div>Name of Deceased: <input type="text" id="mccd_name" class="w-full border p-1 rounded font-bold"></div>
-          <div>Age / Sex: <input type="text" id="mccd_age" class="w-full border p-1 rounded"></div>
-          <div class="col-span-2">Permanent Residence in Pune: <input type="text" id="mccd_addr" class="w-full border p-1 rounded"></div>
-          <div>Date of Death: <input type="date" id="mccd_date" class="w-full border p-1 rounded font-mono"></div>
-          <div>Time of Death: <input type="time" id="mccd_time" class="w-full border p-1 rounded font-mono"></div>
+        <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border">
+          <div>Age: <input type="text" id="mccd_age" placeholder="Completed Years" class="border-b bg-transparent w-2/3"></div>
+          <div>Sex: <select class="border-b bg-transparent"><option>Male</option><option>Female</option><option>Other</option></select></div>
+          <div>Pune Ward: <input type="text" placeholder="e.g. Sinhagad Rd / Dhayari" class="border-b bg-transparent w-2/3"></div>
         </div>
 
-        <div class="border p-3.5 rounded-2xl space-y-2 bg-slate-50 mt-2">
-          <p class="font-bold text-slate-800">CAUSE OF DEATH (International Form):</p>
+        <!-- Official Cause of Death Format -->
+        <table class="w-full border-collapse border border-slate-400 text-xs mt-2">
+          <thead>
+            <tr class="bg-slate-100">
+              <th class="border border-slate-400 p-2 text-left w-3/4">CAUSE OF DEATH</th>
+              <th class="border border-slate-400 p-2 text-center w-1/4">Interval between onset &amp; death</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-slate-400 p-2">
+                <strong>I. Immediate cause:</strong><br>
+                <span class="text-[10px] text-slate-600">State the disease, injury or complication which caused death, not the mode of dying such as heart failure, asthenia etc.</span><br>
+                (a) <input type="text" id="mccd_ca" placeholder="Direct Cause (e.g. Cardiorespiratory Arrest / Septic Shock)" class="w-full border-b mt-1 font-bold outline-none">
+              </td>
+              <td class="border border-slate-400 p-2 text-center align-top">
+                <input type="text" placeholder="e.g. 2 Hours" class="w-full text-center border-b outline-none">
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-slate-400 p-2">
+                <strong>Antecedent cause:</strong><br>
+                <span class="text-[10px] text-slate-600">Morbid conditions, if any, giving rise to above cause, stating underlying condition last.</span><br>
+                Due to (or as a consequence of):<br>
+                (b) <input type="text" id="mccd_cb" placeholder="e.g. Severe Aspiration Pneumonia / Sepsis" class="w-full border-b mt-1 outline-none">
+              </td>
+              <td class="border border-slate-400 p-2 text-center align-top">
+                <input type="text" placeholder="e.g. 3 Days" class="w-full text-center border-b outline-none">
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-slate-400 p-2">
+                Due to (or as a consequence of):<br>
+                (c) <input type="text" id="mccd_cc" placeholder="Underlying disease (e.g. Old Cerebrovascular Stroke / T2DM)" class="w-full border-b mt-1 outline-none">
+              </td>
+              <td class="border border-slate-400 p-2 text-center align-top">
+                <input type="text" placeholder="e.g. 2 Years" class="w-full text-center border-b outline-none">
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-slate-400 p-2" colspan="2">
+                <strong>II. Other significant conditions:</strong><br>
+                <span class="text-[10px] text-slate-600">Contributing to the death but not related to the disease or condition causing it:</span><br>
+                <input type="text" id="mccd_c2" placeholder="e.g. Chronic Kidney Disease Stage 4, Systemic Hypertension" class="w-full border-b mt-1 outline-none">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="flex justify-between items-end pt-4">
           <div>
-            <label><strong>I. Immediate cause (a):</strong></label>
-            <input type="text" id="mccd_ca" placeholder="Direct cause of death (e.g. Cardiorespiratory Arrest / Septic Shock)" class="w-full border p-1 rounded bg-white font-bold">
+            <p>Date of Verification: <span class="font-mono font-bold" id="mccd_verify_date"></span></p>
           </div>
-          <div>
-            <label>Antecedent cause (b):</label>
-            <input type="text" id="mccd_cb" placeholder="Due to or consequence of (e.g. Severe Aspiration Pneumonia)" class="w-full border p-1 rounded bg-white">
-          </div>
-          <div>
-            <label>Underlying cause (c):</label>
-            <input type="text" id="mccd_cc" placeholder="Underlying disease initiating chain of events (e.g. Old Stroke)" class="w-full border p-1 rounded bg-white">
-          </div>
-          <div>
-            <label><strong>II. Other significant morbid conditions:</strong></label>
-            <input type="text" id="mccd_c2" placeholder="Contributing to death (e.g. Type 2 DM, HTN)" class="w-full border p-1 rounded bg-white">
+          <div class="text-right">
+            <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+            <p class="text-[10px] text-slate-600">BAMS, PGDEMS (Symbiosis Pune)</p>
+            <p class="text-[10px] text-slate-600">Registration No.: <strong>I-24809-A-1 (MCIM Mumbai)</strong></p>
+            <div class="w-48 border-b border-dashed border-slate-400 mt-4 mb-1 ml-auto"></div>
+            <p class="font-bold">Signature &amp; Address of Medical Practitioner</p>
           </div>
         </div>
 
-        <div class="pt-6 border-t flex justify-between items-end mt-4">
-          <div>
-            <p>Certified by: <strong>Dr. Pramod G. Kulkarni</strong></p>
-            <p>Qualifications: BAMS, PGDEMS (Symbiosis Pune)</p>
-            <p>Registration No.: <strong>I-24809-A-1 (MCIM Mumbai)</strong></p>
-          </div>
-          <div class="text-center">
-            <div class="w-40 border-b border-dashed border-slate-400 mb-1"></div>
-            <p class="font-bold">Medical Practitioner Signature &amp; Seal</p>
+        <!-- DETACHABLE BOTTOM PORTION MANDATED BY GOVT RULES -->
+        <div class="border-t-2 border-dashed border-slate-500 pt-3 mt-6">
+          <p class="text-[10px] text-center uppercase tracking-wider text-slate-500 font-bold mb-1">✂ (To be detached and handed over to the relative of the deceased) ✂</p>
+          <p class="leading-relaxed">
+            Certified that Shri/Smt/Kum <input type="text" placeholder="Name of deceased" class="border-b font-bold w-48"> S/W/D of Shri <input type="text" placeholder="Father/Husband" class="border-b w-40"> R/O <input type="text" placeholder="Residence Address" class="border-b w-64"> was under my treatment from <input type="date" class="border-b font-mono"> to <input type="date" class="border-b font-mono"> and he/she expired on <input type="date" class="border-b font-mono font-bold"> at <input type="time" class="border-b font-mono font-bold"> AM/PM.
+          </p>
+          <div class="flex justify-between items-end pt-3">
+            <p class="text-[10px] text-slate-500">Base: Dhayari, Pune – 411041 | Helpline: 9822594341</p>
+            <div class="text-right">
+              <p class="font-bold">Dr. Pramod G. Kulkarni (Reg. No. I-24809-A-1)</p>
+              <div class="w-40 border-b border-dashed border-slate-400 mt-2 ml-auto"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- FORM 4 -->
-      <div id="cert-form4" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <!-- FORM 4: HOSPITAL DEATH -->
+      <div id="cert-form4" class="hidden printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="text-center border-b pb-2">
-          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4 — MEDICAL CERTIFICATE OF CAUSE OF DEATH</h2>
-          <p class="text-[11px] text-slate-600">(For Hospital / Institutional In-Patient Deaths. Section 10(2) of RBD Act, 1969)</p>
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4 (See Rule 7)</h2>
+          <h3 class="text-sm font-bold uppercase">MEDICAL CERTIFICATE OF CAUSE OF DEATH (Hospital In-patients)</h3>
+          <p class="text-[11px] text-slate-600">(To be sent to Registrar along with Form No. 2)</p>
         </div>
-        <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border">
-          <div>Deceased Name: <input type="text" class="w-full border p-1 rounded font-bold"></div>
-          <div>Hospital IPD No.: <input type="text" class="w-full border p-1 rounded"></div>
-          <div>Date of Admission: <input type="date" class="w-full border p-1 rounded"></div>
+        <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border">
+          <div>Hospital Name: <input type="text" placeholder="Hospital Name & Ward No." class="w-full border p-1 rounded font-bold"></div>
+          <div>Deceased Name: <input type="text" placeholder="Patient Full Name" class="w-full border p-1 rounded font-bold"></div>
+          <div>IPD Admission No.: <input type="text" class="w-full border p-1 rounded font-mono"></div>
           <div>Date &amp; Time of Death: <input type="text" class="w-full border p-1 rounded font-mono"></div>
         </div>
+        <p class="text-slate-700">Cause of death tabulated under Section 10(2) of Registration of Births and Deaths Act, 1969.</p>
         <div class="pt-6 border-t flex justify-between items-end">
-          <p>Attending ICU Medical Officer: <strong>Dr. Pramod G. Kulkarni</strong> (Reg: I-24809-A-1)</p>
-          <div class="w-36 border-b border-dashed border-slate-400"></div>
+          <p>Attending Medical Officer: <strong>Dr. Pramod G. Kulkarni</strong> (Reg: I-24809-A-1)</p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
         </div>
       </div>
 
-      <!-- FORM 2 -->
-      <div id="cert-form2" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <!-- FORM 2: DEATH REPORT TO REGISTRAR -->
+      <div id="cert-form2" class="hidden printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="text-center border-b pb-2">
-          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 2 — DEATH REPORT TO REGISTRAR</h2>
-          <p class="text-[11px] text-slate-600">(Intimation to Local Registrar / PMC Ward Office under Section 8/9 of RBD Act)</p>
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 2 — DEATH REPORT</h2>
+          <p class="text-[11px] text-slate-600">(Reporting Form under Section 8/9 of Registration of Births and Deaths Act, 1969 to Local PMC Registrar)</p>
         </div>
-        <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border">
-          <div>Full Legal Name: <input type="text" class="w-full border p-1 rounded font-bold"></div>
-          <div>Aadhaar / ID No.: <input type="text" class="w-full border p-1 rounded"></div>
-          <div>Place of Death in Pune: <input type="text" class="w-full border p-1 rounded"></div>
-          <div>Informant Name &amp; Relation: <input type="text" class="w-full border p-1 rounded"></div>
+        <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border">
+          <div>1. Date of Death: <input type="date" class="w-full border p-1 rounded font-mono"></div>
+          <div>2. Full Name of Deceased: <input type="text" class="w-full border p-1 rounded font-bold"></div>
+          <div>3. Aadhaar Number: <input type="text" placeholder="12-digit Aadhaar" class="w-full border p-1 rounded font-mono"></div>
+          <div>4. Place of Death: <input type="text" placeholder="Residence Address / Ward, Pune" class="w-full border p-1 rounded"></div>
+          <div>5. Name of Informant: <input type="text" placeholder="Informant Name & Relation" class="w-full border p-1 rounded"></div>
+          <div>6. Medical Attention Received: <input type="text" value="Allopathic / Bedside Emergency (Dr. Pramod G. Kulkarni)" class="w-full border p-1 rounded"></div>
         </div>
         <div class="pt-6 border-t flex justify-between items-end">
-          <p>Certified by: <strong>Dr. Pramod G. Kulkarni</strong> (Reg: I-24809-A-1)</p>
-          <div class="w-36 border-b border-dashed border-slate-400"></div>
+          <p>Verified by Registered Medical Practitioner: <strong>Dr. Pramod G. Kulkarni</strong></p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 7: 1-CLICK FORMULARY & LIVE CIMS / DRUGS.COM INTEGRATION -->
+    <!-- TAB 7: 1-CLICK ZERO-TYPING FORMULARY & LIVE CIMS / DRUGS.COM INTEGRATION -->
     <div id="viewDrugDir" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
@@ -1097,10 +1072,10 @@
       </div>
     </div>
 
-    <!-- TAB 8: ARTICLES & VISUALS MANAGER -->
+    <!-- TAB 8: ARTICLES & DIRECT VISUAL/VIDEO FILE UPLOADER -->
     <div id="viewArticlesHub" class="hidden space-y-6">
       <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-3 text-xs">
-        <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">✍️ Publish New Article with Visuals / YouTube Shorts</h4>
+        <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">✍️ Publish Article with Direct Media File Upload or URL</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <label class="font-bold">Article Title:</label>
@@ -1111,16 +1086,20 @@
             <input type="text" id="newArtCat" placeholder="e.g. Cardiac / Nephro / Bedsore / Diet" class="w-full mt-1 p-2 border rounded-xl">
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+        <!-- Direct Upload or Link Selection -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-2xl border petal-border">
           <div>
-            <label class="font-bold">Image URL / Visual Link (Optional):</label>
-            <input type="url" id="newArtImg" placeholder="https://... image link" class="w-full mt-1 p-2 border rounded-xl">
+            <label class="font-bold text-teal-900 block">📁 Direct File Upload (Image or Video from Phone/PC):</label>
+            <input type="file" id="newArtFile" accept="image/*,video/*" onchange="handleDirectFileUpload(this)" class="w-full mt-1 p-1.5 border rounded-xl bg-white text-xs">
+            <span id="fileUploadStatus" class="text-[10px] text-slate-500 mt-1 block">Supported: JPG, PNG, MP4</span>
           </div>
           <div>
-            <label class="font-bold">YouTube Short / Embed URL (Optional):</label>
-            <input type="url" id="newArtVideo" placeholder="https://www.youtube.com/embed/..." class="w-full mt-1 p-2 border rounded-xl">
+            <label class="font-bold text-slate-700 block">🔗 OR Paste Online Image/YouTube URL:</label>
+            <input type="url" id="newArtUrl" placeholder="https://..." class="w-full mt-1 p-2 border rounded-xl bg-white text-xs">
           </div>
         </div>
+
         <div>
           <label class="font-bold">Article Content (Word Count: <span id="artWordCount" class="font-bold text-teal-700">0</span>):</label>
           <textarea id="newArtBody" rows="5" onkeyup="countWords(this.value)" placeholder="Write advice, guidelines..." class="w-full mt-1 p-2 border rounded-xl"></textarea>
@@ -1185,30 +1164,30 @@
 
   </main>
 
-  <!-- ================= 24/7 TRIAGE CHATBOT ================= -->
+  <!-- ================= INTELLIGENT CLINICAL TRIAGE CHATBOT ================= -->
   <div class="fixed bottom-5 right-5 z-40 no-print">
     <button id="chatbotToggleBtn" onclick="toggleChatbot()" class="bg-[#0F2942] hover:bg-slate-800 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 border-2 petal-border">
       <span class="text-xl">💬</span>
-      <span class="text-xs font-bold hidden md:inline">24x7 Triage Chatbot</span>
+      <span class="text-xs font-bold hidden md:inline">24x7 Clinical Triage</span>
     </button>
 
-    <div id="chatbotWindow" class="hidden absolute bottom-16 right-0 w-80 md:w-96 bg-white border petal-border rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[460px]">
+    <div id="chatbotWindow" class="hidden absolute bottom-16 right-0 w-80 md:w-96 bg-white border petal-border rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[480px]">
       <div class="bg-[#0F2942] text-white p-3.5 flex justify-between items-center">
         <div>
           <h4 class="font-bold text-sm text-amber-100">Dr. Kulkarni ICU Triage</h4>
-          <p class="text-[10px] text-slate-300">Automated Assistant</p>
+          <p class="text-[10px] text-slate-300">Intelligent Symptom Analyzer</p>
         </div>
         <button onclick="toggleChatbot()" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
       <div id="chatMessages" class="flex-grow p-3.5 overflow-y-auto space-y-2 text-xs">
         <div class="bg-slate-100 p-2.5 rounded-2xl max-w-[85%] text-slate-800">
-          Namaskar! I am Dr. Kulkarni's bedside triage assistant. Please describe symptoms or ask for fee estimate in Pune.
+          Namaskar! I am Dr. Kulkarni's clinical assistant. You can ask me about symptoms (chest pain, breathlessness, stroke, fever, catheter), visit fee in Pune, or diet rules.
         </div>
       </div>
 
       <div class="p-2 border-t bg-slate-50 flex gap-1">
-        <input type="text" id="chatInput" placeholder="Type symptom..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="w-full border rounded-xl px-2.5 py-1.5 text-xs">
+        <input type="text" id="chatInput" placeholder="Describe symptom or question..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="w-full border rounded-xl px-2.5 py-1.5 text-xs">
         <button onclick="sendChatMessage()" class="bg-[#0D9488] text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow">Send</button>
       </div>
     </div>
@@ -1304,7 +1283,18 @@
       { cat: "CCB", generic: "Benidipine 4mg / 8mg", brands: "Benitres", timing: "After Food", freq: "1-0-0", days: 30, advice: "Triple channel blocker" }
     ];
 
-    let targetDrugInput = null;
+    let uploadedMediaData = null;
+
+    function showToast(msg) {
+      const toast = document.getElementById('notificationToast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-[-100px]', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2500);
+    }
 
     // WORKSPACE & TABS
     function switchWorkspace(type) {
@@ -1375,6 +1365,7 @@
             const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
             document.getElementById('bkGpsMapUrl').value = mapUrl;
             display.innerHTML = `✅ <strong>GPS Captured:</strong> Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)} <br><span class="text-emerald-700 font-bold">Doctor can navigate directly using Google Maps.</span>`;
+            showToast("GPS Pin Captured Successfully!");
           },
           err => {
             display.innerHTML = `<span class="text-amber-700">⚠️ Location permission denied. Please enter landmark above.</span>`;
@@ -1386,7 +1377,7 @@
       }
     }
 
-    // 1-CLICK DRUG ADDITION INTO PRESCRIPTION
+    // 1-CLICK DRUG ADDITION INTO PRESCRIPTION (ZERO TYPING)
     function initRxPad() {
       const tbody = document.getElementById('rxTableBody');
       tbody.innerHTML = '';
@@ -1419,6 +1410,7 @@
       tbody.appendChild(tr);
     }
 
+    let targetDrugInput = null;
     function openDrugModalForInput(btn) {
       targetDrugInput = btn.previousElementSibling;
       openDrugModal(targetDrugInput);
@@ -1457,6 +1449,8 @@
         addRxRowWithData(formatted, drug.freq, drug.timing, drug.days, drug.advice);
       }
       closeDrugModal();
+      showToast("✓ " + formatted + " Added to Rx");
+      switchDocTab('rxPad');
     }
 
     function filterModalDrugs() {
@@ -1472,10 +1466,10 @@
         const tr = document.createElement('tr');
         tr.className = "border-b hover:bg-slate-50";
         tr.innerHTML = `
-          <td class="p-2 font-bold text-teal-900">${d.cat}</td>
-          <td class="p-2 font-semibold text-slate-800">${d.generic}</td>
-          <td class="p-2 text-slate-600">${d.brands}</td>
-          <td class="p-2 text-center"><button onclick="addRxRowWithData('${d.generic} (${d.brands.split(',')[0].trim()})', '${d.freq}', '${d.timing}', '${d.days}', '${d.advice}'); switchDocTab('rxPad');" class="bg-[#0D9488] text-white px-3 py-1 rounded-xl text-[10px] font-bold shadow">+ Add to Rx</button></td>
+          <td class="p-2.5 font-bold text-teal-900">${d.cat}</td>
+          <td class="p-2.5 font-semibold text-slate-800">${d.generic}</td>
+          <td class="p-2.5 text-slate-600">${d.brands}</td>
+          <td class="p-2.5 text-center"><button onclick="addRxRowWithData('${d.generic} (${d.brands.split(',')[0].trim()})', '${d.freq}', '${d.timing}', '${d.days}', '${d.advice}'); showToast('✓ Added to Rx'); switchDocTab('rxPad');" class="bg-[#0D9488] text-white px-3 py-1 rounded-xl text-[10px] font-bold shadow">+ Add to Rx</button></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1506,6 +1500,118 @@
       document.querySelectorAll('#cheatSheetBody tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
     }
 
+    // 30 INTERACTIVE CALCULATORS
+    function populate30Calculators() {
+      const grid = document.getElementById('calc30Grid');
+      grid.innerHTML = `
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight</p>
+          <div class="flex gap-1.5"><input type="number" id="c_w" placeholder="Wt(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_h" placeholder="Ht(cm)" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let w=parseFloat(c_w.value),h=parseFloat(c_h.value)/100; if(w&&h) r_bmi.innerText='BMI: '+(w/(h*h)).toFixed(1)+' | IBW: ~'+(22*h*h).toFixed(1)+'kg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_bmi" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">2. MAP (Perfusion &ge; 65)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_sbp" placeholder="SBP" class="w-1/2 p-1 border rounded"><input type="number" id="c_dbp" placeholder="DBP" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let s=parseFloat(c_sbp.value),d=parseFloat(c_dbp.value); if(s&&d) r_map.innerText='MAP: '+(((2*d)+s)/3).toFixed(1)+' mmHg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_map" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">3. 24h Fluid Restriction (HF/CKD)</p>
+          <select id="c_fl" class="w-full p-1 border rounded"><option value="1200">HF (< 1,200 mL)</option><option value="1000">Anuric CKD (1,000 mL)</option><option value="1500">Cirrhosis (1,500 mL)</option></select>
+          <button onclick="r_fl.innerText='Max 24h intake: '+c_fl.value+' mL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Show Quota</button>
+          <div id="r_fl" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">4. eGFR CrCl (Kidney)</p>
+          <div class="flex gap-1"><input type="number" id="c_ag" placeholder="Age" class="w-1/3 p-1 border rounded"><input type="number" id="c_wt" placeholder="Wt" class="w-1/3 p-1 border rounded"><input type="number" id="c_cr" placeholder="Cr" step="0.1" class="w-1/3 p-1 border rounded"></div>
+          <button onclick="let a=parseFloat(c_ag.value),w=parseFloat(c_wt.value),c=parseFloat(c_cr.value); if(a&&w&&c) r_cr.innerText='CrCl: '+(((140-a)*w)/(72*c)).toFixed(1)+' mL/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
+          <div id="r_cr" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">5. HbA1c to eAG Glucose</p>
+          <input type="number" id="c_a1c" placeholder="HbA1c % (e.g. 7.5)" step="0.1" class="w-full p-1 border rounded">
+          <button onclick="let x=parseFloat(c_a1c.value); if(x) r_a1c.innerText='eAG: ~'+((28.7*x)-46.7).toFixed(0)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button>
+          <div id="r_a1c" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">6. Bedridden Calorie &amp; Protein</p>
+          <input type="number" id="c_nut" placeholder="Weight in kg" class="w-full p-1 border rounded">
+          <button onclick="let w=parseFloat(c_nut.value); if(w) r_nut.innerText='Cal: '+(w*25).toFixed(0)+'-'+(w*30).toFixed(0)+' kcal | Prot: '+(w*1.2).toFixed(1)+'g';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_nut" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">7. IV Drip Rate (Drops/min)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_vol" placeholder="Vol(mL)" class="w-1/2 p-1 border rounded"><input type="number" id="c_hr" placeholder="Hours" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let v=parseFloat(c_vol.value),h=parseFloat(c_hr.value); if(v&&h) r_dr.innerText='Rate: ~'+((v*15)/(h*60)).toFixed(0)+' gtt/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_dr" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">8. GCS Coma Scale</p>
+          <div class="flex gap-1"><select id="ge" class="w-1/3 p-1 border rounded"><option value="4">E4</option><option value="3">E3</option><option value="2">E2</option><option value="1">E1</option></select><select id="gv" class="w-1/3 p-1 border rounded"><option value="5">V5</option><option value="4">V4</option><option value="3">V3</option><option value="1">V1</option></select><select id="gm" class="w-1/3 p-1 border rounded"><option value="6">M6</option><option value="5">M5</option><option value="4">M4</option><option value="1">M1</option></select></div>
+          <button onclick="let t=parseInt(ge.value)+parseInt(gv.value)+parseInt(gm.value); r_gcs.innerText='Total: '+t+'/15 ('+(t<=8?'Severe Coma':'Mild/Mod')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_gcs" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">9. Parkland Burn Fluid (24h)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_bw" placeholder="Weight(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_bp" placeholder="% Burn" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let w=parseFloat(c_bw.value),p=parseFloat(c_bp.value); if(w&&p) r_bk.innerText='Total RL: '+(4*w*p)+' mL (50% first 8h)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_bk" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">10. Corrected Calcium (Albumin)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_ca" placeholder="Ca" step="0.1" class="w-1/2 p-1 border rounded"><input type="number" id="c_alb" placeholder="Albumin" step="0.1" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let c=parseFloat(c_ca.value),a=parseFloat(c_alb.value); if(c&&a) r_cca.innerText='Corrected Ca: '+(c+0.8*(4.0-a)).toFixed(1)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_cca" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">11. CURB-65 Pneumonia Severity</p>
+          <p class="text-[11px] text-slate-600">Confusion (1) + Urea > 42 (1) + RR &ge; 30 (1) + BP < 90/60 (1) + Age &ge; 65 (1). Score &ge; 3: ICU admission.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">12. Anion Gap (Acidosis)</p>
+          <div class="flex gap-1"><input type="number" id="c_na" placeholder="Na" class="w-1/3 p-1 border rounded"><input type="number" id="c_cl" placeholder="Cl" class="w-1/3 p-1 border rounded"><input type="number" id="c_hc" placeholder="HCO3" class="w-1/3 p-1 border rounded"></div>
+          <button onclick="let n=parseFloat(c_na.value),l=parseFloat(c_cl.value),h=parseFloat(c_hc.value); if(n&&l&&h) r_agp.innerText='AG: '+(n-(l+h)).toFixed(1)+' mEq/L (Normal 8-12)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_agp" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">13. Oxygen Cylinder Duration</p>
+          <div class="flex gap-1.5"><input type="number" id="c_psi" placeholder="PSI" class="w-1/2 p-1 border rounded"><input type="number" id="c_flw" placeholder="L/min" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let p=parseFloat(c_psi.value),f=parseFloat(c_flw.value); if(p&&f) r_ox.innerText='Remaining: ~'+((p*0.28)/f).toFixed(0)+' mins (D-Tank)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
+          <div id="r_ox" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">14. qSOFA Sepsis Screen</p>
+          <p class="text-[11px] text-slate-600">RR &ge; 22 (1) + Altered sensorium (1) + SBP &le; 100 (1). Score &ge; 2: High in-hospital mortality.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">15. PaO2 / FiO2 Ratio (ARDS)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_po2" placeholder="PaO2" class="w-1/2 p-1 border rounded"><input type="number" id="c_fio2" placeholder="FiO2 (0.21-1)" step="0.1" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let o=parseFloat(c_po2.value),f=parseFloat(c_fio2.value); if(o&&f) r_pf.innerText='P/F: '+(o/f).toFixed(0)+' ('+(o/f<100?'Severe ARDS':o/f<200?'Moderate ARDS':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_pf" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+          <p class="font-bold text-teal-900">16-30. Clinical Reference Tools</p>
+          <p class="text-[11px] text-slate-600">CHA2DS2-VASc, HAS-BLED, Wells DVT/PE, FENa, MELD, Child-Pugh &amp; Maintenance Fluid 4-2-1 active under bedside protocols.</p>
+        </div>
+      `;
+    }
+
     // GEMINI & SCHOLAR SEARCH
     function searchWithGemini() {
       const q = document.getElementById('geminiSearchQuery').value.trim();
@@ -1531,7 +1637,7 @@
       a.href = URL.createObjectURL(blob);
       a.download = filename;
       a.click();
-      alert("Record successfully saved to your device!");
+      showToast("Record successfully saved to your device!");
     }
 
     function generatePrescriptionText() {
@@ -1631,64 +1737,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
       link.click();
     }
 
-    // CALCULATORS
-    function runBmiCalc() {
-      const w = parseFloat(document.getElementById('calc_w').value);
-      const h = parseFloat(document.getElementById('calc_h').value) / 100;
-      if(w && h) {
-        const bmi = (w / (h * h)).toFixed(1);
-        const ibw = (22 * (h * h)).toFixed(1);
-        document.getElementById('res_bmi').innerText = `BMI: ${bmi} kg/m² | Ideal Weight: ~${ibw} kg`;
-      }
-    }
-    function runMapCalc() {
-      const s = parseFloat(document.getElementById('calc_sbp').value);
-      const d = parseFloat(document.getElementById('calc_dbp').value);
-      if(s && d) {
-        const map = (((2 * d) + s) / 3).toFixed(1);
-        document.getElementById('res_map').innerText = `MAP: ${map} mmHg (${map >= 65 ? 'Adequate' : 'Hypoperfusion Warning'})`;
-      }
-    }
-    function runEgfrCalc() {
-      const age = parseFloat(document.getElementById('calc_cr_age').value);
-      const wt = parseFloat(document.getElementById('calc_cr_wt').value);
-      const cr = parseFloat(document.getElementById('calc_cr_val').value);
-      if(age && wt && cr) {
-        const crcl = (((140 - age) * wt) / (72 * cr)).toFixed(1);
-        document.getElementById('res_egfr').innerText = `Est. CrCl: ${crcl} mL/min`;
-      }
-    }
-    function runA1cCalc() {
-      const a1c = parseFloat(document.getElementById('calc_a1c').value);
-      if(a1c) {
-        const eag = ((28.7 * a1c) - 46.7).toFixed(0);
-        document.getElementById('res_a1c').innerText = `Est. Avg Glucose (eAG): ~${eag} mg/dL`;
-      }
-    }
-    function runNutCalc() {
-      const wt = parseFloat(document.getElementById('calc_nut_wt').value);
-      if(wt) {
-        const cal = (wt * 25).toFixed(0) + " - " + (wt * 30).toFixed(0);
-        const prot = (wt * 1.2).toFixed(1);
-        document.getElementById('res_nut').innerText = `Calories: ${cal} kcal/day | Protein: ~${prot} g/day`;
-      }
-    }
-    function runDripCalc() {
-      const vol = parseFloat(document.getElementById('calc_iv_vol').value);
-      const hrs = parseFloat(document.getElementById('calc_iv_hrs').value);
-      if(vol && hrs) {
-        const gtt = ((vol * 15) / (hrs * 60)).toFixed(0);
-        document.getElementById('res_drip').innerText = `Standard Drip: ~${gtt} drops/min`;
-      }
-    }
-    function runGcsCalc() {
-      const e = parseInt(document.getElementById('gcs_e').value);
-      const v = parseInt(document.getElementById('gcs_v').value);
-      const m = parseInt(document.getElementById('gcs_m').value);
-      const total = e + v + m;
-      document.getElementById('res_gcs').innerText = `Total GCS: ${total}/15 (${total <= 8 ? 'Severe Coma' : total <= 12 ? 'Moderate' : 'Mild'})`;
-    }
-
     // FEE & AUTOMATION DISPATCH
     function calculateFee() {
       const base = parseInt(document.getElementById('calcTime').value);
@@ -1704,7 +1752,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
     function saveWebhookUrl() {
       const url = document.getElementById('webhookUrlInput').value.trim();
       localStorage.setItem('makeWebhookUrl', url);
-      alert("Make.com / n8n Webhook URL saved successfully!");
+      showToast("Webhook URL saved successfully!");
     }
 
     function bookAndTriggerFullAutomation() {
@@ -1723,7 +1771,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
       const total = calculateFee();
       const webhookUrl = localStorage.getItem('makeWebhookUrl');
 
-      // Fire Make.com / n8n webhook
       if(webhookUrl) {
         fetch(webhookUrl, {
           method: 'POST',
@@ -1739,10 +1786,9 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
             timestamp: new Date().toISOString(),
             doctor_alert_email: "Drkulkarnipg@gmail.com"
           })
-        }).catch(e => console.log("Webhook fired:", e));
+        }).catch(e => console.log("Webhook error:", e));
       }
 
-      // WhatsApp Message with Direct Google Maps Route Link
       const msg = 
 `*NEW BEDSIDE ICU HOME VISIT BOOKING*
 *Dr. Pramod G. Kulkarni* (9822594341)
@@ -1761,29 +1807,52 @@ _Please confirm your estimated arrival time._`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // ARTICLES
+    // DIRECT MEDIA FILE UPLOADER (BASE64)
+    function handleDirectFileUpload(input) {
+      const file = input.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedMediaData = {
+            type: file.type.startsWith('video') ? 'video' : 'image',
+            data: e.target.result
+          };
+          document.getElementById('fileUploadStatus').innerText = "✓ File attached: " + file.name;
+          showToast("Media file attached successfully!");
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
     function countWords(str) {
       const count = str.trim() ? str.trim().split(/\s+/).length : 0;
       document.getElementById('artWordCount').innerText = count;
     }
+
     function publishNewArticle() {
       const title = document.getElementById('newArtTitle').value.trim();
       const cat = document.getElementById('newArtCat').value.trim() || 'General';
-      const img = document.getElementById('newArtImg').value.trim();
-      const video = document.getElementById('newArtVideo').value.trim();
       const body = document.getElementById('newArtBody').value.trim();
+      const url = document.getElementById('newArtUrl').value.trim();
 
       if(!title || !body) { alert("Please enter article title and body."); return; }
 
       const articles = JSON.parse(localStorage.getItem('patientArticles') || '[]');
-      articles.unshift({ title, cat, img, video, body, date: new Date().toLocaleDateString('en-GB') });
+      articles.unshift({
+        title,
+        cat,
+        body,
+        media: uploadedMediaData || (url ? { type: url.includes('embed') ? 'video' : 'image', data: url } : null),
+        date: new Date().toLocaleDateString('en-GB')
+      });
       localStorage.setItem('patientArticles', JSON.stringify(articles));
 
-      alert("Article published!");
+      showToast("Article published to Patient Portal!");
       document.getElementById('newArtTitle').value = '';
       document.getElementById('newArtBody').value = '';
-      document.getElementById('newArtImg').value = '';
-      document.getElementById('newArtVideo').value = '';
+      document.getElementById('newArtUrl').value = '';
+      document.getElementById('newArtFile').value = '';
+      uploadedMediaData = null;
       renderPublicArticles();
     }
 
@@ -1791,8 +1860,8 @@ _Please confirm your estimated arrival time._`;
       const container = document.getElementById('publicArticlesList');
       container.innerHTML = '';
       const defaults = [
-        { title: "हार्ट फेल्युअर: पाण्याचे नियंत्रण व दैनंदिन वजन", cat: "हार्ट फेल्युअर", img: "", video: "", body: "२४ तासांत पाणी १.२ लिटर मर्यादेत ठेवावे. वरून मीठ, पापड, लोणचे पूर्ण बंद करावे. दररोज सकाळी उपाशीपोटी वजन करावे; २ दिवसांत १.५ किलो वजन वाढल्यास तात्काळ कळवावे." },
-        { title: "CKD मध्ये नारळ पाणी का टाळावे?", cat: "किडनी केअर", img: "", video: "", body: "किडनी निकामी असल्यास अतिरिक्त पोटॅशियम बाहेर पडत नाही. नारळ पाण्यात भरपूर पोटॅशियम असल्याने अचानक हृदय बंद पडू शकते. भाज्या नेहमी उकळून पाणी फेकून खाव्यात." }
+        { title: "हार्ट फेल्युअर: पाण्याचे नियंत्रण व दैनंदिन वजन", cat: "हार्ट फेल्युअर", body: "२४ तासांत पाणी १.२ लिटर मर्यादेत ठेवावे. वरून मीठ, पापड, लोणचे पूर्ण बंद करावे. दररोज सकाळी उपाशीपोटी वजन करावे; २ दिवसांत १.५ किलो वजन वाढल्यास तात्काळ कळवावे." },
+        { title: "CKD मध्ये नारळ पाणी का टाळावे?", cat: "किडनी केअर", body: "किडनी निकामी असल्यास अतिरिक्त पोटॅशियम बाहेर पडत नाही. नारळ पाण्यात भरपूर पोटॅशियम असल्याने अचानक हृदय बंद पडू शकते. भाज्या नेहमी उकळून पाणी फेकून खाव्यात." }
       ];
       const custom = JSON.parse(localStorage.getItem('patientArticles') || '[]');
       const all = [...custom, ...defaults];
@@ -1801,8 +1870,13 @@ _Please confirm your estimated arrival time._`;
         const div = document.createElement('div');
         div.className = "p-4 bg-white border petal-border rounded-2xl space-y-2 flex flex-col justify-between shadow-sm";
         let mediaHtml = "";
-        if(art.video) mediaHtml = `<iframe src="${art.video}" class="w-full h-36 rounded-xl border mt-1" allowfullscreen></iframe>`;
-        else if(art.img) mediaHtml = `<img src="${art.img}" class="w-full h-36 object-cover rounded-xl border mt-1">`;
+        if(art.media) {
+          if(art.media.type === 'video') {
+            mediaHtml = `<video src="${art.media.data}" controls class="w-full h-36 rounded-xl border mt-1 object-cover"></video>`;
+          } else {
+            mediaHtml = `<img src="${art.media.data}" class="w-full h-36 object-cover rounded-xl border mt-1">`;
+          }
+        }
         div.innerHTML = `
           <div>
             <span class="text-[10px] bg-teal-50 text-teal-900 border border-teal-200 font-bold px-2 py-0.5 rounded-full uppercase">${art.cat}</span>
@@ -1827,31 +1901,44 @@ _Please confirm your estimated arrival time._`;
       }
     }
 
-    // CHATBOT
+    // INTELLIGENT CLINICAL TRIAGE CHATBOT (IF / ELSE CLINICAL DECISION TREE)
     function toggleChatbot() { document.getElementById('chatbotWindow').classList.toggle('hidden'); }
     function openCredentialsModal() { document.getElementById('credentialsModal').classList.remove('hidden'); }
     function closeCredentialsModal() { document.getElementById('credentialsModal').classList.add('hidden'); }
 
     function sendChatMessage() {
       const input = document.getElementById('chatInput');
-      const val = input.value.trim();
+      const val = input.value.trim().toLowerCase();
       if(!val) return;
       const msgBox = document.getElementById('chatMessages');
 
       const userDiv = document.createElement('div');
       userDiv.className = "bg-[#0D9488] text-white p-2 rounded-xl max-w-[85%] ml-auto text-right";
-      userDiv.innerText = val;
+      userDiv.innerText = input.value;
       msgBox.appendChild(userDiv);
       input.value = "";
 
       setTimeout(() => {
         const botDiv = document.createElement('div');
-        botDiv.className = "bg-slate-100 p-2 rounded-xl max-w-[85%] text-slate-800";
-        if(val.toLowerCase().includes('chest') || val.toLowerCase().includes('breath') || val.toLowerCase().includes('stroke') || val.toLowerCase().includes('धडधड') || val.toLowerCase().includes('दम')) {
-          botDiv.innerHTML = "🚨 <strong>URGENT ALERT:</strong> Acute symptoms detected. Call 108 or contact Dr. Kulkarni immediately at <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a>.";
+        botDiv.className = "bg-slate-100 p-2.5 rounded-xl max-w-[85%] text-slate-800 leading-relaxed";
+
+        // Intelligent Clinical Decision Tree
+        if(val.includes('chest') || val.includes('छातीत') || val.includes('pain') || val.includes('dhad') || val.includes('धडधड') || val.includes('sweating')) {
+          botDiv.innerHTML = "🚨 <strong>CARDIAC EMERGENCY ALERT:</strong> Chest pain with breathlessness or sweating can indicate acute myocardial infarction. Keep patient seated upright, chew Disprin 300mg (if no allergy/contraindication), dial 108 or call Dr. Kulkarni immediately: <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a>.";
+        } else if(val.includes('breath') || val.includes('oxygen') || val.includes('spo2') || val.includes('दम')) {
+          botDiv.innerHTML = "🫁 <strong>RESPIRATORY ALERT:</strong> If SpO2 is below 92%, check pulse oximeter probe, start oxygen if cylinder available, and keep patient at 70° upright sitting. For urgent home ICU BiPAP/ventilator support, contact Dr. Kulkarni at <a href='tel:+919822594341' class='text-teal-800 font-bold underline'>9822594341</a>.";
+        } else if(val.includes('stroke') || val.includes('face') || val.includes('बोल') || val.includes('हात') || val.includes('paralysis')) {
+          botDiv.innerHTML = "🧠 <strong>ACUTE STROKE ALERT:</strong> Remember <strong>FAST</strong> (Face drooping, Arm weakness, Speech slurred, Time to call). Do NOT give water or food orally (choking risk). Transfer immediately for NCCT Brain. Contact: <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a>.";
+        } else if(val.includes('fee') || val.includes('charge') || val.includes('cost') || val.includes('दर') || val.includes('फी')) {
+          botDiv.innerHTML = "💰 <strong>HOME VISIT FEES:</strong> Daytime visit (08:00 - 20:00) is ₹1,200 from Dhayari base. Night emergency is ₹1,680. Distance charges apply (+₹300 per 5km). Foley catheter/RT insertion: +₹700. UPI payment to: <code>9561394341@sbi</code>.";
+        } else if(val.includes('fever') || val.includes('ताप') || val.includes('dengue') || val.includes('platelet')) {
+          botDiv.innerHTML = "🌡️ <strong>AFI / FEVER PROTOCOL:</strong> For high fever, maintain adequate oral hydration (ORS/coconut water if kidneys normal), use paracetamol only. Avoid ibuprofen/brufen in suspected dengue. CBC and Dengue NS1 recommended.";
+        } else if(val.includes('catheter') || val.includes('ryle') || val.includes('tube') || val.includes('नळी')) {
+          botDiv.innerHTML = "🩺 <strong>BEDSIDE PROCEDURES:</strong> Dr. Kulkarni personally performs Foley catheterization (urinary catheter) and Ryle's tube (feeding tube) insertion under strict aseptic ICU precautions with signed informed consent at home.";
         } else {
-          botDiv.innerText = "Dr. Kulkarni provides 24x7 bedside ICU visits in Pune from Dhayari base. Helpline: 9822594341.";
+          botDiv.innerHTML = "Dr. Pramod G. Kulkarni provides 24x7 bedside ICU home visits across Pune from Dhayari base station. For immediate visit confirmation, please dial <a href='tel:+919822594341' class='text-teal-800 font-bold underline'>9822594341</a>.";
         }
+
         msgBox.appendChild(botDiv);
         msgBox.scrollTop = msgBox.scrollHeight;
       }, 350);
@@ -1859,7 +1946,7 @@ _Please confirm your estimated arrival time._`;
 
     function insertDietPreset(type) {
       const ta = document.getElementById('rxAdvice');
-      if(type === 'chf') ta.value = "हार्ट फेल्युअर प्रोटोकॉल: Strict fluid cap < 1.2 Litres/24h. Zero table salt, no papad/pickles. Check daily morning weight.";
+      if(type === 'chf') ta.value = "हार्ट फेल्युअर: Strict fluid cap < 1.2 Litres/24h. Zero table salt, no papad/pickles. Check daily morning weight (alert if gain > 1.5 kg in 48h).";
       if(type === 'ckd') ta.value = "Leached vegetables only (boiled in excess water, water thrown). Low potassium. Strict zero coconut water & zero citrus juice.";
       if(type === 'stroke') ta.value = "Semi-solid thickened food only. 45° to 90° upright sitting during & 45 mins post feeding (strict aspiration precautions).";
       if(type === 'bedsore') ta.value = "Strict Q2H turning schedule. Air-mattress on. Normal saline wound cleaning & prescribed dressing.";
@@ -1874,6 +1961,7 @@ _Please confirm your estimated arrival time._`;
       const csDate = document.getElementById('cs_pdate'); if(csDate) csDate.value = dt;
       const certDate = document.getElementById('cert_issue_date'); if(certDate) certDate.innerText = new Date().toLocaleDateString('en-GB');
       const fitDate = document.getElementById('fit_issue_date'); if(fitDate) fitDate.innerText = new Date().toLocaleDateString('en-GB');
+      const mccdDate = document.getElementById('mccd_verify_date'); if(mccdDate) mccdDate.innerText = new Date().toLocaleDateString('en-GB');
 
       const savedHook = localStorage.getItem('makeWebhookUrl');
       if(savedHook && document.getElementById('webhookUrlInput')) document.getElementById('webhookUrlInput').value = savedHook;
@@ -1881,6 +1969,7 @@ _Please confirm your estimated arrival time._`;
       initRxPad();
       renderDrugDirectory();
       renderCheatSheet();
+      populate30Calculators();
       renderPublicArticles();
     }
   </script>
