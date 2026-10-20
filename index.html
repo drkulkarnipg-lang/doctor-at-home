@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor & Emergency Specialist, Pune</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- html2pdf for Direct High-Quality A4 PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -34,7 +36,7 @@
     .petal-box { background-color: #FFFDF9; border: 1px solid #E6DCCD; }
     
     @media print {
-      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop, #notificationToast { display: none !important; }
+      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop, #notificationToast, #aiLaunchBar { display: none !important; }
       body { background: #ffffff !important; color: #000000 !important; margin: 0 !important; padding: 0 !important; }
       main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
       .printable-sheet { border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
@@ -53,7 +55,7 @@
 <body class="min-h-screen flex flex-col antialiased relative">
 
   <!-- TOAST NOTIFICATION -->
-  <div id="notificationToast" class="fixed top-16 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2">
+  <div id="notificationToast" class="fixed top-16 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none">
     <span id="toastMsg">✓ Notification</span>
   </div>
 
@@ -61,13 +63,18 @@
   <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       
-      <!-- Doctor Brand with Pure SVG Caduceus Emblem (NO CARTOON PILLS) -->
+      <!-- Doctor Brand Header with Dual Logo & Medical Caduceus Fallback -->
       <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
-        <div class="w-11 h-11 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 text-[#0F2942]">
-          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            <circle cx="12" cy="4" r="2" fill="#D97706"/>
-          </svg>
+        <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
+          <!-- Fallback Caduceus SVG Emblem -->
+          <div id="caduceusFallback" class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50/50">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              <circle cx="12" cy="4" r="2" fill="#D97706"/>
+            </svg>
+          </div>
+          <!-- Auto-detects logo.png or LOGO DR PRAMOD G KULKARNI.png -->
+          <img src="logo.png" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; document.getElementById('caduceusFallback').style.display='flex'; };" alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" style="display:block;">
         </div>
         <div>
           <div class="flex items-center gap-2">
@@ -79,7 +86,7 @@
         </div>
       </div>
 
-      <!-- Live Navigation Actions & Urdu/Indian Language Support -->
+      <!-- Navigation & Verified GMB Profiles -->
       <div class="flex items-center flex-wrap gap-2">
         <div id="google_translate_element" class="inline-block"></div>
 
@@ -93,15 +100,15 @@
         </div>
 
         <!-- 2 Live GMB Profile Links -->
-        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
+        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune">
           <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden sm:inline">GMB: Home ICU</span>
         </a>
 
-        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1">
+        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Emergency Specialist Pune">
           <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden sm:inline">GMB: Clinic</span>
         </a>
 
-        <!-- Clickable Direct Phone Call -->
+        <!-- 100% Clickable Direct Call Button -->
         <a href="tel:+919822594341" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer">
           <i class="fa-solid fa-phone"></i> <span>9822594341</span>
         </a>
@@ -135,7 +142,7 @@
             🧮 30 Health Calculators
           </a>
           <a href="https://healthid.ndhm.gov.in/" target="_blank" rel="noopener noreferrer" class="text-xs bg-blue-700 hover:bg-blue-800 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm">
-            ☁️ ABHA Digital Health Locker ↗
+            ☁️ ABHA Digital Locker ↗
           </a>
         </div>
       </div>
@@ -176,7 +183,7 @@
               <!-- LIVE GPS CAPTURE BUTTON FOR DOCTOR NAVIGATION -->
               <div class="sm:col-span-2 bg-emerald-50 p-3 rounded-xl border border-emerald-300 space-y-1.5">
                 <div class="flex justify-between items-center">
-                  <span class="font-bold text-emerald-950">📍 Pinpoint Live Google Maps Location (For Doctor's Route):</span>
+                  <span class="font-bold text-emerald-950">📍 Pinpoint Live Google Maps Location:</span>
                   <button type="button" onclick="captureLiveGpsLocation()" class="bg-[#16A34A] hover:bg-green-700 text-white font-bold px-3 py-1.5 rounded-xl shadow flex items-center gap-1.5">
                     <i class="fa-solid fa-crosshairs"></i> Capture My GPS Location
                   </button>
@@ -246,16 +253,39 @@
       </div>
     </section>
 
+    <!-- RESTORED VERIFIED INTERNATIONAL HEALTH & GUIDANCE PORTALS -->
+    <section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
+      <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide border-b pb-2">Verified Patient Knowledge &amp; Guidance Portals</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 pt-1">
+        <a href="https://my.clevelandclinic.org/health" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          🏥 Cleveland Clinic Library ↗
+        </a>
+        <a href="https://www.mayoclinic.org/patient-care-and-health-information" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          🏥 Mayo Clinic Patient Care ↗
+        </a>
+        <a href="https://www.msdmanuals.com/home" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          📚 MSD Manuals Consumer ↗
+        </a>
+        <a href="https://www.testing.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          🧪 Testing.com (Lab Guides) ↗
+        </a>
+        <a href="https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          ☢️ RadiologyInfo.org ↗
+        </a>
+        <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
+          🇬🇧 NICE UK Guidance ↗
+        </a>
+      </div>
+    </section>
+
     <!-- 30 INTERACTIVE PATIENT & CLINICAL HEALTH CALCULATORS -->
     <section id="patientToolsSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="border-b petal-border pb-2">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">30 Comprehensive Clinical &amp; Patient Tools</h3>
-        <p class="text-xs text-slate-600">Evidence-based calculators for bedside ICU, organ failure assessment, and home recovery.</p>
+        <p class="text-xs text-slate-600">Evidence-based interactive calculators for bedside ICU, organ assessment, and home recovery.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid">
-        <!-- Calculators populated by JavaScript -->
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid"></div>
     </section>
 
     <!-- AUTHENTIC MAHARASHTRIAN & INDIAN CLINICAL DIETS -->
@@ -341,16 +371,20 @@
       <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Settings</button>
     </div>
 
-    <!-- BEDSIDE CLINICAL RESEARCH & GOOGLE GEMINI LAUNCHPAD -->
-    <div class="bg-gradient-to-r from-teal-900 to-[#0F2942] text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-3 no-print shadow-sm text-xs">
-      <div class="flex items-center gap-2">
+    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Gemini, ChatGPT, Claude, Copilot, Google Scholar, PubMed) -->
+    <div id="aiLaunchBar" class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs">
+      <div class="flex items-center gap-1.5">
         <span class="text-base">🧠</span>
-        <span class="font-bold">Bedside Clinical Search &amp; Google Gemini:</span>
+        <span class="font-bold">Bedside Clinical AI Hub:</span>
       </div>
-      <div class="flex items-center gap-1.5 flex-grow max-w-md">
-        <input type="text" id="geminiSearchQuery" placeholder="Search symptom, drug dose, or syndrome..." class="w-full p-1.5 rounded-lg text-slate-900 text-xs outline-none">
-        <button onclick="searchWithGemini()" class="bg-[#0D9488] hover:bg-teal-600 text-white font-bold px-3 py-1.5 rounded-lg">Gemini AI ↗</button>
-        <button onclick="searchWithScholar()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3 py-1.5 rounded-lg">Scholar ↗</button>
+      <div class="flex items-center gap-1.5 flex-grow max-w-lg">
+        <input type="text" id="aiGlobalQuery" placeholder="Type syndrome, drug interaction, or condition..." class="w-full p-1.5 rounded-lg text-slate-900 text-xs outline-none">
+        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2.5 py-1.5 rounded-lg flex items-center gap-1">Gemini ↗</button>
+        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1.5 rounded-lg">ChatGPT ↗</button>
+        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Claude ↗</button>
+        <button onclick="launchAI('copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Copilot ↗</button>
+        <button onclick="launchAI('scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Scholar ↗</button>
+        <button onclick="launchAI('pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2.5 py-1.5 rounded-lg">PubMed ↗</button>
       </div>
     </div>
 
@@ -369,19 +403,22 @@
             <option value="bedsore">Bedridden (Q2H Turning, Air-Mattress)</option>
           </select>
           <button onclick="saveRecordAsPrompt()" class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">💾 Save As...</button>
-          <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">🖨️ Print A4</button>
+          <button onclick="exportToPdf('rxSheet', 'Prescription_Dr_Kulkarni.pdf')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">🖨️ Print</button>
           <button onclick="universalShareDocument('rx')" class="bg-[#16A34A] hover:bg-green-700 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-share-nodes"></i> Share (WhatsApp/Mail)
+            <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
         </div>
       </div>
 
-      <!-- Printable A4 Sheet -->
-      <div class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <!-- Printable A4 Prescription Sheet -->
+      <div id="rxSheet" class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 text-[#0F2942]">
-              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
+              <svg class="w-7 h-7 text-[#0F2942]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                 <circle cx="12" cy="4" r="2" fill="#D97706"/>
               </svg>
@@ -490,19 +527,39 @@
       </div>
     </div>
 
-    <!-- TAB 3: PATHOLOGY REQUISITION -->
+    <!-- TAB 3: PATHOLOGY REQUISITION (WITH 1-CLICK DISEASE BUNDLES & DIRECT PDF EXPORT) -->
     <div id="viewPathReq" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Requisition Pad</h3>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
+          <button onclick="exportToPdf('pathSlipSheet', 'Pathology_Requisition_Dr_Kulkarni.pdf')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
+          </button>
           <button onclick="universalShareDocument('path')" class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-share-nodes"></i> Share Tests (WhatsApp/Mail)
+            <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
           <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Slip</button>
         </div>
       </div>
 
-      <div class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <!-- Restored Netlify-Style 1-Click Disease Symptom Bundles -->
+      <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl no-print space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-amber-950 text-xs">⚡ 1-Click Disease/Symptom Test Bundles (Auto-selects exact tests below):</span>
+          <button onclick="clearAllPathTests()" class="text-[11px] text-red-700 font-bold underline">Clear All Selections</button>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <button onclick="applyTestBundle('fever')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🌡️ AFI / Fever Bundle</button>
+          <button onclick="applyTestBundle('chest')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🫁 Breathlessness / Chest</button>
+          <button onclick="applyTestBundle('cardiac')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">❤️ Acute Cardiac / ACS</button>
+          <button onclick="applyTestBundle('stroke')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🧠 Stroke / Altered Sensorium</button>
+          <button onclick="applyTestBundle('sepsis')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🩸 Sepsis / Septic Shock</button>
+          <button onclick="applyTestBundle('dka')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🧪 Diabetic Coma / DKA</button>
+          <button onclick="applyTestBundle('cirrhosis')" class="px-3 py-1.5 bg-white border border-amber-300 rounded-xl font-bold hover:bg-amber-100">🩺 Liver Failure / Ascites</button>
+        </div>
+      </div>
+
+      <div id="pathSlipSheet" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
           <div>
             <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
@@ -512,38 +569,44 @@
         </div>
 
         <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border">
-          <div>Patient: <input type="text" id="reqPatName" placeholder="Name" class="font-bold bg-transparent border-b"></div>
-          <div>Age/Sex: <input type="text" id="reqPatAge" placeholder="Age/Sex" class="bg-transparent border-b"></div>
-          <div>Date: <input type="text" id="reqDate" class="bg-transparent border-b font-mono"></div>
+          <div>Patient: <input type="text" id="reqPatName" placeholder="Full Name" class="font-bold bg-transparent border-b w-full"></div>
+          <div>Age/Sex: <input type="text" id="reqPatAge" placeholder="e.g. 68 Y / M" class="bg-transparent border-b w-full"></div>
+          <div>Date: <input type="text" id="reqDate" class="bg-transparent border-b font-mono w-full"></div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl">
+        <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl" id="pathCheckboxesGrid">
           <div class="space-y-1">
-            <p class="font-bold text-teal-800 border-b pb-0.5">Hematology:</p>
+            <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Coagulation:</p>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_cbc" value="CBC + Platelets"> CBC (Hb, TLC, Platelets)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_esr" value="ESR"> ESR (Westergren)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_pt" value="PT/INR"> PT / INR (Coagulation)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_ddimer" value="D-Dimer"> D-Dimer (Thrombosis)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_esr" value="ESR (Westergren)"> ESR (Westergren)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_pt" value="PT / INR (Coagulation)"> PT / INR (Coagulation)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_ddimer" value="D-Dimer Quantitative"> D-Dimer Quantitative</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_dengue" value="Dengue NS1 & IgM/IgG"> Dengue NS1 &amp; IgM/IgG</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_widal" value="Widal & Typhidot"> Widal &amp; Typhidot Test</label>
           </div>
           <div class="space-y-1">
             <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Organ Panels:</p>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_kft" value="KFT (Urea/Creat)"> KFT (Creatinine, Urea)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lytes" value="Electrolytes (Na/K/Cl)"> Electrolytes (Na+, K+, Cl-)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lft" value="LFT Complete"> LFT Complete (Bili, SGOT/PT)</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_sugar" value="Blood Sugar Fasting/PP"> Fasting / PP Sugar / HbA1c</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_kft" value="KFT (Creatinine, Urea)"> KFT (Creatinine, Urea)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lytes" value="Electrolytes (Na+, K+, Cl-)"> Electrolytes (Na+, K+, Cl-)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lft" value="LFT Complete (Bilirubin, SGOT/PT, Albumin)"> LFT Complete</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_sugar" value="Fasting / PP Blood Sugar"> Fasting / PP Blood Sugar</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_hba1c" value="HbA1c (Glycated Hb)"> HbA1c (Glycated Hb)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_ammonia" value="Serum Ammonia (Cirrhosis)"> Serum Ammonia</label>
           </div>
           <div class="space-y-1">
-            <p class="font-bold text-teal-800 border-b pb-0.5">Cardiac &amp; Sepsis:</p>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_trop" value="Troponin-I"> Troponin-I Quantitative</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_bnp" value="NT-proBNP"> NT-proBNP (Heart Failure)</label>
+            <p class="font-bold text-teal-800 border-b pb-0.5">Cardiac, Sepsis &amp; Gas:</p>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_trop" value="High Sensitivity Troponin-I"> Troponin-I Quantitative</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_bnp" value="NT-proBNP (Heart Failure)"> NT-proBNP</label>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_pct" value="Procalcitonin & CRP"> Procalcitonin &amp; CRP</label>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_abg" value="Arterial Blood Gas (ABG)"> ABG (pH, PaO2, Lactate)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_blood_cx" value="Blood Culture & Sensitivity (2 Sets)"> Blood Culture (2 Sets)</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_urine" value="Urine Routine & Microscopic"> Urine Routine &amp; Micro</label>
           </div>
         </div>
 
         <div>
           <label class="font-bold">Additional Specific Tests / Clinical Notes:</label>
-          <textarea id="pathNotes" rows="2" placeholder="e.g. Blood culture (2 sets), Urine C&S..." class="w-full border p-2 rounded-xl"></textarea>
+          <textarea id="pathNotes" rows="2" placeholder="e.g. Sputum for AFB/GeneXpert, Wound swab C&S..." class="w-full border p-2 rounded-xl"></textarea>
         </div>
 
         <div class="pt-4 border-t flex justify-between items-end">
@@ -560,15 +623,18 @@
     <div id="viewRadReq" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Radiology Requisition Pad</h3>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
+          <button onclick="exportToPdf('radSlipSheet', 'Radiology_Requisition_Dr_Kulkarni.pdf')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
+          </button>
           <button onclick="universalShareDocument('rad')" class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-share-nodes"></i> Share Radiology
+            <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
           <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Slip</button>
         </div>
       </div>
 
-      <div class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+      <div id="radSlipSheet" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
           <div>
             <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
@@ -580,11 +646,12 @@
         <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
           <div class="space-y-2">
             <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-            <label class="flex items-center gap-2"><input type="checkbox" id="rad_cxr" value="Portable Digital Chest X-Ray" checked> <strong>Portable Digital Chest X-Ray (AP/PA View)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_cxr" value="Portable Digital Chest X-Ray (AP/PA View)" checked> <strong>Portable Digital Chest X-Ray (AP/PA View)</strong></label>
             <label class="flex items-center gap-2"><input type="checkbox" id="rad_usg" value="Bedside USG Abdomen & Pelvis"> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="rad_dop_v" value="Venous Color Doppler Lower Limb"> <strong>Venous Color Doppler Lower Limb (DVT Rule-out)</strong></label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="rad_echo" value="Bedside 2D Echocardiography"> <strong>Bedside 2D Echocardiography with EF</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_dop_v" value="Venous Color Doppler Lower Limb (DVT Rule-out)"> <strong>Venous Color Doppler Lower Limb (DVT Rule-out)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_echo" value="Bedside 2D Echocardiography with EF"> <strong>Bedside 2D Echocardiography with EF</strong></label>
             <label class="flex items-center gap-2"><input type="checkbox" id="rad_ct_brain" value="NCCT Brain (Stroke Protocol)"> <strong>NCCT Brain (Stroke Protocol)</strong></label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="rad_mri_brain" value="MRI Brain with DWI (Acute Infarction)"> <strong>MRI Brain with DWI (Acute Infarction)</strong></label>
           </div>
           <div class="space-y-2">
             <label class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
@@ -615,9 +682,12 @@
             <option value="invoice">Official Clinical Fee Invoice / Receipt</option>
           </select>
         </div>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
+          <button onclick="exportCurrentClinDocPdf()" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
+          </button>
           <button onclick="universalShareDocument('clinDoc')" class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-share-nodes"></i> Share Document
+            <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Document
           </button>
           <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print</button>
         </div>
@@ -898,7 +968,12 @@
           <option value="form4">Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act)</option>
           <option value="form2">Form 2 — Death Report to Registrar / PMC Ward Office</option>
         </select>
-        <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Form</button>
+        <div class="flex gap-2">
+          <button onclick="exportCurrentDeathFormPdf()" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Form</button>
+        </div>
       </div>
 
       <!-- FORM 4A (EXACT LEGAL STATUTORY FORMAT) -->
@@ -920,7 +995,6 @@
           <div>Pune Ward: <input type="text" placeholder="e.g. Sinhagad Rd / Dhayari" class="border-b bg-transparent w-2/3"></div>
         </div>
 
-        <!-- Official Cause of Death Format -->
         <table class="w-full border-collapse border border-slate-400 text-xs mt-2">
           <thead>
             <tr class="bg-slate-100">
@@ -932,7 +1006,7 @@
             <tr>
               <td class="border border-slate-400 p-2">
                 <strong>I. Immediate cause:</strong><br>
-                <span class="text-[10px] text-slate-600">State the disease, injury or complication which caused death, not the mode of dying such as heart failure, asthenia etc.</span><br>
+                <span class="text-[10px] text-slate-600">State the disease, injury or complication which caused death:</span><br>
                 (a) <input type="text" id="mccd_ca" placeholder="Direct Cause (e.g. Cardiorespiratory Arrest / Septic Shock)" class="w-full border-b mt-1 font-bold outline-none">
               </td>
               <td class="border border-slate-400 p-2 text-center align-top">
@@ -942,7 +1016,6 @@
             <tr>
               <td class="border border-slate-400 p-2">
                 <strong>Antecedent cause:</strong><br>
-                <span class="text-[10px] text-slate-600">Morbid conditions, if any, giving rise to above cause, stating underlying condition last.</span><br>
                 Due to (or as a consequence of):<br>
                 (b) <input type="text" id="mccd_cb" placeholder="e.g. Severe Aspiration Pneumonia / Sepsis" class="w-full border-b mt-1 outline-none">
               </td>
@@ -962,7 +1035,6 @@
             <tr>
               <td class="border border-slate-400 p-2" colspan="2">
                 <strong>II. Other significant conditions:</strong><br>
-                <span class="text-[10px] text-slate-600">Contributing to the death but not related to the disease or condition causing it:</span><br>
                 <input type="text" id="mccd_c2" placeholder="e.g. Chronic Kidney Disease Stage 4, Systemic Hypertension" class="w-full border-b mt-1 outline-none">
               </td>
             </tr>
@@ -982,7 +1054,6 @@
           </div>
         </div>
 
-        <!-- DETACHABLE BOTTOM PORTION MANDATED BY GOVT RULES -->
         <div class="border-t-2 border-dashed border-slate-500 pt-3 mt-6">
           <p class="text-[10px] text-center uppercase tracking-wider text-slate-500 font-bold mb-1">✂ (To be detached and handed over to the relative of the deceased) ✂</p>
           <p class="leading-relaxed">
@@ -1022,7 +1093,7 @@
       <div id="cert-form2" class="hidden printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="text-center border-b pb-2">
           <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 2 — DEATH REPORT</h2>
-          <p class="text-[11px] text-slate-600">(Reporting Form under Section 8/9 of Registration of Births and Deaths Act, 1969 to Local PMC Registrar)</p>
+          <p class="text-[11px] text-slate-600">(Reporting Form under Section 8/9 of RBD Act, 1969 to Local PMC Registrar)</p>
         </div>
         <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border">
           <div>1. Date of Death: <input type="date" class="w-full border p-1 rounded font-mono"></div>
@@ -1039,12 +1110,12 @@
       </div>
     </div>
 
-    <!-- TAB 7: 1-CLICK ZERO-TYPING FORMULARY & LIVE CIMS / DRUGS.COM INTEGRATION -->
+    <!-- TAB 7: 1-CLICK ZERO-TYPING FORMULARY WITH ENTIRE DOCTOR DRUG LIST -->
     <div id="viewDrugDir" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
           <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Indian ICU Formulary (Zero Typing: Click "+ Add to Rx")</h3>
-          <p class="text-xs text-slate-500">Click any drug to automatically inject it into the Prescription Pad.</p>
+          <p class="text-xs text-slate-500">Comprehensive ICU &amp; Cardiology molecules. Click to instantly inject into Prescription Pad.</p>
         </div>
         <div class="flex flex-wrap gap-2">
           <a href="https://www.mims.com/india" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
@@ -1053,7 +1124,7 @@
           <a href="https://www.drugs.com/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
             🌐 Drugs.com ↗
           </a>
-          <input type="text" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Instant Search..." class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm">
+          <input type="text" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Search any drug..." class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm">
         </div>
       </div>
 
@@ -1087,7 +1158,6 @@
           </div>
         </div>
 
-        <!-- Direct Upload or Link Selection -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-2xl border petal-border">
           <div>
             <label class="font-bold text-teal-900 block">📁 Direct File Upload (Image or Video from Phone/PC):</label>
@@ -1182,7 +1252,7 @@
 
       <div id="chatMessages" class="flex-grow p-3.5 overflow-y-auto space-y-2 text-xs">
         <div class="bg-slate-100 p-2.5 rounded-2xl max-w-[85%] text-slate-800">
-          Namaskar! I am Dr. Kulkarni's clinical assistant. You can ask me about symptoms (chest pain, breathlessness, stroke, fever, catheter), visit fee in Pune, or diet rules.
+          Namaskar! I am Dr. Kulkarni's clinical assistant. You can ask me about acute symptoms (chest pain, breathlessness, stroke, fever, catheter), visit fee in Pune, or diet rules.
         </div>
       </div>
 
@@ -1256,31 +1326,136 @@
       { sys: "Endocrine & Sugar", test: "HbA1c (Glycated Hb)", ref: "< 5.7% (Diabetic target: < 7.0%)", note: "Long term 3-month glycemic control" }
     ];
 
-    // FORMULARY DATABASE (INDIAN MEDICINES & CIMS)
+    // EXPANDED 150+ ICU, CARDIOLOGY & EMERGENCY FORMULARY (WITH USER'S COMPLETE LIST)
     const DRUG_DATABASE = [
-      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg", brands: "Pan-40, Pantocid, Pantodac", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" },
+      // Antiplatelets & Anticoagulants
+      { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150, Delisprin", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
+      { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt, Plavix", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD prevention" },
+      { cat: "Antiplatelet", generic: "Prasugrel 5mg / 10mg", brands: "Prasita, Effient", timing: "After Food", freq: "1-0-0", days: 30, advice: "Post-PCI antiplatelet" },
+      { cat: "Antiplatelet", generic: "Ticagrelor 90mg", brands: "Brilinta, Axcer", timing: "After Food", freq: "1-0-1", days: 30, advice: "Reversible P2Y12 blocker" },
+      { cat: "Antiplatelet", generic: "Trifrusal 300mg", brands: "Disgren", timing: "With Food", freq: "1-0-1", days: 30, advice: "Lower gastric bleed risk" },
+      { cat: "Antiplatelet", generic: "Aspirin + Dipyridamole", brands: "Aggrenox", timing: "After Food", freq: "1-0-1", days: 30, advice: "Secondary stroke prevention" },
+      { cat: "Antiplatelet", generic: "Cilostazol 50mg / 100mg", brands: "Pletoz, Stiloz", timing: "Empty Stomach", freq: "1-0-1", days: 30, advice: "Intermittent claudication / PAD" },
+      { cat: "Antiplatelet", generic: "Ticlopidine 250mg", brands: "Ticlop, Tyklid", timing: "With Food", freq: "1-0-1", days: 30, advice: "Monitor CBC" },
+      { cat: "IV Antiplatelet", generic: "Inj Abciximab 2mg/mL", brands: "ReoPro", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Periprocedural PCI" },
+      { cat: "IV Antiplatelet", generic: "Inj Eptifibatide 2mg/mL", brands: "Integrilin", timing: "IV Infusion", freq: "STAT", days: 1, advice: "ACS / PCI bolus + infusion" },
+      { cat: "IV Antiplatelet", generic: "Inj Tirofiban 5mg/100mL", brands: "Aggrastat, Tiroban", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Non-ST elevation ACS" },
+      { cat: "IV Antiplatelet", generic: "Inj Cangrelor 50mg", brands: "Kengreal", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Rapid onset/offset P2Y12 inhibitor" },
+      
+      // Anticoagulants (DOACs & LMWH)
+      { cat: "DOAC", generic: "Rivaroxaban 10mg / 15mg / 20mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
+      { cat: "DOAC", generic: "Apixaban 2.5mg / 5mg", brands: "Eliquis, Apigat", timing: "After Food", freq: "1-0-1", days: 30, advice: "Factor Xa inhibitor (Twice Daily)" },
+      { cat: "DOAC", generic: "Dabigatran 110mg / 150mg", brands: "Pradaxa", timing: "After Food", freq: "1-0-1", days: 30, advice: "Direct thrombin inhibitor" },
+      { cat: "DOAC", generic: "Edoxaban 30mg / 60mg", brands: "Lixiana, Savaysa", timing: "After Food", freq: "1-0-0", days: 30, advice: "Once daily Factor Xa" },
+      { cat: "VKA Anticoagulant", generic: "Warfarin 2mg / 5mg", brands: "Warf, Coumadin", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Titrate to target INR 2.0 - 3.0" },
+      { cat: "LMWH", generic: "Inj Enoxaparin 40mg / 60mg SC", brands: "Clexane, Lonopin", timing: "Subcutaneous", freq: "OD / BD", days: 5, advice: "Deep subcutaneous into abdomen" },
+      { cat: "LMWH", generic: "Inj Dalteparin 2500 / 5000 IU", brands: "Fragmin", timing: "Subcutaneous", freq: "OD", days: 5, advice: "DVT prophylaxis / treatment" },
+      { cat: "LMWH", generic: "Inj Nadroparin 0.3 / 0.6 mL", brands: "Fraxiparine", timing: "Subcutaneous", freq: "OD / BD", days: 5, advice: "Subcutaneous injection" },
+      { cat: "Factor Xa Inhibitor", generic: "Inj Fondaparinux 2.5mg SC", brands: "Arixtra, Fondared", timing: "Subcutaneous", freq: "OD", days: 5, advice: "Synthetic pentasaccharide" },
+      { cat: "Direct Thrombin", generic: "Inj Argatroban 100mg/mL", brands: "Arganova", timing: "IV Infusion", freq: "Continuous", days: 3, advice: "In Heparin-Induced Thrombocytopenia (HIT)" },
+      { cat: "Direct Thrombin", generic: "Inj Bivalirudin 250mg", brands: "Angiomax, Bival", timing: "IV Infusion", freq: "STAT", days: 1, advice: "Alternative in PCI with HIT risk" },
+      { cat: "Anticoagulant", generic: "Inj Heparin (UFH) 5000 IU/mL", brands: "Beparine", timing: "IV / SC", freq: "Q6H / Infusion", days: 3, advice: "Monitor aPTT" },
+      { cat: "Glycosaminoglycan", generic: "Inj Sulodexide 600 LRU", brands: "Vessel Due F", timing: "IM / IV", freq: "OD", days: 10, advice: "Vascular endotheliopathy" },
+
+      // Beta Blockers
+      { cat: "Beta Blocker", generic: "Bisoprolol 2.5mg / 5mg", brands: "Concor, Bisoheart", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective beta-1" },
+      { cat: "Beta Blocker", generic: "Metoprolol Succinate 25mg / 50mg ER", brands: "Betaloc-XL, Metpure-XL", timing: "Morning", freq: "1-0-0", days: 30, advice: "Extended release for HFrEF" },
+      { cat: "Beta Blocker", generic: "Carvedilol 3.125mg / 6.25mg / 12.5mg", brands: "Carca, Cardivas", timing: "With Food", freq: "1-0-1", days: 30, advice: "Alpha-beta blocker for HFrEF" },
+      { cat: "Beta Blocker", generic: "Nebivolol 2.5mg / 5mg", brands: "Nebicard, Nebistar", timing: "Morning", freq: "1-0-0", days: 30, advice: "Nitric oxide donating beta blocker" },
+      { cat: "Beta Blocker", generic: "Atenolol 25mg / 50mg", brands: "Aten, Betacard", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective beta blocker" },
+      { cat: "Beta Blocker", generic: "Propranolol 10mg / 40mg", brands: "Ciplar, Inderal", timing: "After Food", freq: "1-0-1", days: 30, advice: "Non-selective; portal HTN / tremor" },
+      { cat: "Beta Blocker", generic: "Labetalol 100mg / Inj 20mg IV", brands: "Gravidol, Labebet", timing: "After Food", freq: "1-0-1", days: 30, advice: "Hypertensive emergencies / safe in pregnancy" },
+      { cat: "Beta Blocker", generic: "Sotalol 40mg / 80mg", brands: "Sotagard", timing: "After Food", freq: "1-0-1", days: 30, advice: "Antiarrhythmic Class III properties" },
+      { cat: "Beta Blocker", generic: "Acebutolol / Betaxolol / Celiprolol", brands: "Sectral, Kerlone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Vasodilating / ISA beta blockers" },
+
+      // Calcium Channel Blockers (CCBs)
+      { cat: "CCB", generic: "Amlodipine 5mg / 10mg", brands: "Amlong, Stamlo", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dihydropyridine CCB" },
+      { cat: "CCB", generic: "S-Amlodipine (Levamlodipine) 2.5mg / 5mg", brands: "Esam, Asomex", timing: "Morning", freq: "1-0-0", days: 30, advice: "Purified enantiomer (reduced pedal edema)" },
+      { cat: "CCB", generic: "Azelnidipine 8mg / 16mg", brands: "Azulix, Azovas", timing: "After Food", freq: "1-0-0", days: 30, advice: "Zero pedal edema, sympathetic friendly" },
+      { cat: "CCB", generic: "Benidipine 4mg / 8mg", brands: "Benitres, Caritec", timing: "After Food", freq: "1-0-0", days: 30, advice: "Triple channel blocker (L, N, T channels)" },
+      { cat: "CCB", generic: "Cilnidipine 10mg / 20mg", brands: "Cilacar, Nexsart-C", timing: "Morning", freq: "1-0-0", days: 30, advice: "L/N-channel blocker (Renal protective)" },
+      { cat: "CCB", generic: "Diltiazem 30mg / 60mg / 90mg SR", brands: "Dilzem, Channel", timing: "After Food", freq: "1-0-1", days: 30, advice: "Non-DHP rate limiting CCB" },
+      { cat: "CCB", generic: "Verapamil 40mg / 80mg / Inj 5mg IV", brands: "Calaptin", timing: "After Food", freq: "1-0-1", days: 30, advice: "AV nodal blocking antiarrhythmic" },
+      { cat: "CCB", generic: "Nifedipine 20mg / 30mg ER", brands: "Nicardia-Retard, Depin", timing: "After Food", freq: "1-0-1", days: 30, advice: "Extended release only; avoid sublingual" },
+      { cat: "IV CCB", generic: "Inj Clevidipine 0.5mg/mL", brands: "Cleviprex", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Ultrashort acting IV CCB for acute HTN" },
+
+      // ARNI, ACE Inhibitors & ARBs
+      { cat: "ARNI", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Foundational HFrEF guideline therapy" },
+      { cat: "ACE Inhibitor", generic: "Ramipril 2.5mg / 5mg", brands: "Cardace, Hopace", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-MI & cardioprotective" },
+      { cat: "ACE Inhibitor", generic: "Enalapril 2.5mg / 5mg", brands: "Envas, Vasotec", timing: "Morning", freq: "1-0-0", days: 30, advice: "ACE inhibitor" },
+      { cat: "ACE Inhibitor", generic: "Perindopril 4mg / 8mg", brands: "Coversyl", timing: "Morning", freq: "1-0-0", days: 30, advice: "High tissue affinity ACEi" },
+      { cat: "ARB", generic: "Telmisartan 40mg / 80mg", brands: "Telma, Sartel", timing: "Morning", freq: "1-0-0", days: 30, advice: "24-hour BP control, PPAR-gamma activity" },
+      { cat: "ARB", generic: "Losartan 25mg / 50mg", brands: "Zaart, Repace", timing: "Morning", freq: "1-0-0", days: 30, advice: "Uricosuric ARB" },
+      { cat: "ARB", generic: "Olmesartan 20mg / 40mg", brands: "Olmecip, Olmy", timing: "Morning", freq: "1-0-0", days: 30, advice: "Potent AT1 receptor blockade" },
+      { cat: "ARB", generic: "Azilsartan 40mg / 80mg", brands: "Zilarbi, Azildac", timing: "Morning", freq: "1-0-0", days: 30, advice: "Superior 24h ambulatory BP reduction" },
+
+      // Fixed-Dose Combinations (FDCs)
+      { cat: "Combination HTN", generic: "Telmisartan 40mg + Amlodipine 5mg", brands: "Telma-AM, Sartel-AM", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dual mechanism BP control" },
+      { cat: "Combination HTN", generic: "Telmisartan 40mg + Chlorthalidone 12.5mg", brands: "Telma-CT, Sartel-C", timing: "Morning", freq: "1-0-0", days: 30, advice: "Take after breakfast" },
+      { cat: "Triple FDC", generic: "Telmisartan 40mg + Amlodipine 5mg + Hydrochlorothiazide 12.5mg", brands: "Telma-AMH, Triolmez", timing: "Morning", freq: "1-0-0", days: 30, advice: "Triple antihypertensive therapy" },
+      { cat: "Combination HTN", generic: "Perindopril 4mg + Indapamide 1.25mg", brands: "Coversyl-Plus", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-stroke BP control" },
+
+      // SGLT2i, MRA & Heart Failure Guideline Drugs
+      { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "HFrEF, HFpEF, CKD & T2DM" },
+      { cat: "SGLT2i", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance, Gibtulio", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
+      { cat: "Dual SGLT1/2i", generic: "Sotagliflozin 200mg", brands: "Inpefa", timing: "Morning", freq: "1-0-0", days: 30, advice: "Worsening heart failure" },
+      { cat: "Non-Steroidal MRA", generic: "Finerenone 10mg / 20mg", brands: "Firialta, Fineren", timing: "With Food", freq: "1-0-0", days: 30, advice: "CKD + T2DM; monitor Potassium" },
+      { cat: "MRA Diuretic", generic: "Spironolactone 25mg / 50mg", brands: "Aldactone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Aldosterone antagonist; HFrEF & ascites" },
+      { cat: "MRA", generic: "Eplerenone 25mg / 50mg", brands: "Eptus, Planep", timing: "Morning", freq: "1-0-0", days: 30, advice: "Selective aldosterone blocker (no gynecomastia)" },
+      { cat: "Loop Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Track daily weight & urine output" },
+      { cat: "Loop Diuretic", generic: "Inj Furosemide 20mg / 40mg IV", brands: "Lasix", timing: "Morning / SOS", freq: "1-0-0", days: 5, advice: "Acute pulmonary edema" },
+      { cat: "Loop Diuretic", generic: "Bumetanide 1mg", brands: "Bumex", timing: "Morning", freq: "1-0-0", days: 15, advice: "High bioavailability loop diuretic" },
+      { cat: "Thiazide-like", generic: "Chlorthalidone 6.25mg / 12.5mg", brands: "Thalidone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Long acting thiazide-like" },
+      { cat: "Thiazide-like", generic: "Metolazone 2.5mg / 5mg", brands: "Zaroxolyn, Metoz", timing: "Morning", freq: "1-0-0", days: 7, advice: "Sequential nephron blockade in diuretic resistance" },
+      { cat: "V2 Antagonist", generic: "Tolvaptan 15mg / 30mg", brands: "Natrise, Tolvat", timing: "Morning", freq: "1-0-0", days: 5, advice: "Euvolemic / hypervolemic hyponatremia" },
+      { cat: "sGC Stimulator", generic: "Vericiguat 2.5mg / 5mg / 10mg", brands: "Verquvo", timing: "With Food", freq: "1-0-0", days: 30, advice: "Post-decompensation HFrEF" },
+      { cat: "Cardiac Myosin Inhibitor", generic: "Mavacamten 2.5mg / 5mg", brands: "Camzyos", timing: "Daily", freq: "1-0-0", days: 30, advice: "Symptomatic Obstructive HCM" },
+      { cat: "Inodilator", generic: "Inj Levosimendan 12.5mg/5mL", brands: "Simdax", timing: "IV Infusion", freq: "24h Infusion", days: 1, advice: "Acute decompensated HF inodilator" },
+      { cat: "Cardiac Glycoside", generic: "Digoxin 0.25mg", brands: "Lanoxin", timing: "Morning", freq: "1-0-0", days: 30, advice: "AFib with rapid ventricular response" },
+
+      // Antianginals & Vasodilators
+      { cat: "Nitrate", generic: "Tab Sorbitrate 5mg / 10mg Sublingual", brands: "Sorbitrate", timing: "Sublingual SOS", freq: "SOS", days: 30, advice: "Place under tongue for acute chest pain" },
+      { cat: "Nitrate", generic: "Isosorbide Mononitrate 30mg / 60mg SR", brands: "Monotrate-OD, Imdur", timing: "Morning", freq: "1-0-0", days: 30, advice: "Provides 12-hour nitrate-free interval" },
+      { cat: "Antianginal", generic: "Nicorandil 5mg / 10mg", brands: "Korandil, Nikoran", timing: "After Food", freq: "1-0-1", days: 30, advice: "Potassium channel opener" },
+      { cat: "Antianginal", generic: "Ranolazine 500mg ER", brands: "Rancad, Ranolaz", timing: "After Food", freq: "1-0-1", days: 30, advice: "Late inward sodium channel blocker" },
+      { cat: "Sinus Node Blocker", generic: "Ivabradine 5mg / 7.5mg", brands: "Bradia, Ivabrad", timing: "With Food", freq: "1-0-1", days: 30, advice: "Reduces HR in sinus rhythm & HFrEF" },
+      { cat: "Metabolic Antianginal", generic: "Trimetazidine 35mg / 60mg MR", brands: "Flavedon-MR, Carvidon", timing: "With Food", freq: "1-0-1", days: 30, advice: "Cardiac energy substrate optimizer" },
+      { cat: "IV Vasodilator", generic: "Inj Sodium Nitroprusside 50mg", brands: "Nipride", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Malignant hypertensive emergency" },
+
+      // Lipid Lowering Agents (Statins, PCSK9i, ACLi)
+      { cat: "Statin", generic: "Atorvastatin 20mg / 40mg / 80mg", brands: "Atorva, Storvas, Lipitor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "High intensity statin" },
+      { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg / 40mg", brands: "Rosuvas, Crestor, Rozavel", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Potent LDL-C reduction" },
+      { cat: "Cholesterol Absorption", generic: "Ezetimibe 10mg", brands: "Ezetrol, Zetia", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "NPC1L1 inhibitor" },
+      { cat: "ATP Citrate Lyase Inhibitor", generic: "Bempedoic Acid 180mg", brands: "Brillo, Bemdac", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "Statin-intolerant LDL lowering" },
+      { cat: "Combination Lipid", generic: "Bempedoic Acid 180mg + Ezetimibe 10mg", brands: "Brillo-EZ, Bemdac-EZ", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "Potent non-statin dual therapy" },
+      { cat: "siRNA PCSK9", generic: "Inj Inclisiran 284mg SC", brands: "Leqvio", timing: "Subcutaneous", freq: "Every 6 Months", days: 180, advice: "Semiannual PCSK9 gene silencer" },
+      { cat: "PCSK9 Monoclonal", generic: "Inj Evolocumab 140mg SC", brands: "Repatha", timing: "Subcutaneous", freq: "Every 2 Weeks", days: 30, advice: "Extreme cardiovascular risk" },
+      { cat: "PCSK9 Monoclonal", generic: "Inj Alirocumab 75mg / 150mg SC", brands: "Praluent", timing: "Subcutaneous", freq: "Every 2 Weeks", days: 30, advice: "Refractory hypercholesterolemia" },
+      { cat: "Purified EPA", generic: "Icosapent Ethyl 1g", brands: "Vazkepa", timing: "With Food", freq: "1-0-1", days: 30, advice: "Proven CV event reduction" },
+      { cat: "Fibrate", generic: "Fenofibrate 145mg / 160mg", brands: "Lipicard, Fenolip", timing: "With Food", freq: "1-0-0", days: 30, advice: "Severe hypertriglyceridemia" },
+      { cat: "Combination Lipid", generic: "Rosuvastatin 10mg + Fenofibrate 145mg", brands: "Rosuvas-F, Rozavel-F", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Mixed dyslipidemia" },
+
+      // Pulmonary Arterial Hypertension (PAH)
+      { cat: "ERA", generic: "Ambrisentan 5mg / 10mg", brands: "Endobloc, Volibris", timing: "Morning", freq: "1-0-0", days: 30, advice: "Selective ETA receptor antagonist" },
+      { cat: "ERA", generic: "Bosentan 62.5mg / 125mg", brands: "Bosentas", timing: "Morning/Night", freq: "1-0-1", days: 30, advice: "Dual ERA; monitor LFT" },
+      { cat: "ERA", generic: "Macitentan 10mg", brands: "Opsumit, Macit", timing: "After Food", freq: "1-0-0", days: 30, advice: "High tissue penetration ERA" },
+      { cat: "PDE5 Inhibitor", generic: "Sildenafil 20mg", brands: "Revatio, Pulmonext", timing: "After Food", freq: "1-1-1", days: 30, advice: "PAH vasodilator" },
+      { cat: "PDE5 Inhibitor", generic: "Tadalafil 20mg / 40mg", brands: "Adcirca", timing: "Morning", freq: "1-0-0", days: 30, advice: "Once daily for PAH" },
+      { cat: "sGC Stimulator", generic: "Riociguat 0.5mg / 1mg / 2.5mg", brands: "Adempas", timing: "After Food", freq: "1-1-1", days: 30, advice: "CTEPH and PAH" },
+      { cat: "IP Receptor Agonist", generic: "Selexipag 200mcg / 400mcg", brands: "Uptravi", timing: "With Food", freq: "1-0-1", days: 30, advice: "Oral prostacyclin receptor agonist" },
+      { cat: "Activin Signaling", generic: "Inj Sotatercept 45mg / 60mg SC", brands: "Winrevair", timing: "Subcutaneous", freq: "Every 3 Weeks", days: 21, advice: "Breakthrough biological for PAH" },
+
+      // Neuroprotective, Gastro & ICU Supportive
+      { cat: "Neuroprotective", generic: "Citicoline 500mg / Inj 1g IV", brands: "Stiloz-C, Ceraxon, Citistar", timing: "After Food", freq: "1-0-1", days: 30, advice: "Acute ischemic stroke recovery" },
+      { cat: "Neuroprotective", generic: "Inj Edaravone 30mg IV", brands: "Edarone, Radicut", timing: "IV Infusion", freq: "1-0-1", days: 14, advice: "Free radical scavenger for stroke" },
+      { cat: "Neuropeptide", generic: "Inj Cerebrolysin 10mL / 20mL IV", brands: "Cerebrolysin", timing: "Slow IV / Infusion", freq: "OD", days: 10, advice: "Neurotrophic support in stroke / TBI" },
+      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg / Inj 40mg IV", brands: "Pan-40, Pantocid", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" },
       { cat: "Gastro / PPI", generic: "Pantoprazole 40mg + Domperidone 30mg SR", brands: "Pan-D, Pantocid-DSR", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "Before breakfast" },
       { cat: "Gastro / PPI", generic: "Rabeprazole 20mg", brands: "Razo 20, Happi 20", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "Rapid acid inhibitor" },
       { cat: "Gastro / PPI", generic: "Rabeprazole 20mg + Levosulpiride 75mg SR", brands: "Razo-L, Happi-L", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "Reflux & gastroparesis" },
-      { cat: "Gastro / PPI", generic: "Esomeprazole 40mg", brands: "Nexpro 40, Sompraz", timing: "Empty Stomach", freq: "1-0-0", days: 14, advice: "Potent acid suppression" },
-      { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
-      { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD prevention" },
-      { cat: "Antiplatelet", generic: "Ticagrelor 90mg", brands: "Brilinta, Axcer", timing: "After Food", freq: "1-0-1", days: 30, advice: "Reversible P2Y12 blocker" },
-      { cat: "DOAC", generic: "Rivaroxaban 10mg / 15mg / 20mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
-      { cat: "DOAC", generic: "Apixaban 2.5mg / 5mg", brands: "Eliquis, Apigat", timing: "After Food", freq: "1-0-1", days: 30, advice: "Twice daily Factor Xa" },
-      { cat: "DOAC", generic: "Dabigatran 110mg / 150mg", brands: "Pradaxa", timing: "After Food", freq: "1-0-1", days: 30, advice: "Direct thrombin inhibitor" },
-      { cat: "ARNI (हार्ट फेल्युअर)", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Cornerstone HFrEF therapy" },
-      { cat: "MRA", generic: "Finerenone 10mg / 20mg", brands: "Firialta, Fineren", timing: "With Food", freq: "1-0-0", days: 30, advice: "CKD + T2DM protection" },
-      { cat: "Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Track daily weight & urine" },
-      { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
-      { cat: "SGLT2i", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance", timing: "Morning", freq: "1-0-0", days: 30, advice: "Heart failure & diabetes" },
-      { cat: "Statin", generic: "Atorvastatin 20mg / 40mg", brands: "Atorva, Storvas", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Bedtime" },
-      { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg", brands: "Rosuvas, Crestor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Bedtime" },
-      { cat: "Beta Blocker", generic: "Bisoprolol 2.5mg / 5mg", brands: "Concor", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective" },
-      { cat: "Beta Blocker", generic: "Metoprolol Succinate 25mg / 50mg ER", brands: "Betaloc-XL", timing: "Morning", freq: "1-0-0", days: 30, advice: "Extended release" },
-      { cat: "ARB", generic: "Telmisartan 40mg / 80mg", brands: "Telma", timing: "Morning", freq: "1-0-0", days: 30, advice: "24h BP controller" },
-      { cat: "CCB", generic: "Azelnidipine 8mg / 16mg", brands: "Azulix, Azovas", timing: "After Food", freq: "1-0-0", days: 30, advice: "Zero pedal edema CCB" },
-      { cat: "CCB", generic: "Benidipine 4mg / 8mg", brands: "Benitres", timing: "After Food", freq: "1-0-0", days: 30, advice: "Triple channel blocker" }
+      { cat: "Gastro / PPI", generic: "Esomeprazole 40mg / Inj 40mg IV", brands: "Nexpro 40, Sompraz", timing: "Empty Stomach", freq: "1-0-0", days: 14, advice: "Potent acid suppression" },
+      { cat: "Antigout / Anti-inflammatory", generic: "Colchicine 0.5mg", brands: "Zycolsin, Colchipride", timing: "With Food", freq: "1-0-0", days: 30, advice: "Secondary CV prevention / Pericarditis" },
+      { cat: "GLP-1 Receptor Agonist", generic: "Inj Semaglutide 0.5mg / 1mg SC", brands: "Ozempic, Wegovy", timing: "Subcutaneous", freq: "Weekly", days: 28, advice: "T2DM, obesity & cardiovascular risk" }
     ];
 
     let uploadedMediaData = null;
@@ -1294,6 +1469,78 @@
         toast.classList.add('translate-y-[-100px]', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 2500);
+    }
+
+    // 1-CLICK ALL-AI CLINICAL SEARCH LAUNCHER
+    function launchAI(engine) {
+      const q = document.getElementById('aiGlobalQuery').value.trim();
+      const promptText = q ? `Clinical evaluation for bedside emergency: ${q}` : "Bedside ICU emergency clinical guidelines";
+      if(engine === 'gemini') window.open(`https://gemini.google.com/app?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'chatgpt') window.open(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'claude') window.open(`https://claude.ai/new?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'copilot') window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'scholar') window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(q || 'Bedside ICU cardiology')}`, '_blank');
+      if(engine === 'pubmed') window.open(`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q || 'Bedside critical care')}`, '_blank');
+    }
+
+    // HIGH QUALITY DIRECT A4 PDF EXPORTER (html2pdf.js)
+    function exportToPdf(elementId, filename) {
+      const element = document.getElementById(elementId);
+      showToast("Generating official A4 PDF...");
+      const opt = {
+        margin: [8, 8, 8, 8],
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save().then(() => {
+        showToast("✓ PDF Downloaded successfully!");
+      }).catch(err => {
+        window.print();
+      });
+    }
+
+    function exportCurrentClinDocPdf() {
+      const val = document.getElementById('clinDocSelect').value;
+      exportToPdf('cdoc-' + val, `Dr_Kulkarni_${val.toUpperCase()}.pdf`);
+    }
+
+    function exportCurrentDeathFormPdf() {
+      const val = document.getElementById('certTypeSelect').value;
+      exportToPdf('cert-' + val, `Death_Certificate_${val.toUpperCase()}_Dr_Kulkarni.pdf`);
+    }
+
+    // 1-CLICK DISEASE TEST BUNDLES
+    function clearAllPathTests() {
+      document.querySelectorAll('#pathCheckboxesGrid input[type="checkbox"]').forEach(c => c.checked = false);
+    }
+
+    function applyTestBundle(b) {
+      clearAllPathTests();
+      if(b === 'fever') {
+        ['t_cbc', 't_esr', 't_dengue', 't_widal', 't_urine', 't_pct'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Acute Febrile Illness / Dengue / Enteric. Blood cultures SOS.";
+      } else if(b === 'chest') {
+        ['t_cbc', 't_trop', 't_bnp', 't_abg', 't_ddimer', 't_pct'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Acute dyspnea, Pulmonary Edema vs PE vs Pneumonia.";
+      } else if(b === 'cardiac') {
+        ['t_trop', 't_bnp', 't_kft', 't_lytes', 't_pt'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Acute Coronary Syndrome (ACS) / NSTEMI / Decompensated Heart Failure.";
+      } else if(b === 'stroke') {
+        ['t_sugar', 't_lytes', 't_kft', 't_lft', 't_pt', 't_ammonia'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Acute CVA Stroke / Metabolic Encephalopathy. Non-Contrast CT Brain advised.";
+      } else if(b === 'sepsis') {
+        ['t_cbc', 't_pct', 't_blood_cx', 't_kft', 't_lft', 't_abg', 't_pt'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Severe Sepsis / Septic Shock. Track Serum Lactate.";
+      } else if(b === 'dka') {
+        ['t_sugar', 't_hba1c', 't_abg', 't_lytes', 't_kft', 't_urine'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Diabetic Ketoacidosis (DKA) / HHS. Urine for Ketone Bodies.";
+      } else if(b === 'cirrhosis') {
+        ['t_lft', 't_kft', 't_pt', 't_ammonia', 't_cbc', 't_lytes'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).checked = true; });
+        document.getElementById('pathNotes').value = "Clinical Suspect: Decompensated Cirrhosis / Hepatorenal / Hepatic Encephalopathy.";
+      }
+      showToast(`✓ Applied ${b.toUpperCase()} Test Bundle`);
     }
 
     // WORKSPACE & TABS
@@ -1504,124 +1751,210 @@
     function populate30Calculators() {
       const grid = document.getElementById('calc30Grid');
       grid.innerHTML = `
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight (IBW)</p>
           <div class="flex gap-1.5"><input type="number" id="c_w" placeholder="Wt(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_h" placeholder="Ht(cm)" class="w-1/2 p-1 border rounded"></div>
           <button onclick="let w=parseFloat(c_w.value),h=parseFloat(c_h.value)/100; if(w&&h) r_bmi.innerText='BMI: '+(w/(h*h)).toFixed(1)+' | IBW: ~'+(22*h*h).toFixed(1)+'kg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_bmi" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">2. MAP (Perfusion &ge; 65)</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">2. MAP Perfusion Target (&ge;65)</p>
           <div class="flex gap-1.5"><input type="number" id="c_sbp" placeholder="SBP" class="w-1/2 p-1 border rounded"><input type="number" id="c_dbp" placeholder="DBP" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let s=parseFloat(c_sbp.value),d=parseFloat(c_dbp.value); if(s&&d) r_map.innerText='MAP: '+(((2*d)+s)/3).toFixed(1)+' mmHg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <button onclick="let s=parseFloat(c_sbp.value),d=parseFloat(c_dbp.value); if(s&&d) r_map.innerText='MAP: '+(((2*d)+s)/3).toFixed(1)+' mmHg ('+((((2*d)+s)/3)>=65?'Safe':'Hypoperfusion')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_map" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">3. 24h Fluid Restriction (HF/CKD)</p>
           <select id="c_fl" class="w-full p-1 border rounded"><option value="1200">HF (< 1,200 mL)</option><option value="1000">Anuric CKD (1,000 mL)</option><option value="1500">Cirrhosis (1,500 mL)</option></select>
           <button onclick="r_fl.innerText='Max 24h intake: '+c_fl.value+' mL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Show Quota</button>
           <div id="r_fl" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">4. eGFR CrCl (Kidney)</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">4. eGFR CrCl (Cockcroft-Gault)</p>
           <div class="flex gap-1"><input type="number" id="c_ag" placeholder="Age" class="w-1/3 p-1 border rounded"><input type="number" id="c_wt" placeholder="Wt" class="w-1/3 p-1 border rounded"><input type="number" id="c_cr" placeholder="Cr" step="0.1" class="w-1/3 p-1 border rounded"></div>
           <button onclick="let a=parseFloat(c_ag.value),w=parseFloat(c_wt.value),c=parseFloat(c_cr.value); if(a&&w&&c) r_cr.innerText='CrCl: '+(((140-a)*w)/(72*c)).toFixed(1)+' mL/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
           <div id="r_cr" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">5. HbA1c to eAG Glucose</p>
           <input type="number" id="c_a1c" placeholder="HbA1c % (e.g. 7.5)" step="0.1" class="w-full p-1 border rounded">
           <button onclick="let x=parseFloat(c_a1c.value); if(x) r_a1c.innerText='eAG: ~'+((28.7*x)-46.7).toFixed(0)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button>
           <div id="r_a1c" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">6. Bedridden Calorie &amp; Protein</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">6. Bedridden Nutrition Needs</p>
           <input type="number" id="c_nut" placeholder="Weight in kg" class="w-full p-1 border rounded">
           <button onclick="let w=parseFloat(c_nut.value); if(w) r_nut.innerText='Cal: '+(w*25).toFixed(0)+'-'+(w*30).toFixed(0)+' kcal | Prot: '+(w*1.2).toFixed(1)+'g';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_nut" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">7. IV Drip Rate (Drops/min)</p>
           <div class="flex gap-1.5"><input type="number" id="c_vol" placeholder="Vol(mL)" class="w-1/2 p-1 border rounded"><input type="number" id="c_hr" placeholder="Hours" class="w-1/2 p-1 border rounded"></div>
           <button onclick="let v=parseFloat(c_vol.value),h=parseFloat(c_hr.value); if(v&&h) r_dr.innerText='Rate: ~'+((v*15)/(h*60)).toFixed(0)+' gtt/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_dr" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">8. GCS Coma Scale</p>
           <div class="flex gap-1"><select id="ge" class="w-1/3 p-1 border rounded"><option value="4">E4</option><option value="3">E3</option><option value="2">E2</option><option value="1">E1</option></select><select id="gv" class="w-1/3 p-1 border rounded"><option value="5">V5</option><option value="4">V4</option><option value="3">V3</option><option value="1">V1</option></select><select id="gm" class="w-1/3 p-1 border rounded"><option value="6">M6</option><option value="5">M5</option><option value="4">M4</option><option value="1">M1</option></select></div>
           <button onclick="let t=parseInt(ge.value)+parseInt(gv.value)+parseInt(gm.value); r_gcs.innerText='Total: '+t+'/15 ('+(t<=8?'Severe Coma':'Mild/Mod')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_gcs" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">9. Parkland Burn Fluid (24h)</p>
           <div class="flex gap-1.5"><input type="number" id="c_bw" placeholder="Weight(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_bp" placeholder="% Burn" class="w-1/2 p-1 border rounded"></div>
           <button onclick="let w=parseFloat(c_bw.value),p=parseFloat(c_bp.value); if(w&&p) r_bk.innerText='Total RL: '+(4*w*p)+' mL (50% first 8h)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_bk" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">10. Corrected Calcium (Albumin)</p>
           <div class="flex gap-1.5"><input type="number" id="c_ca" placeholder="Ca" step="0.1" class="w-1/2 p-1 border rounded"><input type="number" id="c_alb" placeholder="Albumin" step="0.1" class="w-1/2 p-1 border rounded"></div>
           <button onclick="let c=parseFloat(c_ca.value),a=parseFloat(c_alb.value); if(c&&a) r_cca.innerText='Corrected Ca: '+(c+0.8*(4.0-a)).toFixed(1)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_cca" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">11. CURB-65 Pneumonia Severity</p>
-          <p class="text-[11px] text-slate-600">Confusion (1) + Urea > 42 (1) + RR &ge; 30 (1) + BP < 90/60 (1) + Age &ge; 65 (1). Score &ge; 3: ICU admission.</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">11. CURB-65 Pneumonia Score</p>
+          <div class="flex flex-wrap gap-1">
+            <label><input type="checkbox" id="cb_c"> Confusion</label>
+            <label><input type="checkbox" id="cb_u"> Urea>42</label>
+            <label><input type="checkbox" id="cb_r"> RR&ge;30</label>
+            <label><input type="checkbox" id="cb_b"> BP<90/60</label>
+            <label><input type="checkbox" id="cb_65"> Age&ge;65</label>
+          </div>
+          <button onclick="let s=(cb_c.checked?1:0)+(cb_u.checked?1:0)+(cb_r.checked?1:0)+(cb_b.checked?1:0)+(cb_65.checked?1:0); r_curb.innerText='Score: '+s+'/5 ('+(s>=3?'Severe/ICU':'Outpatient/Ward')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Score</button>
+          <div id="r_curb" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">12. Anion Gap (Acidosis)</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">12. Serum Anion Gap</p>
           <div class="flex gap-1"><input type="number" id="c_na" placeholder="Na" class="w-1/3 p-1 border rounded"><input type="number" id="c_cl" placeholder="Cl" class="w-1/3 p-1 border rounded"><input type="number" id="c_hc" placeholder="HCO3" class="w-1/3 p-1 border rounded"></div>
-          <button onclick="let n=parseFloat(c_na.value),l=parseFloat(c_cl.value),h=parseFloat(c_hc.value); if(n&&l&&h) r_agp.innerText='AG: '+(n-(l+h)).toFixed(1)+' mEq/L (Normal 8-12)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <button onclick="let n=parseFloat(c_na.value),l=parseFloat(c_cl.value),h=parseFloat(c_hc.value); if(n&&l&&h) r_agp.innerText='AG: '+(n-(l+h)).toFixed(1)+' mEq/L ('+((n-(l+h))>12?'HAGMA':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_agp" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">13. Oxygen Cylinder Duration</p>
           <div class="flex gap-1.5"><input type="number" id="c_psi" placeholder="PSI" class="w-1/2 p-1 border rounded"><input type="number" id="c_flw" placeholder="L/min" class="w-1/2 p-1 border rounded"></div>
           <button onclick="let p=parseFloat(c_psi.value),f=parseFloat(c_flw.value); if(p&&f) r_ox.innerText='Remaining: ~'+((p*0.28)/f).toFixed(0)+' mins (D-Tank)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
           <div id="r_ox" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">14. qSOFA Sepsis Screen</p>
-          <p class="text-[11px] text-slate-600">RR &ge; 22 (1) + Altered sensorium (1) + SBP &le; 100 (1). Score &ge; 2: High in-hospital mortality.</p>
+          <div class="flex flex-wrap gap-1">
+            <label><input type="checkbox" id="qs_r"> RR &ge; 22</label>
+            <label><input type="checkbox" id="qs_g"> Altered Mentation</label>
+            <label><input type="checkbox" id="qs_b"> SBP &le; 100</label>
+          </div>
+          <button onclick="let q=(qs_r.checked?1:0)+(qs_g.checked?1:0)+(qs_b.checked?1:0); r_qsofa.innerText='qSOFA: '+q+'/3 ('+(q>=2?'High ICU Mortality Risk':'Low Risk')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Check</button>
+          <div id="r_qsofa" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
           <p class="font-bold text-teal-900">15. PaO2 / FiO2 Ratio (ARDS)</p>
           <div class="flex gap-1.5"><input type="number" id="c_po2" placeholder="PaO2" class="w-1/2 p-1 border rounded"><input type="number" id="c_fio2" placeholder="FiO2 (0.21-1)" step="0.1" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let o=parseFloat(c_po2.value),f=parseFloat(c_fio2.value); if(o&&f) r_pf.innerText='P/F: '+(o/f).toFixed(0)+' ('+(o/f<100?'Severe ARDS':o/f<200?'Moderate ARDS':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <button onclick="let o=parseFloat(c_po2.value),f=parseFloat(c_fio2.value); if(o&&f) r_pf.innerText='P/F: '+(o/f).toFixed(0)+' ('+(o/f<100?'Severe ARDS':o/f<200?'Mod ARDS':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
           <div id="r_pf" class="text-[11px] font-semibold text-slate-700"></div>
         </div>
 
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5">
-          <p class="font-bold text-teal-900">16-30. Clinical Reference Tools</p>
-          <p class="text-[11px] text-slate-600">CHA2DS2-VASc, HAS-BLED, Wells DVT/PE, FENa, MELD, Child-Pugh &amp; Maintenance Fluid 4-2-1 active under bedside protocols.</p>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">16. Corrected Na in Hyperglycemia</p>
+          <div class="flex gap-1.5"><input type="number" id="c_mna" placeholder="Meas. Na" class="w-1/2 p-1 border rounded"><input type="number" id="c_mglu" placeholder="Glucose" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let n=parseFloat(c_mna.value),g=parseFloat(c_mglu.value); if(n&&g) r_cna.innerText='Corrected Na: '+(n+0.016*(g-100)).toFixed(1)+' mEq/L';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_cna" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">17. FENa (Pre-renal vs ATN)</p>
+          <div class="flex gap-1"><input type="number" id="c_una" placeholder="UNa" class="w-1/4 p-1 border rounded"><input type="number" id="c_sna" placeholder="SNa" class="w-1/4 p-1 border rounded"><input type="number" id="c_ucr" placeholder="UCr" class="w-1/4 p-1 border rounded"><input type="number" id="c_scr" placeholder="SCr" class="w-1/4 p-1 border rounded"></div>
+          <button onclick="let u_n=parseFloat(c_una.value),s_n=parseFloat(c_sna.value),u_c=parseFloat(c_ucr.value),s_c=parseFloat(c_scr.value); if(u_n&&s_n&&u_c&&s_c) { let fe=((u_n*s_c)/(s_n*u_c)*100).toFixed(1); r_fena.innerText='FENa: '+fe+'% ('+(fe<1?'Prerenal':'Intrinsic ATN')+')'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_fena" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">18. Maintenance Fluid (4-2-1 Rule)</p>
+          <input type="number" id="c_mf_wt" placeholder="Weight (kg)" class="w-full p-1 border rounded">
+          <button onclick="let w=parseFloat(c_mf_wt.value); if(w) { let rate = w<=10 ? w*4 : w<=20 ? 40+(w-10)*2 : 60+(w-20)*1; r_mf.innerText='Hourly Rate: '+rate+' mL/h ('+(rate*24)+' mL/day)'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_mf" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">19. Steroid Dose Converter</p>
+          <div class="flex gap-1.5"><input type="number" id="c_pred" placeholder="Prednisolone (mg)" class="w-2/3 p-1 border rounded"><button onclick="let p=parseFloat(c_pred.value); if(p) r_steroid.innerText='Dex: '+(p*0.15).toFixed(1)+'mg | Hydrocort: '+(p*4).toFixed(0)+'mg';" class="w-1/3 bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button></div>
+          <div id="r_steroid" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">20. Wells' DVT Probability</p>
+          <p class="text-[11px] text-slate-600">Active cancer (1), Paralysis/plaster (1), Bedridden &gt;3d (1), Local tenderness (1), Entire leg swollen (1). Score &ge; 2: DVT Likely.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">21. Wells' PE Probability</p>
+          <p class="text-[11px] text-slate-600">Clinical signs of DVT (3), PE #1 diagnosis (3), HR &gt; 100 (1.5), Immobilization (1.5). Score &gt; 4: PE Likely.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">22. CHA₂DS₂-VASc AFib Stroke</p>
+          <p class="text-[11px] text-slate-600">CHF (1), HTN (1), Age &ge; 75 (2), DM (1), Stroke/TIA (2), Vascular (1), Age 65-74 (1), Sex Female (1). Score &ge; 2 (Men) / &ge; 3 (Women): DOAC indicated.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">23. HAS-BLED Bleeding Risk</p>
+          <p class="text-[11px] text-slate-600">HTN (1), Renal (1), Liver (1), Stroke (1), Bleeding (1), Labile INR (1), Elderly (1), Drugs/Alcohol (1). Score &ge; 3: High bleeding risk.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">24. Bedside Insulin Sliding Scale</p>
+          <input type="number" id="c_grbs_val" placeholder="Current GRBS (mg/dL)" class="w-full p-1 border rounded">
+          <button onclick="let g=parseFloat(c_grbs_val.value); if(g) { let ins = g<150?0 : g<200?2 : g<250?4 : g<300?6 : g<350?8 : 10; r_ins.innerText='Regular Insulin Dose: '+ins+' Units SC'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_ins" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">25. Norton Bedsore Ulcer Scale</p>
+          <select id="norton_sc" class="w-full p-1 border rounded"><option value="high">Score &le; 14: High Risk (Q2H Turning + Air Bed)</option><option value="low">Score &gt; 14: Moderate / Low Risk</option></select>
+          <div class="text-[11px] text-slate-600">Air mattress mandatory for bedridden patients.</div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">26. Shock Index (HR / SBP)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_sihr" placeholder="Heart Rate" class="w-1/2 p-1 border rounded"><input type="number" id="c_sisbp" placeholder="Systolic BP" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let hr=parseFloat(c_sihr.value),sbp=parseFloat(c_sisbp.value); if(hr&&sbp) r_si.innerText='Shock Index: '+(hr/sbp).toFixed(2)+' ('+((hr/sbp)>0.9?'Occult Shock Warning':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_si" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">27. Target Heart Rate (Karvonen)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_tage" placeholder="Age" class="w-1/2 p-1 border rounded"><input type="number" id="c_trhr" placeholder="Resting HR" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let a=parseFloat(c_tage.value),r=parseFloat(c_trhr.value); if(a&&r) { let max=220-a; r_thr.innerText='60-80% Target: '+((max-r)*0.6+r).toFixed(0)+'-'+((max-r)*0.8+r).toFixed(0)+' bpm'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_thr" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">28. MELD Score (End-Stage Liver)</p>
+          <p class="text-[11px] text-slate-600">Calculated from Creatinine, Bilirubin, and INR. MELD &gt; 15 indicates urgent hepatology tertiary transfer.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">29. Child-Pugh Score (Cirrhosis)</p>
+          <p class="text-[11px] text-slate-600">Class A (5-6), Class B (7-9), Class C (10-15). Class C carries 1-year mortality of ~50%.</p>
+        </div>
+
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">30. Apache II Quick Mortality Risk</p>
+          <p class="text-[11px] text-slate-600">Based on core body temp, MAP, heart rate, RR, oxygenation, arterial pH, serum sodium, potassium, and creatinine.</p>
         </div>
       `;
-    }
-
-    // GEMINI & SCHOLAR SEARCH
-    function searchWithGemini() {
-      const q = document.getElementById('geminiSearchQuery').value.trim();
-      if(!q) { alert("Please type a symptom or clinical query."); return; }
-      window.open(`https://gemini.google.com/app?q=${encodeURIComponent("Clinical analysis for acute emergency: " + q)}`, '_blank');
-    }
-    function searchWithScholar() {
-      const q = document.getElementById('geminiSearchQuery').value.trim();
-      if(!q) return;
-      window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(q)}`, '_blank');
     }
 
     // SAVE AS... EDITABLE RECORD
@@ -1681,7 +2014,7 @@ ${adv}
 Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
     }
 
-    // UNIVERSAL SHARE (WEB SHARE API + WHATSAPP)
+    // 100% RELIABLE FULL DOCUMENT SHARING (NO TRUNCATION / NO MISSING TESTS)
     function universalShareDocument(type) {
       let title = "";
       let text = "";
@@ -1692,16 +2025,20 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
         text = generatePrescriptionText();
       } else if(type === 'path') {
         const name = document.getElementById('reqPatName').value || "Patient";
+        const age = document.getElementById('reqPatAge').value || "-";
+        const date = document.getElementById('reqDate').value || "";
+        const notes = document.getElementById('pathNotes').value;
         let tests = [];
-        document.querySelectorAll('#viewPathReq input[type="checkbox"]:checked').forEach(c => tests.push(c.value));
+        document.querySelectorAll('#pathCheckboxesGrid input[type="checkbox"]:checked').forEach(c => tests.push(c.value));
         title = "Pathology Requisition - Dr. Kulkarni";
-        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\n*Patient:* ${name}\n\n*Tests Requested:*\n${tests.map((t, i) => `${i+1}. ${t}`).join('\n')}\n\nReports to: 9822594341`;
+        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\nDhayari, Pune | Mob: 9822594341\n---------------------------------------------\n*Patient:* ${name} (${age}) | *Date:* ${date}\n\n*TESTS REQUESTED:*\n${tests.length > 0 ? tests.map((t, i) => `${i+1}. ${t}`).join('\n') : 'No tests checked.'}\n\n*Clinical Notes:* ${notes || 'Bedside evaluation'}\n\nPlease send urgent reports via WhatsApp to: 9822594341`;
       } else if(type === 'rad') {
         const name = document.getElementById('reqPatName').value || "Patient";
         let tests = [];
         document.querySelectorAll('#viewRadReq input[type="checkbox"]:checked').forEach(c => tests.push(c.value));
+        const ind = document.getElementById('radIndication').value;
         title = "Radiology Requisition - Dr. Kulkarni";
-        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\n*Patient:* ${name}\n\n*Imaging:*\n${tests.map((t, i) => `${i+1}. ${t}`).join('\n')}\n\nHelpline: 9822594341`;
+        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (Reg: I-24809-A-1)\nPatient: ${name}\n\n*Imaging Requested:*\n${tests.map((t, i) => `${i+1}. ${t}`).join('\n')}\n\n*Indication:* ${ind || 'Emergency evaluation'}\n\nConfirm technician ETA to: 9822594341`;
       } else if(type === 'clinDoc') {
         const doc = document.getElementById('clinDocSelect').value;
         if(doc === 'consent') {
@@ -1901,7 +2238,7 @@ _Please confirm your estimated arrival time._`;
       }
     }
 
-    // INTELLIGENT CLINICAL TRIAGE CHATBOT (IF / ELSE CLINICAL DECISION TREE)
+    // INTELLIGENT CLINICAL TRIAGE CHATBOT (IF / ELSE CLINICAL DECISION ENGINE)
     function toggleChatbot() { document.getElementById('chatbotWindow').classList.toggle('hidden'); }
     function openCredentialsModal() { document.getElementById('credentialsModal').classList.remove('hidden'); }
     function closeCredentialsModal() { document.getElementById('credentialsModal').classList.add('hidden'); }
@@ -1922,9 +2259,8 @@ _Please confirm your estimated arrival time._`;
         const botDiv = document.createElement('div');
         botDiv.className = "bg-slate-100 p-2.5 rounded-xl max-w-[85%] text-slate-800 leading-relaxed";
 
-        // Intelligent Clinical Decision Tree
         if(val.includes('chest') || val.includes('छातीत') || val.includes('pain') || val.includes('dhad') || val.includes('धडधड') || val.includes('sweating')) {
-          botDiv.innerHTML = "🚨 <strong>CARDIAC EMERGENCY ALERT:</strong> Chest pain with breathlessness or sweating can indicate acute myocardial infarction. Keep patient seated upright, chew Disprin 300mg (if no allergy/contraindication), dial 108 or call Dr. Kulkarni immediately: <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a>.";
+          botDiv.innerHTML = "🚨 <strong>CARDIAC EMERGENCY ALERT:</strong> Chest pain with breathlessness or diaphoresis can indicate acute myocardial infarction. Keep patient seated upright, chew Disprin 300mg (if no allergy/contraindication), dial 108 or call Dr. Kulkarni immediately: <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a>.";
         } else if(val.includes('breath') || val.includes('oxygen') || val.includes('spo2') || val.includes('दम')) {
           botDiv.innerHTML = "🫁 <strong>RESPIRATORY ALERT:</strong> If SpO2 is below 92%, check pulse oximeter probe, start oxygen if cylinder available, and keep patient at 70° upright sitting. For urgent home ICU BiPAP/ventilator support, contact Dr. Kulkarni at <a href='tel:+919822594341' class='text-teal-800 font-bold underline'>9822594341</a>.";
         } else if(val.includes('stroke') || val.includes('face') || val.includes('बोल') || val.includes('हात') || val.includes('paralysis')) {
