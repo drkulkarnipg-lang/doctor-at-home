@@ -111,7 +111,7 @@
           <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden sm:inline">GMB: Clinic</span>
         </a>
 
-        <!-- 100% Clickable Call Button -->
+        <!-- 100% Clickable Direct Call Button -->
         <a href="tel:+919822594341" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer">
           <i class="fa-solid fa-phone"></i> <span>9822594341</span>
         </a>
@@ -161,7 +161,7 @@
       </div>
     </div>
 
-    <!-- BOOKING SECTION: PATIENT DETAILS + GOOGLE MAPS GPS LOCATION + PROCEDURES -->
+    <!-- BOOKING SECTION: PATIENT DETAILS + LIVE SLAB TIME DETECTOR + GPS + PROCEDURES -->
     <section id="bookingSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="max-w-4xl">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Bedside ICU Home Visit Booking &amp; Accurate GPS Location</h3>
@@ -198,16 +198,22 @@
               </div>
             </div>
 
-            <!-- Time & Distance -->
+            <!-- Time Slab with 11:01 PM Live Auto-Detector & Distance -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="font-bold text-slate-700">Time of Visit:</label>
+                <div class="flex justify-between items-center">
+                  <label class="font-bold text-slate-700">Time of Visit:</label>
+                  <span id="liveTimeBadge" class="text-[10px] bg-red-100 text-red-900 font-bold px-2 py-0.5 rounded-full animate-pulse">
+                    🕒 Detecting Live Time...
+                  </span>
+                </div>
                 <select id="calcTime" onchange="calculateFee()" class="w-full mt-1 p-2 border petal-border rounded-xl bg-white font-medium">
-                  <option value="1200">Daytime (08:00 - 20:00) — ₹1,200</option>
-                  <option value="1440">Evening (20:00 - 23:00) — ₹1,440</option>
-                  <option value="1680">Late Night Emergency (23:00 - 05:00) — ₹1,680</option>
-                  <option value="1440">Early Morning (05:00 - 08:00) — ₹1,440</option>
+                  <option value="1200" id="optDay">Daytime (08:00 - 20:00) — ₹1,200</option>
+                  <option value="1440" id="optEve">Evening (20:00 - 23:00) — ₹1,440</option>
+                  <option value="1680" id="optNight">Late Night Emergency (23:00 - 05:00) — ₹1,680</option>
+                  <option value="1440" id="optEarly">Early Morning (05:00 - 08:00) — ₹1,440</option>
                 </select>
+                <p id="liveSlabNotice" class="text-[10px] text-teal-800 font-semibold mt-1"></p>
               </div>
 
               <div>
@@ -248,7 +254,7 @@
           <!-- Dynamic UPI QR -->
           <div class="bg-white border petal-border p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
             <span class="text-xs font-bold text-[#0F2942] uppercase tracking-wide">Instant Bedside UPI</span>
-            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D${total}%26cu%3DINR" alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm">
+            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D1200%26cu%3DINR" alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm">
             <p class="font-mono text-xs font-bold text-slate-800">9561394341@sbi</p>
             <p class="text-[10px] text-slate-500">Google Pay / PhonePe / Paytm / BHIM</p>
           </div>
@@ -256,7 +262,7 @@
       </div>
     </section>
 
-    <!-- RESTORED VERIFIED INTERNATIONAL HEALTH & GUIDANCE PORTALS -->
+    <!-- VERIFIED INTERNATIONAL HEALTH & GUIDANCE PORTALS -->
     <section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
       <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide border-b pb-2">Verified Patient Knowledge &amp; Guidance Portals</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 pt-1">
@@ -329,7 +335,7 @@
       </div>
     </section>
 
-    <!-- Public Guidance Articles (Large Reading Grid) -->
+    <!-- Public Guidance Articles (Spacious View) -->
     <section class="petal-box p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
       <div class="flex justify-between items-center border-b petal-border pb-2">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Patient Education &amp; Visual Clinical Guides</h3>
@@ -363,9 +369,10 @@
   <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
   <main id="doctorWorkstation" class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6">
     
-    <!-- Doctor Sub-Tabs Navigation -->
+    <!-- Doctor Sub-Tabs Navigation (Includes WebMD Suite) -->
     <div class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print">
       <button onclick="switchDocTab('rxPad')" id="tabRx" class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow">📝 A4 Prescription</button>
+      <button onclick="switchDocTab('symptomChecker')" id="tabSymptom" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm">🩺 WebMD Symptom &amp; Interaction Suite</button>
       <button onclick="switchDocTab('pathCheatSheet')" id="tabCheat" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🔬 Pathology Cheat Sheet (150+)</button>
       <button onclick="switchDocTab('pathReq')" id="tabPath" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">🩸 Lab Slip</button>
       <button onclick="switchDocTab('radReq')" id="tabRad" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">☢️ Radiology Slip</button>
@@ -377,7 +384,7 @@
       <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Settings</button>
     </div>
 
-    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR -->
+    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Includes WebMD Point-of-Care) -->
     <div id="aiLaunchBar" class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs">
       <div class="flex items-center gap-1.5">
         <span class="text-base">🧠</span>
@@ -385,12 +392,13 @@
       </div>
       <div class="flex items-center gap-1.5 flex-grow max-w-lg">
         <input type="text" id="aiGlobalQuery" placeholder="Type syndrome, drug interaction, or condition..." class="w-full p-1.5 rounded-lg text-slate-900 text-xs outline-none">
-        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2.5 py-1.5 rounded-lg flex items-center gap-1">Gemini ↗</button>
-        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1.5 rounded-lg">ChatGPT ↗</button>
-        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Claude ↗</button>
-        <button onclick="launchAI('copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Copilot ↗</button>
-        <button onclick="launchAI('scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1.5 rounded-lg">Scholar ↗</button>
-        <button onclick="launchAI('pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2.5 py-1.5 rounded-lg">PubMed ↗</button>
+        <button onclick="launchAI('webmd')" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">WebMD ↗</button>
+        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2 py-1.5 rounded-lg">Gemini ↗</button>
+        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1.5 rounded-lg">ChatGPT ↗</button>
+        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-1.5 rounded-lg">Claude ↗</button>
+        <button onclick="launchAI('copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1.5 rounded-lg">Copilot ↗</button>
+        <button onclick="launchAI('scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2 py-1.5 rounded-lg">Scholar ↗</button>
+        <button onclick="launchAI('pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2 py-1.5 rounded-lg">PubMed ↗</button>
       </div>
     </div>
 
@@ -422,7 +430,7 @@
         </div>
       </div>
 
-      <!-- Printable A4 Prescription Sheet (Exact Unified Logo Matching Header) -->
+      <!-- Printable A4 Prescription Sheet (Exact Unified Logo) -->
       <div id="rxSheet" class="printable-sheet bg-white border-2 border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div class="flex items-center gap-3">
@@ -514,7 +522,87 @@
       </div>
     </div>
 
-    <!-- TAB 2: PATHOLOGY MASTER CHEAT SHEET (150+ VALUES) -->
+    <!-- TAB 2: WEBMD CLINICAL SUITE & DIFFERENTIALS -->
+    <div id="viewSymptomChecker" class="hidden space-y-4 no-print">
+      <div class="bg-white p-5 rounded-3xl border petal-border shadow-sm flex flex-wrap justify-between items-center gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🩺</span>
+            <h3 class="text-base font-bold serif-brand text-[#0F2942]">WebMD Clinical Triage &amp; Evidence Suite</h3>
+            <span class="bg-rose-100 text-rose-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Physician Grade</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-0.5">Interactive body-map differentials, multi-drug interaction screening, and bedside triage protocol.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="https://symptoms.webmd.com/" target="_blank" rel="noopener noreferrer" class="bg-rose-700 hover:bg-rose-800 text-white text-xs font-bold px-4 py-2 rounded-xl shadow flex items-center gap-1.5 transition">
+            <span>Open Interactive Body Map ↗</span>
+          </a>
+          <a href="https://www.webmd.com/interaction-checker/default.htm" target="_blank" rel="noopener noreferrer" class="bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold px-4 py-2 rounded-xl shadow flex items-center gap-1.5 transition">
+            <span>Drug Interaction Engine ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-white p-5 rounded-3xl border petal-border space-y-3 flex flex-col justify-between shadow-sm">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800 text-sm">Interactive Symptom Checker</span>
+              <span class="bg-teal-50 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-200">Point-of-Care</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              Pinpoint atypical presentations in elderly or non-verbal home ICU patients using WebMD's structured anatomic body map and multi-symptom filters.
+            </p>
+            <ul class="text-slate-700 space-y-1 list-disc list-inside text-[11px]">
+              <li>Cardiopulmonary red-flag screening</li>
+              <li>Elderly stroke mimic identification</li>
+              <li>Atypical septic presentation triage</li>
+            </ul>
+          </div>
+          <a href="https://symptoms.webmd.com/" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-[#0F2942] hover:bg-slate-800 text-white font-bold py-2 rounded-xl transition">
+            Launch Symptom Checker ↗
+          </a>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border petal-border space-y-3 flex flex-col justify-between shadow-sm">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800 text-sm">Polypharmacy Interaction Matrix</span>
+              <span class="bg-amber-50 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200">Critical ICU Safety</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              Screen multi-drug combinations across anticoagulants, antiplatelets, MRAs, and SGLT2 inhibitors before injecting them into the prescription pad.
+            </p>
+            <ul class="text-slate-700 space-y-1 list-disc list-inside text-[11px]">
+              <li>DOAC + Antiplatelet bleed risk check</li>
+              <li>Sacubitril/Valsartan + ACEi washout verification</li>
+              <li>Potassium-sparing vs Loop diuretic balance</li>
+            </ul>
+          </div>
+          <a href="https://www.webmd.com/interaction-checker/default.htm" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 rounded-xl transition">
+            Launch Interaction Matrix ↗
+          </a>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border petal-border space-y-3 flex flex-col justify-between shadow-sm">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800 text-sm">Transfer Findings to Rx Pad</span>
+              <span class="bg-blue-50 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-200">Zero Typing</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              Type or paste differential findings below to inject them straight into the patient's A4 Prescription Pad:
+            </p>
+            <textarea id="webmdFindingsInput" rows="3" placeholder="e.g. Differential: Acute Exacerbation of HFrEF vs Aspiration Pneumonitis. Mild bibasilar crackles, JVP elevated..." class="w-full p-2 border rounded-xl text-xs bg-slate-50 outline-none"></textarea>
+          </div>
+          <button onclick="injectWebmdFindingsToRx()" class="w-full bg-[#0D9488] hover:bg-teal-700 text-white font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
+            <span>✓ Insert into Prescription Sheet</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: PATHOLOGY MASTER CHEAT SHEET (150+ VALUES) -->
     <div id="viewPathCheatSheet" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
@@ -539,7 +627,7 @@
       </div>
     </div>
 
-    <!-- TAB 3: PATHOLOGY REQUISITION (WITH 1-CLICK DISEASE BUNDLES & DIRECT PDF EXPORT) -->
+    <!-- TAB 4: PATHOLOGY REQUISITION (WITH 1-CLICK DISEASE BUNDLES & DIRECT PDF EXPORT) -->
     <div id="viewPathReq" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Requisition Pad</h3>
@@ -556,7 +644,7 @@
 
       <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl no-print space-y-2">
         <div class="flex justify-between items-center">
-          <span class="font-bold text-amber-950 text-xs">⚡ 1-Click Disease/Symptom Test Bundles (Auto-selects exact tests below):</span>
+          <span class="font-bold text-amber-950 text-xs">⚡ 1-Click Disease/Symptom Test Bundles:</span>
           <button onclick="clearAllPathTests()" class="text-[11px] text-red-700 font-bold underline">Clear All Selections</button>
         </div>
         <div class="flex flex-wrap gap-2 text-xs">
@@ -630,7 +718,7 @@
       </div>
     </div>
 
-    <!-- TAB 4: RADIOLOGY -->
+    <!-- TAB 5: RADIOLOGY -->
     <div id="viewRadReq" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Radiology Requisition Pad</h3>
@@ -680,7 +768,7 @@
       </div>
     </div>
 
-    <!-- TAB 5: REFERRAL, PROCEDURAL CONSENT, LEAVE & FITNESS -->
+    <!-- TAB 6: REFERRAL, PROCEDURAL CONSENT, LEAVE & FITNESS -->
     <div id="viewClinicalCertificates" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
         <div class="flex items-center gap-2">
@@ -704,7 +792,7 @@
         </div>
       </div>
 
-      <!-- 1. HIGH-RISK PROCEDURAL CONSENT (द्विभाषिक संमतीपत्र) -->
+      <!-- 1. HIGH-RISK PROCEDURAL CONSENT -->
       <div id="cdoc-consent" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div>
@@ -971,7 +1059,7 @@
       </div>
     </div>
 
-    <!-- TAB 6: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2 EXACT LEGAL FORMS) -->
+    <!-- TAB 7: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2 EXACT LEGAL FORMS) -->
     <div id="viewLegalForms" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
         <select id="certTypeSelect" onchange="switchCertificateView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
@@ -1121,7 +1209,7 @@
       </div>
     </div>
 
-    <!-- TAB 7: 1-CLICK ZERO-TYPING FORMULARY WITH ENTIRE DOCTOR DRUG LIST -->
+    <!-- TAB 8: 1-CLICK ZERO-TYPING FORMULARY WITH ENTIRE DOCTOR DRUG LIST -->
     <div id="viewDrugDir" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
@@ -1154,7 +1242,7 @@
       </div>
     </div>
 
-    <!-- TAB 8: ARTICLES WITH IMPORT & LARGE SPACIOUS MANAGER -->
+    <!-- TAB 9: ARTICLES WITH IMPORT & LARGE SPACIOUS MANAGER -->
     <div id="viewArticlesHub" class="hidden space-y-6">
       <div class="bg-white p-6 md:p-8 rounded-3xl border petal-border shadow-sm space-y-4 text-xs">
         <div class="flex flex-wrap justify-between items-center border-b pb-3 gap-2">
@@ -1209,11 +1297,17 @@
       </div>
     </div>
 
-    <!-- TAB 9: JOURNALS, NEJM JOURNAL WATCH & EVIDENCE -->
+    <!-- TAB 10: JOURNALS, NEJM JOURNAL WATCH & EVIDENCE -->
     <div id="viewJournalsHub" class="hidden space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
         <div class="bg-white p-5 rounded-2xl border petal-border space-y-2.5">
           <h4 class="font-bold text-teal-900 border-b pb-1 text-sm">Top Research &amp; UpToDate</h4>
+          <a href="https://symptoms.webmd.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-rose-50 font-bold text-rose-950 border border-rose-300 hover:bg-rose-100 transition">
+            🩺 WebMD Symptom Checker (Interactive Body Map) ↗
+          </a>
+          <a href="https://www.webmd.com/interaction-checker/default.htm" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-amber-50 font-bold text-amber-950 border border-amber-300 hover:bg-amber-100 transition">
+            💊 WebMD Drug Interaction Checker ↗
+          </a>
           <a href="https://www.jwatch.org/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-amber-50 font-bold text-amber-950 border border-amber-300">
             📰 NEJM Journal Watch (Clinical Summaries) ↗
           </a>
@@ -1222,9 +1316,6 @@
           </a>
           <a href="https://www.medscape.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">
             🩺 Medscape Clinical Reference ↗
-          </a>
-          <a href="https://medicalxpress.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">
-            ⚡ Medical Xpress ↗
           </a>
         </div>
 
@@ -1246,7 +1337,7 @@
       </div>
     </div>
 
-    <!-- TAB 10: MAKE.COM / N8N WEBHOOK AUTOMATION -->
+    <!-- TAB 11: MAKE.COM / N8N WEBHOOK AUTOMATION -->
     <div id="viewSettingsTab" class="hidden space-y-4">
       <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-3 text-xs max-w-2xl">
         <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">⚙️ Make.com / n8n Webhook Connector</h4>
@@ -1402,7 +1493,7 @@
       { sys: "Endocrine & Sugar", test: "HbA1c (Glycated Hb)", ref: "< 5.7% (Diabetic target: < 7.0%)", note: "Long term 3-month glycemic control" }
     ];
 
-    // EXPANDED 150+ ICU, CARDIOLOGY & EMERGENCY FORMULARY (WITH USER'S COMPLETE LIST)
+    // EXPANDED 150+ ICU, CARDIOLOGY & EMERGENCY FORMULARY
     const DRUG_DATABASE = [
       { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150, Delisprin", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
       { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt, Plavix", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD prevention" },
@@ -1437,7 +1528,6 @@
       { cat: "Beta Blocker", generic: "Propranolol 10mg / 40mg", brands: "Ciplar, Inderal", timing: "After Food", freq: "1-0-1", days: 30, advice: "Non-selective; portal HTN / tremor" },
       { cat: "Beta Blocker", generic: "Labetalol 100mg / Inj 20mg IV", brands: "Gravidol, Labebet", timing: "After Food", freq: "1-0-1", days: 30, advice: "Hypertensive emergencies / safe in pregnancy" },
       { cat: "Beta Blocker", generic: "Sotalol 40mg / 80mg", brands: "Sotagard", timing: "After Food", freq: "1-0-1", days: 30, advice: "Antiarrhythmic Class III properties" },
-      { cat: "Beta Blocker", generic: "Acebutolol / Betaxolol / Celiprolol", brands: "Sectral, Kerlone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Vasodilating / ISA beta blockers" },
       { cat: "CCB", generic: "Amlodipine 5mg / 10mg", brands: "Amlong, Stamlo", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dihydropyridine CCB" },
       { cat: "CCB", generic: "S-Amlodipine (Levamlodipine) 2.5mg / 5mg", brands: "Esam, Asomex", timing: "Morning", freq: "1-0-0", days: 30, advice: "Purified enantiomer (reduced pedal edema)" },
       { cat: "CCB", generic: "Azelnidipine 8mg / 16mg", brands: "Azulix, Azovas", timing: "After Food", freq: "1-0-0", days: 30, advice: "Zero pedal edema, sympathetic friendly" },
@@ -1446,7 +1536,6 @@
       { cat: "CCB", generic: "Diltiazem 30mg / 60mg / 90mg SR", brands: "Dilzem, Channel", timing: "After Food", freq: "1-0-1", days: 30, advice: "Non-DHP rate limiting CCB" },
       { cat: "CCB", generic: "Verapamil 40mg / 80mg / Inj 5mg IV", brands: "Calaptin", timing: "After Food", freq: "1-0-1", days: 30, advice: "AV nodal blocking antiarrhythmic" },
       { cat: "CCB", generic: "Nifedipine 20mg / 30mg ER", brands: "Nicardia-Retard, Depin", timing: "After Food", freq: "1-0-1", days: 30, advice: "Extended release only; avoid sublingual" },
-      { cat: "IV CCB", generic: "Inj Clevidipine 0.5mg/mL", brands: "Cleviprex", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Ultrashort acting IV CCB for acute HTN" },
       { cat: "ARNI", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Foundational HFrEF guideline therapy" },
       { cat: "ACE Inhibitor", generic: "Ramipril 2.5mg / 5mg", brands: "Cardace, Hopace", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-MI & cardioprotective" },
       { cat: "ACE Inhibitor", generic: "Enalapril 2.5mg / 5mg", brands: "Envas, Vasotec", timing: "Morning", freq: "1-0-0", days: 30, advice: "ACE inhibitor" },
@@ -1461,56 +1550,19 @@
       { cat: "Combination HTN", generic: "Perindopril 4mg + Indapamide 1.25mg", brands: "Coversyl-Plus", timing: "Morning", freq: "1-0-0", days: 30, advice: "Post-stroke BP control" },
       { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "HFrEF, HFpEF, CKD & T2DM" },
       { cat: "SGLT2i", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance, Gibtulio", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
-      { cat: "Dual SGLT1/2i", generic: "Sotagliflozin 200mg", brands: "Inpefa", timing: "Morning", freq: "1-0-0", days: 30, advice: "Worsening heart failure" },
       { cat: "Non-Steroidal MRA", generic: "Finerenone 10mg / 20mg", brands: "Firialta, Fineren", timing: "With Food", freq: "1-0-0", days: 30, advice: "CKD + T2DM; monitor Potassium" },
       { cat: "MRA Diuretic", generic: "Spironolactone 25mg / 50mg", brands: "Aldactone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Aldosterone antagonist; HFrEF & ascites" },
-      { cat: "MRA", generic: "Eplerenone 25mg / 50mg", brands: "Eptus, Planep", timing: "Morning", freq: "1-0-0", days: 30, advice: "Selective aldosterone blocker (no gynecomastia)" },
       { cat: "Loop Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Track daily weight & urine output" },
       { cat: "Loop Diuretic", generic: "Inj Furosemide 20mg / 40mg IV", brands: "Lasix", timing: "Morning / SOS", freq: "1-0-0", days: 5, advice: "Acute pulmonary edema" },
-      { cat: "Loop Diuretic", generic: "Bumetanide 1mg", brands: "Bumex", timing: "Morning", freq: "1-0-0", days: 15, advice: "High bioavailability loop diuretic" },
-      { cat: "Thiazide-like", generic: "Chlorthalidone 6.25mg / 12.5mg", brands: "Thalidone", timing: "Morning", freq: "1-0-0", days: 30, advice: "Long acting thiazide-like" },
-      { cat: "Thiazide-like", generic: "Metolazone 2.5mg / 5mg", brands: "Zaroxolyn, Metoz", timing: "Morning", freq: "1-0-0", days: 7, advice: "Sequential nephron blockade in diuretic resistance" },
       { cat: "V2 Antagonist", generic: "Tolvaptan 15mg / 30mg", brands: "Natrise, Tolvat", timing: "Morning", freq: "1-0-0", days: 5, advice: "Euvolemic / hypervolemic hyponatremia" },
-      { cat: "sGC Stimulator", generic: "Vericiguat 2.5mg / 5mg / 10mg", brands: "Verquvo", timing: "With Food", freq: "1-0-0", days: 30, advice: "Post-decompensation HFrEF" },
-      { cat: "Cardiac Myosin Inhibitor", generic: "Mavacamten 2.5mg / 5mg", brands: "Camzyos", timing: "Daily", freq: "1-0-0", days: 30, advice: "Symptomatic Obstructive HCM" },
-      { cat: "Inodilator", generic: "Inj Levosimendan 12.5mg/5mL", brands: "Simdax", timing: "IV Infusion", freq: "24h Infusion", days: 1, advice: "Acute decompensated HF inodilator" },
-      { cat: "Cardiac Glycoside", generic: "Digoxin 0.25mg", brands: "Lanoxin", timing: "Morning", freq: "1-0-0", days: 30, advice: "AFib with rapid ventricular response" },
       { cat: "Nitrate", generic: "Tab Sorbitrate 5mg / 10mg Sublingual", brands: "Sorbitrate", timing: "Sublingual SOS", freq: "SOS", days: 30, advice: "Place under tongue for acute chest pain" },
-      { cat: "Nitrate", generic: "Isosorbide Mononitrate 30mg / 60mg SR", brands: "Monotrate-OD, Imdur", timing: "Morning", freq: "1-0-0", days: 30, advice: "Provides 12-hour nitrate-free interval" },
       { cat: "Antianginal", generic: "Nicorandil 5mg / 10mg", brands: "Korandil, Nikoran", timing: "After Food", freq: "1-0-1", days: 30, advice: "Potassium channel opener" },
       { cat: "Antianginal", generic: "Ranolazine 500mg ER", brands: "Rancad, Ranolaz", timing: "After Food", freq: "1-0-1", days: 30, advice: "Late inward sodium channel blocker" },
-      { cat: "Sinus Node Blocker", generic: "Ivabradine 5mg / 7.5mg", brands: "Bradia, Ivabrad", timing: "With Food", freq: "1-0-1", days: 30, advice: "Reduces HR in sinus rhythm & HFrEF" },
-      { cat: "Metabolic Antianginal", generic: "Trimetazidine 35mg / 60mg MR", brands: "Flavedon-MR, Carvidon", timing: "With Food", freq: "1-0-1", days: 30, advice: "Cardiac energy substrate optimizer" },
-      { cat: "IV Vasodilator", generic: "Inj Sodium Nitroprusside 50mg", brands: "Nipride", timing: "IV Infusion", freq: "Titrated", days: 1, advice: "Malignant hypertensive emergency" },
       { cat: "Statin", generic: "Atorvastatin 20mg / 40mg / 80mg", brands: "Atorva, Storvas, Lipitor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "High intensity statin" },
       { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg / 40mg", brands: "Rosuvas, Crestor, Rozavel", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Potent LDL-C reduction" },
-      { cat: "Cholesterol Absorption", generic: "Ezetimibe 10mg", brands: "Ezetrol, Zetia", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "NPC1L1 inhibitor" },
-      { cat: "ATP Citrate Lyase Inhibitor", generic: "Bempedoic Acid 180mg", brands: "Brillo, Bemdac", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "Statin-intolerant LDL lowering" },
-      { cat: "Combination Lipid", generic: "Bempedoic Acid 180mg + Ezetimibe 10mg", brands: "Brillo-EZ, Bemdac-EZ", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "Potent non-statin dual therapy" },
-      { cat: "siRNA PCSK9", generic: "Inj Inclisiran 284mg SC", brands: "Leqvio", timing: "Subcutaneous", freq: "Every 6 Months", days: 180, advice: "Semiannual PCSK9 gene silencer" },
-      { cat: "PCSK9 Monoclonal", generic: "Inj Evolocumab 140mg SC", brands: "Repatha", timing: "Subcutaneous", freq: "Every 2 Weeks", days: 30, advice: "Extreme cardiovascular risk" },
-      { cat: "PCSK9 Monoclonal", generic: "Inj Alirocumab 75mg / 150mg SC", brands: "Praluent", timing: "Subcutaneous", freq: "Every 2 Weeks", days: 30, advice: "Refractory hypercholesterolemia" },
-      { cat: "Purified EPA", generic: "Icosapent Ethyl 1g", brands: "Vazkepa", timing: "With Food", freq: "1-0-1", days: 30, advice: "Proven CV event reduction" },
-      { cat: "Fibrate", generic: "Fenofibrate 145mg / 160mg", brands: "Lipicard, Fenolip", timing: "With Food", freq: "1-0-0", days: 30, advice: "Severe hypertriglyceridemia" },
-      { cat: "Combination Lipid", generic: "Rosuvastatin 10mg + Fenofibrate 145mg", brands: "Rosuvas-F, Rozavel-F", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Mixed dyslipidemia" },
-      { cat: "ERA", generic: "Ambrisentan 5mg / 10mg", brands: "Endobloc, Volibris", timing: "Morning", freq: "1-0-0", days: 30, advice: "Selective ETA receptor antagonist" },
-      { cat: "ERA", generic: "Bosentan 62.5mg / 125mg", brands: "Bosentas", timing: "Morning/Night", freq: "1-0-1", days: 30, advice: "Dual ERA; monitor LFT" },
-      { cat: "ERA", generic: "Macitentan 10mg", brands: "Opsumit, Macit", timing: "After Food", freq: "1-0-0", days: 30, advice: "High tissue penetration ERA" },
-      { cat: "PDE5 Inhibitor", generic: "Sildenafil 20mg", brands: "Revatio, Pulmonext", timing: "After Food", freq: "1-1-1", days: 30, advice: "PAH vasodilator" },
-      { cat: "PDE5 Inhibitor", generic: "Tadalafil 20mg / 40mg", brands: "Adcirca", timing: "Morning", freq: "1-0-0", days: 30, advice: "Once daily for PAH" },
-      { cat: "sGC Stimulator", generic: "Riociguat 0.5mg / 1mg / 2.5mg", brands: "Adempas", timing: "After Food", freq: "1-1-1", days: 30, advice: "CTEPH and PAH" },
-      { cat: "IP Receptor Agonist", generic: "Selexipag 200mcg / 400mcg", brands: "Uptravi", timing: "With Food", freq: "1-0-1", days: 30, advice: "Oral prostacyclin receptor agonist" },
-      { cat: "Activin Signaling", generic: "Inj Sotatercept 45mg / 60mg SC", brands: "Winrevair", timing: "Subcutaneous", freq: "Every 3 Weeks", days: 21, advice: "Breakthrough biological for PAH" },
+      { cat: "ATP Citrate Lyase", generic: "Bempedoic Acid 180mg", brands: "Brillo, Bemdac", timing: "With/Without Food", freq: "1-0-0", days: 30, advice: "Statin-intolerant LDL lowering" },
       { cat: "Neuroprotective", generic: "Citicoline 500mg / Inj 1g IV", brands: "Stiloz-C, Ceraxon, Citistar", timing: "After Food", freq: "1-0-1", days: 30, advice: "Acute ischemic stroke recovery" },
-      { cat: "Neuroprotective", generic: "Inj Edaravone 30mg IV", brands: "Edarone, Radicut", timing: "IV Infusion", freq: "1-0-1", days: 14, advice: "Free radical scavenger for stroke" },
-      { cat: "Neuropeptide", generic: "Inj Cerebrolysin 10mL / 20mL IV", brands: "Cerebrolysin", timing: "Slow IV / Infusion", freq: "OD", days: 10, advice: "Neurotrophic support in stroke / TBI" },
-      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg / Inj 40mg IV", brands: "Pan-40, Pantocid", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" },
-      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg + Domperidone 30mg SR", brands: "Pan-D, Pantocid-DSR", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "Before breakfast" },
-      { cat: "Gastro / PPI", generic: "Rabeprazole 20mg", brands: "Razo 20, Happi 20", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "Rapid acid inhibitor" },
-      { cat: "Gastro / PPI", generic: "Rabeprazole 20mg + Levosulpiride 75mg SR", brands: "Razo-L, Happi-L", timing: "Empty Stomach", freq: "1-0-0", days: 10, advice: "Reflux & gastroparesis" },
-      { cat: "Gastro / PPI", generic: "Esomeprazole 40mg / Inj 40mg IV", brands: "Nexpro 40, Sompraz", timing: "Empty Stomach", freq: "1-0-0", days: 14, advice: "Potent acid suppression" },
-      { cat: "Antigout / Anti-inflammatory", generic: "Colchicine 0.5mg", brands: "Zycolsin, Colchipride", timing: "With Food", freq: "1-0-0", days: 30, advice: "Secondary CV prevention / Pericarditis" },
-      { cat: "GLP-1 Receptor Agonist", generic: "Inj Semaglutide 0.5mg / 1mg SC", brands: "Ozempic, Wegovy", timing: "Subcutaneous", freq: "Weekly", days: 28, advice: "T2DM, obesity & cardiovascular risk" }
+      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg / Inj 40mg IV", brands: "Pan-40, Pantocid", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" }
     ];
 
     let uploadedMediaData = null;
@@ -1524,6 +1576,63 @@
         toast.classList.add('translate-y-[-100px]', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 2500);
+    }
+
+    // AUTO-DETECT LIVE TIME & APPLY CHARGES SLAB (11:01 PM LATE NIGHT ICU SLAB)
+    function autoDetectTimeSlab() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      
+      const selectElem = document.getElementById('calcTime');
+      const badge = document.getElementById('liveTimeBadge');
+      const notice = document.getElementById('liveSlabNotice');
+
+      if (!selectElem) return;
+
+      // 11:00 PM (23:00) to 04:59 AM -> Late Night Emergency (₹1,680)
+      if (hours >= 23 || hours < 5) {
+        selectElem.value = "1680";
+        if (badge) {
+          badge.className = "text-[10px] bg-red-600 text-white font-bold px-2 py-0.5 rounded-full";
+          badge.innerText = `🌙 Live: ${timeStr} (Night ICU)`;
+        }
+        if (notice) notice.innerHTML = `🚨 <strong>Active Slab:</strong> Late Night Emergency (23:00 - 05:00) auto-applied at ${timeStr}.`;
+      }
+      // 05:00 AM to 07:59 AM -> Early Morning (₹1,440)
+      else if (hours >= 5 && hours < 8) {
+        selectElem.value = "1440";
+        const optEarly = document.getElementById('optEarly');
+        if (optEarly) optEarly.selected = true;
+        if (badge) {
+          badge.className = "text-[10px] bg-amber-500 text-white font-bold px-2 py-0.5 rounded-full";
+          badge.innerText = `🌅 Live: ${timeStr} (Early Morning)`;
+        }
+        if (notice) notice.innerHTML = `⚡ <strong>Active Slab:</strong> Early Morning Emergency (05:00 - 08:00) auto-applied.`;
+      }
+      // 08:00 PM (20:00) to 10:59 PM (22:59) -> Evening (₹1,440)
+      else if (hours >= 20 && hours < 23) {
+        selectElem.value = "1440";
+        const optEve = document.getElementById('optEve');
+        if (optEve) optEve.selected = true;
+        if (badge) {
+          badge.className = "text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded-full";
+          badge.innerText = `🌆 Live: ${timeStr} (Evening)`;
+        }
+        if (notice) notice.innerHTML = `⚡ <strong>Active Slab:</strong> Evening Visit (20:00 - 23:00) auto-applied.`;
+      }
+      // 08:00 AM to 07:59 PM (19:59) -> Daytime Regular (₹1,200)
+      else {
+        selectElem.value = "1200";
+        if (badge) {
+          badge.className = "text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full";
+          badge.innerText = `☀️ Live: ${timeStr} (Daytime)`;
+        }
+        if (notice) notice.innerHTML = `✓ <strong>Active Slab:</strong> Regular Daytime Visit (08:00 - 20:00) auto-applied.`;
+      }
+
+      calculateFee();
     }
 
     // WORKSTATION ACCESS SECURITY (OPEN / PIN / FINGERPRINT)
@@ -1591,16 +1700,40 @@
       }
     }
 
-    // 1-CLICK ALL-AI CLINICAL SEARCH LAUNCHER
+    // 1-CLICK ALL-AI CLINICAL SEARCH LAUNCHER WITH WEBMD
     function launchAI(engine) {
       const q = document.getElementById('aiGlobalQuery').value.trim();
       const promptText = q ? `Clinical evaluation for bedside emergency: ${q}` : "Bedside ICU emergency clinical guidelines";
+
       if(engine === 'gemini') window.open(`https://gemini.google.com/app?q=${encodeURIComponent(promptText)}`, '_blank');
       if(engine === 'chatgpt') window.open(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`, '_blank');
       if(engine === 'claude') window.open(`https://claude.ai/new?q=${encodeURIComponent(promptText)}`, '_blank');
       if(engine === 'copilot') window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(promptText)}`, '_blank');
       if(engine === 'scholar') window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(q || 'Bedside ICU cardiology')}`, '_blank');
       if(engine === 'pubmed') window.open(`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q || 'Bedside critical care')}`, '_blank');
+      
+      if(engine === 'webmd') {
+        if(q) {
+          window.open(`https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q)}`, '_blank');
+        } else {
+          window.open('https://symptoms.webmd.com/', '_blank');
+        }
+      }
+    }
+
+    // INJECT WEBMD FINDINGS DIRECTLY INTO PRESCRIPTION PAD
+    function injectWebmdFindingsToRx() {
+      const findings = document.getElementById('webmdFindingsInput').value.trim();
+      if(!findings) {
+        alert("Please write or paste clinical differential findings first.");
+        return;
+      }
+      const rxField = document.getElementById('rxComplaints');
+      if(rxField) {
+        rxField.value = rxField.value ? rxField.value + "\n" + findings : findings;
+        showToast("✓ Differential Injected into Prescription Pad!");
+        switchDocTab('rxPad');
+      }
     }
 
     // HIGH QUALITY DIRECT A4 PDF EXPORTER (html2pdf.js)
@@ -1699,7 +1832,7 @@
     }
 
     function switchDocTab(tabId) {
-      ['rxPad', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'journalsHub', 'settingsTab'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'journalsHub', 'settingsTab'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
@@ -2141,7 +2274,7 @@ ${adv}
 Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
     }
 
-    // 100% RELIABLE FULL DOCUMENT SHARING (NO TRUNCATION)
+    // UNIVERSAL DOCUMENT SHARING
     function universalShareDocument(type) {
       let title = "";
       let text = "";
@@ -2201,7 +2334,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
       link.click();
     }
 
-    // FEE & AUTOMATION DISPATCH
+    // FEE & AUTOMATION DISPATCH (WITH LIVE TIME LOGGING)
     function calculateFee() {
       const base = parseInt(document.getElementById('calcTime').value);
       const dist = parseInt(document.getElementById('calcDistance').value);
@@ -2234,6 +2367,9 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 
       const total = calculateFee();
       const webhookUrl = localStorage.getItem('makeWebhookUrl');
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const currentSlabVal = document.getElementById('calcTime').value;
+      const slabName = currentSlabVal === "1680" ? "🌙 Late Night Emergency (23:00 - 05:00)" : currentSlabVal === "1440" ? "🌆 Evening / Early Morning" : "☀️ Regular Daytime";
 
       if(webhookUrl) {
         fetch(webhookUrl, {
@@ -2246,6 +2382,8 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
             gps_lat: lat,
             gps_lng: lng,
             google_maps_nav_url: navUrl,
+            time_detected: timeStr,
+            rate_slab: slabName,
             total_fee: total,
             timestamp: new Date().toISOString(),
             doctor_alert_email: "Drkulkarnipg@gmail.com"
@@ -2257,6 +2395,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 `*NEW BEDSIDE ICU HOME VISIT BOOKING*
 *Dr. Pramod G. Kulkarni* (9822594341)
 ---------------------------------------------
+*Booking Time:* ${timeStr} (${slabName})
 *Patient Name:* ${name}
 *Contact Phone:* ${phone}
 *Address:* ${addr || 'Address shared on call'}
@@ -2456,6 +2595,7 @@ _Please confirm your estimated arrival time._`;
       if(savedHook && document.getElementById('webhookUrlInput')) document.getElementById('webhookUrlInput').value = savedHook;
 
       updateLockIconDisplay();
+      autoDetectTimeSlab();
       initRxPad();
       renderDrugDirectory();
       renderCheatSheet();
