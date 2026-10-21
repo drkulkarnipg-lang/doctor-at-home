@@ -49,3 +49,7 @@ MIMS integration references:
 
 Indian catalogue source to evaluate under its package licence:
 - https://www.nrces.in/services/national-releases
+
+## Follow-up: editable certificates and Medical Xpress
+
+Medical Xpress is now prominent beside Feedly, with a publisher RSS link and selectable news feed. Fitness/Unfitness and death Forms 2/4 have complete editable working layouts; Form 4A is aligned with the official reference. Form 2 separates informant/legal and statistical/Registrar information. Clinical conclusions stay blank. Selected-only print/PDF output preserves typed values and multiline entries. The approved design baseline remains preserved in GitHub history. See CERTIFICATE_FORMAT_REFERENCES.md for official references, form status and validation.
