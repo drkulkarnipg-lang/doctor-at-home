@@ -1,0 +1,120 @@
+/* Stitch-inspired editorial surfaces. Clinical content and calculations stay in index.html. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:Inter;font-style:normal;font-weight:500 800;font-display:swap;src:url('assets/fonts/inter-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:Newsreader;font-style:normal;font-weight:400 700;font-display:swap;src:url('assets/fonts/newsreader-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans Devanagari';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/noto-sans-devanagari-devanagari-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans Devanagari';font-style:normal;font-weight:500 800;font-display:swap;src:url('assets/fonts/noto-sans-devanagari-devanagari-600-normal.woff2') format('woff2')}
+:root{--canvas:#fcf9f0;--paper:#fffdf9;--ink:#0f2942;--muted:#59636a;--line:#e6dccd;--teal:#006a61;--soft:#f1eee5}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
+body{background:var(--canvas)!important;color:var(--ink);font-family:Inter,'Noto Sans Devanagari',sans-serif!important}
+h1,h2,h3,.serif-brand{font-family:Newsreader,'Noto Sans Devanagari',Georgia,serif!important}
+button,a,input,select,textarea{touch-action:manipulation}
+button,a{transition:background .18s ease,border-color .18s ease,box-shadow .18s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #006a6180;outline-offset:3px}
+input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
+.hidden{display:none!important}
+.site-header{background:var(--canvas)!important;box-shadow:none!important}
+.site-header>div{max-width:1440px;padding:18px 32px;gap:16px}
+.site-header h1{font-size:20px;letter-spacing:.025em;line-height:1.15}
+.site-header p{line-height:1.6}
+.site-header a,.site-header button{box-shadow:none!important}
+.site-header .animate-pulse,.site-header .animate-bounce{animation:none}
+.portal-nav{display:flex;gap:28px;align-items:center;overflow-x:auto;padding:13px 32px;border-top:1px solid var(--line);font-size:12px;white-space:nowrap;background:#f6f3ea}
+.portal-nav a{color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+.portal-nav a:hover,.portal-nav a:focus{color:var(--teal);border-color:var(--teal)}
+#publicPortal,#doctorWorkstation{max-width:1360px;padding:34px 32px 48px}
+#publicPortal{display:flex;flex-direction:column;gap:52px}
+#publicPortal>*{margin-top:0!important}
+.portal-hero{display:grid!important;grid-template-columns:minmax(0,1.9fr) minmax(280px,1fr);align-items:stretch!important;gap:24px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.hero-copy,.dispatch-card{border:1px solid var(--line);border-radius:24px!important;background:var(--paper)!important;box-shadow:0 3px 12px #0f294204!important;padding:36px!important;min-width:0}
+.hero-copy{max-width:none!important;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.hero-copy>div:first-child{align-self:flex-start;font-size:10px;letter-spacing:.05em;background:#eaf4ee;border-color:#dce8df;color:var(--teal)}
+.hero-copy h2{font-size:clamp(30px,3vw,45px);font-weight:500;line-height:1.15;max-width:670px;letter-spacing:-.025em}
+.hero-copy>p{font-size:14px;line-height:1.9;max-width:630px;color:var(--muted)}
+.hero-copy>div:last-child{margin-top:12px;padding-top:20px;border-top:1px solid var(--line)}
+.hero-copy>div:last-child a{background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line);box-shadow:none;font-size:11px;line-height:1.8}
+.dispatch-card{width:auto!important;display:flex;flex-direction:column;justify-content:center;gap:18px;font-size:13px;color:var(--ink)}
+.dispatch-card>p:first-child{color:var(--teal);text-transform:uppercase;letter-spacing:.07em;font-size:11px}
+.dispatch-card>a{background:var(--teal)!important;padding:14px;margin-top:12px}
+.section-eyebrow{display:block;color:var(--teal);font:600 10px/1.6 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+#elderlySection,#wikiSection,#bookingSection,#patientToolsSection,.diet-section{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#elderlySection>div:first-child,#wikiSection>div:first-child{border:0;padding-bottom:10px}
+#publicPortal h3{font-size:28px;line-height:1.45;font-weight:500}
+#publicPortal h4{font-family:Newsreader,'Noto Sans Devanagari',serif;font-size:19px;line-height:1.5;font-weight:500}
+#elderlySection>div:first-child>span{background:var(--soft);color:var(--muted);border:1px solid var(--line);font-size:9px}
+#elderlySection>div:last-child{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#elderlySection>div:last-child>div,#wikiCardsGrid>div,.diet-section>div:last-child>div,#calc30Grid>div{background:var(--paper)!important;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:none}
+#elderlySection ul{font-size:13px;line-height:1.95;margin-top:16px}
+#elderlySection ul li{padding:10px 12px;background:#f6f3ea;border-radius:9px;margin-top:8px}
+#wikiSearchInput{width:100%;font-size:14px;padding:15px 18px;border:1px solid var(--line);background:var(--paper);margin-top:18px}
+#wikiSection>div:first-child{display:block}
+#wikiCardsGrid{gap:20px}
+#wikiCardsGrid p{font-size:13px;line-height:1.85}
+#bookingSection>div:not(:first-child){background:var(--paper);border-radius:20px}
+#bookingSection label,#bookingSection p{line-height:1.8}
+#bookingSection input,#bookingSection select,#bookingSection textarea{font-size:13px;padding:12px;border-color:var(--line);border-radius:12px}
+#bookingSection input[type=checkbox]{padding:0;min-width:18px;min-height:18px;accent-color:var(--teal)}
+#procedureList{gap:12px}
+#procedureList label{background:#f6f3ea;border:1px solid var(--line);padding:12px;border-radius:10px}
+#patientToolsSection{order:5}.diet-section{order:6}#publicPortal footer{order:7}
+#calc30Grid{gap:18px}
+#calc30Grid input,#calc30Grid select{min-height:36px;font-size:12px}
+#publicPortal footer{border:1px solid var(--line);background:#f1eee5;color:var(--ink);border-radius:24px;padding:32px;box-shadow:none}
+#publicPortal footer h4,#publicPortal footer p,#publicPortal footer a{color:var(--ink)}
+.workstation-heading{padding:6px 0 20px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.workstation-heading h2{font-size:34px;font-weight:500;line-height:1.2}
+.workstation-heading p{font-size:13px;color:var(--muted);margin-top:8px}
+.doctor-tabs{display:flex;gap:8px;padding:14px!important;background:#f1eee5!important;border:1px solid var(--line);border-radius:18px;box-shadow:none!important}
+.doctor-tabs button{font-size:12px;min-height:40px;box-shadow:none!important;background:transparent!important;color:var(--muted)!important;border:1px solid transparent}
+.doctor-tabs button[aria-selected=true]{background:var(--paper)!important;color:var(--teal)!important;border-color:var(--line);box-shadow:0 2px 5px #0f294208!important}
+#aiLaunchBar{background:var(--ink)!important;border-radius:18px;padding:20px;box-shadow:none}
+#doctorWorkstation>div[id^=view]>div{border-color:var(--line);box-shadow:none}
+#doctorWorkstation .printable-sheet{background:white;border-color:var(--line);border-radius:16px;box-shadow:0 8px 30px #0f294208}
+.research-review{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;gap:18px}
+.research-review h3{font-size:28px}.research-review p{font-size:13px;line-height:1.8;color:var(--muted)}
+.research-status{justify-self:start;background:#f8eed8;color:#79551b;border:1px solid #e8d5a9;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600}
+.research-flow{display:flex;flex-wrap:wrap;gap:8px}.research-flow span{padding:8px 12px;background:var(--soft);border-radius:9px;font-size:12px}
+.research-review button,.research-upload{border:1px solid var(--line);background:var(--teal);color:white;border-radius:12px;padding:11px 16px;font-size:12px;font-weight:600;cursor:pointer;display:inline-block}
+.research-review textarea{width:100%;min-height:100px;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px}
+.research-draft{border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:14px;display:grid;gap:12px}
+.research-draft h4{font:500 22px/1.4 Newsreader,serif}.research-draft dl{display:grid;gap:8px;font-size:13px;line-height:1.7}.research-draft dt{font-weight:600;color:var(--teal)}
+.research-draft a{font-size:12px;color:var(--teal);text-decoration:underline}.research-draft small{color:var(--muted)}
+.research-draft button{justify-self:start}.research-error{color:#a31c1c!important}
+.faq-contact{justify-self:start;padding:12px 18px;background:var(--teal);color:white;border-radius:12px;font-size:13px}
+#faqFilters button{background:var(--soft);color:var(--ink);padding:8px 14px;font-weight:500}
+#faqFilters button[aria-pressed=true]{background:var(--teal);color:white}
+#faqList details{border-top:1px solid var(--line);padding:18px 0}
+#faqList summary{cursor:pointer;font-size:15px;font-weight:600;line-height:1.7}
+#faqList details p{margin:12px 0 2px;max-width:850px;font-size:14px;line-height:1.9}
+#patientFaq label{font-size:13px;font-weight:600}
+#trendTable{min-width:650px;border-collapse:separate;border-spacing:0 8px}
+#trendTable th{text-align:left;padding:8px;color:var(--muted);font-weight:500}
+#trendTable td{padding:5px;background:var(--soft)}
+#trendTable input{min-width:70px;width:100%;border:1px solid var(--line);border-radius:6px;padding:8px;background:var(--paper)}
+#bpTrendGraph{width:100%;min-height:180px;background:var(--soft);border-radius:16px}
+#chatbotWindow{max-width:calc(100vw - 40px)}
+#publicGuidanceSection{order:3}#patientFaq{order:4}
+.attachment-panel{grid-column:1 / -1;border:1px solid var(--line);padding:20px;border-radius:16px;background:#f6f3ea;display:grid;gap:12px}
+.attachment-panel h4{font-size:17px}.attachment-panel p{font-size:12px;line-height:1.8;color:var(--muted)}
+.attachment-panel button,.attachment-links button{border:1px solid var(--line);padding:9px 12px;border-radius:10px;font-size:12px;background:var(--paper);color:var(--teal)}
+.attachment-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:12px;overflow-wrap:anywhere}
+.attachment-links{display:flex;gap:8px;flex-wrap:wrap}.attachment-links a{font-size:12px;color:var(--teal);text-decoration:underline}
+#aiLaunchBar>div:last-child{max-width:none;flex-basis:75%;flex-wrap:wrap}#aiGlobalQuery{flex:1 1 220px;width:auto}
+/* Comfortable reading density: preserve every tool while giving each its own space. */
+#publicPortal{gap:72px;padding-top:42px}
+#publicPortal .text-xs{font-size:14px;line-height:1.85}
+#publicPortal .text-\[10px\],#publicPortal .text-\[11px\]{font-size:12px;line-height:1.65}
+#publicPortal h3{font-size:32px;line-height:1.5}
+#elderlySection>div:last-child,#wikiCardsGrid,#calc30Grid{gap:26px}
+#elderlySection>div:last-child>div,#wikiCardsGrid>div{padding:30px}
+#calc30Grid>div{padding:26px;min-height:165px;display:flex;flex-direction:column;gap:12px}
+#calc30Grid>div>button{min-height:38px;margin-top:auto}
+#bookingSection>div:last-child{gap:32px}
+.research-review{padding:34px;gap:22px}
+#faqList details{padding:24px 0}
+.doctor-tabs{gap:10px;padding:18px!important}
+@media(max-width:767px){#publicPortal{gap:48px;padding-top:28px}#publicPortal h3{font-size:26px}.research-review{padding:24px;gap:18px}#elderlySection>div:last-child>div,#wikiCardsGrid>div{padding:24px}#calc30Grid>div{min-height:150px;padding:24px}#faqList details{padding:20px 0}}
+@media(min-width:1100px){#doctorWorkstation .text-xs{font-size:13px;line-height:1.7}#doctorWorkstation .text-\[10px\]{font-size:11px}}
+@media(max-width:767px){html{scroll-padding-top:220px}.site-header>div{padding:12px 16px}.site-header h1{font-size:15px}.site-header>div>div{min-width:0}.site-header>div>div:last-child{gap:6px}.portal-nav{padding:10px 16px;gap:20px}#publicPortal,#doctorWorkstation{padding:24px 16px 36px}#publicPortal{gap:36px}.portal-hero{grid-template-columns:1fr}.hero-copy,.dispatch-card{padding:24px!important}.hero-copy h2{font-size:34px}.hero-copy>div:last-child a{flex:1 1 45%}#publicPortal h3{font-size:24px}#elderlySection>div:last-child{grid-template-columns:1fr}#elderlySection>div:last-child>div,#wikiCardsGrid>div,#calc30Grid>div{padding:22px}.doctor-tabs{flex-wrap:nowrap!important;overflow-x:auto;justify-content:flex-start!important}.doctor-tabs button{flex-shrink:0;white-space:nowrap}#aiLaunchBar>div{min-width:0}#aiLaunchBar input{min-width:0}#doctorWorkstation .printable-sheet{padding:16px;overflow-x:auto}#doctorWorkstation .printable-sheet>div{min-width:0}.workstation-heading h2{font-size:28px}.research-review{padding:20px}#rssFeedSource{max-width:100%;width:100%}#viewJournalsHub>div:first-child>div:first-child>div{min-width:0;flex-wrap:wrap}#viewJournalsHub h4{overflow-wrap:anywhere}.portal-nav::-webkit-scrollbar,.doctor-tabs::-webkit-scrollbar{height:3px}#publicPortal footer{padding:24px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{.portal-nav,.workstation-heading,.doctor-tabs,.research-review{display:none!important}body{font-family:Inter,'Noto Sans Devanagari',sans-serif!important}#doctorWorkstation .printable-sheet{border-radius:0;overflow:visible}}
