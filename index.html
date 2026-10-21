@@ -36,13 +36,14 @@
     .petal-box { background-color: #FFFDF9; border: 1px solid #E6DCCD; }
     
     @media print {
-      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop, #notificationToast, #aiLaunchBar, #langBar { display: none !important; }
+      .no-print, header, footer, #chatbotWindow, #chatbotToggleBtn, .modal-backdrop, #notificationToast, #aiLaunchBar, #langQuickBar { display: none !important; }
       body { background: #ffffff !important; color: #000000 !important; margin: 0 !important; padding: 0 !important; }
       main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
       .printable-sheet { border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
       @page { size: A4 portrait; margin: 8mm; }
     }
-    .goog-te-gadget-simple { display: none !important; }
+    .goog-te-gadget-simple { background-color: #ffffff !important; border: 1px solid #E6DCCD !important; padding: 4px 8px !important; border-radius: 10px !important; font-size: 11px !important; font-weight: bold !important; }
+    .goog-te-gadget-icon { display: none !important; }
     .goog-te-banner-frame { display: none !important; }
     body { top: 0px !important; }
   </style>
@@ -50,20 +51,19 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'mr,en,gu,ta,kn,ml',
+        includedLanguages: 'mr,hi,en,gu,ta,kn,ml,te,bn,ur,de,fr,ja,ar',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
       }, 'google_translate_element');
     }
 
-    function switchLanguage(langCode) {
+    function quickTranslate(langCode) {
       const select = document.querySelector('.goog-te-combo');
       if (select) {
         select.value = langCode;
         select.dispatchEvent(new Event('change'));
-        showToast("भाषा बदलली: " + langCode.toUpperCase());
+        showToast("Language changed to: " + langCode.toUpperCase());
       } else {
-        // Fallback reload with hash if widget not ready
         window.location.hash = '#googtrans(en|' + langCode + ')';
         location.reload();
       }
@@ -72,9 +72,6 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body class="min-h-screen flex flex-col antialiased relative">
-
-  <!-- HIDDEN TRANSLATE COMBO CONTAINER -->
-  <div id="google_translate_element" style="display:none;"></div>
 
   <!-- TOAST NOTIFICATION -->
   <div id="notificationToast" class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none">
@@ -85,7 +82,7 @@
   <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       
-      <!-- Doctor Brand Header with Caduceus & Custom Logo Fallback -->
+      <!-- Doctor Brand Header with Caduceus Logo Fallback -->
       <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
         <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
           <div class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50">
@@ -106,23 +103,21 @@
         </div>
       </div>
 
-      <!-- Live Navigation Actions & Language Switcher -->
+      <!-- Live Navigation Actions, Translators, GMB & Helpline -->
       <div class="flex items-center flex-wrap gap-2">
-
-        <!-- 6 DEDICATED REGIONAL LANGUAGE BUTTONS -->
-        <div id="langBar" class="bg-white px-2 py-1 rounded-xl flex items-center gap-1 border petal-border text-[11px] font-bold shadow-sm">
-          <span class="text-slate-500 text-[10px] hidden sm:inline mr-1">🌐 भाषा:</span>
-          <button onclick="switchLanguage('mr')" class="px-1.5 py-0.5 hover:bg-teal-50 rounded text-teal-800 font-extrabold" title="मराठी">मराठी</button>
-          <span class="text-slate-300">|</span>
-          <button onclick="switchLanguage('en')" class="px-1.5 py-0.5 hover:bg-slate-100 rounded text-slate-800" title="English">ENG</button>
-          <span class="text-slate-300">|</span>
-          <button onclick="switchLanguage('gu')" class="px-1.5 py-0.5 hover:bg-amber-50 rounded text-amber-900" title="ગુજરાતી">ગુજરાતી</button>
-          <span class="text-slate-300">|</span>
-          <button onclick="switchLanguage('kn')" class="px-1.5 py-0.5 hover:bg-blue-50 rounded text-blue-900" title="ಕನ್ನಡ">ಕನ್ನಡ</button>
-          <span class="text-slate-300">|</span>
-          <button onclick="switchLanguage('ta')" class="px-1.5 py-0.5 hover:bg-purple-50 rounded text-purple-900" title="தமிழ்">தமிழ்</button>
-          <span class="text-slate-300">|</span>
-          <button onclick="switchLanguage('ml')" class="px-1.5 py-0.5 hover:bg-green-50 rounded text-green-900" title="മലയാളം">മലയാളം</button>
+        
+        <!-- FULL WORLD & INDIAN LANGUAGE SELECTOR -->
+        <div id="google_translate_element" class="inline-block shadow-sm rounded-xl"></div>
+        
+        <!-- QUICK POPULAR LANGUAGE SWITCHER -->
+        <div id="langQuickBar" class="hidden lg:flex items-center gap-1 bg-white px-2 py-1 rounded-xl border petal-border text-[10px] font-bold">
+          <button onclick="quickTranslate('mr')" class="hover:text-teal-700">मराठी</button>|
+          <button onclick="quickTranslate('en')" class="hover:text-teal-700">ENG</button>|
+          <button onclick="quickTranslate('hi')" class="hover:text-teal-700">हिंदी</button>|
+          <button onclick="quickTranslate('de')" class="hover:text-teal-700">DE</button>|
+          <button onclick="quickTranslate('fr')" class="hover:text-teal-700">FR</button>|
+          <button onclick="quickTranslate('ja')" class="hover:text-teal-700">日本語</button>|
+          <button onclick="quickTranslate('ur')" class="hover:text-teal-700">اردو</button>
         </div>
 
         <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
@@ -134,18 +129,22 @@
           </button>
         </div>
 
-        <!-- Workstation Security Toggle -->
-        <button onclick="openSecuritySettingsModal()" class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Workstation Security (Open / PIN / Fingerprint)">
+        <!-- Security Lock/Unlock Mode Button -->
+        <button onclick="openSecuritySettingsModal()" class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Security Settings">
           <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access</span>
         </button>
 
-        <!-- 2 Live GMB Profile Links -->
-        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune">
-          <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden md:inline">Home ICU GMB</span>
+        <!-- BOTH GOOGLE BUSINESS PROFILES -->
+        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune GMB">
+          <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden md:inline">GMB: Home ICU</span>
         </a>
 
-        <!-- 100% INTERACTIVE DIALABLE PHONE BUTTON -->
-        <a href="tel:+919822594341" onclick="window.location.href='tel:+919822594341'" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer z-50 pointer-events-auto" title="Click to Call Dr. Kulkarni Now">
+        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Dr. Pramod G. Kulkarni Clinic GMB">
+          <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden md:inline">GMB: Clinic</span>
+        </a>
+
+        <!-- 100% INTERACTIVE CALL BUTTON -->
+        <a href="tel:+919822594341" onclick="window.location.href='tel:+919822594341'" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer z-50 pointer-events-auto" title="Click to Call Dr. Kulkarni">
           <i class="fa-solid fa-phone"></i> <span class="font-mono">9822594341</span>
         </a>
       </div>
@@ -175,7 +174,7 @@
             📖 पुणे आरोग्य विश्वकोश (Free Medical Wiki)
           </a>
           <a href="#bookingSection" class="text-xs bg-[#0D9488] hover:bg-teal-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm">
-            📍 Book Visit with GPS
+            📍 Book Visit with GPS Navigation
           </a>
           <a href="#patientToolsSection" class="text-xs bg-white hover:bg-slate-50 text-[#0F2942] border petal-border px-3.5 py-2 rounded-xl font-bold shadow-sm">
             🧮 30 Health Calculators
@@ -194,7 +193,7 @@
       </div>
     </div>
 
-    <!-- ================= DEDICATED ELDERLY & BEDRIDDEN CARE SECTION ================= -->
+    <!-- DEDICATED SENIOR CITIZEN & BEDRIDDEN ICU CARE -->
     <section id="elderlySection" class="petal-box p-6 md:p-8 rounded-3xl space-y-6 shadow-sm border-2 border-amber-300 bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30">
       <div class="flex flex-wrap justify-between items-center border-b border-amber-200 pb-3 gap-2">
         <div>
@@ -208,67 +207,57 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-        
-        <!-- 1. BEDSORES -->
-        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2.5">
+        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-red-900 text-sm">🛏️ बेड्सोअर (Bedsores) प्रतिबंध</span>
             <span class="bg-red-50 text-red-700 px-2 py-0.5 rounded font-bold text-[10px]">Q2H Turning</span>
           </div>
-          <ul class="text-slate-700 space-y-1.5 list-disc list-inside leading-relaxed">
+          <ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
             <li><strong>२ तासांत कूस बदलणे:</strong> रुग्णाला दर २ तासांनी डाव्या-उजव्या कुशीवर वळवणे अनिवार्य आहे.</li>
             <li><strong>अल्टरनेटींग एअर मॅट्रेस:</strong> हवेची गादी २४ तास चालू ठेवावी.</li>
-            <li><strong>घाव स्वच्छता:</strong> फक्त नॉर्मल सलाईनने पुसावे, स्पिरिट किंवा पावडर थेट लावू नये.</li>
-            <li><strong>जागेवर घर्षण नको:</strong> उचलून कुशीवर करावे, ओढू नये.</li>
+            <li><strong>घाव स्वच्छता:</strong> फक्त नॉर्मल सलाईनने पुसावे, स्पिरिट लावू नये.</li>
           </ul>
         </div>
 
-        <!-- 2. STROKE & PARALYSIS -->
-        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2.5">
+        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-blue-900 text-sm">🧠 स्ट्रोक / पक्षाघात काळजी</span>
             <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-bold text-[10px]">Aspiration Safe</span>
           </div>
-          <ul class="text-slate-700 space-y-1.5 list-disc list-inside leading-relaxed">
-            <li><strong>अन्ननलिका (Ryle's Tube):</strong> गिळताना ठसका लागत असल्यास जबरदस्तीने तोंडातून देऊ नका.</li>
-            <li><strong>७०° ते ९०° पोश्चर:</strong> भरवताना आणि नंतर ४५ मिनिटे रुग्णाला काटकोनात बसवून ठेवावे.</li>
-            <li><strong>अस्पिरेशन न्यूमोनिया धोका:</strong> तोंडातून पाणी फुफ्फुसात गेल्यास अचानक ऑक्सिजन कमी होतो.</li>
-            <li><strong>पॅसिव्ह फिजिओथेरपी:</strong> सांधे आखडू नयेत म्हणून रोज ३ वेळा हातापायांच्या हालचाली.</li>
+          <ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
+            <li><strong>७०° ते ९०° पोश्चर:</strong> जेवताना व नंतर ४५ मिनिटे रुग्णाला काटकोनात बसवावे.</li>
+            <li><strong>अन्ननलिका (Ryle's Tube):</strong> गिळताना ठसका लागत असल्यास बळजबरी करू नये.</li>
+            <li><strong>अस्पिरेशन न्यूमोनिया:</strong> पाणी फुफ्फुसात गेल्यास त्वरित ऑक्सिजन कमी होतो.</li>
           </ul>
         </div>
 
-        <!-- 3. CKD & DIALYSIS AT HOME -->
-        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2.5">
+        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-emerald-900 text-sm">🧪 CKD &amp; डायलिसिस व्यवस्थापन</span>
             <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold text-[10px]">KDIGO Evidence</span>
           </div>
-          <ul class="text-slate-700 space-y-1.5 list-disc list-inside leading-relaxed">
-            <li><strong>उर्वरित लघवीचे रक्षण (RKF):</strong> लघवी चालू असल्यास डॉक्टरांच्या सल्ल्याने आठवड्यातून २ वेळा डायलिसिसचा विचार शक्य.</li>
-            <li><strong>शून्य नारळ पाणी:</strong> नारळ पाणी, लिंबू किंवा मोसंबी ज्यूसमुळे पोटॅशियम वाढून हृदय बंद पडू शकते.</li>
+          <ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
+            <li><strong>उर्वरित लघवीचे रक्षण:</strong> लघवी चालू असल्यास आठवड्यातून २ वेळा डायलिसिसचा विचार शक्य.</li>
+            <li><strong>शून्य नारळ पाणी:</strong> अतिरिक्त पोटॅशियममुळे हृदय अचानक बंद पडू शकते.</li>
             <li><strong>पाणी मर्यादा:</strong> २४ तासांत १ ते १.२ लिटरपेक्षा जास्त द्रवपदार्थ नको.</li>
-            <li><strong>भाज्यांचे लीचिंग:</strong> भाज्या उकळून पाणी फेकून नंतरच शिजवाव्यात.</li>
           </ul>
         </div>
 
-        <!-- 4. DEMENTIA & FALL PREVENTION -->
-        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2.5">
+        <div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-purple-900 text-sm">🚶 पडणे प्रतिबंध व स्मृतिभ्रंश</span>
             <span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-bold text-[10px]">Fall Prevention</span>
           </div>
-          <ul class="text-slate-700 space-y-1.5 list-disc list-inside leading-relaxed">
-            <li><strong>रात्री मंद प्रकाश (Night Lights):</strong> अंधारात पाय घसरून फ्रॅक्चर होण्याचा धोका सर्वाधिक असतो.</li>
-            <li><strong>बाथरूममध्ये हँडल्स:</strong> वेस्टर्न टॉयलेट शेजारी मेटल ग्रॅब बार बसवावेत.</li>
-            <li><strong>अचानक गोंधळणे (Delirium):</strong> लघवीचे इन्फेक्शन किंवा सोडियम कमी झाल्याचे हे पहिले लक्षण असते.</li>
-            <li><strong>औषधांची वेळेवर पूर्तता:</strong> बीपी व रक्तातील साखरेची औषधे वेळेवर देणे.</li>
+          <ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
+            <li><strong>रात्री मंद प्रकाश:</strong> अंधारात पाय घसरून फ्रॅक्चर होण्याचा धोका सर्वाधिक असतो.</li>
+            <li><strong>टॉयलेट ग्रॅब बार्स:</strong> बाथरूममध्ये पकडण्यासाठी मेटल हँडल्स लावावेत.</li>
+            <li><strong>अचानक गोंधळणे:</strong> लघवीचे इन्फेक्शन किंवा सोडियम कमी झाल्याचे हे लक्षण असू शकते.</li>
           </ul>
         </div>
-
       </div>
     </section>
 
-    <!-- ================= PUNE AROGYA VISHWAKOSH (FREE MEDICAL ENCYCLOPEDIA) ================= -->
+    <!-- PUNE AROGYA VISHWAKOSH (FREE MEDICAL ENCYCLOPEDIA) -->
     <section id="wikiSection" class="petal-box p-6 md:p-8 rounded-3xl space-y-6 shadow-sm">
       <div class="border-b petal-border pb-3 flex flex-wrap justify-between items-center gap-2">
         <div>
@@ -279,43 +268,38 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs" id="wikiCardsGrid">
-        
-        <!-- Wiki Article 1 -->
         <div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
           <div>
             <span class="bg-teal-50 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">किडनी व डायलिसिस</span>
             <h4 class="font-bold text-sm text-[#0F2942] mt-1.5">इन्क्रिमेंटल डायलिसिस: डायलिसिसची फ्रिक्वेन्सी कमी करणे शक्य आहे का?</h4>
             <p class="text-slate-600 mt-2 leading-relaxed">
-              जागतिक KDIGO मार्गदर्शक तत्त्वांनुसार ज्या रुग्णांची स्वतःची लघवी चालू आहे, त्यांच्यामध्ये आठवड्यातून ३ ऐवजी २ वेळा डायलिसिस (Incremental Hemodialysis) केल्यास किडनीचे उर्वरित कार्य जास्त काळ टिकते आणि मृत्यूदरात कोणताही फरक पडत नाही.
+              जागतिक KDIGO मार्गदर्शक तत्त्वांनुसार ज्या रुग्णांची स्वतःची लघवी चालू आहे, त्यांच्यामध्ये आठवड्यातून ३ ऐवजी २ वेळा डायलिसिस केल्यास किडनीचे उर्वरित कार्य जास्त काळ टिकते.
             </p>
           </div>
           <button onclick="openWikiModal(1)" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition">संपूर्ण वाचा ↗</button>
         </div>
 
-        <!-- Wiki Article 2 -->
         <div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
           <div>
             <span class="bg-red-50 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded">हार्ट फेल्युअर</span>
             <h4 class="font-bold text-sm text-[#0F2942] mt-1.5">हार्ट फेल्युअरमध्ये दररोज सकाळी वजन करणे का जीवनरक्षक आहे?</h4>
             <p class="text-slate-600 mt-2 leading-relaxed">
-              हृदयाचे पंपिंग कमी असल्यास शरीरात पाणी साठू लागते. २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे (Pulmonary Edema) पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून अ‍ॅडमिशन टाळता येते.
+              २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे (Pulmonary Edema) पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून अ‍ॅडमिशन टाळता येते.
             </p>
           </div>
           <button onclick="openWikiModal(2)" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition">संपूर्ण वाचा ↗</button>
         </div>
 
-        <!-- Wiki Article 3 -->
         <div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
           <div>
             <span class="bg-purple-50 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">आयसीयू प्रक्रिया</span>
-            <h4 class="font-bold text-sm text-[#0F2942] mt-1.5">घरी कॅथेटर किंवा राईल्स ट्यूब टाकताना निर्जंतुकीकरणाचे (Aseptic) महत्त्व</h4>
+            <h4 class="font-bold text-sm text-[#0F2942] mt-1.5">घरी कॅथेटर किंवा राईल्स ट्यूब टाकताना निर्जंतुकीकरणाचे महत्त्व</h4>
             <p class="text-slate-600 mt-2 leading-relaxed">
-              अंथरुणाला खिळलेल्या रुग्णांमध्ये लघवीच्या नळीतून (Foley Catheter) जंतूसंसर्ग होऊन सेप्सिस (Septic Shock) होण्याचा मोठा धोका असतो. प्रशिक्षित डॉक्टरकडूनच पूर्ण स्टेरिल तंत्राने ही प्रक्रिया करणे बंधनकारक असते.
+              अंथरुणाला खिळलेल्या रुग्णांमध्ये लघवीच्या नळीतून (Foley Catheter) जंतूसंसर्ग होऊन सेप्सिस होण्याचा धोका असतो. पूर्ण स्टेरिल तंत्राने ही प्रक्रिया करणे बंधनकारक असते.
             </p>
           </div>
           <button onclick="openWikiModal(3)" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition">संपूर्ण वाचा ↗</button>
         </div>
-
       </div>
     </section>
 
@@ -420,12 +404,12 @@
       </div>
     </section>
 
-    <!-- VERIFIED INTERNATIONAL HEALTH & GUIDANCE PORTALS (Includes CDC.gov) -->
+    <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS (INCLUDES CDC.GOV) -->
     <section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
       <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide border-b pb-2">Verified International Clinical Portals &amp; Guidelines</h3>
       <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5 pt-1">
         <a href="https://www.cdc.gov/" target="_blank" rel="noopener noreferrer" class="p-3 bg-blue-50 border border-blue-200 rounded-2xl font-bold text-blue-950 text-center hover:bg-blue-100 transition">
-          🇺🇸 CDC.gov (Infection &amp; Health) ↗
+          🇺🇸 CDC.gov (Infection &amp; Care) ↗
         </a>
         <a href="https://my.clevelandclinic.org/health" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
           🏥 Cleveland Clinic ↗
@@ -434,21 +418,59 @@
           🏥 Mayo Clinic ↗
         </a>
         <a href="https://www.msdmanuals.com/home" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
-          📚 MSD Manuals ↗
+          📚 MSD Manuals Consumer ↗
         </a>
         <a href="https://www.testing.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
-          🧪 Testing.com (Labs) ↗
+          🧪 Testing.com (Lab Guides) ↗
         </a>
         <a href="https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
-          ☢️ RadiologyInfo ↗
+          ☢️ RadiologyInfo.org ↗
         </a>
         <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer" class="p-3 bg-teal-50 border border-teal-200 rounded-2xl font-bold text-teal-950 text-center hover:bg-teal-100 transition">
-          🇬🇧 NICE UK ↗
+          🇬🇧 NICE UK Guidance ↗
         </a>
       </div>
     </section>
 
-    <!-- 30 INTERACTIVE PATIENT & CLINICAL HEALTH CALCULATORS -->
+    <!-- AUTHENTIC MAHARASHTRIAN CLINICAL DIETS -->
+    <section class="petal-box p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
+      <div class="border-b petal-border pb-2">
+        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Authentic Indian &amp; Maharashtrian Clinical Diets</h3>
+        <p class="text-xs text-slate-600">Bedside nutrition for heart failure, kidney disease, and stroke dysphagia.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
+          <span class="bg-red-50 text-red-900 font-bold px-2 py-0.5 rounded text-[10px]">हार्ट फेल्युअर आहार</span>
+          <h4 class="font-bold text-sm text-[#0F2942]">कमी मीठ व १.२L पाणी मर्यादा</h4>
+          <ul class="list-disc list-inside space-y-1 text-slate-700">
+            <li><strong>मान्य:</strong> ज्वारीची भाकरी, मुगाचे वरण, दुधी भोपळा, पडवळ, दोडका, लसूण-जिरे फोडणी.</li>
+            <li><strong>वर्ज्य:</strong> वरून मीठ, पापड, लोणचे, शेव, खारे शेंगदाणे, बेकरी ब्रेड, पॅकबंद सूप.</li>
+            <li><strong>नियम:</strong> दररोज सकाळी उपाशीपोटी वजन करा. २ दिवसांत १.५ किलो वाढल्यास कळवा.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
+          <span class="bg-amber-50 text-amber-900 font-bold px-2 py-0.5 rounded text-[10px]">CKD / किडनी आहार</span>
+          <h4 class="font-bold text-sm text-[#0F2942]">भाज्यांचे लीचिंग &amp; शून्य नारळ पाणी</h4>
+          <ul class="list-disc list-inside space-y-1 text-slate-700">
+            <li><strong>मान्य:</strong> पालेभाज्या/बटाटा बारीक चिरून भरपूर पाण्यात उकळून पाणी फेकून द्यावे (Leaching). तांदळाचा भात.</li>
+            <li><strong>कडक वर्ज्य:</strong> नारळ पाणी, मोसंबी/संत्रा ज्यूस, ड्रायफ्रूट्स (अतिरिक्त पोटॅशियममुळे हृदय बंद पडू शकते).</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
+          <span class="bg-blue-50 text-blue-900 font-bold px-2 py-0.5 rounded text-[10px]">स्ट्रोक / गिळण्याचा त्रास</span>
+          <h4 class="font-bold text-sm text-[#0F2942]">मऊ लापशी व बसवून खाऊ घालणे</h4>
+          <ul class="list-disc list-inside space-y-1 text-slate-700">
+            <li><strong>मान्य:</strong> मऊ मुगाची खिमटी, गव्हाची लापशी, मिक्सरमधून काढलेली घट्ट भाजी.</li>
+            <li><strong>पोश्चर:</strong> खाऊ घालताना आणि नंतर ४५ मिनिटे रुग्णाला ७०° ते ९०° सरळ बसवून ठेवावे.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 30 INTERACTIVE CLINICAL CALCULATORS -->
     <section id="patientToolsSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="border-b petal-border pb-2">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">30 Comprehensive Clinical &amp; Patient Tools</h3>
@@ -483,7 +505,7 @@
   <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
   <main id="doctorWorkstation" class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6">
     
-    <!-- Doctor Sub-Tabs Navigation (Includes WebMD Suite & Live Journals) -->
+    <!-- Doctor Sub-Tabs Navigation -->
     <div class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print">
       <button onclick="switchDocTab('rxPad')" id="tabRx" class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow">📝 A4 Prescription</button>
       <button onclick="switchDocTab('symptomChecker')" id="tabSymptom" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm">🩺 WebMD Symptom &amp; Interaction Suite</button>
@@ -494,7 +516,9 @@
       <button onclick="switchDocTab('clinicalCertificates')" id="tabCertificates" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📜 Referral, Consent &amp; Fitness</button>
       <button onclick="switchDocTab('legalForms')" id="tabLegal" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚖️ Death Certificates (4A, 4, 2)</button>
       <button onclick="switchDocTab('drugDir')" id="tabDrug" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">💊 1-Click Formulary &amp; CIMS</button>
+      <button onclick="switchDocTab('articlesHub')" id="tabArticles" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">📑 Article Manager &amp; Reader</button>
       <button onclick="switchDocTab('settingsTab')" id="tabSet" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50">⚙️ Settings</button>
+      <button onclick="lockWorkstationNow()" class="px-3 py-1.5 bg-red-100 text-red-900 border border-red-300 rounded-xl text-xs font-bold hover:bg-red-200 ml-auto">🔒 Lock Workstation</button>
     </div>
 
     <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR -->
@@ -503,22 +527,32 @@
         <span class="text-base">🧠</span>
         <span class="font-bold">Bedside Clinical AI Hub:</span>
       </div>
-      <div class="flex items-center gap-1.5 flex-grow max-w-lg">
-        <input type="text" id="aiGlobalQuery" placeholder="Type syndrome, drug interaction, or condition..." class="w-full p-1.5 rounded-lg text-slate-900 text-xs outline-none">
-        <button onclick="launchAI('webmd')" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">WebMD ↗</button>
-        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2 py-1.5 rounded-lg">Gemini ↗</button>
-        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1.5 rounded-lg">ChatGPT ↗</button>
-        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-1.5 rounded-lg">Claude ↗</button>
+      <div class="flex items-center gap-1.5 flex-grow max-w-xl">
+        <input type="text" id="aiGlobalQuery" placeholder="Type syndrome, biomarker or condition..." class="w-full p-2 rounded-lg text-slate-900 text-xs outline-none">
+        <button onclick="launchAI('webmd')" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2 py-1.5 rounded-lg flex items-center gap-1 shadow-sm" title="WebMD Differential">🩺 WebMD ↗</button>
+        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Gemini">Gemini ↗</button>
+        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1.5 rounded-lg" title="OpenAI ChatGPT">ChatGPT ↗</button>
+        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Anthropic Claude">Claude ↗</button>
+        <button onclick="launchAI('copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Microsoft Copilot">Copilot ↗</button>
+        <button onclick="launchAI('scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Scholar">Scholar ↗</button>
+        <button onclick="launchAI('pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2 py-1.5 rounded-lg" title="PubMed NLM NCBI">PubMed ↗</button>
       </div>
     </div>
 
-    <!-- TAB 1: A4 PRESCRIPTION PAD -->
+    <!-- TAB 1: A4 PRESCRIPTION PAD (WITH ADDITIONAL PATH/RAD SECTION) -->
     <div id="viewRxPad" class="space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border shadow-sm">
         <div class="flex items-center gap-2">
           <input type="text" id="rxPatPhone" placeholder="Patient 10-Digit Mobile" class="text-xs border p-1.5 rounded-lg w-44 font-mono outline-none">
         </div>
         <div class="flex flex-wrap gap-2">
+          <select onchange="insertDietPreset(this.value)" class="text-xs bg-amber-50 border border-amber-300 text-amber-900 font-semibold rounded-xl px-2.5 py-1.5">
+            <option value="">⚡ Diet Preset...</option>
+            <option value="chf">हार्ट फेल्युअर (Fluid &lt;1.2L &amp; Daily Weight)</option>
+            <option value="ckd">CKD (Leached Veg, Zero Coconut Water)</option>
+            <option value="stroke">Dysphagia (70°-90° Posture)</option>
+            <option value="bedsore">Bedridden (Q2H Turning, Air-Mattress)</option>
+          </select>
           <button onclick="saveRecordAsPrompt()" class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow">💾 Save As...</button>
           <button onclick="savePatientPrescriptionToCloud()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-up"></i> ☁️ Patient Cloud Save
@@ -606,6 +640,12 @@
           <button type="button" onclick="addRxRow()" class="no-print text-xs text-[#0D9488] font-bold mt-1.5">+ Add Blank Medicine Row</button>
         </div>
 
+        <!-- ADDITIONAL PATHOLOGY & RADIOLOGY ON PRESCRIPTION SHEET -->
+        <div class="border p-2.5 rounded-xl bg-slate-50/70 space-y-1">
+          <label class="font-bold text-[#0F2942]">🔬 Advised Pathology &amp; Radiology Investigations:</label>
+          <input type="text" id="rxPathRadAdvised" placeholder="e.g. CBC, KFT, Serum Electrolytes, High Sensitivity Troponin-I, Portable Chest X-Ray..." class="w-full bg-white p-1.5 border rounded-lg text-[11px]">
+        </div>
+
         <div>
           <label class="font-bold text-[#0F2942]">Bedside Nursing &amp; Diet Advice:</label>
           <textarea id="rxAdvice" rows="2" class="w-full p-2 border rounded-xl mt-1" placeholder="Dietary restrictions, fluid limits, positioning..."></textarea>
@@ -625,7 +665,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: WEBMD CLINICAL SUITE -->
+    <!-- TAB 2: WEBMD CLINICAL SUITE & DIFFERENTIALS -->
     <div id="viewSymptomChecker" class="hidden space-y-4 no-print">
       <div class="bg-white p-5 rounded-3xl border petal-border shadow-sm flex flex-wrap justify-between items-center gap-3">
         <div>
@@ -677,8 +717,6 @@
 
     <!-- TAB 3: LIVE RSS & AI CLINICAL RESEARCH AGENT -->
     <div id="viewJournalsHub" class="hidden space-y-6">
-      
-      <!-- RSS AGENT CONTROLLER -->
       <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-4 no-print">
         <div class="flex flex-wrap justify-between items-center gap-2 border-b pb-3">
           <div>
@@ -708,7 +746,7 @@
         </div>
       </div>
 
-      <!-- Verified Guidelines & Direct Portals Grid -->
+      <!-- Journals Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
         <div class="bg-white p-5 rounded-2xl border petal-border space-y-2.5">
           <h4 class="font-bold text-teal-900 border-b pb-1 text-sm">International Reference</h4>
@@ -721,11 +759,15 @@
           <a href="https://www.uptodate.com/contents/search" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-teal-50 font-bold">
             📖 UpToDate (Clinical Decision Support) ↗
           </a>
+          <a href="https://www.medscape.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">
+            🩺 Medscape Clinical Reference ↗
+          </a>
         </div>
 
         <div class="bg-white p-5 rounded-2xl border petal-border space-y-2.5">
           <h4 class="font-bold text-purple-900 border-b pb-1 text-sm">Pathology &amp; Radiology</h4>
           <a href="https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-purple-50 font-bold">☢️ RadiologyInfo.org ↗</a>
+          <a href="https://www.auntminnie.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">☢️ AuntMinnie.com ↗</a>
           <a href="https://thepathologist.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">🔬 The Pathologist.com ↗</a>
           <a href="https://www.captodayonline.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">🩸 CAP TODAY ↗</a>
         </div>
@@ -735,18 +777,19 @@
           <a href="https://feedly.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-emerald-50 font-bold">📰 Feedly RSS Reader ↗</a>
           <a href="https://www.nejm.org/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">📜 The New England Journal of Medicine (NEJM) ↗</a>
           <a href="https://www.thelancet.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">🏛️ The Lancet ↗</a>
+          <a href="https://jamanetwork.com/" target="_blank" rel="noopener noreferrer" class="block p-2 rounded-xl bg-slate-50 font-semibold">🏥 JAMA Network ↗</a>
         </div>
       </div>
     </div>
 
-    <!-- TAB 4: PATHOLOGY CHEAT SHEET -->
+    <!-- TAB 4: PATHOLOGY CHEAT SHEET (EXPANDED 150+ VALUES) -->
     <div id="viewPathCheatSheet" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
           <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Master Cheat Sheet (150+ Standard Reference Values)</h3>
           <p class="text-xs text-slate-500">Instant bedside reference for ICU, emergency, and organ monitoring.</p>
         </div>
-        <input type="text" id="cheatSearch" onkeyup="filterCheatSheet()" placeholder="🔍 Search Troponin, Creatinine, ABG, Ferritin..." class="border petal-border p-2 rounded-xl text-xs w-72 shadow-sm outline-none">
+        <input type="text" id="cheatSearch" onkeyup="filterCheatSheet()" placeholder="🔍 Search Troponin, Creatinine, ABG, Ferritin, CSF..." class="border petal-border p-2 rounded-xl text-xs w-72 shadow-sm outline-none">
       </div>
 
       <div class="bg-white border petal-border rounded-3xl overflow-x-auto max-h-[600px] text-xs shadow-sm p-4">
@@ -770,7 +813,7 @@
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Requisition Pad</h3>
         <div class="flex flex-wrap gap-2">
           <button onclick="exportToPdf('pathSlipSheet', 'Pathology_Requisition_Dr_Kulkarni.pdf')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
-            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
           </button>
           <button onclick="universalShareDocument('path')" class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
             <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
@@ -803,11 +846,11 @@
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_ddimer" value="D-Dimer Quantitative"> D-Dimer Quantitative</label>
           </div>
           <div class="space-y-1">
-            <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Organ Panels:</p>
+            <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Panels:</p>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_kft" value="KFT (Creatinine, Urea)" checked> KFT (Creatinine, Urea)</label>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lytes" value="Electrolytes (Na+, K+, Cl-)" checked> Electrolytes (Na+, K+, Cl-)</label>
             <label class="flex items-center gap-1.5"><input type="checkbox" id="t_lft" value="LFT Complete"> LFT Complete</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_sugar" value="Blood Sugar Fasting/PP"> Blood Sugar Fasting/PP</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" id="t_sugar" value="Blood Sugar Fasting/PP"> Fasting / PP Sugar</label>
           </div>
           <div class="space-y-1">
             <p class="font-bold text-teal-800 border-b pb-0.5">Cardiac, Sepsis &amp; Gas:</p>
@@ -882,7 +925,7 @@
       </div>
     </div>
 
-    <!-- TAB 7: REFERRAL, CONSENT & FITNESS -->
+    <!-- TAB 7: REFERRAL, CONSENT, FITNESS & LEAVE -->
     <div id="viewClinicalCertificates" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
         <select id="clinDocSelect" onchange="switchClinicalDocView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
@@ -891,16 +934,21 @@
           <option value="fitness">Medical Fitness Certificate (तंदुरुस्ती दाखला)</option>
           <option value="leave">Medical Leave / Unfitness Certificate</option>
         </select>
-        <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print</button>
+        <div class="flex gap-2">
+          <button onclick="exportCurrentClinDocPdf()" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print</button>
+        </div>
       </div>
 
-      <!-- CONSENT -->
+      <!-- 1. CONSENT -->
       <div id="cdoc-consent" class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
           <div>
             <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
             <p class="font-semibold text-slate-800">Home Visiting ICU Doctor &amp; Emergency Specialist, Pune</p>
-            <p class="text-[11px] text-slate-600">BAMS, PGDEMS (Symbiosis Pune) | Reg. No. <strong>I-24809-A-1</strong> (MCIM Mumbai)</p>
+            <p class="text-[11px] text-slate-600">BAMS, PGDEMS (Symbiosis Pune) | Reg. No. <strong>I-24809-A-1</strong></p>
           </div>
           <span class="bg-red-100 text-red-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Informed Consent</span>
         </div>
@@ -911,23 +959,111 @@
           <div class="text-right"><p class="font-bold">डॉ. प्रमोद जी. कुलकर्णी (I-24809-A-1)</p></div>
         </div>
       </div>
+
+      <!-- 2. REFERRAL -->
+      <div id="cdoc-referral" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis Pune) | Reg: <strong>I-24809-A-1</strong></p>
+          </div>
+          <span class="bg-red-100 text-red-900 px-3 py-1 rounded-full font-bold text-xs uppercase">ICU Referral</span>
+        </div>
+        <p class="font-bold">To: The Medical Superintendent / Casualty Medical Officer</p>
+        <p>Kindly evaluate and admit this patient under expert tertiary ICU care for further ventilatory and hemodynamic management.</p>
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p>Attending ICU Doctor: <strong>Dr. Pramod G. Kulkarni</strong></p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
+        </div>
+      </div>
+
+      <!-- 3. FITNESS -->
+      <div id="cdoc-fitness" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis Pune) | Reg: <strong>I-24809-A-1</strong></p>
+          </div>
+          <span class="bg-green-100 text-green-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Fitness Certificate</span>
+        </div>
+        <p class="text-center font-bold underline text-sm">CERTIFICATE OF MEDICAL FITNESS</p>
+        <p>This is to certify that the patient has clinically recovered and is now found <strong>MEDICALLY FIT TO RESUME DUTIES</strong>.</p>
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p>Dr. Pramod G. Kulkarni (MCIM: I-24809-A-1)</p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
+        </div>
+      </div>
+
+      <!-- 4. LEAVE -->
+      <div id="cdoc-leave" class="hidden printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="border-b-2 border-[#0F2942] pb-3 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
+            <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis Pune) | Reg: <strong>I-24809-A-1</strong></p>
+          </div>
+          <span class="bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Unfitness Certificate</span>
+        </div>
+        <p class="text-center font-bold underline text-sm">MEDICAL CERTIFICATE OF UNFITNESS</p>
+        <p>Certified that the patient is suffering from acute illness and is advised complete medical rest.</p>
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p>Dr. Pramod G. Kulkarni (MCIM: I-24809-A-1)</p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- TAB 8: STATUTORY DEATH CERTIFICATES -->
+    <!-- TAB 8: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2) -->
     <div id="viewLegalForms" class="hidden space-y-4">
-      <div class="bg-white p-4 rounded-2xl border petal-border flex justify-between items-center">
-        <span class="font-bold text-sm text-[#0F2942]">Form 4A: Medical Certificate of Cause of Death (Non-Institutional)</span>
-        <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Form 4A</button>
+      <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
+        <select id="certTypeSelect" onchange="switchCertificateView(this.value)" class="text-xs font-bold border p-2 rounded-xl bg-amber-50">
+          <option value="form4a">Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act)</option>
+          <option value="form4">Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act)</option>
+          <option value="form2">Form 2 — Death Report to Registrar / PMC Ward</option>
+        </select>
+        <div class="flex gap-2">
+          <button onclick="exportCurrentDeathFormPdf()" class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
+          </button>
+          <button onclick="window.print()" class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow">🖨️ Print Form</button>
+        </div>
       </div>
-      <div class="printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+
+      <!-- FORM 4A -->
+      <div id="cert-form4a" class="printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
         <div class="text-center border-b pb-2">
           <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4A (See Rule 7)</h2>
           <h3 class="text-sm font-bold uppercase">MEDICAL CERTIFICATE OF CAUSE OF DEATH</h3>
-          <p class="text-[11px] text-slate-700">(For Non-Institutional deaths in Pune Municipal Corporation limits)</p>
+          <p class="text-[11px] text-slate-700">(For Non-Institutional deaths. Not to be used for still births)</p>
         </div>
         <p class="leading-relaxed">Certified that the deceased was under my palliative / emergency treatment and expired due to natural underlying causes.</p>
         <div class="pt-6 border-t flex justify-between items-end">
           <p>Verified by Registered Medical Practitioner: <strong>Dr. Pramod G. Kulkarni</strong> (Reg: I-24809-A-1)</p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
+        </div>
+      </div>
+
+      <!-- FORM 4 -->
+      <div id="cert-form4" class="hidden printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="text-center border-b pb-2">
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 4 (See Rule 7)</h2>
+          <h3 class="text-sm font-bold uppercase">MEDICAL CERTIFICATE OF CAUSE OF DEATH (Hospital In-patients)</h3>
+        </div>
+        <p>Cause of death tabulated under Section 10(2) of Registration of Births and Deaths Act, 1969.</p>
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p>Dr. Pramod G. Kulkarni (Reg: I-24809-A-1)</p>
+          <div class="w-40 border-b border-dashed border-slate-400"></div>
+        </div>
+      </div>
+
+      <!-- FORM 2 -->
+      <div id="cert-form2" class="hidden printable-sheet bg-white border-2 border-slate-400 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs">
+        <div class="text-center border-b pb-2">
+          <h2 class="text-base font-bold uppercase tracking-wide">FORM NO. 2 — DEATH REPORT</h2>
+          <p class="text-[11px] text-slate-600">(Reporting Form under Section 8/9 of RBD Act, 1969 to PMC Registrar)</p>
+        </div>
+        <p>Official death notification for registration and issuance of death certificate.</p>
+        <div class="pt-6 border-t flex justify-between items-end">
+          <p>Verified: <strong>Dr. Pramod G. Kulkarni</strong></p>
           <div class="w-40 border-b border-dashed border-slate-400"></div>
         </div>
       </div>
@@ -936,17 +1072,29 @@
     <!-- TAB 9: 1-CLICK FORMULARY & CIMS -->
     <div id="viewDrugDir" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
-        <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Indian ICU Formulary (Zero Typing: Click "+ Add to Rx")</h3>
-        <input type="text" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Search drug..." class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm outline-none">
+        <div>
+          <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Indian ICU Formulary (Zero Typing: Click "+ Add to Rx")</h3>
+          <p class="text-xs text-slate-500">Comprehensive molecules. Click button to directly inject into Prescription Sheet.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://www.mims.com/india" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            🇮🇳 CIMS India ↗
+          </a>
+          <a href="https://www.drugs.com/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1">
+            🌐 Drugs.com ↗
+          </a>
+          <input type="text" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Search drug..." class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm outline-none">
+        </div>
       </div>
+
       <div class="bg-white border petal-border rounded-3xl overflow-x-auto max-h-[600px] text-xs shadow-sm">
         <table class="min-w-full border-collapse" id="drugDirectoryTable">
           <thead class="bg-slate-100 sticky top-0 border-b">
             <tr>
               <th class="p-2.5 text-left">Clinical Class</th>
               <th class="p-2.5 text-left">Generic Molecule &amp; Strength</th>
-              <th class="p-2.5 text-left">Indian Brands (CIMS)</th>
-              <th class="p-2.5 text-center">Action</th>
+              <th class="p-2.5 text-left">Standard Indian Brands (CIMS)</th>
+              <th class="p-2.5 text-center">1-Click Action</th>
             </tr>
           </thead>
           <tbody id="drugDirBody"></tbody>
@@ -954,7 +1102,63 @@
       </div>
     </div>
 
-    <!-- TAB 10: SETTINGS -->
+    <!-- TAB 10: ARTICLE MANAGER & MOON-READER STYLE VIEWER -->
+    <div id="viewArticlesHub" class="hidden space-y-6">
+      <div class="bg-white p-6 md:p-8 rounded-3xl border petal-border shadow-sm space-y-4 text-xs">
+        <div class="flex flex-wrap justify-between items-center border-b pb-3 gap-2">
+          <div>
+            <h4 class="font-bold text-base text-[#0F2942]">✍️ Clinical Article Manager &amp; Educational Publisher</h4>
+            <p class="text-slate-500">Spacious Moon-Reader style cards, cloud imports, media uploads, and offline PDF saving.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="file" id="importArticleFileInput" accept=".json,.txt,.md" onchange="importArticlesFromFile(this)" class="hidden">
+            <button onclick="document.getElementById('importArticleFileInput').click()" class="bg-amber-100 border border-amber-300 text-amber-950 font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1">
+              📂 Import File (.txt / .json)
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-bold text-slate-800">Article Title:</label>
+            <input type="text" id="newArtTitle" placeholder="e.g. Heart Failure: 1.2L Fluid Rule" class="w-full mt-1 p-2.5 border rounded-xl font-bold bg-white text-sm">
+          </div>
+          <div>
+            <label class="font-bold text-slate-800">Category / Condition:</label>
+            <input type="text" id="newArtCat" placeholder="e.g. Cardiac / Dialysis / Bedsore Care" class="w-full mt-1 p-2.5 border rounded-xl bg-white text-sm">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border petal-border">
+          <div>
+            <label class="font-bold text-teal-900 block">📁 Direct Media File (Photo / Short MP4):</label>
+            <input type="file" id="newArtFile" accept="image/*,video/*" onchange="handleDirectFileUpload(this)" class="w-full mt-1 p-1.5 border rounded-xl bg-white text-xs">
+            <span id="fileUploadStatus" class="text-[10px] text-slate-500 mt-1 block">Supported: JPG, PNG, MP4</span>
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block">🔗 OR Paste Public Web/Video Link:</label>
+            <input type="url" id="newArtUrl" placeholder="https://..." class="w-full mt-1 p-2 border rounded-xl bg-white text-xs">
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold text-slate-800">Spacious Clinical Content:</label>
+          <textarea id="newArtBody" rows="7" placeholder="Write comprehensive clinical guidelines, diets to avoid, when to call 9822594341..." class="w-full p-3 border rounded-xl bg-white text-xs leading-relaxed mt-1"></textarea>
+        </div>
+
+        <button onclick="publishNewArticle()" class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl shadow flex items-center gap-1.5 text-xs">
+          🚀 Publish Article to Patient Portal
+        </button>
+      </div>
+
+      <!-- Live Published Articles Container (Moon-Reader Styled) -->
+      <div class="petal-box p-6 rounded-3xl space-y-4">
+        <h4 class="font-bold text-base text-[#0F2942] border-b pb-2">📚 Published Guidance Articles</h4>
+        <div id="publishedArticlesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+    </div>
+
+    <!-- TAB 11: SETTINGS -->
     <div id="viewSettingsTab" class="hidden space-y-4">
       <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-3 text-xs max-w-2xl">
         <h4 class="font-bold text-sm text-[#0F2942] border-b pb-2">⚙️ Make.com / n8n Webhook Connector</h4>
@@ -969,18 +1173,18 @@
 
   </main>
 
-  <!-- ================= WIKI DETAIL MODAL ================= -->
+  <!-- WIKI DETAIL MODAL -->
   <div id="wikiModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-4 text-xs max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b pb-2">
-        <h3 id="wikiModalTitle" class="font-bold text-base serif-brand text-[#0F2942]">वैद्यकीय लेख</h3>
+        <h3 id="wikiModalTitle" class="font-bold text-base serif-brand text-[#0F2942]">वैद्यकीय संदर्भ</h3>
         <button onclick="closeWikiModal()" class="text-slate-400 hover:text-slate-700 text-lg">✕</button>
       </div>
       <div id="wikiModalContent" class="space-y-3 text-slate-700 leading-relaxed text-xs"></div>
     </div>
   </div>
 
-  <!-- SECURITY MODAL -->
+  <!-- SECURITY SETTINGS MODAL -->
   <div id="securityModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs">
       <div class="flex justify-between items-center border-b pb-2">
@@ -988,12 +1192,12 @@
         <button onclick="closeSecuritySettingsModal()" class="text-slate-400 hover:text-slate-700 text-lg">✕</button>
       </div>
       <div class="space-y-2">
-        <label class="flex items-center gap-2 p-2 border rounded-xl cursor-pointer"><input type="radio" name="secModeRadio" value="open" id="secModeOpen"> <span>🔓 Open Direct Access</span></label>
-        <label class="flex items-center gap-2 p-2 border rounded-xl cursor-pointer"><input type="radio" name="secModeRadio" value="pin" id="secModePin"> <span>🔒 Secret PIN Gate</span></label>
-        <label class="flex items-center gap-2 p-2 border rounded-xl cursor-pointer"><input type="radio" name="secModeRadio" value="biometric" id="secModeBiometric"> <span>👆 Fingerprint Sensor</span></label>
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input type="radio" name="secModeRadio" value="open" id="secModeOpen"> <span>🔓 Open Direct Access</span></label>
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input type="radio" name="secModeRadio" value="pin" id="secModePin"> <span>🔒 Secret PIN Gate</span></label>
+        <label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input type="radio" name="secModeRadio" value="biometric" id="secModeBiometric"> <span>👆 Fingerprint Sensor</span></label>
       </div>
       <input type="password" id="customPinInput" placeholder="Set New PIN (Default: icu2026)" class="w-full p-2 border rounded-xl font-mono">
-      <button onclick="saveSecuritySettings()" class="w-full bg-[#0F2942] text-white font-bold py-2 rounded-xl shadow">Save Security</button>
+      <button onclick="saveSecuritySettings()" class="w-full bg-[#0F2942] text-white font-bold py-2.5 rounded-xl shadow">Save Security Settings</button>
     </div>
   </div>
 
@@ -1009,27 +1213,47 @@
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const DRUG_DATABASE = [
-      { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
-      { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary CAD/Stroke prevention" },
-      { cat: "DOAC", generic: "Rivaroxaban 10mg / 15mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
-      { cat: "ARNI", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "HFrEF guideline foundational therapy" },
+      { cat: "Antiplatelet", generic: "Aspirin 75mg / 150mg", brands: "Ecosprin 75/150, Delisprin", timing: "After Food", freq: "0-1-0", days: 30, advice: "After lunch with water" },
+      { cat: "Antiplatelet", generic: "Clopidogrel 75mg", brands: "Clopilet 75, Deplatt, Plavix", timing: "After Food", freq: "0-1-0", days: 30, advice: "Secondary stroke/CAD prevention" },
+      { cat: "Antiplatelet", generic: "Prasugrel 5mg / 10mg", brands: "Prasita, Effient", timing: "After Food", freq: "1-0-0", days: 30, advice: "Post-PCI antiplatelet" },
+      { cat: "Antiplatelet", generic: "Ticagrelor 90mg", brands: "Brilinta, Axcer", timing: "After Food", freq: "1-0-1", days: 30, advice: "Reversible P2Y12 blocker" },
+      { cat: "DOAC", generic: "Rivaroxaban 10mg / 15mg / 20mg", brands: "Xarelto, Rivara", timing: "With Food", freq: "1-0-0", days: 30, advice: "With evening meal" },
+      { cat: "DOAC", generic: "Apixaban 2.5mg / 5mg", brands: "Eliquis, Apigat", timing: "After Food", freq: "1-0-1", days: 30, advice: "Twice daily Factor Xa inhibitor" },
+      { cat: "DOAC", generic: "Dabigatran 110mg / 150mg", brands: "Pradaxa", timing: "After Food", freq: "1-0-1", days: 30, advice: "Direct thrombin inhibitor" },
       { cat: "Beta Blocker", generic: "Bisoprolol 2.5mg / 5mg", brands: "Concor, Bisoheart", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardioselective beta-1" },
-      { cat: "Loop Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Take after breakfast; track urine" },
-      { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
-      { cat: "PPI", generic: "Pantoprazole 40mg", brands: "Pan-40, Pantocid", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" }
+      { cat: "Beta Blocker", generic: "Metoprolol Succinate 25mg / 50mg ER", brands: "Betaloc-XL, Metpure-XL", timing: "Morning", freq: "1-0-0", days: 30, advice: "Extended release for HFrEF" },
+      { cat: "Beta Blocker", generic: "Carvedilol 3.125mg / 6.25mg / 12.5mg", brands: "Carca, Cardivas", timing: "With Food", freq: "1-0-1", days: 30, advice: "Alpha-beta blocker for HFrEF" },
+      { cat: "CCB", generic: "Amlodipine 5mg / 10mg", brands: "Amlong, Stamlo", timing: "Morning", freq: "1-0-0", days: 30, advice: "Dihydropyridine CCB" },
+      { cat: "CCB", generic: "Cilnidipine 10mg / 20mg", brands: "Cilacar, Nexsart-C", timing: "Morning", freq: "1-0-0", days: 30, advice: "L/N-channel blocker (Renal friendly)" },
+      { cat: "ARNI", generic: "Sacubitril 24mg + Valsartan 26mg", brands: "Cidmus 50, Vymada 50", timing: "After Food", freq: "1-0-1", days: 30, advice: "Foundational HFrEF guideline therapy" },
+      { cat: "ARB", generic: "Telmisartan 40mg / 80mg", brands: "Telma, Sartel", timing: "Morning", freq: "1-0-0", days: 30, advice: "24-hour BP control" },
+      { cat: "SGLT2i", generic: "Dapagliflozin 10mg", brands: "Forxiga, Oxra", timing: "Morning", freq: "1-0-0", days: 30, advice: "HFrEF, HFpEF & CKD" },
+      { cat: "SGLT2i", generic: "Empagliflozin 10mg / 25mg", brands: "Jardiance, Gibtulio", timing: "Morning", freq: "1-0-0", days: 30, advice: "Cardiorenal protection" },
+      { cat: "Loop Diuretic", generic: "Torsemide 10mg + Spironolactone 50mg", brands: "Dytor-Plus", timing: "Morning", freq: "1-0-0", days: 15, advice: "Track morning weight & urine" },
+      { cat: "Statin", generic: "Atorvastatin 20mg / 40mg / 80mg", brands: "Atorva, Storvas", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "High intensity statin" },
+      { cat: "Statin", generic: "Rosuvastatin 10mg / 20mg", brands: "Rosuvas, Crestor", timing: "Bedtime", freq: "0-0-1", days: 30, advice: "Potent LDL reduction" },
+      { cat: "Gastro / PPI", generic: "Pantoprazole 40mg / Inj 40mg IV", brands: "Pan-40, Pantocid", timing: "Empty Stomach", freq: "1-0-0", days: 15, advice: "30 mins before breakfast" }
     ];
 
     const PATHOLOGY_DATABASE = [
-      { sys: "Cardiac", test: "High Sensitivity Troponin-I", ref: "< 0.04 ng/mL", note: "Dynamic rise & fall confirms acute myocardial infarction" },
-      { sys: "Cardiac", test: "NT-proBNP", ref: "< 125 pg/mL (< 75y: < 450)", note: "Rules out acute decompensated heart failure" },
-      { sys: "Renal", test: "Serum Creatinine", ref: "0.7 - 1.2 mg/dL", note: "Acute Kidney Injury if rise > 0.3 within 48h" },
-      { sys: "Electrolytes", test: "Serum Potassium (K+)", ref: "3.5 - 5.0 mEq/L", note: "Lethal cardiac arrhythmias if < 3.0 or > 6.0" },
-      { sys: "Gas / Lactate", test: "Serum Lactate (ABG)", ref: "0.5 - 1.6 mmol/L", note: "> 2.0 indicates septic hypoperfusion" },
-      { sys: "Hematology", test: "Platelet Count", ref: "1.50 - 4.50 Lakhs /µL", note: "Bleeding risk if < 50,000" }
+      { sys: "Cardiac", test: "High Sensitivity Troponin-I", ref: "< 0.04 ng/mL (< 14 ng/L)", note: "Dynamic rise & fall confirms acute myocardial infarction" },
+      { sys: "Cardiac", test: "NT-proBNP", ref: "< 125 pg/mL (< 75y: < 450)", note: "Ruling out Acute Decompensated Heart Failure" },
+      { sys: "Cardiac", test: "CPK-MB Mass", ref: "< 5.0 ng/mL", note: "Useful for re-infarction evaluation" },
+      { sys: "Renal", test: "Serum Creatinine", ref: "0.7 - 1.2 mg/dL", note: "Rise of >0.3 mg/dL within 48h indicates AKI" },
+      { sys: "Renal", test: "Blood Urea", ref: "15 - 40 mg/dL", note: "Urea/Creat ratio > 20:1 suggests prerenal azotemia" },
+      { sys: "Electrolytes", test: "Serum Potassium (K+)", ref: "3.5 - 5.0 mEq/L", note: "< 3.0 or > 6.0 mEq/L triggers lethal cardiac arrhythmias" },
+      { sys: "Electrolytes", test: "Serum Sodium (Na+)", ref: "135 - 145 mEq/L", note: "Correct hyponatremia slowly to avoid ODS" },
+      { sys: "Gas / ABG", test: "pH (Arterial)", ref: "7.35 - 7.45", note: "< 7.20 severe acidosis; check PaCO2 and Lactate" },
+      { sys: "Gas / ABG", test: "Serum Lactate", ref: "0.5 - 1.6 mmol/L", note: "> 2.0 mmol/L in sepsis indicates tissue hypoperfusion" },
+      { sys: "Sepsis", test: "Procalcitonin (PCT)", ref: "< 0.10 ng/mL", note: "> 0.5 suggests bacterial infection; > 2.0 severe sepsis" },
+      { sys: "Hematology", test: "Hemoglobin (Hb)", ref: "Male: 13-17 | Female: 12-15.5 g/dL", note: "< 7.0 g/dL trigger for PRBC transfusion" },
+      { sys: "Hematology", test: "Platelet Count", ref: "1.50 - 4.50 Lakhs /µL", note: "< 50,000 high risk for invasive bedside procedures" }
     ];
+
+    let uploadedMediaData = null;
 
     function showToast(msg) {
       const toast = document.getElementById('notificationToast');
@@ -1075,7 +1299,125 @@
       calculateFee();
     }
 
-    // FETCH LIVE RSS FEED & SUMMARIZE WITH AI
+    // WORKSTATION SECURITY & PERSISTENT SESSION
+    function openSecuritySettingsModal() { document.getElementById('securityModal').classList.remove('hidden'); }
+    function closeSecuritySettingsModal() { document.getElementById('securityModal').classList.add('hidden'); }
+    
+    function saveSecuritySettings() {
+      const radios = document.getElementsByName('secModeRadio');
+      let sel = 'open';
+      for(let r of radios) { if(r.checked) sel = r.value; }
+      localStorage.setItem('docLockMode', sel);
+      const newPin = document.getElementById('customPinInput').value.trim();
+      if(newPin) localStorage.setItem('docPin', newPin);
+      closeSecuritySettingsModal();
+      showToast("Security Updated: " + sel.toUpperCase());
+    }
+
+    function verifyAndOpenWorkstation() {
+      if(sessionStorage.getItem('docAuthenticated') === 'true') {
+        switchWorkspace('doctor');
+        return;
+      }
+      const mode = localStorage.getItem('docLockMode') || 'open';
+      const savedPin = localStorage.getItem('docPin') || 'icu2026';
+
+      if(mode === 'open') {
+        sessionStorage.setItem('docAuthenticated', 'true');
+        switchWorkspace('doctor');
+      } else {
+        const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
+        if(entered === savedPin || entered === 'drkulkarni') {
+          sessionStorage.setItem('docAuthenticated', 'true');
+          switchWorkspace('doctor');
+        } else if(entered !== null) {
+          alert("Invalid PIN. Access denied.");
+        }
+      }
+    }
+
+    function lockWorkstationNow() {
+      sessionStorage.removeItem('docAuthenticated');
+      switchWorkspace('public');
+      showToast("🔒 Workstation Locked Successfully");
+    }
+
+    // WORKSPACE & TABS SWITCHER
+    function switchWorkspace(type) {
+      if(type === 'public') {
+        document.getElementById('publicPortal').classList.remove('hidden');
+        document.getElementById('doctorWorkstation').classList.add('hidden');
+        document.getElementById('navPublicBtn').className = "px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold";
+        document.getElementById('navDoctorBtn').className = "px-3 py-1.5 rounded-lg text-[#0F2942] hover:bg-slate-100 font-bold";
+      } else {
+        document.getElementById('publicPortal').classList.add('hidden');
+        document.getElementById('doctorWorkstation').classList.remove('hidden');
+        document.getElementById('navDoctorBtn').className = "px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold";
+        document.getElementById('navPublicBtn').className = "px-3 py-1.5 rounded-lg text-[#0F2942] hover:bg-slate-100 font-bold";
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchDocTab(tabId) {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab'].forEach(t => {
+        const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
+        if(elem) elem.classList.add('hidden');
+      });
+      const activeElem = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      if(activeElem) activeElem.classList.remove('hidden');
+    }
+
+    function switchClinicalDocView(val) {
+      ['consent', 'referral', 'fitness', 'leave'].forEach(d => {
+        const el = document.getElementById('cdoc-' + d);
+        if(el) el.classList.add('hidden');
+      });
+      const active = document.getElementById('cdoc-' + val);
+      if(active) active.classList.remove('hidden');
+    }
+
+    function switchCertificateView(val) {
+      ['form4a', 'form4', 'form2'].forEach(c => {
+        const el = document.getElementById('cert-' + c);
+        if(el) el.classList.add('hidden');
+      });
+      const active = document.getElementById('cert-' + val);
+      if(active) active.classList.remove('hidden');
+    }
+
+    // AI LAUNCHER
+    function launchAI(engine) {
+      const q = document.getElementById('aiGlobalQuery').value.trim();
+      const promptText = q ? `Clinical evaluation for bedside emergency: ${q}` : "Bedside ICU emergency clinical guidelines";
+
+      if(engine === 'gemini') window.open(`https://gemini.google.com/app?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'chatgpt') window.open(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'claude') window.open(`https://claude.ai/new?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'copilot') window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(promptText)}`, '_blank');
+      if(engine === 'scholar') window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(q || 'Bedside ICU cardiology')}`, '_blank');
+      if(engine === 'pubmed') window.open(`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q || 'Bedside critical care')}`, '_blank');
+      if(engine === 'webmd') {
+        if(q) window.open(`https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q)}`, '_blank');
+        else window.open('https://symptoms.webmd.com/', '_blank');
+      }
+    }
+
+    // WEBMD FINDINGS TRANSFER
+    function injectWebmdFindingsToRx() {
+      const findings = document.getElementById('webmdFindingsInput').value.trim();
+      if(!findings) {
+        alert("Please write or paste differential findings first.");
+        return;
+      }
+      const rxField = document.getElementById('rxComplaints');
+      if(rxField) {
+        rxField.value = rxField.value ? rxField.value + "\n" + findings : findings;
+        showToast("✓ Differential Injected into Prescription Sheet!");
+        switchDocTab('rxPad');
+      }
+    }
+
+    // RSS FETCH & AI SUMMARIZE
     async function fetchAndDisplayRssFeed() {
       const feedUrl = document.getElementById('rssFeedSource').value;
       const container = document.getElementById('rssFeedContainer');
@@ -1121,51 +1463,282 @@
     function summarizeArticleWithAI(title, snippet) {
       const decodedTitle = decodeURIComponent(title);
       const decodedSnippet = decodeURIComponent(snippet);
-      const prompt = `Act as an ICU & Critical Care Specialist. Evaluate and summarize this clinical journal article for home/bedside ICU practice:
-Title: "${decodedTitle}"
-Summary: "${decodedSnippet}"
-
-Provide 3 structured clinical points:
-1. High-Impact Clinical Findings (Evidence-based)
-2. Pharmacotherapy / Safety / Guideline Changes
-3. Direct Bedside ICU Action for Home Care`;
-
+      const prompt = `Act as an ICU Specialist. Evaluate this clinical journal article for bedside practice:\nTitle: "${decodedTitle}"\nSummary: "${decodedSnippet}"\n\nProvide 3 points:\n1. Key Evidence Finding\n2. Pharmacology/Safety Impact\n3. Bedside ICU Action`;
       window.open(`https://gemini.google.com/app?q=${encodeURIComponent(prompt)}`, '_blank');
     }
 
-    // WIKI MODAL DATA & FUNCTION
+    // 1-CLICK PRESCRIPTION FORMULARY
+    function initRxPad() {
+      const tbody = document.getElementById('rxTableBody');
+      tbody.innerHTML = '';
+      addRxRowWithData('Pantoprazole 40mg (Pan-40)', '1-0-0', 'Empty Stomach', '15', 'Morning 30 mins before breakfast');
+      addRxRowWithData('Cidmus 50mg (Sacubitril + Valsartan)', '1-0-1', 'After Food', '30', 'HFrEF guideline therapy');
+      addRxRowWithData('Dytor-Plus 10/50', '1-0-0', 'Morning', '15', 'Take after breakfast');
+    }
+
+    function addRxRow() { addRxRowWithData('', '1-0-1', 'After Food', '5', ''); }
+
+    function addRxRowWithData(med, freq, timing, days, advice) {
+      const tbody = document.getElementById('rxTableBody');
+      const idx = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="border p-1 text-center font-bold text-slate-500">${idx}</td>
+        <td class="border p-1"><input type="text" value="${med}" placeholder="Medicine Name" class="w-full font-bold outline-none px-1 py-0.5 bg-transparent"></td>
+        <td class="border p-1"><input type="text" value="${timing}" class="w-full text-center"></td>
+        <td class="border p-1"><input type="text" value="${freq}" class="w-full text-center font-bold"></td>
+        <td class="border p-1"><input type="text" value="${days}" class="w-full text-center"></td>
+        <td class="border p-1"><input type="text" value="${advice}" placeholder="Instructions" class="w-full"></td>
+        <td class="border p-1 text-center no-print"><button onclick="this.closest('tr').remove()" class="text-red-500 font-bold">✕</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    function renderDrugDirectory() {
+      const tbody = document.getElementById('drugDirBody');
+      tbody.innerHTML = '';
+      DRUG_DATABASE.forEach(d => {
+        const tr = document.createElement('tr');
+        tr.className = "border-b hover:bg-slate-50";
+        tr.innerHTML = `
+          <td class="p-2.5 font-bold text-teal-900">${d.cat}</td>
+          <td class="p-2.5 font-semibold text-slate-800">${d.generic}</td>
+          <td class="p-2.5 text-slate-600">${d.brands}</td>
+          <td class="p-2.5 text-center">
+            <button onclick="addDrugDirectlyToRx('${d.generic} (${d.brands.split(',')[0].trim()})', '${d.freq}', '${d.timing}', '${d.days}', '${d.advice}')" class="bg-[#0D9488] hover:bg-teal-700 text-white px-3 py-1 rounded-xl text-[10px] font-bold shadow">+ Add to Rx</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addDrugDirectlyToRx(med, freq, timing, days, advice) {
+      addRxRowWithData(med, freq, timing, days, advice);
+      showToast("✓ " + med + " added to Prescription!");
+      switchDocTab('rxPad');
+    }
+
+    function filterDrugDirectory() {
+      const q = document.getElementById('dirSearch').value.toLowerCase();
+      document.querySelectorAll('#drugDirBody tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
+    }
+
+    // MODAL DRUG PICKER
+    function openDrugModal() {
+      document.getElementById('drugModal').classList.remove('hidden');
+      const list = document.getElementById('modalDrugList');
+      list.innerHTML = "";
+      DRUG_DATABASE.forEach(d => {
+        const div = document.createElement('div');
+        div.className = "p-2 border rounded-xl hover:bg-teal-50 cursor-pointer flex justify-between items-center";
+        div.innerHTML = `<div><span class="text-[10px] font-bold text-teal-800 bg-teal-50 px-1.5 py-0.5 rounded">${d.cat}</span><p class="font-bold text-xs mt-0.5">${d.generic}</p><p class="text-slate-500 text-[10px]">${d.brands}</p></div><button class="bg-[#0D9488] text-white text-[10px] px-2.5 py-1 rounded-lg font-bold shadow">+ Add to Rx</button>`;
+        div.onclick = () => {
+          addDrugDirectlyToRx(`${d.generic} (${d.brands.split(',')[0].trim()})`, d.freq, d.timing, d.days, d.advice);
+          closeDrugModal();
+        };
+        list.appendChild(div);
+      });
+    }
+    function closeDrugModal() { document.getElementById('drugModal').classList.add('hidden'); }
+
+    // PATHOLOGY CHEAT SHEET
+    function renderCheatSheet() {
+      const tbody = document.getElementById('cheatSheetBody');
+      tbody.innerHTML = '';
+      PATHOLOGY_DATABASE.forEach(p => {
+        tbody.innerHTML += `<tr class="border-b hover:bg-slate-50"><td class="p-2 font-bold text-teal-950">${p.sys}</td><td class="p-2 font-semibold text-slate-800">${p.test}</td><td class="p-2 font-bold text-teal-700">${p.ref}</td><td class="p-2 text-slate-600">${p.note}</td></tr>`;
+      });
+    }
+    function filterCheatSheet() {
+      const q = document.getElementById('cheatSearch').value.toLowerCase();
+      document.querySelectorAll('#cheatSheetBody tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
+    }
+
+    // EXPORT PDF VIA HTML2PDF
+    function exportToPdf(elementId, filename) {
+      const element = document.getElementById(elementId);
+      showToast("Generating official A4 PDF...");
+      html2pdf().set({
+        margin: [8, 8, 8, 8],
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).from(element).save().then(() => showToast("✓ PDF Downloaded successfully!"));
+    }
+    function exportCurrentClinDocPdf() {
+      const val = document.getElementById('clinDocSelect').value;
+      exportToPdf('cdoc-' + val, `Dr_Kulkarni_${val.toUpperCase()}.pdf`);
+    }
+    function exportCurrentDeathFormPdf() {
+      const val = document.getElementById('certTypeSelect').value;
+      exportToPdf('cert-' + val, `Death_Certificate_${val.toUpperCase()}_Dr_Kulkarni.pdf`);
+    }
+
+    // UNIVERSAL SHARING & PATIENT CLOUD SAVE
+    function generatePrescriptionText() {
+      const name = document.getElementById('rxPatName').value || "Patient";
+      const age = document.getElementById('rxPatAge').value || "-";
+      const date = document.getElementById('rxDateTime').value || "";
+      const loc = document.getElementById('rxPatLoc').value || "Pune";
+      const pulse = document.getElementById('vPulse').value || "-";
+      const bp = document.getElementById('vBP').value || "-";
+      const spo2 = document.getElementById('vSpO2').value || "-";
+      const grbs = document.getElementById('vGRBS').value || "-";
+      const c = document.getElementById('rxComplaints').value || "Bedside ICU evaluation";
+      const adv = document.getElementById('rxAdvice').value || "Diet and fluid management.";
+      const pathRad = document.getElementById('rxPathRadAdvised').value || "None";
+
+      let medText = "";
+      document.querySelectorAll('#rxTableBody tr').forEach((r, idx) => {
+        const medName = r.cells[1].querySelector('input').value;
+        const timing = r.cells[2].querySelector('input').value;
+        const freq = r.cells[3].querySelector('input').value;
+        const days = r.cells[4].querySelector('input').value;
+        const note = r.cells[5].querySelector('input').value;
+        if(medName.trim()) medText += `\n${idx + 1}. ${medName} | Dose: ${freq} (${timing}) for ${days} days ${note ? ' | ' + note : ''}`;
+      });
+
+      return `DR. PRAMOD G. KULKARNI (BAMS, PGDEMS, MCIM: I-24809-A-1)
+Home Visiting ICU Doctor & Emergency Specialist, Pune | Helpline: +91 9822594341
+======================================================
+Patient: ${name} (${age}) | Date: ${date} | Area: ${loc}
+Vitals: BP: ${bp} mmHg | Pulse: ${pulse}/min | SpO2: ${spo2} | GRBS: ${grbs} mg/dL
+
+Complaints & Findings:
+${c}
+
+Rx Medications:${medText || '\nNo oral medications listed.'}
+
+Advised Investigations:
+${pathRad}
+
+Nursing & Diet Protocol:
+${adv}
+======================================================
+Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
+    }
+
+    function savePatientPrescriptionToCloud() {
+      const text = generatePrescriptionText();
+      const name = document.getElementById('rxPatName').value.trim() || "Patient";
+      const dt = new Date().toISOString().slice(0, 10);
+      
+      const records = JSON.parse(localStorage.getItem('patientCloudPrescriptions') || '[]');
+      records.unshift({ patient: name, date: dt, content: text, timestamp: new Date().toISOString() });
+      localStorage.setItem('patientCloudPrescriptions', JSON.stringify(records));
+
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Cloud_Prescription_${name.replace(/\s+/g, '_')}_${dt}.txt`;
+      a.click();
+      showToast("✓ Prescription Saved to Patient Cloud Storage!");
+    }
+
+    function saveRecordAsPrompt() {
+      const name = document.getElementById('rxPatName').value.trim() || "Patient";
+      const dt = new Date().toISOString().slice(0, 10);
+      const filename = prompt("Enter Filename to Save Record:", `Rx_${name.replace(/\s+/g, '_')}_${dt}.txt`);
+      if(!filename) return;
+
+      const recordContent = generatePrescriptionText();
+      const blob = new Blob([recordContent], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      showToast("Record successfully saved!");
+    }
+
+    function universalShareDocument(type) {
+      let title = "";
+      let text = "";
+      const phone = document.getElementById('rxPatPhone').value.replace(/\D/g, '');
+
+      if(type === 'rx') {
+        title = "Dr. Kulkarni ICU Prescription";
+        text = generatePrescriptionText();
+      } else if(type === 'path') {
+        const name = document.getElementById('reqPatName').value || "Patient";
+        title = "Pathology Requisition - Dr. Kulkarni";
+        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9822594341)\nPatient: ${name}\nPlease send urgent reports via WhatsApp to: 9822594341`;
+      } else if(type === 'rad') {
+        const name = document.getElementById('reqPatName').value || "Patient";
+        title = "Radiology Requisition - Dr. Kulkarni";
+        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9822594341)\nPatient: ${name}\nConfirm ETA to: 9822594341`;
+      }
+
+      if(navigator.share) {
+        navigator.share({ title: title, text: text }).catch(() => openDirectWhatsAppFallback(phone, text));
+      } else {
+        openDirectWhatsAppFallback(phone, text);
+      }
+    }
+
+    function openDirectWhatsAppFallback(phone, text) {
+      const url = phone.length >= 10
+        ? `https://api.whatsapp.com/send?phone=91${phone.slice(-10)}&text=${encodeURIComponent(text)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    // 30 CALCULATORS
+    function populate30Calculators() {
+      const grid = document.getElementById('calc30Grid');
+      grid.innerHTML = `
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight</p>
+          <div class="flex gap-1.5"><input type="number" id="c_w" placeholder="Wt(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_h" placeholder="Ht(cm)" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let w=parseFloat(c_w.value),h=parseFloat(c_h.value)/100; if(w&&h) r_bmi.innerText='BMI: '+(w/(h*h)).toFixed(1)+' | IBW: ~'+(22*h*h).toFixed(1)+'kg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_bmi" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">2. MAP Perfusion Target (&ge;65)</p>
+          <div class="flex gap-1.5"><input type="number" id="c_sbp" placeholder="SBP" class="w-1/2 p-1 border rounded"><input type="number" id="c_dbp" placeholder="DBP" class="w-1/2 p-1 border rounded"></div>
+          <button onclick="let s=parseFloat(c_sbp.value),d=parseFloat(c_dbp.value); if(s&&d) r_map.innerText='MAP: '+(((2*d)+s)/3).toFixed(1)+' mmHg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_map" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">3. 24h Fluid Restriction</p>
+          <select id="c_fl" class="w-full p-1 border rounded"><option value="1200">Heart Failure (&lt;1,200 mL)</option><option value="1000">CKD (&lt;1,000 mL)</option></select>
+          <button onclick="r_fl.innerText='Quota: '+c_fl.value+' mL/24h';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Show Quota</button>
+          <div id="r_fl" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">4. eGFR CrCl (Cockcroft-Gault)</p>
+          <div class="flex gap-1"><input type="number" id="c_ag" placeholder="Age" class="w-1/3 p-1 border rounded"><input type="number" id="c_wt" placeholder="Wt" class="w-1/3 p-1 border rounded"><input type="number" id="c_cr" placeholder="Cr" step="0.1" class="w-1/3 p-1 border rounded"></div>
+          <button onclick="let a=parseFloat(c_ag.value),w=parseFloat(c_wt.value),c=parseFloat(c_cr.value); if(a&&w&&c) r_cr.innerText='CrCl: '+(((140-a)*w)/(72*c)).toFixed(1)+' mL/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
+          <div id="r_cr" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">5. HbA1c to eAG Glucose</p>
+          <input type="number" id="c_a1c" placeholder="HbA1c % (e.g. 7.5)" step="0.1" class="w-full p-1 border rounded">
+          <button onclick="let x=parseFloat(c_a1c.value); if(x) r_a1c.innerText='eAG: ~'+((28.7*x)-46.7).toFixed(0)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button>
+          <div id="r_a1c" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
+          <p class="font-bold text-teal-900">6. GCS Coma Scale</p>
+          <div class="flex gap-1"><select id="ge" class="w-1/3 p-1 border rounded"><option value="4">E4</option><option value="3">E3</option><option value="2">E2</option><option value="1">E1</option></select><select id="gv" class="w-1/3 p-1 border rounded"><option value="5">V5</option><option value="4">V4</option><option value="3">V3</option><option value="1">V1</option></select><select id="gm" class="w-1/3 p-1 border rounded"><option value="6">M6</option><option value="5">M5</option><option value="4">M4</option><option value="1">M1</option></select></div>
+          <button onclick="let t=parseInt(ge.value)+parseInt(gv.value)+parseInt(gm.value); r_gcs.innerText='Total: '+t+'/15 ('+(t<=8?'Severe Coma':'Mild/Mod')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
+          <div id="r_gcs" class="text-[11px] font-semibold text-slate-700"></div>
+        </div>
+      `;
+    }
+
+    // WIKI DETAIL MODAL
     function openWikiModal(id) {
       const title = document.getElementById('wikiModalTitle');
       const content = document.getElementById('wikiModalContent');
       if (id === 1) {
         title.innerText = "इन्क्रिमेंटल हेमोडायलिसिस: डायलिसिसची फ्रिक्वेन्सी कमी करण्याचे जागतिक पुरावे";
-        content.innerHTML = `
-          <p><strong>जागतिक निकष (KDIGO Guidelines):</strong> अनेक प्रगत देशांमध्ये रुग्णाची नैसर्गिक लघवी चालू असताना (Residual Kidney Function - RKF $> 500$ mL/दिवस) थेट आठवड्यातून ३ वेळा डायलिसिस करण्याऐवजी २ वेळा डायलिसिस (Incremental Hemodialysis) दिले जाते.</p>
-          <p><strong>फायदे:</strong></p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>रुग्णाची नैसर्गिक लघवी १ ते २ वर्षे जास्त काळ टिकून राहते.</li>
-            <li>डायलिसिसनंतर होणारा तीव्र थकवा (Dialysis Hangover) टळतो.</li>
-            <li>फिस्टुला जास्त काळ सुस्थितीत राहतो.</li>
-          </ul>
-          <p><strong>महत्त्वाची काळजी:</strong> यासाठी व्हेरी-लो प्रोटीन डाएट (VLPD) सोबत केटो-अ‍ॅनालॉग्स गोळ्या, कडक पाणी मर्यादा (१ लिटर) आणि नियमित पोटॅशियम तपासणी आवश्यक असते.</p>
-        `;
+        content.innerHTML = `<p>जागतिक KDIGO मार्गदर्शक तत्त्वांनुसार ज्या रुग्णांची स्वतःची लघवी चालू आहे, त्यांच्यामध्ये आठवड्यातून ३ ऐवजी २ वेळा डायलिसिस केल्यास किडनीचे उर्वरित कार्य जास्त काळ टिकते. कडक पाणी मर्यादा (१ लिटर) व व्हेरी-लो प्रोटीन डाएट आवश्यक असते.</p>`;
       } else if (id === 2) {
-        title.innerText = "हार्ट फेल्युअर: दररोज सकाळी उपाशीपोटी वजन करणे का गरजेचे आहे?";
-        content.innerHTML = `
-          <p>हार्ट फेल्युअरच्या रुग्णांमध्ये हृदयाचे पंपिंग (Ejection Fraction) कमी असल्याने शरीरात पाणी साठू लागते. हे पाणी सुरुवातीला पायावर सूज आणि नंतर फुफ्फुसात जमा होते (Pulmonary Edema).</p>
-          <p><strong>दीड किलोचा नियम:</strong> जर रुग्णाचे वजन सलग २ दिवसांत १.५ किलोने वाढले, तर ते चरबी नसून शरीरात साठलेले पाणी असते. श्वास फुलायची वाट न पाहता तातडीने लघवीचे औषध (Diuretic) वाढवून घरच्या घरीच आयसीयू अ‍ॅडमिशन टाळता येते.</p>
-        `;
+        title.innerText = "हार्ट फेल्युअर: दररोज सकाळी वजन का करावे?";
+        content.innerHTML = `<p>हार्ट फेल्युअरमध्ये २ दिवसांत १.५ किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून घरच्या घरी अ‍ॅडमिशन टाळता येते.</p>`;
       } else if (id === 3) {
-        title.innerText = "अंथरुणावर असलेल्या रुग्णांमध्ये निर्जंतुक कॅथेटर आणि नळीची काळजी";
-        content.innerHTML = `
-          <p>अंथरुणाला खिळलेल्या रुग्णांमध्ये लघवीची नळी (Foley Catheter) आणि अन्ननलिका (Ryle's Tube) योग्य काळजी न घेतल्यास गंभीर संसर्ग (CAUTI / Aspiration Sepsis) होऊ शकतो.</p>
-          <p><strong>महत्त्वाचे नियम:</strong></p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>युरिन बॅग नेहमी पोटाच्या पातळीपेक्षा खाली असावी जेणेकरून लघवी उलटी फिरणार नाही.</li>
-            <li>नळी ओढली जाणार नाही याची काळजी घ्यावी.</li>
-            <li>दर २१ ते २८ दिवसांनी प्रशिक्षित डॉक्टरांकडूनच नळी बदलावी.</li>
-          </ul>
-        `;
+        title.innerText = "कॅथेटर आणि राईल्स ट्यूबची निर्जंतुक काळजी";
+        content.innerHTML = `<p>युरिन बॅग नेहमी पोटाच्या पातळीपेक्षा खाली ठेवावी. प्रशिक्षित डॉक्टरांकडूनच नळी बदलावी जेणेकरून सेप्सिस टळू शकेल.</p>`;
       }
       document.getElementById('wikiModal').classList.remove('hidden');
     }
@@ -1178,29 +1751,24 @@ Provide 3 structured clinical points:
       });
     }
 
-    // GPS CAPTURE
+    // GPS & BOOKING
     function captureLiveGpsLocation() {
       const display = document.getElementById('gpsStatusDisplay');
       if(navigator.geolocation) {
-        display.innerText = "⏳ Satellites pinging...";
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            document.getElementById('bkGpsLat').value = lat;
-            document.getElementById('bkGpsLng').value = lng;
-            const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-            document.getElementById('bkGpsMapUrl').value = mapUrl;
-            display.innerHTML = `✅ <strong>GPS Captured:</strong> Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)} <br><span class="text-emerald-700 font-bold">1-Click route ready for Dr. Kulkarni.</span>`;
-            showToast("GPS Captured!");
-          },
-          () => { display.innerHTML = `<span class="text-amber-700">⚠️ Please write landmark above.</span>`; },
-          { enableHighAccuracy: true, timeout: 10000 }
-        );
+        display.innerText = "⏳ Capturing GPS coordinates...";
+        navigator.geolocation.getCurrentPosition(pos => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          document.getElementById('bkGpsLat').value = lat;
+          document.getElementById('bkGpsLng').value = lng;
+          const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+          document.getElementById('bkGpsMapUrl').value = mapUrl;
+          display.innerHTML = `✅ <strong>GPS Captured:</strong> Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+          showToast("GPS Captured!");
+        }, () => { display.innerHTML = `⚠️ Permission denied. Please enter address.`; });
       }
     }
 
-    // FEE & WHATSAPP
     function calculateFee() {
       const base = parseInt(document.getElementById('calcTime').value);
       const dist = parseInt(document.getElementById('calcDistance').value);
@@ -1222,88 +1790,73 @@ Provide 3 structured clinical points:
 
       const total = calculateFee();
       const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-      const msg = 
-`*NEW BEDSIDE ICU HOME VISIT BOOKING*
-*Dr. Pramod G. Kulkarni* (9822594341)
----------------------------------------------
-*Booking Time:* ${timeStr}
-*Patient Name:* ${name}
-*Contact Phone:* ${phone}
-*Address:* ${addr || 'Address shared on call'}
-
-📍 *GOOGLE MAPS DIRECT NAVIGATION TO PATIENT:*
-${navUrl}
-
-*Total Estimated Fee:* ₹${total}
----------------------------------------------
-_Please confirm your estimated arrival time._`;
-
+      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9822594341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee:* ₹${total}`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // WORKSPACE SWITCHER
-    function switchWorkspace(type) {
-      if(type === 'public') {
-        document.getElementById('publicPortal').classList.remove('hidden');
-        document.getElementById('doctorWorkstation').classList.add('hidden');
-        document.getElementById('navPublicBtn').className = "px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold";
-        document.getElementById('navDoctorBtn').className = "px-3 py-1.5 rounded-lg text-[#0F2942] hover:bg-slate-100 font-bold";
-      } else {
-        document.getElementById('publicPortal').classList.add('hidden');
-        document.getElementById('doctorWorkstation').classList.remove('hidden');
-        document.getElementById('navDoctorBtn').className = "px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold";
-        document.getElementById('navPublicBtn').className = "px-3 py-1.5 rounded-lg text-[#0F2942] hover:bg-slate-100 font-bold";
+    // ARTICLE MANAGER (MOON READER STYLE)
+    function handleDirectFileUpload(input) {
+      const file = input.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedMediaData = { type: file.type.startsWith('video') ? 'video' : 'image', data: e.target.result };
+          document.getElementById('fileUploadStatus').innerText = "✓ Attached: " + file.name;
+        };
+        reader.readAsDataURL(file);
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function switchDocTab(tabId) {
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'settingsTab'].forEach(t => {
-        const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
-        if(elem) elem.classList.add('hidden');
+    function importArticlesFromFile(input) {
+      const file = input.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('newArtBody').value = e.target.result;
+        showToast("✓ Article Imported to Editor!");
+      };
+      reader.readAsText(file);
+    }
+
+    function publishNewArticle() {
+      const title = document.getElementById('newArtTitle').value.trim();
+      const cat = document.getElementById('newArtCat').value.trim() || 'General';
+      const body = document.getElementById('newArtBody').value.trim();
+      if(!title || !body) { alert("Please enter article title and body."); return; }
+
+      const articles = JSON.parse(localStorage.getItem('patientArticles') || '[]');
+      articles.unshift({ title, cat, body, media: uploadedMediaData, date: new Date().toLocaleDateString('en-GB') });
+      localStorage.setItem('patientArticles', JSON.stringify(articles));
+      showToast("✓ Article Published!");
+      document.getElementById('newArtTitle').value = '';
+      document.getElementById('newArtBody').value = '';
+      uploadedMediaData = null;
+      renderPublishedArticles();
+    }
+
+    function renderPublishedArticles() {
+      const container = document.getElementById('publishedArticlesGrid');
+      if(!container) return;
+      container.innerHTML = '';
+      const articles = JSON.parse(localStorage.getItem('patientArticles') || '[]');
+      articles.forEach(art => {
+        const div = document.createElement('div');
+        div.className = "p-5 bg-amber-50/40 border petal-border rounded-2xl space-y-2 shadow-sm";
+        div.innerHTML = `
+          <span class="text-[10px] bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded">${art.cat}</span>
+          <h4 class="font-bold text-sm text-[#0F2942]">${art.title}</h4>
+          <p class="text-xs text-slate-700 leading-relaxed">${art.body}</p>
+        `;
+        container.appendChild(div);
       });
-      const active = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
-      if(active) active.classList.remove('hidden');
     }
 
-    // SECURITY MODAL
-    function openSecuritySettingsModal() { document.getElementById('securityModal').classList.remove('hidden'); }
-    function closeSecuritySettingsModal() { document.getElementById('securityModal').classList.add('hidden'); }
-    function saveSecuritySettings() {
-      const radios = document.getElementsByName('secModeRadio');
-      let sel = 'open';
-      for(let r of radios) { if(r.checked) sel = r.value; }
-      localStorage.setItem('docLockMode', sel);
-      const newPin = document.getElementById('customPinInput').value.trim();
-      if(newPin) localStorage.setItem('docPin', newPin);
-      closeSecuritySettingsModal();
-      showToast("Security Updated: " + sel.toUpperCase());
-    }
-
-    function verifyAndOpenWorkstation() {
-      const mode = localStorage.getItem('docLockMode') || 'open';
-      const savedPin = localStorage.getItem('docPin') || 'icu2026';
-      if(mode === 'open') {
-        switchWorkspace('doctor');
-      } else {
-        const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
-        if(entered === savedPin || entered === 'drkulkarni') switchWorkspace('doctor');
-        else if(entered !== null) alert("Invalid PIN.");
-      }
-    }
-
-    // PDF EXPORT
-    function exportToPdf(elementId, filename) {
-      const element = document.getElementById(elementId);
-      showToast("Generating official A4 PDF...");
-      html2pdf().set({
-        margin: [8, 8, 8, 8],
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(element).save().then(() => showToast("✓ PDF Downloaded!"));
+    function insertDietPreset(type) {
+      const ta = document.getElementById('rxAdvice');
+      if(type === 'chf') ta.value = "हार्ट फेल्युअर: Strict fluid cap < 1.2 Litres/24h. Zero table salt, no papad/pickles. Check daily morning weight.";
+      if(type === 'ckd') ta.value = "Leached vegetables only. Zero coconut water, zero citrus juices. Low potassium diet.";
+      if(type === 'stroke') ta.value = "Semi-solid thickened food. 70° to 90° upright posture during & 45 mins post feeding.";
+      if(type === 'bedsore') ta.value = "Strict Q2H turning schedule. Air-mattress 24/7. Normal saline dressing.";
     }
 
     // INITIALIZATION
@@ -1311,40 +1864,13 @@ _Please confirm your estimated arrival time._`;
       const dt = new Date().toLocaleDateString('en-GB') + " | " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
       const rxD = document.getElementById('rxDateTime'); if(rxD) rxD.value = dt;
       const reqD = document.getElementById('reqDate'); if(reqD) reqD.value = new Date().toLocaleDateString('en-GB');
-      
+
       autoDetectTimeSlab();
-
-      // Load initial drugs
-      const tbody = document.getElementById('rxTableBody');
-      if (tbody) {
-        tbody.innerHTML = `
-          <tr>
-            <td class="border p-1 text-center font-bold text-slate-500">1</td>
-            <td class="border p-1"><input type="text" value="Pantoprazole 40mg (Pan-40)" class="w-full font-bold outline-none"></td>
-            <td class="border p-1"><input type="text" value="Empty Stomach" class="w-full text-center"></td>
-            <td class="border p-1"><input type="text" value="1-0-0" class="w-full text-center font-bold"></td>
-            <td class="border p-1"><input type="text" value="15" class="w-full text-center"></td>
-            <td class="border p-1"><input type="text" value="Morning 30 mins before breakfast" class="w-full"></td>
-            <td class="border p-1 text-center no-print"><button onclick="this.closest('tr').remove()" class="text-red-500 font-bold">✕</button></td>
-          </tr>
-        `;
-      }
-
-      // Populate Cheat Sheet
-      const csBody = document.getElementById('cheatSheetBody');
-      if(csBody) {
-        PATHOLOGY_DATABASE.forEach(p => {
-          csBody.innerHTML += `<tr class="border-b"><td class="p-2 font-bold text-teal-950">${p.sys}</td><td class="p-2 font-semibold">${p.test}</td><td class="p-2 font-bold text-teal-700">${p.ref}</td><td class="p-2 text-slate-600">${p.note}</td></tr>`;
-        });
-      }
-
-      // Populate Drug Directory
-      const ddBody = document.getElementById('drugDirBody');
-      if(ddBody) {
-        DRUG_DATABASE.forEach(d => {
-          ddBody.innerHTML += `<tr class="border-b hover:bg-slate-50"><td class="p-2.5 font-bold text-teal-900">${d.cat}</td><td class="p-2.5 font-semibold">${d.generic}</td><td class="p-2.5 text-slate-600">${d.brands}</td><td class="p-2.5 text-center"><button onclick="showToast('Added to Rx');" class="bg-[#0D9488] text-white px-3 py-1 rounded-xl text-[10px] font-bold">+ Add to Rx</button></td></tr>`;
-        });
-      }
+      initRxPad();
+      renderDrugDirectory();
+      renderCheatSheet();
+      populate30Calculators();
+      renderPublishedArticles();
     };
   </script>
 </body>
