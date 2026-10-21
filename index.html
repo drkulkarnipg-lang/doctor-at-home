@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor & Emergency Specialist, Pune</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- html2pdf for Direct High-Quality A4 PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -83,7 +82,7 @@
   <header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
       
-      <!-- Doctor Brand Header with Caduceus Logo Fallback -->
+      <!-- Doctor Brand Header -->
       <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
         <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
           <div class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50">
@@ -104,22 +103,11 @@
         </div>
       </div>
 
-      <!-- Live Navigation Actions, Translators, GMB & Helpline -->
+      <!-- Navigation & Action Controls -->
       <div class="flex items-center flex-wrap gap-2">
         
-        <!-- FULL WORLD & INDIAN LANGUAGE SELECTOR -->
+        <!-- Language Selector -->
         <div id="google_translate_element" class="inline-block shadow-sm rounded-xl"></div>
-        
-        <!-- QUICK POPULAR LANGUAGE SWITCHER -->
-        <div id="langQuickBar" class="hidden lg:flex items-center gap-1 bg-white px-2 py-1 rounded-xl border petal-border text-[10px] font-bold">
-          <button onclick="quickTranslate('mr')" class="hover:text-teal-700">मराठी</button>|
-          <button onclick="quickTranslate('en')" class="hover:text-teal-700">ENG</button>|
-          <button onclick="quickTranslate('hi')" class="hover:text-teal-700">हिंदी</button>|
-          <button onclick="quickTranslate('de')" class="hover:text-teal-700">DE</button>|
-          <button onclick="quickTranslate('fr')" class="hover:text-teal-700">FR</button>|
-          <button onclick="quickTranslate('ja')" class="hover:text-teal-700">日本語</button>|
-          <button onclick="quickTranslate('ur')" class="hover:text-teal-700">اردو</button>
-        </div>
 
         <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
           <button id="navPublicBtn" onclick="switchWorkspace('public')" class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition">
@@ -130,23 +118,22 @@
           </button>
         </div>
 
-        <!-- Security Lock/Unlock Mode Button -->
         <button onclick="openSecuritySettingsModal()" class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Security Settings">
           <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access</span>
         </button>
 
-        <!-- BOTH GOOGLE BUSINESS PROFILES -->
-        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune GMB">
+        <!-- Both GMB Profiles -->
+        <a href="https://share.google/oNbajE0cqMew0j5Ue" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Home Visiting ICU Doctor Pune">
           <i class="fa-brands fa-google text-blue-600"></i> <span class="hidden md:inline">GMB: Home ICU</span>
         </a>
 
-        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Dr. Pramod G. Kulkarni Clinic GMB">
+        <a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-50 border petal-border text-[#0F2942] text-[11px] px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" title="Dr. Pramod G. Kulkarni Clinic">
           <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden md:inline">GMB: Clinic</span>
         </a>
 
-        <!-- 100% INTERACTIVE CALL BUTTON -->
-        <a href="tel:+919822594341" onclick="window.location.href='tel:+919822594341'" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 font-bold shadow-md transition active:scale-95 cursor-pointer z-50 pointer-events-auto" title="Click to Call Dr. Kulkarni">
-          <i class="fa-solid fa-phone"></i> <span class="font-mono">9822594341</span>
+        <!-- 100% INTERACTIVE CALL BUTTON (Works on PC and Mobile) -->
+        <a href="tel:+919822594341" onclick="handleDirectCall(event)" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" title="Click to Call Dr. Kulkarni">
+          <i class="fa-solid fa-phone animate-bounce"></i> <span class="font-mono text-sm">9822594341</span>
         </a>
       </div>
     </div>
@@ -175,7 +162,7 @@
             📖 पुणे आरोग्य विश्वकोश (Free Medical Wiki)
           </a>
           <a href="#bookingSection" class="text-xs bg-[#0D9488] hover:bg-teal-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm">
-            📍 Book Visit with GPS Navigation
+            📍 Book Visit with GPS
           </a>
           <a href="#patientToolsSection" class="text-xs bg-white hover:bg-slate-50 text-[#0F2942] border petal-border px-3.5 py-2 rounded-xl font-bold shadow-sm">
             🧮 30 Health Calculators
@@ -183,9 +170,9 @@
         </div>
       </div>
 
-      <!-- Dispatch Box -->
+      <!-- Emergency Dispatch Card -->
       <div class="bg-amber-50/80 border border-amber-200 p-5 rounded-2xl text-xs space-y-2.5 w-full md:w-80 shadow-sm flex-shrink-0">
-        <p class="font-bold text-amber-950 text-sm">📍 Base Station &amp; Rapid Reach:</p>
+        <p class="font-bold text-amber-950 text-sm">📍 Base Station &amp; Reach:</p>
         <p class="text-amber-900 font-semibold">Dhayari, Pune – 411041, Maharashtra.</p>
         <p class="text-slate-600">Average Reach Time: 30–60 mins across Pune &amp; PCMC.</p>
         <a href="https://wa.me/919822594341?text=Hello%20Dr.%20Kulkarni,%20I%20need%20urgent%20bedside%20ICU%20consultation%20in%20Pune." target="_blank" rel="noopener noreferrer" class="w-full bg-[#16A34A] hover:bg-green-700 text-white font-bold py-2 rounded-xl flex items-center justify-center gap-2 shadow transition">
@@ -194,7 +181,7 @@
       </div>
     </div>
 
-    <!-- DEDICATED SENIOR CITIZEN & BEDRIDDEN ICU CARE -->
+    <!-- DEDICATED SENIOR CITIZEN & BEDRIDDEN ICU SECTION -->
     <section id="elderlySection" class="petal-box p-6 md:p-8 rounded-3xl space-y-6 shadow-sm border-2 border-amber-300 bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30">
       <div class="flex flex-wrap justify-between items-center border-b border-amber-200 pb-3 gap-2">
         <div>
@@ -285,7 +272,7 @@
             <span class="bg-red-50 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded">हार्ट फेल्युअर</span>
             <h4 class="font-bold text-sm text-[#0F2942] mt-1.5">हार्ट फेल्युअरमध्ये दररोज सकाळी वजन करणे का जीवनरक्षक आहे?</h4>
             <p class="text-slate-600 mt-2 leading-relaxed">
-              २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे (Pulmonary Edema) पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून अ‍ॅडमिशन टाळता येते.
+              २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून घरच्या घरी अ‍ॅडमिशन टाळता येते.
             </p>
           </div>
           <button onclick="openWikiModal(2)" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition">संपूर्ण वाचा ↗</button>
@@ -304,7 +291,7 @@
       </div>
     </section>
 
-    <!-- BOOKING SECTION: WITH AUTO TIME-SLAB DETECTOR (11:01 PM) -->
+    <!-- BOOKING SECTION: WITH 11:01 PM AUTO TIME-SLAB DETECTOR -->
     <section id="bookingSection" class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4">
       <div class="max-w-4xl">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Bedside ICU Home Visit Booking &amp; Accurate GPS Location</h3>
@@ -326,7 +313,7 @@
                 <textarea id="bkPatAddress" rows="2" placeholder="Building name, Flat no, Wing, Near Landmark, Pune locality..." class="w-full mt-1 p-2 border rounded-xl bg-white"></textarea>
               </div>
 
-              <!-- LIVE GPS CAPTURE BUTTON FOR DOCTOR NAVIGATION -->
+              <!-- LIVE GPS CAPTURE BUTTON -->
               <div class="sm:col-span-2 bg-emerald-50 p-3 rounded-xl border border-emerald-300 space-y-1.5">
                 <div class="flex justify-between items-center">
                   <span class="font-bold text-emerald-950">📍 Pinpoint Live Google Maps Location:</span>
@@ -341,7 +328,7 @@
               </div>
             </div>
 
-            <!-- Time Slab with 11:01 PM Live Auto-Detector & Distance -->
+            <!-- Time Slab with Live Auto-Detector -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <div class="flex justify-between items-center">
@@ -405,7 +392,7 @@
       </div>
     </section>
 
-    <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS (INCLUDES CDC.GOV & DIRECT MARATHI PROXY) -->
+    <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS -->
     <section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
       <div class="flex flex-wrap justify-between items-center border-b pb-2">
         <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide">Verified International Clinical Portals &amp; Guidelines</h3>
@@ -553,7 +540,7 @@
       <button onclick="lockWorkstationNow()" class="px-3 py-1.5 bg-red-100 text-red-900 border border-red-300 rounded-xl text-xs font-bold hover:bg-red-200 ml-auto flex items-center gap-1">🔒 Lock Session</button>
     </div>
 
-    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR -->
+    <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Direct, Pop-up Proof <a> Links) -->
     <div id="aiLaunchBar" class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs">
       <div class="flex items-center gap-1.5">
         <span class="text-base">🧠</span>
@@ -561,17 +548,17 @@
       </div>
       <div class="flex items-center gap-1.5 flex-grow max-w-xl">
         <input type="text" id="aiGlobalQuery" placeholder="Type syndrome, biomarker or condition..." class="w-full p-2 rounded-lg text-slate-900 text-xs outline-none">
-        <button onclick="launchAI('webmd')" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm" title="WebMD Differential">🩺 WebMD ↗</button>
-        <button onclick="launchAI('gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Gemini">Gemini ↗</button>
-        <button onclick="launchAI('chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1.5 rounded-lg" title="OpenAI ChatGPT">ChatGPT ↗</button>
-        <button onclick="launchAI('claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Anthropic Claude">Claude ↗</button>
-        <button onclick="launchAI('copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Microsoft Copilot">Copilot ↗</button>
-        <button onclick="launchAI('scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Scholar">Scholar ↗</button>
-        <button onclick="launchAI('pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2 py-1.5 rounded-lg" title="PubMed NLM NCBI">PubMed ↗</button>
+        <a id="btnAiWebmd" href="https://symptoms.webmd.com/" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'webmd')" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm" title="WebMD Differential">🩺 WebMD ↗</a>
+        <a id="btnAiGemini" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'gemini')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Gemini">Gemini ↗</a>
+        <a id="btnAiChatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'chatgpt')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-1.5 rounded-lg" title="OpenAI ChatGPT">ChatGPT ↗</a>
+        <a id="btnAiClaude" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'claude')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Anthropic Claude">Claude ↗</a>
+        <a id="btnAiCopilot" href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'copilot')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Microsoft Copilot">Copilot ↗</a>
+        <a id="btnAiScholar" href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'scholar')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2 py-1.5 rounded-lg" title="Google Scholar">Scholar ↗</a>
+        <a id="btnAiPubmed" href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer" onclick="navigateAI(event, 'pubmed')" class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2 py-1.5 rounded-lg" title="PubMed NLM NCBI">PubMed ↗</a>
       </div>
     </div>
 
-    <!-- TAB 1: A4 PRESCRIPTION PAD (WITH ADDITIONAL PATH/RAD INVESTIGATIONS) -->
+    <!-- TAB 1: A4 PRESCRIPTION PAD -->
     <div id="viewRxPad" class="space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border shadow-sm">
         <div class="flex items-center gap-2">
@@ -672,7 +659,7 @@
           <button type="button" onclick="addRxRow()" class="no-print text-xs text-[#0D9488] font-bold mt-1.5">+ Add Blank Medicine Row</button>
         </div>
 
-        <!-- ADDITIONAL PATHOLOGY & RADIOLOGY INSTRUCTIONS ON PRESCRIPTION -->
+        <!-- ADDITIONAL PATHOLOGY & RADIOLOGY ON PRESCRIPTION -->
         <div class="border p-2.5 rounded-xl bg-slate-50/70 space-y-1">
           <label class="font-bold text-[#0F2942]">🔬 Advised Pathology &amp; Radiology Investigations:</label>
           <input type="text" id="rxPathRadAdvised" placeholder="e.g. CBC, KFT, Serum Electrolytes, High Sensitivity Troponin-I, Portable Chest X-Ray..." class="w-full bg-white p-1.5 border rounded-lg text-[11px]">
@@ -697,7 +684,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: WEBMD CLINICAL SUITE & DIFFERENTIALS -->
+    <!-- TAB 2: WEBMD CLINICAL SUITE -->
     <div id="viewSymptomChecker" class="hidden space-y-4 no-print">
       <div class="bg-white p-5 rounded-3xl border petal-border shadow-sm flex flex-wrap justify-between items-center gap-3">
         <div>
@@ -747,7 +734,7 @@
       </div>
     </div>
 
-    <!-- TAB 3: LIVE RSS & AI CLINICAL RESEARCH AGENT (FEEDLY & PEER-REVIEWED) -->
+    <!-- TAB 3: LIVE RSS & AI RESEARCH AGENT -->
     <div id="viewJournalsHub" class="hidden space-y-6">
       <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-4 no-print">
         <div class="flex flex-wrap justify-between items-center gap-2 border-b pb-3">
@@ -814,7 +801,7 @@
       </div>
     </div>
 
-    <!-- TAB 4: PATHOLOGY CHEAT SHEET (150+ STANDARD VALUES) -->
+    <!-- TAB 4: PATHOLOGY CHEAT SHEET -->
     <div id="viewPathCheatSheet" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <div>
@@ -839,7 +826,7 @@
       </div>
     </div>
 
-    <!-- TAB 5: PATHOLOGY REQUISITION (WITH 1-CLICK DISEASE PRESET BUNDLES) -->
+    <!-- TAB 5: PATHOLOGY REQUISITION (WITH 1-CLICK TEST BUNDLES) -->
     <div id="viewPathReq" class="hidden space-y-4">
       <div class="flex flex-wrap justify-between items-center gap-2 no-print">
         <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Requisition Pad</h3>
@@ -854,7 +841,7 @@
         </div>
       </div>
 
-      <!-- 1-CLICK DISEASE TEST PRESETS -->
+      <!-- 1-CLICK DISEASE TEST BUNDLES -->
       <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl no-print space-y-2">
         <div class="flex justify-between items-center">
           <span class="font-bold text-amber-950 text-xs">⚡ 1-Click Disease/Symptom Test Bundles:</span>
@@ -1367,6 +1354,41 @@
       }, 2500);
     }
 
+    // 100% RELIABLE CALL HANDLER (Works on Desktop Windows PC and Mobile)
+    function handleDirectCall(e) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if(!isMobile) {
+        if(navigator.clipboard) {
+          navigator.clipboard.writeText('9822594341');
+        }
+        showToast("📞 नंबर 9822594341 कॉपी झाला! WhatsApp उघडत आहे...");
+        setTimeout(() => {
+          window.open('https://wa.me/919822594341?text=Hello%20Dr.%20Kulkarni,%20I%20am%20calling%20for%20urgent%20bedside%20ICU%20consultation.', '_blank');
+        }, 500);
+      } else {
+        showToast("📞 Dialing 9822594341...");
+      }
+    }
+
+    // 100% RELIABLE AI NAVIGATOR (Pop-up Proof)
+    function navigateAI(e, engine) {
+      const q = document.getElementById('aiGlobalQuery')?.value?.trim() || '';
+      const promptText = q ? `Clinical evaluation for bedside emergency: ${q}` : "Bedside ICU emergency clinical guidelines";
+      let url = '';
+
+      if(engine === 'gemini') url = `https://gemini.google.com/app?q=${encodeURIComponent(promptText)}`;
+      else if(engine === 'chatgpt') url = `https://chatgpt.com/?q=${encodeURIComponent(promptText)}`;
+      else if(engine === 'claude') url = `https://claude.ai/new?q=${encodeURIComponent(promptText)}`;
+      else if(engine === 'copilot') url = `https://copilot.microsoft.com/?q=${encodeURIComponent(promptText)}`;
+      else if(engine === 'scholar') url = `https://scholar.google.com/scholar?q=${encodeURIComponent(q || 'Bedside ICU cardiology')}`;
+      else if(engine === 'pubmed') url = `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q || 'Bedside critical care')}`;
+      else if(engine === 'webmd') url = q ? `https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q)}` : `https://symptoms.webmd.com/`;
+
+      if(url) {
+        e.currentTarget.href = url;
+      }
+    }
+
     // AUTO-DETECT 11:01 PM LATE NIGHT SLAB
     function autoDetectTimeSlab() {
       const now = new Date();
@@ -1464,8 +1486,8 @@
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
-      const active = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
-      if(active) active.classList.remove('hidden');
+      const activeElem = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      if(activeElem) activeElem.classList.remove('hidden');
     }
 
     function switchClinicalDocView(val) {
@@ -1484,23 +1506,6 @@
       });
       const active = document.getElementById('cert-' + val);
       if(active) active.classList.remove('hidden');
-    }
-
-    // AI CLINICAL LAUNCHER
-    function launchAI(engine) {
-      const q = document.getElementById('aiGlobalQuery').value.trim();
-      const promptText = q ? `Clinical evaluation for bedside emergency: ${q}` : "Bedside ICU emergency clinical guidelines";
-
-      if(engine === 'gemini') window.open(`https://gemini.google.com/app?q=${encodeURIComponent(promptText)}`, '_blank');
-      if(engine === 'chatgpt') window.open(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`, '_blank');
-      if(engine === 'claude') window.open(`https://claude.ai/new?q=${encodeURIComponent(promptText)}`, '_blank');
-      if(engine === 'copilot') window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(promptText)}`, '_blank');
-      if(engine === 'scholar') window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(q || 'Bedside ICU cardiology')}`, '_blank');
-      if(engine === 'pubmed') window.open(`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q || 'Bedside critical care')}`, '_blank');
-      if(engine === 'webmd') {
-        if(q) window.open(`https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q)}`, '_blank');
-        else window.open('https://symptoms.webmd.com/', '_blank');
-      }
     }
 
     // WEBMD FINDINGS TRANSFER TO RX PAD
@@ -2147,13 +2152,17 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
       if(type === 'bedsore') ta.value = "Strict Q2H turning schedule. Air-mattress 24/7. Normal saline dressing.";
     }
 
+    function saveWebhookUrl() {
+      const url = document.getElementById('webhookUrlInput').value.trim();
+      localStorage.setItem('makeWebhookUrl', url);
+      showToast("Webhook URL saved successfully!");
+    }
+
     // INITIALIZATION
     window.onload = function() {
       const dt = new Date().toLocaleDateString('en-GB') + " | " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
       const rxD = document.getElementById('rxDateTime'); if(rxD) rxD.value = dt;
       const reqD = document.getElementById('reqDate'); if(reqD) reqD.value = new Date().toLocaleDateString('en-GB');
-      const fitD = document.getElementById('fitDateDisplay'); if(fitD) fitD.innerText = new Date().toLocaleDateString('en-GB');
-      const lveD = document.getElementById('leaveDateDisplay'); if(lveD) lveD.innerText = new Date().toLocaleDateString('en-GB');
 
       autoDetectTimeSlab();
       initRxPad();
