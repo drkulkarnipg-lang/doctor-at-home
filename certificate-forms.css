@@ -1,0 +1,52 @@
+/* Editable clinical forms: screen comfort and dedicated A4 printing. */
+.certificate-sheet{max-width:880px;margin:24px auto;background:white;color:#17212b;border:1px solid #d8d8d0;border-radius:16px;overflow:hidden}
+.certificate-page{padding:30px;display:grid;gap:14px;font:13px/1.55 Inter,'Noto Sans Devanagari',sans-serif}
+.certificate-title{text-align:center;border-bottom:2px solid #243d50;padding-bottom:12px}
+.certificate-title h2{font:600 21px/1.3 Inter,sans-serif!important;color:#0f2942}
+.certificate-title p,.certificate-instruction{font-size:11px;color:#465461}
+.certificate-letterhead{border-bottom:1px solid #243d50;padding-bottom:12px}
+.certificate-letterhead strong{font:600 22px/1.3 Newsreader,Georgia,serif}.certificate-letterhead p{font-size:11px}
+.certificate-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}
+.certificate-field{display:grid;gap:4px;min-width:0;align-content:start;font-size:12px;break-inside:avoid}
+.certificate-field>span:first-child{font-weight:600;font-size:11px;line-height:1.5;color:#334452}
+.certificate-field input,.certificate-field select,.certificate-field textarea{width:100%;min-width:0;max-width:100%;border:1px solid #c4cdd1;border-radius:6px;background:#fff;padding:9px 8px;color:#101820;font:13px/1.5 Inter,'Noto Sans Devanagari',sans-serif;box-sizing:border-box}
+.certificate-field textarea{resize:vertical;min-height:52px;overflow:hidden}
+.certificate-wide{grid-column:1 / -1}
+.certificate-statement{font-size:13px;line-height:1.8}
+.certificate-section-title{font:600 13px/1.5 Inter,sans-serif!important;border-bottom:1px solid #c4cdd1;padding:8px 0 4px}
+.certificate-signature{display:grid;gap:4px;text-align:right;margin-top:38px;border-top:1px solid #8c969b;justify-self:end;min-width:240px;padding-top:6px;font-size:11px;break-inside:avoid}
+.certificate-hand-signature{margin-top:22px;font-size:12px;break-inside:avoid}
+.certificate-causes{width:100%;table-layout:fixed;border-collapse:collapse;break-inside:avoid}
+.certificate-causes th,.certificate-causes td{border:1px solid #9aa7ae;padding:8px;vertical-align:top}
+.certificate-causes th{font-size:11px;background:#edf1f1;text-align:left}.certificate-causes th:first-child{width:73%}
+.certificate-causes .certificate-field>span{font-size:10px}
+.certificate-footnote{font-size:10px;color:#53616b;border-top:1px solid #c4cdd1;padding-top:6px}
+.certificate-help{padding:18px 22px;border:1px solid #e6dccd;border-radius:14px;background:#fffdf9;font-size:12px;line-height:1.8}
+.certificate-help>div{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}.certificate-help a{color:#006a61;text-decoration:underline}
+.certificate-value{display:block;min-height:1.5em;border-bottom:1px solid #8c969b;padding:3px 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:black}
+#certificatePrintRoot{display:none}
+.certificate-export{width:194mm!important;max-width:194mm!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:white!important}
+.certificate-export .certificate-page{padding:5mm 3mm;gap:2.5mm;font-size:11px;line-height:1.4}
+.certificate-export .certificate-grid{gap:2mm 5mm}.certificate-export .certificate-field{gap:1mm}
+.certificate-export .certificate-field>span:first-child{font-size:9px;line-height:1.3}
+.certificate-export .certificate-value{font-size:10px;line-height:1.35;min-height:4mm;padding:1mm 0}
+.certificate-export .certificate-signature{margin-top:9mm;font-size:10px}
+.certificate-export .certificate-title h2{font-size:16px!important}.certificate-export .certificate-title{padding-bottom:2mm}
+.certificate-export .certificate-title p,.certificate-export .certificate-instruction,.certificate-export .certificate-letterhead p{font-size:9px}
+.certificate-export .certificate-statement{font-size:11px;line-height:1.5}
+.certificate-export .certificate-causes th,.certificate-export .certificate-causes td{padding:2mm}
+.certificate-export .certificate-section-title{padding:1mm 0;font-size:10px!important}
+.certificate-export .certificate-hand-signature{margin-top:5mm;font-size:10px}.certificate-export .certificate-footnote{font-size:8px}
+.certificate-export .no-print{display:none!important}
+.certificate-export .certificate-page+.certificate-page{break-before:page;page-break-before:always}
+@media(max-width:600px){.certificate-page{padding:20px;gap:16px}.certificate-grid{grid-template-columns:1fr}.certificate-title h2{font-size:18px!important}.certificate-signature{min-width:0;max-width:100%}.certificate-causes th:first-child{width:66%}.certificate-causes .certificate-field input,.certificate-causes .certificate-field textarea{font-size:12px;padding:6px}.certificate-help{padding:16px}#viewClinicalCertificates>div:first-child,#viewLegalForms>div:first-child{align-items:stretch;flex-direction:column}#clinDocSelect,#certTypeSelect{max-width:100%;width:100%;white-space:normal}}
+@media print{
+ body.certificate-printing>*{display:none!important}
+ body.certificate-printing>#certificatePrintRoot{display:block!important;width:194mm;margin:0;padding:0}
+ #certificatePrintRoot .certificate-sheet{display:block!important;overflow:visible!important;margin:0!important;padding:0!important}
+ #certificatePrintRoot .certificate-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #certificatePrintRoot .certificate-page{break-inside:auto}
+ #certificatePrintRoot .certificate-page+.certificate-page{break-before:page;page-break-before:always}
+ @page{size:A4 portrait;margin:8mm}
+}
+@media print{body.certificate-printing{background:#fff!important;min-height:0!important}}
