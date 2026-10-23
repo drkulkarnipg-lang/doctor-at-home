@@ -55,3 +55,13 @@ Contact-open/close/copy behaviour, explicit phone URI and navigation state were 
 - App-generated PDF export stamps website, source-section URL and page number on every page. Original government PDFs remain unchanged. Actual PDF export pagination and mobile share-app handoff still require manual preview review.
 - Privacy/limitations page and per-document source references. Article storage remains device-local; adding an article does not publish it globally.
 - Tests: 935 calculator assertions plus DOM tests for masked fields, setup/unlock/rejection/change-password protection, no plaintext password storage, converter values, diet non-overwrite/deduplication and per-page PDF stamp calls. No independent security or legal review claimed.
+
+## Patient-separated trend follow-up (preview only)
+
+Added a prominent Doctor Workstation “Diet & Conversions” tab with seven guidance cards and a working second converter; the prescription selector and public converter remain. This addresses discovery: these changes were not yet published to the live baseline.
+
+Trend histories now have unique patient IDs and separate storage entries, an explicit patient selector, date/time, BP/MAP, glucose with context, weight, pulse, SpO2, temperature, creatinine and HbA1c. Each plot uses explicit fixed units and entry order; it is not a clinical recommendation or a time-weighted chart. Selecting a measurement shows its relevant columns. Histories begin with 20 blank entries and permit adding readings (up to 2,000 per history).
+
+No automatic assignment of the old global history: its original local-storage key remains unchanged; an explicit copy creates an unverified legacy history. JSON exports cover a selected patient or all histories. Restore adds new IDs rather than overwriting existing patients. Inputs auto-save locally; storage failures prevent silently switching away from unsaved data. A cross-tab conflict notice prevents silently overwriting unsaved entries.
+
+Patient selection applies to the trend module, not prescription/other clinical-document ownership. Server authentication, encryption and cloud backup remain unconfigured. Software tests use synthetic patients: identical display names with different IDs, distinct BP/glucose values, chart switching, legacy preservation and non-overwriting restore. Actual mobile chart/print/PDF and backup download handoff remain manual preview checks.
