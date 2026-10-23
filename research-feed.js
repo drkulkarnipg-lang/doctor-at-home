@@ -9,11 +9,11 @@
     container.replaceChildren(node('p','Fetching latest articles and research news...','text-teal-700'));
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),15000);
     try{
-      const response=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feedUrl),{signal:controller.signal});
-      if(!response.ok)throw new Error('Feed service unavailable');
-      const data=await response.json();
+      const response=await fetch('/api/research-feeds?source='+encodeURIComponent(feedUrl),{signal:controller.signal});
+      let data;try{data=await response.json();}catch{throw new Error('Research feed service is not available on this host. Open the live Vercel website.');}
+      if(!response.ok){const e=new Error(data.message||'Publisher feed unavailable');e.sourceUrl=https(data.sourceUrl);throw e;}
       if(data.status!=='ok'||!Array.isArray(data.items)||!data.items.length)throw new Error('Feed unavailable');
-      const items=data.items.slice(0,4);container.replaceChildren();
+      const items=data.items.slice(0,6);container.replaceChildren();container.append(node('p',data.source+' · '+data.kind+' · Checked '+new Date(data.checkedAt).toLocaleString(),'text-slate-500'));
       for(const item of items){
         const card=node('div',undefined,'p-3.5 bg-slate-50 border petal-border rounded-2xl flex flex-col gap-3');
         const title=String(item.title||'Untitled article');
@@ -31,7 +31,7 @@
         card.append(actions);container.append(card);
       }
       window.showToast?.('Latest feed excerpts loaded.');
-    }catch(e){container.replaceChildren(node('p','Feed unavailable. Open the publisher link directly or try again later.','text-red-600'));}
+    }catch(e){container.replaceChildren(node('p',e.message||'Feed unavailable. Choose another publisher.','text-red-600'));if(e.sourceUrl){const a=node('a','Open publisher ↗','research-upload');a.href=e.sourceUrl;a.target='_blank';a.rel='noopener noreferrer';container.append(a);}const retry=node('button','Try again','research-upload');retry.type='button';retry.onclick=()=>window.fetchAndDisplayRssFeed();container.append(retry);}
     finally{clearTimeout(timeout);}
   };
 })();
