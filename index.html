@@ -313,7 +313,7 @@
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Know your numbers</h3>
 <p class="text-xs text-slate-600">Understand your BMI and estimated average glucose. Clinical calculations are available in Doctor Workstation.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid"></div><article class="conversion-panel"><span class="section-eyebrow">Everyday conversions</span><h4>Temperature &amp; weight</h4><form id="unitConverterForm"><label for="unitConversionType">Conversion</label><select id="unitConversionType"><option value="c-f">Celsius → Fahrenheit</option><option value="f-c">Fahrenheit → Celsius</option><option value="kg-lb">Kilograms → pounds</option><option value="lb-kg">Pounds → kilograms</option></select><label for="unitConversionValue">Value</label><input id="unitConversionValue" type="number" step="any" required/><button type="submit">Convert</button><output id="unitConversionResult" aria-live="polite">Enter a value to convert.</output></form><p>°F = °C × 9/5 + 32 · 1 lb = 0.45359237 kg exactly.</p></article>
 </section>
 <!-- Footer -->
 <footer class="bg-[#0F2942] text-slate-300 p-8 rounded-3xl text-xs space-y-4 shadow-md">
@@ -333,7 +333,7 @@
 <p class="text-slate-300">WhatsApp visit request with optional GPS pin. Server automation requires configuration.</p>
 </div>
 </div>
-<p class="text-center text-slate-500 text-[11px]">© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
+<p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal, privacy &amp; editorial information ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
 </footer>
 </main>
 <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
@@ -379,10 +379,10 @@
 <div class="flex flex-wrap gap-2">
 <select class="text-xs bg-amber-50 border border-amber-300 text-amber-900 font-semibold rounded-xl px-2.5 py-1.5" onchange="insertDietPreset(this.value)">
 <option value="">⚡ Diet Preset...</option>
-<option value="chf">हार्ट फेल्युअर (Fluid &lt;1.2L &amp; Daily Weight)</option>
-<option value="ckd">CKD (Leached Veg, Zero Coconut Water)</option>
-<option value="stroke">Dysphagia (70°-90° Posture)</option>
-<option value="bedsore">Bedridden (Q2H Turning, Air-Mattress)</option>
+<option value="diabetic">Diabetes — individual meal plan</option><option value="dash">DASH — blood-pressure support</option><option value="protein">Protein support — prescribed target</option><option value="chf">Heart failure — individual action plan</option>
+<option value="ckd">Renal — CKD / dialysis-specific plan</option>
+<option value="stroke">Dysphagia — assessed swallowing plan</option>
+<option value="bedsore">Bedridden — individual pressure-care plan</option>
 </select>
 <button class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="saveRecordAsPrompt()">💾 Save As...</button>
 <button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="savePatientPrescriptionToCloud()">
@@ -811,6 +811,8 @@
 </div>
 <!-- TAB 8: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2 EXACT LEGAL FORMS) -->
 <div class="hidden space-y-4" id="viewLegalForms">
+<section class="certificate-help no-print" aria-label="Government original PDF downloads"><h3>Government originals — unchanged PDFs</h3><div class="legal-resource-actions"><a href="assets/forms/crs-form4-4a-original.pdf" download>Download original Form 4 + 4A</a><a href="assets/forms/crs-form4-4a-original.pdf#page=1" target="_blank" rel="noopener">Open / print Form 4 (page 1)</a><a href="assets/forms/crs-form4-4a-original.pdf#page=3" target="_blank" rel="noopener">Open / print Form 4A (page 3)</a><a href="assets/forms/form2-government-reference.pdf" download>Download Form 2 — GHMC reference</a><a href="assets/forms/form2-government-reference.pdf" target="_blank" rel="noopener">Open / print Form 2 reference</a></div><p>Form 4 / 4A: official CRS originals, including instructions. Form 2: GHMC government reference edition; confirm the prescribed Maharashtra / local Registrar version before submitting. Open the original and use the PDF viewer’s Print control. Use the editable forms below to type information and export / share a working PDF. Government originals are not rebranded or altered.</p><a href="https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf" target="_blank" rel="noopener">Form 2 government source ↗</a> · <a href="assets/forms/sources.json" target="_blank" rel="noopener">PDF sources and checksums ↗</a></section>
+
 <aside class="certificate-help no-print"><p>Editable working layouts based on official forms. Use the receiving Registrar's prescribed form / portal where required. Form 4: hospital; Form 4A: non-institutional. Record a disease / injury sequence, not cardiac arrest alone. Entries are not automatically saved or submitted.</p><div><a href="https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf" rel="noopener noreferrer" target="_blank">Official CRS Form 4 / 4A + instructions ↗</a><a href="https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf" rel="noopener noreferrer" target="_blank">Maharashtra CRS handbook (2026) ↗</a></div></aside><div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
 <select class="text-xs font-bold border p-2 rounded-xl bg-amber-50" id="certTypeSelect" onchange="switchCertificateView(this.value)">
 <option value="form4a">Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act)</option>
@@ -938,22 +940,9 @@
 <div class="space-y-3 text-slate-700 leading-relaxed text-xs" id="wikiModalContent"></div>
 </div>
 </div>
-<!-- SECURITY SETTINGS MODAL -->
-<div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="securityModal">
-<div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs">
-<div class="flex justify-between items-center border-b pb-2">
-<h3 class="font-bold text-base serif-brand text-[#0F2942]">Doctor Workstation Access Security</h3>
-<button class="text-slate-400 hover:text-slate-700 text-lg" onclick="closeSecuritySettingsModal()">✕</button>
-</div>
-<div class="space-y-2">
-<label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input id="secModeOpen" name="secModeRadio" type="radio" value="open"/> <span>🔓 Open Direct Access</span></label>
-<label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input id="secModePin" name="secModeRadio" type="radio" value="pin"/> <span>🔒 Secret PIN Gate (Default: icu2026)</span></label>
-<label class="flex items-center gap-2 p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50"><input id="secModeBiometric" name="secModeRadio" type="radio" value="biometric"/> <span>👆 Fingerprint Sensor</span></label>
-</div>
-<input class="w-full p-2 border rounded-xl font-mono" id="customPinInput" placeholder="Set New PIN (Default: icu2026)" type="password"/>
-<button class="w-full bg-[#0F2942] text-white font-bold py-2.5 rounded-xl shadow" onclick="saveSecuritySettings()">Save Security Settings</button>
-</div>
-</div>
+<!-- Device privacy settings: not a secure clinical backend. -->
+<div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="securityModal"><section class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs" role="dialog" aria-modal="true" aria-labelledby="deviceLockHeading"><button class="float-right" onclick="closeSecuritySettingsModal()" aria-label="Close device lock settings">×</button><h3 id="deviceLockHeading">Device privacy lock</h3><p class="device-lock-help">Set a passphrase for this browser. This hides the workstation from casual viewing; it is not server authentication or encrypted record storage. Automatically locks after 15 minutes of inactivity and when this page is hidden.</p><div hidden aria-hidden="true"><input id="secModeOpen" name="secModeRadio" type="radio" value="open" disabled/><input id="secModePin" name="secModeRadio" type="radio" value="pin" disabled/><input id="secModeBiometric" name="secModeRadio" type="radio" value="biometric" disabled/></div><div class="lock-form"><label id="lockCurrentRow">Current passphrase / existing PIN<input id="deviceCurrentPassword" type="password" autocomplete="current-password"/></label><label>New passphrase (8+ characters)<input id="customPinInput" type="password" autocomplete="new-password" minlength="8"/></label><label>Repeat new passphrase<input id="deviceConfirmPassword" type="password" autocomplete="new-password"/></label><button type="button" id="deviceLockSave" onclick="saveSecuritySettings()">Save device passphrase</button><p id="deviceLockSettingsError" class="device-lock-error" role="alert"></p><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Privacy and access limitations ↗</a></div></section></div>
+<dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
 <!-- DRUG SELECT MODAL -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" id="drugModal">
 <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-3 text-xs">
@@ -1072,47 +1061,11 @@
     }
 
     // WORKSTATION SECURITY & PERSISTENT SESSION
-    function openSecuritySettingsModal() { document.getElementById('securityModal').classList.remove('hidden'); }
+    function openSecuritySettingsModal() { window.DevicePrivacyLock.configure(); }
     function closeSecuritySettingsModal() { document.getElementById('securityModal').classList.add('hidden'); }
-    
-    function saveSecuritySettings() {
-      const radios = document.getElementsByName('secModeRadio');
-      let sel = 'open';
-      for(let r of radios) { if(r.checked) sel = r.value; }
-      localStorage.setItem('docLockMode', sel);
-      const newPin = document.getElementById('customPinInput').value.trim();
-      if(newPin) localStorage.setItem('docPin', newPin);
-      closeSecuritySettingsModal();
-      showToast("Security Updated: " + sel.toUpperCase());
-    }
-
-    function verifyAndOpenWorkstation() {
-      if(sessionStorage.getItem('docAuthenticated') === 'true') {
-        switchWorkspace('doctor');
-        return;
-      }
-      const mode = localStorage.getItem('docLockMode') || 'open';
-      const savedPin = localStorage.getItem('docPin') || 'icu2026';
-
-      if(mode === 'open') {
-        sessionStorage.setItem('docAuthenticated', 'true');
-        switchWorkspace('doctor');
-      } else {
-        const entered = prompt("Enter Doctor Workstation PIN (Default: icu2026):", "");
-        if(entered === savedPin || entered === 'drkulkarni') {
-          sessionStorage.setItem('docAuthenticated', 'true');
-          switchWorkspace('doctor');
-        } else if(entered !== null) {
-          alert("Invalid PIN. Access denied.");
-        }
-      }
-    }
-
-    function lockWorkstationNow() {
-      sessionStorage.removeItem('docAuthenticated');
-      switchWorkspace('public');
-      showToast("🔒 Workstation Locked Successfully");
-    }
+    function saveSecuritySettings() { /* replaced by device-lock.js */ }
+    function verifyAndOpenWorkstation() { window.DevicePrivacyLock.open(); }
+    function lockWorkstationNow() { window.DevicePrivacyLock.lock(); }
 
     // WORKSPACE & TABS SWITCHER
     function switchWorkspace(type) {
@@ -1618,13 +1571,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    function insertDietPreset(type) {
-      const ta = document.getElementById('rxAdvice');
-      if(type === 'chf') ta.value = "हार्ट फेल्युअर: Strict fluid cap < 1.2 Litres/24h. Zero table salt, no papad/pickles. Check daily morning weight.";
-      if(type === 'ckd') ta.value = "Leached vegetables only. Zero coconut water, zero citrus juices. Low potassium diet.";
-      if(type === 'stroke') ta.value = "Semi-solid thickened food. 70° to 90° upright posture during & 45 mins post feeding.";
-      if(type === 'bedsore') ta.value = "Strict Q2H turning schedule. Air-mattress 24/7. Normal saline dressing.";
-    }
 
     function saveWebhookUrl() {
       const url = document.getElementById('webhookUrlInput').value.trim();
@@ -1716,5 +1662,5 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9822594341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919822594341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog></body>
+</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9822594341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919822594341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog></body>
 </html>

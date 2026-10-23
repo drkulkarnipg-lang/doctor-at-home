@@ -1,0 +1,17 @@
+[
+  {
+    "file": "crs-form4-4a-original.pdf",
+    "source": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf",
+    "retrieved": "2026-10-23",
+    "sha256": "3b19259da7143c5d47576f387280bade33253c8d2f28df2be3c8b31d0993afc0",
+    "bytes": 249012
+  },
+  {
+    "file": "form2-government-reference.pdf",
+    "source": "https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf",
+    "authority": "Greater Hyderabad Municipal Corporation; reference edition, not a confirmed Maharashtra prescribed form",
+    "retrieved": "2026-10-23",
+    "sha256": "9d126bc36e2a4c0758d445c43ac62a4ccd0b07352b60ff00ddc831dfbe3858cd",
+    "bytes": 553370
+  }
+]
