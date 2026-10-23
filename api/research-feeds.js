@@ -1,12 +1,6 @@
 'use strict';
 const {XMLParser}=require('fast-xml-parser');
-const SOURCES={
- criticalcare:{name:'Critical Care',url:'https://link.springer.com/search.rss?facet-journal-id=13054&sortOrder=newestFirst',home:'https://link.springer.com/journal/13054',kind:'journal feed',hosts:['link.springer.com','link.springernature.com']},
- medicalxpress:{name:'Medical Xpress',url:'https://medicalxpress.com/rss-feed/',home:'https://medicalxpress.com/',kind:'research news',hosts:['medicalxpress.com']},
- nejm:{name:'NEJM',url:'https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss',home:'https://www.nejm.org/',kind:'journal feed',hosts:['www.nejm.org']},
- lancet:{name:'The Lancet',url:'https://www.thelancet.com/action/showFeed?jc=lancet&type=etoc&feed=rss',home:'https://www.thelancet.com/',kind:'journal feed',hosts:['www.thelancet.com']},
- cdc:{name:'CDC Newsroom',url:'https://tools.cdc.gov/api/v2/resources/media/132608.rss',home:'https://www.cdc.gov/media/',kind:'public health news',hosts:['tools.cdc.gov']}
-};
+const {sources:SOURCES}=require('../research-sources.js');
 const parser=new XMLParser({ignoreAttributes:false,removeNSPrefix:true,parseTagValue:false,processEntities:true,trimValues:true});
 const text=v=>typeof v==='string'?v:typeof v==='number'?String(v):v&&typeof v==='object'?text(v['#text']):'';
 const arr=v=>Array.isArray(v)?v:v?[v]:[];
@@ -31,9 +25,9 @@ async function fetchFeed(source){
 async function handler(req,res){
  res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('X-Content-Type-Options','nosniff');
  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({status:'error',message:'Use GET.'});}
- const id=String(req.query?.source||'criticalcare'),source=Object.hasOwn(SOURCES,id)?SOURCES[id]:null;
+ const id=String(req.query?.source||'naturemedicine'),source=Object.hasOwn(SOURCES,id)?SOURCES[id]:null;
  if(!source)return res.status(400).json({status:'error',message:'Choose a listed publisher. Custom URLs are not accepted.'});
- try{const d=await fetchFeed(source);if(!d.items.length)throw Error('No readable items');res.setHeader('Cache-Control','public, s-maxage=600, stale-while-revalidate=1800');return res.status(200).json({status:'ok',source:source.name,kind:source.kind,sourceUrl:source.home,checkedAt:new Date().toISOString(),feedTitle:d.title,items:d.items});}
+ try{const d=await fetchFeed(source);if(!d.items.length)throw Error('No readable items');res.setHeader('Cache-Control','public, s-maxage=600, stale-while-revalidate=1800');return res.status(200).json({status:'ok',source:source.name,kind:source.kind,sourceUrl:source.home,fields:source.fields,checkedAt:new Date().toISOString(),feedTitle:d.title,items:d.items});}
  catch(e){res.setHeader('Cache-Control','no-store');return res.status(502).json({status:'unavailable',source:source.name,sourceUrl:source.home,message:'This publisher feed is unavailable. Open the original source or choose another feed. No separate internet connection is needed.'});}
 }
-module.exports=handler;module.exports.parseFeed=parseFeed;
+module.exports=handler;module.exports.parseFeed=parseFeed;module.exports.fetchFeed=fetchFeed;module.exports.sources=SOURCES;

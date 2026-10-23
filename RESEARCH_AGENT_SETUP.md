@@ -1,3 +1,22 @@
+# Current preview update — 24 October 2026
+
+The feed catalogue now contains 19 configured publisher URLs and a directory of 27 specialty PubMed searches. A PubMed search link is NOT a connected RSS feed. Specialty filters show only matching direct feeds; empty specialties link to PubMed rather than pretending to have a feed. Six Nature feeds returned readable XML in the local source check; other configured sources timed out or remain subject to publisher restrictions. Source availability is tested per fetch.
+
+**Review excerpt** now opens an internal review dialog with source/date, the supplied excerpt, limitations/checklist, notes and an optional copyable AI prompt. External AI buttons open their homepages without relying on an unsupported prompt URL. No AI API request occurs unless a separately connected workflow runs. Save adds a labelled unapproved `rss_excerpt` draft to the existing local review queue; it does not publish an article.
+
+Use the daily source-plan selector in the research desk to choose feeds and export a JSON plan. The plan deliberately has `schedule: null`, `status: not_connected` and `autoPublish: false`. This is not an activated scheduler. To finish the daily reading agent, configure a server workflow, persistent deduplication, an AI provider credential and private review storage. Account connections are still required; do not put secrets into the plan or repository.
+
+## Workflow to activate after connections
+
+1. Server schedule in Asia/Kolkata at a selected daily time.
+2. Read only the selected allowlisted publisher RSS URLs; record success/error per source and keep the last successful check date.
+3. Deduplicate by DOI or canonical URL in durable storage, then label available text as title/link, RSS excerpt, abstract or authorised full text.
+4. AI drafts a structured evidence note based only on that material, treating source text as untrusted data. Record missing information rather than inventing study results.
+5. Validate metadata and support for claims, then place the draft in a private physician review queue. A failed or unsupported result stays flagged.
+6. Physician checks the original source and approves any patient article. No autonomous public posting, prescribing or patient-record access.
+
+---
+
 # Dr. Kulkarni — Daily Clinical Research Agent
 
 Status: on-demand publisher RSS now has a Vercel endpoint; see SHARING_FEEDS_SETUP.md. The local review queue remains available. No daily job, Feedly account, model API or shared publishing backend is connected. The existing booking webhook setting is unchanged and is not reused for research.
