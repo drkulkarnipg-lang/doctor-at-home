@@ -165,27 +165,6 @@ switchDocTab=function(tab){
 const previousRenderArticles=renderPublishedArticles;
 renderPublishedArticles=function(){previousRenderArticles();renderPublicArticles();};
 
-const trendKey='kulkarniTrend20V1';
-function getTrendReadings(){return Array.from(document.querySelectorAll('#trendRows tr')).map(row=>Object.fromEntries(Array.from(row.querySelectorAll('input')).map(i=>[i.dataset.field,i.value])));}
-function drawTrend(){
- const data=getTrendReadings();const svg=document.getElementById('bpTrendGraph');svg.replaceChildren();
- const valid=data.map((r,i)=>({i,s:Number(r.sbp),d:Number(r.dbp),has:r.sbp!==''&&r.dbp!==''}));
- const points=valid.filter(r=>r.has&&r.s>r.d&&r.d>0&&r.s<=400&&r.d<=300);
- document.querySelectorAll('#trendRows tr').forEach((row,i)=>{const r=valid[i];row.querySelector('output').textContent=points.includes(r)?((r.s+2*r.d)/3).toFixed(1):'—';});
- const status=document.getElementById('trendStatus');status.textContent=points.length?`${points.length} entered BP readings. Invalid or incomplete pairs are not plotted.`:'No valid BP readings entered. The graph is blank.';
- if(!points.length)return;
- const ns='http://www.w3.org/2000/svg';const el=(tag,attrs,text)=>{const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text)e.textContent=text;svg.appendChild(e);return e;};
- const max=Math.ceil(Math.max(...points.map(r=>r.s))/20)*20+20;
- for(let v=0;v<=max;v+=40){const y=210-v/max*180;el('line',{x1:42,x2:738,y1:y,y2:y,stroke:'#ded8cb'});el('text',{x:5,y:y+4,fill:'#59636a','font-size':11},String(v));}
- const coords=r=>({x:45+r.i*36,yS:210-r.s/max*180,yD:210-r.d/max*180});
- for(const [field,color]of [['yS','#0f2942'],['yD','#006a61']]){
-  let segment=[];const flush=()=>{if(segment.length>1)el('polyline',{points:segment.join(' '),fill:'none',stroke:color,'stroke-width':2});segment=[];};
-  valid.forEach(r=>{if(!points.includes(r)){flush();return;}const p=coords(r);segment.push(`${p.x},${p[field]}`);el('circle',{cx:p.x,cy:p[field],r:4,fill:color});});flush();
- }
- el('text',{x:45,y:232,fill:'#59636a','font-size':11},'Entry 1');el('text',{x:690,y:232,fill:'#59636a','font-size':11},'Entry 20');
-}
-function saveTrendReadings(){localStorage.setItem(trendKey,JSON.stringify(getTrendReadings()));showToast('20-entry trend saved in this browser.');}
-function exportTrendReadings(){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([JSON.stringify(getTrendReadings(),null,2)],{type:'application/json'}));a.href=url;a.download='20-day-bp-lab-trend.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 
 const serviceFaq=[
  {
@@ -248,16 +227,6 @@ function renderServiceFaq(){
  document.querySelectorAll('#faqFilters button').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===faqTopic)));
 }
 document.addEventListener('DOMContentLoaded',()=>{
- let saved=[];try{saved=JSON.parse(localStorage.getItem(trendKey)||'[]');}catch{}
- const tbody=document.getElementById('trendRows');
- for(let i=0;i<20;i++){
-  const tr=tbody.insertRow();
-  for(const field of ['date','sbp','dbp','map','notes']){
-   const td=tr.insertCell();if(field==='map'){td.appendChild(document.createElement('output'));continue;}
-   const input=document.createElement('input');input.dataset.field=field;input.type=field==='date'?'date':['sbp','dbp'].includes(field)?'number':'text';input.setAttribute('aria-label',`Entry ${i+1}: ${field}`);input.value=(saved[i]||{})[field]||'';input.addEventListener('input',drawTrend);td.appendChild(input);
-  }
- }
- drawTrend();
  const filters=document.getElementById('faqFilters');
  for(const topic of ['All',...new Set(serviceFaq.map(f=>f.topic))]){const b=document.createElement('button');b.type='button';b.textContent=topic;b.onclick=()=>{faqTopic=topic;renderServiceFaq();};filters.appendChild(b);}
  document.getElementById('faqSearch').addEventListener('input',renderServiceFaq);renderServiceFaq();

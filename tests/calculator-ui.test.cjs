@@ -3,6 +3,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {JSDOM}=require('jsdom');
 const base=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(base,'index.html'),'utf8');
 const dom=new JSDOM(html,{runScripts:'outside-only',url:'https://preview.example.test/'}),w=dom.window;
+Object.defineProperty(w,'crypto',{value:require('node:crypto').webcrypto});w.TextEncoder=TextEncoder;
 w.scrollTo=()=>{};w.alert=()=>{};w.tailwind={};w.showToast=()=>{};
 const scripts=[];
 for(const script of [...w.document.scripts]){
@@ -41,6 +42,33 @@ assert.equal(w.document.getElementById('contactDial').getAttribute('href'),'tel:
 w.document.getElementById('contactClose').click();assert.equal(w.document.getElementById('doctorContactDialog').open,false);
 let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9822594341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
 assert.equal(w.document.querySelector('.portal-nav a').getAttribute('aria-current'),'location');
+
+// Local privacy lock: no default passphrase, password fields masked, verifier only.
+for(const id of ['deviceCurrentPassword','customPinInput','deviceConfirmPassword','deviceUnlockPassword'])assert.equal(w.document.getElementById(id).type,'password');
+w.switchWorkspace('doctor');assert.equal(w.DevicePrivacyLock.isUnlocked(),false);assert.equal(w.document.getElementById('doctorWorkstation').classList.contains('hidden'),true);
+change('customPinInput','SyntheticTest-2026');change('deviceConfirmPassword','SyntheticTest-2026');await w.saveSecuritySettings();
+assert.equal(w.DevicePrivacyLock.isUnlocked(),true);const record=w.localStorage.getItem('kulkarniDeviceLockV2');assert.ok(record);assert.equal(record.includes('SyntheticTest-2026'),false);assert.equal(JSON.parse(record).iterations,600000);
+w.lockWorkstationNow();assert.equal(w.DevicePrivacyLock.isUnlocked(),false);w.verifyAndOpenWorkstation();change('deviceUnlockPassword','incorrect-test');await w.document.getElementById('deviceUnlockForm').onsubmit({preventDefault(){}});assert.equal(w.DevicePrivacyLock.isUnlocked(),false);assert.match(w.document.getElementById('deviceUnlockError').textContent,/Incorrect/);
+change('deviceUnlockPassword','SyntheticTest-2026');await w.document.getElementById('deviceUnlockForm').onsubmit({preventDefault(){}});assert.equal(w.DevicePrivacyLock.isUnlocked(),true);
+w.openSecuritySettingsModal();change('deviceCurrentPassword','wrong');change('customPinInput','OtherTest-2026');change('deviceConfirmPassword','OtherTest-2026');await w.saveSecuritySettings();assert.equal(w.localStorage.getItem('kulkarniDeviceLockV2'),record);assert.match(w.document.getElementById('deviceLockSettingsError').textContent,/incorrect/);
+w.closeSecuritySettingsModal();w.lockWorkstationNow();
+// Conversions and presets preserve the entered advice.
+const {convert}=w.ReleaseTools;assert.equal(convert(0,'c-f'),32);assert.equal(convert(212,'f-c'),100);assert.equal(convert(1,'lb-kg'),.45359237);assert.ok(Math.abs(convert(convert(70,'kg-lb'),'lb-kg')-70)<1e-10);assert.throws(()=>convert(-1,'kg-lb'));assert.throws(()=>convert('','c-f'));assert.throws(()=>convert(-274,'c-f'));
+const advice=w.document.getElementById('rxAdvice');advice.value='Existing individual advice';w.insertDietPreset('dash');const added=advice.value;assert.ok(added.startsWith('Existing individual advice'));assert.match(added,/DASH/);w.insertDietPreset('dash');assert.equal(advice.value,added);
+// Provenance is present on clones and every generated PDF page.
+const copy=w.decorateDocumentClone(w.document.createElement('article'),'cert-form4');assert.match(copy.textContent,/Dr. Pramod/);assert.match(copy.textContent,/#document=cert-form4/);assert.equal(w.documentReference('wikiModalContent').url.endsWith('#wikiSection'),true);
+let page=0;const stamped=[];w.stampDocumentPdf({internal:{getNumberOfPages:()=>3,pageSize:{getWidth:()=>210,getHeight:()=>297}},setPage:p=>{page=p;},setFont(){},setFontSize(){},setTextColor(){},text:t=>stamped.push([page,t])},'rxSheet');for(let p=1;p<=3;p++)assert.ok(stamped.some(([n,t])=>n===p&&t.includes('#document=rxSheet')));
+
+// The tools are discoverable in the workstation, with independently wired conversion controls.
+w.switchDocTab('everydayTools');assert.equal(w.document.getElementById('viewEverydayTools').classList.contains('hidden'),false);assert.equal(w.document.querySelectorAll('#dietPresetCards article').length,7);change('doctorUnitConversionValue','37');w.document.getElementById('doctorUnitConverterForm').onsubmit({preventDefault(){}});assert.match(w.document.getElementById('doctorUnitConversionResult').textContent,/98.6/);w.switchDocTab('chart20');assert.equal(w.document.getElementById('viewEverydayTools').classList.contains('hidden'),true);
+// Two synthetic patients with the same display name must never share a history.
+const pa=w.PatientTrends.addPatient('Synthetic patient'),rowInput=k=>w.document.querySelector('#trendRows tr [data-field="'+k+'"]');rowInput('sbp').value='120';rowInput('dbp').value='80';rowInput('glucose').value='110';rowInput('context').value='Fasting';assert.equal(w.saveTrendReadings(),true);
+const pb=w.PatientTrends.addPatient('Synthetic patient');assert.notEqual(pa,pb);assert.equal(rowInput('sbp').value,'');assert.equal(rowInput('glucose').value,'');rowInput('sbp').value='140';rowInput('dbp').value='90';rowInput('glucose').value='180';assert.equal(w.saveTrendReadings(),true);w.PatientTrends.choose(pa);assert.equal(rowInput('sbp').value,'120');assert.equal(rowInput('glucose').value,'110');assert.equal(rowInput('context').value,'Fasting');assert.equal(w.document.querySelector('#trendRows output').textContent,'93.3');
+change('trendMetricSelect','glucose');w.document.getElementById('trendMetricSelect').onchange();assert.equal(rowInput('glucose').closest('td').hidden,false);assert.equal(rowInput('sbp').closest('td').hidden,true);assert.equal(w.document.querySelectorAll('#bpTrendGraph circle').length,1);assert.match(w.document.getElementById('trendPatientIdentity').textContent,new RegExp(pa));
+const originalStore=w.localStorage.getItem(w.PatientTrends.key);w.localStorage.setItem('kulkarniTrend20V1',JSON.stringify([{sbp:'160',dbp:'100',notes:'Unassigned original'}]));w.document.getElementById('trendImportLegacy').click();assert.equal(w.localStorage.getItem('kulkarniTrend20V1'),JSON.stringify([{sbp:'160',dbp:'100',notes:'Unassigned original'}]));w.PatientTrends.choose(pa);assert.equal(rowInput('sbp').value,'120');
+const backup=JSON.parse(originalStore);w.PatientTrends.restore(backup);const restored=JSON.parse(w.localStorage.getItem(w.PatientTrends.key));assert.equal(restored.patients.length,5);assert.equal(new Set(restored.patients.map(p=>p.id)).size,5);assert.equal(restored.patients.find(p=>p.id===pb).readings[0].glucose,'180');assert.throws(()=>w.PatientTrends.restore({version:2,patients:[{name:'invalid',readings:null}]}));
+console.log('Patient isolation, glucose/BP switching, preserved legacy backup, non-overwriting restore and workstation tool discovery checks passed.');
+console.log('Privacy lock, conversions, diet preservation and PDF page provenance checks passed.');
 console.log('Calculator UI integration checks passed: 2 public / 28 clinical, full GCS, tab switching, conditional fields, stale-result clearing, search, existing feature IDs retained.');
 await new Promise(resolve=>setTimeout(resolve,30));w.close();
 

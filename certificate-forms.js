@@ -26,7 +26,7 @@
     });
     copy.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
     copy.removeAttribute('id');
-    return copy;
+    return window.decorateDocumentClone?window.decorateDocumentClone(copy,id):copy;
   }
   window.buildCertificatePdfClone = printableClone;
   function preparePrint(group) {

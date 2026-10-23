@@ -1,3 +1,7 @@
+## Release state — 23 October 2026
+
+The approved petal-green baseline was published through PR 4 (main c256b486). The subsequent document, conversion, diet and device-lock changes below are a NEW PREVIEW ONLY. Dr Kulkarni requested a compulsory preview before any further production publishing. Do not merge this preview without his approval.
+
 # International portal redesign — approval preview
 
 This is a review branch, not a production release. Production `main` stays at `44a5678b453213a97b577d0c020d21f06468a531` until Dr Kulkarni approves publishing.
@@ -41,3 +45,23 @@ The review draft now uses pale petal/sage backgrounds, warm-white panels, dark-g
 Phone links first open an accessible contact dialog with dialler, WhatsApp and copy options. The initial click prevents navigation and does not copy a number or open an external app automatically. The user can close the dialog to continue browsing. The actual device dialler/WhatsApp handoff has not been tested on the user's phone.
 
 Contact-open/close/copy behaviour, explicit phone URI and navigation state were added to DOM integration checks. Browser visual verification remains incomplete because of the earlier URL-policy block.
+
+## New document and access preview
+
+- Masked passphrase fields, no built-in PIN or master password; PBKDF2-SHA256 verifier with a random salt and 600,000 iterations. Changes require the existing passphrase. Reload, hiding the page and 15-minute inactivity lock the workstation. No simulated fingerprint option.
+- This is a browser privacy lock, NOT owner-only server login, encrypted records or a clinical security certification. Verified identity, WebAuthn/passkeys and a protected clinical backend remain unconfigured. The public source and browser-stored legacy data are not secured by this screen.
+- Celsius/Fahrenheit and kg/lb conversions; four requested diet presets plus three retained guidance topics, appended without overwriting existing advice.
+- Unchanged CRS Form 4/4A PDF and a GHMC Form 2 reference PDF can be downloaded/opened for print. The GHMC edition is explicitly not a verified Maharashtra prescribed edition. Editable HTML working forms remain separate.
+- App-generated PDF export stamps website, source-section URL and page number on every page. Original government PDFs remain unchanged. Actual PDF export pagination and mobile share-app handoff still require manual preview review.
+- Privacy/limitations page and per-document source references. Article storage remains device-local; adding an article does not publish it globally.
+- Tests: 935 calculator assertions plus DOM tests for masked fields, setup/unlock/rejection/change-password protection, no plaintext password storage, converter values, diet non-overwrite/deduplication and per-page PDF stamp calls. No independent security or legal review claimed.
+
+## Patient-separated trend follow-up (preview only)
+
+Added a prominent Doctor Workstation “Diet & Conversions” tab with seven guidance cards and a working second converter; the prescription selector and public converter remain. This addresses discovery: these changes were not yet published to the live baseline.
+
+Trend histories now have unique patient IDs and separate storage entries, an explicit patient selector, date/time, BP/MAP, glucose with context, weight, pulse, SpO2, temperature, creatinine and HbA1c. Each plot uses explicit fixed units and entry order; it is not a clinical recommendation or a time-weighted chart. Selecting a measurement shows its relevant columns. Histories begin with 20 blank entries and permit adding readings (up to 2,000 per history).
+
+No automatic assignment of the old global history: its original local-storage key remains unchanged; an explicit copy creates an unverified legacy history. JSON exports cover a selected patient or all histories. Restore adds new IDs rather than overwriting existing patients. Inputs auto-save locally; storage failures prevent silently switching away from unsaved data. A cross-tab conflict notice prevents silently overwriting unsaved entries.
+
+Patient selection applies to the trend module, not prescription/other clinical-document ownership. Server authentication, encryption and cloud backup remain unconfigured. Software tests use synthetic patients: identical display names with different IDs, distinct BP/glucose values, chart switching, legacy preservation and non-overwriting restore. Actual mobile chart/print/PDF and backup download handoff remain manual preview checks.
