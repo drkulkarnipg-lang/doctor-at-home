@@ -35,6 +35,12 @@ assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,8);
 w.document.getElementById('wikiSearchInput').value='catheter';w.filterWikiArticles();assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,1);
 assert.ok(w.document.querySelector('#drugSetuReference a[href="https://drugsetu.com/"]'));
 assert.ok(w.document.querySelector('#doctorWorkstation').classList.contains('notranslate'));
+const phoneLink=w.document.querySelector('a[onclick="handleDirectCall(event)"]');const phoneEvent=new w.MouseEvent('click',{bubbles:true,cancelable:true});phoneLink.dispatchEvent(phoneEvent);
+assert.equal(phoneEvent.defaultPrevented,true,'Phone click must leave the website open');assert.equal(w.document.getElementById('doctorContactDialog').open,true);
+assert.equal(w.document.getElementById('contactDial').getAttribute('href'),'tel:+919822594341');
+w.document.getElementById('contactClose').click();assert.equal(w.document.getElementById('doctorContactDialog').open,false);
+let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9822594341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
+assert.equal(w.document.querySelector('.portal-nav a').getAttribute('aria-current'),'location');
 console.log('Calculator UI integration checks passed: 2 public / 28 clinical, full GCS, tab switching, conditional fields, stale-result clearing, search, existing feature IDs retained.');
 await new Promise(resolve=>setTimeout(resolve,30));w.close();
 

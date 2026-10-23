@@ -33,3 +33,11 @@ The wider legacy application still needs separate work: patient-specific isolati
 6. DrugSetu reference panel and connection requirements.
 
 Approval to review the design is not automatically approval to deploy to production. The branch will not be merged or published to the live URL without an explicit publishing instruction.
+
+## Petal-green refinement and contact handoff
+
+The review draft now uses pale petal/sage backgrounds, warm-white panels, dark-green text, consistent rounded tabs and an explicit selected-tab style. Core text colours maintain WCAG AA contrast against their background. Print sheet styling is unchanged.
+
+Phone links first open an accessible contact dialog with dialler, WhatsApp and copy options. The initial click prevents navigation and does not copy a number or open an external app automatically. The user can close the dialog to continue browsing. The actual device dialler/WhatsApp handoff has not been tested on the user's phone.
+
+Contact-open/close/copy behaviour, explicit phone URI and navigation state were added to DOM integration checks. Browser visual verification remains incomplete because of the earlier URL-policy block.

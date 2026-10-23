@@ -1013,20 +1013,10 @@
       }, 2500);
     }
 
-    // 100% RELIABLE CALL HANDLER (Works on Desktop Windows PC and Mobile)
+    // Keep the page open; let the visitor choose a dialler, WhatsApp or copy.
     function handleDirectCall(e) {
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if(!isMobile) {
-        if(navigator.clipboard) {
-          navigator.clipboard.writeText('9822594341');
-        }
-        showToast("📞 नंबर 9822594341 कॉपी झाला! WhatsApp उघडत आहे...");
-        setTimeout(() => {
-          window.open('https://wa.me/919822594341?text=Hello%20Dr.%20Kulkarni,%20I%20am%20calling%20for%20urgent%20bedside%20ICU%20consultation.', '_blank');
-        }, 500);
-      } else {
-        showToast("📞 Dialing 9822594341...");
-      }
+      e.preventDefault();
+      window.openDoctorContact();
     }
 
     // 100% RELIABLE AI NAVIGATOR (Pop-up Proof)
@@ -1726,5 +1716,5 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div></body>
+</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9822594341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919822594341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog></body>
 </html>

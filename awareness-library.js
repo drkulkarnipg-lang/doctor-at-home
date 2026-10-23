@@ -14,6 +14,10 @@ function render(){const q=$('wikiSearchInput').value.trim().toLowerCase(),items=
 window.openWikiModal=id=>{const t=topics.find(t=>t.id===Number(id));if(!t)return;$('wikiModalTitle').textContent=t.title;const body=$('wikiModalContent');body.replaceChildren(make('span','awareness-category',t.cat),make('h2','',t.title));for(const p of t.body)body.append(make('p','',p));const a=make('a','','Read the original reference ↗');a.href=t.source;a.target='_blank';a.rel='noopener noreferrer';body.append(a,make('p','article-review-note','General education · English original · Draft reviewed against the linked source on 23 October 2026. Individual care needs your clinician.'));$('wikiModal').classList.remove('hidden');};
 window.filterWikiArticles=render;
 document.addEventListener('DOMContentLoaded',()=>{
+const sectionLinks=[...document.querySelectorAll('.portal-nav a')];
+const activateLink=link=>sectionLinks.forEach(a=>{if(a===link)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+if(sectionLinks.length)activateLink(sectionLinks[0]);sectionLinks.forEach(a=>a.addEventListener('click',()=>activateLink(a)));
+document.querySelectorAll('.doctor-tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.id==='tabRx')));
 const filters=$('libraryTopicFilters');for(const cat of ['All topics',...new Set(topics.map(t=>t.cat))]){const b=make('button','',cat);b.type='button';b.setAttribute('aria-pressed',String(cat===selected));b.onclick=()=>{selected=cat;filters.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();};filters.append(b);}$('wikiSearchInput').addEventListener('input',render);render();
 $('healthGlobalSearchForm').onsubmit=e=>{e.preventDefault();selected='All topics';filters.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.textContent===selected)));$('wikiSearchInput').value=$('healthGlobalSearch').value;render();$('wikiSection').scrollIntoView({behavior:'smooth',block:'start'});$('wikiSearchInput').focus({preventScroll:true});};
 // Do not send clinical documents or entered patient information to the translation widget.
