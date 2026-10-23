@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Sitemap: https://home-visiting-icu-doctor.vercel.app/sitemap.xml
