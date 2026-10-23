@@ -72,9 +72,9 @@ const LIVE_SITE_DRUGS = [
       const container = document.getElementById('publicArticlesList');
       container.innerHTML = '';
       const defaults = [
-        { title: "हार्ट फेल्युअर: पाण्याचे नियंत्रण व दैनंदिन वजन", cat: "हार्ट फेल्युअर", body: "२४ तासांत पाणी १.२ लिटर मर्यादेत ठेवावे. वरून मीठ, पापड, लोणचे पूर्ण बंद करावे. दररोज सकाळी उपाशीपोटी वजन करावे; २ दिवसांत १.५ किलो वजन वाढल्यास डॉक्टरांना कळवावे." },
-        { title: "CKD मध्ये नारळ पाणी का टाळावे?", cat: "किडनी केअर", body: "किडनी निकामी असल्यास अतिरिक्त पोटॅशियम बाहेर पडत नाही. नारळ पाण्यात भरपूर पोटॅशियम असल्याने अचानक कार्डिॲक अरेस्टचा धोका असतो. भाज्या उकळून पाणी फेकून द्यावे." },
-        { title: "बेडरीडन रुग्णांची काळजी: २ तासांचे टर्निंग क्लॉक", cat: "बेडसोअर", body: "एकाच स्थितीत पडून राहिल्याने सेक्रमवर जखम होते. दर २ तासांनी कूस बदलावी, एअर मॅट्रेस वापरावी आणि जखमेवर नॉर्मल सलाइनने स्वच्छता ठेवावी." }
+        {"title": "Heart failure: your fluid and weight plan", "cat": "Heart health", "body": "Track weight and symptoms as agreed with your healthcare team. Ask for your individual fluid allowance and weight-alert threshold. Report new swelling, breathlessness or rapid weight changes; medicine adjustments need the prescribed action plan. Reference: https://www.heart.org/en/health-topics/heart-failure/treatment-options-for-heart-failure/lifestyle-changes-for-heart-failure"},
+        {"title": "Kidney disease: understand potassium and fluids", "cat": "Kidney health", "body": "Kidney disease can change how the body handles potassium and fluids. Requirements depend on blood tests, kidney function and dialysis. Ask the renal team whether potassium-rich drinks and foods need restriction; avoid universal fluid or food limits. Reference: https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis"},
+        {"title": "Limited mobility: protect skin and comfort", "cat": "Care at home", "body": "Agree an individual repositioning, support-surface and skin-care plan. Check vulnerable skin and report persistent redness, discolouration, pain or broken skin. Support mattresses complement the care plan; they do not replace repositioning and assessment. Reference: https://www.nice.org.uk/guidance/cg179/chapter/Recommendations"}
       ];
       const custom = JSON.parse(localStorage.getItem('patientArticles') || '[]');
       const all = [...custom, ...defaults];
@@ -188,21 +188,61 @@ function saveTrendReadings(){localStorage.setItem(trendKey,JSON.stringify(getTre
 function exportTrendReadings(){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([JSON.stringify(getTrendReadings(),null,2)],{type:'application/json'}));a.href=url;a.download='20-day-bp-lab-trend.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 
 const serviceFaq=[
- {topic:'भेट व शुल्क',q:'घरी डॉक्टरांची भेट कशी बुक करावी?',a:'“Book a visit” विभाग उघडा. नाव, फोन नंबर, पत्ता आणि आवश्यक सेवा भरा. उपलब्ध असल्यास GPS location जोडा. बुकिंगची माहिती WhatsApp वर पाठवा. भेटीची वेळ डॉक्टरांकडून निश्चित करून घ्या.',keywords:'booking appointment visit doctor home'},
- {topic:'भेट व शुल्क',q:'घरी भेटीचे शुल्क किती आहे?',a:'दिवसाच्या भेटीचे मूळ शुल्क ₹१,२०० आहे. वेळ, अंतर आणि निवडलेल्या प्रक्रियांनुसार शुल्क बदलते. “Book a visit” विभागातील calculator मध्ये अंदाज पाहा आणि अंतिम शुल्क डॉक्टरांकडून निश्चित करून घ्या.',keywords:'fees cost charge price payment upi'},
- {topic:'भेट व शुल्क',q:'GPS location जोडता आली नाही तर काय करावे?',a:'पूर्ण पत्ता, इमारतीचे नाव, मजला, फ्लॅट नंबर आणि जवळची खूण लिहा. WhatsApp वर location पाठवता येते. तुमची परवानगी दिल्यावरच browser GPS वापरतो.',keywords:'gps location address permission map'},
- {topic:'तयारी व अहवाल',q:'भेटीपूर्वी काय तयार ठेवावे?',a:'सध्याची prescription, औषधांची यादी, allergy ची माहिती, अलीकडील तपासण्यांचे अहवाल आणि discharge summary जवळ ठेवा. रुग्णाला होणाऱ्या त्रासाची आणि तो कधी सुरू झाला याची नोंद ठेवा.',keywords:'preparation reports prescription discharge allergy'},
- {topic:'तयारी व अहवाल',q:'तपासण्यांचे अहवाल कसे पाठवावेत?',a:'तारीख आणि तपासणीचे नाव स्पष्ट दिसेल असे पूर्ण पानाचे फोटो किंवा PDF डॉक्टरांना WhatsApp वर पाठवा. अहवालासोबत रुग्णाचे नाव आणि सध्याचा त्रास नमूद करा.',keywords:'report laboratory scan pdf upload share'},
- {topic:'आरोग्य मार्गदर्शन',q:'आरोग्यविषयक लेख कुठे वाचता येतील?',a:'“Health library” आणि “Patient guidance library” विभागांत लेख पाहता येतील. त्यातील माहिती समजून घेण्यासाठी आहे. वैयक्तिक उपचारांसाठी डॉक्टरांचा सल्ला घ्या.',keywords:'articles education health library information'},
- {topic:'आरोग्य मार्गदर्शन',q:'येथे विचारून औषधांचा डोस बदलता येईल का?',a:'या FAQ मधून वैयक्तिक निदान किंवा औषधांचा डोस ठरवला जात नाही. औषध बदलण्यापूर्वी तुमच्या डॉक्टरांशी संपर्क साधा. prescription आणि औषधांची यादी त्यांना पाठवा.',keywords:'medicine dose treatment prescription drug'},
- {topic:'तातडीची मदत',q:'तातडीची वैद्यकीय मदत हवी असल्यास काय करावे?',a:'तीव्र छातीत दुखणे, खूप दम लागणे किंवा शुद्ध हरपणे अशा वेळी या FAQ च्या उत्तराची वाट पाहू नका. तातडीची वैद्यकीय मदत घ्या. डॉक्टरांशी थेट संपर्कासाठी वरचे Call बटण वापरा.',keywords:'emergency urgent chest breathless unconscious call'}
+ {
+  "topic": "Visits & fees",
+  "q": "How do I request a home visit?",
+  "a": "Open Book a visit, enter the patient name, phone, address and required services. Add GPS if available. Send the request on WhatsApp and wait for the doctor to confirm the visit time.",
+  "keywords": "booking appointment visit doctor home भेट बुक"
+ },
+ {
+  "topic": "Visits & fees",
+  "q": "What does a home visit cost?",
+  "a": "The base daytime home-visit fee is ₹1,200. Time, distance and selected procedures change the estimate. Use the booking calculator and confirm the final fee with the doctor.",
+  "keywords": "fees cost charge price payment upi शुल्क फी"
+ },
+ {
+  "topic": "Visits & fees",
+  "q": "What if GPS does not work?",
+  "a": "Enter the complete address, building, floor, flat number and a nearby landmark. You can also share your location on WhatsApp. The browser uses GPS only with your permission.",
+  "keywords": "gps location address permission map पत्ता"
+ },
+ {
+  "topic": "Preparation & reports",
+  "q": "What should I prepare before the visit?",
+  "a": "Keep the current prescription, medicine list, allergy details, recent test reports and discharge summary ready. Note the symptoms and when they began.",
+  "keywords": "preparation reports prescription discharge allergy तयारी"
+ },
+ {
+  "topic": "Preparation & reports",
+  "q": "How can I share test reports?",
+  "a": "Prepare clear photographs or a PDF showing the complete report and test date. Send it to the doctor on WhatsApp with the patient name and current concern.",
+  "keywords": "report laboratory scan pdf upload share अहवाल"
+ },
+ {
+  "topic": "Health guidance",
+  "q": "Where can I read patient-education articles?",
+  "a": "Explore the Health library and Patient guidance library. General articles support understanding; your doctor should advise on individual treatment.",
+  "keywords": "articles education health library information लेख"
+ },
+ {
+  "topic": "Health guidance",
+  "q": "Can this FAQ change my medicine dose?",
+  "a": "This service FAQ does not make individual diagnoses or set medicine doses. Contact your doctor before changing treatment and share your current prescription and medicine list.",
+  "keywords": "medicine dose treatment prescription drug औषध डोस"
+ },
+ {
+  "topic": "Urgent help",
+  "q": "What should I do if urgent medical help is needed?",
+  "a": "For severe chest pain, marked breathlessness or loss of consciousness, do not wait for this FAQ. Seek urgent medical care. The Call button connects you with the doctor.",
+  "keywords": "emergency urgent chest breathless unconscious call तातडी"
+ }
 ];
-let faqTopic='सर्व';
+let faqTopic='All';
 function renderServiceFaq(){
  const q=document.getElementById('faqSearch').value.trim().toLowerCase();const list=document.getElementById('faqList');list.replaceChildren();
- const rows=serviceFaq.filter(f=>(faqTopic==='सर्व'||f.topic===faqTopic)&&`${f.q} ${f.a} ${f.keywords}`.toLowerCase().includes(q));
+ const rows=serviceFaq.filter(f=>(faqTopic==='All'||f.topic===faqTopic)&&`${f.q} ${f.a} ${f.keywords}`.toLowerCase().includes(q));
  rows.forEach(f=>{const d=document.createElement('details');const s=document.createElement('summary');s.textContent=f.q;const p=document.createElement('p');p.textContent=f.a;d.append(s,p);list.appendChild(d);});
- document.getElementById('faqCount').textContent=`${rows.length} प्रश्न / questions`;
+ document.getElementById('faqCount').textContent=`${rows.length} questions`;
  document.getElementById('faqEmpty').classList.toggle('hidden',rows.length>0);
  document.getElementById('faqAskDoctor').href='https://wa.me/919822594341?text='+encodeURIComponent(q?`नमस्कार डॉक्टर, माझा प्रश्न: ${document.getElementById('faqSearch').value.trim()}`:'नमस्कार डॉक्टर, मला घरी भेटीबद्दल माहिती हवी आहे.');
  document.querySelectorAll('#faqFilters button').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===faqTopic)));
@@ -219,7 +259,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  }
  drawTrend();
  const filters=document.getElementById('faqFilters');
- for(const topic of ['सर्व',...new Set(serviceFaq.map(f=>f.topic))]){const b=document.createElement('button');b.type='button';b.textContent=topic;b.onclick=()=>{faqTopic=topic;renderServiceFaq();};filters.appendChild(b);}
+ for(const topic of ['All',...new Set(serviceFaq.map(f=>f.topic))]){const b=document.createElement('button');b.type='button';b.textContent=topic;b.onclick=()=>{faqTopic=topic;renderServiceFaq();};filters.appendChild(b);}
  document.getElementById('faqSearch').addEventListener('input',renderServiceFaq);renderServiceFaq();
 });
 
@@ -238,9 +278,9 @@ bookAndTriggerFullAutomation=function(){
 };
 
 const LIVE_ARTICLE_DEFAULTS=[
-        { title: "हार्ट फेल्युअर: पाण्याचे नियंत्रण व दैनंदिन वजन", cat: "हार्ट फेल्युअर", body: "२४ तासांत पाणी १.२ लिटर मर्यादेत ठेवावे. वरून मीठ, पापड, लोणचे पूर्ण बंद करावे. दररोज सकाळी उपाशीपोटी वजन करावे; २ दिवसांत १.५ किलो वजन वाढल्यास डॉक्टरांना कळवावे." },
-        { title: "CKD मध्ये नारळ पाणी का टाळावे?", cat: "किडनी केअर", body: "किडनी निकामी असल्यास अतिरिक्त पोटॅशियम बाहेर पडत नाही. नारळ पाण्यात भरपूर पोटॅशियम असल्याने अचानक कार्डिॲक अरेस्टचा धोका असतो. भाज्या उकळून पाणी फेकून द्यावे." },
-        { title: "बेडरीडन रुग्णांची काळजी: २ तासांचे टर्निंग क्लॉक", cat: "बेडसोअर", body: "एकाच स्थितीत पडून राहिल्याने सेक्रमवर जखम होते. दर २ तासांनी कूस बदलावी, एअर मॅट्रेस वापरावी आणि जखमेवर नॉर्मल सलाइनने स्वच्छता ठेवावी." }
+        {"title": "Heart failure: your fluid and weight plan", "cat": "Heart health", "body": "Track weight and symptoms as agreed with your healthcare team. Ask for your individual fluid allowance and weight-alert threshold. Report new swelling, breathlessness or rapid weight changes; medicine adjustments need the prescribed action plan. Reference: https://www.heart.org/en/health-topics/heart-failure/treatment-options-for-heart-failure/lifestyle-changes-for-heart-failure"},
+        {"title": "Kidney disease: understand potassium and fluids", "cat": "Kidney health", "body": "Kidney disease can change how the body handles potassium and fluids. Requirements depend on blood tests, kidney function and dialysis. Ask the renal team whether potassium-rich drinks and foods need restriction; avoid universal fluid or food limits. Reference: https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis"},
+        {"title": "Limited mobility: protect skin and comfort", "cat": "Care at home", "body": "Agree an individual repositioning, support-surface and skin-care plan. Check vulnerable skin and report persistent redness, discolouration, pain or broken skin. Support mattresses complement the care plan; they do not replace repositioning and assessment. Reference: https://www.nice.org.uk/guidance/cg179/chapter/Recommendations"}
       ];
 const REPO_ARTICLE_DEFAULTS=[
         { title: "हार्ट फेल्युअर: १.२L पाणी मर्यादा आणि सकाळचे वजन", cat: "कार्डिॲक काळजी", body: "हार्ट फेल्युअरच्या रुग्णांनी दिवसाला १.२ लिटरपेक्षा जास्त पाणी पिऊ नये. दररोज सकाळी उपाशीपोटी वजन करावे. २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढल्यास लघवीचे औषध वाढवण्यासाठी डॉक्टरांशी संपर्क साधावा." },

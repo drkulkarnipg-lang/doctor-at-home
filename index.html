@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<link href="assets/tailwind.css" rel="stylesheet"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="assets/tailwind.css" rel="stylesheet"/><link href="clinical-calculators.css" rel="stylesheet"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor &amp; Emergency Specialist, Pune</title>
 <script src="assets/tailwind-config-compat.js"></script>
 <script src="assets/pdf/html2pdf.bundle.min.js"></script>
@@ -51,8 +51,7 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'mr,hi,en,gu,ta,kn,ml,te,bn,ur,de,fr,ja,ar',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        layout: google.translate.TranslateElement.InlineLayout.VERTICAL,
         autoDisplay: false
       }, 'google_translate_element');
     }
@@ -69,15 +68,15 @@
       }
     }
   </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-<link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/><link href="document-sharing.css" rel="stylesheet"/><link href="patient-helper.css" rel="stylesheet"/></head>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/><link href="document-sharing.css" rel="stylesheet"/><link href="patient-helper.css" rel="stylesheet"/><link href="international-portal.css" rel="stylesheet"/></head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
 <div class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none" id="notificationToast">
 <span id="toastMsg">✓ Notification</span>
 </div>
 <!-- ================= TOP NAVIGATION BAR ================= -->
-<header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print site-header">
+<a class="skip-link no-print" href="#publicPortal">Skip to main content</a><header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print site-header">
 <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
 <!-- Doctor Brand Header -->
 <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
@@ -102,7 +101,7 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<div class="inline-block shadow-sm rounded-xl" id="google_translate_element"></div>
+<details class="language-control"><summary>Language / भाषा</summary><div><p>English original · automatic translations</p><div id="google_translate_element"></div><p id="translationStatus">Load the language menu to choose a supported language. Medical meaning should be checked against the English original.</p><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></div></details>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -130,149 +129,33 @@
 <nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
-<!-- Hero Card -->
-<div class="petal-box p-6 md:p-8 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm portal-hero">
-<div class="space-y-3 max-w-3xl hero-copy">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
-<span>⚡ 24x7 Bedside ICU, Palliative &amp; Emergency Care at Home across Pune</span>
+<!-- Editorial home-care introduction -->
+<section class="portal-hero" aria-labelledby="portalHeroTitle">
+<div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
+<h2 id="portalHeroTitle">Thoughtful care.<br/><em>Closer to home.</em></h2>
+<p>Medical care at your bedside. Clear guidance for everyday life. A place for patients, families and clinicians to find the next helpful step.</p>
+<div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="#wikiSection" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div>
+<form id="healthGlobalSearchForm" class="health-global-search" role="search"><label for="healthGlobalSearch">What would you like to understand?</label><div><input id="healthGlobalSearch" type="search" placeholder="Try heart, kidney, stroke or medicines"/><button type="submit" aria-label="Search health topics">Search →</button></div></form>
 </div>
-<h2 class="text-2xl md:text-4xl font-bold serif-brand text-[#0F2942] tracking-tight leading-tight">
-          Hospital-Grade ICU Care at Your Bedside in Pune
-        </h2>
-<p class="text-slate-700 text-xs md:text-sm leading-relaxed">
-          Bedside medical consultations, cardiac/stroke palliative care and personalised guidance directed personally by <strong>Dr. Pramod G. Kulkarni</strong> (BAMS, PGDEMS).
-        </p>
-<div class="flex flex-wrap gap-2.5 pt-1">
-<a class="text-xs bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm" href="#elderlySection">
-            👵 ज्येष्ठ नागरिक व घरगुती आयसीयू काळजी
-          </a>
-<a class="text-xs bg-[#0F2942] hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm" href="#wikiSection">
-            📖 पुणे आरोग्य विश्वकोश (Free Medical Wiki)
-          </a>
-<a class="text-xs bg-[#0D9488] hover:bg-teal-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm" href="#bookingSection">
-            📍 Book Visit with GPS
-          </a>
-<a class="text-xs bg-white hover:bg-slate-50 text-[#0F2942] border petal-border px-3.5 py-2 rounded-xl font-bold shadow-sm" href="#patientToolsSection">
-            🧮 30 Health Calculators
-          </a>
-</div>
-</div>
-<!-- Emergency Dispatch Card -->
-<div class="bg-amber-50/80 border border-amber-200 p-5 rounded-2xl text-xs space-y-2.5 w-full md:w-80 shadow-sm flex-shrink-0 dispatch-card">
-<p class="font-bold text-amber-950 text-sm">📍 Base Station &amp; Reach:</p>
-<p class="text-amber-900 font-semibold">Dhayari, Pune – 411041, Maharashtra.</p>
-<p class="text-slate-600">Average Reach Time: 30–60 mins across Pune &amp; PCMC.</p>
-<a class="w-full bg-[#16A34A] hover:bg-green-700 text-white font-bold py-2 rounded-xl flex items-center justify-center gap-2 shadow transition" href="https://wa.me/919822594341?text=Hello%20Dr.%20Kulkarni,%20I%20need%20urgent%20bedside%20ICU%20consultation%20in%20Pune." rel="noopener noreferrer" target="_blank">
-<i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Dr. Kulkarni
-        </a>
-<button class="text-xs bg-white border petal-border px-3 py-2 rounded-xl" onclick="openCredentialsModal()" type="button">Doctor credentials</button></div>
-</div>
-<!-- DEDICATED SENIOR CITIZEN & BEDRIDDEN ICU SECTION -->
-<section class="petal-box p-6 md:p-8 rounded-3xl space-y-6 shadow-sm border-2 border-amber-300 bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30" id="elderlySection"><span class="section-eyebrow">Everyday care · practical guidance</span>
-<div class="flex flex-wrap justify-between items-center border-b border-amber-200 pb-3 gap-2">
-<div>
-<div class="flex items-center gap-2">
-<span class="text-2xl">👵👴</span>
-<h3 class="text-xl md:text-2xl font-bold serif-brand text-[#0F2942]">ज्येष्ठ नागरिक, पक्षाघात व अंथरुणाला खिळलेल्या रुग्णांची विशेष काळजी</h3>
-</div>
-<p class="text-xs text-slate-600 mt-1">Dedicated Bedridden ICU &amp; Geriatric Palliative Care Protocols (घरीच घ्यावयाची शास्त्रीय काळजी).</p>
-</div>
-<span class="bg-amber-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Senior Citizen Care Hub</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-<div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
-<div class="flex items-center justify-between">
-<span class="font-bold text-red-900 text-sm">🛏️ बेड्सोअर (Bedsores) प्रतिबंध</span>
-<span class="bg-red-50 text-red-700 px-2 py-0.5 rounded font-bold text-[10px]">Q2H Turning</span>
-</div>
-<ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
-<li><strong>२ तासांत कूस बदलणे:</strong> रुग्णाला दर २ तासांनी डाव्या-उजव्या कुशीवर वळवणे अनिवार्य आहे.</li>
-<li><strong>अल्टरनेटींग एअर मॅट्रेस:</strong> हवेची गादी २४ तास चालू ठेवावी.</li>
-<li><strong>घाव स्वच्छता:</strong> फक्त नॉर्मल सलाईनने पुसावे, स्पिरिट लावू नये.</li>
-</ul>
-</div>
-<div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
-<div class="flex items-center justify-between">
-<span class="font-bold text-blue-900 text-sm">🧠 स्ट्रोक / पक्षाघात काळजी</span>
-<span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-bold text-[10px]">Aspiration Safe</span>
-</div>
-<ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
-<li><strong>७०° ते ९०° पोश्चर:</strong> जेवताना व नंतर ४५ मिनिटे रुग्णाला काटकोनात बसवावे.</li>
-<li><strong>अन्ननलिका (Ryle's Tube):</strong> गिळताना ठसका लागत असल्यास बळजबरी करू नये.</li>
-<li><strong>अस्पिरेशन न्यूमोनिया:</strong> पाणी फुफ्फुसात गेल्यास त्वरित ऑक्सिजन कमी होतो.</li>
-</ul>
-</div>
-<div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
-<div class="flex items-center justify-between">
-<span class="font-bold text-emerald-900 text-sm">🧪 CKD &amp; डायलिसिस व्यवस्थापन</span>
-<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold text-[10px]">KDIGO Evidence</span>
-</div>
-<ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
-<li><strong>उर्वरित लघवीचे रक्षण:</strong> लघवी चालू असल्यास आठवड्यातून २ वेळा डायलिसिसचा विचार शक्य.</li>
-<li><strong>शून्य नारळ पाणी:</strong> अतिरिक्त पोटॅशियममुळे हृदय अचानक बंद पडू शकते.</li>
-<li><strong>पाणी मर्यादा:</strong> २४ तासांत १ ते १.२ लिटरपेक्षा जास्त द्रवपदार्थ नको.</li>
-</ul>
-</div>
-<div class="bg-white p-5 rounded-2xl border petal-border shadow-sm space-y-2">
-<div class="flex items-center justify-between">
-<span class="font-bold text-purple-900 text-sm">🚶 पडणे प्रतिबंध व स्मृतिभ्रंश</span>
-<span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-bold text-[10px]">Fall Prevention</span>
-</div>
-<ul class="text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
-<li><strong>रात्री मंद प्रकाश:</strong> अंधारात पाय घसरून फ्रॅक्चर होण्याचा धोका सर्वाधिक असतो.</li>
-<li><strong>टॉयलेट ग्रॅब बार्स:</strong> बाथरूममध्ये पकडण्यासाठी मेटल हँडल्स लावावेत.</li>
-<li><strong>अचानक गोंधळणे:</strong> लघवीचे इन्फेक्शन किंवा सोडियम कमी झाल्याचे हे लक्षण असू शकते.</li>
-</ul>
-</div>
-</div>
+<aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
+<svg class="care-mark" aria-hidden="true" viewBox="0 0 260 170" fill="none"><path d="M42 92 130 22 218 92M65 75v70h130V75" stroke="currentColor" stroke-width="2"/><path d="M117 79h26v18h18v26h-18v18h-26v-18H99V97h18V79Z" stroke="currentColor" stroke-width="2"/><circle cx="205" cy="38" r="14" stroke="currentColor"/><path d="M29 130h23m158 0h23M194 38h22m-11-11v22" stroke="currentColor"/></svg>
+<h3>Here for your<br/>next step.</h3><p>Dhayari, Pune · 411041<br/>Home visits across Pune &amp; PCMC; availability confirmed by the doctor.</p>
+<a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer" class="compass-contact">Contact Dr. Kulkarni ↗</a>
+<button onclick="openCredentialsModal()" type="button" class="compass-credentials">Qualifications &amp; registration →</button></aside>
 </section>
-<!-- PUNE AROGYA VISHWAKOSH (FREE MEDICAL ENCYCLOPEDIA) -->
-<section class="petal-box p-6 md:p-8 rounded-3xl space-y-6 shadow-sm" id="wikiSection"><span class="section-eyebrow">Explore · understand · share</span>
-<div class="border-b petal-border pb-3 flex flex-wrap justify-between items-center gap-2">
-<div>
-<h3 class="text-2xl font-bold serif-brand text-[#0F2942]">📖 पुणे आरोग्य विश्वकोश (Open Home ICU Knowledge Base)</h3>
-<p class="text-xs text-slate-600">गुगल व विकिपीडियाच्या धर्तीवर सर्वसामान्यांसाठी अधिकृत, मोफत आणि जीवनरक्षक वैद्यकीय संदर्भ.</p>
-</div>
-<input class="border p-2 rounded-xl text-xs w-64 shadow-sm outline-none" id="wikiSearchInput" onkeyup="filterWikiArticles()" placeholder="🔍 सर्च करा: डायलिसिस, पक्षाघात, कॅथेटर, ऑक्सिजन..." type="text"/>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs" id="wikiCardsGrid">
-<div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
-<div>
-<span class="bg-teal-50 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">किडनी व डायलिसिस</span>
-<h4 class="font-bold text-sm text-[#0F2942] mt-1.5">इन्क्रिमेंटल डायलिसिस: डायलिसिसची फ्रिक्वेन्सी कमी करणे शक्य आहे का?</h4>
-<p class="text-slate-600 mt-2 leading-relaxed">
-              जागतिक KDIGO मार्गदर्शक तत्त्वांनुसार ज्या रुग्णांची स्वतःची लघवी चालू आहे, त्यांच्यामध्ये आठवड्यातून ३ ऐवजी २ वेळा डायलिसिस केल्यास किडनीचे उर्वरित कार्य जास्त काळ टिकते.
-            </p>
-</div>
-<button class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition" onclick="openWikiModal(1)">संपूर्ण वाचा ↗</button>
-</div>
-<div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
-<div>
-<span class="bg-red-50 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded">हार्ट फेल्युअर</span>
-<h4 class="font-bold text-sm text-[#0F2942] mt-1.5">हार्ट फेल्युअरमध्ये दररोज सकाळी वजन करणे का जीवनरक्षक आहे?</h4>
-<p class="text-slate-600 mt-2 leading-relaxed">
-              २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढणे हे फुफ्फुसात पाणी भरण्याचे पहिले लक्षण असते. वेळीच लघवीचे औषध वाढवून घरच्या घरी अ‍ॅडमिशन टाळता येते.
-            </p>
-</div>
-<button class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition" onclick="openWikiModal(2)">संपूर्ण वाचा ↗</button>
-</div>
-<div class="wiki-card bg-white p-5 rounded-2xl border petal-border space-y-2.5 shadow-sm flex flex-col justify-between">
-<div>
-<span class="bg-purple-50 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">आयसीयू प्रक्रिया</span>
-<h4 class="font-bold text-sm text-[#0F2942] mt-1.5">घरी कॅथेटर किंवा राईल्स ट्यूब टाकताना निर्जंतुकीकरणाचे महत्त्व</h4>
-<p class="text-slate-600 mt-2 leading-relaxed">
-              अंथरुणाला खिळलेल्या रुग्णांमध्ये लघवीच्या नळीतून (Foley Catheter) जंतूसंसर्ग होऊन सेप्सिस होण्याचा धोका असतो. पूर्ण स्टेरिल तंत्राने ही प्रक्रिया करणे बंधनकारक असते.
-            </p>
-</div>
-<button class="w-full text-center bg-slate-100 hover:bg-slate-200 text-[#0F2942] font-bold py-1.5 rounded-xl transition" onclick="openWikiModal(3)">संपूर्ण वाचा ↗</button>
-</div>
-</div>
-</section><section class="research-review" id="publicGuidanceSection"><span class="section-eyebrow">Patient guidance · read &amp; share</span><h3>Patient guidance library</h3><p>Articles saved in this browser appear here as well as in Article Manager.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="publicArticlesList"></div></section>
+<nav class="care-pathways" aria-label="Start with what you need"><a href="#bookingSection"><span class="pathway-number">01</span><div><strong>Care at home</strong><p>Plan a visit and estimate the fee.</p></div><span aria-hidden="true">↗</span></a><a href="#wikiSection"><span class="pathway-number">02</span><div><strong>Understand your health</strong><p>Practical, referenced guidance.</p></div><span aria-hidden="true">↗</span></a><a href="#patientToolsSection"><span class="pathway-number">03</span><div><strong>Know your numbers</strong><p>Simple tools, clearly explained.</p></div><span aria-hidden="true">↗</span></a></nav>
+<section id="elderlySection" class="home-care-section"><span class="section-eyebrow">Better days at home</span><div class="section-intro"><h3>Small steps.<br/>Meaningful everyday care.</h3><p>For older adults, people recovering from illness and the families beside them. Build the daily plan with your healthcare team.</p></div><div class="home-care-grid">
+<article><span class="care-icon"><i class="fa-solid fa-bed" aria-hidden="true"></i></span><h4>Protect skin &amp; comfort</h4><ul><li>Agree an individual repositioning and pressure-relief plan.</li><li>Check skin, moisture and comfort; report persistent redness or broken skin.</li><li>Use the support surface and wound-care plan advised for the patient.</li></ul><a href="https://www.nice.org.uk/guidance/cg179/chapter/Recommendations" target="_blank" rel="noopener noreferrer">Pressure-injury guidance ↗</a></article>
+<article><span class="care-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span><h4>Support stroke recovery</h4><ul><li>Follow the swallowing assessment and prescribed food textures.</li><li>Support an upright, comfortable position for meals.</li><li>Stop feeding and seek help for choking, new breathlessness or reduced alertness.</li></ul><a href="https://www.nhs.uk/conditions/swallowing-problems-dysphagia/" target="_blank" rel="noopener noreferrer">Swallowing information ↗</a></article>
+<article><span class="care-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span><h4>Live well with kidney disease</h4><ul><li>Keep dialysis, medicine and blood-test appointments.</li><li>Ask for your individual fluid, salt and potassium plan.</li><li>Changes to dialysis frequency belong with the nephrology team.</li></ul><a href="https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis" target="_blank" rel="noopener noreferrer">Kidney-care information ↗</a></article>
+<article><span class="care-icon"><i class="fa-solid fa-person-walking" aria-hidden="true"></i></span><h4>Make home safer</h4><ul><li>Keep walkways clear and lighting comfortable at night.</li><li>Review safe footwear, mobility aids and bathroom supports.</li><li>Report new confusion or a fall; the cause needs assessment.</li></ul><a href="https://www.nia.nih.gov/health/falls-and-falls-prevention" target="_blank" rel="noopener noreferrer">Falls-prevention information ↗</a></article>
+</div></section>
+<section id="wikiSection" class="health-library"><span class="section-eyebrow">The health library</span><div class="section-intro"><h3>Understanding changes<br/>everything.</h3><p>Find practical answers, recognise warning signs and prepare better questions for your doctor.</p></div><label class="library-search-label" for="wikiSearchInput">Search by condition, symptom or everyday concern</label><input id="wikiSearchInput" type="search" placeholder="Search the library…"/><div class="library-topic-filters" id="libraryTopicFilters" aria-label="Filter health topics"></div><p id="libraryResultCount" role="status" aria-live="polite"></p><div id="wikiCardsGrid" class="awareness-grid"></div><p id="libraryNoResults" hidden>No matching topic yet. Try another term or ask the doctor.</p></section><section class="research-review" id="publicGuidanceSection"><span class="section-eyebrow">Patient guidance · read &amp; share</span><h3>Read. Keep. Share.</h3><p>Your patient guidance articles, with PDF download and sharing. Articles added on this device appear here; they are not automatically published to other devices.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="publicArticlesList"></div></section>
 <!-- BOOKING SECTION: WITH 11:01 PM AUTO TIME-SLAB DETECTOR -->
 <section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="bookingSection"><span class="section-eyebrow">Home visit · booking &amp; dispatch</span>
 <div class="max-w-4xl">
-<h3 class="text-xl font-bold serif-brand text-[#0F2942]">Bedside ICU Home Visit Booking &amp; Accurate GPS Location</h3>
-<p class="text-xs text-slate-600 mb-4">Patient details, address, and live GPS pin sent directly to Dr. Kulkarni's phone for instant Google Maps navigation.</p>
+<h3 class="text-xl font-bold serif-brand text-[#0F2942]">A home visit, planned clearly.</h3>
+<p class="text-xs text-slate-600 mb-4">Choose the visit details to see an estimate. Send a WhatsApp request with your address and optional location pin; the doctor confirms availability and the final fee.</p>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
@@ -347,7 +230,7 @@
 <div class="text-2xl font-bold text-[#0F2942]" id="totalFeeDisplay">₹1,200</div>
 </div>
 <button class="bg-[#16A34A] hover:bg-green-700 text-white font-bold px-4 py-2.5 rounded-xl shadow flex items-center gap-2 text-xs" onclick="bookAndTriggerFullAutomation()">
-<i class="fa-brands fa-whatsapp text-base"></i> Confirm Visit (WhatsApp + Google Maps Pin)
+<i class="fa-brands fa-whatsapp text-base"></i> Send visit request on WhatsApp
               </button>
 </div>
 </div>
@@ -360,12 +243,12 @@
 </div>
 </div>
 </div>
-</section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">तुमचे प्रश्न, सोपी उत्तरे</h3><p>घरी भेट, शुल्क आणि वेबसाइट वापरण्याबद्दल प्रश्न शोधा. येथे वैयक्तिक निदान किंवा औषधांचे बदल सुचवले जात नाहीत.</p><label for="faqSearch">प्रश्न शोधा / Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="उदा. भेट, शुल्क, अहवाल, booking, fees…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">उत्तर सापडले नाही. खालील बटणातून तुमचा प्रश्न डॉक्टरांना WhatsApp वर विचारा.</p><a class="faq-contact" href="https://wa.me/919822594341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">डॉक्टरांना WhatsApp वर विचारा ↗</a></section>
+</section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919822594341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
 <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS -->
 <section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
 <div class="flex flex-wrap justify-between items-center border-b pb-2">
-<h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide">Verified International Clinical Portals &amp; Guidelines</h3>
-<span class="text-[11px] text-teal-800 font-semibold">🌐 Includes 1-Click Marathi Translated Web Proxies</span>
+<h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide">Explore international health resources</h3>
+<span class="text-[11px] text-teal-800 font-semibold">Original sources · Marathi translation links</span>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5 pt-1">
 <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-2xl text-center space-y-1">
@@ -419,45 +302,16 @@
 </div>
 </div>
 </section>
-<!-- AUTHENTIC MAHARASHTRIAN CLINICAL DIETS -->
-<section class="petal-box p-6 md:p-8 rounded-3xl space-y-4 shadow-sm diet-section"><span class="section-eyebrow">Food &amp; daily living</span>
+<section id="nutritionSection" class="diet-section"><span class="section-eyebrow">Food &amp; daily living</span><div class="section-intro"><h3>Familiar food.<br/>An individual plan.</h3><p>Keep the foods and traditions you know. Adapt portions, textures and nutrients to the person’s care plan.</p></div><div class="nutrition-grid">
+<article><span class="nutrition-number">01 / HEART HEALTH</span><h4>Make room for less salt.</h4><p>Discuss everyday meals such as bhakri, dal and vegetables with your clinician or dietitian. Compare packaged-food labels and reduce added salt, pickles and salty snacks.</p><p>Fluid limits and weight-alert thresholds should follow the individual heart-failure action plan.</p></article>
+<article><span class="nutrition-number">02 / KIDNEY HEALTH</span><h4>Let the blood tests guide you.</h4><p>Protein, potassium, phosphorus and fluid needs differ with CKD stage and dialysis treatment. Coconut water, fruit juices and other potassium-rich foods need individual review, not a universal ban.</p><p>Use preparation methods such as vegetable leaching only when the renal dietitian advises them.</p></article>
+<article><span class="nutrition-number">03 / SWALLOWING</span><h4>Comfort begins with safe textures.</h4><p>Soft foods such as porridge may suit some people, but texture and drink thickness must follow a swallowing assessment.</p><p>Support upright eating and the recommended pace. Do not force food or fluid when swallowing is unsafe.</p></article>
+</div></section>
+<!-- Public tools; 28 clinical calculators are inside Doctor Workstation. -->
+<section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="patientToolsSection"><span class="section-eyebrow">Everyday health · simple tools</span>
 <div class="border-b petal-border pb-2">
-<h3 class="text-xl font-bold serif-brand text-[#0F2942]">Authentic Indian &amp; Maharashtrian Clinical Diets</h3>
-<p class="text-xs text-slate-600">Bedside nutrition for heart failure, kidney disease, and stroke dysphagia.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-<div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
-<span class="bg-red-50 text-red-900 font-bold px-2 py-0.5 rounded text-[10px]">हार्ट फेल्युअर आहार</span>
-<h4 class="font-bold text-sm text-[#0F2942]">कमी मीठ व १.२L पाणी मर्यादा</h4>
-<ul class="list-disc list-inside space-y-1 text-slate-700">
-<li><strong>मान्य:</strong> ज्वारीची भाकरी, मुगाचे वरण, दुधी भोपळा, पडवळ, दोडका, लसूण-जिरे फोडणी.</li>
-<li><strong>वर्ज्य:</strong> वरून मीठ, पापड, लोणचे, शेव, खारे शेंगदाणे, बेकरी ब्रेड, पॅकबंद सूप.</li>
-<li><strong>नियम:</strong> दररोज सकाळी उपाशीपोटी वजन करा. २ दिवसांत १.५ किलो वाढल्यास कळवा.</li>
-</ul>
-</div>
-<div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
-<span class="bg-amber-50 text-amber-900 font-bold px-2 py-0.5 rounded text-[10px]">CKD / किडनी आहार</span>
-<h4 class="font-bold text-sm text-[#0F2942]">भाज्यांचे लीचिंग &amp; शून्य नारळ पाणी</h4>
-<ul class="list-disc list-inside space-y-1 text-slate-700">
-<li><strong>मान्य:</strong> पालेभाज्या/बटाटा बारीक चिरून भरपूर पाण्यात उकळून पाणी फेकून द्यावे (Leaching). तांदळाचा भात.</li>
-<li><strong>कडक वर्ज्य:</strong> नारळ पाणी, मोसंबी/संत्रा ज्यूस, ड्रायफ्रूट्स (अतिरिक्त पोटॅशियममुळे हृदय बंद पडू शकते).</li>
-</ul>
-</div>
-<div class="p-4 bg-white border petal-border rounded-2xl space-y-2 shadow-sm">
-<span class="bg-blue-50 text-blue-900 font-bold px-2 py-0.5 rounded text-[10px]">स्ट्रोक / गिळण्याचा त्रास</span>
-<h4 class="font-bold text-sm text-[#0F2942]">मऊ लापशी व बसवून खाऊ घालणे</h4>
-<ul class="list-disc list-inside space-y-1 text-slate-700">
-<li><strong>मान्य:</strong> मऊ मुगाची खिमटी, गव्हाची लापशी, मिक्सरमधून काढलेली घट्ट भाजी.</li>
-<li><strong>पोश्चर:</strong> खाऊ घालताना आणि नंतर ४५ मिनिटे रुग्णाला ७०° ते ९०° सरळ बसवून ठेवावे.</li>
-</ul>
-</div>
-</div>
-</section>
-<!-- 30 INTERACTIVE CLINICAL CALCULATORS (ALL 30 CODED) -->
-<section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="patientToolsSection"><span class="section-eyebrow">Bedside tools · quick reference</span>
-<div class="border-b petal-border pb-2">
-<h3 class="text-xl font-bold serif-brand text-[#0F2942]">30 Comprehensive Clinical &amp; Patient Tools</h3>
-<p class="text-xs text-slate-600">Evidence-based interactive calculators for bedside ICU, organ assessment, and home recovery.</p>
+<h3 class="text-xl font-bold serif-brand text-[#0F2942]">Know your numbers</h3>
+<p class="text-xs text-slate-600">Understand your BMI and estimated average glucose. Clinical calculations are available in Doctor Workstation.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs" id="calc30Grid"></div>
 </section>
@@ -475,8 +329,8 @@
 <p class="text-slate-300">Direct Helpline: +91 9822594341</p>
 </div>
 <div>
-<h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">AUTOMATION READY</h4>
-<p class="text-slate-300">Make.com Webhook + Live GPS Location Sync</p>
+<h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">VISIT REQUESTS</h4>
+<p class="text-slate-300">WhatsApp visit request with optional GPS pin. Server automation requires configuration.</p>
 </div>
 </div>
 <p class="text-center text-slate-500 text-[11px]">© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
@@ -498,7 +352,7 @@
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabArticles" onclick="switchDocTab('articlesHub')">📑 Article Manager &amp; Moon-Reader</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabSet" onclick="switchDocTab('settingsTab')">⚙️ Settings</button>
 <button class="px-3 py-1.5 bg-red-100 text-red-900 border border-red-300 rounded-xl text-xs font-bold hover:bg-red-200 ml-auto flex items-center gap-1" onclick="lockWorkstationNow()">🔒 Lock Session</button>
-</div>
+<button type="button" class="px-3 py-2 rounded-xl text-xs font-bold" id="tabCalculators" onclick="switchDocTab('clinicalCalculators')">Clinical calculators · 28</button></div>
 <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Direct, Pop-up Proof <a> Links) -->
 <div class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs" id="aiLaunchBar">
 <div class="flex items-center gap-1.5">
@@ -978,7 +832,7 @@
 <div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cert-form2"><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 2 - DEATH REPORT</h2><p>See Rule 5 | Legal information | To be filled by the informant</p></div><div class="certificate-grid"><label class="certificate-field" for="f2Name"><span>Name of deceased (full name in capitals)</span><input id="f2Name" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Sex"><span>Sex</span><select id="f2Sex"><option value=""></option><option>Male</option><option>Female</option><option>Transgender person</option></select></label><label class="certificate-field" for="f2Age"><span>Age at death</span><input id="f2Age" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="f2AgeUnit"><span>Age unit</span><select id="f2AgeUnit"><option value=""></option><option>Completed years</option><option>Completed months (under 1 year)</option><option>Completed days (under 1 month)</option><option>Hours (under 1 day)</option></select></label><label class="certificate-field" for="f2DeathDate"><span>Date of death</span><input id="f2DeathDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f2DeathTime"><span>Time of death (24-hour clock)</span><input id="f2DeathTime" maxlength="240" type="time"/></label></div><div class="certificate-grid"><label class="certificate-field" for="f2DOB"><span>Date of birth, if available</span><input id="f2DOB" maxlength="240" type="date"/></label><label class="certificate-field" for="f2Aadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2Aadhaar" maxlength="240" type="text"/></label></div><h3 class="certificate-section-title">Mother's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2MotherName"><span>Full name</span><input id="f2MotherName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2MotherAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2MotherAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2MotherMobile"><span>Mobile no.</span><input id="f2MotherMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2MotherEmail"><span>Email, if available</span><input id="f2MotherEmail" maxlength="240" type="email"/></label></div><h3 class="certificate-section-title">Father's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2FatherName"><span>Full name</span><input id="f2FatherName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2FatherAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2FatherAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2FatherMobile"><span>Mobile no.</span><input id="f2FatherMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2FatherEmail"><span>Email, if available</span><input id="f2FatherEmail" maxlength="240" type="email"/></label></div><h3 class="certificate-section-title">Spouse's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2SpouseName"><span>Full name</span><input id="f2SpouseName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2SpouseAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2SpouseAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2SpouseMobile"><span>Mobile no.</span><input id="f2SpouseMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2SpouseEmail"><span>Email, if available</span><input id="f2SpouseEmail" maxlength="240" type="email"/></label></div><div class="certificate-grid"><label class="certificate-field certificate-wide" for="f2CurrentAddress"><span>Address at the time of death (house, locality, ward, town/village, sub-district, district, state, PIN)</span><textarea id="f2CurrentAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field certificate-wide" for="f2PermanentAddress"><span>Permanent address (house, locality, ward, town/village, sub-district, district, state, PIN)</span><textarea id="f2PermanentAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2PlaceType"><span>Place of death</span><select id="f2PlaceType"><option value=""></option><option>Hospital / institution</option><option>House</option><option>Other place</option></select></label><label class="certificate-field" for="f2PlaceAddress"><span>Name and full address of place of death</span><textarea id="f2PlaceAddress" maxlength="1800" rows="2"></textarea></label></div><h3 class="certificate-section-title">Informant</h3><div class="certificate-grid"><label class="certificate-field" for="f2Informant"><span>Informant full name / relationship</span><input id="f2Informant" maxlength="240" type="text"/></label><label class="certificate-field" for="f2InformantPhone"><span>Mobile / email</span><input id="f2InformantPhone" maxlength="240" type="text"/></label><label class="certificate-field" for="f2InformantAddress"><span>Informant address</span><textarea id="f2InformantAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2ReportDate"><span>Date of reporting</span><input id="f2ReportDate" maxlength="240" type="date"/></label></div><div class="certificate-hand-signature">Signature / thumb impression of informant: ______________________________</div><p class="certificate-footnote">Form 2 reports a death; it is not the death certificate issued by the Registrar. Page 1 of 2.</p></section><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 2 - DEATH REPORT</h2><p>Statistical information | Detach for statistical processing</p></div><div class="certificate-grid"><label class="certificate-field" for="f2UsualTown"><span>Town / village of usual residence</span><input id="f2UsualTown" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualType"><span>Residence type</span><select id="f2UsualType"><option value=""></option><option>Town</option><option>Village</option></select></label><label class="certificate-field" for="f2UsualSubdistrict"><span>Sub-district</span><input id="f2UsualSubdistrict" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualDistrict"><span>District</span><input id="f2UsualDistrict" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualState"><span>State / Union Territory</span><input id="f2UsualState" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Religion"><span>Religion</span><input id="f2Religion" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Occupation"><span>Occupation</span><input id="f2Occupation" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Attention"><span>Medical attention before death</span><select id="f2Attention"><option value=""></option><option>Institutional</option><option>Medical attention outside an institution</option><option>No medical attention</option><option>Unknown</option></select></label><label class="certificate-field" for="f2Certified"><span>Was cause of death medically certified?</span><select id="f2Certified"><option value=""></option><option>Yes</option><option>No</option><option>Unknown</option></select></label><label class="certificate-field certificate-wide" for="f2Cause"><span>Disease / actual cause of death (as per Form 4/4A where available)</span><textarea id="f2Cause" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2Pregnancy"><span>Death while pregnant, during delivery or within 6 weeks after pregnancy?</span><select id="f2Pregnancy"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label></div><h3 class="certificate-section-title">Habitual use - duration in years, or specify none / unknown</h3><div class="certificate-grid"><label class="certificate-field" for="f2Smoking"><span>Smoking</span><input id="f2Smoking" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Tobacco"><span>Chewing tobacco</span><input id="f2Tobacco" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Arecanut"><span>Areca nut / pan masala</span><input id="f2Arecanut" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Alcohol"><span>Alcohol</span><input id="f2Alcohol" maxlength="240" type="text"/></label></div><h3 class="certificate-section-title">For Registrar use only</h3><div class="certificate-grid"><label class="certificate-field" for="f2RegistrationNo"><span>Registration no.</span><input id="f2RegistrationNo" maxlength="240" type="text"/></label><label class="certificate-field" for="f2RegistrationDate"><span>Registration date</span><input id="f2RegistrationDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f2RegistrationUnit"><span>Registration unit / code</span><input id="f2RegistrationUnit" maxlength="240" type="text"/></label><label class="certificate-field" for="f2RegistrarArea"><span>Town / village / district</span><input id="f2RegistrarArea" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="f2RegistrarRemarks"><span>Remarks</span><textarea id="f2RegistrarRemarks" maxlength="1800" rows="2"></textarea></label></div><div class="certificate-hand-signature">Name, signature and seal of Registrar: ______________________________</div><p class="certificate-footnote">Complete known particulars accurately. Do not invent unknown information. Page 2 of 2.</p></section></div>
 </div>
 <!-- TAB 9: 1-CLICK FORMULARY & CIMS -->
-<div class="hidden space-y-4" id="viewDrugDir"><section class="research-review"><span class="section-eyebrow">Formulary · bulk catalogue import</span><h3>Find the right medicine.</h3><p>Import your authorized CSV/JSON catalogue with 1,000 or more medicines. Existing medicines stay available. New catalogue entries have blank prescription dosing fields for the doctor to complete.</p><div class="flex flex-wrap gap-2"><label class="research-upload">Import CSV / JSON<input accept=".csv,.json,text/csv,application/json" class="sr-only" id="formularyImport" type="file"/></label><button id="formularyTemplate" type="button">Download CSV template</button><button id="formularyExport" type="button">Export catalogue backup</button></div><p aria-live="polite" id="formularyImportStatus" role="status">A licensed CIMS/MIMS dataset is not connected.</p><p aria-live="polite" id="formularyCount"></p><div class="flex gap-2"><button id="formularyPrev" type="button">Previous 100</button><button id="formularyNext" type="button">Next 100</button></div></section><button class="bg-[#0D9488] text-white px-4 py-2 rounded-xl text-xs" onclick="openAddDrugModal()" type="button">+ Add custom medicine</button>
+<div class="hidden space-y-4" id="viewDrugDir"><section class="research-review" id="drugSetuReference"><span class="section-eyebrow">India medicine reference</span><h3>DrugSetu</h3><p>Open the independent DrugSetu medicine-data service. Direct medicine search within this workstation requires authorised API access and a secure server connection; it is not connected in this preview.</p><div class="flex flex-wrap gap-2"><a class="research-upload" href="https://drugsetu.com/" target="_blank" rel="noopener noreferrer">Open DrugSetu ↗</a><a class="research-upload" href="https://drugsetu.com/pricing/" target="_blank" rel="noopener noreferrer">API access &amp; pricing ↗</a><a class="research-upload" href="DRUGSETU_SETUP.md" target="_blank" rel="noopener noreferrer">Connection guide ↗</a></div></section><section class="research-review"><span class="section-eyebrow">Formulary · bulk catalogue import</span><h3>Find the right medicine.</h3><p>Import your authorized CSV/JSON catalogue with 1,000 or more medicines. Existing medicines stay available. New catalogue entries have blank prescription dosing fields for the doctor to complete.</p><div class="flex flex-wrap gap-2"><label class="research-upload">Import CSV / JSON<input accept=".csv,.json,text/csv,application/json" class="sr-only" id="formularyImport" type="file"/></label><button id="formularyTemplate" type="button">Download CSV template</button><button id="formularyExport" type="button">Export catalogue backup</button></div><p aria-live="polite" id="formularyImportStatus" role="status">A licensed CIMS/MIMS dataset is not connected.</p><p aria-live="polite" id="formularyCount"></p><div class="flex gap-2"><button id="formularyPrev" type="button">Previous 100</button><button id="formularyNext" type="button">Next 100</button></div></section><button class="bg-[#0D9488] text-white px-4 py-2 rounded-xl text-xs" onclick="openAddDrugModal()" type="button">+ Add custom medicine</button>
 <div class="flex flex-wrap justify-between items-center gap-2 no-print">
 <div>
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Indian ICU Formulary (Zero Typing: Click "+ Add to Rx")</h3>
@@ -1073,7 +927,7 @@
 <button class="bg-[#0F2942] text-white font-bold px-4 py-2 rounded-xl shadow" onclick="saveWebhookUrl()">Save Webhook</button>
 </div>
 </div>
-<div class="hidden space-y-6" id="viewChart20"><section class="research-review"><span class="section-eyebrow">Longitudinal records · 20 entries</span><h3>20-Day Trend &amp; BP</h3><p>Enter measured readings to plot systolic and diastolic BP. MAP is calculated as (SBP + 2 × DBP) / 3. No sample patient values are preloaded. Records remain in this browser.</p><div class="flex flex-wrap gap-2 no-print"><button onclick="saveTrendReadings()" type="button">Save readings</button><button onclick="exportTrendReadings()" type="button">Export readings (JSON)</button><button onclick="window.print()" type="button">Print trend</button></div><p aria-live="polite" id="trendStatus" role="status">No readings entered.</p><svg aria-label="Systolic and diastolic BP trends from entered readings" id="bpTrendGraph" role="img" viewbox="0 0 760 240"></svg><p>Systolic BP: navy · Diastolic BP: teal · Units: mmHg. Points use entry order; missing values are not connected.</p><div class="overflow-x-auto"><table class="w-full text-xs" id="trendTable"><thead><tr><th>Date</th><th>SBP (mmHg)</th><th>DBP (mmHg)</th><th>MAP (mmHg)</th><th>Lab results / notes (include units)</th></tr></thead><tbody id="trendRows"></tbody></table></div></section></div></main>
+<section id="viewClinicalCalculators" class="hidden calculator-workspace"><span class="section-eyebrow">Clinical reference tools</span><h3>Clinical calculators</h3><span class="calc-review-label">Source-reviewed draft · awaiting physician approval</span><p>28 tools for clinician use. Enter the current patient’s measurements and select every assessment explicitly. Values are not auto-filled or saved. Formulas, scope and sources accompany each tool.</p><label class="calculator-search">Find a calculator<input type="search" id="clinicalCalculatorSearch" placeholder="Search name or specialty"/></label><div id="clinicalCalculatorGrid"></div></section><div class="hidden space-y-6" id="viewChart20"><section class="research-review"><span class="section-eyebrow">Longitudinal records · 20 entries</span><h3>20-Day Trend &amp; BP</h3><p>Enter measured readings to plot systolic and diastolic BP. MAP is calculated as (SBP + 2 × DBP) / 3. No sample patient values are preloaded. Records remain in this browser.</p><div class="flex flex-wrap gap-2 no-print"><button onclick="saveTrendReadings()" type="button">Save readings</button><button onclick="exportTrendReadings()" type="button">Export readings (JSON)</button><button onclick="window.print()" type="button">Print trend</button></div><p aria-live="polite" id="trendStatus" role="status">No readings entered.</p><svg aria-label="Systolic and diastolic BP trends from entered readings" id="bpTrendGraph" role="img" viewbox="0 0 760 240"></svg><p>Systolic BP: navy · Diastolic BP: teal · Units: mmHg. Points use entry order; missing values are not connected.</p><div class="overflow-x-auto"><table class="w-full text-xs" id="trendTable"><thead><tr><th>Date</th><th>SBP (mmHg)</th><th>DBP (mmHg)</th><th>MAP (mmHg)</th><th>Lab results / notes (include units)</th></tr></thead><tbody id="trendRows"></tbody></table></div></section></div></main>
 <!-- WIKI DETAIL MODAL -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="wikiModal">
 <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-4 text-xs max-h-[85vh] overflow-y-auto">
@@ -1287,7 +1141,7 @@
     }
 
     function switchDocTab(tabId) {
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
@@ -1628,182 +1482,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 
     // 30 INTERACTIVE CALCULATORS (FULL 30 IMPLEMENTED)
     function populate30Calculators() {
-      const grid = document.getElementById('calc30Grid');
-      grid.innerHTML = `
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">1. BMI &amp; Ideal Weight</p>
-          <div class="flex gap-1.5"><input type="number" id="c_w" placeholder="Wt(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_h" placeholder="Ht(cm)" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let w=parseFloat(c_w.value),h=parseFloat(c_h.value)/100; if(w&&h) r_bmi.innerText='BMI: '+(w/(h*h)).toFixed(1)+' | IBW: ~'+(22*h*h).toFixed(1)+'kg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_bmi" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">2. MAP Perfusion Target (&ge;65)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_sbp" placeholder="SBP" class="w-1/2 p-1 border rounded"><input type="number" id="c_dbp" placeholder="DBP" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let s=parseFloat(c_sbp.value),d=parseFloat(c_dbp.value); if(s&&d) r_map.innerText='MAP: '+(((2*d)+s)/3).toFixed(1)+' mmHg';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_map" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">3. 24h Fluid Restriction</p>
-          <select id="c_fl" class="w-full p-1 border rounded"><option value="1200">Heart Failure (&lt;1,200 mL)</option><option value="1000">CKD (&lt;1,000 mL)</option></select>
-          <button onclick="r_fl.innerText='Quota: '+c_fl.value+' mL/24h';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Show Quota</button>
-          <div id="r_fl" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">4. eGFR CrCl (Cockcroft-Gault)</p>
-          <div class="flex gap-1"><input type="number" id="c_ag" placeholder="Age" class="w-1/3 p-1 border rounded"><input type="number" id="c_wt" placeholder="Wt" class="w-1/3 p-1 border rounded"><input type="number" id="c_cr" placeholder="Cr" step="0.1" class="w-1/3 p-1 border rounded"></div>
-          <button onclick="let a=parseFloat(c_ag.value),w=parseFloat(c_wt.value),c=parseFloat(c_cr.value); if(a&&w&&c) r_cr.innerText='CrCl: '+(((140-a)*w)/(72*c)).toFixed(1)+' mL/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
-          <div id="r_cr" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">5. HbA1c to eAG Glucose</p>
-          <input type="number" id="c_a1c" placeholder="HbA1c % (e.g. 7.5)" step="0.1" class="w-full p-1 border rounded">
-          <button onclick="let x=parseFloat(c_a1c.value); if(x) r_a1c.innerText='eAG: ~'+((28.7*x)-46.7).toFixed(0)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button>
-          <div id="r_a1c" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">6. GCS Coma Scale</p>
-          <div class="flex gap-1"><select id="ge" class="w-1/3 p-1 border rounded"><option value="4">E4</option><option value="3">E3</option><option value="2">E2</option><option value="1">E1</option></select><select id="gv" class="w-1/3 p-1 border rounded"><option value="5">V5</option><option value="4">V4</option><option value="3">V3</option><option value="1">V1</option></select><select id="gm" class="w-1/3 p-1 border rounded"><option value="6">M6</option><option value="5">M5</option><option value="4">M4</option><option value="1">M1</option></select></div>
-          <button onclick="let t=parseInt(ge.value)+parseInt(gv.value)+parseInt(gm.value); r_gcs.innerText='Total: '+t+'/15 ('+(t<=8?'Severe Coma':'Mild/Mod')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_gcs" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">7. Bedridden Nutrition Needs</p>
-          <input type="number" id="c_nut" placeholder="Weight in kg" class="w-full p-1 border rounded">
-          <button onclick="let w=parseFloat(c_nut.value); if(w) r_nut.innerText='Cal: '+(w*25).toFixed(0)+'-'+(w*30).toFixed(0)+' kcal | Prot: '+(w*1.2).toFixed(1)+'g';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_nut" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">8. IV Drip Rate (Drops/min)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_vol" placeholder="Vol(mL)" class="w-1/2 p-1 border rounded"><input type="number" id="c_hr" placeholder="Hours" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let v=parseFloat(c_vol.value),h=parseFloat(c_hr.value); if(v&&h) r_dr.innerText='Rate: ~'+((v*15)/(h*60)).toFixed(0)+' gtt/min';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_dr" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">9. Parkland Burn Fluid (24h)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_bw" placeholder="Weight(kg)" class="w-1/2 p-1 border rounded"><input type="number" id="c_bp" placeholder="% Burn" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let w=parseFloat(c_bw.value),p=parseFloat(c_bp.value); if(w&&p) r_bk.innerText='Total RL: '+(4*w*p)+' mL (50% first 8h)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_bk" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">10. Corrected Calcium</p>
-          <div class="flex gap-1.5"><input type="number" id="c_ca" placeholder="Ca" step="0.1" class="w-1/2 p-1 border rounded"><input type="number" id="c_alb" placeholder="Albumin" step="0.1" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let c=parseFloat(c_ca.value),a=parseFloat(c_alb.value); if(c&&a) r_cca.innerText='Corrected Ca: '+(c+0.8*(4.0-a)).toFixed(1)+' mg/dL';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_cca" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">11. CURB-65 Pneumonia</p>
-          <div class="flex flex-wrap gap-1">
-            <label><input type="checkbox" id="cb_c"> Confusion</label>
-            <label><input type="checkbox" id="cb_u"> Urea>42</label>
-            <label><input type="checkbox" id="cb_r"> RR&ge;30</label>
-            <label><input type="checkbox" id="cb_b"> BP<90/60</label>
-            <label><input type="checkbox" id="cb_65"> Age&ge;65</label>
-          </div>
-          <button onclick="let s=(cb_c.checked?1:0)+(cb_u.checked?1:0)+(cb_r.checked?1:0)+(cb_b.checked?1:0)+(cb_65.checked?1:0); r_curb.innerText='Score: '+s+'/5 ('+(s>=3?'Severe/ICU':'Ward')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Score</button>
-          <div id="r_curb" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">12. Serum Anion Gap</p>
-          <div class="flex gap-1"><input type="number" id="c_na" placeholder="Na" class="w-1/3 p-1 border rounded"><input type="number" id="c_cl" placeholder="Cl" class="w-1/3 p-1 border rounded"><input type="number" id="c_hc" placeholder="HCO3" class="w-1/3 p-1 border rounded"></div>
-          <button onclick="let n=parseFloat(c_na.value),l=parseFloat(c_cl.value),h=parseFloat(c_hc.value); if(n&&l&&h) r_agp.innerText='AG: '+(n-(l+h)).toFixed(1)+' mEq/L ('+((n-(l+h))>12?'HAGMA':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_agp" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">13. Oxygen Tank Duration</p>
-          <div class="flex gap-1.5"><input type="number" id="c_psi" placeholder="PSI" class="w-1/2 p-1 border rounded"><input type="number" id="c_flw" placeholder="L/min" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let p=parseFloat(c_psi.value),f=parseFloat(c_flw.value); if(p&&f) r_ox.innerText='Remaining: ~'+((p*0.28)/f).toFixed(0)+' mins (D-Tank)';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Estimate</button>
-          <div id="r_ox" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">14. qSOFA Sepsis Screen</p>
-          <div class="flex flex-wrap gap-1">
-            <label><input type="checkbox" id="qs_r"> RR&ge;22</label>
-            <label><input type="checkbox" id="qs_g"> Altered Mentation</label>
-            <label><input type="checkbox" id="qs_b"> SBP&le;100</label>
-          </div>
-          <button onclick="let q=(qs_r.checked?1:0)+(qs_g.checked?1:0)+(qs_b.checked?1:0); r_qsofa.innerText='qSOFA: '+q+'/3 ('+(q>=2?'High ICU Risk':'Low Risk')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Check</button>
-          <div id="r_qsofa" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">15. PaO2 / FiO2 Ratio (ARDS)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_po2" placeholder="PaO2" class="w-1/2 p-1 border rounded"><input type="number" id="c_fio2" placeholder="FiO2 (0.21-1)" step="0.1" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let o=parseFloat(c_po2.value),f=parseFloat(c_fio2.value); if(o&&f) r_pf.innerText='P/F: '+(o/f).toFixed(0)+' ('+(o/f<100?'Severe ARDS':o/f<200?'Mod ARDS':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_pf" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">16. Corrected Na in High Glucose</p>
-          <div class="flex gap-1.5"><input type="number" id="c_mna" placeholder="Na" class="w-1/2 p-1 border rounded"><input type="number" id="c_mglu" placeholder="Glucose" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let n=parseFloat(c_mna.value),g=parseFloat(c_mglu.value); if(n&&g) r_cna.innerText='Corrected Na: '+(n+0.016*(g-100)).toFixed(1)+' mEq/L';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_cna" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">17. FENa (Pre-renal vs ATN)</p>
-          <div class="flex gap-1"><input type="number" id="c_una" placeholder="UNa" class="w-1/4 p-1 border rounded"><input type="number" id="c_sna" placeholder="SNa" class="w-1/4 p-1 border rounded"><input type="number" id="c_ucr" placeholder="UCr" class="w-1/4 p-1 border rounded"><input type="number" id="c_scr" placeholder="SCr" class="w-1/4 p-1 border rounded"></div>
-          <button onclick="let u_n=parseFloat(c_una.value),s_n=parseFloat(c_sna.value),u_c=parseFloat(c_ucr.value),s_c=parseFloat(c_scr.value); if(u_n&&s_n&&u_c&&s_c) r_fena.innerText='FENa: '+((u_n*s_c)/(s_n*u_c)*100).toFixed(1)+'% ('+(((u_n*s_c)/(s_n*u_c)*100)<1?'Prerenal':'ATN')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_fena" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">18. Maintenance Fluid (4-2-1)</p>
-          <input type="number" id="c_mf_wt" placeholder="Weight (kg)" class="w-full p-1 border rounded">
-          <button onclick="let w=parseFloat(c_mf_wt.value); if(w) { let r = w<=10 ? w*4 : w<=20 ? 40+(w-10)*2 : 60+(w-20)*1; r_mf.innerText='Hourly: '+r+' mL/h ('+(r*24)+' mL/day)'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_mf" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">19. Steroid Dose Converter</p>
-          <div class="flex gap-1.5"><input type="number" id="c_pred" placeholder="Prednisolone (mg)" class="w-2/3 p-1 border rounded"><button onclick="let p=parseFloat(c_pred.value); if(p) r_steroid.innerText='Dex: '+(p*0.15).toFixed(1)+'mg | Hydrocort: '+(p*4).toFixed(0)+'mg';" class="w-1/3 bg-[#0F2942] text-white py-1 rounded font-bold">Convert</button></div>
-          <div id="r_steroid" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">20. Wells' DVT Probability</p>
-          <p class="text-[11px] text-slate-600">Active cancer (1), Paralysis/plaster (1), Bedridden &gt;3d (1), Swollen leg (1). Score &ge; 2: DVT Likely.</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">21. Wells' PE Probability</p>
-          <p class="text-[11px] text-slate-600">Signs of DVT (3), PE #1 diagnosis (3), HR &gt; 100 (1.5). Score &gt; 4: PE Likely.</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">22. CHA₂DS₂-VASc AFib Stroke</p>
-          <p class="text-[11px] text-slate-600">CHF (1), HTN (1), Age &ge; 75 (2), DM (1), Stroke (2). Score &ge; 2 (Men): DOAC Indicated.</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">23. HAS-BLED Bleeding Risk</p>
-          <p class="text-[11px] text-slate-600">HTN (1), Renal (1), Liver (1), Stroke (1), Bleeding (1), Labile INR (1), Age&gt;65 (1). Score &ge; 3: High bleed risk.</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">24. Bedside Sliding Scale Insulin</p>
-          <input type="number" id="c_grbs_val" placeholder="Current GRBS (mg/dL)" class="w-full p-1 border rounded">
-          <button onclick="let g=parseFloat(c_grbs_val.value); if(g) { let ins = g<150?0 : g<200?2 : g<250?4 : g<300?6 : g<350?8 : 10; r_ins.innerText='Regular Insulin: '+ins+' Units SC'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_ins" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">25. Norton Bedsore Ulcer Scale</p>
-          <p class="text-[11px] text-slate-600">Physical (1-4), Mental (1-4), Activity (1-4), Mobility (1-4), Incontinence (1-4). Score &le; 14: High Bedsore Risk (Air mattress mandatory).</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">26. Shock Index (HR / SBP)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_sihr" placeholder="HR" class="w-1/2 p-1 border rounded"><input type="number" id="c_sisbp" placeholder="SBP" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let hr=parseFloat(c_sihr.value),sbp=parseFloat(c_sisbp.value); if(hr&&sbp) r_si.innerText='Shock Index: '+(hr/sbp).toFixed(2)+' ('+((hr/sbp)>0.9?'Occult Shock':'Normal')+')';" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_si" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">27. Target Heart Rate (Karvonen)</p>
-          <div class="flex gap-1.5"><input type="number" id="c_tage" placeholder="Age" class="w-1/2 p-1 border rounded"><input type="number" id="c_trhr" placeholder="Rest HR" class="w-1/2 p-1 border rounded"></div>
-          <button onclick="let a=parseFloat(c_tage.value),r=parseFloat(c_trhr.value); if(a&&r) { let m=220-a; r_thr.innerText='60-80%: '+((m-r)*0.6+r).toFixed(0)+'-'+((m-r)*0.8+r).toFixed(0)+' bpm'; }" class="w-full bg-[#0F2942] text-white py-1 rounded font-bold">Calculate</button>
-          <div id="r_thr" class="text-[11px] font-semibold text-slate-700"></div>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">28. MELD Score (End-Stage Liver)</p>
-          <p class="text-[11px] text-slate-600">Calculated from Creatinine, Bilirubin &amp; INR. MELD &gt; 15 indicates urgent tertiary liver ICU transfer.</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">29. Child-Pugh Score (Cirrhosis)</p>
-          <p class="text-[11px] text-slate-600">Class A (5-6), Class B (7-9), Class C (10-15 decompensated cirrhosis).</p>
-        </div>
-        <div class="p-3 bg-white border petal-border rounded-2xl space-y-1.5 shadow-sm">
-          <p class="font-bold text-teal-900">30. APACHE II Mortality Estimate</p>
-          <p class="text-[11px] text-slate-600">Based on core body temp, MAP, heart rate, RR, arterial pH, PaO2, Na, K, Cr, and age.</p>
-        </div>
-      `;
+      window.ClinicalCalculators.render();
     }
 
     // WIKI DETAIL MODAL
@@ -2047,5 +1726,5 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div></body>
+</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div></body>
 </html>
