@@ -53,3 +53,7 @@ Indian catalogue source to evaluate under its package licence:
 ## Follow-up: editable certificates and Medical Xpress
 
 Medical Xpress is now prominent beside Feedly, with a publisher RSS link and selectable news feed. Fitness/Unfitness and death Forms 2/4 have complete editable working layouts; Form 4A is aligned with the official reference. Form 2 separates informant/legal and statistical/Registrar information. Clinical conclusions stay blank. Selected-only print/PDF output preserves typed values and multiline entries. The approved design baseline remains preserved in GitHub history. See CERTIFICATE_FORMAT_REFERENCES.md for official references, form status and validation.
+
+## PDF sharing, service chat and server-side feeds - 23 October 2026
+
+PDF is now the default document/article share, with a native file-sharing action and explicit download/attach fallback. The PDF engine is local. Interactive patient service help replaces the generic symptom reply without claiming a connected AI model. A fixed-publisher Vercel RSS endpoint replaces the external conversion service and repairs the moved Critical Care feed. See SHARING_FEEDS_SETUP.md for platform limits, validation and remaining model/workflow connections.

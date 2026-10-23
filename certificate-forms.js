@@ -28,6 +28,7 @@
     copy.removeAttribute('id');
     return copy;
   }
+  window.buildCertificatePdfClone = printableClone;
   function preparePrint(group) {
     document.getElementById('certificatePrintRoot')?.remove();
     const root = document.createElement('div'); root.id = 'certificatePrintRoot';

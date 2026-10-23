@@ -6,7 +6,7 @@
 <link href="assets/tailwind.css" rel="stylesheet"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor &amp; Emergency Specialist, Pune</title>
 <script src="assets/tailwind-config-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="assets/pdf/html2pdf.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="assets/icons/css/all.min.css" rel="stylesheet"/>
@@ -70,7 +70,7 @@
     }
   </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-<link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/></head>
+<link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/><link href="document-sharing.css" rel="stylesheet"/><link href="patient-helper.css" rel="stylesheet"/></head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
 <div class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none" id="notificationToast">
@@ -679,7 +679,7 @@
 </div>
 </div>
 <!-- TAB 3: LIVE RSS & AI RESEARCH AGENT -->
-<div class="hidden space-y-6" id="viewJournalsHub"><section aria-labelledby="researchReviewTitle" class="research-review no-print"><span class="section-eyebrow">Research desk · physician review</span><h3 id="researchReviewTitle">Daily evidence, ready for your review.</h3><span class="research-status">Daily automation not connected</span><p>Import summaries from your research workflow, check the original sources, and edit patient guidance before publishing. Drafts and review notes stay in this browser. Export a backup before changing devices.</p><div aria-label="Research workflow" class="research-flow"><span>1. RSS / Feedly</span><span>2. Source &amp; evidence checks</span><span>3. AI draft</span><span>4. Physician review</span></div><p>An RSS excerpt or abstract is not a full article. Each imported draft must state what text was available. API credentials belong in a secure backend or n8n credentials, never this page.</p><div class="flex flex-wrap gap-2"><label class="research-upload">Import research drafts (JSON)<input accept=".json,application/json" class="sr-only" id="researchImport" type="file"/></label><button id="researchExport" type="button">Export review backup</button><a class="text-sm underline" href="RESEARCH_AGENT_SETUP.md" rel="noopener noreferrer" target="_blank">Connection guide ↗</a></div><p aria-live="polite" id="researchImportStatus" role="status"></p><p id="researchDraftCount"></p><div id="researchDraftList"></div></section>
+<div class="hidden space-y-6" id="viewJournalsHub"><section aria-labelledby="researchReviewTitle" class="research-review no-print"><span class="section-eyebrow">Research desk · physician review</span><h3 id="researchReviewTitle">Daily evidence, ready for your review.</h3><span class="research-status">On-demand feeds · daily AI automation not connected</span><p>Import summaries from your research workflow, check the original sources, and edit patient guidance before publishing. Drafts and review notes stay in this browser. Export a backup before changing devices.</p><div aria-label="Research workflow" class="research-flow"><span>1. RSS / Feedly</span><span>2. Source &amp; evidence checks</span><span>3. AI draft</span><span>4. Physician review</span></div><p>An RSS excerpt or abstract is not a full article. Each imported draft must state what text was available. API credentials belong in a secure backend or n8n credentials, never this page.</p><div class="flex flex-wrap gap-2"><label class="research-upload">Import research drafts (JSON)<input accept=".json,application/json" class="sr-only" id="researchImport" type="file"/></label><button id="researchExport" type="button">Export review backup</button><a class="text-sm underline" href="RESEARCH_AGENT_SETUP.md" rel="noopener noreferrer" target="_blank">Connection guide ↗</a></div><p aria-live="polite" id="researchImportStatus" role="status"></p><p id="researchDraftCount"></p><div id="researchDraftList"></div></section>
 <div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-4 no-print">
 <div class="flex flex-wrap justify-between items-center gap-2 border-b pb-3">
 <div>
@@ -692,11 +692,11 @@
 </div>
 <div class="flex items-center gap-2">
 <select class="text-xs border p-2 rounded-xl bg-slate-50 font-bold text-slate-700 outline-none" id="rssFeedSource">
-<option value="https://www.nejm.org/action/showFeed?jc=nejm&amp;type=etoc&amp;feed=rss">NEJM (New England Journal of Medicine)</option>
-<option value="https://ccforum.biomedcentral.com/articles/rss.xml">Critical Care Forum (BioMed Central)</option>
-<option value="https://www.thelancet.com/rssfeed/lancet_online.xml">The Lancet Online First</option>
-<option value="https://tools.cdc.gov/api/v2/resources/media/132608.rss">CDC Emerging Infectious Diseases (CDC.gov)</option>
-<option value="https://medicalxpress.com/rss-feed/">Medical Xpress - research news updates</option></select>
+<option value="nejm">NEJM (New England Journal of Medicine)</option>
+<option value="criticalcare" selected>Critical Care - latest journal feed</option>
+<option value="lancet">The Lancet Online First</option>
+<option value="cdc">CDC Newsroom - public health updates</option>
+<option value="medicalxpress">Medical Xpress - research news updates</option></select>
 <button class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex items-center gap-1" onclick="fetchAndDisplayRssFeed()">
               🔄 Fetch Latest Feeds
             </button>
@@ -2027,13 +2027,13 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 </div><div class="fixed bottom-5 right-5 z-40 no-print">
 <button class="bg-[#0F2942] hover:bg-slate-800 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 border-2 border-slate-300" id="chatbotToggleBtn" onclick="toggleChatbot()">
 <span class="text-xl">💬</span>
-<span class="text-xs font-bold hidden md:inline">24x7 Triage Chatbot</span>
+<span class="text-xs font-bold hidden md:inline">Patient help</span>
 </button>
 <div class="hidden absolute bottom-16 right-0 w-80 md:w-96 bg-white border border-slate-300 rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[460px]" id="chatbotWindow">
 <div class="bg-[#0F2942] text-white p-3.5 flex justify-between items-center">
 <div>
-<h4 class="font-bold text-sm text-amber-100">Dr. Kulkarni — Quick Help</h4>
-<p class="text-[10px] text-slate-300">Automated responses · not a clinical assessment</p>
+<h4 class="font-bold text-sm text-amber-100">Dr. Kulkarni - Patient Help</h4>
+<p class="text-[10px] text-slate-300">Interactive service FAQ · AI model not connected</p>
 </div>
 <button class="text-slate-400 hover:text-white" onclick="toggleChatbot()">✕</button>
 </div>
@@ -2042,10 +2042,10 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
           Namaskar! I am Dr. Kulkarni's bedside triage assistant. Please describe the patient's acute symptoms (breathlessness, chest pain, SpO2) or ask for visit fee estimate in Pune.
         </div>
 </div>
-<div class="p-2 border-t bg-slate-50 flex gap-1">
+<div id="helperShortcuts" aria-label="Patient help topics"></div><div class="p-2 border-t bg-slate-50 flex gap-1">
 <input class="w-full border rounded-xl px-2.5 py-1.5 text-xs" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Type symptom..." type="text"/>
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script></body>
+</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div></body>
 </html>

@@ -1,6 +1,6 @@
 # Dr. Kulkarni — Daily Clinical Research Agent
 
-Status: implementation plan and local review queue prepared. No daily job, Feedly account, model API or publishing backend is connected. The existing booking webhook setting is unchanged and is not reused for research.
+Status: on-demand publisher RSS now has a Vercel endpoint; see SHARING_FEEDS_SETUP.md. The local review queue remains available. No daily job, Feedly account, model API or shared publishing backend is connected. The existing booking webhook setting is unchanged and is not reused for research.
 
 ## Recommended workflow
 
