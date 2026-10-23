@@ -7,6 +7,7 @@ Object.defineProperty(w,'crypto',{value:require('node:crypto').webcrypto});w.Tex
 w.scrollTo=()=>{};w.alert=()=>{};w.tailwind={};w.showToast=()=>{};
 const scripts=[];
 for(const script of [...w.document.scripts]){
+ if(script.type==='application/ld+json')continue;
  if(script.src){const src=script.getAttribute('src');if(/^(https?:)?\/\//.test(src))continue;if(['assets/tailwind-config-compat.js','assets/pdf/html2pdf.bundle.min.js','assets/qr-code.js'].includes(src))continue;scripts.push(fs.readFileSync(path.join(base,src),'utf8'));}
  else scripts.push(script.textContent);
 }
@@ -30,6 +31,7 @@ change('calculator-30-acid','hco3');assert.equal(w.document.getElementById('calc
 change('calculator-18-method','p421');assert.equal(w.document.getElementById('calculator-18-factor').disabled,true);
 const search=w.document.getElementById('clinicalCalculatorSearch');search.value='Wells';search.oninput();assert.equal([...w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card')].filter(e=>!e.hidden).length,2);
 for(const id of require('./existing-feature-ids.json'))assert.ok(w.document.getElementById(id),`Lost existing interface element ${id}`);
+const websiteSchema=JSON.parse(w.document.querySelector('script[type="application/ld+json"]').textContent);assert.equal(websiteSchema['@graph'][0].name,'Dr. Pramod G. Kulkarni');assert.ok(w.document.querySelector('link[rel=canonical]'));assert.ok(w.document.querySelector('a[href="site-information.html"]'));
 const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size,'Duplicate HTML IDs');
 for(const id of ['rxSheet','pathSlipSheet','radSlipSheet','viewChart20','viewLegalForms','viewClinicalCertificates','viewDrugDir','viewArticlesHub','viewJournalsHub','chatbotWindow','patientFaq','bookingSection'])assert.ok(w.document.getElementById(id),`Lost feature ${id}`);
 assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,8);

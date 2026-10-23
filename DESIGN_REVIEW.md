@@ -83,3 +83,15 @@ Added canonical/description/Open Graph metadata, a sitemap containing only the t
 ## Device lock usability correction
 
 Removed immediate locking when a page becomes hidden. A local privacy session now stays open during active use, short tab switches and reloads on the same tab. It expires after 15 minutes of inactivity or 8 hours total; foreground/visibility checks enforce elapsed time even when background timers are delayed. Explicit Lock now clears the session. The session is tied to the stored verifier and invalidated when the device passphrase changes. It is sessionStorage state for a device privacy screen, NOT server-auth proof; cloud endpoints continue to require the separate server-verified owner cookie. No plaintext passphrase or permanent remember-me setting is stored. Tests cover continuity, expiration, manual lock, old flag rejection and pagehide not reviving a locked session.
+
+## Restore care headline and contain public layout
+
+The care headline now uses the same heading font, normal emphasis, colour, size rules and line break as the approved petal-green release. The semantic H1 remains, while shared h1/h2 hero selectors retain the old appearance. Removed the newly introduced Georgia hero override; Georgia remains the original name style only.
+
+The mobile full-bleed width/margin rules for Health Library, booking and footer are overridden with contained 100% panels, zero side offsets, border-box sizing and shrinkable children. Search and cards stay within the library; no global overflow hiding is used to conceal clipped content. Final rendered geometry on actual devices remains unverified because browser QA remains blocked.
+
+Added a footer Site information page identifying the canonical URL, Vercel host, current subdomain, HTTPS meaning and explicit verification limits. A live HTTPS HEAD request returned 200 and HSTS on 23 October 2026; a separate direct TLS socket check could not resolve DNS in the runtime, so no negotiated TLS version or certificate-expiry claim is made. No universal “international protocol compliant” or provider endorsement claim is made.
+
+## Click affordances and search metadata
+
+Actionable controls use a pointer cursor, hover and visible keyboard focus; text-entry fields retain text cursors and disabled controls show not-allowed. External new-tab links get noopener/noreferrer. Added WebSite/Person structured data limited to the visible name, canonical URL and phone, with no fabricated ratings, credentials or endorsements. Metadata, sitemap and site-information page describe readiness, not verified Google indexing. Search Console verification/submission remains unconfirmed; no suitable connected ownership-management tool was found.
