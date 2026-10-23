@@ -79,7 +79,7 @@
 <a class="skip-link no-print" href="#publicPortal">Skip to main content</a><header class="sticky top-0 z-40 bg-[#FAF7EE] border-b petal-border shadow-sm no-print site-header">
 <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
 <!-- Doctor Brand Header -->
-<div class="flex items-center gap-2.5 cursor-pointer" onclick="switchWorkspace('public')">
+<a class="doctor-brand flex items-center gap-2.5 cursor-pointer" href="#publicPortal" aria-label="Dr. Pramod G. Kulkarni — Home" onclick="switchWorkspace('public')">
 <div class="w-12 h-12 rounded-full border-2 border-[#0F2942] bg-white flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden relative">
 <div class="w-full h-full flex items-center justify-center text-[#0F2942] bg-amber-50">
 <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
@@ -91,13 +91,13 @@
 </div>
 <div>
 <div class="flex items-center gap-2">
-<h1 class="text-sm sm:text-base font-bold serif-brand tracking-tight text-[#0F2942]">DR. PRAMOD G. KULKARNI</h1>
-<span class="bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse uppercase">24/7 ICU</span>
+<p class="doctor-wordmark notranslate" translate="no"><span class="wordmark-prefix">Dr.</span> <span class="wordmark-given">Pramod G.</span> <strong>Kulkarni</strong></p>
+<span class="bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase">24/7 ICU</span>
 </div>
 <p class="text-[11px] font-semibold text-[#0D9488]">Home Visiting ICU Doctor &amp; Emergency Specialist</p>
 <p class="text-[9px] text-slate-600">BAMS, PGDEMS (Symbiosis Pune) | MCIM: I-24809-A-1 | Dhayari, Pune</p>
 </div>
-</div>
+</a>
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
@@ -126,13 +126,13 @@
 </a>
 </div>
 </div>
-<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
+<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a><a href="editorial-policy.html">Our standards ↗</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
 <!-- Editorial home-care introduction -->
 <section class="portal-hero" aria-labelledby="portalHeroTitle">
-<div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
-<h2 id="portalHeroTitle">Thoughtful care.<br/><em>Closer to home.</em></h2>
+<div class="hero-copy"><span class="section-eyebrow">Personal care · Practical health guidance · Pune, India</span>
+<h1 id="portalHeroTitle" class="doctor-hero-name notranslate" translate="no"><span>Dr. Pramod G.</span><br/><em>Kulkarni</em></h1><p class="hero-promise">Thoughtful care. Closer to home.</p>
 <p>Medical care at your bedside. Clear guidance for everyday life. A place for patients, families and clinicians to find the next helpful step.</p>
 <div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="#wikiSection" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div>
 <form id="healthGlobalSearchForm" class="health-global-search" role="search"><label for="healthGlobalSearch">What would you like to understand?</label><div><input id="healthGlobalSearch" type="search" placeholder="Try heart, kidney, stroke or medicines"/><button type="submit" aria-label="Search health topics">Search →</button></div></form>
@@ -333,11 +333,11 @@
 <p class="text-slate-300">WhatsApp visit request with optional GPS pin. Server automation requires configuration.</p>
 </div>
 </div>
-<p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal, privacy &amp; editorial information ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
+<p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal &amp; privacy ↗</a> · <a href="editorial-policy.html">Editorial standards &amp; sources ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. All clinical, statutory, and brand rights reserved.</p>
 </footer>
 </main>
 <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
-<main class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6" id="doctorWorkstation"><div class="workstation-heading no-print"><span class="section-eyebrow">Dr. Kulkarni · clinical workspace</span><h2>Doctor Workstation</h2><p>Prescriptions, investigations, clinical references and research — together at your desk.</p></div>
+<main class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6" id="doctorWorkstation"><div class="workstation-heading no-print"><span class="section-eyebrow">Dr. Kulkarni · clinical workspace</span><p class="workspace-area-label">Doctor Workstation</p><p>Prescriptions, investigations, clinical references and research — together at your desk.</p></div>
 <!-- Doctor Sub-Tabs Navigation -->
 <div aria-label="Doctor workstation tools" class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print doctor-tabs">
 <button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button>
@@ -1662,5 +1662,5 @@ Next Review: After 3 Days / SOS | Emergency Call: 9822594341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9822594341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919822594341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog></body>
+</div><script src="assets/qr-code.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9822594341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919822594341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919822594341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog></body>
 </html>
