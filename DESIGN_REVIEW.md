@@ -95,3 +95,9 @@ Added a footer Site information page identifying the canonical URL, Vercel host,
 ## Click affordances and search metadata
 
 Actionable controls use a pointer cursor, hover and visible keyboard focus; text-entry fields retain text cursors and disabled controls show not-allowed. External new-tab links get noopener/noreferrer. Added WebSite/Person structured data limited to the visible name, canonical URL and phone, with no fabricated ratings, credentials or endorsements. Metadata, sitemap and site-information page describe readiness, not verified Google indexing. Search Console verification/submission remains unconfirmed; no suitable connected ownership-management tool was found.
+
+## 24 October: published baseline and readability preview
+
+Dr Kulkarni approved publishing PR 6. Main 84bc60662bc2c2f4046e1357246f07d8df92c1a9 deployed successfully. The next visual refinement is a SEPARATE screen-only preview: larger public body/card text, clearer section introductions, larger tabs/buttons and touch targets, stronger selected-tab contrast, restrained card borders/shadows and calm green depth. The approved hero wording/type/size is untouched, and the original Georgia name is retained with a modest size increase. No clinical print rules, content or calculations are changed.
+
+Existing DOM/feature integration checks pass. Final visual quality and responsive geometry are not verified in an actual browser because of the earlier URL-policy restriction; no quality rating or accessibility conformance claim is made. Cloud and Search Console still require account configuration/verification.
