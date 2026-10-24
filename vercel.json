@@ -40,5 +40,13 @@
       "source": "/article-sitemap.xml",
       "destination": "/api/article-sitemap"
     }
-  ]
+  ],
+  "functions": {
+    "api/evidence-workflow.js": {
+      "maxDuration": 180
+    },
+    "api/evidence-webhook.js": {
+      "maxDuration": 180
+    }
+  }
 }
