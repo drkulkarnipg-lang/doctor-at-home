@@ -26,5 +26,19 @@
         }
       ]
     }
+  ],
+  "functions": {
+    "api/research-daily.js": {
+      "maxDuration": 300
+    },
+    "api/research-agent.js": {
+      "maxDuration": 300
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/research-daily",
+      "schedule": "30 18 * * *"
+    }
   ]
 }

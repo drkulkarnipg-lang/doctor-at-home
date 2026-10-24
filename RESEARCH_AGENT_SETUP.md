@@ -1,3 +1,41 @@
+# Schedule update and operator check — 24 October 2026
+
+The requested daily target is now midnight (00:00 Asia/Kolkata), represented by cron `30 18 * * *`. The schedule is prepared in preview, not activated. n8n is not connected. If n8n becomes the scheduler, remove the Vercel cron rather than running two schedulers. Precise execution timing and availability depend on the selected hosting plan and must be verified before activation.
+
+The owner-only preview research panel now includes Check AI connection. It performs a minimal one-token Gateway request when explicitly clicked, reports verification/credit errors and does not generate or publish articles. The last confirmed live probe returned HTTP403 customer_verification_required. This is not evidence that verification has since been completed. No purchase or recharge has been activated.
+
+Independent analysis/writing/reviewer orchestration, reusable author-style examples, production article URLs and full monitoring remain further work. The current agent creates unreviewed excerpt summaries only; it must not be presented as the complete proposed multi-role editorial workflow.
+
+---
+
+# Current agent status — 24 October 2026
+
+Owner login and one patient cloud save are verified. The live research job fetched PLOS and Medical Xpress items and saved its run report. OIDC was enabled and runtime header authentication was fixed. The next live AI request reached Gateway but was rejected due to account verification, credentials or credits. No AI summary has been generated, and the production daily cron remains inactive while the changes stay in preview. A protected minimal connectivity check reports the exact Gateway status without returning credentials or raw provider responses. No paid upgrade or automatic credit recharge has been configured.
+
+The prepared job checks 19 allowlisted feeds, rotates source priority, deduplicates canonical URLs and limits each day to six AI attempts/drafts. It uses only RSS excerpts and labels output unapproved; source-quote checking is not independent clinical fact-checking. Drafts and review notes have owner-only cloud access. Publisher failures/empty results remain visible. The 27 PubMed specialty links are manual searches. No article is automatically published.
+
+Production schedule prepared: 00:00 Asia/Kolkata. Required server configuration: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, CLINIC_OWNER_USER_ID, AI_GATEWAY_MODEL, RESEARCH_JOB_SECRET, and CRON_SECRET matching RESEARCH_JOB_SECRET. Job credential hash is seeded separately. The research job cannot access patient records. No secrets belong in GitHub.
+
+Setup failures with zero saved drafts permit at most three retries, retaining attempt history. Hard-terminated jobs may need administrative review; failures do not silently expand the daily call budget. Cloud review notes and copies in the local review queue are distinct. Feedly and full-text subscriptions are not connected.
+
+---
+
+# Daily cloud agent — implementation and verification
+
+The preview has an owner-only cloud research panel, a manual Run today action, and a production cron definition for 00:00 Asia/Kolkata. Cron runs only after production release. The server currently checks all 19 allowlisted publisher feeds; the downloadable browser source plan is separate. The 27 specialty PubMed links remain manual searches, not subscriptions.
+
+At most six AI attempts and six new drafts are allowed per daily run. Canonical source URLs are deduplicated; source priority rotates daily. A zero-draft run blocked by setup can be retried up to three times, with prior attempt reports retained. Unavailable/empty sources are reported. A hard timeout may leave a run marked running; it is not silently retried. Review drafts and notes use owner-only Supabase access. The job credential permits only bounded research operations, not patient access.
+
+AI uses only RSS excerpts, checks an exact supporting quote, and labels output unapproved. This is not independent fact-checking or full-paper review. It cannot prescribe or publish an article. Model access uses Vercel OIDC; credit/account requirements are checked on actual requests. No billing upgrade or automatic credit recharge is configured by this change.
+
+Verified: clinical cloud login, patient cloud save, research database access restrictions and an initial live source-fetch run. PLOS, Medical Xpress and CDC returned items; several other feeds were unavailable/empty. The first AI run was blocked by missing runtime OIDC authentication; the request-header authentication fix is being verified. Do not claim AI summaries or daily automation are operational until a successful run and production schedule are confirmed.
+
+Server configuration: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, CLINIC_OWNER_USER_ID, RESEARCH_JOB_SECRET, AI_GATEWAY_MODEL. Production additionally requires CRON_SECRET to match RESEARCH_JOB_SECRET. The job-secret hash is seeded privately, outside repository files. Source credentials and patient data do not belong in GitHub.
+
+Cloud notes are saved explicitly; opening a cloud draft in the local review queue makes a separate local copy. Patient article publication still requires physician action. No Feedly account or full-text journal subscription is connected.
+
+---
+
 # Current preview update — 24 October 2026
 
 The feed catalogue now contains 19 configured publisher URLs and a directory of 27 specialty PubMed searches. A PubMed search link is NOT a connected RSS feed. Specialty filters show only matching direct feeds; empty specialties link to PubMed rather than pretending to have a feed. Six Nature feeds returned readable XML in the local source check; other configured sources timed out or remain subject to publisher restrictions. Source availability is tested per fetch.
@@ -8,7 +46,7 @@ Use the daily source-plan selector in the research desk to choose feeds and expo
 
 ## Workflow to activate after connections
 
-1. Server schedule in Asia/Kolkata at a selected daily time.
+1. Server schedule at 00:00 Asia/Kolkata (18:30 UTC on the preceding calendar day).
 2. Read only the selected allowlisted publisher RSS URLs; record success/error per source and keep the last successful check date.
 3. Deduplicate by DOI or canonical URL in durable storage, then label available text as title/link, RSS excerpt, abstract or authorised full text.
 4. AI drafts a structured evidence note based only on that material, treating source text as untrusted data. Record missing information rather than inventing study results.
