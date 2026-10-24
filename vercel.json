@@ -38,7 +38,7 @@
   "crons": [
     {
       "path": "/api/research-daily",
-      "schedule": "30 0 * * *"
+      "schedule": "30 18 * * *"
     }
   ]
 }
