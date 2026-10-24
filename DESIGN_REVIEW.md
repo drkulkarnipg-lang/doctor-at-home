@@ -95,3 +95,21 @@ Added a footer Site information page identifying the canonical URL, Vercel host,
 ## Click affordances and search metadata
 
 Actionable controls use a pointer cursor, hover and visible keyboard focus; text-entry fields retain text cursors and disabled controls show not-allowed. External new-tab links get noopener/noreferrer. Added WebSite/Person structured data limited to the visible name, canonical URL and phone, with no fabricated ratings, credentials or endorsements. Metadata, sitemap and site-information page describe readiness, not verified Google indexing. Search Console verification/submission remains unconfirmed; no suitable connected ownership-management tool was found.
+
+## 24 October: published baseline and readability preview
+
+Dr Kulkarni approved publishing PR 6. Main 84bc60662bc2c2f4046e1357246f07d8df92c1a9 deployed successfully. The next visual refinement is a SEPARATE screen-only preview: larger public body/card text, clearer section introductions, larger tabs/buttons and touch targets, stronger selected-tab contrast, restrained card borders/shadows and calm green depth. The approved hero wording/type/size is untouched, and the original Georgia name is retained with a modest size increase. No clinical print rules, content or calculations are changed.
+
+Existing DOM/feature integration checks pass. Final visual quality and responsive geometry are not verified in an actual browser because of the earlier URL-policy restriction; no quality rating or accessibility conformance claim is made. Cloud and Search Console still require account configuration/verification.
+
+## Unified owner-login preparation
+
+A single Doctor login UI now connects the configured owner session to Workstation and cloud trends, hides the duplicate cloud password form, and routes logout through the server endpoint. In configured owner mode, no device PIN is requested after owner authentication. Network failures do not downgrade owner login to a local PIN. If the backend explicitly reports unconfigured, the existing device-only privacy flow is preserved and labelled honestly. Supabase/Vercel account connections are still missing; this is not operational bank-equivalent authentication. Provider hosting preview protection remains separate and cannot be changed without the Vercel account connection. Use the canonical live URL for daily work.
+
+Dedicated DOM tests pass for one owner form, no second PIN in owner mode, session reuse, credential clearing, logout, unconfigured-only fallback and no network-error downgrade. Real authentication, database policy and cross-device tests still require configured accounts.
+
+## Research review repair and broader source plan
+
+Review excerpt opens a safe in-site dialog instead of depending on a Gemini prompt URL. Copy/paste is explicit, external AI apps open separately, and no model API call is implied. Notes save as an unapproved RSS draft in the existing deduplicated browser review queue. Tests cover text-only rendering, no popup/AI call on Review, prompt copy, deduplication and no patient article publication.
+
+Added 19 configured publisher feeds and 27 specialty PubMed search links, preserving existing sources. Six Nature feeds returned XML during source checks; PLOS and two other Nature calls timed out in this runtime. No claim that every endpoint is always available is made. The daily source plan is exportable but has no schedule or automatic publication. Daily AI processing and shared review storage remain unconnected.
