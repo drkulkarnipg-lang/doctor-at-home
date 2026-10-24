@@ -85,6 +85,7 @@
 <link rel="stylesheet" href="patient-education.css"/>
 <link rel="stylesheet" href="booking-intake.css"/>
 <link rel="stylesheet" href="evidence-workflow.css"/>
+<link rel="stylesheet" href="patient-welcome.css"/>
 </head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
@@ -949,11 +950,12 @@
 <!-- WIKI DETAIL MODAL -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="wikiModal">
 <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-4 text-xs max-h-[85vh] overflow-y-auto">
-<div class="flex justify-between items-center border-b pb-2">
+<div class="wiki-reader-header" id="wikiReaderHeader">
 <h3 class="font-bold text-base serif-brand text-[#0F2942]" id="wikiModalTitle">वैद्यकीय संदर्भ</h3>
-<button class="text-slate-400 hover:text-slate-700 text-lg" onclick="closeWikiModal()">✕</button>
+<button type="button" id="wikiReaderClose" onclick="closeWikiModal()" aria-label="Close article and return to health library">✕ <span>Close / बंद करा</span></button>
 </div>
-<div class="space-y-3 text-slate-700 leading-relaxed text-xs" id="wikiModalContent"></div>
+<div class="space-y-3 text-slate-700 leading-relaxed text-xs" id="wikiModalContent" tabindex="0" aria-label="Article text — scroll to read"></div>
+<div class="wiki-reader-footer"><button type="button" id="wikiReaderBack" onclick="closeWikiModal()">← Health library / लेखसूचीकडे परत</button></div>
 </div>
 </div>
 <!-- Device privacy settings: not a secure clinical backend. -->
