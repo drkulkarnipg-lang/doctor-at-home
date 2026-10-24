@@ -238,7 +238,7 @@ bookAndTriggerFullAutomation=function(){
  const time=document.getElementById('calcTime');const distance=document.getElementById('calcDistance');
  const procedures=Array.from(document.querySelectorAll('#procedureList input:checked')).map(c=>c.parentElement.textContent.trim());
  const total=calculateFee();
- const msg=`HOME VISIT REQUEST — Dr. Pramod G. Kulkarni\nPatient: ${name}\nPhone: ${phone}\nAddress: ${addr}\nMaps: ${nav}\nVisit time: ${time.options[time.selectedIndex].text}\nDistance: ${distance.options[distance.selectedIndex].text}\nAdditional services: ${procedures.join('; ')||'None selected'}\nEstimated fee: ₹${total}\nPlease confirm availability, visit time and final fee.`;
+ const msg=`HOME VISIT REQUEST — Dr. Pramod G. Kulkarni\nPatient: ${name}\nPhone: ${phone}\nAddress: ${addr}\nMaps: ${nav}\nVisit time: ${time.options[time.selectedIndex].text}\nDistance: ${distance.options[distance.selectedIndex].text}\nAdditional services: ${procedures.join('; ')||'None selected'}\nEstimated fee: ₹${total}\nPlease confirm availability, visit time and final fee.${window.BookingIntake?.bookingText()||''}`;
  window.open('https://wa.me/919822594341?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');
 };
 
@@ -248,16 +248,16 @@ function safeArticleCards(container,articles,publicMode){
  container.replaceChildren();
  for(const [idx,art]of articles.entries()){
   const card=document.createElement('article');card.className=publicMode?'research-draft':'p-5 moon-reader-card rounded-2xl space-y-3';card.id=publicMode?`publicArticle_${idx}`:`moonArticle_${idx}`;
-  const cat=document.createElement('small');cat.textContent=art.cat||'General';const h=document.createElement('h4');h.textContent=art.title||'';card.append(cat,h);
-  const builtIn=window.PatientEducation.get(art.educationKey),body=document.createElement('p');body.className='education-card-summary';body.textContent=builtIn?builtIn.mr.intro:art.body||'';body.style.whiteSpace='pre-wrap';card.append(body);
-  if(builtIn){const read=document.createElement('button');read.type='button';read.className='education-read-full no-print';read.textContent='संपूर्ण लेख वाचा →';read.onclick=()=>window.openWikiModal(builtIn.id);const full=document.createElement('div');full.className='education-pdf-content';if(window.PatientEducationView)full.append(window.PatientEducationView.content(builtIn,'mr'));else full.textContent=art.body;card.append(read,full);}
-  const note=document.createElement('p');note.className='education-review-alert';note.textContent=builtIn?'सुधारित मसुदा · डॉक्टरांची अंतिम मंजुरी बाकी.':'Device-added article · medical accuracy and source review have not been verified by this website.';card.append(note);
+  const cat=document.createElement('small');cat.textContent=(window.PatientEducation.get(art.educationKey)?.cat[window.PatientEducationView?.language||'en'])||art.cat||'General';const h=document.createElement('h4');h.textContent=window.PatientEducation.get(art.educationKey)?.[window.PatientEducationView?.language||'en'].title||art.title||'';card.append(cat,h);
+  const builtIn=window.PatientEducation.get(art.educationKey),body=document.createElement('p');body.className='education-card-summary';body.textContent=builtIn?builtIn[window.PatientEducationView?.language||'en'].intro:art.body||'';body.style.whiteSpace='pre-wrap';card.append(body);
+  if(builtIn){const read=document.createElement('button');read.type='button';read.className='education-read-full no-print';read.textContent=window.PatientEducationView?.language==='mr'?'संपूर्ण लेख वाचा →':'Read the complete guide →';read.onclick=()=>window.openWikiModal(builtIn.id);const full=document.createElement('div');full.className='education-pdf-content';if(window.PatientEducationView)full.append(window.PatientEducationView.content(builtIn,window.PatientEducationView?.language||'en'));else full.textContent=art.body;card.append(read,full);}
+  const note=document.createElement('p');note.className='education-review-alert';note.textContent=builtIn?'Source-checked patient guidance · individual treatment needs your clinician.':'Device-added article · medical accuracy and source review have not been verified by this website.';card.append(note);
   if(art.media&&typeof art.media.data==='string'&&/^data:(image|video)\//.test(art.media.data)){
    const media=document.createElement(art.media.type==='video'?'video':'img');media.src=art.media.data;media.style.maxWidth='100%';if(media.tagName==='VIDEO')media.controls=true;else media.alt=art.title||'Article image';card.appendChild(media);
   }
-  const controls=document.createElement('div');controls.className='flex flex-wrap gap-2 no-print';
+  const controls=document.createElement('div');controls.className='article-share-controls flex flex-wrap gap-2 no-print';
   if(!publicMode){const pdf=document.createElement('button');pdf.textContent='Save Article PDF';pdf.className='bg-[#0F2942] text-white px-3 py-2 rounded-xl text-xs';pdf.onclick=()=>exportToPdf(card.id,'Dr_Kulkarni_Article.pdf');controls.appendChild(pdf);}
-  const share=document.createElement('button');share.textContent=publicMode?'Share on WhatsApp':'Share';share.className='bg-[#0D9488] text-white px-3 py-2 rounded-xl text-xs';share.onclick=()=>publicMode?shareDirectArticleWhatsApp(encodeURIComponent(art.title),encodeURIComponent(art.body)):universalShareArticle(encodeURIComponent(art.title),encodeURIComponent(art.body));controls.appendChild(share);card.appendChild(controls);container.appendChild(card);
+  const share=document.createElement('button');share.dataset.action='share-pdf';share.textContent=publicMode?'Share on WhatsApp':'Share';share.className='bg-[#0D9488] text-white px-3 py-2 rounded-xl text-xs';share.onclick=()=>publicMode?shareDirectArticleWhatsApp(encodeURIComponent(art.title),encodeURIComponent(art.body)):universalShareArticle(encodeURIComponent(art.title),encodeURIComponent(art.body));controls.appendChild(share);card.appendChild(controls);container.appendChild(card);
  }
 }
 function storedPatientArticles(){try{const a=JSON.parse(localStorage.getItem('patientArticles')||'[]');return Array.isArray(a)?a:[];}catch{return [];}}
