@@ -15,6 +15,8 @@ create table public.clinic_research_runs (
  sources jsonb not null default '[]',
  processed integer not null default 0 check(processed between 0 and 6),
  message text not null default '',
+ attempts integer not null default 1 check(attempts between 1 and 3),
+ attempt_history jsonb not null default '[]',
  started_at timestamptz not null default now(),
  finished_at timestamptz
 );
@@ -58,7 +60,12 @@ begin
  if octet_length(p_payload::text)>150000 then raise exception 'Payload too large'; end if;
  if p_action='claim' then
   insert into public.clinic_research_runs(day,owner_id) values(today,cfg.owner_id) on conflict do nothing returning * into r;
-  if r.id is null then select * into r from public.clinic_research_runs where day=today; return jsonb_build_object('claimed',false,'state',r.state,'runId',r.id); end if;
+  if r.id is null then
+   select * into r from public.clinic_research_runs where day=today for update;
+   if r.state='needs_setup' and r.processed=0 and r.attempts<3 then
+    update public.clinic_research_runs set attempt_history=attempt_history||jsonb_build_array(jsonb_build_object('state',state,'message',message,'sources',sources,'started_at',started_at,'finished_at',finished_at)),attempts=attempts+1,state='running',started_at=now(),finished_at=null,message='',sources='[]' where id=r.id returning * into r;
+   else return jsonb_build_object('claimed',false,'state',r.state,'runId',r.id); end if;
+  end if;
   return jsonb_build_object('claimed',true,'runId',r.id,'day',today);
  elsif p_action='seen' then
   return (select coalesce(jsonb_agg(url),'[]') from public.clinic_research_items where url in (select jsonb_array_elements_text(p_payload->'urls')));

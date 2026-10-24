@@ -1,3 +1,19 @@
+# Daily cloud agent — implementation and verification
+
+The preview has an owner-only cloud research panel, a manual Run today action, and a production cron definition for 06:00 Asia/Kolkata. Cron runs only after production release. The server currently checks all 19 allowlisted publisher feeds; the downloadable browser source plan is separate. The 27 specialty PubMed links remain manual searches, not subscriptions.
+
+At most six AI attempts and six new drafts are allowed per daily run. Canonical source URLs are deduplicated; source priority rotates daily. A zero-draft run blocked by setup can be retried up to three times, with prior attempt reports retained. Unavailable/empty sources are reported. A hard timeout may leave a run marked running; it is not silently retried. Review drafts and notes use owner-only Supabase access. The job credential permits only bounded research operations, not patient access.
+
+AI uses only RSS excerpts, checks an exact supporting quote, and labels output unapproved. This is not independent fact-checking or full-paper review. It cannot prescribe or publish an article. Model access uses Vercel OIDC; credit/account requirements are checked on actual requests. No billing upgrade or automatic credit recharge is configured by this change.
+
+Verified: clinical cloud login, patient cloud save, research database access restrictions and an initial live source-fetch run. PLOS, Medical Xpress and CDC returned items; several other feeds were unavailable/empty. The first AI run was blocked by missing runtime OIDC authentication; the request-header authentication fix is being verified. Do not claim AI summaries or daily automation are operational until a successful run and production schedule are confirmed.
+
+Server configuration: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, CLINIC_OWNER_USER_ID, RESEARCH_JOB_SECRET, AI_GATEWAY_MODEL. Production additionally requires CRON_SECRET to match RESEARCH_JOB_SECRET. The job-secret hash is seeded privately, outside repository files. Source credentials and patient data do not belong in GitHub.
+
+Cloud notes are saved explicitly; opening a cloud draft in the local review queue makes a separate local copy. Patient article publication still requires physician action. No Feedly account or full-text journal subscription is connected.
+
+---
+
 # Current preview update — 24 October 2026
 
 The feed catalogue now contains 19 configured publisher URLs and a directory of 27 specialty PubMed searches. A PubMed search link is NOT a connected RSS feed. Specialty filters show only matching direct feeds; empty specialties link to PubMed rather than pretending to have a feed. Six Nature feeds returned readable XML in the local source check; other configured sources timed out or remain subject to publisher restrictions. Source availability is tested per fetch.
