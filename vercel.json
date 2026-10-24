@@ -26,5 +26,19 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/articles",
+      "destination": "/api/public-articles"
+    },
+    {
+      "source": "/articles/:slug",
+      "destination": "/api/public-articles?slug=:slug"
+    },
+    {
+      "source": "/article-sitemap.xml",
+      "destination": "/api/article-sitemap"
+    }
   ]
 }

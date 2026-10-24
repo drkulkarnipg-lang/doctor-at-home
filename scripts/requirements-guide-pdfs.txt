@@ -1,0 +1,2 @@
+weasyprint==68.0
+fonttools[woff]==4.61.1

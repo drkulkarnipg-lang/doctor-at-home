@@ -71,11 +71,7 @@ const LIVE_SITE_DRUGS = [
     function renderPublicArticles() {
       const container = document.getElementById('publicArticlesList');
       container.innerHTML = '';
-      const defaults = [
-        {"title": "Heart failure: your fluid and weight plan", "cat": "Heart health", "body": "Track weight and symptoms as agreed with your healthcare team. Ask for your individual fluid allowance and weight-alert threshold. Report new swelling, breathlessness or rapid weight changes; medicine adjustments need the prescribed action plan. Reference: https://www.heart.org/en/health-topics/heart-failure/treatment-options-for-heart-failure/lifestyle-changes-for-heart-failure"},
-        {"title": "Kidney disease: understand potassium and fluids", "cat": "Kidney health", "body": "Kidney disease can change how the body handles potassium and fluids. Requirements depend on blood tests, kidney function and dialysis. Ask the renal team whether potassium-rich drinks and foods need restriction; avoid universal fluid or food limits. Reference: https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis"},
-        {"title": "Limited mobility: protect skin and comfort", "cat": "Care at home", "body": "Agree an individual repositioning, support-surface and skin-care plan. Check vulnerable skin and report persistent redness, discolouration, pain or broken skin. Support mattresses complement the care plan; they do not replace repositioning and assessment. Reference: https://www.nice.org.uk/guidance/cg179/chapter/Recommendations"}
-      ];
+      const defaults = window.PatientEducation.defaults(['heart','potassium','pressure']);
       const custom = JSON.parse(localStorage.getItem('patientArticles') || '[]');
       const all = [...custom, ...defaults];
 
@@ -242,30 +238,26 @@ bookAndTriggerFullAutomation=function(){
  const time=document.getElementById('calcTime');const distance=document.getElementById('calcDistance');
  const procedures=Array.from(document.querySelectorAll('#procedureList input:checked')).map(c=>c.parentElement.textContent.trim());
  const total=calculateFee();
- const msg=`HOME VISIT REQUEST — Dr. Pramod G. Kulkarni\nPatient: ${name}\nPhone: ${phone}\nAddress: ${addr}\nMaps: ${nav}\nVisit time: ${time.options[time.selectedIndex].text}\nDistance: ${distance.options[distance.selectedIndex].text}\nAdditional services: ${procedures.join('; ')||'None selected'}\nEstimated fee: ₹${total}\nPlease confirm availability, visit time and final fee.`;
+ const msg=`HOME VISIT REQUEST — Dr. Pramod G. Kulkarni\nPatient: ${name}\nPhone: ${phone}\nAddress: ${addr}\nMaps: ${nav}\nVisit time: ${time.options[time.selectedIndex].text}\nDistance: ${distance.options[distance.selectedIndex].text}\nAdditional services: ${procedures.join('; ')||'None selected'}\nEstimated fee: ₹${total}\nPlease confirm availability, visit time and final fee.${window.BookingIntake?.bookingText()||''}`;
  window.open('https://wa.me/919822594341?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');
 };
 
-const LIVE_ARTICLE_DEFAULTS=[
-        {"title": "Heart failure: your fluid and weight plan", "cat": "Heart health", "body": "Track weight and symptoms as agreed with your healthcare team. Ask for your individual fluid allowance and weight-alert threshold. Report new swelling, breathlessness or rapid weight changes; medicine adjustments need the prescribed action plan. Reference: https://www.heart.org/en/health-topics/heart-failure/treatment-options-for-heart-failure/lifestyle-changes-for-heart-failure"},
-        {"title": "Kidney disease: understand potassium and fluids", "cat": "Kidney health", "body": "Kidney disease can change how the body handles potassium and fluids. Requirements depend on blood tests, kidney function and dialysis. Ask the renal team whether potassium-rich drinks and foods need restriction; avoid universal fluid or food limits. Reference: https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis"},
-        {"title": "Limited mobility: protect skin and comfort", "cat": "Care at home", "body": "Agree an individual repositioning, support-surface and skin-care plan. Check vulnerable skin and report persistent redness, discolouration, pain or broken skin. Support mattresses complement the care plan; they do not replace repositioning and assessment. Reference: https://www.nice.org.uk/guidance/cg179/chapter/Recommendations"}
-      ];
-const REPO_ARTICLE_DEFAULTS=[
-        { title: "हार्ट फेल्युअर: १.२L पाणी मर्यादा आणि सकाळचे वजन", cat: "कार्डिॲक काळजी", body: "हार्ट फेल्युअरच्या रुग्णांनी दिवसाला १.२ लिटरपेक्षा जास्त पाणी पिऊ नये. दररोज सकाळी उपाशीपोटी वजन करावे. २ दिवसांत दीड किलोपेक्षा जास्त वजन वाढल्यास लघवीचे औषध वाढवण्यासाठी डॉक्टरांशी संपर्क साधावा." },
-        { title: "डायलिसिस रुग्णांसाठी भाजीचे लीचिंग (Leaching)", cat: "किडनी केअर", body: "किडनी निकामी असल्यास भाज्यांमधील अतिरिक्त पोटॅशियम बाहेर पडत नाही. बटाटा, पालेभाज्या बारीक चिरून भरपूर पाण्यात उकळून पाणी फेकून दिले पाहिजे. नारळ पाणी कडक बंद ठेवावे." }
-      ];
+const LIVE_ARTICLE_DEFAULTS=window.PatientEducation.defaults(['heart','potassium','pressure']);
+const REPO_ARTICLE_DEFAULTS=window.PatientEducation.defaults(['heart','potassium']);
 function safeArticleCards(container,articles,publicMode){
  container.replaceChildren();
  for(const [idx,art]of articles.entries()){
   const card=document.createElement('article');card.className=publicMode?'research-draft':'p-5 moon-reader-card rounded-2xl space-y-3';card.id=publicMode?`publicArticle_${idx}`:`moonArticle_${idx}`;
-  const cat=document.createElement('small');cat.textContent=art.cat||'General';const h=document.createElement('h4');h.textContent=art.title||'';const body=document.createElement('p');body.textContent=art.body||'';body.style.whiteSpace='pre-wrap';card.append(cat,h,body);
+  const cat=document.createElement('small');cat.textContent=(window.PatientEducation.get(art.educationKey)?.cat[window.PatientEducationView?.language||'en'])||art.cat||'General';const h=document.createElement('h4');h.textContent=window.PatientEducation.get(art.educationKey)?.[window.PatientEducationView?.language||'en'].title||art.title||'';card.append(cat,h);
+  const builtIn=window.PatientEducation.get(art.educationKey),body=document.createElement('p');body.className='education-card-summary';body.textContent=builtIn?builtIn[window.PatientEducationView?.language||'en'].intro:art.body||'';body.style.whiteSpace='pre-wrap';card.append(body);
+  if(builtIn){card.setAttribute('translate',window.PatientEducationView?.automatic?'yes':'no');card.classList.toggle('notranslate',!window.PatientEducationView?.automatic);const read=document.createElement('button');read.type='button';read.className='education-read-full no-print';read.textContent=window.PatientEducationView?.language==='mr'?'संपूर्ण लेख वाचा →':'Read the complete guide →';read.onclick=()=>window.openWikiModal(builtIn.id);const full=document.createElement('div');full.className='education-pdf-content';if(window.PatientEducationView)full.append(window.PatientEducationView.content(builtIn,window.PatientEducationView?.language||'en'));else full.textContent=art.body;card.append(read,full);}
+  const note=document.createElement('p');note.className='education-review-alert';note.textContent=builtIn?'Source-checked patient guidance · individual treatment needs your clinician.':'Device-added article · medical accuracy and source review have not been verified by this website.';card.append(note);
   if(art.media&&typeof art.media.data==='string'&&/^data:(image|video)\//.test(art.media.data)){
    const media=document.createElement(art.media.type==='video'?'video':'img');media.src=art.media.data;media.style.maxWidth='100%';if(media.tagName==='VIDEO')media.controls=true;else media.alt=art.title||'Article image';card.appendChild(media);
   }
-  const controls=document.createElement('div');controls.className='flex flex-wrap gap-2 no-print';
+  const controls=document.createElement('div');controls.className='article-share-controls flex flex-wrap gap-2 no-print';
   if(!publicMode){const pdf=document.createElement('button');pdf.textContent='Save Article PDF';pdf.className='bg-[#0F2942] text-white px-3 py-2 rounded-xl text-xs';pdf.onclick=()=>exportToPdf(card.id,'Dr_Kulkarni_Article.pdf');controls.appendChild(pdf);}
-  const share=document.createElement('button');share.textContent=publicMode?'Share on WhatsApp':'Share';share.className='bg-[#0D9488] text-white px-3 py-2 rounded-xl text-xs';share.onclick=()=>publicMode?shareDirectArticleWhatsApp(encodeURIComponent(art.title),encodeURIComponent(art.body)):universalShareArticle(encodeURIComponent(art.title),encodeURIComponent(art.body));controls.appendChild(share);card.appendChild(controls);container.appendChild(card);
+  const share=document.createElement('button');share.dataset.action='share-pdf';share.textContent=publicMode?'Share on WhatsApp':'Share';share.className='bg-[#0D9488] text-white px-3 py-2 rounded-xl text-xs';share.onclick=()=>publicMode?shareDirectArticleWhatsApp(encodeURIComponent(art.title),encodeURIComponent(art.body)):universalShareArticle(encodeURIComponent(art.title),encodeURIComponent(art.body));controls.appendChild(share);card.appendChild(controls);container.appendChild(card);
  }
 }
 function storedPatientArticles(){try{const a=JSON.parse(localStorage.getItem('patientArticles')||'[]');return Array.isArray(a)?a:[];}catch{return [];}}
