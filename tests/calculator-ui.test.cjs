@@ -40,9 +40,9 @@ assert.equal(w.document.querySelector('#drugSetuReference'),null,'Keep the owner
 assert.ok(w.document.querySelector('#doctorWorkstation').classList.contains('notranslate'));
 const phoneLink=w.document.querySelector('a[onclick="handleDirectCall(event)"]');const phoneEvent=new w.MouseEvent('click',{bubbles:true,cancelable:true});phoneLink.dispatchEvent(phoneEvent);
 assert.equal(phoneEvent.defaultPrevented,true,'Phone click must leave the website open');assert.equal(w.document.getElementById('doctorContactDialog').open,true);
-assert.equal(w.document.getElementById('contactDial').getAttribute('href'),'tel:+919822594341');
+assert.equal(w.document.getElementById('contactDial').getAttribute('href'),'tel:+919561394341');
 w.document.getElementById('contactClose').click();assert.equal(w.document.getElementById('doctorContactDialog').open,false);
-let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9822594341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
+let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9561394341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
 assert.equal(w.document.querySelector('.portal-nav a').getAttribute('aria-current'),'location');
 
 // Local privacy lock: no default passphrase, password fields masked, verifier only.
