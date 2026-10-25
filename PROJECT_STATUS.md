@@ -90,3 +90,6 @@ Still open: production/provider configuration gates, scheduled automation end-to
 
 ## Preview publication checkpoint — 25 October 2026
 Owner requested “preview publish kara”. Vercel preview deployment dpl_ASghn2GmNNDNU3Gr7NX4SaXuSH3R is READY for commit 286a597217e46bc3f68dfe6eb10ac88a2d631240. URL: https://home-visiting-icu-doctor-pune-6wmai5awl-drkulkarnipg-lang.vercel.app/ . Provider metadata confirms review/dob-brain-a4-20261025; build duration approximately 9 seconds. Browser reaches Vercel Authentication, so deployed-page browser QA remains blocked by sign-in. Local browser QA and all 20 test files passed earlier. No share/bypass link created, no protection changed, no production publication.
+
+## Brain-care placement correction — 25 October 2026
+Owner clarified: no separate Brain Care tab or section. Removed that extra navigation/section from the review version. The existing complete stroke/swallowing article remains in the same Health library as kidney and heart-failure articles.. No new top-level tab or search feature added. Patient Portal and Doctor Workstation remain the two main tabs. Earlier brain-section completion entries above are superseded by this correction. Preview only; production unchanged.

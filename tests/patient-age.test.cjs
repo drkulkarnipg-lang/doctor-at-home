@@ -15,6 +15,6 @@ fill('intake-age',['25','10','2000']);assert.equal(w.document.getElementById('in
 assert.ok(w.document.getElementById('intake-calendarAge').value.includes('months'));
 w.document.querySelector('#intake-ageDOB button').click();assert.equal(w.document.getElementById('intake-age').value,'55');assert.equal(w.document.getElementById('intake-birthDate').value,'');
 fill('rxPatAge',['25','10','2000']);assert.match(w.document.getElementById('rxPatAge').value,/Y \d+ M \d+ D \/ Male$/);
-const html=fs.readFileSync('index.html','utf8');assert.ok(!html.includes('Explore international health resources'));assert.match(html,/id="brainCareSection"/);assert.match(html,/@page \{ size: A4 portrait/);
+const html=fs.readFileSync('index.html','utf8');assert.ok(!html.includes('Explore international health resources'));assert.ok(!html.includes('brainCareSection'));assert.match(html,/@page \{ size: A4 portrait/);
 console.log('Calendar age, invalid/future dates, leap day, month end, newborns, manual-age restoration, complete history values and gender preservation passed.');
 dom.window.close();
