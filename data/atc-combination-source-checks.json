@@ -1,0 +1,154 @@
+{
+  "C07FB": [
+    {
+      "code": "C07FB02",
+      "name": "metoprolol and felodipine"
+    },
+    {
+      "code": "C07FB03",
+      "name": "atenolol and nifedipine"
+    },
+    {
+      "code": "C07FB07",
+      "name": "bisoprolol and amlodipine"
+    },
+    {
+      "code": "C07FB12",
+      "name": "nebivolol and amlodipine"
+    },
+    {
+      "code": "C07FB13",
+      "name": "metoprolol and amlodipine"
+    }
+  ],
+  "C09DB": [
+    {
+      "code": "C09DB01",
+      "name": "valsartan and amlodipine"
+    },
+    {
+      "code": "C09DB02",
+      "name": "olmesartan medoxomil and amlodipine"
+    },
+    {
+      "code": "C09DB04",
+      "name": "telmisartan and amlodipine"
+    },
+    {
+      "code": "C09DB05",
+      "name": "irbesartan and amlodipine"
+    },
+    {
+      "code": "C09DB06",
+      "name": "losartan and amlodipine"
+    },
+    {
+      "code": "C09DB07",
+      "name": "candesartan and amlodipine"
+    },
+    {
+      "code": "C09DB08",
+      "name": "valsartan and lercanidipine"
+    },
+    {
+      "code": "C09DB09",
+      "name": "fimasartan and amlodipine"
+    }
+  ],
+  "C10BA": [
+    {
+      "code": "C10BA01",
+      "name": "lovastatin and nicotinic acid"
+    },
+    {
+      "code": "C10BA02",
+      "name": "simvastatin and ezetimibe"
+    },
+    {
+      "code": "C10BA03",
+      "name": "pravastatin and fenofibrate"
+    },
+    {
+      "code": "C10BA04",
+      "name": "simvastatin and fenofibrate"
+    },
+    {
+      "code": "C10BA05",
+      "name": "atorvastatin and ezetimibe"
+    },
+    {
+      "code": "C10BA06",
+      "name": "rosuvastatin and ezetimibe"
+    },
+    {
+      "code": "C10BA07",
+      "name": "rosuvastatin and omega-3 fatty acids"
+    },
+    {
+      "code": "C10BA08",
+      "name": "atorvastatin and omega-3 fatty acids"
+    },
+    {
+      "code": "C10BA09",
+      "name": "rosuvastatin and fenofibrate"
+    },
+    {
+      "code": "C10BA10",
+      "name": "bempedoic acid and ezetimibe"
+    },
+    {
+      "code": "C10BA11",
+      "name": "pravastatin and ezetimibe"
+    },
+    {
+      "code": "C10BA12",
+      "name": "pravastatin, ezetimibe and fenofibrate"
+    },
+    {
+      "code": "C10BA13",
+      "name": "pitavastatin and ezetimibe"
+    },
+    {
+      "code": "C10BA14",
+      "name": "pitavastatin and fenofibrate"
+    },
+    {
+      "code": "C10BA15",
+      "name": "rosuvastatin, ezetimibe and fenofibrate"
+    },
+    {
+      "code": "C10BA16",
+      "name": "atorvastatin and fenofibrate"
+    }
+  ],
+  "C09BX": [
+    {
+      "code": "C09BX01",
+      "name": "perindopril, amlodipine and indapamide"
+    },
+    {
+      "code": "C09BX02",
+      "name": "perindopril and bisoprolol"
+    },
+    {
+      "code": "C09BX03",
+      "name": "ramipril, amlodipine and hydrochlorothiazide"
+    },
+    {
+      "code": "C09BX04",
+      "name": "perindopril, bisoprolol and amlodipine"
+    },
+    {
+      "code": "C09BX05",
+      "name": "ramipril and bisoprolol"
+    },
+    {
+      "code": "C09BX06",
+      "name": "perindopril, bisoprolol, amlodipine and indapamide"
+    },
+    {
+      "code": "C09BX07",
+      "name": "zofenopril and nebivolol"
+    }
+  ]
+}

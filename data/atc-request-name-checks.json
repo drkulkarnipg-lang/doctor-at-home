@@ -1,0 +1,608 @@
+{
+  "triflusal": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=triflusal&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AC18",
+        "name": "triflusal",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AC18"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "9d82f5945610e1378331ec52a8b6514da591dac1a9f95983954caa515c3b15cd"
+  },
+  "abciximab": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=abciximab&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AC13",
+        "name": "abciximab",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AC13"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "8b38508bdb898d16fae477ca828a5ae807d83e88393e7cbf9540a708ddd6b929"
+  },
+  "nadroparin": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=nadroparin&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AB06",
+        "name": "nadroparin",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AB06"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "62156891df13f9b59bf8333233fe75a110c56dec5adb9f785e868ced62964243"
+  },
+  "omega3 fish oils": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=omega3+fish+oils&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "812260ce4f12b8dabfe3657edcfc0a5cbf47e39000c5abdc69c47cd9b6f691df"
+  },
+  "cilazapril": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=cilazapril&showdescription=no",
+    "matches": [
+      {
+        "code": "C09AA08",
+        "name": "cilazapril",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09AA08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "028c2a40e08534dbf201c32e77e3b7ed522a8ce72f656606b9d555e6bae05c12"
+  },
+  "delapril": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=delapril&showdescription=no",
+    "matches": [
+      {
+        "code": "C09AA12",
+        "name": "delapril",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09AA12"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "c27466322eed547e5d5a032b16e63be8c1e32c68408c0a63d0de7ec396fed358"
+  },
+  "imidapril": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=imidapril&showdescription=no",
+    "matches": [
+      {
+        "code": "C09AA16",
+        "name": "imidapril",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09AA16"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "0b7f147df33480b5af9acfafc028b7f6df1614dbf252d91ad4f3e0237e7b6163"
+  },
+  "eprosartan": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=eprosartan&showdescription=no",
+    "matches": [
+      {
+        "code": "C09CA02",
+        "name": "eprosartan",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09CA02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "3c7619fe681d2f0693a68276e7ae59a21220d7c56ec83d5aa0940ff7e7aab55a"
+  },
+  "celiprolol": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=celiprolol&showdescription=no",
+    "matches": [
+      {
+        "code": "C07AB08",
+        "name": "celiprolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AB08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "f78fa3433e6923c1138b73b8e67f3f36283db58d110b0e53623b76cdbe7ad503"
+  },
+  "bepridil": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=bepridil&showdescription=no",
+    "matches": [
+      {
+        "code": "C08EA02",
+        "name": "bepridil",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08EA02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "6e18f439c6da5ba3e197631b137b6c20b117b01908c90aa52d8681cab49e48b2"
+  },
+  "gallopamil": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=gallopamil&showdescription=no",
+    "matches": [
+      {
+        "code": "C08DA02",
+        "name": "gallopamil",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08DA02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "9181e7fdb712465b6f539a015fb7672c4c997aa9d1f12e3bb15d83a5e80a1968"
+  },
+  "trimetazidine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=trimetazidine&showdescription=no",
+    "matches": [
+      {
+        "code": "C01EB15",
+        "name": "trimetazidine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01EB15"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "c579eea745494c0fe4f7bddf32c86f3b5625190489a37492b438609b7b572a3a"
+  },
+  "molsidomine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=molsidomine&showdescription=no",
+    "matches": [
+      {
+        "code": "C01DX12",
+        "name": "molsidomine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01DX12"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "915b8dad6946846edaef7cbbf6918c2fbfe6562d7f8acc358d5955da47cd6ce0"
+  },
+  "nicorandil": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=nicorandil&showdescription=no",
+    "matches": [
+      {
+        "code": "C01DX16",
+        "name": "nicorandil",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01DX16"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "ce28fa4637f0ffa6ab26624066ff669ce13a9b267ff51973ddf9275367e8924f"
+  },
+  "bezafibrate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=bezafibrate&showdescription=no",
+    "matches": [
+      {
+        "code": "C10AB02",
+        "name": "bezafibrate",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C10AB02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a6cdd2b0060055d3a6eb7c5de82c14a32c0494acc10be4fcb8241f3b6a5d3fcb"
+  },
+  "ciprofibrate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=ciprofibrate&showdescription=no",
+    "matches": [
+      {
+        "code": "C10AB08",
+        "name": "ciprofibrate",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C10AB08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "4d1e669fd6b8aef6b0e63eb012b72e624a2c321fec11e5c6afd2b0ae2c4f1c40"
+  },
+  "pemafibrate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=pemafibrate&showdescription=no",
+    "matches": [
+      {
+        "code": "C10AB12",
+        "name": "pemafibrate",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C10AB12"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "7b9ef37f487588b63471818be4b150ff8e948295480a90ddf8c995825c474172"
+  },
+  "acipimox": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=acipimox&showdescription=no",
+    "matches": [
+      {
+        "code": "C10AD06",
+        "name": "acipimox",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C10AD06"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "792a7d756fd8be5a1b4b3859ab78abf4b6ab75e7935c7c341c3f0ee79a7721fe"
+  },
+  "benfluorex": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=benfluorex&showdescription=no",
+    "matches": [
+      {
+        "code": "A10BX06",
+        "name": "benfluorex",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=A10BX06"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "03936179f511cd1025b9e9642f1e643183169e4de782d737c4da4f4a9938a1b3"
+  },
+  "probucol": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=probucol&showdescription=no",
+    "matches": [
+      {
+        "code": "C10AX02",
+        "name": "probucol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C10AX02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a208291f11c6688e6a7bf4d41cf3e4c6a9c7ac0eec424f0a40ebd62e37f72a96"
+  },
+  "standardized yeast rice": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=standardized+yeast+rice&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a56beda07f220ed819346d9e456b83828c0ccf7416b7a48c6f98e13e661b4b4d"
+  },
+  "tocopheryl nicotinate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=tocopheryl+nicotinate&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "ef3bd106ef3dda3fb4c71d99f26200b311f1d9cc6eb89180d89bcdd9a580d46c"
+  },
+  "phytosterol complex": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=phytosterol+complex&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a38947536758ed59d327749ca1ecf7af75cebcbfe7752398e5fb1004e3cf96f5"
+  },
+  "xantinol nicotinate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=xantinol+nicotinate&showdescription=no",
+    "matches": [
+      {
+        "code": "C04AD02",
+        "name": "xantinol nicotinate",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C04AD02"
+      },
+      {
+        "code": "C04AD02",
+        "name": "xantinol nicotinate",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C04AD02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "5617deaf835008010333dac3c48f2f3c5565d99a9fc12de59be13e5dd634ef07"
+  },
+  "metildigoxin": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=metildigoxin&showdescription=no",
+    "matches": [
+      {
+        "code": "C01AA08",
+        "name": "metildigoxin",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01AA08"
+      },
+      {
+        "code": "C01AA08",
+        "name": "metildigoxin",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01AA08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "d02f5007145f3f12d100dcc839344da3fe4aa854b0e1f1a1d6bf62979fa723e8"
+  },
+  "levosimendan": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=levosimendan&showdescription=no",
+    "matches": [
+      {
+        "code": "C01CX08",
+        "name": "levosimendan",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01CX08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "20f4a3d06bd43034e6e106fcb0fec910cc157981335a0a614ec8cd3eebb0e205"
+  },
+  "bendroflumethiazide": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=bendroflumethiazide&showdescription=no",
+    "matches": [
+      {
+        "code": "C03AA01",
+        "name": "bendroflumethiazide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C03AA01"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "3832b2c26f709e9f2be6b234818745307e7daf5bc996a7b5354d88c08e13cd66"
+  },
+  "cyclopenthiazide": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=cyclopenthiazide&showdescription=no",
+    "matches": [
+      {
+        "code": "C03AA07",
+        "name": "cyclopenthiazide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C03AA07"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "c9fb42e5d1b284e6fb1464f6c67a37ad340f1c8d3b0e4f5ed41f1daccb222ce1"
+  },
+  "sambong leaf": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=sambong+leaf&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "238db709405d56c7e6aafa97b0daddc4432ad92a1ac3a8f758e5b62637c0bf62"
+  },
+  "zofenopril": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=zofenopril&showdescription=no",
+    "matches": [
+      {
+        "code": "C09AA15",
+        "name": "zofenopril",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09AA15"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "f1f1c0eec80be1bad4a65f9cd9203ebcc4f5367a6c5dbe199969b34e005e53dd"
+  },
+  "fimasartan": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=fimasartan&showdescription=no",
+    "matches": [
+      {
+        "code": "C09CA10",
+        "name": "fimasartan",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C09CA10"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "da08f960a7b83c719d05f1f4690752270f7df6e2bc37f23dc23491fda91141d0"
+  },
+  "alprenolol": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=alprenolol&showdescription=no",
+    "matches": [
+      {
+        "code": "C07AA01",
+        "name": "alprenolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AA01"
+      },
+      {
+        "code": "C07AA01",
+        "name": "alprenolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AA01"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "51f7d50d5ba0cf3a87043557683a0040756b42a22ccc9fdc2d3fd5c6df050fc5"
+  },
+  "oxprenolol": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=oxprenolol&showdescription=no",
+    "matches": [
+      {
+        "code": "C07AA02",
+        "name": "oxprenolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AA02"
+      },
+      {
+        "code": "C07AA02",
+        "name": "oxprenolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AA02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "7a93a9cb219e665282ca31585f52fbcea04bcc7e3de66c4387531748efbaa937"
+  },
+  "penbutolol": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=penbutolol&showdescription=no",
+    "matches": [
+      {
+        "code": "C07AA23",
+        "name": "penbutolol",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C07AA23"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "0b6a118534c5dcc7cdc56879abf721494ab20fee4cc12df9a11b43abe9eea73f"
+  },
+  "barnidipine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=barnidipine&showdescription=no",
+    "matches": [
+      {
+        "code": "C08CA12",
+        "name": "barnidipine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08CA12"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "c131b1a539e8c23a8faad58ea1b11f51d5a724b630f44772c22ef9481d17469a"
+  },
+  "lacidipine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=lacidipine&showdescription=no",
+    "matches": [
+      {
+        "code": "C08CA09",
+        "name": "lacidipine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08CA09"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "44726dd3a3b9dcda544f9d7546df618f824bc550105e95a75c733221021ae947"
+  },
+  "lercanidipine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=lercanidipine&showdescription=no",
+    "matches": [
+      {
+        "code": "C08CA13",
+        "name": "lercanidipine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08CA13"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "8f00c473cbb4eb73ccd284197f53170c3243a4e7beb95ffd912a5f16fff46a29"
+  },
+  "manidipine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=manidipine&showdescription=no",
+    "matches": [
+      {
+        "code": "C08CA11",
+        "name": "manidipine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08CA11"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "3e0ea72ee18b066ca9a03a8248a7cecc8241951274a9e0188ba2976a95035a96"
+  },
+  "nitrendipine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=nitrendipine&showdescription=no",
+    "matches": [
+      {
+        "code": "C08CA08",
+        "name": "nitrendipine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C08CA08"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "f54a113fa7a0847e1a13796b229ff43c2e307218849438ba4ec815e8ded4542d"
+  },
+  "piretanide": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=piretanide&showdescription=no",
+    "matches": [
+      {
+        "code": "C03CA03",
+        "name": "piretanide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C03CA03"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "39d67c636d3c8904cd6dc9374d649b73271529966262004f63f91dbbd3549715"
+  },
+  "trichlormethiazide": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=trichlormethiazide&showdescription=no",
+    "matches": [
+      {
+        "code": "C03AA06",
+        "name": "trichlormethiazide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C03AA06"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "2b45aec4350359b191eac06187d1d1010f5d7883363c00de27fd8f8a10047522"
+  },
+  "moxonidine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=moxonidine&showdescription=no",
+    "matches": [
+      {
+        "code": "C02AC05",
+        "name": "moxonidine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C02AC05"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "02c14b95a08106803d93f688344af38a27e0b2463ef0cf1fae3c59fa228ad054"
+  },
+  "rilmenidine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=rilmenidine&showdescription=no",
+    "matches": [
+      {
+        "code": "C02AC06",
+        "name": "rilmenidine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C02AC06"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "90918960917bbbbee9785f5e73faa5b8b0f2bb0c95ce3a392b317b8ca95651d5"
+  },
+  "apricitentan": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=apricitentan&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "e5e0ff7ffba78477ddd2030a7ff1d77f50d1d5c8311dcaad9c87ac5b3288f0b6"
+  },
+  "reserpine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=reserpine&showdescription=no",
+    "matches": [
+      {
+        "code": "C02AA02",
+        "name": "reserpine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C02AA02"
+      },
+      {
+        "code": "C02AA02",
+        "name": "reserpine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C02AA02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "6e4949265c0b7715825443f354ea2cbe44936dfa073eef0d984e73064a4fd78e"
+  },
+  "nicergoline": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=nicergoline&showdescription=no",
+    "matches": [
+      {
+        "code": "C04AE02",
+        "name": "nicergoline",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C04AE02"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "3ffc1d2fd4aefe431e95a87faaa6e6ad10b2d0b272fb1029834b49e7dfce7f57"
+  },
+  "fenoldopam": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=fenoldopam&showdescription=no",
+    "matches": [
+      {
+        "code": "C01CA19",
+        "name": "fenoldopam",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=C01CA19"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a6fa5faa77a62cb3c11517b11956f2cd732ef7cbd21b455656b3f9e9a5818307"
+  },
+  "sulodexide": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=sulodexide&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AB11",
+        "name": "sulodexide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AB11"
+      },
+      {
+        "code": "B01AB11",
+        "name": "sulodexide",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AB11"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "61ad323ebb2e21617c471c350ba844a6f62d0359ee181c33f75b2e1f9ea88141"
+  },
+  "ticlopidine": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=ticlopidine&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AC05",
+        "name": "ticlopidine",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AC05"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "8268a3da0228053de9b56efccbc81a3df13f55d54090fc474acc8abb889b7df0"
+  },
+  "cerebrolysin concentrate": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=cerebrolysin+concentrate&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "fac8bf62f6293d2e3600ae1218c188f4574fffcd1e6d0f1aa5afa2fcab21652b"
+  },
+  "beraprost": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=beraprost&showdescription=no",
+    "matches": [
+      {
+        "code": "B01AC19",
+        "name": "beraprost",
+        "url": "https://atcddd.fhi.no/atc_ddd_index/?code=B01AC19"
+      }
+    ],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "a50332178c091f919cba9838ffeeaa48db759e900049160415198cb577bedb2b"
+  },
+  "iloprost inhalation": {
+    "query": "https://atcddd.fhi.no/atc_ddd_index/?name=iloprost+inhalation&showdescription=no",
+    "matches": [],
+    "retrievedOn": "2026-10-25",
+    "responseSHA256": "6daa4b938d4aeb1894d048bdec320c6be796695c502c9ecc72bb8043133f3325"
+  }
+}
