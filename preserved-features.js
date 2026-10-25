@@ -60,9 +60,9 @@ const LIVE_SITE_DRUGS = [
         const botDiv = document.createElement('div');
         botDiv.className = "bg-slate-100 p-2.5 rounded-2xl max-w-[85%] text-slate-800 leading-relaxed";
         if(val.toLowerCase().includes('chest') || val.toLowerCase().includes('breath') || val.toLowerCase().includes('stroke') || val.toLowerCase().includes('dhad') || val.toLowerCase().includes('धडधड') || val.toLowerCase().includes('दम')) {
-          botDiv.innerHTML = "🚨 <strong>URGENT MEDICAL ALERT:</strong> Severe cardiopulmonary symptoms detected. Please call 108 or contact Dr. Kulkarni directly at <a href='tel:+919822594341' class='text-red-700 font-bold underline'>9822594341</a> for bedside ICU support.";
+          botDiv.innerHTML = "🚨 <strong>URGENT MEDICAL ALERT:</strong> Severe cardiopulmonary symptoms detected. Please call 108 or contact Dr. Kulkarni directly at <a href='tel:+919561394341' class='text-red-700 font-bold underline'>9561394341</a> for bedside ICU support.";
         } else {
-          botDiv.innerText = "Understood. Dr. Kulkarni provides 24x7 home ICU visits across Pune from Dhayari base. Daytime visit starts at ₹1,200. Connect on WhatsApp: 9822594341.";
+          botDiv.innerText = "Understood. Dr. Kulkarni provides home visits across Pune from Dhayari base; availability is confirmed by the doctor. Daytime visit starts at ₹1,200. Connect on WhatsApp: 9561394341.";
         }
         msgBox.appendChild(botDiv);
         msgBox.scrollTop = msgBox.scrollHeight;
@@ -92,7 +92,7 @@ const LIVE_SITE_DRUGS = [
       });
     }
     function shareDirectArticleWhatsApp(title, body) {
-      const msg = `*PATIENT HEALTH GUIDANCE — DR. PRAMOD G. KULKARNI*\n(Home Visiting ICU Doctor Pune | Mob: 9822594341)\n\n*${decodeURIComponent(title)}*\n\n${decodeURIComponent(body)}`;
+      const msg = `*PATIENT HEALTH GUIDANCE — DR. PRAMOD G. KULKARNI*\n(Home Visiting ICU Doctor Pune | Mob: 9561394341)\n\n*${decodeURIComponent(title)}*\n\n${decodeURIComponent(body)}`;
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -219,7 +219,7 @@ function renderServiceFaq(){
  rows.forEach(f=>{const d=document.createElement('details');const s=document.createElement('summary');s.textContent=f.q;const p=document.createElement('p');p.textContent=f.a;d.append(s,p);list.appendChild(d);});
  document.getElementById('faqCount').textContent=`${rows.length} questions`;
  document.getElementById('faqEmpty').classList.toggle('hidden',rows.length>0);
- document.getElementById('faqAskDoctor').href='https://wa.me/919822594341?text='+encodeURIComponent(q?`नमस्कार डॉक्टर, माझा प्रश्न: ${document.getElementById('faqSearch').value.trim()}`:'नमस्कार डॉक्टर, मला घरी भेटीबद्दल माहिती हवी आहे.');
+ document.getElementById('faqAskDoctor').href='https://wa.me/919561394341?text='+encodeURIComponent(q?`नमस्कार डॉक्टर, माझा प्रश्न: ${document.getElementById('faqSearch').value.trim()}`:'नमस्कार डॉक्टर, मला घरी भेटीबद्दल माहिती हवी आहे.');
  document.querySelectorAll('#faqFilters button').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===faqTopic)));
 }
 document.addEventListener('DOMContentLoaded',()=>{
@@ -239,7 +239,7 @@ bookAndTriggerFullAutomation=function(){
  const procedures=Array.from(document.querySelectorAll('#procedureList input:checked')).map(c=>c.parentElement.textContent.trim());
  const total=calculateFee();
  const msg=`HOME VISIT REQUEST — Dr. Pramod G. Kulkarni\nPatient: ${name}\nPhone: ${phone}\nAddress: ${addr}\nMaps: ${nav}\nVisit time: ${time.options[time.selectedIndex].text}\nDistance: ${distance.options[distance.selectedIndex].text}\nAdditional services: ${procedures.join('; ')||'None selected'}\nEstimated fee: ₹${total}\nPlease confirm availability, visit time and final fee.${window.BookingIntake?.bookingText()||''}`;
- window.open('https://wa.me/919822594341?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');
+ window.open('https://wa.me/919561394341?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');
 };
 
 const LIVE_ARTICLE_DEFAULTS=window.PatientEducation.defaults(['heart','potassium','pressure']);

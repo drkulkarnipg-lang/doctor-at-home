@@ -98,3 +98,15 @@ Owner clarified: no separate Brain Care tab or section. Removed that extra navig
 Owner approved publication after the brain-placement correction. PR12 merged as 8c63233a41eca4c76d8b9d287ade80078ab24dcc; production deployment dpl_FFDcnWE9gYyQnAMtAF6ThfuKNEQ3 is READY. Live URL https://home-visiting-icu-doctor.vercel.app/ verified in browser: no separate Brain Care navigation; DOB and password-keyboard scripts plus RxNorm/openFDA links present; resource heading is Explore health resources. Supersedes preview-only statements for this batch.
 
 Actual bundled formulary count: 15 repository rows plus 40 restored rows, deduplicated by the same getAllDrugs() logic to 45 unique built-in entries. Some rows combine several strengths. Browser-specific custom/local imports may increase a particular device count but were not inspected. Minimum 700 drugs is NOT achieved. Reference links are not catalogue imports; previous 12,081 claim remains unverified.
+
+## Immediate live contact correction — 25 October 2026
+Owner explicitly requested the live number correction and removal of 24/7 ICU, after pointing out that the prior number change was only in preview. This is a separate focused release from PR13's unapproved catalogue work.
+
+| Requirement | Implementation | Release state |
+| --- | --- | --- |
+| Current contact number 9561394341 | All active HTML/JS contacts, structured data, WhatsApp/booking messages and generated-document contact templates corrected | Production verification pending for this focused release |
+| Contact-board number clickable | Explicit Call +91 9561394341 button, tel:+919561394341 | Production verification pending |
+| Remove 24/7 ICU | Header badge removed; legacy helper's 24x7 home-visit claim removed | Production verification pending |
+| Keep all existing facilities | Catalogue remains original 45 entries in this hotfix; prior public/doctor tabs, calculators, guides, forms and resource links retained | Tests required before merge |
+
+PR13 is not merged by this release. Its expanded RxNorm catalogue and small audit fixes remain preview-only. Provider passkeys have separately been enabled and the live challenge endpoint returned 200; real-device registration remains pending. n8n remains incomplete. Never describe a preview-only change as live.
