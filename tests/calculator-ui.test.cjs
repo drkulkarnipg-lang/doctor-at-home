@@ -38,9 +38,12 @@ assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,9);
 w.document.getElementById('wikiSearchInput').value='catheter';w.filterWikiArticles();assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,1);
 assert.equal(w.document.querySelector('#drugSetuReference'),null,'Keep the owner-requested DrugSetu removal');
 assert.ok(w.document.querySelector('#doctorWorkstation').classList.contains('notranslate'));
-const phoneLink=w.document.querySelector('a[onclick="handleDirectCall(event)"]');const phoneEvent=new w.MouseEvent('click',{bubbles:true,cancelable:true});phoneLink.dispatchEvent(phoneEvent);
-assert.equal(phoneEvent.defaultPrevented,true,'Phone click must leave the website open');assert.equal(w.document.getElementById('doctorContactDialog').open,true);
+const phoneLink=w.document.querySelector('a.hero-call[href="tel:+919561394341"]');const phoneEvent=new w.MouseEvent('click',{bubbles:true,cancelable:true});phoneLink.dispatchEvent(phoneEvent);
+assert.equal(phoneEvent.defaultPrevented,false,'Phone links must reach the native phone handler');assert.equal(w.document.getElementById('doctorContactDialog').open,false);w.openDoctorContact();
 assert.equal(w.document.getElementById('contactDial').getAttribute('href'),'tel:+919561394341');
+for(const link of w.document.querySelectorAll('a[href^="tel:"]')){const click=new w.MouseEvent('click',{bubbles:true,cancelable:true});link.dispatchEvent(click);assert.equal(click.defaultPrevented,false,'Do not intercept phone links, including emergency numbers');}
+assert.ok(w.document.querySelector('.hero-contact-actions a[href="https://wa.me/919561394341"]'));
+assert.ok(!w.document.querySelector('a[onclick="handleDirectCall(event)"]'));
 w.document.getElementById('contactClose').click();assert.equal(w.document.getElementById('doctorContactDialog').open,false);
 let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9561394341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
 assert.equal(w.document.querySelector('.portal-nav a').getAttribute('aria-current'),'location');

@@ -148,7 +148,7 @@ function populateModalDrugs(drugs){
 function openDrugModal(target){restoredTargetDrugInput=target||null;document.getElementById('drugModal').classList.remove('hidden');document.getElementById('modalDrugSearch').value='';populateModalDrugs(getAllDrugs());}
 function filterModalDrugs(){const q=document.getElementById('modalDrugSearch').value.toLowerCase();populateModalDrugs(getAllDrugs().filter(d=>`${d.generic} ${d.brands} ${d.cat}`.toLowerCase().includes(q)));}
 function selectDrugForRx(d){
- const name=`${d.generic} (${String(d.brands||'').split(',')[0]})`;
+ const brand=String(d.brands||'').split(',')[0];const name=d.generic+(brand?' ('+brand+')':'');
  if(restoredTargetDrugInput){const row=restoredTargetDrugInput.closest('tr');[name,d.timing,d.freq,d.days,d.advice].forEach((v,i)=>{row.cells[i+1].querySelector('input').value=v==null?'':v;});}
  else addDrugDirectlyToRx(name,d.freq,d.timing,d.days,d.advice);
  closeDrugModal();restoredTargetDrugInput=null;
