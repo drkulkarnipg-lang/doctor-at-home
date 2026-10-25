@@ -11,7 +11,7 @@ This table is the current state. Earlier checkpoint notes below are historical a
 | No separate Brain Care tab | LIVE | Brain-related stroke/swallowing guide remains in the shared health library. |
 | Main layout | LIVE: two main tabs retained | Patient Portal and Doctor Workstation; existing facilities preserved. |
 | DOB age calculation and optional password keyboard | LIVE | Previously released in PR12. |
-| Minimum 700-drug catalogue | PREVIEW ONLY; NOT LIVE | Production still has 45 bundled entries. PR13 has 12,081 RxNorm formulations plus 45 existing entries = 12,126 rows; formulations are not unique ingredients/Indian brands. Do not claim the preview catalogue is live. |
+| Minimum 700-drug catalogue | RELEASE APPROVED; PRODUCTION VERIFICATION PENDING | Owner explicitly requested actual live publication. This focused release includes 12,081 RxNorm formulations plus 45 existing entries = 12,126 catalogue rows; formulations are not unique ingredients/Indian brands. |
 | Fingerprint / Windows Hello | Provider enabled; device enrolment pending | Supabase settings saved for main-site RP ID; live passkey challenge returned 200. Owner must register on their own device before successful biometric sign-in can be claimed. |
 | n8n | INCOMPLETE | No verified activated production workflow or successful scheduled agent run. |
 | Remaining audit/EMR/payment/domain work | PENDING | No blanket completion claim; retain earlier backlog. |
@@ -128,3 +128,8 @@ Owner explicitly requested the live number correction and removal of 24/7 ICU, a
 | Keep all existing facilities | Catalogue remains original 45 entries in this hotfix; prior public/doctor tabs, calculators, guides, forms and resource links retained | Tests required before merge |
 
 PR13 is not merged by this release. Its expanded RxNorm catalogue and small audit fixes remain preview-only. Provider passkeys have separately been enabled and the live challenge endpoint returned 200; real-device registration remains pending. n8n remains incomplete. Never describe a preview-only change as live.
+
+## Direct call and formulary release — 25 October 2026
+Owner reported that the visible hero board offered only WhatsApp and that number clicks did not open the dialler. Reproduced on production: hero Contact linked only to WhatsApp; header onclick cancelled native tel navigation and opened a chooser. This release adds separate labelled Call 9561394341 and WhatsApp controls to the hero, removes the header cancellation and stops intercepting all tel links (including emergency numbers). Optional contact/copy dialog retained. Native phone-app handling depends on the user device; desktop dialling cannot be claimed proven by a cloud browser.
+
+Owner explicitly approved making the expanded formulary live. Includes the 12,081 source-labelled NLM RxNorm SCD formulations, original 45 entries, lazy loading, full search, 100-row pagination and prescription picker without inferred dosing fields. This focused release does not publish PR15’s unrelated indexing/speed changes. Validation/deployment recorded after verification.
