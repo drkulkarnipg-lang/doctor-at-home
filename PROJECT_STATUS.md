@@ -14,7 +14,7 @@ This table is the current state. Earlier checkpoint notes below are historical a
 | Minimum 700-drug catalogue | PREVIEW ONLY; NOT LIVE | Production still has 45 bundled entries. PR13 has 12,081 RxNorm formulations plus 45 existing entries = 12,126 rows; formulations are not unique ingredients/Indian brands. Do not claim the preview catalogue is live. |
 | Fingerprint / Windows Hello | Provider enabled; device enrolment pending | Supabase settings saved for main-site RP ID; live passkey challenge returned 200. Owner must register on their own device before successful biometric sign-in can be claimed. |
 | n8n | INCOMPLETE | No verified activated production workflow or successful scheduled agent run. |
-| Article indexing, speed and public usability | IMPLEMENTED FOR PREVIEW | 18 complete EN/MR guide URLs, sitemap, about-doctor page, deferred PDF/Translate, smaller logo and accessibility fixes; all 24 test files pass. Hosted preview pending. |
+| Article indexing, speed and public usability | IMPLEMENTED FOR PREVIEW | 18 complete EN/MR guide URLs, sitemap, about-doctor page, deferred PDF/Translate, smaller logo and accessibility fixes; all 24 test files pass. Hosted preview READY at d3334d2; requires Vercel login. |
 | Remaining audit/EMR/payment/domain work | INCOMPLETE / EXTERNAL INPUT NEEDED | Day 1–13 originals, verified portrait, domain, 30-day sessions, real-device biometrics, n8n and payments are not claimed complete. |
 
 Contact/availability production release: PR14, commit 026f5336e9efa2f6572b2630fe1e4b7836f1bc4e, deployment dpl_GCthHamkK3d6YqwYXN3fDuwCtMEz READY. Verified live URL https://home-visiting-icu-doctor.vercel.app/ . All 21 test files passed before release. This focused release did not merge PR13.
@@ -156,3 +156,5 @@ Unresolved / gated — not claimed complete:
 - Search Console/Bing ownership submission, real Google/Bing indexing, mobile-device inspection and Lighthouse/PageSpeed measurement remain unverified. Do not describe code readiness as achieved search ranking or measured speed.
 
 Browser verification — 25 October 2026: local rendered heart guide and Marathi language navigation verified; main-page two-tab layout, 9 guide cards with standalone links, 9561394341 and booking labels verified. No application CSP errors observed; extension-only metadata errors excluded. Actual mobile viewport, provider integrations and production indexing are not claimed tested.
+
+Hosted audit preview: https://home-visiting-icu-doctor-pune-921qbl25x-drkulkarnipg-lang.vercel.app/ ; deployment dpl_CUn3eEEzTzdMS9Lqvz2Y678mnA9c READY, source d3334d2537183d0d86b259e05092c648b6d162c2, draft PR15 https://github.com/drkulkarnipg-lang/doctor-at-home/pull/15. Browser reaches Vercel login on hosted preview; protection retained. Local render screenshots and code tests do not prove hosted API/provider flows. Production unchanged by this batch.
