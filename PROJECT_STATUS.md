@@ -1,10 +1,10 @@
 # Dr Kulkarni — consolidated project status
-Updated: 24 October 2026, India time. This is the single working register for this project. Update it when work changes; do not ask the owner to repeat previously recorded requirements.
+Updated: 25 October 2026, India time. This is the single working register for this project. Update it when work changes; do not ask the owner to repeat previously recorded requirements.
 
 ## Release rule and identity
 Preserve every existing facility and the original Georgia identity/care promise. Show preview before publication. Save code to the existing GitHub repository. A saved/READY preview is not a production release or a proven live integration.
-Current production release: f08c2b4561884a54281f531a6b23b0fdc4555850.
-Current working branch: preview/evidence-automation-workflow; draft PR 10.
+Current production feature release: ee799ac6761234393af950ac0656603daa133032 (PRs 11 and 10 explicitly approved and merged on 25 October 2026; production deployment READY).
+PR 11 (isolated backend) and PR 10 (full previously reviewed preview) are merged. Their website changes are now published; a live deployment does not imply live provider integrations.
 Stable working preview: https://home-visiting-icu-doctor-pune-git-prev-de07c9-drkulkarnipg-lang.vercel.app/
 Main website: https://home-visiting-icu-doctor.vercel.app/
 
@@ -58,3 +58,10 @@ Main website: https://home-visiting-icu-doctor.vercel.app/
 
 ## What must not be claimed complete
 No blanket banking-grade/security/medical/legal/Google-ranking certification. No live n8n, final media, biometric sign-in, payment gateway, automatic receipt delivery or social publication until the corresponding actual end-to-end check succeeds.
+
+## Release checkpoint — 25 October 2026
+The owner explicitly instructed publishing all reviewed changes. Production deployment dpl_AMJZeXmp6yXKwCqek1Z5Gc8gVS4b is READY at feature commit ee799ac. Existing published UI files were retained or updated by approved PR10; backend PR11 changes no UI. No public Vercel share link or preview-protection bypass was created.
+
+Actual n8n workspace: drkulkarni.app.n8n.cloud. The imported workflow was visibly found in the signed-in cloud browser as ‘Dr Kulkarni — Daily evidence research (approval gated)’. Its checkpoint URL was still undefined and Header Auth was not connected. No real or scheduled execution is claimed.
+
+EVIDENCE_WEBHOOK_SECRET and AI_GATEWAY_MODEL were configured only for preview/evidence-automation-workflow; the existing RESEARCH_JOB_SECRET was moved from the obsolete readability preview to that branch. These have NOT been provisioned for production. The generated preview secret is not assumed recoverable after runtime cleanup. Production auth integrations, n8n credential handling, Gateway success and passkey provider/device activation remain pending. Do not mark them completed merely because the scripts are published.
