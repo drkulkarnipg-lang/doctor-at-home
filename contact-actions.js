@@ -1,5 +1,5 @@
 /* Phone links open a recoverable contact chooser before handing off to another app. */
-(()=>{'use strict';const number='9822594341',phone='+919822594341';let returnFocus=null;
+(()=>{'use strict';const number='9561394341',phone='+919561394341';let returnFocus=null;
 function dialog(){return document.getElementById('doctorContactDialog');}
 function close(){const d=dialog();if(typeof d.close==='function')d.close();else d.removeAttribute('open');if(returnFocus&&document.contains(returnFocus))returnFocus.focus();}
 window.openDoctorContact=()=>{const d=dialog();if(d.open)return;returnFocus=document.activeElement;document.getElementById('contactCopyStatus').textContent='Choose how to contact the doctor. The website remains open.';if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');document.getElementById('contactClose').focus();};
