@@ -36,7 +36,7 @@ const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids
 for(const id of ['rxSheet','pathSlipSheet','radSlipSheet','viewChart20','viewLegalForms','viewClinicalCertificates','viewDrugDir','viewArticlesHub','viewJournalsHub','chatbotWindow','patientFaq','bookingSection'])assert.ok(w.document.getElementById(id),`Lost feature ${id}`);
 assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,9);
 w.document.getElementById('wikiSearchInput').value='catheter';w.filterWikiArticles();assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,1);
-assert.ok(w.document.querySelector('#drugSetuReference a[href="https://drugsetu.com/"]'));
+assert.equal(w.document.querySelector('#drugSetuReference'),null,'Keep the owner-requested DrugSetu removal');
 assert.ok(w.document.querySelector('#doctorWorkstation').classList.contains('notranslate'));
 const phoneLink=w.document.querySelector('a[onclick="handleDirectCall(event)"]');const phoneEvent=new w.MouseEvent('click',{bubbles:true,cancelable:true});phoneLink.dispatchEvent(phoneEvent);
 assert.equal(phoneEvent.defaultPrevented,true,'Phone click must leave the website open');assert.equal(w.document.getElementById('doctorContactDialog').open,true);

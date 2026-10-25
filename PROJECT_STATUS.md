@@ -65,3 +65,31 @@ The owner explicitly instructed publishing all reviewed changes. Production depl
 Actual n8n workspace: drkulkarni.app.n8n.cloud. The imported workflow was visibly found in the signed-in cloud browser as ‘Dr Kulkarni — Daily evidence research (approval gated)’. Its checkpoint URL was still undefined and Header Auth was not connected. No real or scheduled execution is claimed.
 
 EVIDENCE_WEBHOOK_SECRET and AI_GATEWAY_MODEL were configured only for preview/evidence-automation-workflow; the existing RESEARCH_JOB_SECRET was moved from the obsolete readability preview to that branch. These have NOT been provisioned for production. The generated preview secret is not assumed recoverable after runtime cleanup. Production auth integrations, n8n credential handling, Gateway success and passkey provider/device activation remain pending. Do not mark them completed merely because the scripts are published.
+
+## Correction batch — 25 October 2026, DOB and brain-care navigation
+Status: implemented on a review branch; not published to production by this batch.
+
+| Requested correction | Result and verification |
+| --- | --- |
+| Remove “international” from public resource heading | Heading now reads “Explore health resources”; reference links retained. |
+| DOB in separate small day/month/year boxes, no punctuation separators | Added to pre-visit patient history and prescription age entry. Optional; manual age remains. Existing death-report date fields retain their original format. |
+| Calculate exact age after complete DOB | Calendar years/months/days using today's India date, with month-end anniversary clamping. Invalid/future dates rejected. Pre-visit history includes DOB and complete age; prescription preserves a pre-existing gender suffix. Verified birthday, leap-year, month-end and newborn cases. |
+| Brain care visible | Dedicated navigation/section opens existing complete stroke/swallowing guide and links to pre-visit event history. This is not a complete neurology library; broader brain-health topics remain to be authored and reviewed. |
+| A4 documents | Existing A4 print and PDF engine settings preserved. All 18 prebuilt guides, 37 pages, measured as A4. Blank/filled intake print-flow tests pass. Physical printing and every filled certificate length remain unverified. |
+| Preserve every facility | All 19 existing/new test files pass, including 935 formula assertions across 30 calculators and the existing-feature-ID inventory. Corrected one stale UI assertion that expected the owner-removed DrugSetu tile. |
+| Preview before publication | Local browser preview confirms DOB entry calculates age; production is unchanged. Review branch is the checkpoint for this batch. |
+
+Still open: production/provider configuration gates, scheduled automation end-to-end execution, payment/receipt integration, full EMR/registers and broader patient-education coverage remain as listed above. This correction batch does not complete those facilities or claim external integrations are live.
+
+## Follow-up omissions — 25 October 2026
+- Optional password on-screen keyboard: added to the existing Doctor login password field. Includes letters, digits, symbols, Shift, Space, Backspace, Clear and Hide. Regular keyboard/password-manager use remains. No credential storage/logging, automatic submission, or security-strength claim. Tested insertion/selection replacement, deletion, Shift, clear and cancellation.
+- RxNorm and openFDA: official reference links added to Doctor Workstation → Live RSS & AI Research Agent → Clinical references. These are reference links, not an API integration or a drug catalogue import.
+- Removed the remaining “International Reference” heading. The formal university name retains its official wording.
+- Earlier conversation claimed 12,081 RxNorm clinical formulations were imported. This is not verified in the present repository; do not claim minimum 700 drugs or a completed imported catalogue until an actual catalogue and count are verified.
+- These omissions were missed in the first correction batch. They are now included in the same review PR; production publication is still pending review/approval.
+
+## Preview publication checkpoint — 25 October 2026
+Owner requested “preview publish kara”. Vercel preview deployment dpl_ASghn2GmNNDNU3Gr7NX4SaXuSH3R is READY for commit 286a597217e46bc3f68dfe6eb10ac88a2d631240. URL: https://home-visiting-icu-doctor-pune-6wmai5awl-drkulkarnipg-lang.vercel.app/ . Provider metadata confirms review/dob-brain-a4-20261025; build duration approximately 9 seconds. Browser reaches Vercel Authentication, so deployed-page browser QA remains blocked by sign-in. Local browser QA and all 20 test files passed earlier. No share/bypass link created, no protection changed, no production publication.
+
+## Brain-care placement correction — 25 October 2026
+Owner clarified: no separate Brain Care tab or section. Removed that extra navigation/section from the review version. The existing complete stroke/swallowing article remains in the same Health library as kidney and heart-failure articles.. No new top-level tab or search feature added. Patient Portal and Doctor Workstation remain the two main tabs. Earlier brain-section completion entries above are superseded by this correction. Preview only; production unchanged.

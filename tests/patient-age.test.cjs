@@ -1,0 +1,20 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
+const {age}=require('../patient-age.js');
+assert.deepEqual(age(25,10,2000,{year:2026,month:10,day:25}),{years:26,months:0,days:0,totalMonths:312,totalDays:9496});
+assert.equal(age(26,10,2000,{year:2026,month:10,day:25}).years,25);
+assert.equal(age(29,2,2024,{year:2025,month:2,day:28}).years,1);
+assert.equal(age(31,1,2026,{year:2026,month:3,day:1}).days,1);
+assert.equal(age(25,10,2026,{year:2026,month:10,day:25}).totalDays,0);
+assert.throws(()=>age(31,4,2000));assert.throws(()=>age(29,2,2025));assert.throws(()=>age(1,1,2030,{year:2026,month:10,day:25}));
+const dom=new JSDOM('<label><input id="intake-age" value="55"></label><select id="intake-ageUnit"><option>Years</option><option>Months</option><option>Days</option></select><input id="intake-birthDate"><input id="intake-calendarAge"><label><input id="rxPatAge" value="55 Y / Male"></label>',{runScripts:'outside-only'}),w=dom.window;
+w.eval(fs.readFileSync('patient-age.js','utf8'));w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+function fill(prefix,values){['day','month','year'].forEach((key,i)=>{const e=w.document.getElementById(prefix+'DOB'+key);e.value=values[i];e.dispatchEvent(new w.Event('input',{bubbles:true}));});}
+fill('intake-age',['31','04','2000']);assert.equal(w.document.getElementById('intake-age').value,'55');assert.match(w.document.getElementById('intake-ageDOBStatus').textContent,/valid/);
+fill('intake-age',['25','10','2000']);assert.equal(w.document.getElementById('intake-age').value,String(w.PatientAge.age(25,10,2000).years));assert.equal(w.document.getElementById('intake-birthDate').value,'25 10 2000');
+assert.ok(w.document.getElementById('intake-calendarAge').value.includes('months'));
+w.document.querySelector('#intake-ageDOB button').click();assert.equal(w.document.getElementById('intake-age').value,'55');assert.equal(w.document.getElementById('intake-birthDate').value,'');
+fill('rxPatAge',['25','10','2000']);assert.match(w.document.getElementById('rxPatAge').value,/Y \d+ M \d+ D \/ Male$/);
+const html=fs.readFileSync('index.html','utf8');assert.ok(!html.includes('Explore international health resources'));assert.ok(!html.includes('brainCareSection'));assert.match(html,/@page \{ size: A4 portrait/);
+console.log('Calendar age, invalid/future dates, leap day, month end, newborns, manual-age restoration, complete history values and gender preservation passed.');
+dom.window.close();
