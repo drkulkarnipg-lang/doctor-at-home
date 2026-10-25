@@ -1,4 +1,22 @@
 # Dr Kulkarni — consolidated project status
+
+## Current authoritative register — live verified 25 October 2026
+This table is the current state. Earlier checkpoint notes below are historical and are superseded where they differ.
+
+| User requirement | Current actual state | Evidence / remaining action |
+| --- | --- | --- |
+| Contact number must be 9561394341 | LIVE | Main header, clickable contact board, call/WhatsApp links and generated-document contact templates corrected. Live DOM contains no old 9822594341 number. |
+| Remove 24/7 ICU | LIVE: REMOVED | Header badge absent in live browser; legacy helper's 24x7 home-visit claim also removed. |
+| Clickable number on the board | LIVE | Call +91 9561394341 links to tel:+919561394341. |
+| No separate Brain Care tab | LIVE | Brain-related stroke/swallowing guide remains in the shared health library. |
+| Main layout | LIVE: two main tabs retained | Patient Portal and Doctor Workstation; existing facilities preserved. |
+| DOB age calculation and optional password keyboard | LIVE | Previously released in PR12. |
+| Minimum 700-drug catalogue | PREVIEW ONLY; NOT LIVE | Production still has 45 bundled entries. PR13 has 12,081 RxNorm formulations plus 45 existing entries = 12,126 rows; formulations are not unique ingredients/Indian brands. Do not claim the preview catalogue is live. |
+| Fingerprint / Windows Hello | Provider enabled; device enrolment pending | Supabase settings saved for main-site RP ID; live passkey challenge returned 200. Owner must register on their own device before successful biometric sign-in can be claimed. |
+| n8n | INCOMPLETE | No verified activated production workflow or successful scheduled agent run. |
+| Remaining audit/EMR/payment/domain work | PENDING | No blanket completion claim; retain earlier backlog. |
+
+Contact/availability production release: PR14, commit 026f5336e9efa2f6572b2630fe1e4b7836f1bc4e, deployment dpl_GCthHamkK3d6YqwYXN3fDuwCtMEz READY. Verified live URL https://home-visiting-icu-doctor.vercel.app/ . All 21 test files passed before release. This focused release did not merge PR13.
 Updated: 25 October 2026, India time. This is the single working register for this project. Update it when work changes; do not ask the owner to repeat previously recorded requirements.
 
 ## Release rule and identity
