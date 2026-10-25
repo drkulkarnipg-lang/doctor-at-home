@@ -866,7 +866,7 @@
 <a class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" href="https://www.drugs.com/" rel="noopener noreferrer" target="_blank">
             🌐 Drugs.com ↗
           </a>
-<input class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm outline-none" id="dirSearch" onkeyup="filterDrugDirectory()" placeholder="🔍 Search drug..." type="text"/>
+<input class="border petal-border p-2 rounded-xl text-xs w-60 shadow-sm outline-none" id="dirSearch" oninput="filterDrugDirectory()" placeholder="🔍 Search drug..." type="text"/>
 </div>
 </div>
 <div class="bg-white border petal-border rounded-3xl overflow-x-auto max-h-[600px] text-xs shadow-sm">
@@ -971,7 +971,7 @@
 <h3 class="font-bold text-base serif-brand text-[#0F2942]">1-Click Formulary Picker</h3>
 <button onclick="closeDrugModal()">✕</button>
 </div>
-<input class="w-full border p-2 rounded-xl" id="modalDrugSearch" onkeyup="filterModalDrugs()" placeholder="Search molecule or brand..." type="text"/>
+<input class="w-full border p-2 rounded-xl" id="modalDrugSearch" oninput="filterModalDrugs()" placeholder="Search molecule or brand..." type="text"/>
 <div class="max-h-80 overflow-y-auto space-y-2" id="modalDrugList"></div>
 </div>
 </div>
