@@ -80,3 +80,10 @@ Status: implemented on a review branch; not published to production by this batc
 | Preview before publication | Local browser preview confirms DOB entry calculates age; production is unchanged. Review branch is the checkpoint for this batch. |
 
 Still open: production/provider configuration gates, scheduled automation end-to-end execution, payment/receipt integration, full EMR/registers and broader patient-education coverage remain as listed above. This correction batch does not complete those facilities or claim external integrations are live.
+
+## Follow-up omissions — 25 October 2026
+- Optional password on-screen keyboard: added to the existing Doctor login password field. Includes letters, digits, symbols, Shift, Space, Backspace, Clear and Hide. Regular keyboard/password-manager use remains. No credential storage/logging, automatic submission, or security-strength claim. Tested insertion/selection replacement, deletion, Shift, clear and cancellation.
+- RxNorm and openFDA: official reference links added to Doctor Workstation → Live RSS & AI Research Agent → Clinical references. These are reference links, not an API integration or a drug catalogue import.
+- Removed the remaining “International Reference” heading. The formal university name retains its official wording.
+- Earlier conversation claimed 12,081 RxNorm clinical formulations were imported. This is not verified in the present repository; do not claim minimum 700 drugs or a completed imported catalogue until an actual catalogue and count are verified.
+- These omissions were missed in the first correction batch. They are now included in the same review PR; production publication is still pending review/approval.

@@ -1,0 +1,8 @@
+'use strict';const fs=require('node:fs'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom');
+const d=new JSDOM('<dialog id="doctorLoginDialog"><form id="doctorLoginForm"><input type="password" id="doctorLoginPassword"><button type="button" id="doctorLoginCancel">Cancel</button></form></dialog>',{runScripts:'outside-only'}),w=d.window;
+w.eval(fs.readFileSync('password-keyboard.js','utf8'));w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+const panel=w.document.getElementById('passwordKeyboard'),input=w.document.getElementById('doctorLoginPassword'),toggle=w.document.getElementById('passwordKeyboardToggle');assert.equal(panel.hidden,true);toggle.click();assert.equal(panel.hidden,false);
+function click(text){[...panel.querySelectorAll('button')].find(b=>b.textContent===text).click();}
+click('a');click('1');click('!');assert.equal(input.value,'a1!');input.setSelectionRange(1,2);click('b');assert.equal(input.value,'ab!');click('Backspace');assert.equal(input.value,'a!');input.setSelectionRange(2,2);click('Shift');click('Z');assert.equal(input.value,'a!Z');click('Clear');assert.equal(input.value,'');click('A');w.document.getElementById('doctorLoginCancel').click();assert.equal(panel.hidden,true);assert.equal(input.type,'password');assert.equal(panel.querySelectorAll('button:not([type=button])').length,0);
+const html=fs.readFileSync('index.html','utf8');assert.match(html,/id="rxNormReference"/);assert.match(html,/id="openFDAReference"/);assert.ok(!html.includes('>International Reference<'));
+console.log('Optional keyboard: selection edits, backspace, shift, clear, cancel, masked field and non-submit keys passed. Reference links present.');w.close();
