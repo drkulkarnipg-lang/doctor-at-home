@@ -93,3 +93,8 @@ Owner requested “preview publish kara”. Vercel preview deployment dpl_ASghn2
 
 ## Brain-care placement correction — 25 October 2026
 Owner clarified: no separate Brain Care tab or section. Removed that extra navigation/section from the review version. The existing complete stroke/swallowing article remains in the same Health library as kidney and heart-failure articles.. No new top-level tab or search feature added. Patient Portal and Doctor Workstation remain the two main tabs. Earlier brain-section completion entries above are superseded by this correction. Preview only; production unchanged.
+
+## Production publication and medicine count — 25 October 2026
+Owner approved publication after the brain-placement correction. PR12 merged as 8c63233a41eca4c76d8b9d287ade80078ab24dcc; production deployment dpl_FFDcnWE9gYyQnAMtAF6ThfuKNEQ3 is READY. Live URL https://home-visiting-icu-doctor.vercel.app/ verified in browser: no separate Brain Care navigation; DOB and password-keyboard scripts plus RxNorm/openFDA links present; resource heading is Explore health resources. Supersedes preview-only statements for this batch.
+
+Actual bundled formulary count: 15 repository rows plus 40 restored rows, deduplicated by the same getAllDrugs() logic to 45 unique built-in entries. Some rows combine several strengths. Browser-specific custom/local imports may increase a particular device count but were not inspected. Minimum 700 drugs is NOT achieved. Reference links are not catalogue imports; previous 12,081 claim remains unverified.
