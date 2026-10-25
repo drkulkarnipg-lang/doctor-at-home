@@ -1,0 +1,176 @@
+{
+  "name": "Dr Kulkarni \u2014 Daily evidence research (approval gated)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 * * *"
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Midnight India",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Manual test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $vars.CLINIC_EVIDENCE_URL }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({action:\"tick\", requestId:\"n8n:\"+$execution.id+\":\"+$runIndex}) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "tick",
+      "name": "Run one cloud checkpoint",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "continue",
+              "leftValue": "={{ $json.continue === true && $runIndex < 79 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "continue",
+      "name": "More checkpoints needed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        510,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 10,
+        "unit": "seconds"
+      },
+      "id": "wait",
+      "name": "Pause before next checkpoint",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        510,
+        -100
+      ],
+      "webhookId": "dr-kulkarni-evidence-wait"
+    }
+  ],
+  "connections": {
+    "Midnight India": {
+      "main": [
+        [
+          {
+            "node": "Run one cloud checkpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual test": {
+      "main": [
+        [
+          {
+            "node": "Run one cloud checkpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run one cloud checkpoint": {
+      "main": [
+        [
+          {
+            "node": "More checkpoints needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "More checkpoints needed": {
+      "main": [
+        [
+          {
+            "node": "Pause before next checkpoint",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Pause before next checkpoint": {
+      "main": [
+        [
+          {
+            "node": "Run one cloud checkpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "none",
+    "saveManualExecutions": false,
+    "executionTimeout": 1800
+  },
+  "active": false,
+  "pinData": {},
+  "tags": []
+}
