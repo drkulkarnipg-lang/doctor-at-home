@@ -1,0 +1,248 @@
+{
+  "benfluorex": {
+    "status": "withdrawn-reference",
+    "note": "EU withdrawal for safety concerns. Historical identity reference only; prescription selection disabled.",
+    "sources": [
+      {
+        "name": "EMA withdrawal notice",
+        "url": "https://www.ema.europa.eu/en/news/european-medicines-agency-recommends-withdrawal-benfluorex-market-european-union"
+      }
+    ]
+  },
+  "alirocumab": {
+    "formNote": "The cited product is a subcutaneous injection; the requested tablet form is not supported by that label.",
+    "extraSource": {
+      "name": "DailyMed Praluent label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=446f6b5c-0dd4-44ff-9bc2-c2b41f2806b4"
+    }
+  },
+  "evolocumab": {
+    "formNote": "The cited product is a subcutaneous injection; the requested tablet form is not supported by that label.",
+    "extraSource": {
+      "name": "DailyMed Repatha label",
+      "url": "https://www.dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=cd61e902-166d-4aa6-9f3c-a18c1008d07e&type=display"
+    }
+  },
+  "evinacumab": {
+    "formNote": "Evinacumab-dgnb is an intravenous injection; the requested tablet form is not supported by the cited label.",
+    "extraSource": {
+      "name": "FDA Evkeeza label",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761181s002lbl.pdf"
+    }
+  },
+  "cangrelor": {
+    "formNote": "The cited product is for intravenous injection; the requested tablet form is not supported by that label.",
+    "extraSource": {
+      "name": "DailyMed cangrelor label",
+      "url": "https://dailymed-beta.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=c86264c2-ef49-4524-b6af-edb7a6279faa&type=display"
+    }
+  },
+  "phentolamine": {
+    "formNote": "The cited product is an injection. Do not infer a tablet formulation from the original request.",
+    "extraSource": {
+      "name": "DailyMed phentolamine label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ed6c506c-5535-4b7c-ae1a-d63f09d796c9"
+    }
+  },
+  "enlicitide": {
+    "extraSource": {
+      "name": "FDA Lipfendra label",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/220848Orig1s000lbl.pdf"
+    },
+    "note": "Identity reference with a US FDA label. Indian product availability and authorisation are not verified."
+  },
+  "lerodalcibep": {
+    "extraSource": {
+      "name": "FDA Lerochol label",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/761427s001lbl.pdf"
+    },
+    "formNote": "Lerodalcibep-liga: subcutaneous injection in the cited US label. Indian availability not verified."
+  },
+  "pemafibrate": {
+    "status": "identity-reference",
+    "sources": [
+      {
+        "name": "PMDA approved medicine review reports",
+        "url": "https://www.pmda.go.jp/english/review-services/reviews/approved-information/drugs/0001.html"
+      }
+    ],
+    "note": "Identity reference; Japanese PMDA listing is not proof of Indian availability."
+  },
+  "tocopheryl nicotinate": {
+    "status": "identity-reference",
+    "sources": [
+      {
+        "name": "NLM MeSH substance identity",
+        "url": "https://meshb.nlm.nih.gov/record/ui?name=Tocopheryl+nicotinate"
+      }
+    ],
+    "note": "Substance identity reference only; verify the exact medicinal product and local authorisation."
+  },
+  "xantinol nicotinate": {
+    "status": "identity-reference",
+    "sources": [
+      {
+        "name": "NLM MeSH xanthinol niacinate identity",
+        "url": "https://www.ncbi.nlm.nih.gov/mesh/?term=D014971"
+      }
+    ],
+    "aliases": [
+      "xanthinol nicotinate",
+      "xanthinol niacinate"
+    ],
+    "note": "Substance identity reference only; verify the exact medicinal product and local authorisation."
+  },
+  "cerebrolysin concentrate": {
+    "status": "product-review",
+    "sources": [
+      {
+        "name": "Manufacturer product monograph",
+        "url": "https://www.cerebrolysin.com/wp-content/uploads/2022/06/CEREBROLYSIN_ProductMonograph_2021_SCREEN.pdf"
+      }
+    ],
+    "formNote": "Cerebrolysin is described as a solution for injection, not a tablet.",
+    "note": "Branded mixture, not a single generic molecule. Exact product and local authorisation require review; no efficacy claim or prescribing regimen supplied."
+  },
+  "sambong leaf": {
+    "status": "product-review",
+    "sources": [
+      {
+        "name": "Philippines FDA Sambong product leaflet",
+        "url": "https://verification.fda.gov.ph/files/HMRP-27_PIL_01.pdf"
+      }
+    ],
+    "note": "Herbal product (Blumea balsamifera). Verify the exact extract/product and local authorisation; no inferred prescribing regimen."
+  },
+  "beraprost": {
+    "status": "identity-reference",
+    "extraSource": {
+      "name": "NIH clinical-study record of oral beraprost",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30276833/"
+    },
+    "formNote": "The cited beraprost study uses oral tablets. The requested injection is not verified; check the exact product."
+  },
+  "iloprost": {
+    "status": "identity-reference",
+    "sources": [
+      {
+        "name": "NLM RxNorm iloprost inhalation identity",
+        "url": "https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=iloprost"
+      }
+    ],
+    "note": "Requested inhalation reference. Verify the exact inhalation product; other routes are not interchangeable."
+  },
+  "omega3 fish oils": {
+    "status": "supplement-review",
+    "sources": [
+      {
+        "name": "NIH NCCIH omega-3 supplements",
+        "url": "https://www.nccih.nih.gov/health/omega3-supplements-what-you-need-to-know"
+      }
+    ],
+    "note": "Supplement category, not an exact medicine/formulation. Specify the product and EPA/DHA content. Do not substitute for prescription icosapent ethyl."
+  },
+  "standardized yeast rice": {
+    "status": "supplement-review",
+    "sources": [
+      {
+        "name": "NIH NCCIH red yeast rice reference",
+        "url": "https://www.nccih.nih.gov/health/red-yeast-rice"
+      }
+    ],
+    "note": "Confirm whether red yeast rice is intended and provide the exact standardised product. Content, interactions and safety vary; no medicine substitution inferred."
+  },
+  "phytosterol complex": {
+    "status": "supplement-review",
+    "sources": [
+      {
+        "name": "NIH NCCIH cholesterol and natural products",
+        "url": "https://www.nccih.nih.gov/health/providers/digest/high-cholesterol-and-natural-products-science"
+      }
+    ],
+    "note": "Supplement category, not an exact medicinal product. Confirm composition and local product details."
+  },
+  "perindopril plus indapamide": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "HPRA combination product identity",
+        "url": "https://www.hpra.ie/find-a-medicine/for-human-use/authorised-medicines/details/37770"
+      }
+    ],
+    "note": "Ingredient-combination identity only. The cited record does not establish current Indian availability; verify exact product, strength, ratio and local authorisation."
+  },
+  "eprosartan plus hydrochlorothiazide": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "HPRA combination product identity",
+        "url": "https://www.hpra.ie/find-a-medicine/for-human-use/authorised-medicines/details/30051"
+      }
+    ],
+    "note": "Ingredient-combination identity only. The cited record does not establish current Indian availability; verify exact product, strength, ratio and local authorisation."
+  },
+  "pindolol plus clopamide": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "HPRA historical product label",
+        "url": "https://assets.hpra.ie/products/Human/12994/LicenseSPC_PA0013-026-001_30062007021432.pdf"
+      }
+    ],
+    "note": "Ingredient-combination identity only. The cited record does not establish current Indian availability; verify exact product, strength, ratio and local authorisation."
+  },
+  "metoprolol plus chlorthalidone": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "NIH MedlinePlus combination identity",
+        "url": "https://www.medlineplus.gov/druginfo/meds/a682864.html"
+      }
+    ],
+    "note": "Ingredient-combination identity only. The cited record does not establish current Indian availability; verify exact product, strength, ratio and local authorisation."
+  },
+  "amlodipine plus indapamide": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "Singapore National Drug Formulary",
+        "url": "https://www.ndf.gov.sg/about-drugs/active-ingredient/m01265/"
+      }
+    ],
+    "note": "Ingredient-combination identity only. The cited record does not establish current Indian availability; verify exact product, strength, ratio and local authorisation."
+  },
+  "ramipril plus hydrochlorothiazide": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "HPRA historical product label",
+        "url": "https://assets.hpra.ie/products/Human/18008/LicenseSPC_PA0540-085-001_14072010222400.pdf"
+      }
+    ],
+    "note": "Ingredient-combination identity only. Verify exact strength, product and current local authorisation."
+  },
+  "telmisartan plus rosuvastatin": {
+    "status": "composition-reference",
+    "sources": [
+      {
+        "name": "Published original FDC study, NIH PubMed record",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29673890/"
+      }
+    ],
+    "note": "Ingredient-combination reference from an original study; this is not proof of an approved or currently available Indian product. Verify exact product before prescribing."
+  },
+  "clevidipine": {
+    "formNote": "The cited product is an intravenous emulsion, not a tablet.",
+    "extraSource": {
+      "name": "DailyMed Cleviprex label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a6826aa3-fabb-4ff1-a7a3-cd4c34e3a330"
+    }
+  },
+  "fenoldopam": {
+    "formNote": "The cited product is an injection, not a tablet.",
+    "extraSource": {
+      "name": "Pfizer Corlopam label information",
+      "url": "https://www.pfizermedical.com/corlopam"
+    }
+  }
+}

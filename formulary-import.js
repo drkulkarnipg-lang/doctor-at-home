@@ -2,18 +2,30 @@
 (() => {
  'use strict';
  // Generic identity references: ATC classification is not a prescribing-dose or local-product source.
- const genericReferences=[['Quinapril','C09AA06'],['Cilazapril','C09AA08'],['Imidapril','C09AA16']].map(([generic,code])=>({generic,code,brands:'',cat:'ACE inhibitor · generic reference',reference:true,source:'https://atcddd.fhi.no/atc_ddd_index/?code='+code,reviewedOn:'2026-10-25',timing:'',freq:'',days:'',advice:''}));
- let imported=[],bundled=[],page=0,loading=null,loaded=false,catalogueError='',catalogueVersion='';
+ let genericReferences=[['Quinapril','C09AA06'],['Cilazapril','C09AA08'],['Imidapril','C09AA16']].map(([generic,code])=>({generic,code,brands:'',cat:'ACE inhibitor · generic reference',reference:true,source:'https://atcddd.fhi.no/atc_ddd_index/?code='+code,reviewedOn:'2026-10-25',timing:'',freq:'',days:'',advice:''}));
+ let imported=[],bundled=[],page=0,loading=null,loaded=false,requested=null,catalogueError='',catalogueVersion='';
+ const queryAliases=new Map();
+ const normal=s=>String(s||'').trim().toLowerCase().replace(/^\.?\s*(tab|inj)\s+/,'').replace(/\bplus\b/g,' ').replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+ function searchQuery(s){const q=normal(s);return queryAliases.get(q)||q;}
+ function matches(d,q){return normal([d.generic,d.brands,d.cat,d.manufacturer,d.code,...(d.aliases||[])].join(' ')).includes(searchQuery(q));}
+ async function loadRequested(){
+  if(requested)return;
+  const response=await fetch('/assets/drugs/requested-cardiovascular.json',{credentials:'same-origin'});if(!response.ok)throw Error('Requested-name audit could not be loaded.');
+  const data=await response.json();if(data.schemaVersion!==1||!Array.isArray(data.rows)||!Array.isArray(data.requests)||data.requests.length<1)throw Error('Invalid requested-name audit.');
+  const names=new Set();for(const r of data.rows){if(!r||typeof r.generic!=='string'||!r.generic.trim()||names.has(r.generic)||!Array.isArray(r.sources)||typeof r.selectable!=='boolean')throw Error('Invalid requested medicine.');names.add(r.generic);for(const s of r.sources){if(new URL(s.url).protocol!=='https:')throw Error('Invalid reference URL.');}}
+  if(data.requests.some(r=>!names.has(r.canonical)))throw Error('Requested-name coverage is incomplete.');
+  genericReferences=data.rows.map(r=>({...r,generic:r.generic[0].toUpperCase()+r.generic.slice(1),brands:'',cat:r.selectable?'Requested medicine · identity reference':'Requested medicine · review required',reference:true,source:r.sources[0]?.url||'',timing:'',freq:'',days:'',advice:''}));for(const r of data.requests)queryAliases.set(normal(r.requested),normal(r.canonical));requested=data;
+ }
  async function ensureCatalogue(){
-  if(loaded)return;if(loading)return loading;catalogueError='';
-  loading=(async()=>{try{
+  if(loaded&&requested)return;if(loading)return loading;catalogueError='';
+  loading=(async()=>{const results=await Promise.allSettled([loadRequested(),(async()=>{if(loaded)return;
    const response=await fetch('/assets/drugs/rxnorm-scd.json',{credentials:'same-origin'});if(!response.ok)throw Error('Catalogue could not be loaded.');const data=await response.json();
    if(data.schemaVersion!==1||data.termType!=='SCD'||!Array.isArray(data.entries)||data.entries.length!==data.count||data.count<700||data.count>50000)throw Error('Catalogue validation failed.');
    const seen=new Set();const next=data.entries.map(r=>{if(!/^\d+$/.test(r.rxcui)||typeof r.name!=='string'||!r.name.trim()||seen.has(r.rxcui))throw Error('Invalid catalogue record.');seen.add(r.rxcui);return{generic:r.name,brands:'',cat:'RxNorm formulation',code:r.rxcui,source:'https://mor.nlm.nih.gov/RxNav/search?searchBy=RXCUI&searchTerm='+r.rxcui,rxnorm:true,timing:'',freq:'',days:'',advice:''};});
    bundled=next;catalogueVersion=data.sourceVersion;loaded=true;
-  }catch(e){catalogueError=e.message;}finally{loading=null;view();}})();return loading;
+  })()]);catalogueError=results.filter(r=>r.status==='rejected').map(r=>r.reason.message).join(' ');loading=null;view();})();return loading;
  }
- window.DrugCatalogue={load:ensureCatalogue,get count(){return bundled.length;},get loaded(){return loaded;}};
+ window.DrugCatalogue={load:ensureCatalogue,matches,get requested(){return requested;},get count(){return bundled.length;},get loaded(){return loaded;}};
  const baseDrugs=getAllDrugs;
  getAllDrugs=function(){const rows=[...baseDrugs(),...genericReferences,...bundled,...imported];const seen=new Set();return rows.filter(d=>{const k=(d.generic+'|'+(d.brands||'')).toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});};
  const dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open('kulkarniFormulary',1);r.onupgradeneeded=()=>r.result.createObjectStore('catalogue');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});dbPromise.catch(()=>{});
@@ -43,24 +55,26 @@
  }
  function view(){
   const query=(document.getElementById('dirSearch').value||'').trim().toLowerCase();
-  const all=getAllDrugs();const matches=all.filter(d=>`${d.generic} ${d.brands} ${d.cat} ${d.manufacturer||''} ${d.code||''}`.toLowerCase().includes(query));
-  const status=document.getElementById('bundledCatalogueStatus');if(status){status.textContent=catalogueError?'RxNorm catalogue unavailable: '+catalogueError+' Existing medicines remain available. Use Retry.':loaded?bundled.length+' RxNorm formulations loaded. Names include strength and form; prescribing dose must be entered by the doctor.':loading?'Loading the source-labelled RxNorm catalogue…':'Open this directory or the Rx medicine picker to load the RxNorm catalogue.';}
-  const pages=Math.max(1,Math.ceil(matches.length/100));page=Math.min(page,pages-1);
+  const all=getAllDrugs();const found=all.filter(d=>matches(d,query));
+  const status=document.getElementById('bundledCatalogueStatus');if(status){status.textContent=catalogueError?'Catalogue loading issue: '+catalogueError+' Existing medicines remain available. Use Retry.':loaded?bundled.length+' RxNorm formulations loaded. Names include strength and form; prescribing dose must be entered by the doctor.':loading?'Loading the source-labelled RxNorm catalogue…':'Open this directory or the Rx medicine picker to load the RxNorm catalogue.';}
+  const pages=Math.max(1,Math.ceil(found.length/100));page=Math.min(page,pages-1);
   const tbody=document.getElementById('drugDirBody');tbody.replaceChildren();
-  matches.slice(page*100,page*100+100).forEach(d=>{
+  found.slice(page*100,page*100+100).forEach(d=>{
    const tr=tbody.insertRow();tr.className='border-b';
    for(const text of [d.cat,d.generic,d.brands+(d.manufacturer?' · '+d.manufacturer:'')]){const td=tr.insertCell();td.textContent=text;td.className='p-3';}
-   if(d.reference||d.imported||d.rxnorm){const small=document.createElement('small');small.style.display='block';small.textContent=d.reference?'WHO ATC '+d.code+' · generic identity only. Strength, form, local availability and prescribing regimen must be verified.':d.rxnorm?'RxNorm '+d.code+' · formulation reference; verify local availability. Dose and frequency are not supplied.':'Imported: verify product and source. Dosing fields left blank.';tr.cells[1].appendChild(small);}
-   if(d.rxnorm||d.reference){const link=document.createElement('a');link.textContent='View source ↗';link.href=d.source;link.target='_blank';link.rel='noopener noreferrer';tr.cells[1].append(link);}
+   if(d.reference||d.imported||d.rxnorm){const small=document.createElement('small');small.style.display='block';small.textContent=d.reference?[d.status||'Identity reference',d.formNote,d.note||'Verify the exact strength, form, product and local authorisation. No prescribing regimen supplied.'].filter(Boolean).join(' · '):d.rxnorm?'RxNorm '+d.code+' · formulation reference; verify local availability. Dose and frequency are not supplied.':'Imported: verify product and source. Dosing fields left blank.';tr.cells[1].appendChild(small);}
+   if(d.rxnorm||d.reference){for(const source of d.sources||(d.source?[{name:'View source',url:d.source}]:[])){const link=document.createElement('a');link.textContent=source.name+' ↗';link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.style.display='block';tr.cells[1].append(link);}}
    const button=document.createElement('button');button.type='button';button.textContent='+ Add to Rx';button.className='bg-[#0D9488] text-white px-3 py-2 rounded-xl';
-   button.onclick=()=>addDrugDirectlyToRx([d.generic,d.brands?'('+d.brands.split(',')[0]+')':''].filter(Boolean).join(' '),d.freq,d.timing,d.days,d.advice);tr.insertCell().appendChild(button);
+   button.disabled=d.selectable===false;if(button.disabled){button.textContent='Review required';button.title=d.note||'Confirm this entry before prescription selection.';}
+   button.onclick=()=>{if(d.selectable===false)return;addDrugDirectlyToRx([d.generic,d.brands?'('+d.brands.split(',')[0]+')':''].filter(Boolean).join(' '),d.freq,d.timing,d.days,d.advice);};tr.insertCell().appendChild(button);
   });
-  document.getElementById('formularyCount').textContent=`${all.length} catalogue entries · ${genericReferences.length} sourced generic references · ${bundled.length} RxNorm formulations${catalogueVersion?' (release '+catalogueVersion+')':''} · ${matches.length} matches · page ${page+1} of ${pages}. Formulations are not unique ingredients or verified Indian brands.`;
+  document.getElementById('formularyCount').textContent=`${all.length} catalogue entries · ${genericReferences.length} requested name records (${genericReferences.filter(d=>d.selectable===false).length} require review) · ${bundled.length} RxNorm formulations${catalogueVersion?' (release '+catalogueVersion+')':''} · ${found.length} matches · page ${page+1} of ${pages}. Identity references do not establish local availability.`;
   document.getElementById('formularyPrev').disabled=page===0;document.getElementById('formularyNext').disabled=page>=pages-1;
  }
  const oldSwitch=switchDocTab;switchDocTab=function(name){const result=oldSwitch(name);if(name==='drugDir'){view();ensureCatalogue();}return result;};
  const oldOpen=openDrugModal;openDrugModal=function(target){oldOpen(target);ensureCatalogue().then(()=>{if(!document.getElementById('drugModal').classList.contains('hidden'))filterModalDrugs();});};
- renderDrugDirectory=view;filterDrugDirectory=function(){page=0;view();if(!loaded&&!loading)ensureCatalogue();};
+ renderDrugDirectory=view;filterDrugDirectory=function(){page=0;view();if((!loaded||!requested)&&!loading)ensureCatalogue();};
+ filterModalDrugs=function(){const q=document.getElementById('modalDrugSearch').value;populateModalDrugs(getAllDrugs().filter(d=>matches(d,q)));};
  // Cap picker display too, while searching the complete catalogue.
  const renderPicker=populateModalDrugs;
  populateModalDrugs=function(drugs){renderPicker(drugs.slice(0,100));if(drugs.length>100){const note=document.createElement('p');note.textContent=`Showing 100 of ${drugs.length}. Type a more specific name to find the medicine.`;document.getElementById('modalDrugList').prepend(note);}};

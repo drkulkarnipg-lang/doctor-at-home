@@ -142,12 +142,13 @@ let restoredTargetDrugInput=null;
 function populateModalDrugs(drugs){
  const list=document.getElementById('modalDrugList');list.replaceChildren();
  for(const d of drugs){const div=document.createElement('div');div.className='p-3 border rounded-xl flex justify-between gap-3';
- const info=document.createElement('p');info.textContent=`${d.generic} · ${d.brands||''} · ${d.cat||''}`;div.appendChild(info);
- const button=document.createElement('button');button.type='button';button.textContent='Select';button.className='bg-[#0D9488] text-white px-3 py-1 rounded-xl';button.onclick=()=>selectDrugForRx(d);div.appendChild(button);list.appendChild(div);}
+ const info=document.createElement('p');info.textContent=`${d.generic} · ${d.brands||''} · ${d.cat||''}${d.formNote?' · '+d.formNote:''}${d.selectable===false?' · '+(d.note||'Review required'):''}`;div.appendChild(info);
+ const button=document.createElement('button');button.type='button';button.textContent=d.selectable===false?'Review required':'Select';button.disabled=d.selectable===false;button.className='bg-[#0D9488] text-white px-3 py-1 rounded-xl';button.onclick=()=>selectDrugForRx(d);div.appendChild(button);list.appendChild(div);}
 }
 function openDrugModal(target){restoredTargetDrugInput=target||null;document.getElementById('drugModal').classList.remove('hidden');document.getElementById('modalDrugSearch').value='';populateModalDrugs(getAllDrugs());}
 function filterModalDrugs(){const q=document.getElementById('modalDrugSearch').value.toLowerCase();populateModalDrugs(getAllDrugs().filter(d=>`${d.generic} ${d.brands} ${d.cat}`.toLowerCase().includes(q)));}
 function selectDrugForRx(d){
+ if(d.selectable===false){showToast('Review the medicine identity or product before selection.');return;}
  const brand=String(d.brands||'').split(',')[0];const name=d.generic+(brand?' ('+brand+')':'');
  if(restoredTargetDrugInput){const row=restoredTargetDrugInput.closest('tr');[name,d.timing,d.freq,d.days,d.advice].forEach((v,i)=>{row.cells[i+1].querySelector('input').value=v==null?'':v;});}
  else addDrugDirectlyToRx(name,d.freq,d.timing,d.days,d.advice);
