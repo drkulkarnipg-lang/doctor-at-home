@@ -14,7 +14,8 @@ This table is the current state. Earlier checkpoint notes below are historical a
 | Minimum 700-drug catalogue | PREVIEW ONLY; NOT LIVE | Production still has 45 bundled entries. PR13 has 12,081 RxNorm formulations plus 45 existing entries = 12,126 rows; formulations are not unique ingredients/Indian brands. Do not claim the preview catalogue is live. |
 | Fingerprint / Windows Hello | Provider enabled; device enrolment pending | Supabase settings saved for main-site RP ID; live passkey challenge returned 200. Owner must register on their own device before successful biometric sign-in can be claimed. |
 | n8n | INCOMPLETE | No verified activated production workflow or successful scheduled agent run. |
-| Remaining audit/EMR/payment/domain work | PENDING | No blanket completion claim; retain earlier backlog. |
+| Article indexing, speed and public usability | IMPLEMENTED FOR PREVIEW | 18 complete EN/MR guide URLs, sitemap, about-doctor page, deferred PDF/Translate, smaller logo and accessibility fixes; all 24 test files pass. Hosted preview pending. |
+| Remaining audit/EMR/payment/domain work | INCOMPLETE / EXTERNAL INPUT NEEDED | Day 1–13 originals, verified portrait, domain, 30-day sessions, real-device biometrics, n8n and payments are not claimed complete. |
 
 Contact/availability production release: PR14, commit 026f5336e9efa2f6572b2630fe1e4b7836f1bc4e, deployment dpl_GCthHamkK3d6YqwYXN3fDuwCtMEz READY. Verified live URL https://home-visiting-icu-doctor.vercel.app/ . All 21 test files passed before release. This focused release did not merge PR13.
 Updated: 25 October 2026, India time. This is the single working register for this project. Update it when work changes; do not ask the owner to repeat previously recorded requirements.
@@ -128,3 +129,30 @@ Owner explicitly requested the live number correction and removal of 24/7 ICU, a
 | Keep all existing facilities | Catalogue remains original 45 entries in this hotfix; prior public/doctor tabs, calculators, guides, forms and resource links retained | Tests required before merge |
 
 PR13 is not merged by this release. Its expanded RxNorm catalogue and small audit fixes remain preview-only. Provider passkeys have separately been enabled and the live challenge endpoint returned 200; real-device registration remains pending. n8n remains incomplete. Never describe a preview-only change as live.
+
+## Audit repair batch — article indexing, speed and usability (preview)
+The pasted audit was based on b59f496. This batch starts from e25ca0a, preserving the LIVE 9561394341 correction, clickable contact button and removal of 24/7 ICU. Existing 337-ID feature inventory is retained; no main tab or reference panel was removed.
+
+Implemented for review:
+- 18 complete server-rendered guide pages: 9 existing public guides × English/Marathi; permanent /articles/guide-… and /mr/articles/guide-… URLs, self canonicals, reciprocal en/mr/x-default hreflang, MedicalWebPage + Article metadata, named author/editor, original source-check date, complete sections/FAQs/references and existing A4 PDF downloads. No Hindi edition is invented.
+- /articles and /mr/articles list the built-in guides even if the cloud article service is empty or unavailable. Existing separately reviewed cloud publishing and URLs are retained. Built-in slugs are reserved against accidental duplicate cloud records. Article sitemap now includes the 18 guide URLs, including Marathi; a source-controlled guide sitemap is also linked. Canonical guide pages are added to the home library with real crawlable links and an A–Z list.
+- About the doctor page uses the existing published qualifications and registration, practice base, current phone and editorial-policy links. No fake portrait, accreditation, reviewer or new service-hours promise added.
+- Display logo: faithful 144-pixel derivative, 6,566 bytes versus 1,289,642-byte original; original retained as fallback. Removed the broken initial logo.png request. PDF bundle (946,030 bytes) is deferred until PDF generation is requested; complete prebuilt guide PDFs do not need that bundle. Google Translate loads only on language interaction, with an explicit Load other languages control. Approximately 2.23 MB of these two original startup assets removed; no Lighthouse or ranking score claimed.
+- Booking labels associated with name/mobile/address; public small-text classes raised to 14px, common buttons/links given 44px targets, Georgia headings retained, mobile header scrolls out of the reading area, and history sections start collapsed except patient details. All form fields remain available. Source/public guides and two main tabs retained.
+- Removed external initial/legacy QR-service requests, preserving the existing on-device QR generator and unchanged UPI ID.
+- Added an enforced script-src allowlist for self, existing inline handlers and the required Google Translate domains. This is an incremental CSP, not a strict no-inline policy or security certification.
+- Incorporated PR13's source-labelled 12,081 RxNorm SCD formulation snapshot and on-demand search/picker, retaining 45 existing entries (12,126 catalogue rows). Formulations are not unique ingredients or a verified Indian brand/CIMS dataset. No inferred prescribing fields. Public homepage does not download the snapshot.
+
+Verification: all 24 test files pass, including 935 calculator assertions, 337 preserved feature IDs, complete bilingual paragraphs/schema/hreflang/PDF links, 18 sitemap URLs, safe cloud-failure fallback, RxNorm count/search/pagination/blank Rx fields, optional-service deduplication and retry, current contact and no-24/7 contract. Browser QA and hosted preview status are recorded separately after completion.
+
+Unresolved / gated — not claimed complete:
+- Day 1–13 EN/HI/MR corpus: Library searches did not resolve a full labelled set. Read the current Daily Awareness ledger: several dated packages are explicitly private review drafts, and older linked scratch paths are not the full article contents. Do not auto-publish or fabricate 39 editions or claim 57 available pages.
+- Doctor portrait / pearl infographics: verified original assets and topic assignments are still needed. Do not fabricate the doctor's likeness.
+- Domain: no domain selected/purchased. Keep the canonical origin and passkey RP stable; do not purchase or redirect to an invented domain. A custom domain alone does not guarantee Google indexing/rankings; title truncation is device-width dependent, not a fixed 60-character rule.
+- Provider passkeys: already enabled on production with main-site RP and HTTP-200 challenge; owner-device enrolment and successful biometric sign-in still pending. 30-day remembered sessions are NOT implemented; existing short secure sessions/password fallback remain.
+- Leaked-password protection: inspected the actual Supabase Email provider UI; available only on Pro and above. No paid upgrade or unrelated auth setting enabled.
+- n8n: workspace currently shows sign-in; no activation/run claimed. Secure sign-in and workflow credential/provider checks remain necessary.
+- Razorpay, online consultation and verified payment-receipt flow remain unimplemented/unconnected. No payments/KYC or automatic messages performed.
+- Search Console/Bing ownership submission, real Google/Bing indexing, mobile-device inspection and Lighthouse/PageSpeed measurement remain unverified. Do not describe code readiness as achieved search ranking or measured speed.
+
+Browser verification — 25 October 2026: local rendered heart guide and Marathi language navigation verified; main-page two-tab layout, 9 guide cards with standalone links, 9561394341 and booking labels verified. No application CSP errors observed; extension-only metadata errors excluded. Actual mobile viewport, provider integrations and production indexing are not claimed tested.

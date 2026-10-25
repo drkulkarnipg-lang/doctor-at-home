@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <link href="assets/tailwind.css" rel="stylesheet"/><link href="clinical-calculators.css" rel="stylesheet"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dr. Pramod G. Kulkarni — Home Visiting ICU Doctor &amp; Emergency Specialist, Pune</title>
+<title>Dr Pramod Kulkarni | Home Visiting Doctor, Pune</title>
 <meta name="description" content="Dr. Pramod G. Kulkarni, Pune: home-visit requests, practical patient education and clinical reference tools. Visit availability is confirmed by the doctor."/>
 <link rel="canonical" href="https://home-visiting-icu-doctor.vercel.app/"/>
 <meta property="og:title" content="Dr. Pramod G. Kulkarni | Home visits &amp; health guidance"/>
@@ -17,7 +17,7 @@
 <link rel="alternate" hreflang="x-default" href="https://home-visiting-icu-doctor.vercel.app/"/>
 <meta property="og:url" content="https://home-visiting-icu-doctor.vercel.app/"/>
 <script src="assets/tailwind-config-compat.js"></script>
-<script src="assets/pdf/html2pdf.bundle.min.js"></script>
+<script src="lazy-services.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="assets/icons/css/all.min.css" rel="stylesheet"/>
@@ -79,13 +79,13 @@
       }
     }
   </script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+
 <link href="privacy-publishing.css" rel="stylesheet"/><link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/><link href="document-sharing.css" rel="stylesheet"/><link href="patient-helper.css" rel="stylesheet"/><link href="international-portal.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://home-visiting-icu-doctor.vercel.app/#website", "name": "Dr. Pramod G. Kulkarni", "url": "https://home-visiting-icu-doctor.vercel.app/", "inLanguage": "en", "publisher": {"@id": "https://home-visiting-icu-doctor.vercel.app/#owner"}, "about": {"@id": "https://home-visiting-icu-doctor.vercel.app/#practice"}}, {"@type": "Person", "@id": "https://home-visiting-icu-doctor.vercel.app/#owner", "name": "Dr. Pramod G. Kulkarni", "url": "https://home-visiting-icu-doctor.vercel.app/", "telephone": "+919561394341"}, {"@type": ["Physician", "MedicalBusiness"], "@id": "https://home-visiting-icu-doctor.vercel.app/#practice", "name": "Dr. Pramod G. Kulkarni — Home Visiting Doctor", "url": "https://home-visiting-icu-doctor.vercel.app/", "telephone": "+919561394341", "image": "https://home-visiting-icu-doctor.vercel.app/assets/social-card.png", "areaServed": {"@type": "City", "name": "Pune"}, "founder": {"@id": "https://home-visiting-icu-doctor.vercel.app/#owner"}, "description": "Home-visit requests and practical health education. Visit availability is confirmed by the doctor.", "publishingPrinciples": "https://home-visiting-icu-doctor.vercel.app/editorial-policy.html"}]}</script>
 <meta property="og:description" content="Home-visit requests, practical patient education and clinical tools from Dr. Pramod G. Kulkarni, Pune."/>
 <link rel="stylesheet" href="patient-education.css"/>
 <link rel="stylesheet" href="booking-intake.css"/>
 <link rel="stylesheet" href="evidence-workflow.css"/>
-<link rel="stylesheet" href="patient-welcome.css"/>
+<link rel="stylesheet" href="patient-welcome.css"/><link rel="stylesheet" href="accessibility-refinements.css"/>
 <link rel="stylesheet" href="patient-age.css"/><link rel="stylesheet" href="password-keyboard.css"/>
 </head>
 <body class="min-h-screen flex flex-col antialiased relative">
@@ -105,7 +105,7 @@
 <circle cx="12" cy="4" fill="#D97706" r="2"></circle>
 </svg>
 </div>
-<img alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" src="logo.png"/>
+<img alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" src="assets/doctor-logo.webp" width="48" height="48" decoding="async"/>
 </div>
 <div>
 <div class="flex items-center gap-2">
@@ -151,7 +151,7 @@
 <div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
 <h1 id="portalHeroTitle" class="original-care-hero">Thoughtful care.<br/><em>Closer to home.</em></h1>
 <p>Medical care at your bedside. Clear guidance for everyday life. A place for patients, families and clinicians to find the next helpful step.</p>
-<div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="#wikiSection" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div>
+<div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="/articles" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div>
 <form id="healthGlobalSearchForm" class="health-global-search" role="search"><label for="healthGlobalSearch">What would you like to understand?</label><div><input id="healthGlobalSearch" type="search" placeholder="Try heart, kidney, stroke or medicines"/><button type="submit" aria-label="Search health topics">Search →</button></div></form>
 </div>
 <aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
@@ -167,7 +167,7 @@
 <article><span class="care-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span><h4>Live well with kidney disease</h4><ul><li>Keep dialysis, medicine and blood-test appointments.</li><li>Ask for your individual fluid, salt and potassium plan.</li><li>Changes to dialysis frequency belong with the nephrology team.</li></ul><a href="https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis" target="_blank" rel="noopener noreferrer">Kidney-care information ↗</a></article>
 <article><span class="care-icon"><i class="fa-solid fa-person-walking" aria-hidden="true"></i></span><h4>Make home safer</h4><ul><li>Keep walkways clear and lighting comfortable at night.</li><li>Review safe footwear, mobility aids and bathroom supports.</li><li>Report new confusion or a fall; the cause needs assessment.</li></ul><a href="https://www.nia.nih.gov/health/falls-and-falls-prevention" target="_blank" rel="noopener noreferrer">Falls-prevention information ↗</a></article>
 </div></section>
-<section id="wikiSection" class="health-library"><span class="section-eyebrow">The health library</span><div class="section-intro"><h3>Understanding changes<br/>everything.</h3><p>Find practical answers, recognise warning signs and prepare better questions for your doctor.</p></div><label class="library-search-label" for="wikiSearchInput">Search by condition, symptom or everyday concern</label><input id="wikiSearchInput" type="search" placeholder="Search the library…"/><div class="library-topic-filters" id="libraryTopicFilters" aria-label="Filter health topics"></div><p id="libraryResultCount" role="status" aria-live="polite"></p><div id="wikiCardsGrid" class="awareness-grid"></div><p id="libraryNoResults" hidden>No matching topic yet. Try another term or ask the doctor.</p></section><section class="research-review" id="publicGuidanceSection"><span class="section-eyebrow">Patient guidance · read &amp; share</span><h3>Read. Keep. Share.</h3><p>Your patient guidance articles, with PDF download and sharing. Articles added on this device appear here; they are not automatically published to other devices.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="publicArticlesList"></div></section>
+<section id="wikiSection" class="health-library"><span class="section-eyebrow">The health library</span><div class="section-intro"><h3>Understanding changes<br/>everything.</h3><a href="/articles">Browse complete guides by topic or A–Z →</a><p>Find practical answers, recognise warning signs and prepare better questions for your doctor.</p></div><label class="library-search-label" for="wikiSearchInput">Search by condition, symptom or everyday concern</label><input id="wikiSearchInput" type="search" placeholder="Search the library…"/><details class="guide-directory"><summary>All complete guides · A–Z</summary><ul><li><a href="/articles/guide-after-a-fall">After a fall: protect confidence as well as safety</a> · <a href="/mr/articles/guide-after-a-fall" lang="mr">मराठी</a></li><li><a href="/articles/guide-medicine-list">Bring a medicine list, not a memory test</a> · <a href="/mr/articles/guide-medicine-list" lang="mr">मराठी</a></li><li><a href="/articles/guide-catheter-and-feeding-tube-care">Catheters and feeding tubes: two different home-care plans</a> · <a href="/mr/articles/guide-catheter-and-feeding-tube-care" lang="mr">मराठी</a></li><li><a href="/articles/guide-swallowing-after-stroke">Coughing with meals after stroke: check swallowing first</a> · <a href="/mr/articles/guide-swallowing-after-stroke" lang="mr">मराठी</a></li><li><a href="/articles/guide-heart-failure-daily-weight">Heart failure: what a daily weight record can tell you</a> · <a href="/mr/articles/guide-heart-failure-daily-weight" lang="mr">मराठी</a></li><li><a href="/articles/guide-home-blood-pressure">Home blood pressure: the method matters too</a> · <a href="/mr/articles/guide-home-blood-pressure" lang="mr">मराठी</a></li><li><a href="/articles/guide-potassium-and-coconut-water">Must coconut water be banned? Let your potassium plan decide</a> · <a href="/mr/articles/guide-potassium-and-coconut-water" lang="mr">मराठी</a></li><li><a href="/articles/guide-pressure-injury-prevention">Preventing pressure injury takes more than a mattress</a> · <a href="/mr/articles/guide-pressure-injury-prevention" lang="mr">मराठी</a></li><li><a href="/articles/guide-dialysis-and-urine">Still passing urine: why might dialysis be needed?</a> · <a href="/mr/articles/guide-dialysis-and-urine" lang="mr">मराठी</a></li></ul></details><div class="library-topic-filters" id="libraryTopicFilters" aria-label="Filter health topics"></div><p id="libraryResultCount" role="status" aria-live="polite"></p><div id="wikiCardsGrid" class="awareness-grid"></div><p id="libraryNoResults" hidden>No matching topic yet. Try another term or ask the doctor.</p></section><section class="research-review" id="publicGuidanceSection"><span class="section-eyebrow">Patient guidance · read &amp; share</span><h3>Read. Keep. Share.</h3><p>Your patient guidance articles, with PDF download and sharing. Articles added on this device appear here; they are not automatically published to other devices.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="publicArticlesList"></div></section>
 <!-- BOOKING SECTION: WITH 11:01 PM AUTO TIME-SLAB DETECTOR -->
 <section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="bookingSection"><span class="section-eyebrow">Home visit · booking &amp; dispatch</span>
 <div class="max-w-4xl">
@@ -177,15 +177,15 @@
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
 <div>
-<label class="font-bold text-slate-700">Patient Full Name: *</label>
+<label class="font-bold text-slate-700" for="bkPatName">Patient Full Name: *</label>
 <input class="w-full mt-1 p-2 border rounded-xl bg-white font-bold" id="bkPatName" placeholder="e.g. Ramesh Kulkarni" type="text"/>
 </div>
 <div>
-<label class="font-bold text-slate-700">Patient / Family WhatsApp Mobile: *</label>
+<label class="font-bold text-slate-700" for="bkPatPhone">Patient / Family WhatsApp Mobile: *</label>
 <input class="w-full mt-1 p-2 border rounded-xl bg-white font-mono font-bold" id="bkPatPhone" placeholder="10-digit mobile number" type="tel"/>
 </div>
 <div class="sm:col-span-2">
-<label class="font-bold text-slate-700">Complete Address with Landmark: *</label>
+<label class="font-bold text-slate-700" for="bkPatAddress">Complete Address with Landmark: *</label>
 <textarea class="w-full mt-1 p-2 border rounded-xl bg-white" id="bkPatAddress" placeholder="Building name, Flat no, Wing, Near Landmark, Pune locality..." rows="2"></textarea>
 </div>
 <!-- LIVE GPS CAPTURE BUTTON -->
@@ -254,7 +254,7 @@
 <!-- Dynamic UPI QR -->
 <div class="bg-white border petal-border p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
 <span class="text-xs font-bold text-[#0F2942] uppercase tracking-wide">Instant Bedside UPI</span>
-<img alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm" id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&amp;data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D1200%26cu%3DINR"/>
+<img alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm" id="upiQrImg" src="assets/qr-loading.svg"/>
 <p class="font-mono text-xs font-bold text-slate-800">9561394341@sbi</p>
 <p class="text-[10px] text-slate-500">Google Pay / PhonePe / Paytm / BHIM</p>
 </div>
@@ -350,7 +350,7 @@
 <p class="text-slate-300">WhatsApp visit request with optional GPS pin. Server automation requires configuration.</p>
 </div>
 </div>
-<p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal &amp; privacy ↗</a> · <a href="editorial-policy.html">Editorial standards &amp; sources ↗</a> · <a class="site-info-link" href="site-information.html">Site information: domain, hosting &amp; HTTPS ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. </p>
+<p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal &amp; privacy ↗</a> · <a href="about-doctor.html">About the doctor ↗</a> · <a href="editorial-policy.html">Editorial standards &amp; sources ↗</a> · <a class="site-info-link" href="site-information.html">Site information: domain, hosting &amp; HTTPS ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. </p>
 <p><a href="/articles">Browse published health articles</a> · <a href="/patient-privacy.html">Cloud privacy notice</a></p></footer>
 </main>
 <!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
@@ -425,7 +425,7 @@
 <circle cx="12" cy="4" fill="#D97706" r="2"></circle>
 </svg>
 </div>
-<img alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" src="logo.png"/>
+<img alt="Dr. Pramod G. Kulkarni" class="w-full h-full object-contain absolute inset-0 bg-white" onerror="this.onerror=null; this.src='LOGO DR PRAMOD G KULKARNI.png'; this.onerror=function(){ this.style.display='none'; };" src="assets/doctor-logo.webp" width="48" height="48" decoding="async"/>
 </div>
 <div>
 <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
@@ -870,6 +870,7 @@
 </div>
 </div>
 <div class="bg-white border petal-border rounded-3xl overflow-x-auto max-h-[600px] text-xs shadow-sm">
+<p id="bundledCatalogueStatus" role="status" aria-live="polite"></p><button id="bundledCatalogueRetry" type="button" class="no-print">Load / Retry RxNorm catalogue</button>
 <table class="min-w-full border-collapse" id="drugDirectoryTable">
 <thead class="bg-slate-100 sticky top-0 border-b">
 <tr>
@@ -1489,7 +1490,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       document.querySelectorAll('#procedureList input[type="checkbox"]:checked').forEach(c => proc += parseInt(c.value));
       const total = base + dist + proc;
       document.getElementById('totalFeeDisplay').innerText = "₹" + total.toLocaleString('en-IN');
-      document.getElementById('upiQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D${total}%26cu%3DINR`;
+      // On-device QR generation is handled by the existing fee calculator.
       return total;
     }
 

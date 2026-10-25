@@ -46,6 +46,7 @@
   async function exportCertificate(group) {
     const id = activeId(group), source = document.getElementById(id);
     if (!source.dataset.certificateTemplate) return originalClinicalExport();
+    if (typeof window.html2pdf !== 'function' && window.ensurePdfEngine) { try { await window.ensurePdfEngine(); } catch {} }
     if (typeof window.html2pdf !== 'function') { window.printActiveCertificate(group); return; }
     const copy = printableClone(id);
     const holder = document.createElement('div'); holder.setAttribute('aria-hidden','true');
