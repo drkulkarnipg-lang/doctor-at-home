@@ -11,7 +11,7 @@ This table is the current state. Earlier checkpoint notes below are historical a
 | No separate Brain Care tab | LIVE | Brain-related stroke/swallowing guide remains in the shared health library. |
 | Main layout | LIVE: two main tabs retained | Patient Portal and Doctor Workstation; existing facilities preserved. |
 | DOB age calculation and optional password keyboard | LIVE | Previously released in PR12. |
-| Minimum 700-drug catalogue | LIVE | PR16 released 12,081 RxNorm formulations plus 45 retained entries and 3 WHO ATC generic references = 12,129 catalogue rows. Live JSON HTTP 200 and SHA-256 match verified; PR17 added searchable quinapril/cilazapril/imidapril references. Formulations are not unique ingredients/Indian brands. |
+| Minimum 700-drug catalogue | LIVE | 12,081 RxNorm formulations + 45 original entries + 245 requested name records = 12,371 rows on a clean device. Fifteen requested records are review-only and cannot be auto-selected. Not a count of unique approved ingredients or verified Indian products. |
 | Fingerprint / Windows Hello | Provider enabled; device enrolment pending | Supabase settings saved for main-site RP ID; live passkey challenge returned 200. Owner must register on their own device before successful biometric sign-in can be claimed. |
 | n8n | INCOMPLETE | No verified activated production workflow or successful scheduled agent run. |
 | Remaining audit/EMR/payment/domain work | PENDING | No blanket completion claim; retain earlier backlog. |
@@ -153,3 +153,5 @@ Added an accessible searchable audit at /formulary-coverage.html, linked inside 
 Validation: exhaustive tests query every original request and all 245 records, aliases, uppercase/whitespace and combination separators, directory/picker blocks, blank prescribing fields, and independent download failures. Browser verified the audit count, alirocumab form note and review filter. Release verification follows.
 
 All 23 test files passed for this release (15.6 seconds), including 935 calculator assertions, preserved feature IDs and exhaustive requested-name coverage.
+
+Production verified for the full requested list: PR18 merged f8eda436b1fbd686c20f140cd9a4cba50cdaa1ac; deployment dpl_B6YVmNsuuXsp7GA9y4uxkBFC7P91 READY. Live /assets/drugs/requested-cardiovascular.json returned HTTP200, byte-matched the release, and contains all 287 requests / 245 rows. Live formulary-import.js also byte-matched. Browser verified /formulary-coverage.html: counts 287 / 245 / 230 references / 15 review, original misspelling bicalirufin resolves to Bivalirudin, and alirocumab shows the injection form correction. Real owner-authenticated directory use remains unverified; exhaustive software tests exercise every directory query, picker safety and the deployed-source code. Keep the fifteen review items explicit; do not claim all 245 are verified local products.
