@@ -118,5 +118,5 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | Request | Current evidence / remaining action |
 | --- | --- | --- | --- |
-| G01 | [ ] PREVIEW | Prescription, lab/pathology and radiology must close before or after export | Added top Back to tools, always visible bottom Close, Escape and a document chooser; entered data retained. Interaction checks pending. |
-| G02 | [ ] PREVIEW | Sent PDF should use the A4 page, not appear half-size | Full 194mm writing width and 264mm minimum page area, readable clinical type and signoff towards bottom for short documents; natural overflow retained. Real-engine geometry/visual checks pending; do not close based only on page count. |
+| G01 | [ ] PREVIEW | Prescription, lab/pathology and radiology must close before or after export | Added top Back to tools, always visible bottom Close, Escape and a document chooser; entered data retained. Regression passed on all three forms: preserve entered values, reopen, top/bottom Close and Escape; share Escape closes only overlay. |
+| G02 | [ ] PREVIEW | Sent PDF should use the A4 page, not appear half-size | Full 194mm writing width and 264mm minimum page area, readable clinical type and signoff towards bottom for short documents; natural overflow retained. Real PDF image matrix confirms 194mm×263.76mm writing area on A4; ordinary Rx/lab/radiology each one page. Larger-font 42-row stress case naturally four pages, all rows retained. Source/local preview ready; release pending. |
