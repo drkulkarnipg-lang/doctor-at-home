@@ -51,3 +51,5 @@ Consultation notice verification: clinical-documents regression test passed afte
 
 ## Release continuation — 26 October 2026
 Owner instructed proceeding without repeated suggestions after seeing the review screenshot. Treat as authorisation to finish and release this concrete PR19 correction batch, not a blanket claim that unrelated integrations work. Main remains 8fada37; remote review head d8be7fd. Latest exact-head preview dpl_GpJtSACh1k1kqAvhg3rCh1aXBXh6 READY. Entire 24-file suite re-run successfully after the consultation notice: 29.8 seconds. Next: finish remaining local document/card/QR checks, then merge PR19 and verify production.
+
+Remaining overflow check completed: a diagnostic hook on the real PDF stamp received jsPDF's getNumberOfPages() = 2 for the 42-row synthetic prescription. All 42 rows and final signature/date/time retained in the DOM clone; no browser download completion claimed. Fitness visual check found an unnecessary second page in the ordinary synthetic case. Applied compact spacing to fitness/leave templates as well; original government forms remain unchanged. Rechecking this concrete defect before release.

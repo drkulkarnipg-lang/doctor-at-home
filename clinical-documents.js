@@ -1,5 +1,5 @@
 /* Document preparation metadata; clinical event dates and handwritten signatures are not inferred. */
-(()=>{'use strict';const $=id=>document.getElementById(id),compact=new Set(['rxSheet','pathSlipSheet','radSlipSheet','cdoc-referral','cdoc-consent']);
+(()=>{'use strict';const $=id=>document.getElementById(id),compact=new Set(['rxSheet','pathSlipSheet','radSlipSheet','cdoc-referral','cdoc-consent','cdoc-fitness','cdoc-leave']);
 function indiaNow(now=new Date()){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(p=>[p.type,p.value]));return{date:`${p.year}-${p.month}-${p.day}`,display:`${p.day}/${p.month}/${p.year}`,time:`${p.hour}:${p.minute}`};}
 function field(parent,id,label,type='text',value=''){if($(id))return $(id);const wrap=document.createElement('label'),title=document.createElement('span'),input=document.createElement('input');wrap.className='clinical-document-field';wrap.htmlFor=id;title.textContent=label;input.id=id;input.type=type;input.value=value;wrap.append(title,input);parent.append(wrap);return input;}
 const dateDisplay=v=>/^\d{4}-\d{2}-\d{2}$/.test(v)?v.split('-').reverse().join('/'):v;
