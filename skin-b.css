@@ -1,0 +1,47 @@
+/* Option B skin. Scoped by html.skin-b. */
+html.skin-b,html.skin-b body,html.skin-b #publicPortal{background:#F2F8FC!important;color:#123B56!important}
+html.skin-b h1,html.skin-b h2,html.skin-b h3,html.skin-b .hero-copy .original-care-hero,html.skin-b #publicPortal .hero-copy .original-care-hero,html.skin-b .doctor-wordmark,html.skin-b .serif-brand{font-family:Georgia,'Times New Roman',serif!important;color:#123B56!important}
+html.skin-b #publicPortal .hero-copy .original-care-hero em{color:#1A6C93!important}
+html.skin-b .site-header{background:#FFFFFF!important;border-color:#D5E5EF!important}
+html.skin-b .site-header .doctor-wordmark{color:#123B56!important}
+html.skin-b .site-header .bg-\[\#0F2942\]{background:#1A6C93!important;color:#FFFFFF!important}
+html.skin-b .site-header a[data-direct-call]{background:#1A6C93!important;color:#FFFFFF!important}
+html.skin-b .site-header a[data-direct-call] i{animation:none!important}
+html.skin-b .portal-nav{background:#E6F1F8!important;border-color:#D5E5EF!important}
+html.skin-b .portal-nav a{background:transparent!important;color:#123B56!important}
+html.skin-b .portal-nav a:first-child{background:#1A6C93!important;color:#FFFFFF!important}
+html.skin-b #publicPortal .hero-primary-actions .primary-link,html.skin-b .hero-contact-actions .hero-call{background:#1A6C93!important;color:#FFFFFF!important;border-color:#1A6C93!important}
+html.skin-b #publicPortal .hero-primary-actions .secondary-link{background:#FFFFFF!important;color:#123B56!important;border:1px solid #1A6C93!important}
+html.skin-b .section-eyebrow{color:#0E6B73!important}
+html.skin-b .dispatch-card,html.skin-b .care-compass{background:#FFFFFF!important;border:1px solid #D5E5EF!important;color:#123B56!important}
+html.skin-b .dispatch-card h3{color:#123B56!important}
+html.skin-b .compass-credentials{color:#123B56!important}
+html.skin-b .health-global-search button{background:#1A6C93!important;color:#FFFFFF!important}
+html.skin-b .care-mark{color:#0E6B73!important}
+html.skin-b .emergency-strip{background:#FBEFF0!important;border-color:#E5C7CB!important;border-left-color:#8C2F39!important}
+html.skin-b .language-control .petal-border,html.skin-b .language-control>div{background:#E6F1F8!important;border-color:#D5E5EF!important}
+html.skin-b .site-header .text-\[\#0D9488\]{color:#0E6B73!important}
+html.skin-b .dispatch-card,html.skin-b .care-compass{background-image:none!important}
+html.skin-b .health-global-search label,html.skin-b .health-global-search{color:inherit!important}
+html.skin-b #publicPortal .dispatch-card,html.skin-b #publicPortal .care-compass,html.skin-b #publicPortal aside.dispatch-card{background:#E6F1F8!important;background-image:none!important;border:1px solid #D5E5EF!important}
+/* --- Option B: replace leftover green tones from older stylesheets --- */
+html.skin-b h4,html.skin-b summary,html.skin-b #publicPortal strong,html.skin-b output.calc-result,html.skin-b .calc-card h3,html.skin-b .care-icon,html.skin-b .fa-brain{color:#123B56!important}
+html.skin-b .awareness-category,html.skin-b .pathway-number,html.skin-b .nutrition-number,html.skin-b .calc-index{color:#0E6B73!important}
+html.skin-b #publicPortal a:not([class*="bg-"]):not(.primary-link):not(.hero-call):not(.compass-contact){color:#1A6C93}
+html.skin-b button.calc-primary,html.skin-b a.faq-contact,html.skin-b button[class*="bg-[#2"],html.skin-b .language-control button[aria-pressed="true"],html.skin-b [role="radio"][aria-checked="true"]{background:#1A6C93!important;border-color:#1A6C93!important;color:#fff!important}
+html.skin-b output.calc-result,html.skin-b output{background:#E6F1F8!important;border-color:#D5E5EF!important}
+html.skin-b details,html.skin-b .calc-card,html.skin-b .conversion-panel,html.skin-b label.flex.items-center{border-color:#D5E5EF!important}
+html.skin-b #publicPortal button:not([class*="bg-"]):not(.primary-link){border-color:#B7D3E3}
+html.skin-b .research-review{border-color:#D5E5EF!important}
+html.skin-b button[aria-pressed="true"],html.skin-b .education-languages [aria-pressed="true"]{background:#1A6C93!important;border-color:#1A6C93!important;color:#fff!important}
+html.skin-b .research-flow button:not([aria-pressed="true"]){background:#E6F1F8!important;border-color:#B7D3E3!important;color:#123B56!important}
+html.skin-b .education-languages button:not([aria-pressed="true"]){background:#fff!important;border-color:#B7D3E3!important;color:#123B56!important}
+html.skin-b #publicPortal button:not([class]):not([aria-pressed]):not([type="submit"]){background:#1A6C93!important;border-color:#1A6C93!important;color:#fff!important}
+html.skin-b .care-icon{background:#E6F1F8!important;color:#1A6C93!important}
+html.skin-b #publicPortal span[aria-hidden="true"]{color:inherit}
+html.skin-b button:not([class]):not([aria-pressed]){background:#1A6C93!important;border-color:#1A6C93!important;color:#fff!important}
+html.skin-b #publicPortal .home-care-grid .care-icon,html.skin-b #publicPortal span.care-icon{background:#E6F1F8!important;color:#1A6C93!important}
+html.skin-b #publicPortal .education-read-full,html.skin-b #publicPortal .research-upload,html.skin-b #publicPortal button.calc-primary{background:#1A6C93!important;border-color:#1A6C93!important;color:#fff!important}
+html.skin-b #publicPortal button[class*="bg-[#0D9488]"]{background:#0E6B73!important;color:#fff!important}
+html.skin-b #publicPortal button[class*="bg-[#16A34A]"]{background:#15803D!important;color:#fff!important}
+html.skin-b .bg-\[\#0D9488\]{background:#0E6B73!important}
