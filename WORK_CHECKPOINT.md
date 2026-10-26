@@ -34,7 +34,7 @@ This batch is NOT released to production. Do not merge just to save progress.
 
 ## Next action
 
-Continue the remaining layout/overflow checks using the existing implementation. Recreate only temporary QA fixtures if needed. Save the result of each check here and synchronize the branch immediately.
+Read MASTER_TASK_REGISTER.md. The owner requested a complete permanent done/to-do register; created it from the visible two-day conversation, recovered prior-context requests and project release records. Updated AGENTS.md to require maintaining it and reporting changed states every substantive handoff. Keep unverifiable recovered requests unticked. Synchronize this documentation step, then implement D02/D03: ₹500 online-consultation notice and severe-condition limitations. Afterwards resume remaining layout/overflow checks; do not repeat the three passed normal PDF checks unless a source change warrants it.
 
 ## Workspace recovery note
 
