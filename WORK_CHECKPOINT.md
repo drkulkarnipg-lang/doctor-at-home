@@ -29,7 +29,7 @@ This batch is NOT released to production. Do not merge just to save progress.
 
 1. Verify the 42-row prescription genuinely expands to multiple pages; it was generated but its page count has not been confirmed.
 2. Inspect final document appearance and the public article-action/QR screen states; record screenshots. Certificate/consent layout still needs visual checking.
-3. Run the complete suite including the new test after any further changes.
+3. COMPLETE: the complete suite passed all 24 test files (39.8 seconds); repeat only after further source changes.
 4. Draft PR19 is saved: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/19 . Verify/update its hosted preview after remaining checks. Production publication is not authorised merely by the saving request.
 
 ## Next action
@@ -41,3 +41,5 @@ Continue the remaining layout/overflow checks using the existing implementation.
 Automated workspace cleanup removed the earlier uncommitted local batch. The repository was re-cloned and the known changes restored, then synchronized in commit 4725cf4. Future work must checkpoint remotely after each completed step. Never describe a new clone as restarting the project.
 
 Checkpoint workflow and new test synchronized in remote commit 5d7eba9. PR19 was created as a draft; no production merge.
+
+Verified preview at source 5d7eba9: deployment dpl_6duUuHw858vMgcaLBKc4QysRSCHx READY, https://home-visiting-icu-doctor-pune-iwgcvch5y-drkulkarnipg-lang.vercel.app/ . Preview protection is retained. Main remains unchanged.
