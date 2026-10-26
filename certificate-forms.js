@@ -30,6 +30,7 @@
   }
   window.buildCertificatePdfClone = printableClone;
   function preparePrint(group) {
+    if(window.prepareClinicalPrint){window.prepareClinicalPrint(activeId(group));return;}
     document.getElementById('certificatePrintRoot')?.remove();
     const root = document.createElement('div'); root.id = 'certificatePrintRoot';
     root.appendChild(printableClone(activeId(group))); document.body.appendChild(root);
