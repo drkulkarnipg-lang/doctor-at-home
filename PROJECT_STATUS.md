@@ -1,6 +1,6 @@
 # Dr Kulkarni — consolidated project status
 
-**Current master checklist:** `MASTER_TASK_REGISTER.md` (26 October 2026). It consolidates the visible and recovered 25–26 October requests, distinguishes LIVE/PREVIEW/PARTIAL/TODO/VERIFY, and supersedes stale status summaries below. `WORK_CHECKPOINT.md` supplies the exact next action. The latest ₹500 telemedicine notice/emergency-limitations request is implemented in the PR19 review branch, not production; actual online consultation/payment workflow remains incomplete.
+**Current master checklist:** `MASTER_TASK_REGISTER.md` (26 October 2026). It consolidates the visible and recovered 25–26 October requests, distinguishes LIVE/PREVIEW/PARTIAL/TODO/VERIFY, and supersedes stale status summaries below. `WORK_CHECKPOINT.md` supplies the exact next action. PR19 is now released: ₹500 notice/emergency limitations, article contrast, collapsed payment QR and compact clinical layouts/signoff are LIVE. Full consultation/payment and n8n integrations remain incomplete.
 
 ## Current authoritative register — live verified 25 October 2026
 This table is the current state. Earlier checkpoint notes below are historical and are superseded where they differ.
@@ -160,3 +160,6 @@ Production verified for the full requested list: PR18 merged f8eda436b1fbd686c20
 
 ## Reading / QR / clinical document corrections — 26 October 2026
 Owner requires: pale, readable heart/coconut-water/skin article actions; QR hidden inside Payment methods; ordinary prescription/pathology/radiology fit one A4 page when content permits, expand only for actual overflow; signature, name, date, time across clinical requisitions, consent, certificates. No inferred event dates or digital signatures. Original government PDFs and intentional two-page Form2 retained. DOB editor removed only from prescription output, age data retained. Added visible radiology identity/date/time, certificate issue/verification time, consent signatory date/time and Form2 informant/Registrar date/time. Private local changes from 25 October were removed by automated workspace maintenance before checkpoint; restored from main 8fada37 and re-applied. Verification and preview release follow.
+
+## PR19 production release — 26 October 2026
+Owner requested proceeding without repeated suggestions after review. PR19 merged 1888c3a310ae4305c972d0d34c8ad710809b366c; production dpl_3vbXZvtF8HazQnNmiTUS29SF9yGT READY. Live source byte checks and browser notice/article controls/collapsed QR/secure UPI ID copy verified. All24 tests passed after final fitness/leave spacing fix. Synthetic PDF engine: normal Rx/path/rad one A4 page, long 42-row Rx two pages, normal fitness/consent one page. No claim of owner-device download/printing, payment, live n8n or biometric success. See master register for exact remaining rows.

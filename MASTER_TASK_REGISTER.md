@@ -47,7 +47,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| C01 | [ ] PREVIEW | Pale readable Read/Download/Share boxes below heart-failure, coconut-water and skin articles | Explicit pale backgrounds, dark text, borders/focus saved in PR19. Computed browser styles verified on all three action groups; pale backgrounds/dark text, 46–51px controls. Release pending. |
+| C01 | [x] LIVE | Pale readable Read/Download/Share boxes below heart-failure, coconut-water and skin articles | Explicit pale backgrounds, dark text, borders/focus saved in PR19. Computed browser styles verified on all three action groups; pale backgrounds/dark text, 46–51px controls. Released PR19; live browser verified. |
 | C02 | [ ] PARTIAL | Brain-related awareness beside kidney/heart articles | Existing stroke/swallowing guide is live in shared library. Additional brain articles not all authored/reviewed/published. No new main tab. |
 | C03 | [ ] TODO | Day 1–13 EN/HI/MR articles on website | Original corpus/import, topic deduplication, review and publication still required; do not replace it with invented text. |
 | C04 | [ ] PARTIAL | Separate article URLs, index, canonical/hreflang, sitemap, topic hubs | Some article endpoints/schema exist in main; indexing/speed PR15 is an older unmerged draft. Reconcile onto current main without undoing subsequent fixes. Full multilingual indexing not proven. |
@@ -64,9 +64,9 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| D01 | [ ] PREVIEW | QR hidden inside Payment methods, reveal when tapped | Closed outer Payment methods and closed inner QR details saved in PR19. No initial third-party QR request. UPI link/copy controls exist in preview; current request confirms other methods are missing. Local browser verified closed outer/inner details and tap-to-reveal local QR; clipboard manual fallback on insecure local preview. Release pending. |
-| D02 | [ ] PREVIEW | **Online consultation / Telemedicine notice: ₹500** | Implemented 26 Oct: hero link and English/Marathi notice, ₹500 clearly separated from home-visit fee; availability/suitability confirmed by doctor. Clinical regression and focused DOM checks passed; desktop preview inspected. Saved for review, not live. |
-| D03 | [ ] PREVIEW | Say who should not rely on online consultation in severe conditions | Prominent English/Marathi warning beside ₹500: severe chest pain, severe breathing difficulty, sudden face/arm weakness or speech problems, collapse/unconsciousness; seek emergency help without waiting for booking/reply/payment. Primary MoHFW guidance checked; local desktop screenshot/hero navigation and focused DOM checks passed. Production release and phone layout checks pending. |
+| D01 | [x] LIVE | QR hidden inside Payment methods, reveal when tapped | Closed outer Payment methods and closed inner QR details saved in PR19. No initial third-party QR request. UPI link/copy controls exist in preview; current request confirms other methods are missing. Local browser verified closed outer/inner details and tap-to-reveal local QR; clipboard manual fallback on insecure local preview. Released PR19; live browser verified. |
+| D02 | [x] LIVE | **Online consultation / Telemedicine notice: ₹500** | Implemented 26 Oct: hero link and English/Marathi notice, ₹500 clearly separated from home-visit fee; availability/suitability confirmed by doctor. Clinical regression and focused DOM checks passed; desktop preview inspected. Released PR19; live notice verified. |
+| D03 | [x] LIVE | Say who should not rely on online consultation in severe conditions | Prominent English/Marathi warning beside ₹500: severe chest pain, severe breathing difficulty, sudden face/arm weakness or speech problems, collapse/unconsciousness; seek emergency help without waiting for booking/reply/payment. Primary MoHFW guidance checked; local desktop screenshot/hero navigation and focused DOM checks passed. Released PR19; production notice verified. Phone layout check remains. |
 | D04 | [ ] TODO | Actual online consultation workflow | Availability confirmation, screening/consent and private access not end-to-end verified. Notice alone is not an operating consultation backend. |
 | D05 | [ ] TODO | Razorpay / online payments | No verified merchant/KYC, server order/payment confirmation, webhook, refund flow. QR is not a verified payment gateway. |
 | D06 | [ ] TODO | PDF receipt immediately after verified payment | Receipt number, amount/date/reference and authorised delivery with retries/status not implemented. Never issue paid receipt just because QR opened. |
@@ -75,11 +75,11 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| E01 | [ ] PREVIEW | Ordinary prescription/pathology/radiology generally ONE A4 page | Compact layout and isolated print root saved in PR19. Real html2pdf metadata: normal 5-row Rx, path and rad each one A4 page. Browser download completion timed out; owner's final save/print not verified. |
-| E02 | [ ] VERIFY | More pages only for actual longer content; no clipped text | Real PDF engine confirmed two pages for 42 synthetic rows; all rows and final signoff retained in clone. Fitness spacing corrected and one-page result verified; consent one page with both signatories. Broader filled examples/device output remain open. |
-| E03 | [ ] PREVIEW | Remove unnecessary date/DOB layout that makes Rx two pages | DOB editor stays onscreen, excluded from document clone; calculated age retained. Dates use compact fields; saved/tested. |
-| E04 | [ ] PREVIEW | **Signature, name, date and time** on every clinical document | Signoffs added/tested for Rx/path/rad/referral/consent; certificate issue/verification times and Form2 signatory dates/times. Blank signature lines; no fabricated electronic signatures or event dates. Needs visual review/release. |
-| E05 | [ ] PREVIEW | Requisitions actually mention date | Path time and radiology identity/date/time added; existing dates retained. Fresh cloned values tested. |
+| E01 | [x] LIVE | Ordinary prescription/pathology/radiology generally ONE A4 page | Compact layout and isolated print root saved in PR19. Real html2pdf metadata: normal 5-row Rx, path and rad each one A4 page. Browser download completion timed out; owner's final save/print not verified. |
+| E02 | [ ] PARTIAL | More pages only for actual longer content; no clipped text | Real PDF engine confirmed two pages for 42 synthetic rows; all rows and final signoff retained in clone. Fitness spacing corrected and one-page result verified; consent one page with both signatories. Broader filled examples/device output remain open. |
+| E03 | [x] LIVE | Remove unnecessary date/DOB layout that makes Rx two pages | DOB editor stays onscreen, excluded from document clone; calculated age retained. Dates use compact fields; saved/tested. |
+| E04 | [x] LIVE | **Signature, name, date and time** on every clinical document | Signoffs added/tested for Rx/path/rad/referral/consent; certificate issue/verification times and Form2 signatory dates/times. Blank signature lines; no fabricated electronic signatures or event dates. Released PR19; normal fitness/consent visual checks passed. All filled/device examples not claimed. |
+| E05 | [x] LIVE | Requisitions actually mention date | Path time and radiology identity/date/time added; existing dates retained. Fresh cloned values tested. |
 | E06 | [ ] VERIFY | Fitness/unfitness/leave/Forms 2, 4, 4A all print/save/share properly | Facilities and original government PDFs preserved; check filled examples, layout and current jurisdictional forms. Intentional multi-page originals are not forced onto one page. |
 | E07 | [ ] VERIFY | Lab choices: lipid profile, ammonia, iron studies | Recovered request. Check exact current list, labels and selected-item output; no completion evidence yet. |
 | E08 | [ ] VERIFY | Radiology: portable/bedside USG, separate arterial/venous Doppler, CT/MRI choices | Recovered request. Check exact current items and requisition output before marking complete. |
@@ -103,13 +103,13 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 ## Next work — resume here, not from zero
 
-1. D02/D03: notice implemented; verify layout alongside the remaining PR19 visual checks, then publish only through the review flow.
-2. E02/C01/D01/E04: finish remaining visual/overflow checks on PR19; preserve the three already-passed normal PDF checks and 24 passing test files. Re-run relevant checks after changes.
-3. Update PR19 preview and this register with exact evidence. Keep not-live items unticked until publication and appropriate live checks.
+1. PR19 released and production checked on 26 October: consultation notice, article controls, collapsed QR/UPI and clinical layout/signoff code are live. Do not reimplement this batch.
+2. E02/E06/E09: further filled certificates, phone/native dialler, device PDF-save and physical print checks remain distinct from verified synthetic page counts. Preserve passed results.
+3. Continue E07/E08 requisition-list audit, F01–F03 login/device work, F06–F10 n8n/provider automation and C03–C10 article/SEO backlog; keep exact external configuration blockers explicit.
 4. Continue pending requisition-list, login/device, automation and audit work using the row IDs. For external access, finish independently available code/review before identifying a precise configuration blocker.
 
 ## Evidence pointers and handoff rule
 
-- Current review: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/19 (draft). Current production source recorded as main 8fada37396585ec6f2b62a79b8e2c27ad2563d77; latest remote review checkpoint before this register: 331d9cc7c5a6da450442015c196048274355a83d.
+- Released PR19: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/19 . Production implementation commit 1888c3a310ae4305c972d0d34c8ad710809b366c; Vercel dpl_3vbXZvtF8HazQnNmiTUS29SF9yGT READY (production). Live index.html, reading-print-fixes.css and clinical-documents.js returned HTTP200 and matched the release bytes. Live browser verified ₹500 notice, all six article action controls, initially closed QR/payment details and successful secure UPI ID copy. Whole 24-file suite passed after final source change (27.1s). No payment, biometric enrolment or actual recipient delivery executed.
 - WORK_CHECKPOINT.md: exact resume point, completed checks and limitations. PROJECT_STATUS.md: deployment history and detailed implementation evidence. Older historical entries may be superseded; this register states present status.
 - Never tick a TODO because a plan, prompt, test stub or READY build exists. Update this register after each changed item; include an updated done/preview/pending summary in every substantive project handoff. Do not ask Dr Kulkarni to reconstruct the old list again.
