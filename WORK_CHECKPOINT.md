@@ -54,3 +54,5 @@ PR19 merge 1888c3a, deployment dpl_3vbXZvtF8HazQnNmiTUS29SF9yGT READY production
 
 ## Active follow-up — document close and A4 presentation
 User reports no exit from prescription/lab/radiology after/before export, and half-size content on A4. Worktree document-exit-a4, branch fix/document-exit-a4, based on released main f945281. Added persistent per-document exit controls, keyboard exit and chooser without clearing inputs; generated clinical clones now use a full-page writing area with readable type and lower signoff. Need interaction/data-retention and actual PDF geometry/visual checks, ordinary/long page regression, then review/deploy. Current follow-up is not live. Preserve prior release checks; do not call one-page count alone visual proof.
+
+Exit regression check passed for all three forms: top/bottom Close, reopen, retained names, Escape, no exit buttons in exported clones. Escape closes the share overlay first and leaves the editor open; listener capture prevents a double close. Source fix and meaningful regression checks saved before real PDF inspection.
