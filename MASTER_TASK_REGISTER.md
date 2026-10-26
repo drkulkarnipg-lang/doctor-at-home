@@ -113,3 +113,10 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 - Released PR19: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/19 . Production implementation commit 1888c3a310ae4305c972d0d34c8ad710809b366c; Vercel dpl_3vbXZvtF8HazQnNmiTUS29SF9yGT READY (production). Live index.html, reading-print-fixes.css and clinical-documents.js returned HTTP200 and matched the release bytes. Live browser verified ₹500 notice, all six article action controls, initially closed QR/payment details and successful secure UPI ID copy. Whole 24-file suite passed after final source change (27.1s). No payment, biometric enrolment or actual recipient delivery executed.
 - WORK_CHECKPOINT.md: exact resume point, completed checks and limitations. PROJECT_STATUS.md: deployment history and detailed implementation evidence. Older historical entries may be superseded; this register states present status.
 - Never tick a TODO because a plan, prompt, test stub or READY build exists. Update this register after each changed item; include an updated done/preview/pending summary in every substantive project handoff. Do not ask Dr Kulkarni to reconstruct the old list again.
+
+## G. New document usability correction — 26 October 2026
+
+| ID | Tick / state | Request | Current evidence / remaining action |
+| --- | --- | --- | --- |
+| G01 | [ ] PREVIEW | Prescription, lab/pathology and radiology must close before or after export | Added top Back to tools, always visible bottom Close, Escape and a document chooser; entered data retained. Interaction checks pending. |
+| G02 | [ ] PREVIEW | Sent PDF should use the A4 page, not appear half-size | Full 194mm writing width and 264mm minimum page area, readable clinical type and signoff towards bottom for short documents; natural overflow retained. Real-engine geometry/visual checks pending; do not close based only on page count. |
