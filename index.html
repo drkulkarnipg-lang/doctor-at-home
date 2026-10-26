@@ -87,7 +87,7 @@
 <link rel="stylesheet" href="evidence-workflow.css"/>
 <link rel="stylesheet" href="patient-welcome.css"/>
 <link rel="stylesheet" href="patient-age.css"/><link rel="stylesheet" href="password-keyboard.css"/>
-</head>
+<link rel="stylesheet" href="reading-print-fixes.css"/></head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
 <div class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none" id="notificationToast">
@@ -251,13 +251,7 @@
               </button>
 </div>
 </div>
-<!-- Dynamic UPI QR -->
-<div class="bg-white border petal-border p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
-<span class="text-xs font-bold text-[#0F2942] uppercase tracking-wide">Instant Bedside UPI</span>
-<img alt="UPI QR Code" class="w-32 h-32 border p-1 rounded-xl bg-white shadow-sm" id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&amp;data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D1200%26cu%3DINR"/>
-<p class="font-mono text-xs font-bold text-slate-800">9561394341@sbi</p>
-<p class="text-[10px] text-slate-500">Google Pay / PhonePe / Paytm / BHIM</p>
-</div>
+<details class="payment-methods" id="paymentMethods"><summary>Payment methods · UPI</summary><p>UPI ID: <strong>9561394341@sbi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=9561394341%40sbi&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary>Show payment QR</summary><img alt="UPI payment QR" id="upiQrImg" loading="lazy"/><p>Google Pay / PhonePe / Paytm / BHIM</p></details></details>
 </div>
 </div>
 </section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919561394341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
@@ -408,7 +402,7 @@
 <button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription_Dr_Kulkarni.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
           </button>
-<button class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="window.print()">🖨️ Print</button>
+<button class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="printClinicalDocument('rxSheet')">🖨️ Print</button>
 <button class="bg-[#16A34A] hover:bg-green-700 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="universalShareDocument('rx')">
 <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
@@ -646,7 +640,7 @@
 <button class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="universalShareDocument('path')">
 <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
-<button class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow" onclick="window.print()">🖨️ Print Slip</button>
+<button class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow" onclick="printClinicalDocument('pathSlipSheet')">🖨️ Print Slip</button>
 </div>
 </div>
 <!-- 1-CLICK DISEASE TEST BUNDLES -->
@@ -731,7 +725,7 @@
 <button class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="universalShareDocument('rad')">
 <i class="fa-solid fa-share-nodes"></i> 📤 Share Full Slip
           </button>
-<button class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow" onclick="window.print()">🖨️ Print Slip</button>
+<button class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow" onclick="printClinicalDocument('radSlipSheet')">🖨️ Print Slip</button>
 </div>
 </div>
 <div class="printable-sheet bg-white border border-slate-300 p-8 rounded-3xl shadow-md max-w-4xl mx-auto space-y-4 text-xs" id="radSlipSheet">
@@ -1490,7 +1484,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       document.querySelectorAll('#procedureList input[type="checkbox"]:checked').forEach(c => proc += parseInt(c.value));
       const total = base + dist + proc;
       document.getElementById('totalFeeDisplay').innerText = "₹" + total.toLocaleString('en-IN');
-      document.getElementById('upiQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3D9561394341%40sbi%26pn%3DDr%2520Pramod%2520G%2520Kulkarni%26am%3D${total}%26cu%3DINR`;
       return total;
     }
 
@@ -1589,9 +1582,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 
     // INITIALIZATION
     window.onload = function() {
-      const dt = new Date().toLocaleDateString('en-GB') + " | " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      const rxD = document.getElementById('rxDateTime'); if(rxD) rxD.value = dt;
-      const reqD = document.getElementById('reqDate'); if(reqD) reqD.value = new Date().toLocaleDateString('en-GB');
 
       autoDetectTimeSlab();
       initRxPad();
@@ -1671,5 +1661,5 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script></body>
+</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script><script src="clinical-documents.js"></script></body>
 </html>
