@@ -163,3 +163,6 @@ Owner requires: pale, readable heart/coconut-water/skin article actions; QR hidd
 
 ## PR19 production release — 26 October 2026
 Owner requested proceeding without repeated suggestions after review. PR19 merged 1888c3a310ae4305c972d0d34c8ad710809b366c; production dpl_3vbXZvtF8HazQnNmiTUS29SF9yGT READY. Live source byte checks and browser notice/article controls/collapsed QR/secure UPI ID copy verified. All24 tests passed after final fitness/leave spacing fix. Synthetic PDF engine: normal Rx/path/rad one A4 page, long 42-row Rx two pages, normal fitness/consent one page. No claim of owner-device download/printing, payment, live n8n or biometric success. See master register for exact remaining rows.
+
+## PR20 Close and A4 release — 26 October 2026
+Explicit preview publication approval received (“ho”). PR20 merged a110d9c; production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. Persistent top/bottom document exit, data-preserving chooser and Escape layering released. Clinical Rx/lab/radiology PDFs use 194mm×264mm A4 writing area with readable type and lower signoff; genuine overflow retained. Both live source files byte-match tested implementation; all six controls mounted in production DOM and doctor lock retained. Full24 tests and real synthetic PDF geometry passed before release; owner-device printing/download remains unverified.

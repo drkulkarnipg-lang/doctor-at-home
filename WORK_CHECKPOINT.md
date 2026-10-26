@@ -2,6 +2,8 @@
 
 Updated: 26 October 2026, India time.
 
+CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
+
 ## Resume here
 
 Repository: `drkulkarnipg-lang/doctor-at-home`.
@@ -60,3 +62,6 @@ Exit regression check passed for all three forms: top/bottom Close, reopen, reta
 Real PDF geometry checked, not only page count: normal five-row Rx, pathology and radiology each render one A4 page; embedded content image width 549.93pt = 194mm and height747.67pt =263.76mm. Thus content occupies the full A4 writing area rather than a half-page box. Rx signoff begins 825px into the 998px clone. Long 42-row stress Rx naturally expands to four pages with all 42 rows retained at the larger readable font. Full24 suite passed after exit/format changes. No owner-device file transfer or physical print claimed.
 
 PR20 created: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/20 . Automated approval review REJECTED merging this new Close/A4 batch into main: standing preview-before-publication requirement needs explicit approval of this batch. Do not retry via shell, other branch or direct deployment. Source and tests remain saved on fix/document-exit-a4. Main remains f945281. Local browser synthetic Close/reopen preserved entered name, and screenshot clinical-close-preview-20261026.jpg shows top and fixed-bottom Close controls. Await owner's explicit release approval; do not report this batch live.
+
+## PR20 approved release verification — 26 October 2026
+After the user explicitly approved the preview, PR20 merged a110d9cb114738f9ae5e40fd49b4329a9b5a1232. Vercel dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY production. Live clinical-documents.js and reading-print-fixes.css HTTP200 and SHA256 match the tested local files. Reloaded production DOM contains both Close controls for all three editors and one document chooser. Workstation remains locked; no auth protection changed or bypassed. Earlier synthetic browser Close/reopen/data retention, Escape layering and 24-file suite remain the behavioral evidence; real authenticated owner-device PDF/print interaction not claimed. Register G01/G02 marked live with those limits. Resume other pending register rows, not PR20.
