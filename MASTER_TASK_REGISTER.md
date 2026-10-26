@@ -65,8 +65,8 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
 | D01 | [ ] PREVIEW | QR hidden inside Payment methods, reveal when tapped | Closed outer Payment methods and closed inner QR details saved in PR19. No initial third-party QR request. UPI link/copy controls exist in preview; current request confirms other methods are missing. Verify final screen. |
-| D02 | [ ] TODO | **Online consultation / Telemedicine notice: ₹500** | Latest 26 Oct request. Show fee clearly and distinguish from home visit. Describe stable follow-up/report review and limitations; not yet implemented when this register was created. |
-| D03 | [ ] TODO | Say who should not rely on online consultation in severe conditions | Display prominent emergency limitations beside ₹500: serious symptoms require immediate in-person emergency assessment, not waiting for online consultation. Draft/review with primary clinical guidance. |
+| D02 | [ ] PREVIEW | **Online consultation / Telemedicine notice: ₹500** | Implemented 26 Oct: hero link and English/Marathi notice, ₹500 clearly separated from home-visit fee; availability/suitability confirmed by doctor. Saved for review, not live. |
+| D03 | [ ] PREVIEW | Say who should not rely on online consultation in severe conditions | Prominent English/Marathi warning beside ₹500: severe chest pain, severe breathing difficulty, sudden face/arm weakness or speech problems, collapse/unconsciousness; seek emergency help without waiting for booking/reply/payment. Primary MoHFW guidance checked; visual/release checks pending. |
 | D04 | [ ] TODO | Actual online consultation workflow | Availability confirmation, screening/consent and private access not end-to-end verified. Notice alone is not an operating consultation backend. |
 | D05 | [ ] TODO | Razorpay / online payments | No verified merchant/KYC, server order/payment confirmation, webhook, refund flow. QR is not a verified payment gateway. |
 | D06 | [ ] TODO | PDF receipt immediately after verified payment | Receipt number, amount/date/reference and authorised delivery with retries/status not implemented. Never issue paid receipt just because QR opened. |
@@ -103,7 +103,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 ## Next work — resume here, not from zero
 
-1. D02/D03: implement and checkpoint ₹500 consultation notice with severe-condition limitations.
+1. D02/D03: notice implemented; verify layout alongside the remaining PR19 visual checks, then publish only through the review flow.
 2. E02/C01/D01/E04: finish remaining visual/overflow checks on PR19; preserve the three already-passed normal PDF checks and 24 passing test files. Re-run relevant checks after changes.
 3. Update PR19 preview and this register with exact evidence. Keep not-live items unticked until publication and appropriate live checks.
 4. Continue pending requisition-list, login/device, automation and audit work using the row IDs. For external access, finish independently available code/review before identifying a precise configuration blocker.

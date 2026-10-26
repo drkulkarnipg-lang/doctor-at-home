@@ -1,6 +1,6 @@
 # Dr Kulkarni — consolidated project status
 
-**Current master checklist:** `MASTER_TASK_REGISTER.md` (26 October 2026). It consolidates the visible and recovered 25–26 October requests, distinguishes LIVE/PREVIEW/PARTIAL/TODO/VERIFY, and supersedes stale status summaries below. `WORK_CHECKPOINT.md` supplies the exact next action. The latest ₹500 telemedicine notice/emergency-limitations request is explicitly recorded as unfinished; it has not been silently marked implemented.
+**Current master checklist:** `MASTER_TASK_REGISTER.md` (26 October 2026). It consolidates the visible and recovered 25–26 October requests, distinguishes LIVE/PREVIEW/PARTIAL/TODO/VERIFY, and supersedes stale status summaries below. `WORK_CHECKPOINT.md` supplies the exact next action. The latest ₹500 telemedicine notice/emergency-limitations request is implemented in the PR19 review branch, not production; actual online consultation/payment workflow remains incomplete.
 
 ## Current authoritative register — live verified 25 October 2026
 This table is the current state. Earlier checkpoint notes below are historical and are superseded where they differ.
