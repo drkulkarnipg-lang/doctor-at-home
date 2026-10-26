@@ -47,7 +47,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| C01 | [ ] PREVIEW | Pale readable Read/Download/Share boxes below heart-failure, coconut-water and skin articles | Explicit pale backgrounds, dark text, borders/focus saved in PR19. Public visual inspection and release still pending. |
+| C01 | [ ] PREVIEW | Pale readable Read/Download/Share boxes below heart-failure, coconut-water and skin articles | Explicit pale backgrounds, dark text, borders/focus saved in PR19. Computed browser styles verified on all three action groups; pale backgrounds/dark text, 46–51px controls. Release pending. |
 | C02 | [ ] PARTIAL | Brain-related awareness beside kidney/heart articles | Existing stroke/swallowing guide is live in shared library. Additional brain articles not all authored/reviewed/published. No new main tab. |
 | C03 | [ ] TODO | Day 1–13 EN/HI/MR articles on website | Original corpus/import, topic deduplication, review and publication still required; do not replace it with invented text. |
 | C04 | [ ] PARTIAL | Separate article URLs, index, canonical/hreflang, sitemap, topic hubs | Some article endpoints/schema exist in main; indexing/speed PR15 is an older unmerged draft. Reconcile onto current main without undoing subsequent fixes. Full multilingual indexing not proven. |
@@ -64,7 +64,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| D01 | [ ] PREVIEW | QR hidden inside Payment methods, reveal when tapped | Closed outer Payment methods and closed inner QR details saved in PR19. No initial third-party QR request. UPI link/copy controls exist in preview; current request confirms other methods are missing. Verify final screen. |
+| D01 | [ ] PREVIEW | QR hidden inside Payment methods, reveal when tapped | Closed outer Payment methods and closed inner QR details saved in PR19. No initial third-party QR request. UPI link/copy controls exist in preview; current request confirms other methods are missing. Local browser verified closed outer/inner details and tap-to-reveal local QR; clipboard manual fallback on insecure local preview. Release pending. |
 | D02 | [ ] PREVIEW | **Online consultation / Telemedicine notice: ₹500** | Implemented 26 Oct: hero link and English/Marathi notice, ₹500 clearly separated from home-visit fee; availability/suitability confirmed by doctor. Clinical regression and focused DOM checks passed; desktop preview inspected. Saved for review, not live. |
 | D03 | [ ] PREVIEW | Say who should not rely on online consultation in severe conditions | Prominent English/Marathi warning beside ₹500: severe chest pain, severe breathing difficulty, sudden face/arm weakness or speech problems, collapse/unconsciousness; seek emergency help without waiting for booking/reply/payment. Primary MoHFW guidance checked; local desktop screenshot/hero navigation and focused DOM checks passed. Production release and phone layout checks pending. |
 | D04 | [ ] TODO | Actual online consultation workflow | Availability confirmation, screening/consent and private access not end-to-end verified. Notice alone is not an operating consultation backend. |
@@ -76,7 +76,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
 | E01 | [ ] PREVIEW | Ordinary prescription/pathology/radiology generally ONE A4 page | Compact layout and isolated print root saved in PR19. Real html2pdf metadata: normal 5-row Rx, path and rad each one A4 page. Browser download completion timed out; owner's final save/print not verified. |
-| E02 | [ ] VERIFY | More pages only for actual longer content; no clipped text | 42-row synthetic Rx was generated but page count/appearance still unchecked. No forced truncation. Check long tables/signatures, certificates and consent visually. |
+| E02 | [ ] VERIFY | More pages only for actual longer content; no clipped text | Real PDF engine confirmed two pages for 42 synthetic rows; all rows and final signoff retained in clone. Fitness spacing corrected and one-page result verified; consent one page with both signatories. Broader filled examples/device output remain open. |
 | E03 | [ ] PREVIEW | Remove unnecessary date/DOB layout that makes Rx two pages | DOB editor stays onscreen, excluded from document clone; calculated age retained. Dates use compact fields; saved/tested. |
 | E04 | [ ] PREVIEW | **Signature, name, date and time** on every clinical document | Signoffs added/tested for Rx/path/rad/referral/consent; certificate issue/verification times and Form2 signatory dates/times. Blank signature lines; no fabricated electronic signatures or event dates. Needs visual review/release. |
 | E05 | [ ] PREVIEW | Requisitions actually mention date | Path time and radiology identity/date/time added; existing dates retained. Fresh cloned values tested. |
