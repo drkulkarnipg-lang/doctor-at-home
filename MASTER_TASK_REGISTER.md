@@ -103,6 +103,8 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 
 ## Next work — resume here, not from zero
 
+**PAUSED by owner, 26 October 2026:** stop after the published PR20 Close/A4 corrections. No new medicine/agent work has started since that release. Resume only on a new owner instruction; keep all remaining rows open.
+
 1. PR19 released and production checked on 26 October: consultation notice, article controls, collapsed QR/UPI and clinical layout/signoff code are live. Do not reimplement this batch.
 2. E02/E06/E09: further filled certificates, phone/native dialler, device PDF-save and physical print checks remain distinct from verified synthetic page counts. Preserve passed results.
 3. Continue E07/E08 requisition-list audit, F01–F03 login/device work, F06–F10 n8n/provider automation and C03–C10 article/SEO backlog; keep exact external configuration blockers explicit.

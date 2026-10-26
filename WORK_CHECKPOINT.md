@@ -4,6 +4,10 @@ Updated: 26 October 2026, India time.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
+## Owner pause — 26 October 2026
+
+Owner explicitly requested stopping here with work so far published. PR20 Close/A4 changes are already live and verified. No further medicine additions or agent integrations were implemented after that release; the last response only described a future sequence. STOP at this checkpoint until the owner asks to resume. On resume, read the master register and continue pending work; do not repeat released corrections or restart from zero.
+
 ## Resume here
 
 Repository: `drkulkarnipg-lang/doctor-at-home`.
