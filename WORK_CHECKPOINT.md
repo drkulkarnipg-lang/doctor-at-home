@@ -34,7 +34,7 @@ This batch is NOT released to production. Do not merge just to save progress.
 
 ## Next action
 
-Read MASTER_TASK_REGISTER.md. The owner requested a complete permanent done/to-do register; created it from the visible two-day conversation, recovered prior-context requests and project release records. Updated AGENTS.md to require maintaining it and reporting changed states every substantive handoff. Keep unverifiable recovered requests unticked. Synchronize this documentation step, then implement D02/D03: ₹500 online-consultation notice and severe-condition limitations. Afterwards resume remaining layout/overflow checks; do not repeat the three passed normal PDF checks unless a source change warrants it.
+Read MASTER_TASK_REGISTER.md. The owner requested a complete permanent done/to-do register; created it from the visible two-day conversation, recovered prior-context requests and project release records. Updated AGENTS.md to require maintaining it and reporting changed states every substantive handoff. Keep unverifiable recovered requests unticked. Synchronize this documentation step, then implement D02/D03: ₹500 online-consultation notice and severe-condition limitations. D02/D03 implementation is now saved in remote commit df43123. Resume remaining layout/overflow checks; do not repeat the three passed normal PDF checks unless a source change warrants it.
 
 ## Workspace recovery note
 
@@ -46,3 +46,5 @@ Verified preview at source 5d7eba9: deployment dpl_6duUuHw858vMgcaLBKc4QysRSCHx 
 
 ## Online consultation notice — 26 October 2026
 Implemented D02/D03: hero tag links to an English/Marathi ₹500 consultation notice beside home-visit booking. Stable follow-up/report review, doctor-confirmed suitability/availability, possible in-person examination, separate home-visit fee. Prominent severe-symptom warning says seek emergency help without waiting for appointment/reply/payment. Source checked: MoHFW Telemedicine Practice Guidelines (official eSanjeevani PDF, emergency-care limitations); primary NHS emergency symptom guidance. No new payment/backend or availability promise. Pale readable card, 46px contact link, no new main tab. Requires visual preview review; not production.
+
+Consultation notice verification: clinical-documents regression test passed after the HTML/CSS update; focused DOM checks passed for ₹500, Marathi, emergency warning, separate home fee, correct tel number and unique IDs. Local browser hero link reached the notice; screenshot inspected: dark text on pale card, clear fee and emergency warning. Screenshot saved as consultation-notice-review-20261026.jpg (QA only, not committed). Full suite remains the earlier 24-file pass; no claim of a new full-suite run. Notice and existing PR19 fixes remain NOT LIVE.
