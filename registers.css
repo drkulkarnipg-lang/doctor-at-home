@@ -55,3 +55,4 @@
  body.printing-register .rg-print-table tr{break-inside:avoid}
  body.printing-register .rg-print-table thead{display:table-header-group}
 }
+.rg-doc-pdf{display:flex;flex-direction:column;min-height:690px;box-sizing:border-box}.rg-doc-pdf .rg-print-table{flex:0 0 auto}.rg-doc-pdf .rg-doc-sign{margin-top:auto;padding-top:24px}
