@@ -14,3 +14,6 @@
 /* Calculator, converter and WhatsApp-request buttons: white text on a dark fill so the label is always readable. */
 #publicPortal button.calc-primary,#doctorWorkstation button.calc-primary,.calc-card button.calc-primary,#publicPortal .conversion-panel button[type="submit"],#doctorWorkstation .conversion-panel button[type="submit"],#unitConverterForm button[type="submit"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
 #publicPortal #bookingSection button.bg-\[\#16A34A\]{background:#15803d!important;color:#fff!important}
+
+/* Selected language button: white text on the dark fill. */
+#patientLanguageControls button[aria-pressed="true"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
