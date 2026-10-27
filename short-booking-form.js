@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   ['sfWhatsApp','Send short form on WhatsApp',()=>{if(!consent())return;window.open('https://wa.me/'+OFFICE+'?text='+encodeURIComponent(message()),'_blank','noopener,noreferrer');status('WhatsApp opened with the short form. Check the recipient and press Send yourself. Nothing was sent automatically.');}]
  ]){const b=node('button',text,actions);b.type='button';b.id=id;b.onclick=run;}
  const st=node('p','Not saved to the cloud. Information stays on this page until you print, download or share it.',host);st.id='sfStatus';st.setAttribute('role','status');
- const doc=node('article','',host);doc.id='shortFormDocument';doc.hidden=true;
+ const doc=node('article','',host);doc.id='shortFormDocument';doc.className='sf-doc';doc.hidden=true;
  if(intake)intake.before(host);else parent.append(host);
  window.addEventListener('afterprint',()=>document.body.classList.remove('printing-shortform'));
  window.ShortBookingForm={data,render,message};
