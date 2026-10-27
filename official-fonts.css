@@ -1,0 +1,4 @@
+/* Official book-style serif for every clinical, statutory and patient-form document (screen, print and PDF).
+   One standard: Georgia, then Times New Roman. Icon fonts are left alone. */
+:is(#cert-form4a,#cert-form4,#cert-form2,#cdoc-leave,#cdoc-fitness,#cdoc-referral,#cdoc-consent,#rxSheet,#pathSlipSheet,#radSlipSheet,#intakeDocument,#shortFormDocument,.certificate-export,.document-pdf-sheet:not([data-education-key])),
+:is(#cert-form4a,#cert-form4,#cert-form2,#cdoc-leave,#cdoc-fitness,#cdoc-referral,#cdoc-consent,#rxSheet,#pathSlipSheet,#radSlipSheet,#intakeDocument,#shortFormDocument,.certificate-export,.document-pdf-sheet:not([data-education-key])) *:not(i):not([class*="fa-"]){font-family:Georgia,'Times New Roman',Times,'Noto Serif Devanagari','Noto Sans Devanagari',serif!important}
