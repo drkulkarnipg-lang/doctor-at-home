@@ -1,0 +1,24 @@
+.short-form{margin:28px 0;padding:clamp(18px,3vw,32px);border-radius:18px}
+.short-form .sf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.short-form .sf-wide{display:grid;gap:14px;margin-top:14px}
+.short-form label{display:grid;gap:7px;font-size:15px;line-height:1.6}
+#shortFormDocument:not([hidden]){margin-top:25px;background:#fff;color:#101820;padding:clamp(12px,3vw,22px);border:1px solid #c7d3dc;font-family:Georgia,'Times New Roman',serif}
+#shortFormDocument .sf-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid #123b56;padding-bottom:10px}
+#shortFormDocument .sf-top>div:first-child{display:grid;gap:2px;font-size:13px}
+#shortFormDocument .sf-name{font-size:20px;color:#123b56}
+#shortFormDocument .sf-date{display:grid;text-align:right;font-size:13px}
+#shortFormDocument .sf-date strong{font-size:17px;white-space:nowrap}
+#shortFormDocument h2{margin:14px 0 10px;font-size:19px;color:#123b56}
+#shortFormDocument .sf-table{width:100%;border-collapse:collapse;table-layout:fixed}
+#shortFormDocument .sf-table th,#shortFormDocument .sf-table td{border:1px solid #9fb3c2;padding:8px 10px;vertical-align:top;font-size:14px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}
+#shortFormDocument .sf-table th{width:38%;text-align:left;background:#eef4f8;font-weight:700;font-size:13px;overflow-wrap:normal;word-break:normal;hyphens:none}
+#shortFormDocument .sf-table tr:nth-child(n+5) td{height:64px}
+#shortFormDocument .sf-sign{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px}
+#shortFormDocument .sf-sign>div{display:grid;gap:30px;border-top:1px solid #123b56;padding-top:6px;font-size:13px}
+#shortFormDocument .sf-foot{margin-top:18px;font-size:12px;color:#44586a}
+#shortFormDocument .sf-close{margin-top:14px;min-height:44px;padding:10px 16px;border:1px solid #6f93ad;border-radius:9px;background:#e1f1ff;color:#163f5c;font-weight:650;cursor:pointer}
+@media print{@page{size:A4;margin:12mm}
+body.printing-shortform>*{display:none!important}
+body.printing-shortform #publicPortal,body.printing-shortform #bookingSection,body.printing-shortform #shortVisitForm{display:block!important;border:0!important;background:#fff!important;padding:0!important;margin:0!important}
+body.printing-shortform #shortVisitForm>*:not(#shortFormDocument),body.printing-shortform #bookingSection>*:not(#shortVisitForm),body.printing-shortform #publicPortal>*:not(#bookingSection){display:none!important}
+body.printing-shortform #shortFormDocument{display:block!important;border:0;padding:0;margin:0}}
