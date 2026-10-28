@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="skin-b">
 <head>
 <meta charset="utf-8"/>
 <link href="assets/tailwind.css" rel="stylesheet"/><link href="clinical-calculators.css" rel="stylesheet"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -87,7 +87,7 @@
 <link rel="stylesheet" href="evidence-workflow.css"/>
 <link rel="stylesheet" href="patient-welcome.css"/>
 <link rel="stylesheet" href="patient-age.css"/><link rel="stylesheet" href="password-keyboard.css"/>
-<link rel="stylesheet" href="reading-print-fixes.css"/></head>
+<link rel="stylesheet" href="reading-print-fixes.css"/><link rel="stylesheet" href="skin-b.css"/></head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
 <div class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none" id="notificationToast">
@@ -146,6 +146,7 @@
 <nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
+<aside class="emergency-strip no-print" aria-label="Emergency numbers"><span class="emergency-strip-text"><strong>Emergency?</strong> <span lang="mr">आपत्कालीन स्थिती?</span> <span lang="hi">आपातकालीन स्थिति?</span></span><span class="emergency-strip-actions"><a href="tel:112">Call 112</a><a href="tel:108">Call 108</a></span><span class="emergency-strip-note">The doctor&rsquo;s number is for home-visit requests.</span></aside>
 <!-- Editorial home-care introduction -->
 <section class="portal-hero" aria-labelledby="portalHeroTitle">
 <div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
@@ -346,7 +347,7 @@
 <div>
 <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">CLINICAL BASE &amp; REACH</h4>
 <p class="text-slate-300">Base Station: Dhayari, Pune – 411041, Maharashtra</p>
-<p class="text-slate-300">Direct Helpline: <a href="tel:+919561394341" data-direct-call class="contact-board-phone">Call +91 9561394341</a></p>
+<p class="text-slate-300">Home-visit requests: <a href="tel:+919561394341" data-direct-call class="contact-board-phone">Call +91 9561394341</a></p>
 </div>
 <div>
 <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">VISIT REQUESTS</h4>
@@ -434,7 +435,7 @@
 <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
 <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
 <p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
-<p class="text-[11px] text-slate-600">Emergency Helpline: <strong>+91 9561394341</strong> | Email: Drkulkarnipg@gmail.com</p>
+<p class="text-[11px] text-slate-600">Home-visit requests: <strong>+91 9561394341</strong> | Email: drkulkarnipg@gmail.com</p>
 </div>
 </div>
 <div class="text-right text-[11px]">
@@ -815,7 +816,7 @@
 <span class="bg-red-100 text-red-900 px-3 py-1 rounded-full font-bold text-xs uppercase">ICU Referral</span>
 </div>
 <p class="font-bold">To: The Medical Superintendent / Casualty Medical Officer</p>
-<p>Kindly evaluate and admit this patient under expert tertiary ICU care for further ventilatory, invasive monitoring, and hemodynamic management.</p>
+<p>Kindly evaluate and admit this patient under expert tertiary ICU care for further invasive monitoring and hemodynamic management.</p>
 <div class="space-y-2 pt-2">
 <div><label class="font-bold">Co-morbid Diagnoses:</label><input class="w-full border p-1 rounded" placeholder="e.g. K/C/O T2DM, HTN, Ischemic Heart Disease" type="text"/></div>
 <div><label class="font-bold">Acute Presentation &amp; Vitals:</label><input class="w-full border p-1 rounded" placeholder="Severe dyspnea, SpO2 84%, PR 120/min, BP 90/60 mmHg" type="text"/></div>
