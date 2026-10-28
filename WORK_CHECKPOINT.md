@@ -69,3 +69,9 @@ PR20 created: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/20 . Auto
 
 ## PR20 approved release verification — 26 October 2026
 After the user explicitly approved the preview, PR20 merged a110d9cb114738f9ae5e40fd49b4329a9b5a1232. Vercel dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY production. Live clinical-documents.js and reading-print-fixes.css HTTP200 and SHA256 match the tested local files. Reloaded production DOM contains both Close controls for all three editors and one document chooser. Workstation remains locked; no auth protection changed or bypassed. Earlier synthetic browser Close/reopen/data retention, Escape layering and 24-file suite remain the behavioral evidence; real authenticated owner-device PDF/print interaction not claimed. Register G01/G02 marked live with those limits. Resume other pending register rows, not PR20.
+
+## 27 October 2026 — Claude session (owner requests H01–H03)
+- Branch `feat/short-booking-and-registers` from main 095c7ff: official serif fonts, short A4 booking form, Registers tab. Verified locally in Chromium at 390 px: all 337 ids in tests/existing-feature-ids.json still present; runnable Node tests pass; jsdom-based tests could not run here (package missing). Not published; waits for the owner's "publish".
+- Next: owner preview review; then printed-document phone numbers as tap-to-call links and the Rx emergency line (112/108).
+
+- 27 Oct 2026 (PR23): PDF check found the short form PDF lost its layout because the clone has no id; now styled by class (.sf-doc), signature at the bottom, one A4 page. Register PDFs also put the signature at the bottom of the landscape A4 page. Verified: 337 existing feature ids present, registers add/edit/search/CSV/PDF, stock balance, Georgia/Times font on death forms. Pending: real phone Share sheet check by the owner; registers are stored on the device only (backup/restore provided), cloud storage not built.
