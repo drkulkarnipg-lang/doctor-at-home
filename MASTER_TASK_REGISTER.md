@@ -122,3 +122,21 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 | --- | --- | --- | --- |
 | G01 | [x] LIVE | Prescription, lab/pathology and radiology must close before or after export | Added top Back to tools, always visible bottom Close, Escape and a document chooser; entered data retained. Regression passed on all three forms: preserve entered values, reopen, top/bottom Close and Escape; share Escape closes only overlay. Local browser Close/reopen retained synthetic name. Owner approved publication (“ho”); PR20 released as a110d9c. Live browser confirms all six controls mounted; actual authenticated owner-device interaction remains distinct from the synthetic interaction checks. |
 | G02 | [x] LIVE | Sent PDF should use the A4 page, not appear half-size | Full 194mm writing width and 264mm minimum page area, readable clinical type and signoff towards bottom for short documents; natural overflow retained. Real PDF image matrix confirms 194mm×263.76mm writing area on A4; ordinary Rx/lab/radiology each one page. Larger-font 42-row stress case naturally four pages, all rows retained. PR20 released after explicit approval. Production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY; live JS/CSS returned200 and byte-matched tested source. All24 tests passed before release; real owner-device download/print remains unverified. |
+
+
+## Resume update — 29 October 2026 (owner asked: “check end to end and restructure end to end”)
+
+This resume instruction supersedes the historical “PAUSED by owner, 26 October” stop for the current task only. It does not authorise production publication or unrelated paid integrations.
+
+- [x] Read the continuity instructions, authoritative register, checkpoint and current project status.
+- [x] Start isolated branch `fix/end-to-end-contact-emergency-navigation`; main/production was not edited.
+- [x] Open draft PR #29: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29
+- [x] Add English-only emergency strip with direct 112/108 links, correct home-visit contact wording, clickable contact links, and responsive styling.
+- [x] Add `END_TO_END_AUDIT.md` with preservation controls, baseline, end-to-end phases and release acceptance criteria.
+- [ ] Verify PR #29 preview in an interactive browser and on a real phone; deployment READY alone is not enough.
+- [ ] Run the complete existing test suite and add regression tests for the changes. Local cloning/testing was unavailable in the current tool environment because the host could not resolve GitHub; do not report tests as passed.
+- [ ] Continue end-to-end audit in the order set out in `END_TO_END_AUDIT.md`: full-article rendering; contact and booking journey; document/form options; Doctor Workstation controls; language coverage; security/session; cloud and automation integrations; responsive/visual review.
+- [ ] Keep all other pending rows in this register open until separately verified.
+- [ ] No merge, production deploy, patient message, real payment, external publishing or paid integration without the relevant explicit approval.
+
+Evidence note: the current PR preview URL was supplied by Vercel's PR comment: https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . Vercel marked the deployment Ready, but full live browser QA and the test suite remain unverified.
