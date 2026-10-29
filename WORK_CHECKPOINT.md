@@ -179,3 +179,26 @@ No merge, production release, payment activation or external publication without
 - Full Node.js/npm test suite, authenticated cloud operations, and real Android device/browser tests remain outstanding.
 
 Production is unchanged. Draft PR #29 remains unmerged; no production deploy, payment activation, patient communication, or public article publication is authorised.
+
+
+## Owner request continuation — 30 October 2026
+
+Current working branch: `fix/end-to-end-contact-emergency-navigation`, PR #29 draft/unmerged. Production remains unchanged. Stitch project is open and the user says its prompt has been submitted; do not overwrite Stitch work or assume it has generated a finished design. Use Stitch for visual design; AI Studio later for a separate AI workflow prototype if useful.
+
+### Changes committed in this review branch
+- Updated credentials modal with full owner-supplied BAMS and PGDEMS qualification names and education details.
+- Updated visible UPI ID and QR alt text to `drkulkarnipg@upi`.
+- Fixed the encoded UPI payment URI so it uses `pa=drkulkarnipg%40upi` rather than the previous SBI ID.
+- No bank account number or IFSC exposed in public UI; no live payment gateway configured.
+- Added a dated owner-request roadmap to `MASTER_TASK_REGISTER.md`.
+
+### Exact verification status
+- Source-level check confirms the visible UPI text and encoded payment URI were updated in the review branch. QR has NOT been scanned and payee not verified in a real UPI app; do not collect payment on this evidence alone.
+- These changes are NOT merged into production.
+- Login/email reset, actual owner login configuration, logout/dismissal on the owner's device, desktop/mobile navigation, medicine controls, all calculator reference notes, separate downloadable Form 4/4A, editable multilingual official forms, requisition final signature/page layout, global search/sitemap, secure persistent registers and payment gateway remain to be verified or completed.
+- The URL `225929102026home-visiting-icu-doctor.vercel.app` has not been verified as a real Vercel deployment. Continue on the known repository/PR preview unless the intended project URL is clarified by account evidence.
+
+### Research direction
+Build an original, source-cited and dated patient/caregiver reference library; do not copy proprietary articles from MSD Manual, Mayo Clinic or Cleveland Clinic. Candidate modules: elderly safety/falls/medication checklist; hypertension and home BP log; cardiovascular prevention; diabetes monitoring; COPD action plan; CKD monitoring; cirrhosis red flags; cancer/palliative symptom support; emergency warning signs; caregiver and home-visit preparation checklists. Use relevant government/specialty guidance, explain when normal ranges vary by laboratory/context, and separate patient education from clinician-only protocols.
+
+Next action: continue auditing PR #29 files and tests, fix the encoded UPI/payment issues only on the review branch, then verify the resulting Vercel preview before showing it. Do not merge/deploy without explicit owner approval.
