@@ -49,7 +49,7 @@
 - [x] Correct the patient guide share footer label.
 - [ ] Verify phone and WhatsApp handoff on a real phone; a desktop/cloud browser cannot prove native dialler behaviour.
 - [ ] Verify all generated WhatsApp text and all remaining contact labels across every template; do not rely on a few replacements alone.
-- [ ] Add regression assertions for English-only emergency wording, clickable phone/email, and absence of legacy emergency-helpline labels.
+- [x] Add regression assertions in `tests/end-to-end-contact-emergency.test.cjs` for English-only emergency wording, clickable phone/email, emergency links, and preserved core workspace/booking entry points. The test has been added but not executed in this environment.
 
 **Review artifact:** PR #29 — https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29  
 **Verified Vercel preview URL:** https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/  
