@@ -118,7 +118,7 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<div class="language-control" aria-label="Website language selector"><label for="google_translate_element">Language</label><div id="google_translate_element"></div><p id="translationStatus">Choose a language. Clinical translations are automatic; verify medical details against the English original.</p></div>
+<div class="language-control" aria-label="Website language selector"><span class="language-control-label">Language</span><div id="google_translate_element"></div><p id="translationStatus">Choose a language. Clinical translations are automatic; verify medical details against the English original.</p></div>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -159,7 +159,7 @@
 <aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
 <svg class="care-mark" aria-hidden="true" viewBox="0 0 260 170" fill="none"><path d="M42 92 130 22 218 92M65 75v70h130V75" stroke="currentColor" stroke-width="2"/><path d="M117 79h26v18h18v26h-18v18h-26v-18H99V97h18V79Z" stroke="currentColor" stroke-width="2"/><circle cx="205" cy="38" r="14" stroke="currentColor"/><path d="M29 130h23m158 0h23M194 38h22m-11-11v22" stroke="currentColor"/></svg>
 <h3>Here for your<br/>next step.</h3><p>Dhayari, Pune · 411041<br/>Home visits across Pune &amp; PCMC; availability confirmed by the doctor.</p>
-<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a></div>
+<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a><a href="mailto:drkulkarnipg@gmail.com" class="hero-email">Email</a></div>
 <button onclick="openCredentialsModal()" type="button" class="compass-credentials">Qualifications &amp; registration →</button></aside>
 </section>
 <nav class="care-pathways" aria-label="Start with what you need"><a href="#bookingSection"><span class="pathway-number">01</span><div><strong>Care at home</strong><p>Plan a visit and estimate the fee.</p></div><span aria-hidden="true">↗</span></a><a href="#wikiSection"><span class="pathway-number">02</span><div><strong>Understand your health</strong><p>Practical, referenced guidance.</p></div><span aria-hidden="true">↗</span></a><a href="#patientToolsSection"><span class="pathway-number">03</span><div><strong>Know your numbers</strong><p>Simple tools, clearly explained.</p></div><span aria-hidden="true">↗</span></a></nav>
@@ -1540,7 +1540,9 @@ Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit request
           if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
         });
         portal.dataset.activeView = view;
-        if (updateHistory) history.replaceState({ ...(history.state || {}), portalView: view }, '', '#' + (navLinks.find(a => a.dataset.portalView === view)?.getAttribute('href')?.slice(1) || 'publicPortal'));
+        const pathways = document.querySelector('.care-pathways');
+        if (pathways) pathways.classList.toggle('portal-section-hidden', view !== 'overview');
+        if (updateHistory && portal.dataset.activeView !== view) history.pushState({ ...(history.state || {}), portalView: view }, '', '#' + (navLinks.find(a => a.dataset.portalView === view)?.getAttribute('href')?.slice(1) || 'publicPortal'));
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
       navLinks.forEach(link => link.addEventListener('click', event => {
