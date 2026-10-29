@@ -88,5 +88,7 @@ assert.match(education, /en:\{title:/);
 assert.match(html,/articleOpenSourceBtn/);
 assert.match(html,/Add typed medicine to prescription/);
 assert.match(html,/Doctor username/);
+assert.match(html,/id="rxSignatureUpload"/);
+assert.match(html,/id="rxDoctorSignatureImage"/);
 assert.match(fs.readFileSync('clinical-calculators.js','utf8'),/const updateResult=/);
 console.log('End-to-end website preservation assertions passed.');
