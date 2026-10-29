@@ -53,7 +53,7 @@
 
 **Review artifact:** PR #29 — https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29  
 **Verified Vercel preview URL:** https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/  
-The Vercel deployment was marked Ready. The page has not been fully browser-tested on the new preview in this task; do not interpret Ready as end-to-end verification.
+An earlier deployment of this branch was marked Ready, but the latest checkpoint/documentation commits triggered a new Vercel deployment that is still pending. Keep using the preview URL above, but verify the latest deployment status before treating it as review-ready. The page has not been fully browser-tested in this task; do not interpret Ready as end-to-end verification.
 
 ## Phase 2 — Visual system and responsive experience
 
