@@ -20,7 +20,7 @@ r=await call(createHandler({env:{}}),'logout','POST',{});assert.equal(r.code,200
 r=await call(createHandler({env,request:async()=>json({})}),'recover','POST',{});
 assert.equal(r.code,503,'Recovery fails closed without the configured owner email');
 let recoveryRequests=[];
-handler=createHandler({env:{...env,CLINIC_OWNER_EMAIL:'owner@example.test'},request:async(url,o)=>{recoveryRequests.push([url,o]);return json({});}});
+handler=createHandler({env:{...env,CLINIC_OWNER_EMAIL:'owner@example.test',CLINIC_PASSWORD_REDIRECT_URL:'https://clinic.test/reset-password.html'},request:async(url,o)=>{recoveryRequests.push([url,o]);return json({});}});
 r=await call(handler,'recover','POST',{});
 assert.equal(r.code,200);assert.equal(recoveryRequests.length,1);assert.ok(recoveryRequests[0][0].includes('/auth/v1/recover?redirect_to='));assert.equal(JSON.parse(recoveryRequests[0][1].body).email,'owner@example.test');
 recoveryRequests=[];
