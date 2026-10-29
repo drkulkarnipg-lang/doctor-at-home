@@ -12,7 +12,7 @@ Updated: 26 October 2026 (India). Covers requests available from the 25–26 Oct
 - [x] Keep only Patient Portal and Doctor Workstation as main tabs. Brain articles belong beside kidney/heart articles in the shared library.
 - [x] Keep preview and production separate. Show a concrete preview before publishing a new batch unless that specific release is already authorised. Saving is not publishing.
 - [x] Use one active repository editing workflow. Do not overwrite another tool's changes. No repeated password creation, secret requests in chat, invented drug identity or automatic prescribing regimen.
-- [ ] Design identity: retain Georgia/care promise; sky-blue versus cream/navy has conflicting earlier notes. Do not apply a fresh global redesign based on the old audit alone.
+- [x] Design direction confirmed by owner (30 Oct): premium, eye-friendly natural palette using green/teal shades, blue shades, pale petal/ivory/cream tones; avoid red as a dominant brand colour. Keep critical clinical danger alerts clearly distinguishable for safety. Stitch is for visual design/prototypes; integrate only through reviewed code and preview.
 
 ## A. Contact, navigation, search and language
 
@@ -203,3 +203,14 @@ The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78
 - Full Node.js/npm test suite, authenticated cloud operations, and real Android device/browser tests remain outstanding.
 
 Production is unchanged. Draft PR #29 remains unmerged; no production deploy, payment activation, patient communication, or public article publication is authorised.
+
+
+## Owner request follow-up — 30 October 2026 (review branch only)
+
+- [x] Owner's full qualifications were added to the existing credentials modal in `index.html`: BAMS — Bachelor of Ayurvedic Medicine and Surgery, Pune University, Pune — October 1991; PGDEMS — Post Graduate Diploma in Emergency Medical Services, Symbiosis, Pune. This is code on `fix/end-to-end-contact-emergency-navigation`, not a production release.
+- [x] UPI ID text and QR alt text updated to `drkulkarnipg@upi`; encoded UPI payment URI corrected to `upi://pay?pa=drkulkarnipg%40upi&cu=INR` on the review branch. The prior UPI ID was wrong. The generated QR still needs scanning with a real UPI app and payee verification before any payment is accepted. No bank account number/IFSC was added to public UI.
+- [ ] Payment gateway is NOT configured: Razorpay/BillDesk require merchant onboarding, secure server-side order creation, webhook/signature verification, refund handling and end-to-end test. A UPI QR is not a payment gateway.
+- [ ] User's named Vercel address `225929102026home-visiting-icu-doctor.vercel.app` has not been verified as an existing deployment. Current project review remains PR #29 / its branch preview; production was not changed.
+- [ ] Continue feature audit from this register; do not claim full completion. Priority open items: login/reset setup and dismiss/logout; header navigation and desktop/mobile layout; medicine add-row/formulary controls; calculator-by-calculator reference notes; separate Form 4 and Form 4A downloads plus editable/local-language form mapping; requisition signature/page-layout verification; global search/sitemap; real patient-register persistence and privacy; article library/source/research flow; three consultation service levels and compliant triage.
+- [ ] Clinical reference library plan: original, reviewed, dated patient guides with source citations; no copied proprietary manual articles. Cover older-adult safety/falls/medication review, hypertension/home BP, cardiovascular prevention, diabetes, COPD action plan, CKD monitoring, cirrhosis red flags, cancer/palliative symptom support, emergency warning signs, caregiver checklists and visit preparation. Reference sources to evaluate include MSD Manual Consumer, Mayo Clinic, Cleveland Clinic, WHO, KDIGO, Indian government and relevant specialty guidelines. Separate patient education from clinician-only protocols.
+- [ ] Future AI/agentic workflows require human review, source traceability, privacy controls, audit logs, emergency escalation, no autonomous prescribing, and secure backend-held credentials. Never expose patient records or API keys to public client code.
