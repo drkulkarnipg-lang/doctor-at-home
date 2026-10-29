@@ -27,10 +27,10 @@ if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'
 cookie(data.access_token,Math.min(900,Number(data.expires_in)||900));return reply(200,{configured:true,signedIn:true});
 }
 if(action==='recover'&&method==='POST'){
- const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim();
- if(!ownerEmail||ownerEmail.length>254||!ownerEmail.includes('@'))return reply(503,{configured:false,message:'Secure email setup is not configured. The owner email and recovery redirect must be configured in the hosting environment first.'});
- const redirect=new URL('/reset-password.html',`https://${req.headers.host}`).href;
- const response=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
+ const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim(),redirect=String(env.CLINIC_PASSWORD_REDIRECT_URL||'').trim();
+ let safeRedirect;try{safeRedirect=new URL(redirect);if(safeRedirect.protocol!=='https:'||safeRedirect.pathname!=='/reset-password.html'||safeRedirect.username||safeRedirect.password||safeRedirect.search||safeRedirect.hash)throw Error();}catch{return reply(503,{configured:false,message:'Secure email setup is not configured. Set the verified owner email and exact HTTPS password-reset URL in the hosting environment.'});}
+ if(!ownerEmail||ownerEmail.length>254||!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail))return reply(503,{configured:false,message:'Secure email setup is not configured. Set the verified owner email and exact HTTPS password-reset URL in the hosting environment.'});
+ const response=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(safeRedirect.href),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
  if(!response.ok)return reply(503,{configured:true,message:'The email recovery service could not accept the request. Check the Supabase recovery URL allowlist and email delivery settings.'});
  return reply(200,{requested:true,message:'If the clinic owner account exists, a secure setup/reset email will be sent.'});
 }
