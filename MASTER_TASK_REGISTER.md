@@ -150,3 +150,25 @@ Evidence note: the current PR preview URL was supplied by Vercel's PR comment: h
 
 ### Latest deployment status — 29 October 2026
 The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . An earlier deployment was Ready, but the latest checkpoint/audit commits triggered a new Vercel deployment that is currently pending. Verify the current deployment before asking the owner to review; the earlier Ready status does not establish that the newest files are deployed.
+
+
+## Current end-to-end correction status — 29 October 2026 (supersedes older deployment notes)
+
+- [x] Resumed work on isolated branch `fix/end-to-end-contact-emergency-navigation`; production/main unchanged.
+- [x] Draft PR #29 expanded to include language selector, focused patient section navigation, responsive hero/layout, full-article reading, quick home-visit intake, safe blank clinical defaults, PDF sharing and article import improvements.
+- [x] Header language selector remains in the header; English is default; automatic translation options are provided by the translation service. The reader no longer moves the selector or shows a Marathi-only language panel.
+- [x] Patient sections switch independently; browser Back/Forward is wired to section navigation.
+- [x] Full English article content, references, FAQ and takeaway render in the native reader dialog; browser Back, close and Escape are supported. Redundant article-reader action buttons were removed.
+- [x] Booking now presents essential contact/address/GPS first; quick optional history and original prescription/discharge attachments are available; long detailed history starts collapsed.
+- [x] Removed prefilled “NKDA” and default-selected CBC/KFT/electrolytes/chest X-ray.
+- [x] Prescription sheet email removed; registration line styled; prescription/lab/radiology PDF sharing targets and filenames corrected; native file-share sheet attempted before fallback.
+- [x] Added two static regression test files for preservation and contact/emergency checks.
+- [x] Source scan found zero duplicate HTML IDs and retained the core booking/workstation/document element IDs.
+- [ ] Run the new tests and all existing tests in an environment that can clone/run the repository. Tests are added but not executed.
+- [ ] Browser-test preview and real Android device: language selector, tabs, Back/Forward, article full text, native dialler/WhatsApp, file share, PDF page count and mobile layout.
+- [ ] Exact official Form 2 / Form 4 / Form 4A facsimile/mapping remains open. Original government PDFs remain available; editable working layouts are not claimed to be exact facsimiles.
+- [ ] Continue all remaining security, cloud, payments, article-scale and workstation items in `END_TO_END_AUDIT.md`.
+
+**Latest checked branch head:** `5e8ef19c7f70da009e4f9db5d62ced297dfd9297`. Vercel status at that head: success/Ready. Preview: https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . The later audit/checkpoint documentation commits trigger their own redeployments; recheck latest head/status before review. PR #29 remains draft and unmerged.
+
+**Verification truth:** source-level checks passed; full tests and interactive preview/device checks did not run. Do not mark end-to-end complete or publish production yet.
