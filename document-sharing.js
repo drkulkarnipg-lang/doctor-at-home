@@ -14,12 +14,34 @@
   try{await document.fonts?.ready;const worker=html2pdf().set({margin:[8,8,20,8],filename:filename(name),image:{type:'jpeg',quality:.95},html2canvas:{scale:1.8,useCORS:true,scrollY:0,backgroundColor:'#ffffff',windowWidth:1000},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['tr','.certificate-field','.certificate-signature','img']}}).from(copy).toPdf();const pdf=await worker.get('pdf');window.stampDocumentPdf?.(pdf,id);const blob=await worker.outputPdf('blob');if(!blob||blob.size<500)throw Error('PDF could not be prepared.');return new File([blob],filename(name),{type:'application/pdf'});}finally{host.remove();}}
  function release(){if(activeUrl)URL.revokeObjectURL(activeUrl);activeUrl=null;activeFile=null;}
  function close(){ticket++;$('pdfShareDialog').hidden=true;release();}
- window.shareDocumentPdf=async(id,name)=>{const current=++ticket;release();$('pdfShareDialog').hidden=false;$('pdfShareStatus').textContent='Preparing your PDF on this device…';$('pdfShareError').textContent='';$('pdfShareHelp').textContent='';$('pdfNativeShare').disabled=true;$('pdfNativeShare').hidden=false;$('pdfDownload').disabled=true;
-  try{const file=await prepare(id,name);if(current!==ticket)return;activeFile=file;activeUrl=URL.createObjectURL(file);$('pdfDownload').disabled=false;const can=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}));$('pdfNativeShare').disabled=!can;$('pdfNativeShare').hidden=!can;$('pdfShareStatus').textContent=file.name+' · '+Math.round(file.size/1024)+' KB · Ready';$('pdfShareHelp').textContent=can?'Tap Share PDF, then choose WhatsApp, email, Drive or another app offered by your device.':'1. Download PDF. 2. Open WhatsApp and select the recipient. 3. Choose Attach → Document, select the downloaded PDF and Send. The WhatsApp link cannot attach a file automatically.';}catch(e){if(current===ticket){$('pdfShareStatus').textContent='PDF not ready';$('pdfShareError').textContent=e.message;$('pdfShareHelp').textContent='Use the document’s Print button and choose Save as PDF.';}}};
+ window.shareDocumentPdf=async(id,name)=>{
+  const current=++ticket;release();
+  try{
+    const file=await prepare(id,name);
+    if(current!==ticket)return;
+    // Prefer the native device share sheet immediately. No forced download and no second confirmation step.
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:filename(name)});
+      window.showToast?.('PDF shared. Choose the recipient/app in your device share sheet.');
+      return;
+    }
+    // If direct file sharing is unsupported, explain the platform limitation and provide the PDF download.
+    if(navigator.share){
+      try{await navigator.share({title:filename(name),text:'This browser cannot attach a PDF directly. Download the PDF using Export PDF, then attach it in WhatsApp or email.'});}catch(e){if(e.name==='AbortError')return;}
+    }
+    activeFile=file;activeUrl=URL.createObjectURL(file);
+    const a=document.createElement('a');a.href=activeUrl;a.download=file.name;a.click();
+    window.showToast?.('This browser cannot share PDF attachments directly. The PDF was downloaded; attach it in WhatsApp or email.');
+    setTimeout(()=>{if(activeUrl){URL.revokeObjectURL(activeUrl);activeUrl=null;activeFile=null;}},60000);
+  }catch(e){
+    console.error('PDF share failed',e);
+    window.showToast?.('PDF could not be prepared: '+e.message+'. Use Print / Save as PDF.');
+  }
+ };
  window.exportToPdf=async(id,name)=>{try{const file=await prepare(id,name),url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}catch(e){window.showToast?.(e.message);}};
  const selected=g=>g==='clinical'?'cdoc-'+$('clinDocSelect').value:'cert-'+$('certTypeSelect').value;
  window.shareSelectedCertificate=g=>window.shareDocumentPdf(selected(g),'Dr_Kulkarni_'+selected(g));window.exportCurrentClinDocPdf=()=>window.exportToPdf(selected('clinical'),'Dr_Kulkarni_'+selected('clinical'));window.exportCurrentDeathFormPdf=()=>window.exportToPdf(selected('death'),'Dr_Kulkarni_'+selected('death'));
- window.universalShareDocument=type=>{const id={rx:'rxSheet',path:'pathSlipSheet',rad:'radSlipSheet'}[type];if(id)window.shareDocumentPdf(id,'Dr_Kulkarni_'+type);};
+ window.universalShareDocument=type=>{const config={rx:{id:'rxSheet',name:'Prescription.pdf'},path:{id:'pathSlipSheet',name:'Lab_Slip.pdf'},rad:{id:'radSlipSheet',name:'Radiology_Slip.pdf'}}[type];if(config)window.shareDocumentPdf(config.id,config.name);};
  function legacyArticle(title,body){$('shareArticleTemporary')?.remove();const el=document.createElement('article');el.id='shareArticleTemporary';el.className='document-share-temporary';const h=document.createElement('h2'),p=document.createElement('p');try{h.textContent=decodeURIComponent(title);p.textContent=decodeURIComponent(body);}catch{h.textContent=title;p.textContent=body;}el.append(h,p);document.body.append(el);window.shareDocumentPdf(el.id,h.textContent).finally(()=>el.remove());}
  window.shareDirectArticleWhatsApp=legacyArticle;window.universalShareArticle=legacyArticle;
  const cards=window.safeArticleCards;window.safeArticleCards=(container,articles,publicMode)=>{cards(container,articles,publicMode);articles.forEach((art,i)=>{const card=$((publicMode?'publicArticle_':'moonArticle_')+i),controls=card?.querySelector('.article-share-controls');if(!controls)return;const share=controls.querySelector('[data-action=share-pdf]');if(share){share.textContent='Share PDF / WhatsApp';share.onclick=()=>window.shareDocumentPdf(card.id,art.title||'Patient_Guidance');}if(publicMode){const b=document.createElement('button');b.type='button';b.className='research-upload';b.textContent='Download PDF';b.onclick=()=>window.exportToPdf(card.id,art.title||'Patient_Guidance');controls.prepend(b);}});};
