@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded',()=>{
  dialog.addEventListener('cancel',e=>{e.preventDefault();window.closeWikiModal();});
  const status=$('translationStatus');
  if(status)status.textContent='English is the original language. Choose any language available in the header dropdown for automatic translation; clinical meaning may not be exact, so check important details against the English original.';
+ const languageWidget=$('google_translate_element');
+ const labelLanguageControl=()=>{const combo=languageWidget?.querySelector('.goog-te-combo');if(combo){combo.id='headerLanguageSelect';combo.setAttribute('aria-label','Select website language');combo.title='Select website language';}};
+ labelLanguageControl();
+ if(languageWidget)new MutationObserver(labelLanguageControl).observe(languageWidget,{childList:true,subtree:true});
  let reapplyTranslation=false;
  document.addEventListener('change',e=>{
    if(!e.target.matches('.goog-te-combo'))return;
