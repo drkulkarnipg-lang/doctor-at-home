@@ -1,0 +1,148 @@
+/* Calm, high-clarity visual system — responsive from small phones to ultra-wide displays.
+   The web page is resolution-independent; these rules scale to device pixels and viewport width. */
+:root{
+ --care-ink:#102b46;--care-ink-soft:#28455e;--care-teal:#087e82;--care-teal-dark:#07656a;
+ --care-mint:#e8f7f4;--care-sky:#edf6ff;--care-paper:#f7fafb;--care-line:#d9e5eb;
+ --care-amber:#f2b84b;--care-shadow:0 18px 50px rgba(16,43,70,.08);
+ --care-radius:24px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:150px;background:#f7fafb}
+body{color:var(--care-ink);background:linear-gradient(180deg,#f7fafb 0%,#fff 35%,#f5f9fb 100%);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+::selection{background:#c6eee9;color:#102b46}
+.site-header{background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--care-line)!important;box-shadow:0 6px 24px rgba(16,43,70,.06)!important;backdrop-filter:blur(18px)}
+.site-header>div:first-child{display:grid!important;grid-template-columns:minmax(280px,1fr) minmax(0,auto);align-items:center;gap:16px;padding-top:12px!important;padding-bottom:12px!important}
+.doctor-brand{min-width:0;text-decoration:none}
+.doctor-wordmark{font-size:clamp(15px,1.15vw,19px);letter-spacing:.035em;line-height:1.2}
+.site-header>div:first-child>.flex.items-center.flex-wrap.gap-2{display:flex;align-items:center;justify-content:flex-end;gap:8px!important;min-width:0}
+.language-control{display:flex!important;align-items:center;gap:7px;min-width:145px;max-width:180px;flex:0 1 180px;order:0!important;padding:6px 9px;background:#f3f8fb;border:1px solid #d8e5ed;border-radius:14px}
+.language-control-label{font-size:11px;font-weight:800;color:#23435b;white-space:nowrap}
+.language-control #google_translate_element{min-width:0;flex:1}
+.language-control .goog-te-gadget{font-size:0!important;line-height:1!important;color:transparent!important}
+.language-control .goog-te-combo{max-width:100%;width:100%;min-width:0;margin:0!important;padding:7px 22px 7px 8px;border:1px solid #cadbe5;border-radius:9px;background:#fff;color:#102b46;font:600 12px/1.2 Inter,system-ui,sans-serif}
+.language-control .goog-logo-link,.language-control .goog-te-gadget span{display:none!important}
+.language-control iframe{max-width:100%}
+.language-fallback{font-size:10px;white-space:nowrap}
+#navPublicBtn,#navDoctorBtn{white-space:nowrap;min-height:40px;padding:9px 12px!important}
+#navPublicBtn{background:var(--care-ink)!important}
+#navDoctorBtn{background:#fff;border:1px solid var(--care-line)}
+.header-whatsapp-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:9px 12px;border:1px solid #b8e4d3;border-radius:13px;background:#effaf4;color:#146b49;font-weight:800;font-size:12px;text-decoration:none;white-space:nowrap}
+.site-header a[href*="share.google"],.site-header a[href*="google.com/search?kgmid"]{min-height:38px}
+.site-header a[data-direct-call]{min-height:40px;box-shadow:0 5px 14px rgba(185,28,28,.16)}
+.portal-nav{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.8vw,24px);padding:10px clamp(12px,3vw,32px)!important;background:#f7fafc;border-top:1px solid #eef2f5;overflow-x:auto;overscroll-behavior-x:contain}
+.portal-nav a{display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border-radius:10px;color:#36536b;font-size:12px;font-weight:750;text-decoration:none;white-space:nowrap;transition:background .16s,color .16s}
+.portal-nav a:hover,.portal-nav a[aria-current="page"]{background:#e4f5f3;color:#086d70}
+.emergency-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:9px 14px;padding:11px 16px;border:1px solid #f0d7a9;border-radius:16px;background:#fff9ed;color:#614a1b;font-size:12px}
+.emergency-strip-actions a{display:inline-flex;align-items:center;min-height:34px;padding:6px 12px;border-radius:10px;background:#9f2424;color:#fff;font-weight:850;text-decoration:none}
+.portal-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:clamp(18px,3vw,36px);align-items:stretch;padding:clamp(24px,4vw,54px)!important;border:1px solid #d8e9ee;border-radius:32px;background:radial-gradient(ellipse at 90% 0%,rgba(190,235,231,.72),transparent 42%),linear-gradient(135deg,#fff 0%,#f1f8fb 58%,#e7f5f2 100%);box-shadow:var(--care-shadow);overflow:hidden;position:relative}
+.portal-hero:after{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(8,126,130,.12);border-radius:50%;right:-95px;bottom:-135px;pointer-events:none}
+.hero-copy,.dispatch-card{position:relative;z-index:1;min-width:0}
+.hero-copy h1,.hero-copy h2{max-width:14ch;font-size:clamp(32px,4.2vw,62px)!important;line-height:1.07!important;letter-spacing:-.045em;color:var(--care-ink);text-wrap:balance}
+.hero-copy p{max-width:64ch;color:#486176;font-size:clamp(14px,1.25vw,17px);line-height:1.75}
+.hero-copy a,.dispatch-card a{transition:transform .18s,box-shadow .18s}
+.hero-copy a:hover,.dispatch-card a:hover{transform:translateY(-2px)}
+.dispatch-card{border:1px solid rgba(255,255,255,.75)!important;border-radius:24px!important;background:rgba(255,255,255,.88)!important;box-shadow:0 14px 35px rgba(16,43,70,.08)!important;backdrop-filter:blur(10px)}
+#publicPortal>section,#publicPortal>article,#patientToolsSection,.research-review,.home-care-section{min-width:0}
+#publicPortal .petal-box,#patientToolsSection,.research-review,.home-care-section{border:1px solid var(--care-line);border-radius:var(--care-radius);box-shadow:0 10px 34px rgba(16,43,70,.045)}
+#publicPortal h3,#patientToolsSection h3{color:var(--care-ink);letter-spacing:-.025em;line-height:1.2}
+#publicPortal p{line-height:1.7}
+#elderlySection .home-care-grid>article{border:1px solid #deeaee;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(16,43,70,.035)}
+#patientToolsSection{background:linear-gradient(160deg,#fff,#f6fbfd)}
+#calc30Grid>article,#calc30Grid>div{min-width:0;border:1px solid #dce7ec;border-radius:18px;background:#fff;box-shadow:0 6px 20px rgba(16,43,70,.035)}
+#calc30Grid input,#calc30Grid select,#unitConverterForm input,#unitConverterForm select{width:100%;min-width:0;min-height:42px;border:1px solid #cbdbe4;border-radius:10px;background:#fff;padding:9px 11px;color:#18364e;font-size:14px}
+#calc30Grid input:focus,#calc30Grid select:focus,#unitConverterForm input:focus,#unitConverterForm select:focus{outline:3px solid rgba(8,126,130,.18);border-color:#087e82}
+.calc-result{border-radius:12px!important;background:#f4fafb!important;color:#173e56!important}
+.conversion-panel{border:1px solid #d6e6ed;border-radius:20px;padding:20px;background:linear-gradient(135deg,#f0f8ff,#f0faf7);min-width:0}
+.conversion-panel form{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+.conversion-panel form button{min-height:42px;border:0;border-radius:10px;background:#087e82;color:#fff;font-weight:800}
+#unitConversionResult{display:block;min-height:40px;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid #d8e5eb;color:#163f55;font-weight:800}
+#exploreHealthSources{scroll-margin-top:150px}
+#exploreHealthSources .grid>div{min-width:0;display:flex;flex-direction:column;justify-content:center;min-height:108px;border-radius:15px!important;background:#f8fbfd!important;border-color:#dce8ee!important;transition:transform .16s,box-shadow .16s}
+#exploreHealthSources .grid>div:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,43,70,.08)}
+.doctor-tabs{display:flex;gap:8px!important;padding:12px 0 16px!important}
+.doctor-tabs button{min-height:40px;max-width:100%;border-radius:12px!important;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+#doctorWorkstation{max-width:1680px;padding-top:26px}
+.workstation-heading{padding:20px 24px;border:1px solid #dce8ee;border-radius:22px;background:linear-gradient(120deg,#fff,#eef7fa);box-shadow:0 8px 25px rgba(16,43,70,.04)}
+.workstation-heading h2{letter-spacing:-.035em}
+#doctorWorkstation .printable-sheet{border:1px solid #dbe6eb;border-radius:18px;background:#fff}
+#doctorWorkstation input,#doctorWorkstation select,#doctorWorkstation textarea{max-width:100%;min-height:40px;border-radius:9px}
+#doctorWorkstation button:focus-visible,#publicPortal button:focus-visible,#publicPortal a:focus-visible,#doctorWorkstation a:focus-visible{outline:3px solid #f2b84b;outline-offset:2px}
+#doctorWorkstation .hidden{display:none!important}
+.payment-methods{margin-top:18px;padding:18px;border:1px solid #d6e5eb;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(16,43,70,.045)}
+.payment-methods>summary{cursor:pointer;display:flex;align-items:center;gap:8px;min-height:42px;font-size:15px;font-weight:850;color:var(--care-ink)}
+#upiQrDetails[open]{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+#upiQrDetails summary{flex-basis:100%;font-weight:800}
+#upiQrImg{display:block;width:220px;height:220px;max-width:100%;object-fit:contain;padding:10px;border:1px solid #dbe5eb;border-radius:12px;background:#fff}
+.payment-provider-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.payment-provider-grid>div{padding:12px;border:1px solid #dbe5eb;border-radius:12px;background:#f8fbfd}
+.payment-provider-grid strong{display:block;color:#153750}
+.payment-provider-grid span{display:block;font-size:11px;color:#526a7b;line-height:1.5}
+#doctorLoginDialog,#doctorSessionDialog{width:min(94vw,460px);border:1px solid #d7e4eb;border-radius:22px;padding:24px;box-shadow:0 28px 90px rgba(7,26,44,.25)}
+#doctorLoginDialog::backdrop,#doctorSessionDialog::backdrop{background:rgba(7,26,44,.55);backdrop-filter:blur(3px)}
+#doctorLoginDialog h2,#doctorSessionDialog h2{font-size:24px;font-weight:850;letter-spacing:-.03em;color:#102b46}
+#doctorLoginDialog button,#doctorSessionDialog button{min-height:42px;padding:9px 13px;border-radius:10px;font-weight:800}
+.login-security-note{font-size:12px;color:#536b7d;line-height:1.6}
+#exploreHealthSources .source-translation-panel{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(140px,.65fr) auto;gap:10px;align-items:end;padding:16px;border:1px solid #d7e6ed;border-radius:16px;background:#f2f8fb}
+.source-translation-panel label{display:grid;gap:5px;font-size:11px;font-weight:800;color:#28455e}
+.source-translation-panel input,.source-translation-panel select{min-width:0;width:100%;min-height:42px;border:1px solid #cbdbe4;border-radius:10px;background:#fff;padding:9px 10px;color:#102b46}
+.source-translation-panel button{min-height:42px;padding:9px 14px;border:0;border-radius:10px;background:#087e82;color:white;font-weight:850}
+#registersBillingPanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#registersBillingPanel>section{min-width:0;padding:18px;border:1px solid #dce7ec;border-radius:18px;background:#fff}
+@media(min-width:1800px){.site-header>div:first-child,#publicPortal,#doctorWorkstation{max-width:1720px!important}#publicPortal{font-size:16px}.portal-hero{min-height:420px}.hero-copy h1,.hero-copy h2{font-size:clamp(48px,3.2vw,72px)!important}}
+@media(max-width:1180px){.site-header>div:first-child{grid-template-columns:minmax(0,1fr);gap:10px}.site-header>div:first-child>.flex.items-center.flex-wrap.gap-2{justify-content:flex-start}.language-control{max-width:220px;flex:0 1 220px}.site-header a[href*="share.google"],.site-header a[href*="google.com/search?kgmid"]{display:none!important}.portal-hero{grid-template-columns:minmax(0,1fr) minmax(260px,.8fr)}}
+@media(max-width:760px){
+ html{scroll-padding-top:190px}.site-header>div:first-child{padding:9px 12px!important}.doctor-brand{gap:9px!important}.doctor-brand>div:first-child{width:42px;height:42px}.doctor-brand p.text-\[11px\]{font-size:10px}.doctor-brand p.text-\[9px\]{font-size:9px}
+ .site-header>div:first-child>.flex.items-center.flex-wrap.gap-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px!important}
+ .language-control{grid-column:1/-1;min-width:0;max-width:none;width:100%;flex:none;padding:5px 8px}
+ .language-control .goog-te-combo{min-height:38px;font-size:13px}
+ .site-header>div:first-child>.flex.items-center.flex-wrap.gap-2>.bg-white.p-0\.5{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:100%}
+ #navPublicBtn,#navDoctorBtn{justify-content:center;width:100%;padding:9px 7px!important;font-size:12px}
+ .site-header a[data-direct-call],.header-whatsapp-action{width:100%;justify-content:center;min-height:42px}
+ .site-header>div:first-child>.flex.items-center.flex-wrap.gap-2>button[title="Security Settings"]{position:absolute;right:12px;top:12px;min-height:34px}
+ .site-header>div:first-child>.flex.items-center.flex-wrap.gap-2>button[title="Security Settings"] span.hidden{display:none!important}
+ .portal-nav{justify-content:flex-start;gap:6px;padding:7px 10px!important}.portal-nav a{font-size:11px;min-height:34px;padding:6px 9px}
+ #publicPortal,#doctorWorkstation{padding:14px 10px 26px!important;gap:20px!important}
+ .portal-hero{grid-template-columns:minmax(0,1fr);gap:16px;padding:22px!important;border-radius:23px}
+ .hero-copy h1,.hero-copy h2{font-size:clamp(32px,9vw,44px)!important;max-width:13ch}
+ .hero-copy p{font-size:14px}.dispatch-card{padding:17px!important}
+ #publicPortal h3{font-size:22px!important}
+ .emergency-strip{justify-content:flex-start;font-size:11px;padding:10px;border-radius:13px}
+ #patientToolsSection,.research-review,.home-care-section{padding:17px!important;border-radius:19px!important}
+ #exploreHealthSources .source-translation-panel{grid-template-columns:minmax(0,1fr)}
+ #exploreHealthSources .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .doctor-tabs{gap:7px!important;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:12px!important}
+ .doctor-tabs button{flex:0 0 auto;max-width:82vw;min-height:40px;font-size:11px!important}
+ .workstation-heading{padding:16px;border-radius:17px}.workstation-heading h2{font-size:24px!important}
+ .payment-provider-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#registersBillingPanel{grid-template-columns:minmax(0,1fr)}
+ #upiQrImg{width:190px;height:190px}
+}
+@media(max-width:380px){.doctor-wordmark{font-size:13px}.doctor-brand p.text-\[11px\]{max-width:225px;line-height:1.3}.site-header>div:first-child>.flex.items-center.flex-wrap.gap-2>.bg-white.p-0\.5 button{font-size:10px;padding:8px 4px!important}.portal-hero{padding:18px!important}.payment-provider-grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{.site-header,.portal-nav,.doctor-tabs,.source-translation-panel,.no-print{display:none!important}body{background:#fff!important;color:#000!important}.printable-sheet{box-shadow:none!important;border:0!important;border-radius:0!important}}
+
+.calc-reference-note{margin:8px 0 12px;padding:10px 12px;border-left:3px solid #087e82;border-radius:0 10px 10px 0;background:#f1f8fa;color:#405c70;font-size:11px;line-height:1.6}
+.language-control #google_translate_element{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.language-control #headerLanguageSelect{min-width:0;flex:1;width:100%;padding:7px 22px 7px 8px;border:1px solid #cadbe5;border-radius:9px;background:#fff;color:#102b46;font:600 12px/1.2 Inter,system-ui,sans-serif}
+#registersBillingPanel h3{font-size:18px;font-weight:850;letter-spacing:-.025em;margin-bottom:8px}
+#registersBillingPanel p{font-size:12px;line-height:1.6;color:#526a7b;margin-bottom:12px}
+#registersBillingPanel form{display:grid;gap:10px}
+#registersBillingPanel form label{display:grid;gap:5px;font-size:12px;font-weight:750;color:#28455e}
+#registersBillingPanel form input,#registersBillingPanel form select{width:100%;min-width:0;min-height:42px;padding:9px 10px;border:1px solid #cbdbe4;border-radius:10px;background:#fff;color:#102b46}
+#registersBillingPanel form button,#registersBillingPanel>[id] button,#registersBillingPanel>section>button{min-height:40px;margin-top:10px;padding:9px 12px;border:1px solid #d2e2e9;border-radius:10px;background:#edf7f8;color:#0c5962;font-size:12px;font-weight:850}
+.register-table{width:100%;margin:12px 0;border-collapse:collapse;font-size:11px;overflow-wrap:anywhere}
+.register-table th,.register-table td{padding:7px 6px;border:1px solid #dbe5ea;text-align:left;vertical-align:top}
+.register-table th{background:#f1f7f9;font-weight:800}
+.register-empty,.register-count{padding:8px;border-radius:8px;background:#f7fafb;font-size:11px}
+.invoice-print-sheet{max-width:100%;padding:20px;border:1px solid #d8e5eb;border-radius:14px;background:#fff;color:#142f45}
+.invoice-kicker{font-size:12px;font-weight:850;letter-spacing:.08em;color:#087e82}
+.invoice-title{margin:12px 0 5px;font-size:25px;font-weight:900;letter-spacing:-.04em}
+.invoice-muted{font-size:11px;color:#526577;line-height:1.5}
+.invoice-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0;padding:10px 0;border-top:1px solid #d8e5eb;border-bottom:1px solid #d8e5eb;font-size:12px}
+.invoice-section{font-size:13px;font-weight:850}
+.invoice-lines{width:100%;margin:14px 0;border-collapse:collapse;font-size:12px}
+.invoice-lines th,.invoice-lines td{padding:12px;border:1px solid #d8e5eb;text-align:left}
+.invoice-lines th:last-child,.invoice-lines td:last-child{text-align:right}
+.invoice-status{font-weight:850}
+.invoice-note{margin-top:18px;font-size:10px;color:#526577}
+.invoice-sign{margin-top:24px;font-weight:800}
+@media(max-width:760px){#registersBillingPanel{grid-template-columns:minmax(0,1fr)}.invoice-print-sheet{padding:14px}.register-table{font-size:10px}}
+@media print{body *{visibility:hidden!important}#invoicePrintable,#invoicePrintable *{visibility:visible!important}#invoicePrintable{position:absolute;left:0;top:0;width:100%;border:0!important;padding:0!important;box-shadow:none!important}}

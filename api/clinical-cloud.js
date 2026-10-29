@@ -26,6 +26,25 @@ if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'
 // Store only a short-lived secure cookie, never a refresh token or browser-storage token.
 cookie(data.access_token,Math.min(900,Number(data.expires_in)||900));return reply(200,{configured:true,signedIn:true});
 }
+if(action==='recover'&&method==='POST'){
+ const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim(),redirect=String(env.CLINIC_PASSWORD_REDIRECT_URL||'').trim();
+ let safeRedirect;try{safeRedirect=new URL(redirect);if(safeRedirect.protocol!=='https:'||safeRedirect.pathname!=='/reset-password.html'||safeRedirect.username||safeRedirect.password||safeRedirect.search||safeRedirect.hash)throw Error();}catch{return reply(503,{configured:false,message:'Secure email setup is not configured. Set the verified owner email and exact HTTPS password-reset URL in the hosting environment.'});}
+ if(!ownerEmail||ownerEmail.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{configured:false,message:'Secure email setup is not configured. Set the verified owner email and exact HTTPS password-reset URL in the hosting environment.'});
+ const response=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(safeRedirect.href),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
+ if(!response.ok)return reply(503,{configured:true,message:'The email recovery service could not accept the request. Check the Supabase recovery URL allowlist and email delivery settings.'});
+ return reply(200,{requested:true,message:'If the clinic owner account exists, a secure setup/reset email will be sent.'});
+}
+if(action==='complete-recovery'&&method==='POST'){
+ const accessToken=typeof body.accessToken==='string'?body.accessToken:'',password=typeof body.password==='string'?body.password:'';
+ if(accessToken.length<20||accessToken.length>8192||password.length<12||password.length>1024)return reply(400,{message:'Use the recovery link and enter a new password of at least 12 characters.'});
+ const verified=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+accessToken}});
+ if(!verified.ok)return reply(401,{message:'The recovery link is invalid or expired. Request a new email.'});
+ const identity=await verified.json();
+ if(identity.id!==env.CLINIC_OWNER_USER_ID)return reply(403,{message:'This recovery link is not for the clinic owner account.'});
+ const updated=await api('/auth/v1/user',{method:'PUT',headers:{Authorization:'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({password})});
+ if(!updated.ok)return reply(400,{message:'The password could not be updated. The recovery link may have expired; request a new one.'});
+ cookie();return reply(200,{updated:true,message:'Password updated. Return to Doctor Workstation and sign in with the new password.'});
+}
 if(!token)return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Sign in with the clinic owner account.'});
 const auth=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+token}});if(!auth.ok){cookie();return reply(401,{signedIn:false,message:'Session expired. Sign in again.'});}const user=await auth.json();if(user.id!==env.CLINIC_OWNER_USER_ID){cookie();return reply(403,{message:'Owner access required.'});}
 if(action==='session'&&method==='GET')return reply(200,{configured:true,signedIn:true});

@@ -166,3 +166,22 @@ Owner requested proceeding without repeated suggestions after review. PR19 merge
 
 ## PR20 Close and A4 release — 26 October 2026
 Explicit preview publication approval received (“ho”). PR20 merged a110d9c; production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. Persistent top/bottom document exit, data-preserving chooser and Escape layering released. Clinical Rx/lab/radiology PDFs use 194mm×264mm A4 writing area with readable type and lower signoff; genuine overflow retained. Both live source files byte-match tested implementation; all six controls mounted in production DOM and doctor lock retained. Full24 tests and real synthetic PDF geometry passed before release; owner-device printing/download remains unverified.
+
+
+## End-to-end correction branch — 29 October 2026
+
+Current review-only work is tracked in draft PR #29: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29 . It is not merged and production remains unchanged.
+
+- Global header language selector stays in the header; English is the authored default; the Google Translate dropdown supplies the languages it supports. No claim is made that every language worldwide is supported or that machine translation is clinically validated.
+- Patient portal nav switches between focused sections; browser Back/Forward restores the previous view.
+- Responsive sky-blue hero and eye-friendly navigation/read controls updated.
+- Health library uses native article dialog with complete English article sections/references/FAQ/takeaway; native close/Escape and browser Back are wired; redundant article-reader back/download/share controls removed.
+- Quick booking now puts essential contact/address/GPS first, then optional clinical questions and original prescription/discharge-summary attachments. Detailed intake starts collapsed.
+- Unsafe prefilled NKDA and preselected lab/imaging orders removed.
+- Prescription sheet no longer includes email; registration line font adjusted; prescription/lab/radiology PDF share IDs/names corrected and native device share sheet attempted first.
+- Article import controls are above the content box. Public URL import can still be blocked by source CORS, login or paywall. Existing authenticated cloud-article controls are present in the publisher panel.
+- Added end-to-end preservation/contact test files. Static scan found zero duplicate HTML IDs and retained core booking/workstation/document IDs.
+
+**Verification state:** Vercel reported success/Ready for branch head `5e8ef19c7f70da009e4f9db5d62ced297dfd9297`; preview URL https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . Later documentation commits trigger redeployment, so verify the current head/status before review. Tests have not been run in this environment; the repository clone failed due GitHub hostname resolution. Interactive preview and owner-device checks remain pending.
+
+**Important remaining issue:** government Form 2 / Form 4 / Form 4A originals are available as unchanged PDFs, but the editable web forms are not exact facsimiles. Exact official-form mapping, full regression tests, device share/print verification and the rest of the end-to-end audit remain open. No merge or production deployment without explicit approval.

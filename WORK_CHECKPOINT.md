@@ -69,3 +69,136 @@ PR20 created: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/20 . Auto
 
 ## PR20 approved release verification — 26 October 2026
 After the user explicitly approved the preview, PR20 merged a110d9cb114738f9ae5e40fd49b4329a9b5a1232. Vercel dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY production. Live clinical-documents.js and reading-print-fixes.css HTTP200 and SHA256 match the tested local files. Reloaded production DOM contains both Close controls for all three editors and one document chooser. Workstation remains locked; no auth protection changed or bypassed. Earlier synthetic browser Close/reopen/data retention, Escape layering and 24-file suite remain the behavioral evidence; real authenticated owner-device PDF/print interaction not claimed. Register G01/G02 marked live with those limits. Resume other pending register rows, not PR20.
+
+
+## Resume checkpoint — end-to-end audit, 29 October 2026
+
+Owner resumed the project with “check end to end and restructure end to end”. Do not restart released work. Production/main remains unchanged.
+
+### New work on isolated review branch
+- Branch: `fix/end-to-end-contact-emergency-navigation`
+- Draft PR #29: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29
+- Latest known Vercel preview from PR comment: https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/
+- Vercel deployment status: Ready. Interactive browser and owner-device QA have NOT been completed.
+- Files changed: `index.html`, `reading-print-fixes.css`, `END_TO_END_AUDIT.md`, `MASTER_TASK_REGISTER.md`, this checkpoint.
+- New English-only emergency strip with tel:112/tel:108; header call button labelled; doctor number identified as home-visit requests; certificate contact phone/email made clickable; prescription emergency wording corrected; pathology/radiology contact numbers made clickable; guide-share contact label corrected.
+- Added the phase-by-phase preservation-first audit plan and acceptance gates in `END_TO_END_AUDIT.md`.
+- Main/production was not changed, and PR #29 is not merged.
+
+### Validation limits
+- Source-level replacement assertions passed during the editing operation.
+- GitHub status shows Vercel deployment Ready.
+- Full test suite was NOT run. Attempt to clone/run tests failed because this environment could not resolve github.com. Do not claim tests passed.
+- Live preview content was not available to the browser inspection tool in this turn; real phone dialler, WhatsApp handoff, PDF save/print and owner authentication are device-dependent and remain unverified.
+
+### Next action
+1. Open the preview link above and check emergency strip/contact labels visually on desktop and mobile.
+2. Obtain an environment capable of running `npm test`; add focused tests for English-only emergency wording, tel:112/tel:108, tel:+919561394341, mailto:drkulkarnipg@gmail.com and absence of legacy “Direct Helpline” / “Emergency Helpline” labels.
+3. Review all changed lines and confirm no existing IDs/features were removed.
+4. Continue from `END_TO_END_AUDIT.md` and the remaining rows of `MASTER_TASK_REGISTER.md`; prioritize full original article rendering and remaining contact/emergency labels.
+5. Show preview and evidence; do not merge or deploy production without explicit owner approval.
+
+
+### Regression test follow-up — 29 October 2026
+Added `tests/end-to-end-contact-emergency.test.cjs` to check emergency-strip language and 112/108 links, clickable contact/email, emergency wording, responsive strip CSS and retained core workspace/booking elements. This is a source-level test only and has NOT been run. Update `END_TO_END_AUDIT.md` and `MASTER_TASK_REGISTER.md` accordingly. Current preview is still the Vercel Ready deployment linked above; verify latest deployment before review.
+
+
+### Preview status correction — 29 October 2026
+The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . An earlier deployment was Ready; the latest checkpoint/audit commits triggered a new deployment and the current Vercel status is pending. Before presenting the preview as ready, recheck the Vercel status and confirm it corresponds to the latest branch head.
+
+
+## Latest end-to-end correction checkpoint — 29 October 2026
+
+**Current review branch:** `fix/end-to-end-contact-emergency-navigation`  
+**Draft PR:** https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29  
+**Preview URL:** https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/  
+**Last checked Vercel status:** success/Ready for branch head `5e8ef19c7f70da009e4f9db5d62ced297dfd9297`. Documentation commits after that check trigger further deploys; recheck the latest head/status before preview review.
+
+### Latest implementation recorded in PR #29
+- Header language dropdown stays in the header; English default; translation provider supplies its supported languages. Removed Marathi-only article language panels.
+- Patient portal sections are now navigable views; browser Back/Forward restores the prior view.
+- Responsive sky-blue hero, language selector, tab navigation, quick intake, article reader and publisher styles added.
+- Native article dialog renders the full English authored guide and its references/FAQ/takeaway; native close, Escape and browser Back supported; no extra article-reader back/download/share buttons.
+- Booking order is essential patient contact/address/GPS first, then optional quick history and prescription/discharge attachments; detailed history is collapsed by default.
+- Allergy default and preselected lab/imaging orders cleared.
+- Prescription PDF named `Prescription.pdf`, email removed from the prescription sheet, registration line compacted. Lab/radiology share targets corrected; native device file sharing attempted before download fallback.
+- Article import controls placed directly above the content box; direct URL fetch reports CORS/login/paywall limitations rather than pretending every URL can be fetched.
+- Added `tests/end-to-end-contact-emergency.test.cjs` and `tests/end-to-end-website-preservation.test.cjs`.
+- Current source scan: zero duplicate HTML IDs; core existing IDs retained.
+
+### Not yet verified
+- No test suite executed; repository clone failed due GitHub hostname resolution in this environment.
+- Interactive preview/browser QA was not available. Vercel Ready does not prove tests pass.
+- Owner-device dialler/WhatsApp/PDF sharing, print page count, authenticated cloud article operations and security/session flows remain pending.
+- Official Form 2 / 4 / 4A original PDFs remain linked; editable forms are not exact facsimiles. Exact official field mapping is still pending.
+
+### Resume from here
+1. Recheck latest PR head and Vercel status.
+2. Run the two new regression tests plus all existing tests in a repository-capable environment.
+3. Verify language dropdown stays in the header even after opening/closing articles; test full article, browser Back/Forward and Escape.
+4. Test the quick booking and native share flow on the owner's Android device.
+5. Validate PDF page count and government original-form compliance; do not force official two-page forms onto one page.
+6. Continue the remaining audit phases in `END_TO_END_AUDIT.md`.
+
+No merge, production release, payment activation or external publication without explicit owner approval.
+
+
+### Final static source scan for the code change set
+- HTML length: 187,938 characters; 447 element IDs; **zero duplicate IDs**.
+- Checked 31 local script references and 16 local CSS references against the repository tree; no missing references found.
+- Static assertions passed for the header language selector, English default, no Marathi-only reader controls, native full-article dialog/history, phone/WhatsApp/email actions, quick intake attachments, blank allergy/lab defaults, PDF names/targets, article import controls, cloud publisher buttons, government original PDF links and retained core workstation/booking IDs.
+- This is source inspection only. It does not establish JavaScript syntax/runtime correctness, passing tests, visual layout correctness, native phone/WhatsApp/PDF sharing, cloud availability, or legal-form fidelity. The new tests remain unexecuted.
+
+## Latest client-request corrections — 29 October 2026
+
+### Implemented on the review branch
+- Front-page call links now have a capture-phase handler that routes phone links to the phone protocol; WhatsApp remains a separate, explicitly chosen action.
+- Header language control is compacted; English can be selected to reset Google Translate. Patient navigation reads Elderly care instead of Home care.
+- The pre-visit WhatsApp handoff opens a window before preparing content, reports pop-up blocking, and uses a short note plus explicit PDF-attachment instructions for histories that exceed WhatsApp URL limits. It never claims the history was sent automatically.
+- Patient tools now include three live calculators: BMI (age field removed), estimated average glucose, and mean arterial pressure. The shared calculator renderer updates results as valid inputs change, including Doctor Workstation calculators. Temperature/weight conversion also updates immediately.
+- Calculator results use a neutral white style instead of a green prefilled-looking box.
+- Doctor login is labelled username-first; doctor and drkulkarni are aliases for the existing clinic-owner account, while the existing account email remains accepted for compatibility. Password verification and the existing server-owned session boundary are unchanged. Mobile OTP is explicitly marked not active until a verified SMS provider and number are configured.
+- Prescription formulary picker now filters the local list, links to external drug references, and can add a typed medicine as a blank prescription row. No dose/frequency/duration is invented for a custom medicine. Existing Add Blank Medicine Row remains available without an imposed row cap. User-entered prescription values are escaped before HTML insertion.
+- Added a session-only PNG/JPG/WebP signature-image input for the prescription preview. It is not uploaded or persisted and is not a cryptographic/e-signature or identity-verification service.
+- Radiology requisition now has chest X-ray AP/PA selection, venous and arterial Doppler options, and a free-text additional-test field; the specific Portable and Bedside investigation wording was removed from the standard list.
+- Added a signed-form photo/PDF input for the death-form section. Image scans are converted locally to an A4 PDF; supported devices can open the native share sheet. Otherwise a PDF copy is downloaded for manual sharing. No patient file is uploaded automatically.
+- Article source import now has a normal Open source in new tab fallback and keeps the saved-draft reload control. Arbitrary source text import can still be blocked by CORS, authentication, paywalls or source restrictions.
+
+### Verification performed
+- Calculator logic was executed in a lightweight sandbox harness: 944 assertions passed across 31 calculators, including BMI without age and both patient/workstation MAP calculations.
+- The contact/emergency and website-preservation regression scripts were executed against fetched source using an in-memory test harness; both passed.
+- Updated inline JavaScript and modified JavaScript/test files passed syntax compilation checks.
+- Vercel reported success for code commit 27c5c911607bcb9b88b748f7fbb6016bb6bd3df1. Later commits for signature upload and test corrections have their own deploy status; recheck the latest commit before final preview review.
+- The direct preview page could not be opened by the available web reader. Native dialler, WhatsApp handoff, file-share chooser, image-to-PDF rendering, mobile layout, and actual device print page count have not been verified on the owner's phone.
+
+### Still not complete / do not overclaim
+- Username aliases are a transitional UI mapping to the existing account, not a new server-managed username directory. OTP login is not enabled.
+- External drug resources are opened for lookup; arbitrary third-party drug data is not automatically imported. Verify product, formulation, local availability and prescribing information before use.
+- The death-form language selector uses the site translation service and may translate the whole page. It does not create a certified bilingual government form.
+- Original government Form 2 / Form 4 / Form 4A PDFs remain unchanged and available. Editable HTML forms are not exact Word versions or exact government facsimiles; local/Maharashtra receiving-authority requirements must be checked.
+- Full Node.js/npm test suite, authenticated cloud operations, and real Android device/browser tests remain outstanding.
+
+Production is unchanged. Draft PR #29 remains unmerged; no production deploy, payment activation, patient communication, or public article publication is authorised.
+
+
+## Owner request continuation — 30 October 2026
+
+Current working branch: `fix/end-to-end-contact-emergency-navigation`, PR #29 draft/unmerged. Production remains unchanged. Stitch project is open and the user says its prompt has been submitted; do not overwrite Stitch work or assume it has generated a finished design. Use Stitch for visual design; AI Studio later for a separate AI workflow prototype if useful.
+
+### Changes committed in this review branch
+- Updated credentials modal with full owner-supplied BAMS and PGDEMS qualification names and education details.
+- Updated visible UPI ID and QR alt text to `drkulkarnipg@upi`.
+- Fixed the encoded UPI payment URI so it uses `pa=drkulkarnipg%40upi` rather than the previous SBI ID.
+- No bank account number or IFSC exposed in public UI; no live payment gateway configured.
+- Added a dated owner-request roadmap to `MASTER_TASK_REGISTER.md`.
+
+### Exact verification status
+- Source-level check confirms the visible UPI text and encoded payment URI were updated in the review branch. QR has NOT been scanned and payee not verified in a real UPI app; do not collect payment on this evidence alone.
+- These changes are NOT merged into production.
+- Login/email reset, actual owner login configuration, logout/dismissal on the owner's device, desktop/mobile navigation, medicine controls, all calculator reference notes, separate downloadable Form 4/4A, editable multilingual official forms, requisition final signature/page layout, global search/sitemap, secure persistent registers and payment gateway remain to be verified or completed.
+- The URL `225929102026home-visiting-icu-doctor.vercel.app` has not been verified as a real Vercel deployment. Continue on the known repository/PR preview unless the intended project URL is clarified by account evidence.
+
+### Research direction
+Build an original, source-cited and dated patient/caregiver reference library; do not copy proprietary articles from MSD Manual, Mayo Clinic or Cleveland Clinic. Candidate modules: elderly safety/falls/medication checklist; hypertension and home BP log; cardiovascular prevention; diabetes monitoring; COPD action plan; CKD monitoring; cirrhosis red flags; cancer/palliative symptom support; emergency warning signs; caregiver and home-visit preparation checklists. Use relevant government/specialty guidance, explain when normal ranges vary by laboratory/context, and separate patient education from clinician-only protocols.
+
+Next action: continue auditing PR #29 files and tests, fix the encoded UPI/payment issues only on the review branch, then verify the resulting Vercel preview before showing it. Do not merge/deploy without explicit owner approval.

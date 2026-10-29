@@ -70,11 +70,19 @@
     function quickTranslate(langCode) {
       const select = document.querySelector('.goog-te-combo');
       if (select) {
-        select.value = langCode;
+        select.value = langCode === 'en' ? '' : langCode;
         select.dispatchEvent(new Event('change'));
-        showToast("Language changed to: " + langCode.toUpperCase());
+        if (langCode === 'en') {
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        }
+        showToast("Language changed to: " + (langCode === 'en' ? 'ENGLISH' : langCode.toUpperCase()));
       } else {
-        window.location.hash = '#googtrans(en|' + langCode + ')';
+        if (langCode === 'en') {
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+          window.location.hash = '';
+        } else {
+          window.location.hash = '#googtrans(en|' + langCode + ')';
+        }
         location.reload();
       }
     }
@@ -118,7 +126,7 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<details class="language-control"><summary>Language / भाषा</summary><div><p>English original · automatic translations</p><div id="google_translate_element"></div><p id="translationStatus">Load the language menu to choose a supported language. Medical meaning should be checked against the English original.</p><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></div></details>
+<div class="language-control" aria-label="Website language selector"><label class="language-control-label" for="headerLanguageSelect">Language</label><select id="headerLanguageSelect" aria-label="Translate website into a language"><option value="en" selected>English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="am">Amharic</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="my">Burmese</option><option value="ca">Catalan</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jv">Javanese</option><option value="kn">Kannada</option><option value="kk">Kazakh</option><option value="km">Khmer</option><option value="ko">Korean</option><option value="lo">Lao</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="ml">Malayalam</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="mn">Mongolian</option><option value="ne">Nepali</option><option value="no">Norwegian</option><option value="or">Odia</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="si">Sinhala</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="so">Somali</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="uz">Uzbek</option><option value="vi">Vietnamese</option><option value="cy">Welsh</option><option value="yo">Yoruba</option><option value="zu">Zulu</option></select><div id="google_translate_element" aria-hidden="true"></div><span id="translationStatus" class="visually-hidden">Machine translation is provided for convenience. Verify medical instructions against the English original.</span><a class="language-fallback" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" aria-label="More language options">All languages ↗</a></div>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -138,14 +146,16 @@
 <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden md:inline">GMB: Clinic</span>
 </a>
 <!-- 100% INTERACTIVE CALL BUTTON (Works on PC and Mobile) -->
-<a class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" href="tel:+919561394341" data-direct-call title="Click to Call Dr. Kulkarni">
-<i class="fa-solid fa-phone animate-bounce"></i> <span class="font-mono text-sm">9561394341</span>
+<a class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" href="tel:+919561394341" data-direct-call onclick="event.stopPropagation();window.location.href='tel:+919561394341';return false" title="Open phone dialler for Dr. Kulkarni" aria-label="Call Dr. Kulkarni at +91 9561394341">
+<i class="fa-solid fa-phone"></i> <span class="font-mono text-sm">Call 9561394341</span>
 </a>
+<a class="header-whatsapp-action" href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" aria-label="Message Dr. Kulkarni on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
 </div>
 </div>
-<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
+<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal" data-portal-view="overview" aria-current="page">Overview</a><a href="#elderlySection" data-portal-view="home-care">Elderly care</a><a href="#wikiSection" data-portal-view="health-library">Health library</a><a href="#bookingSection" data-portal-view="booking">Book a visit</a><a href="#patientToolsSection" data-portal-view="health-tools">Health tools</a><a href="#patientFaq" data-portal-view="faq">Patient FAQ</a><a href="#exploreHealthSources" data-portal-view="health-sources">Health sources</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
+<aside class="emergency-strip no-print" aria-label="Emergency numbers"><span class="emergency-strip-text"><strong>Emergency?</strong> For immediate danger, call 112 or 108.</span><span class="emergency-strip-actions"><a href="tel:112" aria-label="Call emergency number 112">Call 112</a><a href="tel:108" aria-label="Call ambulance number 108">Call 108</a></span><span class="emergency-strip-note">Dr. Kulkarni’s number is for home-visit requests, not emergency dispatch.</span></aside>
 <!-- Editorial home-care introduction -->
 <section class="portal-hero" aria-labelledby="portalHeroTitle">
 <div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
@@ -157,11 +167,11 @@
 <aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
 <svg class="care-mark" aria-hidden="true" viewBox="0 0 260 170" fill="none"><path d="M42 92 130 22 218 92M65 75v70h130V75" stroke="currentColor" stroke-width="2"/><path d="M117 79h26v18h18v26h-18v18h-26v-18H99V97h18V79Z" stroke="currentColor" stroke-width="2"/><circle cx="205" cy="38" r="14" stroke="currentColor"/><path d="M29 130h23m158 0h23M194 38h22m-11-11v22" stroke="currentColor"/></svg>
 <h3>Here for your<br/>next step.</h3><p>Dhayari, Pune · 411041<br/>Home visits across Pune &amp; PCMC; availability confirmed by the doctor.</p>
-<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a></div>
+<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call onclick="event.stopPropagation();window.location.href='tel:+919561394341';return false" class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a><a href="mailto:drkulkarnipg@gmail.com" class="hero-email">Email</a></div>
 <button onclick="openCredentialsModal()" type="button" class="compass-credentials">Qualifications &amp; registration →</button></aside>
 </section>
 <nav class="care-pathways" aria-label="Start with what you need"><a href="#bookingSection"><span class="pathway-number">01</span><div><strong>Care at home</strong><p>Plan a visit and estimate the fee.</p></div><span aria-hidden="true">↗</span></a><a href="#wikiSection"><span class="pathway-number">02</span><div><strong>Understand your health</strong><p>Practical, referenced guidance.</p></div><span aria-hidden="true">↗</span></a><a href="#patientToolsSection"><span class="pathway-number">03</span><div><strong>Know your numbers</strong><p>Simple tools, clearly explained.</p></div><span aria-hidden="true">↗</span></a></nav>
-<section id="elderlySection" class="home-care-section"><span class="section-eyebrow">Better days at home</span><div class="section-intro"><h3>Small steps.<br/>Meaningful everyday care.</h3><p>For older adults, people recovering from illness and the families beside them. Build the daily plan with your healthcare team.</p></div><div class="home-care-grid">
+<section id="elderlySection" class="home-care-section"><span class="section-eyebrow">Better days at home</span><div class="section-intro"><h3>Elderly care at home.</h3><p>Practical support for older adults and the families caring for them. Build an individual daily plan with the patient’s healthcare team.</p></div><div class="home-care-grid">
 <article><span class="care-icon"><i class="fa-solid fa-bed" aria-hidden="true"></i></span><h4>Protect skin &amp; comfort</h4><ul><li>Agree an individual repositioning and pressure-relief plan.</li><li>Check skin, moisture and comfort; report persistent redness or broken skin.</li><li>Use the support surface and wound-care plan advised for the patient.</li></ul><a href="https://www.nice.org.uk/guidance/cg179/chapter/Recommendations" target="_blank" rel="noopener noreferrer">Pressure-injury guidance ↗</a></article>
 <article><span class="care-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span><h4>Support stroke recovery</h4><ul><li>Follow the swallowing assessment and prescribed food textures.</li><li>Support an upright, comfortable position for meals.</li><li>Stop feeding and seek help for choking, new breathlessness or reduced alertness.</li></ul><a href="https://www.nhs.uk/conditions/swallowing-problems-dysphagia/" target="_blank" rel="noopener noreferrer">Swallowing information ↗</a></article>
 <article><span class="care-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span><h4>Live well with kidney disease</h4><ul><li>Keep dialysis, medicine and blood-test appointments.</li><li>Ask for your individual fluid, salt and potassium plan.</li><li>Changes to dialysis frequency belong with the nephrology team.</li></ul><a href="https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis" target="_blank" rel="noopener noreferrer">Kidney-care information ↗</a></article>
@@ -172,8 +182,8 @@
 <span class="section-eyebrow">Telemedicine · by confirmed appointment</span>
 <h3 id="onlineConsultationTitle">Online consultation <span class="online-consultation-fee">₹500</span></h3>
 <p>For stable patients seeking follow-up advice, review of existing reports or guidance about the next step. The doctor confirms availability and whether an online consultation is suitable. An in-person examination may still be needed. This fee is for an online consultation; home-visit fees are separate.</p>
-<div class="online-consultation-warning" aria-labelledby="onlineConsultationEmergencyTitle"><h4 id="onlineConsultationEmergencyTitle">Severe symptoms need urgent in-person care</h4><p>Severe chest pain, severe difficulty breathing, sudden weakness of the face or arm or difficulty speaking, collapse or loss of consciousness: seek emergency medical help immediately. Do not wait for an online appointment, a reply or payment confirmation.</p><p lang="mr">छातीत तीव्र दुखणे, तीव्र श्वासोच्छ्वासाचा त्रास, अचानक चेहरा किंवा हात कमजोर होणे अथवा बोलताना अडचण, कोसळणे किंवा बेशुद्धी—अशी लक्षणे असल्यास तातडीची प्रत्यक्ष वैद्यकीय मदत घ्या. ऑनलाइन भेट, उत्तर किंवा पैसे भरल्याच्या पुष्टीची वाट पाहू नका.</p></div>
-<p lang="mr">ऑनलाइन सल्ला: ₹५००. प्रकृती स्थिर असलेल्या रुग्णांचा फॉलो-अप, आधीच्या तपासणी अहवालांचा आढावा आणि पुढील मार्गदर्शन यासाठी. ऑनलाइन सल्ला योग्य आहे का आणि वेळ उपलब्ध आहे का, हे डॉक्टर निश्चित करतील. प्रत्यक्ष तपासणीची गरज पडू शकते. घरभेटीचे शुल्क वेगळे आहे.</p>
+<div class="online-consultation-warning" aria-labelledby="onlineConsultationEmergencyTitle"><h4 id="onlineConsultationEmergencyTitle">Severe symptoms need urgent in-person care</h4><p>Severe chest pain, severe difficulty breathing, sudden weakness of the face or arm or difficulty speaking, collapse or loss of consciousness: seek emergency medical help immediately. Do not wait for an online appointment, a reply or payment confirmation.</p></div>
+
 <a href="tel:+919561394341" data-direct-call class="online-consultation-enquiry">Call 9561394341 to discuss availability</a>
 <p class="online-consultation-reference">Emergency-care principle: <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank" rel="noopener noreferrer">MoHFW telemedicine guidance ↗</a></p>
 </section>
@@ -181,7 +191,8 @@
 <section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="bookingSection"><span class="section-eyebrow">Home visit · booking &amp; dispatch</span>
 <div class="max-w-4xl">
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">A home visit, planned clearly.</h3>
-<p class="text-xs text-slate-600 mb-4">Choose the visit details to see an estimate. Send a WhatsApp request with your address and optional location pin; the doctor confirms availability and the final fee.</p>
+<p class="text-sm text-slate-600 mb-4">Need help quickly? Enter only what you know, attach your latest prescription or discharge summary if available, and send the request. You can add details later; the doctor confirms availability and the final fee. For an emergency, call 112/108 now.</p>
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
@@ -211,6 +222,7 @@
 <input id="bkGpsMapUrl" type="hidden" value=""/>
 </div>
 </div>
+<fieldset class="quick-clinical-intake"><legend>Quick patient details (optional — do not delay urgent care)</legend><div class="quick-intake-grid"><label>Current complaints<input id="quickComplaints" type="text" maxlength="500" placeholder="What is troubling the patient?"/></label><label>Known case / medical history<input id="quickKnownCase" type="text" maxlength="500" placeholder="e.g. diabetes, heart disease"/></label><label>Known allergies<input id="quickAllergies" type="text" maxlength="300" placeholder="Medicines / food / unknown"/></label><label>Past surgeries<input id="quickSurgeries" type="text" maxlength="300" placeholder="If any"/></label><label>Last menstrual period (if relevant)<input id="quickLmp" type="date"/></label><label>Height (cm)<input id="quickHeight" type="number" min="30" max="250" step="0.1" inputmode="decimal"/></label><label>Weight (kg)<input id="quickWeight" type="number" min="1" max="500" step="0.1" inputmode="decimal"/></label><label>BMI (calculated from entered height/weight)<output id="quickBmi" aria-live="polite">—</output></label><label>Temperature (°C)<input id="quickTemperature" type="number" min="25" max="45" step="0.1" inputmode="decimal" placeholder="If measured"/></label><label>Current medicines / reconciliation notes<input id="quickMedicines" type="text" maxlength="1000" placeholder="Medicine names, dose, frequency, last dose"/></label></div><div class="quick-intake-files"><label>Attach latest prescription / discharge summary<input id="quickClinicalFiles" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*" multiple/></label><label>Attach medicine reconciliation form (if available)<input id="quickMedicationFile" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*"/></label><p>Attachments are shared only when you choose a supported device share target. If your browser cannot share files, WhatsApp may open with the text request and you may need to attach the files manually.</p></div></fieldset>
 <!-- Time Slab with Live Auto-Detector -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
@@ -260,64 +272,58 @@
               </button>
 </div>
 </div>
-<details class="payment-methods" id="paymentMethods"><summary>Payment methods · UPI</summary><p>UPI ID: <strong>9561394341@sbi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=9561394341%40sbi&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary>Show payment QR</summary><img alt="UPI payment QR" id="upiQrImg" loading="lazy"/><p>Google Pay / PhonePe / Paytm / BHIM</p></details></details>
+<details class="payment-methods" id="paymentMethods" open><summary>Payment methods · UPI / bank transfer options</summary><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=drkulkarnipg%40upi&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails" open><summary>Scan to pay with UPI</summary><img alt="UPI payment QR code for drkulkarnipg@upi; verify the payee name before paying" id="upiQrImg" loading="eager"/><p>Scan with a UPI app, then verify the payee name and amount before approving payment.</p></details><div class="payment-provider-grid" aria-label="Other payment methods"><div><strong>UPI</strong><span>QR / UPI app — verify recipient before paying.</span></div><div><strong>Razorpay</strong><span>Available after merchant account and verified checkout configuration.</span></div><div><strong>BillDesk</strong><span>Available after merchant onboarding and verified checkout configuration.</span></div><div><strong>NEFT / bank transfer</strong><span>Bank details will be shown only after the account holder supplies and verifies them.</span></div></div></details>
 </div>
 </div>
 </section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919561394341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
 <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS -->
-<section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
+<section id="exploreHealthSources" class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
+<div class="source-translation-panel no-print" aria-label="Translate an external health source"><label>Original article / document URL<input id="healthSourceTranslateUrl" type="url" placeholder="https://publisher.example/article" inputmode="url"/></label><label>Translate original into<select id="healthSourceTranslateLanguage"><option value="en" selected>English</option><option value="ar">Arabic</option><option value="bn">Bengali</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="fr">French</option><option value="de">German</option><option value="gu">Gujarati</option><option value="hi">Hindi</option><option value="id">Indonesian</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="kn">Kannada</option><option value="ko">Korean</option><option value="ml">Malayalam</option><option value="mr">Marathi</option><option value="ne">Nepali</option><option value="or">Odia</option><option value="fa">Persian</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="ru">Russian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option></select></label><button type="button" id="translateHealthSourceButton">Open translated source ↗</button><p id="healthSourceTranslateStatus" role="status" aria-live="polite" style="grid-column:1/-1;margin:0;font-size:11px;color:#536b7d">Opens Google's translated-source view in a new tab when the publisher permits it. Some sites block translation or require login.</p></div>
 <div class="flex flex-wrap justify-between items-center border-b pb-2">
 <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide">Explore health resources</h3>
-<span class="text-[11px] text-teal-800 font-semibold">Original sources · Marathi translation links</span>
+<span class="text-[11px] text-teal-800 font-semibold">Original source links · use the language selector above</span>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5 pt-1">
 <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-blue-950">🇺🇸 CDC.gov</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-blue-700 underline font-semibold" href="https://www.cdc.gov/" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.cdc.gov/" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-blue-700 underline font-semibold" href="https://www.cdc.gov/" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">🏥 Cleveland</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://my.clevelandclinic.org/health" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://my.clevelandclinic.org/health" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://my.clevelandclinic.org/health" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">🏥 Mayo Clinic</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://www.mayoclinic.org/patient-care-and-health-information" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.mayoclinic.org/patient-care-and-health-information" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://www.mayoclinic.org/patient-care-and-health-information" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">📚 MSD Manuals</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://www.msdmanuals.com/home" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.msdmanuals.com/home" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://www.msdmanuals.com/home" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">🧪 Testing.com</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://www.testing.com/" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.testing.com/" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://www.testing.com/" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">☢️ RadiologyInfo</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://www.radiologyinfo.org/" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-1">
 <p class="font-bold text-teal-950">🇬🇧 NICE UK</p>
 <div class="flex justify-center gap-1 text-[10px]">
-<a class="text-teal-700 underline font-semibold" href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">Original ↗</a>|
-            <a class="text-teal-800 font-bold" href="https://translate.google.com/translate?sl=auto&amp;tl=mr&amp;u=https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">मराठी ↗</a>
+<a class="text-teal-700 underline font-semibold" href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">Original ↗</a>
 </div>
 </div>
 </div>
@@ -346,7 +352,7 @@
 <div>
 <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">CLINICAL BASE &amp; REACH</h4>
 <p class="text-slate-300">Base Station: Dhayari, Pune – 411041, Maharashtra</p>
-<p class="text-slate-300">Direct Helpline: <a href="tel:+919561394341" data-direct-call class="contact-board-phone">Call +91 9561394341</a></p>
+<p class="text-slate-300">Home-visit requests: <a href="tel:+919561394341" data-direct-call class="contact-board-phone">Call +91 9561394341</a></p>
 </div>
 <div>
 <h4 class="font-bold text-amber-100 text-sm mb-2 serif-brand">VISIT REQUESTS</h4>
@@ -367,7 +373,7 @@
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabPath" onclick="switchDocTab('pathReq')">🩸 Lab Slip</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabRad" onclick="switchDocTab('radReq')">☢️ Radiology Slip</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCertificates" onclick="switchDocTab('clinicalCertificates')">📜 Referral, Consent &amp; Fitness</button>
-<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Certificates (4A, 4, 2)</button>
+<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Forms (4A, 4, 2)</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabDrug" onclick="switchDocTab('drugDir')">💊 1-Click Formulary &amp; CIMS</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabArticles" onclick="switchDocTab('articlesHub')">📑 Article Manager &amp; Moon-Reader</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabSet" onclick="switchDocTab('settingsTab')">⚙️ Settings</button>
@@ -390,11 +396,19 @@
 <a class="bg-cyan-700 hover:bg-cyan-600 text-white font-bold px-2 py-1.5 rounded-lg" href="https://pubmed.ncbi.nlm.nih.gov/" id="btnAiPubmed" onclick="navigateAI(event, 'pubmed')" rel="noopener noreferrer" target="_blank" title="PubMed NLM NCBI">PubMed ↗</a>
 </div>
 </div>
+<div class="hidden space-y-5" id="viewRegistersBilling">
+<section class="workstation-heading"><span class="section-eyebrow">Clinic administration</span><h2 class="text-2xl font-bold">Registers &amp; billing</h2><p>Daily patient register · Death register · Stock register · Invoice copy</p><p class="login-security-note"><strong>Review-preview limitation:</strong> entries remain in memory only and are cleared when this page reloads. Do not use this prototype as the official register or for long-term patient records. Secure server-side storage and access/audit controls must be configured before clinical use.</p></section>
+<div id="registersBillingPanel">
+<section><h3>Daily patient register</h3><p>Record only information required for authorised clinic administration.</p><form id="dailyPatientRegisterForm" class="lock-form"><label>Date<input name="date" type="date" required/></label><label>Patient name / approved identifier<input name="patient" maxlength="120" required/></label><label>Age (years)<input name="age" type="number" min="0" max="125"/></label><label>Visit / service<input name="service" maxlength="160" required/></label><label>Fee (₹)<input name="fee" type="number" min="0" step=".01"/></label><button type="submit">Add patient entry</button></form><div id="dailyPatientRegisterList" aria-live="polite"></div><button type="button" data-register-export="daily" class="no-print">Export CSV</button></section>
+<section><h3>Death register</h3><p>Restricted sensitive record. Use the current prescribed government register/form; this screen is not a replacement for the statutory format.</p><form id="deathRegisterForm" class="lock-form"><label>Date of death<input name="date" type="date" required/></label><label>Authorised record / certificate number<input name="reference" maxlength="100" required/></label><label>Recorded by<input name="recordedBy" maxlength="120" required/></label><label>Note (minimum necessary)<input name="note" maxlength="200"/></label><button type="submit">Add death-register entry</button></form><div id="deathRegisterList" aria-live="polite"></div><button type="button" data-register-export="death" class="no-print">Export CSV</button></section>
+<section><h3>Stock register</h3><p>Track stock movement; verify batch, expiry, storage and applicable drug-record rules.</p><form id="stockRegisterForm" class="lock-form"><label>Date<input name="date" type="date" required/></label><label>Item / medicine<input name="item" maxlength="140" required/></label><label>Batch / lot<input name="batch" maxlength="100"/></label><label>Expiry date<input name="expiry" type="date"/></label><label>Quantity received (+) / issued (−)<input name="quantity" type="number" step="any" required/></label><label>Unit<input name="unit" maxlength="30" required/></label><button type="submit">Add stock movement</button></form><div id="stockRegisterList" aria-live="polite"></div><button type="button" data-register-export="stock" class="no-print">Export CSV</button></section>
+<section><h3>Invoice copy</h3><p>Generate a printable one-page invoice/receipt. A payment receipt must reflect actual verified payment; do not mark an unpaid invoice as paid.</p><form id="invoiceBuilderForm" class="lock-form"><label>Invoice number<input name="number" maxlength="60" placeholder="INV-2026-001" required/></label><label>Invoice date<input name="date" type="date" required/></label><label>Patient / customer name<input name="customer" maxlength="120" required/></label><label>Service description<input name="service" maxlength="180" required/></label><label>Amount (₹)<input name="amount" type="number" min="0" step=".01" required/></label><label>Payment status<select name="status"><option value="Unpaid">Unpaid</option><option value="Paid — verified">Paid — verified</option><option value="Partially paid — verify amount">Partially paid — verify amount</option></select></label><label>Actual payment reference (optional)<input name="paymentReference" maxlength="100"/></label><button type="submit">Build invoice copy</button></form><div id="invoicePreview" aria-live="polite"></div><button type="button" id="invoicePrintButton" class="no-print" disabled>Print / Save as PDF</button><button type="button" id="invoiceShareButton" class="no-print" disabled>Share invoice PDF</button></section>
+</div></div>
 <!-- TAB 1: A4 PRESCRIPTION PAD -->
 <div class="space-y-4" id="viewRxPad">
 <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border shadow-sm">
 <div class="flex items-center gap-2">
-<input class="text-xs border p-1.5 rounded-lg w-44 font-mono outline-none" id="rxPatPhone" placeholder="Patient 10-Digit Mobile" type="text"/>
+<input class="text-xs border p-1.5 rounded-lg w-44 font-mono outline-none" id="rxPatPhone" placeholder="Patient 10-Digit Mobile" type="text"/><label class="no-print text-[11px] font-semibold">Doctor signature image (PNG/JPG)<input id="rxSignatureUpload" type="file" accept="image/png,image/jpeg,image/webp" class="block max-w-56 mt-1 text-[10px]"/></label><span id="rxSignatureStatus" class="no-print text-[10px] text-slate-500" role="status">Signature image is session-only.</span>
 </div>
 <div class="flex flex-wrap gap-2">
 <select class="text-xs bg-amber-50 border border-amber-300 text-amber-900 font-semibold rounded-xl px-2.5 py-1.5" id="prescriptionDietPreset" aria-label="Diet guidance preset" onchange="insertDietPreset(this.value)">
@@ -408,7 +422,7 @@
 <button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="savePatientPrescriptionToCloud()">
 <i class="fa-solid fa-cloud-arrow-up"></i> ☁️ Patient Cloud Save
           </button>
-<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription_Dr_Kulkarni.pdf')">
+<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
           </button>
 <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="printClinicalDocument('rxSheet')">🖨️ Print</button>
@@ -433,8 +447,8 @@
 <div>
 <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
 <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
-<p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
-<p class="text-[11px] text-slate-600">Emergency Helpline: <strong>+91 9561394341</strong> | Email: Drkulkarnipg@gmail.com</p>
+<p class="prescription-registration-line">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
+<p class="prescription-contact-line">Home-visit requests: <a href="tel:+919561394341" data-direct-call>+91 9561394341</a></p>
 </div>
 </div>
 <div class="text-right text-[11px]">
@@ -443,7 +457,7 @@
 </div>
 <div class="bg-red-50 border-l-4 border-red-600 p-2 rounded-r-xl text-red-900 font-bold flex items-center justify-between">
 <span>⚠️ KNOWN DRUG ALLERGIES:</span>
-<input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="NKDA (No Known Drug Allergies)"/>
+<input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" placeholder="Record allergies after checking with the patient or source documents"/>
 </div>
 <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
 <div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
@@ -496,9 +510,10 @@
 <div class="pt-4 border-t flex justify-between items-end">
 <div>
 <p><strong>Next Review:</strong> <input class="border-b px-1 font-semibold" id="rxFollowUp" type="text" value="After 3 Days / SOS in emergency"/></p>
-<p class="text-[10px] text-red-600 mt-1">⚠️ In emergency (severe breathlessness / chest pain), call 9561394341 immediately.</p>
+<p class="text-[10px] text-red-600 mt-1">⚠️ In an emergency (including severe breathlessness or chest pain), call <a href="tel:112">112</a> or <a href="tel:108">108</a> immediately. Dr. Kulkarni’s number <a href="tel:+919561394341">9561394341</a> is for home-visit requests.</p>
 </div>
 <div class="text-center">
+<img id="rxDoctorSignatureImage" alt="Doctor signature image" hidden style="display:none;max-width:150px;max-height:42px;object-fit:contain;margin:0 auto 4px"/>
 <div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
 <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
 <p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
@@ -684,7 +699,7 @@
 <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl" id="pathCheckboxesGrid">
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Coagulation:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
+<label class="flex items-center gap-1.5"><input id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
 <label class="flex items-center gap-1.5"><input id="t_esr" type="checkbox" value="ESR (Westergren)"/> ESR (Westergren)</label>
 <label class="flex items-center gap-1.5"><input id="t_pt" type="checkbox" value="PT / INR (Coagulation)"/> PT / INR (Coagulation)</label>
 <label class="flex items-center gap-1.5"><input id="t_ddimer" type="checkbox" value="D-Dimer Quantitative"/> D-Dimer Quantitative</label>
@@ -693,8 +708,8 @@
 </div>
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Panels:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
-<label class="flex items-center gap-1.5"><input checked="" id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
+<label class="flex items-center gap-1.5"><input id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
+<label class="flex items-center gap-1.5"><input id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
 <label class="flex items-center gap-1.5"><input id="t_lft" type="checkbox" value="LFT Complete"/> LFT Complete</label>
 <label class="flex items-center gap-1.5"><input id="t_sugar" type="checkbox" value="Blood Sugar Fasting/PP"/> Fasting / PP Sugar</label>
 <label class="flex items-center gap-1.5"><input id="t_hba1c" type="checkbox" value="HbA1c"/> HbA1c</label>
@@ -715,7 +730,7 @@
 <textarea class="w-full border p-2 rounded-xl" id="pathNotes" placeholder="e.g. Sputum for AFB/GeneXpert, Urine Culture..." rows="2"></textarea>
 </div>
 <div class="pt-4 border-t flex justify-between items-end">
-<p class="text-[11px] text-slate-500">Urgent reports requested via WhatsApp: 9561394341</p>
+<p class="text-[11px] text-slate-500">Urgent reports requested via WhatsApp: <a href="tel:+919561394341" data-direct-call>9561394341</a></p>
 <div class="text-center">
 <div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
 <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
@@ -747,12 +762,14 @@
 </div>
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
-<p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-<label class="flex items-center gap-2"><input checked="" id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
-<label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
-<label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
-<label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="Bedside 2D Echo"/> <strong>Bedside 2D Echocardiography</strong></label>
+<p class="font-bold text-purple-900 border-b pb-1">Imaging requested:</p>
+<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Chest X-Ray"/> <strong>Chest X-Ray</strong><select id="rad_cxr_view" aria-label="Chest X-Ray view" class="border rounded p-1"><option value="AP">A/P (AP) view</option><option value="PA">PA view</option></select></label>
+<label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="USG Abdomen &amp; Pelvis"/> <strong>USG Abdomen &amp; Pelvis</strong></label>
+<label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Color Doppler — Venous (Lower Limb)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_dop_a" type="checkbox" value="Arterial Color Doppler Lower Limb"/> <strong>Color Doppler — Arterial (Lower Limb)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="2D Echocardiography"/> <strong>2D Echocardiography</strong></label>
 <label class="flex items-center gap-2"><input id="rad_ct_brain" type="checkbox" value="NCCT Brain (Stroke)"/> <strong>NCCT Brain (Stroke Protocol)</strong></label>
+<label class="radiology-custom-test"><span>Other investigation / test</span><input id="rad_custom_test" type="text" placeholder="Type any additional test or view" /></label>
 </div>
 <div class="space-y-2">
 <label class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
@@ -760,7 +777,7 @@
 </div>
 </div>
 <div class="pt-6 border-t flex justify-between items-end">
-<p class="text-[11px] text-slate-500">Confirm technician ETA with attending ICU doctor: 9561394341</p>
+<p class="text-[11px] text-slate-500">Confirm technician ETA with attending ICU doctor: <a href="tel:+919561394341" data-direct-call>9561394341</a></p>
 <div class="text-center">
 <div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
 <p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
@@ -827,20 +844,21 @@
 </div>
 </div>
 <!-- 3. MEDICAL FITNESS CERTIFICATE -->
-<div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cdoc-fitness"><section class="certificate-page"><div class="certificate-letterhead"><strong>DR. PRAMOD G. KULKARNI</strong><p>BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg. No. I-24809-A-1</p><p>Home Visiting ICU Doctor &amp; Emergency Specialist | Dhayari, Pune - 411041 | 9561394341</p></div><div class="certificate-title"><h2>MEDICAL FITNESS CERTIFICATE</h2><p>Fitness to resume work / duties</p></div><div class="certificate-grid"><label class="certificate-field" for="fitNo"><span>Certificate / record no.</span><input id="fitNo" maxlength="240" type="text"/></label><label class="certificate-field" for="fitExamDate"><span>Date of personal examination</span><input id="fitExamDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitName"><span>Patient full name</span><input id="fitName" maxlength="240" type="text"/></label><label class="certificate-field" for="fitAgeSex"><span>Age / sex</span><input id="fitAgeSex" maxlength="240" type="text"/></label><label class="certificate-field" for="fitRelative"><span>Parent / spouse name</span><input id="fitRelative" maxlength="240" type="text"/></label><label class="certificate-field" for="fitPurpose"><span>Employer / institution and purpose</span><input id="fitPurpose" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="fitAddress"><span>Patient address</span><textarea id="fitAddress" maxlength="1800" rows="2"></textarea></label></div><label class="certificate-field certificate-wide" for="fitDiagnosis"><span>Illness / clinical condition assessed</span><textarea id="fitDiagnosis" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="fitTreatmentFrom"><span>Treatment / leave from</span><input id="fitTreatmentFrom" maxlength="240" type="date"/></label><label class="certificate-field" for="fitTreatmentTo"><span>Treatment / leave to</span><input id="fitTreatmentTo" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="fitRecords"><span>Previous medical certificates / records reviewed</span><textarea id="fitRecords" maxlength="1800" rows="2"></textarea></label><p class="certificate-statement">Following personal examination and consideration of the clinical findings and records entered above, my assessment of fitness for the stated work is:</p><label class="certificate-field certificate-wide" for="fitAssessment"><span>Assessment</span><select id="fitAssessment"><option value=""></option><option>Fit to resume the stated duties</option><option>Fit with the restrictions specified below</option><option>Further assessment required - fitness not certified</option></select></label><div class="certificate-grid"><label class="certificate-field" for="fitResumeDate"><span>Effective / proposed return date</span><input id="fitResumeDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitReviewDate"><span>Review date, if needed</span><input id="fitReviewDate" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="fitRestrictions"><span>Work restrictions / accommodations / clinical remarks</span><textarea id="fitRestrictions" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="fitIssueDate"><span>Date of issue</span><input id="fitIssueDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitPlace"><span>Place of issue</span><input id="fitPlace" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Signature and seal of medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div><span hidden="" id="fitDateDisplay"></span></section></div>
+<div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cdoc-fitness"><section class="certificate-page"><div class="certificate-letterhead"><strong>DR. PRAMOD G. KULKARNI</strong><p>BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg. No. I-24809-A-1</p><p>Home Visiting ICU Doctor &amp; Emergency Specialist | Dhayari, Pune - 411041 | <a href="tel:+919561394341" data-direct-call>9561394341</a></p></div><div class="certificate-title"><h2>MEDICAL FITNESS CERTIFICATE</h2><p>Fitness to resume work / duties</p></div><div class="certificate-grid"><label class="certificate-field" for="fitNo"><span>Certificate / record no.</span><input id="fitNo" maxlength="240" type="text"/></label><label class="certificate-field" for="fitExamDate"><span>Date of personal examination</span><input id="fitExamDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitName"><span>Patient full name</span><input id="fitName" maxlength="240" type="text"/></label><label class="certificate-field" for="fitAgeSex"><span>Age / sex</span><input id="fitAgeSex" maxlength="240" type="text"/></label><label class="certificate-field" for="fitRelative"><span>Parent / spouse name</span><input id="fitRelative" maxlength="240" type="text"/></label><label class="certificate-field" for="fitPurpose"><span>Employer / institution and purpose</span><input id="fitPurpose" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="fitAddress"><span>Patient address</span><textarea id="fitAddress" maxlength="1800" rows="2"></textarea></label></div><label class="certificate-field certificate-wide" for="fitDiagnosis"><span>Illness / clinical condition assessed</span><textarea id="fitDiagnosis" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="fitTreatmentFrom"><span>Treatment / leave from</span><input id="fitTreatmentFrom" maxlength="240" type="date"/></label><label class="certificate-field" for="fitTreatmentTo"><span>Treatment / leave to</span><input id="fitTreatmentTo" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="fitRecords"><span>Previous medical certificates / records reviewed</span><textarea id="fitRecords" maxlength="1800" rows="2"></textarea></label><p class="certificate-statement">Following personal examination and consideration of the clinical findings and records entered above, my assessment of fitness for the stated work is:</p><label class="certificate-field certificate-wide" for="fitAssessment"><span>Assessment</span><select id="fitAssessment"><option value=""></option><option>Fit to resume the stated duties</option><option>Fit with the restrictions specified below</option><option>Further assessment required - fitness not certified</option></select></label><div class="certificate-grid"><label class="certificate-field" for="fitResumeDate"><span>Effective / proposed return date</span><input id="fitResumeDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitReviewDate"><span>Review date, if needed</span><input id="fitReviewDate" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="fitRestrictions"><span>Work restrictions / accommodations / clinical remarks</span><textarea id="fitRestrictions" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="fitIssueDate"><span>Date of issue</span><input id="fitIssueDate" maxlength="240" type="date"/></label><label class="certificate-field" for="fitPlace"><span>Place of issue</span><input id="fitPlace" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Signature and seal of medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div><span hidden="" id="fitDateDisplay"></span></section></div>
 <!-- 4. MEDICAL LEAVE / UNFITNESS -->
-<div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cdoc-leave"><section class="certificate-page"><div class="certificate-letterhead"><strong>DR. PRAMOD G. KULKARNI</strong><p>BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg. No. I-24809-A-1</p><p>Home Visiting ICU Doctor &amp; Emergency Specialist | Dhayari, Pune - 411041 | 9561394341</p></div><div class="certificate-title"><h2>MEDICAL CERTIFICATE OF ILLNESS / UNFITNESS</h2><p>Recommendation for leave or extension of leave</p></div><div class="certificate-grid"><label class="certificate-field" for="leaveNo"><span>Certificate / record no.</span><input id="leaveNo" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveExamDate"><span>Date of personal examination</span><input id="leaveExamDate" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveName"><span>Patient full name</span><input id="leaveName" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveAgeSex"><span>Age / sex</span><input id="leaveAgeSex" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveRelative"><span>Parent / spouse name</span><input id="leaveRelative" maxlength="240" type="text"/></label><label class="certificate-field" for="leavePurpose"><span>Employer / institution and purpose</span><input id="leavePurpose" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="leaveAddress"><span>Patient address</span><textarea id="leaveAddress" maxlength="1800" rows="2"></textarea></label></div><label class="certificate-field certificate-wide" for="leaveDiagnosis"><span>Illness / clinical findings</span><textarea id="leaveDiagnosis" maxlength="1800" rows="2"></textarea></label><p class="certificate-statement">After personal examination, I consider absence from the stated duties necessary for recovery from the condition recorded above, for the period and on the terms specified below.</p><div class="certificate-grid"><label class="certificate-field" for="leaveFrom"><span>Recommended absence from</span><input id="leaveFrom" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveTo"><span>Recommended absence through (inclusive)</span><input id="leaveTo" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveDays"><span>Number of days (inclusive)</span><input id="leaveDays" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="leaveReview"><span>Reassessment date</span><input id="leaveReview" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="leaveAdvice"><span>Rest, treatment advice / activity limitations</span><textarea id="leaveAdvice" maxlength="1800" rows="2"></textarea></label><label class="certificate-field certificate-wide" for="leaveNotes"><span>Relevant clinical notes / basis for retrospective dates, if any</span><textarea id="leaveNotes" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="leaveIssueDate"><span>Date of issue</span><input id="leaveIssueDate" maxlength="240" type="date"/></label><label class="certificate-field" for="leavePlace"><span>Place of issue</span><input id="leavePlace" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Signature and seal of medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div><span hidden="" id="leaveDateDisplay"></span></section></div>
+<div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cdoc-leave"><section class="certificate-page"><div class="certificate-letterhead"><strong>DR. PRAMOD G. KULKARNI</strong><p>BAMS, PGDEMS (Symbiosis Pune) | MCIM Reg. No. I-24809-A-1</p><p>Home Visiting ICU Doctor &amp; Emergency Specialist | Dhayari, Pune - 411041 | <a href="tel:+919561394341" data-direct-call>9561394341</a></p></div><div class="certificate-title"><h2>MEDICAL CERTIFICATE OF ILLNESS / UNFITNESS</h2><p>Recommendation for leave or extension of leave</p></div><div class="certificate-grid"><label class="certificate-field" for="leaveNo"><span>Certificate / record no.</span><input id="leaveNo" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveExamDate"><span>Date of personal examination</span><input id="leaveExamDate" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveName"><span>Patient full name</span><input id="leaveName" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveAgeSex"><span>Age / sex</span><input id="leaveAgeSex" maxlength="240" type="text"/></label><label class="certificate-field" for="leaveRelative"><span>Parent / spouse name</span><input id="leaveRelative" maxlength="240" type="text"/></label><label class="certificate-field" for="leavePurpose"><span>Employer / institution and purpose</span><input id="leavePurpose" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="leaveAddress"><span>Patient address</span><textarea id="leaveAddress" maxlength="1800" rows="2"></textarea></label></div><label class="certificate-field certificate-wide" for="leaveDiagnosis"><span>Illness / clinical findings</span><textarea id="leaveDiagnosis" maxlength="1800" rows="2"></textarea></label><p class="certificate-statement">After personal examination, I consider absence from the stated duties necessary for recovery from the condition recorded above, for the period and on the terms specified below.</p><div class="certificate-grid"><label class="certificate-field" for="leaveFrom"><span>Recommended absence from</span><input id="leaveFrom" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveTo"><span>Recommended absence through (inclusive)</span><input id="leaveTo" maxlength="240" type="date"/></label><label class="certificate-field" for="leaveDays"><span>Number of days (inclusive)</span><input id="leaveDays" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="leaveReview"><span>Reassessment date</span><input id="leaveReview" maxlength="240" type="date"/></label></div><label class="certificate-field certificate-wide" for="leaveAdvice"><span>Rest, treatment advice / activity limitations</span><textarea id="leaveAdvice" maxlength="1800" rows="2"></textarea></label><label class="certificate-field certificate-wide" for="leaveNotes"><span>Relevant clinical notes / basis for retrospective dates, if any</span><textarea id="leaveNotes" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="leaveIssueDate"><span>Date of issue</span><input id="leaveIssueDate" maxlength="240" type="date"/></label><label class="certificate-field" for="leavePlace"><span>Place of issue</span><input id="leavePlace" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Signature and seal of medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div><span hidden="" id="leaveDateDisplay"></span></section></div>
 </div>
 <!-- TAB 8: STATUTORY DEATH CERTIFICATES (FORMS 4A, 4 & 2 EXACT LEGAL FORMS) -->
 <div class="hidden space-y-4" id="viewLegalForms">
 <section class="certificate-help no-print" aria-label="Government original PDF downloads"><h3>Government originals — unchanged PDFs</h3><div class="legal-resource-actions"><a href="assets/forms/crs-form4-4a-original.pdf" download>Download original Form 4 + 4A</a><a href="assets/forms/crs-form4-4a-original.pdf#page=1" target="_blank" rel="noopener noreferrer">Open / print Form 4 (page 1)</a><a href="assets/forms/crs-form4-4a-original.pdf#page=3" target="_blank" rel="noopener noreferrer">Open / print Form 4A (page 3)</a><a href="assets/forms/form2-government-reference.pdf" download>Download Form 2 — GHMC reference</a><a href="assets/forms/form2-government-reference.pdf" target="_blank" rel="noopener noreferrer">Open / print Form 2 reference</a></div><p>Form 4 / 4A: official CRS originals, including instructions. Form 2: GHMC government reference edition; confirm the prescribed Maharashtra / local Registrar version before submitting. Open the original and use the PDF viewer’s Print control. Use the editable forms below to type information and export / share a working PDF. Government originals are not rebranded or altered.</p><a href="https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf" target="_blank" rel="noopener noreferrer">Form 2 government source ↗</a> · <a href="assets/forms/sources.json" target="_blank" rel="noopener noreferrer">PDF sources and checksums ↗</a></section>
 
 <aside class="certificate-help no-print"><p>Editable working layouts based on official forms. Use the receiving Registrar's prescribed form / portal where required. Form 4: hospital; Form 4A: non-institutional. Record a disease / injury sequence, not cardiac arrest alone. Entries are not automatically saved or submitted.</p><div><a href="https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf" rel="noopener noreferrer" target="_blank">Official CRS Form 4 / 4A + instructions ↗</a><a href="https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf" rel="noopener noreferrer" target="_blank">Maharashtra CRS handbook (2026) ↗</a></div></aside><div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
-<select class="text-xs font-bold border p-2 rounded-xl bg-amber-50" id="certTypeSelect" onchange="switchCertificateView(this.value)">
+<label class="text-xs font-bold">Form<select class="text-xs font-bold border p-2 rounded-xl bg-amber-50" id="certTypeSelect" onchange="switchCertificateView(this.value)">
 <option value="form4a">Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act)</option>
 <option value="form4">Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act)</option>
 <option value="form2">Form 2 — Death Report to Registrar / PMC Ward</option>
-</select>
+</select></label>
+<label class="text-xs font-bold">Display language<select id="deathFormLanguage" class="text-xs border p-2 rounded-xl bg-white" aria-label="Death form display language" onchange="quickTranslate(this.value)"><option value="en">English</option><option value="mr">Marathi (machine-translated labels)</option></select></label>
 <div class="flex gap-2">
 <button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportCurrentDeathFormPdf()">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
@@ -848,11 +866,18 @@
 <button class="bg-blue-600 text-white text-xs px-4 py-1.5 rounded-xl font-bold shadow" onclick="printActiveCertificate('death')">🖨️ Print Form</button>
 </div>
 </div>
-<!-- FORM 4A (EXACT STATUTORY FORMAT) -->
+<section class="certificate-help no-print" aria-labelledby="signedDeathFormTitle">
+<h3 id="signedDeathFormTitle">Share a photo/scan of the signed original</h3>
+<p>Choose a photo from your device camera/gallery or an existing PDF. Processing stays in this browser; nothing is uploaded automatically. Use only where you are authorised to handle the record.</p>
+<label class="text-xs font-bold">Signed form photo or PDF<input id="signedDeathFormUpload" type="file" accept="image/*,application/pdf" capture="environment" class="block mt-2"/></label>
+<div class="flex flex-wrap gap-2 mt-3"><button type="button" id="signedDeathFormShare" class="bg-blue-700 text-white rounded-lg px-3 py-2 font-bold">Prepare PDF and share</button><button type="button" id="signedDeathFormDownload" class="bg-white border rounded-lg px-3 py-2 font-bold">Download PDF copy</button></div>
+<p id="signedDeathFormStatus" role="status" aria-live="polite">Select a signed form photo or PDF first.</p><div id="signedDeathFormRender" hidden style="position:fixed;left:-10000px;top:0;width:190mm;background:#fff;color:#111;padding:6mm"></div>
+</section>
+<!-- FORM 4A editable working layout; official original PDF is linked above -->
 <div autocomplete="off" class="printable-sheet certificate-sheet" data-certificate-template="true" id="cert-form4a"><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 4A - MEDICAL CERTIFICATE OF CAUSE OF DEATH</h2><p>See Rule 7 | Non-institutional deaths | Not for still births</p></div><p class="certificate-instruction">To accompany Form 2 for reporting to the Registrar.</p><div class="certificate-grid"><label class="certificate-field" for="f4aRelative"><span>Son / daughter / spouse of</span><input id="f4aRelative" maxlength="240" type="text"/></label><label class="certificate-field" for="f4aAddress"><span>Residence of deceased</span><textarea id="f4aAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f4aTreatmentFrom"><span>Under my treatment from</span><input id="f4aTreatmentFrom" maxlength="240" type="date"/></label><label class="certificate-field" for="f4aTreatmentTo"><span>Under my treatment to</span><input id="f4aTreatmentTo" maxlength="240" type="date"/></label></div><p>I certify that the deceased identified below was under my treatment during the dates recorded above and died at the date and time entered below.</p><div class="certificate-grid"><label class="certificate-field" for="f4aName"><span>Name of deceased (full name in capitals)</span><input id="f4aName" maxlength="240" type="text"/></label><label class="certificate-field" for="f4aSex"><span>Sex</span><select id="f4aSex"><option value=""></option><option>Male</option><option>Female</option><option>Transgender person</option></select></label><label class="certificate-field" for="f4aAge"><span>Age at death</span><input id="f4aAge" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="f4aAgeUnit"><span>Age unit</span><select id="f4aAgeUnit"><option value=""></option><option>Completed years</option><option>Completed months (under 1 year)</option><option>Completed days (under 1 month)</option><option>Hours (under 1 day)</option></select></label><label class="certificate-field" for="f4aDeathDate"><span>Date of death</span><input id="f4aDeathDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f4aDeathTime"><span>Time of death (24-hour clock)</span><input id="f4aDeathTime" maxlength="240" type="time"/></label></div><table class="certificate-causes"><thead><tr><th>Part I - causal sequence</th><th>Interval</th></tr></thead><tbody><tr><td><label class="certificate-field" for="f4aA"><span>I(a) Immediate cause: disease, injury or complication</span><textarea id="f4aA" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4aAInterval"><span>Approximate interval from onset to death</span><input id="f4aAInterval" maxlength="240" type="text"/></label></td></tr><tr><td><label class="certificate-field" for="f4aB"><span>I(b) Antecedent cause: due to / as a consequence of</span><textarea id="f4aB" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4aBInterval"><span>Approximate interval from onset to death</span><input id="f4aBInterval" maxlength="240" type="text"/></label></td></tr><tr><td><label class="certificate-field" for="f4aC"><span>I(c) Underlying cause: due to / as a consequence of</span><textarea id="f4aC" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4aCInterval"><span>Approximate interval from onset to death</span><input id="f4aCInterval" maxlength="240" type="text"/></label></td></tr></tbody></table><label class="certificate-field certificate-wide" for="f4aPartII"><span>Part II - other significant contributing conditions outside the Part I sequence</span><textarea id="f4aPartII" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="f4aPregnancy"><span>Was death associated with pregnancy?</span><select id="f4aPregnancy"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label><label class="certificate-field" for="f4aDelivery"><span>If yes, was there a delivery?</span><select id="f4aDelivery"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label><label class="certificate-field" for="f4aVerifyDate"><span>Date of verification</span><input id="f4aVerifyDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f4aStatisticalCode"><span>Statistical office use (leave for office)</span><input id="f4aStatisticalCode" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Name, signature and seal of certifying medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div></section></div>
-<!-- FORM 4 -->
+<!-- FORM 4 editable working layout; official original PDF is linked above -->
 <div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cert-form4"><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 4 - MEDICAL CERTIFICATE OF CAUSE OF DEATH</h2><p>See Rule 7 | Hospital in-patients | Not for still births</p></div><p class="certificate-instruction">Send to the Registrar with Form 2; provide a copy to the nearest relative.</p><div class="certificate-grid"><label class="certificate-field" for="f4Hospital"><span>Name and address of hospital</span><input id="f4Hospital" maxlength="240" type="text"/></label><label class="certificate-field" for="f4Ward"><span>Ward / inpatient record no.</span><input id="f4Ward" maxlength="240" type="text"/></label></div><p>I certify that the person identified below died in the hospital / ward stated above.</p><div class="certificate-grid"><label class="certificate-field" for="f4Name"><span>Name of deceased (full name in capitals)</span><input id="f4Name" maxlength="240" type="text"/></label><label class="certificate-field" for="f4Sex"><span>Sex</span><select id="f4Sex"><option value=""></option><option>Male</option><option>Female</option><option>Transgender person</option></select></label><label class="certificate-field" for="f4Age"><span>Age at death</span><input id="f4Age" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="f4AgeUnit"><span>Age unit</span><select id="f4AgeUnit"><option value=""></option><option>Completed years</option><option>Completed months (under 1 year)</option><option>Completed days (under 1 month)</option><option>Hours (under 1 day)</option></select></label><label class="certificate-field" for="f4DeathDate"><span>Date of death</span><input id="f4DeathDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f4DeathTime"><span>Time of death (24-hour clock)</span><input id="f4DeathTime" maxlength="240" type="time"/></label></div><table class="certificate-causes"><thead><tr><th>Part I - causal sequence</th><th>Interval</th></tr></thead><tbody><tr><td><label class="certificate-field" for="f4A"><span>I(a) Immediate cause: disease, injury or complication</span><textarea id="f4A" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4AInterval"><span>Approximate interval from onset to death</span><input id="f4AInterval" maxlength="240" type="text"/></label></td></tr><tr><td><label class="certificate-field" for="f4B"><span>I(b) Antecedent cause: due to / as a consequence of</span><textarea id="f4B" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4BInterval"><span>Approximate interval from onset to death</span><input id="f4BInterval" maxlength="240" type="text"/></label></td></tr><tr><td><label class="certificate-field" for="f4C"><span>I(c) Underlying cause: due to / as a consequence of</span><textarea id="f4C" maxlength="1800" rows="2"></textarea></label></td><td><label class="certificate-field" for="f4CInterval"><span>Approximate interval from onset to death</span><input id="f4CInterval" maxlength="240" type="text"/></label></td></tr></tbody></table><label class="certificate-field certificate-wide" for="f4PartII"><span>Part II - other significant contributing conditions outside the Part I sequence</span><textarea id="f4PartII" maxlength="1800" rows="2"></textarea></label><div class="certificate-grid"><label class="certificate-field" for="f4Manner"><span>Manner of death</span><select id="f4Manner"><option value=""></option><option>Natural</option><option>Accident</option><option>Suicide</option><option>Homicide</option><option>Pending investigation</option></select></label><label class="certificate-field" for="f4Injury"><span>How did the injury occur? (if applicable)</span><textarea id="f4Injury" maxlength="1800" rows="2"></textarea></label></div><div class="certificate-grid"><label class="certificate-field" for="f4Pregnancy"><span>Was death associated with pregnancy?</span><select id="f4Pregnancy"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label><label class="certificate-field" for="f4Delivery"><span>If yes, was there a delivery?</span><select id="f4Delivery"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label><label class="certificate-field" for="f4VerifyDate"><span>Date of verification</span><input id="f4VerifyDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f4StatisticalCode"><span>Statistical office use (leave for office)</span><input id="f4StatisticalCode" maxlength="240" type="text"/></label></div><div class="certificate-signature"><span>Name, signature and seal of certifying medical practitioner</span><strong>Dr. Pramod G. Kulkarni</strong><span>MCIM Reg. No. I-24809-A-1</span></div></section></div>
-<!-- FORM 2 -->
+<!-- FORM 2 editable working layout; official original PDF is linked above -->
 <div autocomplete="off" class="hidden printable-sheet certificate-sheet" data-certificate-template="true" id="cert-form2"><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 2 - DEATH REPORT</h2><p>See Rule 5 | Legal information | To be filled by the informant</p></div><div class="certificate-grid"><label class="certificate-field" for="f2Name"><span>Name of deceased (full name in capitals)</span><input id="f2Name" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Sex"><span>Sex</span><select id="f2Sex"><option value=""></option><option>Male</option><option>Female</option><option>Transgender person</option></select></label><label class="certificate-field" for="f2Age"><span>Age at death</span><input id="f2Age" maxlength="240" min="0" type="number"/></label><label class="certificate-field" for="f2AgeUnit"><span>Age unit</span><select id="f2AgeUnit"><option value=""></option><option>Completed years</option><option>Completed months (under 1 year)</option><option>Completed days (under 1 month)</option><option>Hours (under 1 day)</option></select></label><label class="certificate-field" for="f2DeathDate"><span>Date of death</span><input id="f2DeathDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f2DeathTime"><span>Time of death (24-hour clock)</span><input id="f2DeathTime" maxlength="240" type="time"/></label></div><div class="certificate-grid"><label class="certificate-field" for="f2DOB"><span>Date of birth, if available</span><input id="f2DOB" maxlength="240" type="date"/></label><label class="certificate-field" for="f2Aadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2Aadhaar" maxlength="240" type="text"/></label></div><h3 class="certificate-section-title">Mother's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2MotherName"><span>Full name</span><input id="f2MotherName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2MotherAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2MotherAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2MotherMobile"><span>Mobile no.</span><input id="f2MotherMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2MotherEmail"><span>Email, if available</span><input id="f2MotherEmail" maxlength="240" type="email"/></label></div><h3 class="certificate-section-title">Father's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2FatherName"><span>Full name</span><input id="f2FatherName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2FatherAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2FatherAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2FatherMobile"><span>Mobile no.</span><input id="f2FatherMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2FatherEmail"><span>Email, if available</span><input id="f2FatherEmail" maxlength="240" type="email"/></label></div><h3 class="certificate-section-title">Spouse's details</h3><div class="certificate-grid"><label class="certificate-field" for="f2SpouseName"><span>Full name</span><input id="f2SpouseName" maxlength="240" type="text"/></label><label class="certificate-field" for="f2SpouseAadhaar"><span>Aadhaar no., if available (optional)</span><input id="f2SpouseAadhaar" maxlength="240" type="text"/></label><label class="certificate-field" for="f2SpouseMobile"><span>Mobile no.</span><input id="f2SpouseMobile" maxlength="240" type="tel"/></label><label class="certificate-field" for="f2SpouseEmail"><span>Email, if available</span><input id="f2SpouseEmail" maxlength="240" type="email"/></label></div><div class="certificate-grid"><label class="certificate-field certificate-wide" for="f2CurrentAddress"><span>Address at the time of death (house, locality, ward, town/village, sub-district, district, state, PIN)</span><textarea id="f2CurrentAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field certificate-wide" for="f2PermanentAddress"><span>Permanent address (house, locality, ward, town/village, sub-district, district, state, PIN)</span><textarea id="f2PermanentAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2PlaceType"><span>Place of death</span><select id="f2PlaceType"><option value=""></option><option>Hospital / institution</option><option>House</option><option>Other place</option></select></label><label class="certificate-field" for="f2PlaceAddress"><span>Name and full address of place of death</span><textarea id="f2PlaceAddress" maxlength="1800" rows="2"></textarea></label></div><h3 class="certificate-section-title">Informant</h3><div class="certificate-grid"><label class="certificate-field" for="f2Informant"><span>Informant full name / relationship</span><input id="f2Informant" maxlength="240" type="text"/></label><label class="certificate-field" for="f2InformantPhone"><span>Mobile / email</span><input id="f2InformantPhone" maxlength="240" type="text"/></label><label class="certificate-field" for="f2InformantAddress"><span>Informant address</span><textarea id="f2InformantAddress" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2ReportDate"><span>Date of reporting</span><input id="f2ReportDate" maxlength="240" type="date"/></label></div><div class="certificate-hand-signature">Signature / thumb impression of informant: ______________________________</div><p class="certificate-footnote">Form 2 reports a death; it is not the death certificate issued by the Registrar. Page 1 of 2.</p></section><section class="certificate-page"><div class="certificate-title"><h2>FORM NO. 2 - DEATH REPORT</h2><p>Statistical information | Detach for statistical processing</p></div><div class="certificate-grid"><label class="certificate-field" for="f2UsualTown"><span>Town / village of usual residence</span><input id="f2UsualTown" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualType"><span>Residence type</span><select id="f2UsualType"><option value=""></option><option>Town</option><option>Village</option></select></label><label class="certificate-field" for="f2UsualSubdistrict"><span>Sub-district</span><input id="f2UsualSubdistrict" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualDistrict"><span>District</span><input id="f2UsualDistrict" maxlength="240" type="text"/></label><label class="certificate-field" for="f2UsualState"><span>State / Union Territory</span><input id="f2UsualState" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Religion"><span>Religion</span><input id="f2Religion" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Occupation"><span>Occupation</span><input id="f2Occupation" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Attention"><span>Medical attention before death</span><select id="f2Attention"><option value=""></option><option>Institutional</option><option>Medical attention outside an institution</option><option>No medical attention</option><option>Unknown</option></select></label><label class="certificate-field" for="f2Certified"><span>Was cause of death medically certified?</span><select id="f2Certified"><option value=""></option><option>Yes</option><option>No</option><option>Unknown</option></select></label><label class="certificate-field certificate-wide" for="f2Cause"><span>Disease / actual cause of death (as per Form 4/4A where available)</span><textarea id="f2Cause" maxlength="1800" rows="2"></textarea></label><label class="certificate-field" for="f2Pregnancy"><span>Death while pregnant, during delivery or within 6 weeks after pregnancy?</span><select id="f2Pregnancy"><option value=""></option><option>Yes</option><option>No</option><option>Not applicable</option><option>Unknown</option></select></label></div><h3 class="certificate-section-title">Habitual use - duration in years, or specify none / unknown</h3><div class="certificate-grid"><label class="certificate-field" for="f2Smoking"><span>Smoking</span><input id="f2Smoking" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Tobacco"><span>Chewing tobacco</span><input id="f2Tobacco" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Arecanut"><span>Areca nut / pan masala</span><input id="f2Arecanut" maxlength="240" type="text"/></label><label class="certificate-field" for="f2Alcohol"><span>Alcohol</span><input id="f2Alcohol" maxlength="240" type="text"/></label></div><h3 class="certificate-section-title">For Registrar use only</h3><div class="certificate-grid"><label class="certificate-field" for="f2RegistrationNo"><span>Registration no.</span><input id="f2RegistrationNo" maxlength="240" type="text"/></label><label class="certificate-field" for="f2RegistrationDate"><span>Registration date</span><input id="f2RegistrationDate" maxlength="240" type="date"/></label><label class="certificate-field" for="f2RegistrationUnit"><span>Registration unit / code</span><input id="f2RegistrationUnit" maxlength="240" type="text"/></label><label class="certificate-field" for="f2RegistrarArea"><span>Town / village / district</span><input id="f2RegistrarArea" maxlength="240" type="text"/></label><label class="certificate-field certificate-wide" for="f2RegistrarRemarks"><span>Remarks</span><textarea id="f2RegistrarRemarks" maxlength="1800" rows="2"></textarea></label></div><div class="certificate-hand-signature">Name, signature and seal of Registrar: ______________________________</div><p class="certificate-footnote">Complete known particulars accurately. Do not invent unknown information. Page 2 of 2.</p></section></div>
 </div>
 <!-- TAB 9: 1-CLICK FORMULARY & CIMS -->
@@ -892,8 +917,8 @@
 <div class="bg-white p-6 md:p-8 rounded-3xl border petal-border shadow-sm space-y-4 text-xs">
 <div class="flex flex-wrap justify-between items-center border-b pb-3 gap-2">
 <div>
-<h4 class="font-bold text-base text-[#0F2942]">✍️ Clinical Article Manager &amp; Moon-Reader Hub</h4>
-<p class="text-slate-500">Import web articles, clinical guidelines, attach photos/videos, or format into reader cards.</p>
+<h4 class="font-bold text-base text-[#0F2942]">✍️ Article Library &amp; Publisher</h4>
+<p class="text-slate-500">Import, organise, review and publish articles. The reader is for reading; publishing is a separate action.</p>
 </div>
 <div class="flex items-center gap-2">
 <input accept=".json,.txt,.md" class="hidden" id="importArticleFileInput" onchange="importArticlesFromFile(this)" type="file"/>
@@ -924,17 +949,18 @@
 </div>
 </div>
 <div>
-<label class="font-bold text-slate-800">Spacious Clinical Content (Or Paste from WebMD/CDC):</label>
-<textarea class="w-full p-3 border rounded-xl bg-white text-xs leading-relaxed mt-1" id="newArtBody" placeholder="Write or paste comprehensive guidelines, foods to avoid, emergency red-flags..." rows="7"></textarea>
+<div class="article-content-import-toolbar" aria-label="Import article content"><strong>Import content into the editor</strong><label class="article-import-button">Choose device file<input id="articleContentFile" type="file" accept=".txt,.md,.html,.json,.pdf,.doc,.docx" hidden/></label><button type="button" id="articleFetchSourceBtn">Load from source URL</button><button type="button" id="articleOpenSourceBtn">Open source in new tab</button><button type="button" id="articleReloadDraftBtn">Reload saved draft</button><span id="articleFetchStatus" role="status" aria-live="polite">Choose a file or add an authorised public URL above.</span></div>
+<label class="font-bold text-slate-800" for="newArtBody">Article content — preserve original wording and references</label>
+<textarea class="w-full p-3 border rounded-xl bg-white text-xs leading-relaxed mt-1" id="newArtBody" placeholder="Write or paste the complete article text here..." rows="12"></textarea>
 </div>
 <button class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl shadow flex items-center gap-1.5 text-xs" onclick="publishNewArticle()">
-          🚀 Publish to Moon-Reader &amp; Patient Portal
+          Publish article to Health Library
         </button>
 </div>
 <!-- Published Articles Container (Moon-Reader Styled Cards) -->
 <div class="petal-box p-6 rounded-3xl space-y-4">
 <div class="flex justify-between items-center border-b pb-2">
-<h4 class="font-bold text-base text-[#0F2942]">📖 Moon-Reader Eye-Comfort Library (PDF Export Available)</h4>
+<h4 class="font-bold text-base text-[#0F2942]">📖 Published Articles — Reading View</h4>
 <span class="text-xs text-amber-900 font-semibold">Comfort Sepia Reader Mode</span>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="publishedArticlesGrid"></div>
@@ -953,20 +979,16 @@
 </div>
 </div>
 <section id="viewClinicalCalculators" class="hidden calculator-workspace"><span class="section-eyebrow">Clinical reference tools</span><h3>Clinical calculators</h3><span class="calc-review-label">Source-reviewed draft · awaiting physician approval</span><p>28 tools for clinician use. Enter the current patient’s measurements and select every assessment explicitly. Values are not auto-filled or saved. Formulas, scope and sources accompany each tool.</p><label class="calculator-search">Find a calculator<input type="search" id="clinicalCalculatorSearch" placeholder="Search name or specialty"/></label><div id="clinicalCalculatorGrid"></div></section><section class="hidden everyday-tools" id="viewEverydayTools"><span class="section-eyebrow">Practical tools</span><h3>Diet presets &amp; conversions</h3><p>Choose a diet guidance preset to append to the prescription advice. Review and individualise it before signing. Existing advice is retained.</p><div id="dietPresetCards" class="nutrition-grid"></div><button type="button" class="research-upload" onclick="switchDocTab('rxPad')">Open prescription &amp; review advice</button><div id="workstationConversionHost"></div></section><section class="hidden space-y-6 patient-trends" id="viewChart20"><span class="section-eyebrow">Separate records for each patient</span><h3>Patient trends</h3><p>Each patient has a separate history. Device copies stay in this browser. An explicit cloud save uploads a generated patient code, readings and documented permission; local display names are not sent by the new flow. Do not put identifying information in notes. Exported files and other devices are separate.</p><section class="cloud-record-panel no-print" aria-labelledby="cloudRecordTitle"><h4 id="cloudRecordTitle">Private cloud records</h4><p id="cloudConnectionStatus" role="status">Cloud connection needs configuration. Your existing local records are unchanged.</p><form id="cloudSignInForm" hidden><label>Clinic owner email<input type="email" id="cloudLoginEmail" autocomplete="username" required/></label><label>Cloud password<input type="password" id="cloudLoginPassword" autocomplete="current-password" required/></label><button type="submit">Sign in to cloud</button></form><div id="cloudSignedInControls" hidden><button type="button" id="cloudSavePatient">Save selected patient to cloud</button><button type="button" id="cloudRefreshPatients">Refresh cloud patient list</button><label>Open a cloud patient<select id="cloudPatientSelect"><option value="">Choose cloud patient</option></select></label><button type="button" id="cloudOpenPatient">Open selected cloud patient</button><button type="button" id="cloudSignOut">Sign out of cloud</button><p>After the first successful cloud save, changes for that linked patient auto-sync while you are signed in. New local histories need their first cloud save. A success message confirms each save; offline edits stay local until you retry. Sign in on your other device to open cloud histories. Signing out ends cloud access; downloaded local copies remain on this browser.</p></div><button type="button" id="cloudCheckConnection">Check cloud connection</button><a href="CLOUD_RECORDS_SETUP.md" target="_blank" rel="noopener noreferrer">Cloud setup guide ↗</a><p id="cloudActionStatus" role="status" aria-live="polite"></p></section><div class="trend-patient-toolbar no-print"><label>Patient<select id="trendPatientSelect"><option value="">Choose patient</option></select></label><form id="trendAddPatientForm"><label>New patient name / code<input id="trendNewPatientName" maxlength="100" required autocomplete="off"/></label><button type="submit">Add patient</button></form><button type="button" id="trendExportAll">Backup all patients (JSON)</button><label class="research-upload">Restore backup<input id="trendRestoreFile" type="file" accept=".json,application/json" class="sr-only"/></label></div><p id="trendStorageStatus" role="status" aria-live="polite"></p><section id="trendLegacyPanel" hidden class="certificate-help no-print"><h4>Unassigned readings from the previous version</h4><p>The earlier history has no patient identity. It remains untouched in this browser. Check it before assigning it; it will not be automatically mixed with a patient.</p><button type="button" id="trendDownloadLegacy">Download original unassigned backup</button><button type="button" id="trendImportLegacy">Copy into a new “Legacy - verify identity” record</button></section><div id="trendPatientWorkspace" hidden><header class="trend-patient-heading"><h4 id="trendPatientHeading"></h4><p id="trendPatientIdentity"></p></header><div class="trend-actions no-print"><label>Plot<select id="trendMetricSelect"><option value="bp">Blood pressure · mmHg</option><option value="glucose">Blood glucose · mg/dL</option><option value="weight">Weight · kg</option><option value="pulse">Pulse · /min</option><option value="spo2">SpO₂ · %</option><option value="temperature">Temperature · °C</option><option value="creatinine">Creatinine · mg/dL</option><option value="hba1c">HbA1c · %</option></select></label><button type="button" onclick="saveTrendReadings()">Save this patient</button><button type="button" onclick="exportTrendReadings()">Export this patient (JSON)</button><button type="button" id="trendAddReading">Add reading</button><button type="button" onclick="window.print()">Print trend</button></div><p id="trendStatus" role="status" aria-live="polite"></p><svg id="bpTrendGraph" viewBox="0 0 760 260" role="img" aria-label="Selected patient's measurement trend"></svg><p id="trendGraphLegend"></p><p class="no-print">Select a measurement above to enter and view its columns. Points follow entry order, not elapsed time. Missing / invalid measurements leave a gap. Enter measured values in the displayed units; glucose context is recorded separately. This patient selection applies to this trend record; other clinical documents are separate.</p><div class="overflow-x-auto"><table id="trendTable" class="w-full text-xs"><thead><tr><th>Date</th><th>Time</th><th>SBP<br/>mmHg</th><th>DBP<br/>mmHg</th><th>MAP<br/>mmHg</th><th>Glucose<br/>mg/dL</th><th>Glucose context</th><th>Weight<br/>kg</th><th>Pulse<br/>/min</th><th>SpO₂<br/>%</th><th>Temp<br/>°C</th><th>Creatinine<br/>mg/dL</th><th>HbA1c<br/>%</th><th>Notes</th></tr></thead><tbody id="trendRows"></tbody></table></div></div></section></main>
-<!-- WIKI DETAIL MODAL -->
-<div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="wikiModal">
-<div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-4 text-xs max-h-[85vh] overflow-y-auto">
-<div class="wiki-reader-header" id="wikiReaderHeader">
-<h3 class="font-bold text-base serif-brand text-[#0F2942]" id="wikiModalTitle">वैद्यकीय संदर्भ</h3>
-<button type="button" id="wikiReaderClose" onclick="closeWikiModal()" aria-label="Close article and return to health library">✕ <span>Close / बंद करा</span></button>
+<!-- WIKI DETAIL MODAL: native dialog supports Escape and browser Back. -->
+<dialog id="wikiModal" class="wiki-reader-dialog no-print" aria-labelledby="wikiModalTitle">
+<div class="wiki-reader-panel">
+<div class="wiki-reader-header" id="wikiReaderHeader"><h1 id="wikiModalTitle">Health article</h1><button type="button" id="wikiReaderClose" onclick="closeWikiModal()" aria-label="Close article">×</button></div>
+<div id="wikiModalContent" class="wiki-reader-content" tabindex="0" aria-label="Full original article"></div>
 </div>
-<div class="space-y-3 text-slate-700 leading-relaxed text-xs" id="wikiModalContent" tabindex="0" aria-label="Article text — scroll to read"></div>
-<div class="wiki-reader-footer"><button type="button" id="wikiReaderBack" onclick="closeWikiModal()">← Health library / लेखसूचीकडे परत</button></div>
-</div>
-</div>
+</dialog>
 <!-- Device privacy settings: not a secure clinical backend. -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="securityModal"><section class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs" role="dialog" aria-modal="true" aria-labelledby="deviceLockHeading"><button class="float-right" onclick="closeSecuritySettingsModal()" aria-label="Close device lock settings">×</button><h3 id="deviceLockHeading">Device privacy lock</h3><p class="device-lock-help">Set a passphrase for this browser. This hides the workstation from casual viewing; it is not server authentication or encrypted record storage. Stays unlocked on this tab while you work, including brief tab changes and refreshes. Locks after 15 minutes of inactivity, 8 hours, or Lock now. This is a device privacy screen, separate from cloud login.</p><div hidden aria-hidden="true"><input id="secModeOpen" name="secModeRadio" type="radio" value="open" disabled/><input id="secModePin" name="secModeRadio" type="radio" value="pin" disabled/><input id="secModeBiometric" name="secModeRadio" type="radio" value="biometric" disabled/></div><div class="lock-form"><label id="lockCurrentRow">Current passphrase / existing PIN<input id="deviceCurrentPassword" type="password" autocomplete="current-password"/></label><label>New passphrase (8+ characters)<input id="customPinInput" type="password" autocomplete="new-password" minlength="8"/></label><label>Repeat new passphrase<input id="deviceConfirmPassword" type="password" autocomplete="new-password"/></label><button type="button" onclick="lockWorkstationNow(); closeSecuritySettingsModal()">Lock now</button><button type="button" id="deviceLockSave" onclick="saveSecuritySettings()">Save device passphrase</button><p id="deviceLockSettingsError" class="device-lock-error" role="alert"></p><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Privacy and access limitations ↗</a></div></section></div>
-<dialog id="doctorLoginDialog" aria-labelledby="doctorLoginTitle"><h2 id="doctorLoginTitle">Doctor login</h2><p id="doctorLoginHelp">One clinic owner account for Doctor Workstation and cloud trends.</p><form id="doctorLoginForm" class="lock-form"><label>Email<input id="doctorLoginEmail" type="email" autocomplete="username" required/></label><label>Password<input id="doctorLoginPassword" type="password" autocomplete="current-password" required/></label><button type="submit" id="doctorLoginSubmit">Sign in</button><button type="button" id="doctorLoginCancel">Return to patient portal</button><p id="doctorLoginError" role="alert"></p></form></dialog><dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
+<dialog id="doctorLoginDialog" aria-labelledby="doctorLoginTitle"><h2 id="doctorLoginTitle">Doctor login</h2><p id="doctorLoginHelp">One clinic owner account for Doctor Workstation and cloud trends.</p><form id="doctorLoginForm" class="lock-form"><label>Doctor username<input id="doctorLoginEmail" type="text" autocomplete="username" placeholder="doctor" required/></label><p class="login-security-note">Use the clinic owner account. For first-time setup or password recovery, request a secure email setup/reset link. Email delivery requires owner-login configuration.</p><label>Password<input id="doctorLoginPassword" type="password" autocomplete="current-password" required/></label><button type="submit" id="doctorLoginSubmit">Sign in</button><button type="button" id="doctorPasswordResetButton">Send setup / reset email</button><p id="doctorPasswordResetStatus" role="status" aria-live="polite"></p><button type="button" id="doctorLoginCancel">Return to patient portal</button><p id="doctorLoginError" role="alert"></p></form></dialog><dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
 <!-- DRUG SELECT MODAL -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" id="drugModal">
 <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-3 text-xs">
@@ -975,6 +997,8 @@
 <button onclick="closeDrugModal()">✕</button>
 </div>
 <input class="w-full border p-2 rounded-xl" id="modalDrugSearch" oninput="filterModalDrugs()" placeholder="Search molecule or brand..." type="text"/>
+<div class="flex flex-wrap gap-2 text-[11px]" id="drugReferenceLinks"><a id="drugRefDrugsCom" href="https://www.drugs.com/" target="_blank" rel="noopener noreferrer">Drugs.com ↗</a><a id="drugRefMedscape" href="https://reference.medscape.com/" target="_blank" rel="noopener noreferrer">Medscape ↗</a><a id="drugRefMims" href="https://www.mims.com/india" target="_blank" rel="noopener noreferrer">CIMS/MIMS India ↗</a><a id="drugRefDrugBank" href="https://go.drugbank.com/" target="_blank" rel="noopener noreferrer">DrugBank ↗</a></div>
+<button type="button" class="border rounded-lg px-3 py-2 font-bold" onclick="addCustomDrugFromPicker()">Add typed medicine to prescription (dose left blank)</button><p id="drugPickerStatus" role="status" aria-live="polite"></p>
 <div class="max-h-80 overflow-y-auto space-y-2" id="modalDrugList"></div>
 </div>
 </div>
@@ -1242,7 +1266,9 @@
 
     function addRxRow() { addRxRowWithData('', '1-0-1', 'After Food', '5', ''); }
 
+    function escapeRxHtml(value) { return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
     function addRxRowWithData(med, freq, timing, days, advice) {
+      med=escapeRxHtml(med); freq=escapeRxHtml(freq); timing=escapeRxHtml(timing); days=escapeRxHtml(days); advice=escapeRxHtml(advice);
       const tbody = document.getElementById('rxTableBody');
       const idx = tbody.rows.length + 1;
       const tr = document.createElement('tr');
@@ -1302,7 +1328,17 @@
         };
         list.appendChild(div);
       });
+      filterModalDrugs();
     }
+    function filterModalDrugs() {
+      const q=(document.getElementById('modalDrugSearch')?.value||'').trim().toLowerCase();
+      document.querySelectorAll('#modalDrugList > div').forEach(row=>{row.hidden=!!q&&!row.textContent.toLowerCase().includes(q);});
+      const encoded=encodeURIComponent(q);
+      const links={drugRefDrugsCom:q?'https://www.drugs.com/search.php?searchterm='+encoded:'https://www.drugs.com/',drugRefMedscape:q?'https://reference.medscape.com/search?q='+encoded:'https://reference.medscape.com/',drugRefMims:'https://www.mims.com/india',drugRefDrugBank:q?'https://go.drugbank.com/unearth/q?query='+encoded:'https://go.drugbank.com/'};
+      for(const [id,url] of Object.entries(links)){const link=document.getElementById(id);if(link)link.href=url;}
+      const status=document.getElementById('drugPickerStatus');if(status)status.textContent=q?'Showing matching local formulary entries. External references open separately; verify the exact product and prescribing information before adding.':'Search the local formulary or open a reference resource.';
+    }
+    function addCustomDrugFromPicker(){const field=document.getElementById('modalDrugSearch'),name=(field?.value||'').trim(),status=document.getElementById('drugPickerStatus');if(!name){if(status)status.textContent='Type the medicine name first.';return;}addDrugDirectlyToRx(name,'','','','');closeDrugModal();}
     function closeDrugModal() { document.getElementById('drugModal').classList.add('hidden'); }
 
     // PATHOLOGY CHEAT SHEET
@@ -1364,7 +1400,7 @@
       });
 
       return `DR. PRAMOD G. KULKARNI (BAMS, PGDEMS, MCIM: I-24809-A-1)
-Home Visiting ICU Doctor & Emergency Specialist, Pune | Helpline: +91 9561394341
+Home Visiting ICU Doctor & Emergency Specialist, Pune | Home-visit requests: +91 9561394341
 ======================================================
 Patient: ${name} (${age}) | Date: ${date} | Area: ${loc}
 Vitals: BP: ${bp} mmHg | Pulse: ${pulse}/min | SpO2: ${spo2} | GRBS: ${grbs} mg/dL
@@ -1380,7 +1416,7 @@ ${pathRad}
 Nursing & Diet Protocol:
 ${adv}
 ======================================================
-Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
+Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit requests: 9561394341`;
     }
 
     function savePatientPrescriptionToCloud() {
@@ -1415,28 +1451,40 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       showToast("Record successfully saved!");
     }
 
-    function universalShareDocument(type) {
-      let title = "";
-      let text = "";
-      const phone = document.getElementById('rxPatPhone').value.replace(/\D/g, '');
-
-      if(type === 'rx') {
-        title = "Dr. Kulkarni ICU Prescription";
-        text = generatePrescriptionText();
-      } else if(type === 'path') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        title = "Pathology Requisition - Dr. Kulkarni";
-        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nPlease send urgent reports via WhatsApp to: 9561394341`;
-      } else if(type === 'rad') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        title = "Radiology Requisition - Dr. Kulkarni";
-        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nConfirm ETA to: 9561394341`;
-      }
-
-      if(navigator.share) {
-        navigator.share({ title: title, text: text }).catch(() => openDirectWhatsAppFallback(phone, text));
-      } else {
-        openDirectWhatsAppFallback(phone, text);
+    async function universalShareDocument(type) {
+      const config = {
+        rx: { id: 'rxSheet', title: 'Prescription', filename: 'Prescription.pdf', fallback: generatePrescriptionText },
+        path: { id: 'pathSlipSheet', title: 'Lab Slip', filename: 'Lab_Slip.pdf' },
+        rad: { id: 'radSlipSheet', title: 'Radiology Slip', filename: 'Radiology_Slip.pdf' }
+      }[type];
+      if (!config) { showToast('This document type is not configured for sharing yet.'); return; }
+      const element = document.getElementById(config.id);
+      if (!element) { showToast('The document could not be found. Nothing was shared.'); return; }
+      const phone = (document.getElementById('rxPatPhone')?.value || '').replace(/\D/g, '');
+      let text = typeof config.fallback === 'function' ? config.fallback() : (type === 'path'
+        ? '*PATHOLOGY REQUISITION*\nPatient: ' + (document.getElementById('reqPatName')?.value || 'Patient') + '\nHome-visit doctor contact: 9561394341'
+        : '*RADIOLOGY REQUISITION*\nPatient: ' + (document.getElementById('reqPatName')?.value || 'Patient') + '\nHome-visit doctor contact: 9561394341');
+      const options = { margin: [6, 6, 6, 6], image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+      try {
+        const blob = await html2pdf().set(options).from(element).outputPdf('blob');
+        const file = new File([blob], config.filename, { type: 'application/pdf' });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: config.title, files: [file] });
+          return;
+        }
+        if (navigator.share) {
+          try { await navigator.share({ title: config.title, text }); return; } catch (error) { if (error?.name === 'AbortError') return; }
+        }
+        const downloadUrl = URL.createObjectURL(file);
+        const anchor = document.createElement('a'); anchor.href = downloadUrl; anchor.download = config.filename; anchor.click();
+        setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
+        const url = 'https://wa.me/919561394341?text=' + encodeURIComponent(text + '\n\nAttach the downloaded ' + config.filename + ' before sending.');
+        const popup = window.open(url, '_blank', 'noopener,noreferrer');
+        if (!popup) location.href = url;
+        showToast('PDF prepared and WhatsApp opened. Attach the PDF if this browser cannot share files directly.');
+      } catch (error) {
+        console.error('Document share failed', error);
+        showToast('Could not prepare the PDF. Please use the separate Print or Export PDF control.');
       }
     }
 
@@ -1452,14 +1500,124 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       window.ClinicalCalculators.render();
     }
 
-    // WIKI DETAIL MODAL
-    function openWikiModal(id) {
-      const a=window.PatientEducation?.get(id);if(!a)return;
-      document.getElementById('wikiModalTitle').textContent=a.mr.title;
-      document.getElementById('wikiModalContent').textContent=window.PatientEducation.text(a,'mr');
-      document.getElementById('wikiModal').classList.remove('hidden');
+    // WIKI DETAIL MODAL — render the complete authored English article, not a summary or Marathi-only version.
+    let wikiHistoryEntry = false;
+    function escapeArticleHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
-    function closeWikiModal() { document.getElementById('wikiModal').classList.add('hidden'); }
+    function renderFullHealthArticle(article) {
+      const lang = 'en';
+      const content = article[lang];
+      if (!content) return '<p>The original English article is not available for this item.</p>';
+      const sourceMap = window.PatientEducation?.sources || {};
+      const sectionHtml = (content.sections || []).map((section, index) => {
+        const refs = (section.refs || []).map(key => {
+          const source = sourceMap[key];
+          return source ? '<li><a href="' + escapeArticleHtml(source[1]) + '" target="_blank" rel="noopener noreferrer">' + escapeArticleHtml(source[0]) + ' ↗</a></li>' : '';
+        }).join('');
+        return '<section class="wiki-article-section"><h2>' + escapeArticleHtml(section.heading || ('Section ' + (index + 1))) + '</h2><p>' + escapeArticleHtml(section.text || '').replace(/\n/g,'<br>') + '</p>' + (refs ? '<h3>References for this section</h3><ul>' + refs + '</ul>' : '') + '</section>';
+      }).join('');
+      const faqs = (content.faq || []).map(item => '<details class="wiki-article-faq"><summary>' + escapeArticleHtml(item[0]) + '</summary><p>' + escapeArticleHtml(item[1]) + '</p></details>').join('');
+      return '<article class="wiki-full-article"><p class="wiki-article-intro">' + escapeArticleHtml(content.intro || '') + '</p>' + sectionHtml + (faqs ? '<section class="wiki-article-faqs"><h2>Frequently asked questions</h2>' + faqs + '</section>' : '') + (content.takeaway ? '<aside class="wiki-article-takeaway"><h2>Key takeaway</h2><p>' + escapeArticleHtml(content.takeaway) + '</p></aside>' : '') + '<p class="wiki-original-note">Original authored English content. Translations, if selected, may be automatic.</p></article>';
+    }
+    function openWikiModal(id) {
+      const article = window.PatientEducation?.get(id);
+      if (!article) return;
+      const source = article.en || {};
+      document.getElementById('wikiModalTitle').textContent = source.title || 'Health article';
+      document.getElementById('wikiModalContent').innerHTML = renderFullHealthArticle(article);
+      const dialog = document.getElementById('wikiModal');
+      if (!dialog.open) {
+        dialog.showModal();
+        history.pushState({ wikiReader: true, articleKey: article.key }, '', '#article-' + encodeURIComponent(article.key));
+        wikiHistoryEntry = true;
+      }
+      document.getElementById('wikiModalContent').focus({ preventScroll: true });
+    }
+    function closeWikiModal(fromHistory = false) {
+      const dialog = document.getElementById('wikiModal');
+      if (dialog.open) dialog.close();
+      if (wikiHistoryEntry && !fromHistory) {
+        wikiHistoryEntry = false;
+        if (location.hash.startsWith('#article-')) history.back();
+      } else {
+        wikiHistoryEntry = false;
+      }
+    }
+    window.addEventListener('popstate', function() {
+      const dialog = document.getElementById('wikiModal');
+      if (dialog?.open) closeWikiModal(true);
+    });
+    document.getElementById('wikiModal')?.addEventListener('close', function() {
+      if (wikiHistoryEntry && location.hash.startsWith('#article-')) {
+        wikiHistoryEntry = false;
+        history.back();
+      }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const resources = document.getElementById('exploreHealthSources');
+      const footer = document.querySelector('#publicPortal > footer');
+      if (resources && footer) footer.before(resources);
+      // True section navigation: one relevant patient section at a time, not one very long page.
+      const portal = document.getElementById('publicPortal');
+      const navLinks = Array.from(document.querySelectorAll('.portal-nav [data-portal-view]'));
+      const groups = {
+        overview: ['portalHeroTitle'],
+        'home-care': ['elderlySection','nutritionSection'],
+        'health-library': ['wikiSection','publicGuidanceSection'],
+        booking: ['onlineConsultationNotice','bookingSection'],
+        'health-tools': ['patientToolsSection'],
+        faq: ['patientFaq'],
+        'health-sources': ['exploreHealthSources']
+      };
+      const directSections = Array.from(portal.querySelectorAll(':scope > section'));
+      function activatePortalView(view, updateHistory = true) {
+        const previousView = portal.dataset.activeView || '';
+        const allowed = groups[view] || groups.overview;
+        directSections.forEach(section => {
+          const isHero = section.id === 'portalHero';
+          const match = allowed.some(id => section.id === id || section.querySelector('#' + id));
+          section.classList.toggle('portal-section-hidden', !(match || (view === 'overview' && isHero)));
+        });
+        navLinks.forEach(link => {
+          const active = link.dataset.portalView === view;
+          if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
+        });
+        portal.dataset.activeView = view;
+        const pathways = document.querySelector('.care-pathways');
+        if (pathways) pathways.classList.toggle('portal-section-hidden', view !== 'overview');
+        if (updateHistory && previousView !== view) history.pushState({ ...(history.state || {}), portalView: view }, '', '#' + (navLinks.find(a => a.dataset.portalView === view)?.getAttribute('href')?.slice(1) || 'publicPortal'));
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+      navLinks.forEach(link => link.addEventListener('click', event => {
+        event.preventDefault();
+        activatePortalView(link.dataset.portalView);
+      }));
+      document.querySelectorAll('#publicPortal .hero-primary-actions a, #publicPortal .care-pathways a').forEach(link => {
+        link.addEventListener('click', event => {
+          const target = link.getAttribute('href')?.slice(1);
+          const view = target === 'bookingSection' || target === 'onlineConsultationNotice' ? 'booking'
+            : target === 'wikiSection' ? 'health-library'
+            : target === 'patientToolsSection' ? 'health-tools' : null;
+          if (view) { event.preventDefault(); activatePortalView(view); }
+        });
+      });
+      const viewFromHash = () => {
+        const hash = location.hash.slice(1);
+        const link = navLinks.find(a => a.getAttribute('href') === '#' + hash);
+        if (link) activatePortalView(link.dataset.portalView, false);
+      };
+      window.addEventListener('popstate', viewFromHash);
+      activatePortalView(navLinks.find(a => a.getAttribute('href') === location.hash)?.dataset.portalView || 'overview', false);
+      const height = document.getElementById('quickHeight');
+      const weight = document.getElementById('quickWeight');
+      const bmi = document.getElementById('quickBmi');
+      const updateBmi = () => {
+        const hCm = Number(height?.value), wKg = Number(weight?.value);
+        bmi.textContent = hCm > 0 && wKg > 0 ? (wKg / ((hCm / 100) ** 2)).toFixed(1) : '—';
+      };
+      [height, weight].forEach(el => el?.addEventListener('input', updateBmi));
+    });
 
     function filterWikiArticles() {
       const q = document.getElementById('wikiSearchInput').value.toLowerCase();
@@ -1496,18 +1654,33 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       return total;
     }
 
-    function bookAndTriggerFullAutomation() {
-      const name = document.getElementById('bkPatName').value.trim();
-      const phone = document.getElementById('bkPatPhone').value.trim();
-      const addr = document.getElementById('bkPatAddress').value.trim();
+    async function bookAndTriggerFullAutomation() {
+      const value = id => document.getElementById(id)?.value?.trim() || '';
+      const name = value('bkPatName'), phone = value('bkPatPhone'), addr = value('bkPatAddress');
       const navUrl = document.getElementById('bkGpsMapUrl').value || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr || 'Pune')}`;
-
-      if(!name || !phone) { alert("Please enter patient name and mobile number."); return; }
-
+      if (!name || !phone) { alert('Please enter the patient name and a contact mobile number.'); return; }
       const total = calculateFee();
       const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9561394341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee:* ₹${total}`;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+      const clinical = [
+        ['Current complaints', value('quickComplaints')], ['Known case / history', value('quickKnownCase')],
+        ['Allergies', value('quickAllergies')], ['Past surgeries', value('quickSurgeries')],
+        ['Last menstrual period', value('quickLmp')], ['Height (cm)', value('quickHeight')],
+        ['Weight (kg)', value('quickWeight')], ['BMI', document.getElementById('quickBmi')?.textContent || ''],
+        ['Temperature (°C)', value('quickTemperature')], ['Current medicines / reconciliation', value('quickMedicines')]
+      ].filter(row => row[1]).map(row => '*' + row[0] + ':* ' + row[1]).join('\n');
+      const msg = `*HOME VISIT REQUEST*\n*Doctor:* Dr. Pramod G. Kulkarni\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Callback mobile:* ${phone}\n*Address:* ${addr || 'To be provided'}\n*Location:* ${navUrl}\n*Estimated fee:* ₹${total} (doctor to confirm)\n${clinical ? '\n' + clinical : ''}\n\nThis is a visit request, not an emergency dispatch. For immediate danger, call 112/108.`;
+      const selected = [
+        ...Array.from(document.getElementById('quickClinicalFiles')?.files || []),
+        ...(document.getElementById('quickMedicationFile')?.files?.length ? Array.from(document.getElementById('quickMedicationFile').files) : [])
+      ];
+      if (selected.length && navigator.share && navigator.canShare && navigator.canShare({ files: selected })) {
+        try { await navigator.share({ title: 'Home visit request', text: msg, files: selected }); return; }
+        catch (error) { if (error?.name === 'AbortError') return; }
+      }
+      const url = 'https://wa.me/919561394341?text=' + encodeURIComponent(msg + (selected.length ? '\n\nPlease attach the selected clinical files in this WhatsApp chat if they were not included by your device share sheet.' : ''));
+      const popup = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!popup) location.href = url;
+      if (selected.length) showToast('WhatsApp opened. If your browser did not include the files, attach them in the chat before sending.');
     }
 
     // ARTICLE MANAGER (MOON-READER STYLE CARDS & PDF EXPORT)
@@ -1533,6 +1706,70 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       };
       reader.readAsText(file);
     }
+    document.addEventListener('DOMContentLoaded', function() {
+      const fileInput = document.getElementById('articleContentFile');
+      fileInput?.addEventListener('change', function() {
+        const file = this.files?.[0];
+        if (!file) return;
+        if (file.size > 15 * 1024 * 1024) {
+          document.getElementById('articleFetchStatus').textContent = 'File is larger than 15 MB. Use the existing attachment workflow or split the file.';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          document.getElementById('newArtBody').value = String(reader.result || '');
+          document.getElementById('articleFetchStatus').textContent = 'Loaded ' + file.name + '. Review the full text and references before publishing.';
+        };
+        reader.onerror = () => document.getElementById('articleFetchStatus').textContent = 'Could not read this file. Try TXT, MD or HTML.';
+        if (/\.pdf$|\.docx?$/i.test(file.name)) {
+          document.getElementById('articleFetchStatus').textContent = 'This file type needs a document text extractor. Use the existing attachment workflow, or upload a TXT/MD/HTML text export.';
+          return;
+        }
+        reader.readAsText(file);
+      });
+      document.getElementById('articleFetchSourceBtn')?.addEventListener('click', async function() {
+        const source = document.getElementById('newArtUrl')?.value.trim();
+        const status = document.getElementById('articleFetchStatus');
+        if (!source) { status.textContent = 'Paste the public article URL in the source field above first.'; return; }
+        try {
+          const url = new URL(source);
+          if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Only public HTTP/HTTPS URLs are supported.');
+          status.textContent = 'Trying to load the source. Some publishers block direct import (CORS/login/paywall).';
+          const response = await fetch(url.href, { credentials: 'omit', redirect: 'follow' });
+          if (!response.ok) throw new Error('The source returned HTTP ' + response.status);
+          const type = response.headers.get('content-type') || '';
+          if (!/text\/(html|plain)|application\/(json|xml)/i.test(type)) throw new Error('This URL does not return readable text/HTML.');
+          const raw = await response.text();
+          const parsed = new DOMParser().parseFromString(raw, 'text/html');
+          const body = type.includes('text/plain') || type.includes('application/json') || type.includes('xml')
+            ? raw : (parsed.querySelector('article')?.innerText || parsed.querySelector('main')?.innerText || parsed.body?.innerText || '');
+          if (!body.trim()) throw new Error('No readable article text was found.');
+          document.getElementById('newArtBody').value = body.trim();
+          status.textContent = 'Imported source text. Verify title, completeness, copyright permissions and references before publishing.';
+        } catch (error) {
+          status.textContent = 'Direct import was blocked or unavailable: ' + error.message + ' Open the source and paste text you are authorised to use, or use an approved server-side importer.';
+        }
+      });
+      document.getElementById('articleOpenSourceBtn')?.addEventListener('click', function() { const raw=document.getElementById('newArtUrl')?.value.trim(),status=document.getElementById('articleFetchStatus'); try { const url=new URL(raw); if(!['https:','http:'].includes(url.protocol)) throw new Error('Only HTTP/HTTPS sources are supported.'); const tab=window.open(url.href,'_blank','noopener,noreferrer'); if(!tab) { status.textContent='The browser blocked the new tab. Allow pop-ups for this site and try again.'; return; } status.textContent='Source opened in a separate tab. If direct text import is blocked by CORS, copy only content you are authorised to reuse into the editor.'; } catch(e) { status.textContent='Enter a valid public source URL first. '+e.message; } });
+      document.getElementById('articleReloadDraftBtn')?.addEventListener('click', function() {
+        const draft = localStorage.getItem('articleEditorDraft');
+        if (!draft) { document.getElementById('articleFetchStatus').textContent = 'No saved draft exists on this device.'; return; }
+        try {
+          const saved = JSON.parse(draft);
+          document.getElementById('newArtTitle').value = saved.title || '';
+          document.getElementById('newArtCat').value = saved.category || '';
+          document.getElementById('newArtBody').value = saved.body || '';
+          document.getElementById('articleFetchStatus').textContent = 'Draft loaded from this device.';
+        } catch { document.getElementById('articleFetchStatus').textContent = 'Saved draft is unreadable. Original content was not overwritten.'; }
+      });
+      ['newArtTitle','newArtCat','newArtBody'].forEach(id => document.getElementById(id)?.addEventListener('input', () => {
+        localStorage.setItem('articleEditorDraft', JSON.stringify({
+          title: document.getElementById('newArtTitle').value,
+          category: document.getElementById('newArtCat').value,
+          body: document.getElementById('newArtBody').value
+        }));
+      }));
+    });
 
     function publishNewArticle() {
       const title = document.getElementById('newArtTitle').value.trim();
@@ -1554,7 +1791,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       const container = document.getElementById('publishedArticlesGrid');
       if(!container) return;
       container.innerHTML = '';
-      const defaults = window.PatientEducation.defaults(['heart','potassium']);
+      const defaults = window.PatientEducation.defaults(['heart','potassium'], 'en');
       const custom = JSON.parse(localStorage.getItem('patientArticles') || '[]');
       const all = [...custom, ...defaults];
 
@@ -1578,7 +1815,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     }
 
     function universalShareArticle(title, body) {
-      const msg = `*CLINICAL GUIDE — DR. PRAMOD G. KULKARNI*\n\n*${decodeURIComponent(title)}*\n\n${decodeURIComponent(body)}\n\nHelpline: 9561394341`;
+      const msg = `*CLINICAL GUIDE — DR. PRAMOD G. KULKARNI*\n\n*${decodeURIComponent(title)}*\n\n${decodeURIComponent(body)}\n\nHome-visit requests: 9561394341`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -1640,8 +1877,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 </div>
 <div class="space-y-2">
 <p><strong>Doctor:</strong> Dr. Pramod G. Kulkarni</p>
-<p><strong>Primary Medical Qualification:</strong> BAMS</p>
-<p><strong>Emergency ICU Specialization:</strong> PGDEMS (Symbiosis International University, Pune)</p>
+<p><strong>BAMS:</strong> Bachelor of Ayurvedic Medicine and Surgery, Pune University, Pune — October 1991.</p> <p><strong>PGDEMS:</strong> Post Graduate Diploma in Emergency Medical Services, Symbiosis, Pune.</p>
 <p><strong>Registration Council:</strong> Maharashtra Council of Indian Medicine (MCIM), Mumbai</p>
 <p><strong>Permanent Reg. Number:</strong> <span class="bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded">I-24809-A-1</span></p>
 <p><strong>Practice:</strong> Home Visiting ICU Doctor &amp; Bedside Emergency Specialist, Pune</p>
@@ -1670,5 +1906,55 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script><script src="clinical-documents.js"></script></body>
+</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script><script src="clinical-documents.js"></script><script src="registers-billing.js"></script><script>
+document.addEventListener("click",function(event){const link=event.target.closest("a[data-direct-call]");if(!link)return;const target=link.getAttribute("href")||"";if(!/^tel:/i.test(target))return;event.preventDefault();event.stopImmediatePropagation();window.location.assign(target);},true);
+document.addEventListener("DOMContentLoaded",function(){const form=document.getElementById("unitConverterForm"),kind=document.getElementById("unitConversionType"),input=document.getElementById("unitConversionValue"),out=document.getElementById("unitConversionResult");if(!form||!kind||!input||!out)return;const convert=()=>{if(input.value.trim()===""){out.textContent="Enter a value to calculate automatically.";return;}const n=Number(input.value);if(!Number.isFinite(n)){out.textContent="Enter a valid number.";return;}let result,label;switch(kind.value){case "c-f":result=n*9/5+32;label="°F";break;case "f-c":result=(n-32)*5/9;label="°C";break;case "kg-lb":result=n/0.45359237;label="lb";break;case "lb-kg":result=n*0.45359237;label="kg";break;default:out.textContent="Choose a conversion.";return;}out.textContent="Result: "+Number(result.toFixed(2))+" "+label;};input.addEventListener("input",convert);input.addEventListener("change",convert);kind.addEventListener("change",convert);form.addEventListener("submit",function(e){e.preventDefault();convert();});});
+document.addEventListener("DOMContentLoaded",function(){const input=document.getElementById("rxSignatureUpload"),img=document.getElementById("rxDoctorSignatureImage"),status=document.getElementById("rxSignatureStatus");if(!input||!img||!status)return;input.addEventListener("change",function(){const file=input.files&&input.files[0];if(!file){img.removeAttribute("src");img.hidden=true;img.style.display="none";status.textContent="No signature image selected.";return;}if(!["image/png","image/jpeg","image/webp"].includes(file.type)||file.size>1024*1024){input.value="";status.textContent="Choose a PNG/JPG/WebP image under 1 MB.";return;}const reader=new FileReader();reader.onload=()=>{img.src=String(reader.result);img.hidden=false;img.style.display="block";status.textContent="Signature image added to the prescription preview for this session only. This is an image, not a cryptographic digital signature.";};reader.onerror=()=>{status.textContent="Could not read the signature image. Try another file.";};reader.readAsDataURL(file);});});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+ const input=document.getElementById("signedDeathFormUpload"),share=document.getElementById("signedDeathFormShare"),download=document.getElementById("signedDeathFormDownload"),status=document.getElementById("signedDeathFormStatus"),render=document.getElementById("signedDeathFormRender");
+ if(!input||!share||!download||!status||!render)return;
+ let selected=null;
+ input.addEventListener("change",()=>{selected=input.files&&input.files[0]||null;status.textContent=selected?"Selected "+selected.name+". Nothing has been uploaded.":"Select a signed form photo or PDF first.";});
+ async function makePdf(){
+  if(!selected)throw Error("Select a signed form photo or PDF first.");
+  if(selected.type==="application/pdf")return selected;
+  if(!selected.type.startsWith("image/"))throw Error("Choose an image or PDF.");
+  render.replaceChildren();render.hidden=false;
+  const title=document.createElement("h2");title.textContent="Signed original form — scanned copy";title.style.cssText="font:700 14pt Arial,sans-serif;margin:0 0 8mm";
+  const note=document.createElement("p");note.textContent="Photographic copy supplied by the user. Verify legibility and completeness before sending.";note.style.cssText="font:9pt Arial,sans-serif;margin:0 0 5mm";
+  const image=document.createElement("img");image.alt="Photograph of signed original form";image.style.cssText="display:block;max-width:100%;max-height:255mm;object-fit:contain;margin:0 auto";
+  const src=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(Error("Could not read the image."));reader.readAsDataURL(selected);});image.src=src;await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error("Could not load the selected image."));});
+  render.append(title,note,image);
+  if(typeof html2pdf!=="function")throw Error("PDF conversion is unavailable in this browser. Use the device print/share function for the original photo.");
+  const worker=html2pdf().set({margin:[8,8,8,8],image:{type:"jpeg",quality:.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}}).from(render);
+  const blob=await worker.outputPdf("blob");render.hidden=true;
+  return new File([blob],"Signed_Original_Form.pdf",{type:"application/pdf"});
+ }
+ async function shareOrDownload(doShare){
+  share.disabled=download.disabled=true;status.textContent="Preparing the signed form locally…";
+  try{const file=await makePdf();if(doShare&&navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:file.name});status.textContent="Share sheet opened. Choose the recipient and confirm sending.";return;}
+   const url=URL.createObjectURL(file),a=document.createElement("a");a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+   status.textContent=doShare?"This browser cannot share a file directly. A PDF copy was downloaded; attach it manually in WhatsApp/email.":"PDF copy downloaded. You can now share it using the device's standard share controls.";
+  }catch(e){render.hidden=true;status.textContent=e.name==="AbortError"?"Sharing cancelled. No file was sent.":"Could not prepare/share the file: "+e.message;}finally{share.disabled=download.disabled=false;}
+ }
+ share.addEventListener("click",()=>shareOrDownload(true));download.addEventListener("click",()=>shareOrDownload(false));
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+ const lang=document.getElementById("headerLanguageSelect"),sourceLang=document.getElementById("healthSourceTranslateLanguage"),sourceUrl=document.getElementById("healthSourceTranslateUrl"),translateBtn=document.getElementById("translateHealthSourceButton"),translateStatus=document.getElementById("healthSourceTranslateStatus");
+ const setSiteLanguage=code=>{let tries=0;const apply=()=>{const g=document.querySelector("#google_translate_element select.goog-te-combo,.goog-te-combo");if(code==="en"){try{document.cookie="googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";}catch{}if(g){g.value="";g.dispatchEvent(new Event("change"));}else if(tries++<8)setTimeout(apply,450);return;}if(g){g.value=code;g.dispatchEvent(new Event("change"));}else if(tries++<8)setTimeout(apply,450);else if(translateStatus)translateStatus.textContent="Translation service is not ready. Try again or use All languages.";};apply();};
+ if(lang)lang.addEventListener("change",()=>setSiteLanguage(lang.value));
+ if(sourceLang&&lang)sourceLang.value=lang.value;
+ if(sourceLang)sourceLang.addEventListener("change",()=>{if(lang)lang.value=sourceLang.value;});
+ if(translateBtn)translateBtn.addEventListener("click",()=>{let url;try{url=new URL(sourceUrl.value.trim());if(!["http:","https:"].includes(url.protocol))throw Error();}catch{translateStatus.textContent="Enter a valid http or https article/document URL.";sourceUrl.focus();return;}const target=sourceLang.value||"en";if(target==="en"){window.open(url.href,"_blank","noopener,noreferrer");translateStatus.textContent="Opened the original source in a new tab.";return;}const translated="https://translate.google.com/translate?sl=auto&tl="+encodeURIComponent(target)+"&u="+encodeURIComponent(url.href);const win=window.open(translated,"_blank","noopener,noreferrer");translateStatus.textContent=win?"Opened Google's translated-source view. Publisher restrictions may prevent translation.":"Popup blocked. Allow this site to open the translated source, or copy the original URL into Google Translate.";});
+ const qr=document.getElementById("upiQrImg"),upi=document.getElementById("upiPaymentLink"),qrDetails=document.getElementById("upiQrDetails");
+ if(qr&&upi){if(qrDetails)qrDetails.open=true;if(window.KulkarniQRCode){window.KulkarniQRCode.toDataURL(upi.href,{width:320,margin:2},(err,data)=>{if(err||!data){qr.alt="QR generation failed. Use the Open UPI app link.";return;}qr.src=data;});}else qr.alt="QR generator unavailable. Use the Open UPI app link.";}
+ const reset=document.getElementById("doctorPasswordResetButton"),resetStatus=document.getElementById("doctorPasswordResetStatus");
+ if(reset)reset.addEventListener("click",async()=>{reset.disabled=true;resetStatus.textContent="Requesting a secure setup/reset email…";try{const r=await fetch("/api/clinical-cloud?action=recover",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({})});const d=await r.json();if(!r.ok)throw Error(d.message||"Email recovery is not configured.");resetStatus.textContent="If the owner account is configured, check its inbox for the secure setup/reset email. Follow the link before signing in.";}catch(e){resetStatus.textContent=e.message||"Email setup/reset is not configured on this preview. The owner account must be configured first.";}finally{reset.disabled=false;}});
+});
+</script>
+</body>
 </html>
