@@ -177,3 +177,34 @@ This section supersedes earlier deployment-pending notes above. The latest branc
 6. Complete the full workstation security/session, payment, cloud backup, article scale and integration audit in this document.
 
 No merge, production deploy, real payment, patient communication, public publishing or paid integration is authorised by this checkpoint.
+
+## Latest client-request corrections — 29 October 2026
+
+### Implemented on the review branch
+- Front-page call links now have a capture-phase handler that routes phone links to the phone protocol; WhatsApp remains a separate, explicitly chosen action.
+- Header language control is compacted; English can be selected to reset Google Translate. Patient navigation reads Elderly care instead of Home care.
+- The pre-visit WhatsApp handoff opens a window before preparing content, reports pop-up blocking, and uses a short note plus explicit PDF-attachment instructions for histories that exceed WhatsApp URL limits. It never claims the history was sent automatically.
+- Patient tools now include three live calculators: BMI (age field removed), estimated average glucose, and mean arterial pressure. The shared calculator renderer updates results as valid inputs change, including Doctor Workstation calculators. Temperature/weight conversion also updates immediately.
+- Calculator results use a neutral white style instead of a green prefilled-looking box.
+- Doctor login is labelled username-first; doctor and drkulkarni are aliases for the existing clinic-owner account, while the existing account email remains accepted for compatibility. Password verification and the existing server-owned session boundary are unchanged. Mobile OTP is explicitly marked not active until a verified SMS provider and number are configured.
+- Prescription formulary picker now filters the local list, links to external drug references, and can add a typed medicine as a blank prescription row. No dose/frequency/duration is invented for a custom medicine. Existing Add Blank Medicine Row remains available without an imposed row cap. User-entered prescription values are escaped before HTML insertion.
+- Added a session-only PNG/JPG/WebP signature-image input for the prescription preview. It is not uploaded or persisted and is not a cryptographic/e-signature or identity-verification service.
+- Radiology requisition now has chest X-ray AP/PA selection, venous and arterial Doppler options, and a free-text additional-test field; the specific Portable and Bedside investigation wording was removed from the standard list.
+- Added a signed-form photo/PDF input for the death-form section. Image scans are converted locally to an A4 PDF; supported devices can open the native share sheet. Otherwise a PDF copy is downloaded for manual sharing. No patient file is uploaded automatically.
+- Article source import now has a normal Open source in new tab fallback and keeps the saved-draft reload control. Arbitrary source text import can still be blocked by CORS, authentication, paywalls or source restrictions.
+
+### Verification performed
+- Calculator logic was executed in a lightweight sandbox harness: 944 assertions passed across 31 calculators, including BMI without age and both patient/workstation MAP calculations.
+- The contact/emergency and website-preservation regression scripts were executed against fetched source using an in-memory test harness; both passed.
+- Updated inline JavaScript and modified JavaScript/test files passed syntax compilation checks.
+- Vercel reported success for code commit 27c5c911607bcb9b88b748f7fbb6016bb6bd3df1. Later commits for signature upload and test corrections have their own deploy status; recheck the latest commit before final preview review.
+- The direct preview page could not be opened by the available web reader. Native dialler, WhatsApp handoff, file-share chooser, image-to-PDF rendering, mobile layout, and actual device print page count have not been verified on the owner's phone.
+
+### Still not complete / do not overclaim
+- Username aliases are a transitional UI mapping to the existing account, not a new server-managed username directory. OTP login is not enabled.
+- External drug resources are opened for lookup; arbitrary third-party drug data is not automatically imported. Verify product, formulation, local availability and prescribing information before use.
+- The death-form language selector uses the site translation service and may translate the whole page. It does not create a certified bilingual government form.
+- Original government Form 2 / Form 4 / Form 4A PDFs remain unchanged and available. Editable HTML forms are not exact Word versions or exact government facsimiles; local/Maharashtra receiving-authority requirements must be checked.
+- Full Node.js/npm test suite, authenticated cloud operations, and real Android device/browser tests remain outstanding.
+
+Production is unchanged. Draft PR #29 remains unmerged; no production deploy, payment activation, patient communication, or public article publication is authorised.
