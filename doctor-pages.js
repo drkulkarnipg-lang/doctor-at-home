@@ -4,7 +4,9 @@
 (()=>{'use strict';
 const doc=document,root=doc.documentElement,$=id=>doc.getElementById(id);
 const GROUPS=[
- ['Documents',['rxPad','pathReq','radReq','clinicalCertificates','legalForms']],
+ ['Prescription, Lab slip and Radiology slip',['rxPad','pathReq','radReq']],
+ ['Death certificate Forms 4A, 4 and 2',['legalForms']],
+ ['Letters',['clinicalCertificates']],
  ['Registers',['registers']],
  ['Medicines',['drugDir']],
  ['Clinical tools',['symptomChecker','pathCheatSheet','clinicalCalculators','everydayTools','chart20','patientTrends']],
@@ -15,6 +17,7 @@ const NOTE={rxPad:'Write, print and share the A4 prescription',pathReq:'Patholog
  clinicalCertificates:'Referral, consent, fitness and leave letters',legalForms:'Death certificate Forms 4A, 4 and 2',drugDir:'Search, import and add medicines',
  registers:'Patient, Stock and Death registers',symptomChecker:'Symptom and interaction reference',pathCheatSheet:'Quick pathology reference',
  clinicalCalculators:'Clinical calculators',journalsHub:'Research feeds',articlesHub:'Manage published articles',settingsTab:'Security and settings'};
+const CHIP={rxPad:'Prescription',pathReq:'Lab slip',radReq:'Radiology slip'};
 let tabs=null,built=false;
 const isDoctor=()=>location.pathname.replace(/\/+$/,'')==='/doctor'||location.hash==='#doctor'||/^#workstation=/.test(location.hash);
 const tabFromHash=()=>{const m=location.hash.match(/^#workstation=([A-Za-z0-9]+)$/);return m?m[1]:'';};
@@ -38,7 +41,7 @@ function build(){
  add('Other',list.filter(t=>!used.has(t.id)));
  const bar=el('div','dp-bar no-print');bar.id='doctorPageBar';
  const back=el('a','dp-back','← Doctor home');back.href='#doctor';bar.append(back);
- const spacer=el('span','dp-bar-title','');bar.append(spacer);
+ const siblings=el('nav','dp-chips');siblings.id='doctorSiblings';siblings.setAttribute('aria-label','Related pages');bar.append(siblings);
  const lock=el('button','dp-lock','🔒 Lock');lock.type='button';lock.onclick=()=>window.lockWorkstationNow?.();bar.append(lock);
  const gate=el('section','dp-gate');gate.id='doctorGate';gate.hidden=true;
  gate.append(el('h2','',  'Doctor Workstation is locked'),el('p','','Unlock to continue. This page is for the doctor only.'));
@@ -53,6 +56,8 @@ function sync(){
  if(!on){root.classList.remove('doctor-tab-open','doctor-locked');return;}
  build();const tab=tabFromHash(),known=scan().find(t=>t.id===tab);
  root.classList.toggle('doctor-tab-open',!!known);
+ const sib=$('doctorSiblings');if(sib){sib.replaceChildren();const grp=known&&GROUPS.find(g=>g[1].includes(known.id)&&g[1].length>1);
+  if(grp)for(const id of grp[1]){const t=scan().find(x=>x.id===id);if(!t)continue;const a=el('a','dp-chip',CHIP[id]||t.label);a.href='#workstation='+id;if(id===known.id)a.setAttribute('aria-current','page');sib.append(a);}}
  root.classList.toggle('doctor-locked',locked());
  const gate=$('doctorGate');if(gate)gate.hidden=!locked();
  const base='Doctor Workstation';

@@ -1,12 +1,12 @@
 /* Doctor-only pages. Everything is scoped to html.doctor-site, or to the patient site's own header and footer. */
 html:not(.doctor-site) .dp-doctor-only{display:none!important}
-html.doctor-site .dp-patient-only,html.doctor-site #publicPortal,html.doctor-site .portal-nav,html.doctor-site .skip-link,html.doctor-site #chatbotToggleBtn,html.doctor-site #chatbotWindow{display:none!important}
+html.doctor-site .dp-patient-only,html.doctor-site #publicPortal,html.doctor-site .portal-nav,html.doctor-site .skip-link{display:none!important}
 html.doctor-site .dp-doctor-only{display:flex}
 html.doctor-site .doctor-tabs,html.doctor-site #doctorWorkstation .workstation-heading{display:none!important}
 html.doctor-site #doctorWorkstation>div[id^="view"],html.doctor-site #doctorWorkstation>section[id^="view"]{display:none}
 html.doctor-site.doctor-tab-open #doctorWorkstation>div[id^="view"]:not(.hidden),html.doctor-site.doctor-tab-open #doctorWorkstation>section[id^="view"]:not(.hidden){display:block}
 html.doctor-site:not(.doctor-tab-open) #doctorWorkstation [id^="view"],html.doctor-site:not(.doctor-tab-open) #doctorWorkstation .doctor-document-home{display:none!important}
-html.doctor-site.doctor-tab-open #doctorHome,html.doctor-site.doctor-tab-open #aiLaunchBar{display:none!important}
+html.doctor-site.doctor-tab-open #doctorHome{display:none!important}
 html.doctor-site:not(.doctor-tab-open) #doctorPageBar{display:none!important}
 html:not(.doctor-site) #doctorHome,html:not(.doctor-site) #doctorPageBar,html:not(.doctor-site) #doctorGate{display:none!important}
 html.doctor-site #doctorHome{display:block}
@@ -31,3 +31,8 @@ html.doctor-site:not(.doctor-locked) #doctorGate{display:none}
 html.doctor-site.doctor-locked #doctorWorkstation{display:none!important}
 html.doctor-site #workspacePageIdentity .page-breadcrumb{display:none}
 html.doctor-site:not(.doctor-tab-open) #workspacePageIdentity{display:none!important}
+
+.dp-chips{display:flex;flex-wrap:wrap;gap:8px;flex:1;min-width:0}
+.dp-chips:empty{display:none}
+.dp-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid #E6DCCD;background:#FFFDF9;color:#0F2942;font-weight:600;font-size:15px;text-decoration:none}
+.dp-chip[aria-current="page"]{background:#0D9488;border-color:#0D9488;color:#fff}
