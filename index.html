@@ -118,7 +118,7 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<details class="language-control"><summary>Language / भाषा</summary><div><p>English original · automatic translations</p><div id="google_translate_element"></div><p id="translationStatus">Load the language menu to choose a supported language. Medical meaning should be checked against the English original.</p><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></div></details>
+<div class="language-control" aria-label="Website language selector"><label for="google_translate_element">Language</label><div id="google_translate_element"></div><p id="translationStatus">Choose a language. Clinical translations are automatic; verify medical details against the English original.</p></div>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -141,6 +141,7 @@
 <a class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" href="tel:+919561394341" data-direct-call title="Click to Call Dr. Kulkarni" aria-label="Call Dr. Kulkarni at +91 9561394341">
 <i class="fa-solid fa-phone"></i> <span class="font-mono text-sm">Call 9561394341</span>
 </a>
+<a class="header-whatsapp-action" href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" aria-label="Message Dr. Kulkarni on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
 </div>
 </div>
 <nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
@@ -182,7 +183,8 @@
 <section class="petal-box p-6 md:p-8 rounded-3xl shadow-sm space-y-4" id="bookingSection"><span class="section-eyebrow">Home visit · booking &amp; dispatch</span>
 <div class="max-w-4xl">
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">A home visit, planned clearly.</h3>
-<p class="text-xs text-slate-600 mb-4">Choose the visit details to see an estimate. Send a WhatsApp request with your address and optional location pin; the doctor confirms availability and the final fee.</p>
+<p class="text-sm text-slate-600 mb-4">Need help quickly? Enter only what you know, attach your latest prescription or discharge summary if available, and send the request. You can add details later; the doctor confirms availability and the final fee. For an emergency, call 112/108 now.</p>
+<fieldset class="quick-clinical-intake"><legend>Quick patient details (optional — do not delay urgent care)</legend><div class="quick-intake-grid"><label>Current complaints<input id="quickComplaints" type="text" maxlength="500" placeholder="What is troubling the patient?"/></label><label>Known case / medical history<input id="quickKnownCase" type="text" maxlength="500" placeholder="e.g. diabetes, heart disease"/></label><label>Known allergies<input id="quickAllergies" type="text" maxlength="300" placeholder="Medicines / food / unknown"/></label><label>Past surgeries<input id="quickSurgeries" type="text" maxlength="300" placeholder="If any"/></label><label>Last menstrual period (if relevant)<input id="quickLmp" type="date"/></label><label>Height (cm)<input id="quickHeight" type="number" min="30" max="250" step="0.1" inputmode="decimal"/></label><label>Weight (kg)<input id="quickWeight" type="number" min="1" max="500" step="0.1" inputmode="decimal"/></label><label>BMI (calculated from entered height/weight)<output id="quickBmi" aria-live="polite">—</output></label><label>Temperature (°C)<input id="quickTemperature" type="number" min="25" max="45" step="0.1" inputmode="decimal" placeholder="If measured"/></label><label>Current medicines / reconciliation notes<input id="quickMedicines" type="text" maxlength="1000" placeholder="Medicine names, dose, frequency, last dose"/></label></div><div class="quick-intake-files"><label>Attach latest prescription / discharge summary<input id="quickClinicalFiles" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*" multiple/></label><label>Attach medicine reconciliation form (if available)<input id="quickMedicationFile" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*"/></label><p>Attachments are shared only when you choose a supported device share target. If your browser cannot share files, WhatsApp may open with the text request and you may need to attach the files manually.</p></div></fieldset>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
@@ -266,10 +268,10 @@
 </div>
 </section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919561394341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
 <!-- VERIFIED INTERNATIONAL CLINICAL PORTALS -->
-<section class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
+<section id="exploreHealthSources" class="bg-white p-6 rounded-3xl border petal-border text-xs space-y-3 shadow-sm">
 <div class="flex flex-wrap justify-between items-center border-b pb-2">
 <h3 class="text-sm font-bold text-[#0F2942] uppercase tracking-wide">Explore health resources</h3>
-<span class="text-[11px] text-teal-800 font-semibold">Original sources · Marathi translation links</span>
+<span class="text-[11px] text-teal-800 font-semibold">Original source links · use the language selector above</span>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5 pt-1">
 <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-2xl text-center space-y-1">
@@ -409,7 +411,7 @@
 <button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="savePatientPrescriptionToCloud()">
 <i class="fa-solid fa-cloud-arrow-up"></i> ☁️ Patient Cloud Save
           </button>
-<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription_Dr_Kulkarni.pdf')">
+<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
           </button>
 <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="printClinicalDocument('rxSheet')">🖨️ Print</button>
@@ -434,8 +436,8 @@
 <div>
 <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
 <p class="font-semibold text-slate-800">BAMS, PGDEMS (Symbiosis International University, Pune)</p>
-<p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
-<p class="text-[11px] text-slate-600">Home-visit requests: <a href="tel:+919561394341" data-direct-call>+91 9561394341</a> | Email: <a href="mailto:drkulkarnipg@gmail.com">drkulkarnipg@gmail.com</a></p>
+<p class="prescription-registration-line">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
+<p class="prescription-contact-line">Home-visit requests: <a href="tel:+919561394341" data-direct-call>+91 9561394341</a></p>
 </div>
 </div>
 <div class="text-right text-[11px]">
@@ -954,17 +956,13 @@
 </div>
 </div>
 <section id="viewClinicalCalculators" class="hidden calculator-workspace"><span class="section-eyebrow">Clinical reference tools</span><h3>Clinical calculators</h3><span class="calc-review-label">Source-reviewed draft · awaiting physician approval</span><p>28 tools for clinician use. Enter the current patient’s measurements and select every assessment explicitly. Values are not auto-filled or saved. Formulas, scope and sources accompany each tool.</p><label class="calculator-search">Find a calculator<input type="search" id="clinicalCalculatorSearch" placeholder="Search name or specialty"/></label><div id="clinicalCalculatorGrid"></div></section><section class="hidden everyday-tools" id="viewEverydayTools"><span class="section-eyebrow">Practical tools</span><h3>Diet presets &amp; conversions</h3><p>Choose a diet guidance preset to append to the prescription advice. Review and individualise it before signing. Existing advice is retained.</p><div id="dietPresetCards" class="nutrition-grid"></div><button type="button" class="research-upload" onclick="switchDocTab('rxPad')">Open prescription &amp; review advice</button><div id="workstationConversionHost"></div></section><section class="hidden space-y-6 patient-trends" id="viewChart20"><span class="section-eyebrow">Separate records for each patient</span><h3>Patient trends</h3><p>Each patient has a separate history. Device copies stay in this browser. An explicit cloud save uploads a generated patient code, readings and documented permission; local display names are not sent by the new flow. Do not put identifying information in notes. Exported files and other devices are separate.</p><section class="cloud-record-panel no-print" aria-labelledby="cloudRecordTitle"><h4 id="cloudRecordTitle">Private cloud records</h4><p id="cloudConnectionStatus" role="status">Cloud connection needs configuration. Your existing local records are unchanged.</p><form id="cloudSignInForm" hidden><label>Clinic owner email<input type="email" id="cloudLoginEmail" autocomplete="username" required/></label><label>Cloud password<input type="password" id="cloudLoginPassword" autocomplete="current-password" required/></label><button type="submit">Sign in to cloud</button></form><div id="cloudSignedInControls" hidden><button type="button" id="cloudSavePatient">Save selected patient to cloud</button><button type="button" id="cloudRefreshPatients">Refresh cloud patient list</button><label>Open a cloud patient<select id="cloudPatientSelect"><option value="">Choose cloud patient</option></select></label><button type="button" id="cloudOpenPatient">Open selected cloud patient</button><button type="button" id="cloudSignOut">Sign out of cloud</button><p>After the first successful cloud save, changes for that linked patient auto-sync while you are signed in. New local histories need their first cloud save. A success message confirms each save; offline edits stay local until you retry. Sign in on your other device to open cloud histories. Signing out ends cloud access; downloaded local copies remain on this browser.</p></div><button type="button" id="cloudCheckConnection">Check cloud connection</button><a href="CLOUD_RECORDS_SETUP.md" target="_blank" rel="noopener noreferrer">Cloud setup guide ↗</a><p id="cloudActionStatus" role="status" aria-live="polite"></p></section><div class="trend-patient-toolbar no-print"><label>Patient<select id="trendPatientSelect"><option value="">Choose patient</option></select></label><form id="trendAddPatientForm"><label>New patient name / code<input id="trendNewPatientName" maxlength="100" required autocomplete="off"/></label><button type="submit">Add patient</button></form><button type="button" id="trendExportAll">Backup all patients (JSON)</button><label class="research-upload">Restore backup<input id="trendRestoreFile" type="file" accept=".json,application/json" class="sr-only"/></label></div><p id="trendStorageStatus" role="status" aria-live="polite"></p><section id="trendLegacyPanel" hidden class="certificate-help no-print"><h4>Unassigned readings from the previous version</h4><p>The earlier history has no patient identity. It remains untouched in this browser. Check it before assigning it; it will not be automatically mixed with a patient.</p><button type="button" id="trendDownloadLegacy">Download original unassigned backup</button><button type="button" id="trendImportLegacy">Copy into a new “Legacy - verify identity” record</button></section><div id="trendPatientWorkspace" hidden><header class="trend-patient-heading"><h4 id="trendPatientHeading"></h4><p id="trendPatientIdentity"></p></header><div class="trend-actions no-print"><label>Plot<select id="trendMetricSelect"><option value="bp">Blood pressure · mmHg</option><option value="glucose">Blood glucose · mg/dL</option><option value="weight">Weight · kg</option><option value="pulse">Pulse · /min</option><option value="spo2">SpO₂ · %</option><option value="temperature">Temperature · °C</option><option value="creatinine">Creatinine · mg/dL</option><option value="hba1c">HbA1c · %</option></select></label><button type="button" onclick="saveTrendReadings()">Save this patient</button><button type="button" onclick="exportTrendReadings()">Export this patient (JSON)</button><button type="button" id="trendAddReading">Add reading</button><button type="button" onclick="window.print()">Print trend</button></div><p id="trendStatus" role="status" aria-live="polite"></p><svg id="bpTrendGraph" viewBox="0 0 760 260" role="img" aria-label="Selected patient's measurement trend"></svg><p id="trendGraphLegend"></p><p class="no-print">Select a measurement above to enter and view its columns. Points follow entry order, not elapsed time. Missing / invalid measurements leave a gap. Enter measured values in the displayed units; glucose context is recorded separately. This patient selection applies to this trend record; other clinical documents are separate.</p><div class="overflow-x-auto"><table id="trendTable" class="w-full text-xs"><thead><tr><th>Date</th><th>Time</th><th>SBP<br/>mmHg</th><th>DBP<br/>mmHg</th><th>MAP<br/>mmHg</th><th>Glucose<br/>mg/dL</th><th>Glucose context</th><th>Weight<br/>kg</th><th>Pulse<br/>/min</th><th>SpO₂<br/>%</th><th>Temp<br/>°C</th><th>Creatinine<br/>mg/dL</th><th>HbA1c<br/>%</th><th>Notes</th></tr></thead><tbody id="trendRows"></tbody></table></div></div></section></main>
-<!-- WIKI DETAIL MODAL -->
-<div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="wikiModal">
-<div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-4 text-xs max-h-[85vh] overflow-y-auto">
-<div class="wiki-reader-header" id="wikiReaderHeader">
-<h3 class="font-bold text-base serif-brand text-[#0F2942]" id="wikiModalTitle">वैद्यकीय संदर्भ</h3>
-<button type="button" id="wikiReaderClose" onclick="closeWikiModal()" aria-label="Close article and return to health library">✕ <span>Close / बंद करा</span></button>
+<!-- WIKI DETAIL MODAL: native dialog supports Escape and browser Back. -->
+<dialog id="wikiModal" class="wiki-reader-dialog no-print" aria-labelledby="wikiModalTitle">
+<div class="wiki-reader-panel">
+<div class="wiki-reader-header" id="wikiReaderHeader"><h1 id="wikiModalTitle">Health article</h1><button type="button" id="wikiReaderClose" onclick="closeWikiModal()" aria-label="Close article">×</button></div>
+<div id="wikiModalContent" class="wiki-reader-content" tabindex="0" aria-label="Full original article"></div>
 </div>
-<div class="space-y-3 text-slate-700 leading-relaxed text-xs" id="wikiModalContent" tabindex="0" aria-label="Article text — scroll to read"></div>
-<div class="wiki-reader-footer"><button type="button" id="wikiReaderBack" onclick="closeWikiModal()">← Health library / लेखसूचीकडे परत</button></div>
-</div>
-</div>
+</dialog>
 <!-- Device privacy settings: not a secure clinical backend. -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="securityModal"><section class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs" role="dialog" aria-modal="true" aria-labelledby="deviceLockHeading"><button class="float-right" onclick="closeSecuritySettingsModal()" aria-label="Close device lock settings">×</button><h3 id="deviceLockHeading">Device privacy lock</h3><p class="device-lock-help">Set a passphrase for this browser. This hides the workstation from casual viewing; it is not server authentication or encrypted record storage. Stays unlocked on this tab while you work, including brief tab changes and refreshes. Locks after 15 minutes of inactivity, 8 hours, or Lock now. This is a device privacy screen, separate from cloud login.</p><div hidden aria-hidden="true"><input id="secModeOpen" name="secModeRadio" type="radio" value="open" disabled/><input id="secModePin" name="secModeRadio" type="radio" value="pin" disabled/><input id="secModeBiometric" name="secModeRadio" type="radio" value="biometric" disabled/></div><div class="lock-form"><label id="lockCurrentRow">Current passphrase / existing PIN<input id="deviceCurrentPassword" type="password" autocomplete="current-password"/></label><label>New passphrase (8+ characters)<input id="customPinInput" type="password" autocomplete="new-password" minlength="8"/></label><label>Repeat new passphrase<input id="deviceConfirmPassword" type="password" autocomplete="new-password"/></label><button type="button" onclick="lockWorkstationNow(); closeSecuritySettingsModal()">Lock now</button><button type="button" id="deviceLockSave" onclick="saveSecuritySettings()">Save device passphrase</button><p id="deviceLockSettingsError" class="device-lock-error" role="alert"></p><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Privacy and access limitations ↗</a></div></section></div>
 <dialog id="doctorLoginDialog" aria-labelledby="doctorLoginTitle"><h2 id="doctorLoginTitle">Doctor login</h2><p id="doctorLoginHelp">One clinic owner account for Doctor Workstation and cloud trends.</p><form id="doctorLoginForm" class="lock-form"><label>Email<input id="doctorLoginEmail" type="email" autocomplete="username" required/></label><label>Password<input id="doctorLoginPassword" type="password" autocomplete="current-password" required/></label><button type="submit" id="doctorLoginSubmit">Sign in</button><button type="button" id="doctorLoginCancel">Return to patient portal</button><p id="doctorLoginError" role="alert"></p></form></dialog><dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
@@ -1416,28 +1414,40 @@ Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit request
       showToast("Record successfully saved!");
     }
 
-    function universalShareDocument(type) {
-      let title = "";
-      let text = "";
-      const phone = document.getElementById('rxPatPhone').value.replace(/\D/g, '');
-
-      if(type === 'rx') {
-        title = "Dr. Kulkarni ICU Prescription";
-        text = generatePrescriptionText();
-      } else if(type === 'path') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        title = "Pathology Requisition - Dr. Kulkarni";
-        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nPlease send urgent reports via WhatsApp to: 9561394341`;
-      } else if(type === 'rad') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        title = "Radiology Requisition - Dr. Kulkarni";
-        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nConfirm ETA to: 9561394341`;
-      }
-
-      if(navigator.share) {
-        navigator.share({ title: title, text: text }).catch(() => openDirectWhatsAppFallback(phone, text));
-      } else {
-        openDirectWhatsAppFallback(phone, text);
+    async function universalShareDocument(type) {
+      const config = {
+        rx: { id: 'rxSheet', title: 'Prescription', filename: 'Prescription.pdf', fallback: generatePrescriptionText },
+        path: { id: 'pathSheet', title: 'Pathology Requisition', filename: 'Pathology_Requisition.pdf' },
+        rad: { id: 'radSheet', title: 'Radiology Requisition', filename: 'Radiology_Requisition.pdf' }
+      }[type];
+      if (!config) { showToast('This document type is not configured for sharing yet.'); return; }
+      const element = document.getElementById(config.id);
+      if (!element) { showToast('The document could not be found. Nothing was shared.'); return; }
+      const phone = (document.getElementById('rxPatPhone')?.value || '').replace(/\D/g, '');
+      let text = typeof config.fallback === 'function' ? config.fallback() : (type === 'path'
+        ? '*PATHOLOGY REQUISITION*\nPatient: ' + (document.getElementById('reqPatName')?.value || 'Patient') + '\nHome-visit doctor contact: 9561394341'
+        : '*RADIOLOGY REQUISITION*\nPatient: ' + (document.getElementById('reqPatName')?.value || 'Patient') + '\nHome-visit doctor contact: 9561394341');
+      const options = { margin: [6, 6, 6, 6], image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+      try {
+        const blob = await html2pdf().set(options).from(element).outputPdf('blob');
+        const file = new File([blob], config.filename, { type: 'application/pdf' });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: config.title, files: [file] });
+          return;
+        }
+        if (navigator.share) {
+          try { await navigator.share({ title: config.title, text }); return; } catch (error) { if (error?.name === 'AbortError') return; }
+        }
+        const downloadUrl = URL.createObjectURL(file);
+        const anchor = document.createElement('a'); anchor.href = downloadUrl; anchor.download = config.filename; anchor.click();
+        setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
+        const url = 'https://wa.me/919561394341?text=' + encodeURIComponent(text + '\n\nAttach the downloaded ' + config.filename + ' before sending.');
+        const popup = window.open(url, '_blank', 'noopener,noreferrer');
+        if (!popup) location.href = url;
+        showToast('PDF prepared and WhatsApp opened. Attach the PDF if this browser cannot share files directly.');
+      } catch (error) {
+        console.error('Document share failed', error);
+        showToast('Could not prepare the PDF. Please use the separate Print or Export PDF control.');
       }
     }
 
@@ -1453,14 +1463,67 @@ Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit request
       window.ClinicalCalculators.render();
     }
 
-    // WIKI DETAIL MODAL
-    function openWikiModal(id) {
-      const a=window.PatientEducation?.get(id);if(!a)return;
-      document.getElementById('wikiModalTitle').textContent=a.mr.title;
-      document.getElementById('wikiModalContent').textContent=window.PatientEducation.text(a,'mr');
-      document.getElementById('wikiModal').classList.remove('hidden');
+    // WIKI DETAIL MODAL — render the complete authored English article, not a summary or Marathi-only version.
+    let wikiHistoryEntry = false;
+    function escapeArticleHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
-    function closeWikiModal() { document.getElementById('wikiModal').classList.add('hidden'); }
+    function renderFullHealthArticle(article) {
+      const lang = 'en';
+      const content = article[lang];
+      if (!content) return '<p>The original English article is not available for this item.</p>';
+      const sourceMap = window.PatientEducation?.sources || {};
+      const sectionHtml = (content.sections || []).map((section, index) => {
+        const refs = (section.refs || []).map(key => {
+          const source = sourceMap[key];
+          return source ? '<li><a href="' + escapeArticleHtml(source[1]) + '" target="_blank" rel="noopener noreferrer">' + escapeArticleHtml(source[0]) + ' ↗</a></li>' : '';
+        }).join('');
+        return '<section class="wiki-article-section"><h2>' + escapeArticleHtml(section.heading || ('Section ' + (index + 1))) + '</h2><p>' + escapeArticleHtml(section.text || '').replace(/\n/g,'<br>') + '</p>' + (refs ? '<h3>References for this section</h3><ul>' + refs + '</ul>' : '') + '</section>';
+      }).join('');
+      const faqs = (content.faq || []).map(item => '<details class="wiki-article-faq"><summary>' + escapeArticleHtml(item[0]) + '</summary><p>' + escapeArticleHtml(item[1]) + '</p></details>').join('');
+      return '<article class="wiki-full-article"><p class="wiki-article-intro">' + escapeArticleHtml(content.intro || '') + '</p>' + sectionHtml + (faqs ? '<section class="wiki-article-faqs"><h2>Frequently asked questions</h2>' + faqs + '</section>' : '') + (content.takeaway ? '<aside class="wiki-article-takeaway"><h2>Key takeaway</h2><p>' + escapeArticleHtml(content.takeaway) + '</p></aside>' : '') + '<p class="wiki-original-note">Original authored English content. Translations, if selected, may be automatic.</p></article>';
+    }
+    function openWikiModal(id) {
+      const article = window.PatientEducation?.get(id);
+      if (!article) return;
+      const source = article.en || {};
+      document.getElementById('wikiModalTitle').textContent = source.title || 'Health article';
+      document.getElementById('wikiModalContent').innerHTML = renderFullHealthArticle(article);
+      const dialog = document.getElementById('wikiModal');
+      if (!dialog.open) {
+        dialog.showModal();
+        history.pushState({ wikiReader: true, articleKey: article.key }, '', '#article-' + encodeURIComponent(article.key));
+        wikiHistoryEntry = true;
+      }
+      document.getElementById('wikiModalContent').focus({ preventScroll: true });
+    }
+    function closeWikiModal(fromHistory = false) {
+      const dialog = document.getElementById('wikiModal');
+      if (dialog.open) dialog.close();
+      if (wikiHistoryEntry && !fromHistory) {
+        wikiHistoryEntry = false;
+        if (location.hash.startsWith('#article-')) history.back();
+      } else {
+        wikiHistoryEntry = false;
+      }
+    }
+    window.addEventListener('popstate', function() {
+      const dialog = document.getElementById('wikiModal');
+      if (dialog?.open) closeWikiModal(true);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const resources = document.getElementById('exploreHealthSources');
+      const footer = document.querySelector('#publicPortal > footer');
+      if (resources && footer) footer.before(resources);
+      const height = document.getElementById('quickHeight');
+      const weight = document.getElementById('quickWeight');
+      const bmi = document.getElementById('quickBmi');
+      const updateBmi = () => {
+        const hCm = Number(height?.value), wKg = Number(weight?.value);
+        bmi.textContent = hCm > 0 && wKg > 0 ? (wKg / ((hCm / 100) ** 2)).toFixed(1) : '—';
+      };
+      [height, weight].forEach(el => el?.addEventListener('input', updateBmi));
+    });
 
     function filterWikiArticles() {
       const q = document.getElementById('wikiSearchInput').value.toLowerCase();
@@ -1497,18 +1560,33 @@ Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit request
       return total;
     }
 
-    function bookAndTriggerFullAutomation() {
-      const name = document.getElementById('bkPatName').value.trim();
-      const phone = document.getElementById('bkPatPhone').value.trim();
-      const addr = document.getElementById('bkPatAddress').value.trim();
+    async function bookAndTriggerFullAutomation() {
+      const value = id => document.getElementById(id)?.value?.trim() || '';
+      const name = value('bkPatName'), phone = value('bkPatPhone'), addr = value('bkPatAddress');
       const navUrl = document.getElementById('bkGpsMapUrl').value || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr || 'Pune')}`;
-
-      if(!name || !phone) { alert("Please enter patient name and mobile number."); return; }
-
+      if (!name || !phone) { alert('Please enter the patient name and a contact mobile number.'); return; }
       const total = calculateFee();
       const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9561394341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee:* ₹${total}`;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+      const clinical = [
+        ['Current complaints', value('quickComplaints')], ['Known case / history', value('quickKnownCase')],
+        ['Allergies', value('quickAllergies')], ['Past surgeries', value('quickSurgeries')],
+        ['Last menstrual period', value('quickLmp')], ['Height (cm)', value('quickHeight')],
+        ['Weight (kg)', value('quickWeight')], ['BMI', document.getElementById('quickBmi')?.textContent || ''],
+        ['Temperature (°C)', value('quickTemperature')], ['Current medicines / reconciliation', value('quickMedicines')]
+      ].filter(row => row[1]).map(row => '*' + row[0] + ':* ' + row[1]).join('\n');
+      const msg = `*HOME VISIT REQUEST*\n*Doctor:* Dr. Pramod G. Kulkarni\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Callback mobile:* ${phone}\n*Address:* ${addr || 'To be provided'}\n*Location:* ${navUrl}\n*Estimated fee:* ₹${total} (doctor to confirm)\n${clinical ? '\n' + clinical : ''}\n\nThis is a visit request, not an emergency dispatch. For immediate danger, call 112/108.`;
+      const selected = [
+        ...Array.from(document.getElementById('quickClinicalFiles')?.files || []),
+        ...(document.getElementById('quickMedicationFile')?.files?.length ? Array.from(document.getElementById('quickMedicationFile').files) : [])
+      ];
+      if (selected.length && navigator.share && navigator.canShare && navigator.canShare({ files: selected })) {
+        try { await navigator.share({ title: 'Home visit request', text: msg, files: selected }); return; }
+        catch (error) { if (error?.name === 'AbortError') return; }
+      }
+      const url = 'https://wa.me/919561394341?text=' + encodeURIComponent(msg + (selected.length ? '\n\nPlease attach the selected clinical files in this WhatsApp chat if they were not included by your device share sheet.' : ''));
+      const popup = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!popup) location.href = url;
+      if (selected.length) showToast('WhatsApp opened. If your browser did not include the files, attach them in the chat before sending.');
     }
 
     // ARTICLE MANAGER (MOON-READER STYLE CARDS & PDF EXPORT)
