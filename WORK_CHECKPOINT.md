@@ -97,3 +97,7 @@ Owner resumed the project with “check end to end and restructure end to end”
 3. Review all changed lines and confirm no existing IDs/features were removed.
 4. Continue from `END_TO_END_AUDIT.md` and the remaining rows of `MASTER_TASK_REGISTER.md`; prioritize full original article rendering and remaining contact/emergency labels.
 5. Show preview and evidence; do not merge or deploy production without explicit owner approval.
+
+
+### Regression test follow-up — 29 October 2026
+Added `tests/end-to-end-contact-emergency.test.cjs` to check emergency-strip language and 112/108 links, clickable contact/email, emergency wording, responsive strip CSS and retained core workspace/booking elements. This is a source-level test only and has NOT been run. Update `END_TO_END_AUDIT.md` and `MASTER_TASK_REGISTER.md` accordingly. Current preview is still the Vercel Ready deployment linked above; verify latest deployment before review.
