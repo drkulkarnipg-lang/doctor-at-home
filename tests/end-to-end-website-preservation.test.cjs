@@ -14,7 +14,7 @@ assert.match(html, /<html lang="en">/);
 assert.match(html, /class="language-control"/);
 assert.ok(html.indexOf('class="language-control"') < html.indexOf('id="navPublicBtn"'), 'language selector precedes workspace navigation');
 assert.match(html, /pageLanguage:\s*'en'/);
-assert.match(html, /More languages ↗/);
+assert.match(html, /All languages ↗/);
 assert.match(css, /\.language-control/);
 
 // Phone and WhatsApp are separate, visitor-chosen actions; no fake social URLs.
