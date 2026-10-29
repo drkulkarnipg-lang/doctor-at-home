@@ -25,9 +25,26 @@
           "value": "camera=(), microphone=(), geolocation=(self)"
         }
       ]
+    },
+    {
+      "source": "/doctor",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
     }
   ],
   "rewrites": [
+    {
+      "source": "/doctor",
+      "destination": "/index.html"
+    },
     {
       "source": "/articles",
       "destination": "/api/public-articles"
@@ -48,5 +65,12 @@
     "api/evidence-webhook.js": {
       "maxDuration": 180
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/doctor/",
+      "destination": "/doctor",
+      "permanent": false
+    }
+  ]
 }
