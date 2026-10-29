@@ -16,5 +16,20 @@ handler=createHandler({env,request:async(url)=>url.endsWith('/auth/v1/user')?jso
 handler=createHandler({env:{...env,SUPABASE_PUBLISHABLE_KEY:'sb_secret_NOT_ALLOWED'},request:async()=>{throw Error('must not run');}});assert.equal((await call(handler,'session')).code,503);
 assert.throws(()=>validatePatient({id,name:'Bad',readings:Array(2001).fill({})}));assert.throws(()=>validatePatient({id,name:'Bad',readings:[{notes:'x'.repeat(2001)}]}));assert.throws(()=>validatePatient({id:'arbitrary',name:'Bad',readings:[]}));assert.deepEqual(Object.keys(validatePatient({id,name:'Good',cloudConsent:consent,readings:[{owner_id:'injected',sbp:'120'}]}).readings[0]).includes('owner_id'),false);
 r=await call(createHandler({env:{}}),'logout','POST',{});assert.equal(r.code,200);assert.match(r.headers['Set-Cookie'],/Max-Age=0/);
+// Owner password recovery is email-only and never requires an existing session cookie.
+r=await call(createHandler({env,request:async()=>json({})}),'recover','POST',{});
+assert.equal(r.code,503,'Recovery fails closed without the configured owner email');
+let recoveryRequests=[];
+handler=createHandler({env:{...env,CLINIC_OWNER_EMAIL:'owner@example.test'},request:async(url,o)=>{recoveryRequests.push([url,o]);return json({});}});
+r=await call(handler,'recover','POST',{});
+assert.equal(r.code,200);assert.equal(recoveryRequests.length,1);assert.ok(recoveryRequests[0][0].includes('/auth/v1/recover?redirect_to='));assert.equal(JSON.parse(recoveryRequests[0][1].body).email,'owner@example.test');
+recoveryRequests=[];
+handler=createHandler({env,request:async(url,o)=>{recoveryRequests.push([url,o]);if(url.endsWith('/auth/v1/user')&&o.method==='PUT')return json({id:owner});if(url.endsWith('/auth/v1/user'))return json({id:owner});throw Error('Unexpected recovery request');}});
+r=await call(handler,'complete-recovery','POST',{accessToken:'synthetic-recovery-token-123456789',password:'Synthetic-Strong-Passphrase-2026!'});
+assert.equal(r.code,200);assert.equal(recoveryRequests.length,2);assert.equal(recoveryRequests[1][1].method,'PUT');assert.equal(JSON.parse(recoveryRequests[1][1].body).password,'Synthetic-Strong-Passphrase-2026!');
+recoveryRequests=[];
+handler=createHandler({env,request:async(url,o)=>{recoveryRequests.push([url,o]);return json({id:other});}});
+r=await call(handler,'complete-recovery','POST',{accessToken:'synthetic-recovery-token-123456789',password:'Synthetic-Strong-Passphrase-2026!'});
+assert.equal(r.code,403,'Recovery token for a non-owner must be rejected');assert.equal(recoveryRequests.length,1,'Non-owner password must never be updated');
 console.log('Cloud API tests passed: unconfigured fail-closed, CSRF, owner authentication, token cookie flags, no client tokens, wrong-owner rejection, optimistic conflict, validation and logout. Live RLS/integration remains untested.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
