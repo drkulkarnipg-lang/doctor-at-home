@@ -143,3 +143,37 @@ An earlier deployment of this branch was marked Ready, but the latest checkpoint
 ## Definition of done
 
 The restructure is complete only when the preserved-feature inventory is reconciled, all high-priority workflows have evidence, tests pass, no critical data/content regressions remain, limitations are listed, the owner has a reviewable preview, and production publication is explicitly approved. A plan, pull request, or Ready deployment alone is not completion.
+
+
+## Current implementation checkpoint — 29 October 2026
+
+This section supersedes earlier deployment-pending notes above. The latest branch head checked for this checkpoint is `5e8ef19c7f70da009e4f9db5d62ced297dfd9297`; Vercel status is **success/Ready**. This is a preview only, not production publication.
+
+### Implemented in PR #29 (draft; not merged)
+- Header language selector remains visible and accessible; English is the original/default. The Google Translate dropdown is not moved into the article reader, and no Marathi-only language panel is injected. It exposes the languages supported by the translation service, not literally every language in the world.
+- Patient portal navigation switches between focused content groups: overview, home care, health library, booking, tools, FAQ and health sources. Browser Back/Forward restores the previous section.
+- Responsive sky-blue clinical visual pass for the hero, header selector, section tabs, article reader, quick intake and publisher controls; mobile breakpoints and focus states added.
+- Separate phone-dialler, WhatsApp and email actions are available from the header/hero. Native phone and share-sheet behaviour still needs device QA.
+- Health-library cards default to authored English. The reader now uses a native `<dialog>`, renders the complete authored English article with all sections/references/FAQ/takeaway, and supports browser Back, close and Escape. The extra in-reader “back to library”, download and share buttons were removed.
+- Home-visit flow presents name/contact/address/GPS first, then optional complaints, known history, allergies, past surgeries, LMP, height/weight/BMI, temperature, medicine notes and original prescription/discharge-summary attachments. The much longer detailed intake is collapsed by default. Attachments use the device share sheet when supported; unsupported browsers cannot attach files automatically through a WhatsApp URL.
+- Removed the prefilled “NKDA” allergy assumption and preselected CBC/KFT/electrolyte/chest-X-ray orders.
+- Prescription sharing uses `Prescription.pdf`; the prescription sheet no longer includes the doctor's email; registration typography is compact. Lab and radiology sharing target the correct existing elements and descriptive filenames. The native file-share sheet is attempted first; fallback limitations are reported honestly.
+- Article content editor has device-file import, public-URL fetch where CORS/permissions allow, saved-draft reload, status feedback and clear publishing-vs-reading labels. Existing authenticated cloud-article refresh/load/start controls remain in the dedicated publisher panel.
+- Government Form 2 / Form 4 / Form 4A original PDF links remain unchanged and available. Editable forms are explicitly treated as working layouts, not exact government facsimiles.
+
+### Source-level checks performed
+- Current HTML scan: zero duplicate IDs; core patient/workstation, booking, GPS, calculator and document IDs remain present.
+- Static assertions checked: visible header language selector; English default; native article dialog; full article rendering path; separate call/WhatsApp/email links; quick intake attachments; corrected PDF target IDs/names; article import controls; original government PDF links.
+- Added tests: `tests/end-to-end-contact-emergency.test.cjs` and `tests/end-to-end-website-preservation.test.cjs`.
+- **Tests not executed:** the repository could not be cloned in this environment because GitHub hostname resolution failed. Vercel Ready is not evidence that tests pass or that native device actions work.
+- The review preview URL is https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . The available browser inspection tool could not load the preview, so visual browser QA is still open.
+
+### Remaining critical work
+1. Run both new regression tests and the full existing test suite in a repository-capable environment; fix failures before asking for review.
+2. Interactively test every patient tab, browser Back/Forward, the full article reader, translation dropdown and 320–1440px layouts.
+3. Test real Android phone dialler, WhatsApp, native PDF file share, save/print and page count on the owner's device.
+4. Verify government Form 2/4/4A against the current official originals. The existing editable layouts are not exact facsimiles; do not claim statutory-format compliance until exact field mapping and PDF output are reviewed. Form 2 may be multi-page in the official original and must not be distorted merely to force one page.
+5. Verify external source import: browser CORS/paywall/login restrictions can block arbitrary web imports. A connected authenticated cloud article list is distinct from importing arbitrary files or URLs.
+6. Complete the full workstation security/session, payment, cloud backup, article scale and integration audit in this document.
+
+No merge, production deploy, real payment, patient communication, public publishing or paid integration is authorised by this checkpoint.
