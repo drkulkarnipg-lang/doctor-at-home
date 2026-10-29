@@ -101,3 +101,7 @@ Owner resumed the project with “check end to end and restructure end to end”
 
 ### Regression test follow-up — 29 October 2026
 Added `tests/end-to-end-contact-emergency.test.cjs` to check emergency-strip language and 112/108 links, clickable contact/email, emergency wording, responsive strip CSS and retained core workspace/booking elements. This is a source-level test only and has NOT been run. Update `END_TO_END_AUDIT.md` and `MASTER_TASK_REGISTER.md` accordingly. Current preview is still the Vercel Ready deployment linked above; verify latest deployment before review.
+
+
+### Preview status correction — 29 October 2026
+The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . An earlier deployment was Ready; the latest checkpoint/audit commits triggered a new deployment and the current Vercel status is pending. Before presenting the preview as ready, recheck the Vercel status and confirm it corresponds to the latest branch head.
