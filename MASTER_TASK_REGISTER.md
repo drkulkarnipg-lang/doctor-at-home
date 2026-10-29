@@ -146,3 +146,7 @@ Evidence note: the current PR preview URL was supplied by Vercel's PR comment: h
 - [x] Added focused regression test `tests/end-to-end-contact-emergency.test.cjs` covering emergency strip language/links, doctor contact and email links, corrected prescription emergency wording, responsive CSS, and core workspace/booking entry points.
 - [ ] Test has not been executed; the current environment cannot clone the repository because GitHub hostname resolution fails. Do not report it as passing.
 - [ ] Vercel preview is Ready, but interactive preview inspection and real-device call/WhatsApp checks remain pending.
+
+
+### Latest deployment status — 29 October 2026
+The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . An earlier deployment was Ready, but the latest checkpoint/audit commits triggered a new Vercel deployment that is currently pending. Verify the current deployment before asking the owner to review; the earlier Ready status does not establish that the newest files are deployed.
