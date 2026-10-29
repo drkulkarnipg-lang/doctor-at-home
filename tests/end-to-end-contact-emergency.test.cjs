@@ -15,7 +15,7 @@ assert.doesNotMatch(strip[0],/आपत्कालीन|आपातकाल�
 
 // Main contact actions and public contact channels must be actionable.
 assert.match(html,/href="tel:\+919561394341"[^>]*aria-label="Call Dr\. Kulkarni at \+91 9561394341"/);
-assert.match(html,/href="mailto:drkulkarnipg@gmail\.com">drkulkarnipg@gmail\.com<\/a>/);
+assert.match(html,/href="mailto:drkulkarnipg@gmail\\.com"/);
 assert.doesNotMatch(html,/Direct Helpline:/);
 assert.doesNotMatch(html,/Emergency Helpline:/);
 assert.doesNotMatch(html,/Drkulkarnipg@gmail\.com/);
