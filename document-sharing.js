@@ -35,6 +35,11 @@
     setTimeout(()=>{if(activeUrl){URL.revokeObjectURL(activeUrl);activeUrl=null;activeFile=null;}},60000);
   }catch(e){
     console.error('PDF share failed',e);
+    if (activeFile && activeUrl) {
+      const a=document.createElement('a');a.href=activeUrl;a.download=activeFile.name;a.click();
+      window.showToast?.('Direct sharing was not accepted by this browser. The PDF was downloaded; attach it in WhatsApp or email.');
+      return;
+    }
     window.showToast?.('PDF could not be prepared: '+e.message+'. Use Print / Save as PDF.');
   }
  };
@@ -51,6 +56,6 @@
   $('pdfWhatsApp').href='https://api.whatsapp.com/send?text='+encodeURIComponent('Patient guidance from Dr. Pramod G. Kulkarni. I will attach the PDF separately.');document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('pdfShareDialog').hidden)close();});window.renderPublishedArticles();
   document.querySelectorAll('[onclick*="universalShareDocument"]').forEach(b=>b.textContent='Share PDF');
   for(const [id,group]of [['viewClinicalCertificates','clinical'],['viewLegalForms','death']]){const toolbar=$(id).querySelector('div.flex');if(!toolbar)continue;const b=document.createElement('button');b.type='button';b.className='research-upload';b.textContent='Share PDF';b.onclick=()=>window.shareSelectedCertificate(group);toolbar.append(b);}
-  for(const [id,label,name]of [['wikiModalContent','Share article PDF','Health_Article'],['viewChart20','Share trend PDF','BP_Trend']]){const el=$(id);if(!el)continue;const b=document.createElement('button');b.type='button';b.className='research-upload no-print';b.textContent=label;b.onclick=()=>window.shareDocumentPdf(id,name);if(id==='viewChart20')el.prepend(b);else{b.id='shareFullGuidePdf';el.parentElement.append(b);const download=document.createElement('button');download.type='button';download.className='research-upload no-print';download.id='downloadFullGuidePdf';download.textContent='Download complete article PDF';download.onclick=()=>window.exportToPdf(id,name);el.parentElement.append(download);}}
+  {const id='viewChart20',label='Share trend PDF',name='BP_Trend';const el=$(id);if(el){const b=document.createElement('button');b.type='button';b.className='research-upload no-print';b.textContent=label;b.onclick=()=>window.shareDocumentPdf(id,name);el.prepend(b);}}
  });
 })();
