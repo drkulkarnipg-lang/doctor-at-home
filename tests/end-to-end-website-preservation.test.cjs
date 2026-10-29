@@ -14,7 +14,7 @@ assert.match(html, /<html lang="en">/);
 assert.match(html, /class="language-control"/);
 assert.ok(html.indexOf('class="language-control"') < html.indexOf('id="navPublicBtn"'), 'language selector precedes workspace navigation');
 assert.match(html, /pageLanguage:\s*'en'/);
-assert.match(html, /Language options ↗/);
+assert.match(html, /More languages ↗/);
 assert.match(css, /\.language-control/);
 
 // Phone and WhatsApp are separate, visitor-chosen actions; no fake social URLs.
@@ -85,4 +85,8 @@ for (const id of ['doctorWorkstation','tabRx','tabPath','tabRad','viewClinicalCe
   assert.match(html, new RegExp('id="' + id + '"'));
 }
 assert.match(education, /en:\{title:/);
+assert.match(html,/articleOpenSourceBtn/);
+assert.match(html,/Add typed medicine to prescription/);
+assert.match(html,/Doctor username/);
+assert.match(fs.readFileSync('clinical-calculators.js','utf8'),/const updateResult=/);
 console.log('End-to-end website preservation assertions passed.');
