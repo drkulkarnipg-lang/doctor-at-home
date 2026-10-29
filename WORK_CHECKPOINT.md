@@ -141,3 +141,10 @@ The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78
 6. Continue the remaining audit phases in `END_TO_END_AUDIT.md`.
 
 No merge, production release, payment activation or external publication without explicit owner approval.
+
+
+### Final static source scan for the code change set
+- HTML length: 187,938 characters; 447 element IDs; **zero duplicate IDs**.
+- Checked 31 local script references and 16 local CSS references against the repository tree; no missing references found.
+- Static assertions passed for the header language selector, English default, no Marathi-only reader controls, native full-article dialog/history, phone/WhatsApp/email actions, quick intake attachments, blank allergy/lab defaults, PDF names/targets, article import controls, cloud publisher buttons, government original PDF links and retained core workstation/booking IDs.
+- This is source inspection only. It does not establish JavaScript syntax/runtime correctness, passing tests, visual layout correctness, native phone/WhatsApp/PDF sharing, cloud availability, or legal-form fidelity. The new tests remain unexecuted.
