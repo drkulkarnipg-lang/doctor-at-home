@@ -69,3 +69,31 @@ PR20 created: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/20 . Auto
 
 ## PR20 approved release verification — 26 October 2026
 After the user explicitly approved the preview, PR20 merged a110d9cb114738f9ae5e40fd49b4329a9b5a1232. Vercel dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY production. Live clinical-documents.js and reading-print-fixes.css HTTP200 and SHA256 match the tested local files. Reloaded production DOM contains both Close controls for all three editors and one document chooser. Workstation remains locked; no auth protection changed or bypassed. Earlier synthetic browser Close/reopen/data retention, Escape layering and 24-file suite remain the behavioral evidence; real authenticated owner-device PDF/print interaction not claimed. Register G01/G02 marked live with those limits. Resume other pending register rows, not PR20.
+
+
+## Resume checkpoint — end-to-end audit, 29 October 2026
+
+Owner resumed the project with “check end to end and restructure end to end”. Do not restart released work. Production/main remains unchanged.
+
+### New work on isolated review branch
+- Branch: `fix/end-to-end-contact-emergency-navigation`
+- Draft PR #29: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29
+- Latest known Vercel preview from PR comment: https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/
+- Vercel deployment status: Ready. Interactive browser and owner-device QA have NOT been completed.
+- Files changed: `index.html`, `reading-print-fixes.css`, `END_TO_END_AUDIT.md`, `MASTER_TASK_REGISTER.md`, this checkpoint.
+- New English-only emergency strip with tel:112/tel:108; header call button labelled; doctor number identified as home-visit requests; certificate contact phone/email made clickable; prescription emergency wording corrected; pathology/radiology contact numbers made clickable; guide-share contact label corrected.
+- Added the phase-by-phase preservation-first audit plan and acceptance gates in `END_TO_END_AUDIT.md`.
+- Main/production was not changed, and PR #29 is not merged.
+
+### Validation limits
+- Source-level replacement assertions passed during the editing operation.
+- GitHub status shows Vercel deployment Ready.
+- Full test suite was NOT run. Attempt to clone/run tests failed because this environment could not resolve github.com. Do not claim tests passed.
+- Live preview content was not available to the browser inspection tool in this turn; real phone dialler, WhatsApp handoff, PDF save/print and owner authentication are device-dependent and remain unverified.
+
+### Next action
+1. Open the preview link above and check emergency strip/contact labels visually on desktop and mobile.
+2. Obtain an environment capable of running `npm test`; add focused tests for English-only emergency wording, tel:112/tel:108, tel:+919561394341, mailto:drkulkarnipg@gmail.com and absence of legacy “Direct Helpline” / “Emergency Helpline” labels.
+3. Review all changed lines and confirm no existing IDs/features were removed.
+4. Continue from `END_TO_END_AUDIT.md` and the remaining rows of `MASTER_TASK_REGISTER.md`; prioritize full original article rendering and remaining contact/emergency labels.
+5. Show preview and evidence; do not merge or deploy production without explicit owner approval.
