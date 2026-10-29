@@ -1,0 +1,38 @@
+/* Doctor-only pages. Everything is scoped to html.doctor-site, or to the patient site's own header and footer. */
+html:not(.doctor-site) .dp-doctor-only{display:none!important}
+html.doctor-site .dp-patient-only,html.doctor-site #publicPortal,html.doctor-site .portal-nav,html.doctor-site .skip-link{display:none!important}
+html.doctor-site .dp-doctor-only{display:flex}
+html.doctor-site .doctor-tabs,html.doctor-site #doctorWorkstation .workstation-heading{display:none!important}
+html.doctor-site #doctorWorkstation>div[id^="view"],html.doctor-site #doctorWorkstation>section[id^="view"]{display:none}
+html.doctor-site.doctor-tab-open #doctorWorkstation>div[id^="view"]:not(.hidden),html.doctor-site.doctor-tab-open #doctorWorkstation>section[id^="view"]:not(.hidden){display:block}
+html.doctor-site:not(.doctor-tab-open) #doctorWorkstation [id^="view"],html.doctor-site:not(.doctor-tab-open) #doctorWorkstation .doctor-document-home{display:none!important}
+html.doctor-site.doctor-tab-open #doctorHome{display:none!important}
+html.doctor-site:not(.doctor-tab-open) #doctorPageBar{display:none!important}
+html:not(.doctor-site) #doctorHome,html:not(.doctor-site) #doctorPageBar,html:not(.doctor-site) #doctorGate{display:none!important}
+html.doctor-site #doctorHome{display:block}
+.dp-group{margin:0 0 22px}
+.dp-group-title{font:700 20px/1.3 Georgia,'Times New Roman',serif;color:#0F2942;margin:0 0 10px}
+.dp-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:640px){.dp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1024px){.dp-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dp-card{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:76px;padding:14px 16px;background:#FFFDF9;border:1px solid #E6DCCD;border-radius:16px;text-decoration:none;color:#0F2942;box-shadow:0 1px 3px rgba(15,41,66,.06)}
+.dp-card:hover,.dp-card:focus-visible{border-color:#0D9488;box-shadow:0 2px 8px rgba(15,41,66,.12)}
+.dp-card-title{font:700 17px/1.3 Georgia,'Times New Roman',serif}
+.dp-card-note{font-size:14px;line-height:1.4;color:#42474D}
+.dp-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.dp-back{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:12px;background:#0F2942;color:#fff!important;font-weight:700;font-size:15px;text-decoration:none}
+.dp-bar-title{flex:1;min-width:0;font:700 16px/1.3 Georgia,serif;color:#0F2942}
+.dp-lock{min-height:44px;padding:8px 14px;border-radius:12px;border:1px solid #FCA5A5;background:#FEE2E2;color:#7F1D1D;font-weight:700;font-size:14px}
+.dp-gate{max-width:34rem;margin:48px auto;padding:24px;text-align:center;background:#FFFDF9;border:1px solid #E6DCCD;border-radius:20px}
+.dp-gate[hidden]{display:none}
+.dp-gate h2{font:700 22px/1.3 Georgia,serif;color:#0F2942;margin:0 0 8px}
+.dp-unlock{margin-top:14px;min-height:48px;padding:10px 24px;border-radius:12px;background:#0F2942;color:#fff;font-weight:700;font-size:16px}
+html.doctor-site:not(.doctor-locked) #doctorGate{display:none}
+html.doctor-site.doctor-locked #doctorWorkstation{display:none!important}
+html.doctor-site #workspacePageIdentity .page-breadcrumb{display:none}
+html.doctor-site:not(.doctor-tab-open) #workspacePageIdentity{display:none!important}
+
+.dp-chips{display:flex;flex-wrap:wrap;gap:8px;flex:1;min-width:0}
+.dp-chips:empty{display:none}
+.dp-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid #E6DCCD;background:#FFFDF9;color:#0F2942;font-weight:600;font-size:15px;text-decoration:none}
+.dp-chip[aria-current="page"]{background:#0D9488;border-color:#0D9488;color:#fff}
