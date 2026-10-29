@@ -12,7 +12,8 @@ window.openWikiModal=id=>{
  const a=data.get(id);if(!a)return;
  const dialog=$('wikiModal'),body=$('wikiModalContent');
  if(!current)lastTrigger=document.activeElement;
- current=a;lang='en';automatic=false;
+ const selectedLanguage=$('google_translate_element')?.querySelector('.goog-te-combo')?.value||'en';
+ current=a;lang='en';automatic=selectedLanguage!=='en';
  $('wikiModalTitle').textContent=a.en.title;
  body.replaceChildren(content(a,'en'));body.scrollTop=0;
  if(!dialog.open){
@@ -24,6 +25,7 @@ window.openWikiModal=id=>{
    window._wikiReaderHistoryEntry=true;
  }
  body.focus({preventScroll:true});
+ if(selectedLanguage!=='en')setTimeout(()=>{const combo=$('google_translate_element')?.querySelector('.goog-te-combo');if(combo&&combo.value&&combo.value!=='en')combo.dispatchEvent(new Event('change',{bubbles:true}));},0);
 };
 window.closeWikiModal=(fromHistory=false)=>{
  const dialog=$('wikiModal'),hadHistory=!!window._wikiReaderHistoryEntry;
