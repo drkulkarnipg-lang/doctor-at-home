@@ -70,11 +70,19 @@
     function quickTranslate(langCode) {
       const select = document.querySelector('.goog-te-combo');
       if (select) {
-        select.value = langCode;
+        select.value = langCode === 'en' ? '' : langCode;
         select.dispatchEvent(new Event('change'));
-        showToast("Language changed to: " + langCode.toUpperCase());
+        if (langCode === 'en') {
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        }
+        showToast("Language changed to: " + (langCode === 'en' ? 'ENGLISH' : langCode.toUpperCase()));
       } else {
-        window.location.hash = '#googtrans(en|' + langCode + ')';
+        if (langCode === 'en') {
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+          window.location.hash = '';
+        } else {
+          window.location.hash = '#googtrans(en|' + langCode + ')';
+        }
         location.reload();
       }
     }
