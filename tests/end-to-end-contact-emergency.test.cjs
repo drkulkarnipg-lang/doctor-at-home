@@ -34,4 +34,10 @@ assert.match(css,/\.emergency-strip-actions\{display:grid;grid-template-columns:
 for(const id of ['publicPortal','doctorWorkstation','navPublicBtn','navDoctorBtn','wikiSection','bookingSection','bkGpsLat','bkGpsLng','calcTime','calcDistance','viewArticlesHub','tabRx','tabPath','tabRad','viewClinicalCertificates']) {
   assert.match(html,new RegExp('id="'+id+'"'),`preserved element #${id}`);
 }
+assert.match(html,/Elderly care/);
+assert.match(html,/id="rad_cxr_view"/);
+assert.match(html,/id="rad_dop_a"/);
+assert.match(html,/id="rad_custom_test"/);
+assert.match(html,/id="deathFormLanguage"/);
+assert.ok(html.includes('a[data-direct-call]'));
 console.log('End-to-end contact/emergency preservation assertions passed.');
