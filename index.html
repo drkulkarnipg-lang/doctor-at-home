@@ -118,7 +118,7 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<div class="language-control" aria-label="Website language selector"><span class="language-control-label">Language</span><div id="google_translate_element"></div><p id="translationStatus">Choose a supported language. Clinical translations are automatic; verify medical details against the English original.</p><a class="language-fallback" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Language options ↗</a></div>
+<div class="language-control" aria-label="Website language selector"><label class="language-control-label" for="headerLanguageSelect">Language</label><div id="google_translate_element"></div><span id="translationStatus" class="visually-hidden">Choose a supported language. Clinical translations are automatic; verify medical details against the English original.</span><a class="language-fallback" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" aria-label="More language options">More languages ↗</a></div>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -138,13 +138,13 @@
 <i class="fa-solid fa-location-dot text-red-600"></i> <span class="hidden md:inline">GMB: Clinic</span>
 </a>
 <!-- 100% INTERACTIVE CALL BUTTON (Works on PC and Mobile) -->
-<a class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" href="tel:+919561394341" data-direct-call title="Click to Call Dr. Kulkarni" aria-label="Call Dr. Kulkarni at +91 9561394341">
+<a class="bg-red-600 hover:bg-red-700 text-white text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 font-bold shadow-lg transition active:scale-95 cursor-pointer z-50" href="tel:+919561394341" data-direct-call onclick="event.stopPropagation();window.location.href='tel:+919561394341';return false" title="Open phone dialler for Dr. Kulkarni" aria-label="Call Dr. Kulkarni at +91 9561394341">
 <i class="fa-solid fa-phone"></i> <span class="font-mono text-sm">Call 9561394341</span>
 </a>
 <a class="header-whatsapp-action" href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" aria-label="Message Dr. Kulkarni on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
 </div>
 </div>
-<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal" data-portal-view="overview" aria-current="page">Overview</a><a href="#elderlySection" data-portal-view="home-care">Home care</a><a href="#wikiSection" data-portal-view="health-library">Health library</a><a href="#bookingSection" data-portal-view="booking">Book a visit</a><a href="#patientToolsSection" data-portal-view="health-tools">Health tools</a><a href="#patientFaq" data-portal-view="faq">Patient FAQ</a><a href="#exploreHealthSources" data-portal-view="health-sources">Health sources</a></nav></header>
+<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal" data-portal-view="overview" aria-current="page">Overview</a><a href="#elderlySection" data-portal-view="home-care">Elderly care</a><a href="#wikiSection" data-portal-view="health-library">Health library</a><a href="#bookingSection" data-portal-view="booking">Book a visit</a><a href="#patientToolsSection" data-portal-view="health-tools">Health tools</a><a href="#patientFaq" data-portal-view="faq">Patient FAQ</a><a href="#exploreHealthSources" data-portal-view="health-sources">Health sources</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
 <aside class="emergency-strip no-print" aria-label="Emergency numbers"><span class="emergency-strip-text"><strong>Emergency?</strong> For immediate danger, call 112 or 108.</span><span class="emergency-strip-actions"><a href="tel:112" aria-label="Call emergency number 112">Call 112</a><a href="tel:108" aria-label="Call ambulance number 108">Call 108</a></span><span class="emergency-strip-note">Dr. Kulkarni’s number is for home-visit requests, not emergency dispatch.</span></aside>
@@ -159,11 +159,11 @@
 <aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
 <svg class="care-mark" aria-hidden="true" viewBox="0 0 260 170" fill="none"><path d="M42 92 130 22 218 92M65 75v70h130V75" stroke="currentColor" stroke-width="2"/><path d="M117 79h26v18h18v26h-18v18h-26v-18H99V97h18V79Z" stroke="currentColor" stroke-width="2"/><circle cx="205" cy="38" r="14" stroke="currentColor"/><path d="M29 130h23m158 0h23M194 38h22m-11-11v22" stroke="currentColor"/></svg>
 <h3>Here for your<br/>next step.</h3><p>Dhayari, Pune · 411041<br/>Home visits across Pune &amp; PCMC; availability confirmed by the doctor.</p>
-<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a><a href="mailto:drkulkarnipg@gmail.com" class="hero-email">Email</a></div>
+<div class="hero-contact-actions"><a href="tel:+919561394341" data-direct-call onclick="event.stopPropagation();window.location.href='tel:+919561394341';return false" class="compass-contact hero-call">Call 9561394341</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" class="compass-contact">WhatsApp ↗</a><a href="mailto:drkulkarnipg@gmail.com" class="hero-email">Email</a></div>
 <button onclick="openCredentialsModal()" type="button" class="compass-credentials">Qualifications &amp; registration →</button></aside>
 </section>
 <nav class="care-pathways" aria-label="Start with what you need"><a href="#bookingSection"><span class="pathway-number">01</span><div><strong>Care at home</strong><p>Plan a visit and estimate the fee.</p></div><span aria-hidden="true">↗</span></a><a href="#wikiSection"><span class="pathway-number">02</span><div><strong>Understand your health</strong><p>Practical, referenced guidance.</p></div><span aria-hidden="true">↗</span></a><a href="#patientToolsSection"><span class="pathway-number">03</span><div><strong>Know your numbers</strong><p>Simple tools, clearly explained.</p></div><span aria-hidden="true">↗</span></a></nav>
-<section id="elderlySection" class="home-care-section"><span class="section-eyebrow">Better days at home</span><div class="section-intro"><h3>Small steps.<br/>Meaningful everyday care.</h3><p>For older adults, people recovering from illness and the families beside them. Build the daily plan with your healthcare team.</p></div><div class="home-care-grid">
+<section id="elderlySection" class="home-care-section"><span class="section-eyebrow">Better days at home</span><div class="section-intro"><h3>Elderly care at home.</h3><p>Practical support for older adults and the families caring for them. Build an individual daily plan with the patient’s healthcare team.</p></div><div class="home-care-grid">
 <article><span class="care-icon"><i class="fa-solid fa-bed" aria-hidden="true"></i></span><h4>Protect skin &amp; comfort</h4><ul><li>Agree an individual repositioning and pressure-relief plan.</li><li>Check skin, moisture and comfort; report persistent redness or broken skin.</li><li>Use the support surface and wound-care plan advised for the patient.</li></ul><a href="https://www.nice.org.uk/guidance/cg179/chapter/Recommendations" target="_blank" rel="noopener noreferrer">Pressure-injury guidance ↗</a></article>
 <article><span class="care-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span><h4>Support stroke recovery</h4><ul><li>Follow the swallowing assessment and prescribed food textures.</li><li>Support an upright, comfortable position for meals.</li><li>Stop feeding and seek help for choking, new breathlessness or reduced alertness.</li></ul><a href="https://www.nhs.uk/conditions/swallowing-problems-dysphagia/" target="_blank" rel="noopener noreferrer">Swallowing information ↗</a></article>
 <article><span class="care-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span><h4>Live well with kidney disease</h4><ul><li>Keep dialysis, medicine and blood-test appointments.</li><li>Ask for your individual fluid, salt and potassium plan.</li><li>Changes to dialysis frequency belong with the nephrology team.</li></ul><a href="https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis" target="_blank" rel="noopener noreferrer">Kidney-care information ↗</a></article>
@@ -364,7 +364,7 @@
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabPath" onclick="switchDocTab('pathReq')">🩸 Lab Slip</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabRad" onclick="switchDocTab('radReq')">☢️ Radiology Slip</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCertificates" onclick="switchDocTab('clinicalCertificates')">📜 Referral, Consent &amp; Fitness</button>
-<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Certificates (4A, 4, 2)</button>
+<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Forms (4A, 4, 2)</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabDrug" onclick="switchDocTab('drugDir')">💊 1-Click Formulary &amp; CIMS</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabArticles" onclick="switchDocTab('articlesHub')">📑 Article Manager &amp; Moon-Reader</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabSet" onclick="switchDocTab('settingsTab')">⚙️ Settings</button>
@@ -744,12 +744,14 @@
 </div>
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
-<p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
-<label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
-<label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
-<label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="Bedside 2D Echo"/> <strong>Bedside 2D Echocardiography</strong></label>
+<p class="font-bold text-purple-900 border-b pb-1">Imaging requested:</p>
+<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Chest X-Ray"/> <strong>Chest X-Ray</strong><select id="rad_cxr_view" aria-label="Chest X-Ray view" class="border rounded p-1"><option value="AP">A/P (AP) view</option><option value="PA">PA view</option></select></label>
+<label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="USG Abdomen &amp; Pelvis"/> <strong>USG Abdomen &amp; Pelvis</strong></label>
+<label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Color Doppler — Venous (Lower Limb)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_dop_a" type="checkbox" value="Arterial Color Doppler Lower Limb"/> <strong>Color Doppler — Arterial (Lower Limb)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="2D Echocardiography"/> <strong>2D Echocardiography</strong></label>
 <label class="flex items-center gap-2"><input id="rad_ct_brain" type="checkbox" value="NCCT Brain (Stroke)"/> <strong>NCCT Brain (Stroke Protocol)</strong></label>
+<label class="radiology-custom-test"><span>Other investigation / test</span><input id="rad_custom_test" type="text" placeholder="Type any additional test or view" /></label>
 </div>
 <div class="space-y-2">
 <label class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
@@ -833,11 +835,12 @@
 <section class="certificate-help no-print" aria-label="Government original PDF downloads"><h3>Government originals — unchanged PDFs</h3><div class="legal-resource-actions"><a href="assets/forms/crs-form4-4a-original.pdf" download>Download original Form 4 + 4A</a><a href="assets/forms/crs-form4-4a-original.pdf#page=1" target="_blank" rel="noopener noreferrer">Open / print Form 4 (page 1)</a><a href="assets/forms/crs-form4-4a-original.pdf#page=3" target="_blank" rel="noopener noreferrer">Open / print Form 4A (page 3)</a><a href="assets/forms/form2-government-reference.pdf" download>Download Form 2 — GHMC reference</a><a href="assets/forms/form2-government-reference.pdf" target="_blank" rel="noopener noreferrer">Open / print Form 2 reference</a></div><p>Form 4 / 4A: official CRS originals, including instructions. Form 2: GHMC government reference edition; confirm the prescribed Maharashtra / local Registrar version before submitting. Open the original and use the PDF viewer’s Print control. Use the editable forms below to type information and export / share a working PDF. Government originals are not rebranded or altered.</p><a href="https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf" target="_blank" rel="noopener noreferrer">Form 2 government source ↗</a> · <a href="assets/forms/sources.json" target="_blank" rel="noopener noreferrer">PDF sources and checksums ↗</a></section>
 
 <aside class="certificate-help no-print"><p>Editable working layouts based on official forms. Use the receiving Registrar's prescribed form / portal where required. Form 4: hospital; Form 4A: non-institutional. Record a disease / injury sequence, not cardiac arrest alone. Entries are not automatically saved or submitted.</p><div><a href="https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf" rel="noopener noreferrer" target="_blank">Official CRS Form 4 / 4A + instructions ↗</a><a href="https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf" rel="noopener noreferrer" target="_blank">Maharashtra CRS handbook (2026) ↗</a></div></aside><div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border">
-<select class="text-xs font-bold border p-2 rounded-xl bg-amber-50" id="certTypeSelect" onchange="switchCertificateView(this.value)">
+<label class="text-xs font-bold">Form<select class="text-xs font-bold border p-2 rounded-xl bg-amber-50" id="certTypeSelect" onchange="switchCertificateView(this.value)">
 <option value="form4a">Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act)</option>
 <option value="form4">Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act)</option>
 <option value="form2">Form 2 — Death Report to Registrar / PMC Ward</option>
-</select>
+</select></label>
+<label class="text-xs font-bold">Display language<select id="deathFormLanguage" class="text-xs border p-2 rounded-xl bg-white"><option value="en">English (editable working layout)</option><option value="mr">Marathi guidance (official form remains unchanged)</option><option value="bilingual">English + Marathi guidance (official form remains unchanged)</option></select></label>
 <div class="flex gap-2">
 <button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportCurrentDeathFormPdf()">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
