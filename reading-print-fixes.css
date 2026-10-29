@@ -121,3 +121,20 @@
 
 .language-control .goog-te-combo,#headerLanguageSelect{display:block;box-sizing:border-box;width:100%;max-width:100%;min-height:42px;padding:8px 10px;border:1px solid #9dbed4;border-radius:9px;background:#fff;color:#173e56;font:650 13px/1.4 Inter,system-ui,sans-serif}
 .language-control .goog-te-combo:focus-visible,#headerLanguageSelect:focus-visible{outline:3px solid #2676a5;outline-offset:2px}
+
+/* Compact header language selector: keep one obvious dropdown without crowding navigation. */
+.language-control{display:flex;align-items:center;gap:6px;min-width:150px;max-width:205px;flex:0 1 205px;padding:5px 7px;border:1px solid #d5e2eb;border-radius:10px;background:#fff}
+.language-control-label{font-size:10px;white-space:nowrap}
+.language-control #google_translate_element{min-width:0;flex:1}
+.language-control .goog-te-gadget{font-size:0!important;line-height:1!important}
+.language-control .goog-te-gadget .goog-te-combo{max-width:100%;width:100%;margin:0!important;font-size:12px!important}
+.language-control .language-fallback{display:none!important}
+.language-control #translationStatus{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.language-control .goog-te-gadget-simple{max-width:100%;padding:5px 6px!important;font-size:11px!important}
+#radSlipSheet .radiology-custom-test{display:grid;gap:5px;margin-top:10px;font-weight:700}
+#radSlipSheet .radiology-custom-test input{width:100%;min-height:40px;border:1px solid #cbd5e1;border-radius:8px;padding:8px;font-weight:400}
+#radSlipSheet select{max-width:130px;font-size:11px}
+.calc-result{background:#fff!important;border:1px solid #d8e2e8;color:#173e56;min-height:42px!important;padding:10px 12px!important}
+.calc-result:empty{display:none}
+.calc-actions .calc-primary{display:none}
+@media(max-width:760px){.language-control{min-width:0;max-width:100%;flex:1 1 100%;order:-1}.language-control #google_translate_element{flex:1}.language-control .goog-te-combo{width:100%;min-width:0}}
