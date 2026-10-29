@@ -105,3 +105,39 @@ Added `tests/end-to-end-contact-emergency.test.cjs` to check emergency-strip lan
 
 ### Preview status correction — 29 October 2026
 The stable preview URL remains https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . An earlier deployment was Ready; the latest checkpoint/audit commits triggered a new deployment and the current Vercel status is pending. Before presenting the preview as ready, recheck the Vercel status and confirm it corresponds to the latest branch head.
+
+
+## Latest end-to-end correction checkpoint — 29 October 2026
+
+**Current review branch:** `fix/end-to-end-contact-emergency-navigation`  
+**Draft PR:** https://github.com/drkulkarnipg-lang/doctor-at-home/pull/29  
+**Preview URL:** https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/  
+**Last checked Vercel status:** success/Ready for branch head `5e8ef19c7f70da009e4f9db5d62ced297dfd9297`. Documentation commits after that check trigger further deploys; recheck the latest head/status before preview review.
+
+### Latest implementation recorded in PR #29
+- Header language dropdown stays in the header; English default; translation provider supplies its supported languages. Removed Marathi-only article language panels.
+- Patient portal sections are now navigable views; browser Back/Forward restores the prior view.
+- Responsive sky-blue hero, language selector, tab navigation, quick intake, article reader and publisher styles added.
+- Native article dialog renders the full English authored guide and its references/FAQ/takeaway; native close, Escape and browser Back supported; no extra article-reader back/download/share buttons.
+- Booking order is essential patient contact/address/GPS first, then optional quick history and prescription/discharge attachments; detailed history is collapsed by default.
+- Allergy default and preselected lab/imaging orders cleared.
+- Prescription PDF named `Prescription.pdf`, email removed from the prescription sheet, registration line compacted. Lab/radiology share targets corrected; native device file sharing attempted before download fallback.
+- Article import controls placed directly above the content box; direct URL fetch reports CORS/login/paywall limitations rather than pretending every URL can be fetched.
+- Added `tests/end-to-end-contact-emergency.test.cjs` and `tests/end-to-end-website-preservation.test.cjs`.
+- Current source scan: zero duplicate HTML IDs; core existing IDs retained.
+
+### Not yet verified
+- No test suite executed; repository clone failed due GitHub hostname resolution in this environment.
+- Interactive preview/browser QA was not available. Vercel Ready does not prove tests pass.
+- Owner-device dialler/WhatsApp/PDF sharing, print page count, authenticated cloud article operations and security/session flows remain pending.
+- Official Form 2 / 4 / 4A original PDFs remain linked; editable forms are not exact facsimiles. Exact official field mapping is still pending.
+
+### Resume from here
+1. Recheck latest PR head and Vercel status.
+2. Run the two new regression tests plus all existing tests in a repository-capable environment.
+3. Verify language dropdown stays in the header even after opening/closing articles; test full article, browser Back/Forward and Escape.
+4. Test the quick booking and native share flow on the owner's Android device.
+5. Validate PDF page count and government original-form compliance; do not force official two-page forms onto one page.
+6. Continue the remaining audit phases in `END_TO_END_AUDIT.md`.
+
+No merge, production release, payment activation or external publication without explicit owner approval.
