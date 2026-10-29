@@ -144,7 +144,7 @@
 <a class="header-whatsapp-action" href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer" aria-label="Message Dr. Kulkarni on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
 </div>
 </div>
-<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal">Overview</a><a href="#elderlySection">Home care</a><a href="#wikiSection">Health library</a><a href="#bookingSection">Book a visit</a><a href="#patientToolsSection">Health tools</a><a href="#patientFaq">Patient FAQ</a></nav></header>
+<nav aria-label="Patient portal sections" class="portal-nav no-print"><a href="#publicPortal" data-portal-view="overview" aria-current="page">Overview</a><a href="#elderlySection" data-portal-view="home-care">Home care</a><a href="#wikiSection" data-portal-view="health-library">Health library</a><a href="#bookingSection" data-portal-view="booking">Book a visit</a><a href="#patientToolsSection" data-portal-view="health-tools">Health tools</a><a href="#patientFaq" data-portal-view="faq">Patient FAQ</a><a href="#exploreHealthSources" data-portal-view="health-sources">Health sources</a></nav></header>
 <!-- ================= 1. PUBLIC PATIENT PORTAL ================= -->
 <main class="flex-grow max-w-7xl mx-auto px-4 py-6 space-y-8 w-full" id="publicPortal">
 <aside class="emergency-strip no-print" aria-label="Emergency numbers"><span class="emergency-strip-text"><strong>Emergency?</strong> For immediate danger, call 112 or 108.</span><span class="emergency-strip-actions"><a href="tel:112" aria-label="Call emergency number 112">Call 112</a><a href="tel:108" aria-label="Call ambulance number 108">Call 108</a></span><span class="emergency-strip-note">Dr. Kulkarni’s number is for home-visit requests, not emergency dispatch.</span></aside>
@@ -1515,6 +1515,54 @@ Next Review: After 3 Days / SOS | Emergency: call 112 or 108; home-visit request
       const resources = document.getElementById('exploreHealthSources');
       const footer = document.querySelector('#publicPortal > footer');
       if (resources && footer) footer.before(resources);
+      // True section navigation: one relevant patient section at a time, not one very long page.
+      const portal = document.getElementById('publicPortal');
+      const navLinks = Array.from(document.querySelectorAll('.portal-nav [data-portal-view]'));
+      const groups = {
+        overview: ['portalHeroTitle'],
+        'home-care': ['elderlySection','nutritionSection'],
+        'health-library': ['wikiSection','publicGuidanceSection'],
+        booking: ['onlineConsultationNotice','bookingSection'],
+        'health-tools': ['patientToolsSection'],
+        faq: ['patientFaq'],
+        'health-sources': ['exploreHealthSources']
+      };
+      const directSections = Array.from(portal.querySelectorAll(':scope > section'));
+      function activatePortalView(view, updateHistory = true) {
+        const allowed = groups[view] || groups.overview;
+        directSections.forEach(section => {
+          const isHero = section.id === 'portalHero';
+          const match = allowed.some(id => section.id === id || section.querySelector('#' + id));
+          section.classList.toggle('portal-section-hidden', !(match || (view === 'overview' && isHero)));
+        });
+        navLinks.forEach(link => {
+          const active = link.dataset.portalView === view;
+          if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
+        });
+        portal.dataset.activeView = view;
+        if (updateHistory) history.replaceState({ ...(history.state || {}), portalView: view }, '', '#' + (navLinks.find(a => a.dataset.portalView === view)?.getAttribute('href')?.slice(1) || 'publicPortal'));
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+      navLinks.forEach(link => link.addEventListener('click', event => {
+        event.preventDefault();
+        activatePortalView(link.dataset.portalView);
+      }));
+      document.querySelectorAll('#publicPortal .hero-primary-actions a, #publicPortal .care-pathways a').forEach(link => {
+        link.addEventListener('click', event => {
+          const target = link.getAttribute('href')?.slice(1);
+          const view = target === 'bookingSection' || target === 'onlineConsultationNotice' ? 'booking'
+            : target === 'wikiSection' ? 'health-library'
+            : target === 'patientToolsSection' ? 'health-tools' : null;
+          if (view) { event.preventDefault(); activatePortalView(view); }
+        });
+      });
+      const viewFromHash = () => {
+        const hash = location.hash.slice(1);
+        const link = navLinks.find(a => a.getAttribute('href') === '#' + hash);
+        if (link) activatePortalView(link.dataset.portalView, false);
+      };
+      window.addEventListener('popstate', viewFromHash);
+      activatePortalView(navLinks.find(a => a.getAttribute('href') === location.hash)?.dataset.portalView || 'overview', false);
       const height = document.getElementById('quickHeight');
       const weight = document.getElementById('quickWeight');
       const bmi = document.getElementById('quickBmi');
