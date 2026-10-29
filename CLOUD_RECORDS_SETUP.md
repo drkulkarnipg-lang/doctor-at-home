@@ -42,3 +42,5 @@ Before this can work on a preview or production deployment:
 5. Keep public signup disabled. Do not use a public “create owner account” endpoint. If the account does not yet exist, provision/invite it through the authenticated Supabase administrator workflow, then set `CLINIC_OWNER_USER_ID` to the verified Auth UUID.
 
 The recovery API fails closed when the owner email or cloud configuration is missing. Email recovery is not the same as email OTP login: this branch implements a time-limited recovery/setup link and password update, not one-time-code sign-in. Never claim OTP, passkeys, or MFA are active unless separately configured and tested.
+
+Required environment variables for email setup/reset: `CLINIC_OWNER_EMAIL` (the already-provisioned owner Auth email) and `CLINIC_PASSWORD_REDIRECT_URL` (the exact HTTPS URL ending `/reset-password.html` for that deployment, allowlisted in Supabase Auth). Do not derive the recovery redirect from a request-supplied host header.
