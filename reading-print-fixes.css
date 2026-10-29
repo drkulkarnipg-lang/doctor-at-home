@@ -118,3 +118,6 @@
 .prescription-pdf-sheet table{font-size:9px!important;line-height:1.15!important}
 .prescription-pdf-sheet th,.prescription-pdf-sheet td{padding:1mm!important}
 @media print{.prescription-pdf-sheet{padding:2mm!important}}
+
+.language-control .goog-te-combo,#headerLanguageSelect{display:block;box-sizing:border-box;width:100%;max-width:100%;min-height:42px;padding:8px 10px;border:1px solid #9dbed4;border-radius:9px;background:#fff;color:#173e56;font:650 13px/1.4 Inter,system-ui,sans-serif}
+.language-control .goog-te-combo:focus-visible,#headerLanguageSelect:focus-visible{outline:3px solid #2676a5;outline-offset:2px}
