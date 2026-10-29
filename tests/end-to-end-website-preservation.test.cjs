@@ -6,6 +6,7 @@ const css = fs.readFileSync('reading-print-fixes.css', 'utf8');
 const share = fs.readFileSync('document-sharing.js', 'utf8');
 const intake = fs.readFileSync('booking-intake.js', 'utf8');
 const publisher = fs.readFileSync('public-article-editor.js', 'utf8');
+const awareness = fs.readFileSync('awareness-library.js', 'utf8');
 const education = fs.readFileSync('patient-education-data.js', 'utf8');
 
 // Language selector is in the global header and English remains the authored default.
@@ -35,6 +36,10 @@ assert.match(html, /window\.addEventListener\('popstate', viewFromHash\)/);
 // Full article reader uses the original English article object and all sections, FAQ and references.
 assert.match(html, /<dialog id="wikiModal"/);
 assert.match(html, /function renderFullHealthArticle\(article\)/);
+assert.match(awareness, /dialog\.showModal\(\)/);
+assert.match(awareness, /history\.pushState/);
+assert.match(awareness, /let lang='en'/);
+assert.doesNotMatch(awareness, /Open Patient Portal language controls|patientLanguageControls|articleLanguageControls|translatorMount\(true\)/);
 assert.match(html, /const content = article\[lang\]/);
 assert.match(html, /content\.sections/);
 assert.match(html, /content\.faq/);
