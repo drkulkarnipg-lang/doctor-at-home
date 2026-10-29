@@ -15,35 +15,37 @@
  function release(){if(activeUrl)URL.revokeObjectURL(activeUrl);activeUrl=null;activeFile=null;}
  function close(){ticket++;$('pdfShareDialog').hidden=true;release();}
  window.shareDocumentPdf=async(id,name)=>{
-  const current=++ticket;release();
+  const current=++ticket;release();let prepared=null;
   try{
-    const file=await prepare(id,name);
+    prepared=await prepare(id,name);
     if(current!==ticket)return;
     // Prefer the native device share sheet immediately. No forced download and no second confirmation step.
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-      await navigator.share({files:[file],title:filename(name)});
-      window.showToast?.('PDF shared. Choose the recipient/app in your device share sheet.');
-      return;
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[prepared]})){
+      try {
+        await navigator.share({files:[prepared],title:filename(name)});
+        window.showToast?.('PDF shared. Choose the recipient/app in your device share sheet.');
+        return;
+      } catch (shareError) {
+        if (shareError?.name === 'AbortError') { window.showToast?.('Sharing cancelled. No file was sent.'); return; }
+        console.warn('Native PDF sharing was not accepted by this browser.', shareError);
+      }
+    } else if(navigator.share) {
+      try {
+        await navigator.share({title:filename(name),text:'This browser cannot attach a PDF directly. The PDF will be downloaded so you can attach it in WhatsApp, email or Drive.'});
+      } catch (shareError) {
+        if (shareError?.name === 'AbortError') return;
+      }
     }
-    // If direct file sharing is unsupported, explain the platform limitation and provide the PDF download.
-    if(navigator.share){
-      try{await navigator.share({title:filename(name),text:'This browser cannot attach a PDF directly. Download the PDF using Export PDF, then attach it in WhatsApp or email.'});}catch(e){if(e.name==='AbortError')return;}
-    }
-    activeFile=file;activeUrl=URL.createObjectURL(file);
-    const a=document.createElement('a');a.href=activeUrl;a.download=file.name;a.click();
-    window.showToast?.('This browser cannot share PDF attachments directly. The PDF was downloaded; attach it in WhatsApp or email.');
+    // Fallback only when direct file sharing is unsupported or rejected.
+    activeFile=prepared;activeUrl=URL.createObjectURL(prepared);
+    const a=document.createElement('a');a.href=activeUrl;a.download=prepared.name;a.click();
+    window.showToast?.('Direct PDF sharing is not supported here. The PDF was downloaded; attach it in WhatsApp or email.');
     setTimeout(()=>{if(activeUrl){URL.revokeObjectURL(activeUrl);activeUrl=null;activeFile=null;}},60000);
   }catch(e){
     console.error('PDF share failed',e);
-    if (activeFile && activeUrl) {
-      const a=document.createElement('a');a.href=activeUrl;a.download=activeFile.name;a.click();
-      window.showToast?.('Direct sharing was not accepted by this browser. The PDF was downloaded; attach it in WhatsApp or email.');
-      return;
-    }
     window.showToast?.('PDF could not be prepared: '+e.message+'. Use Print / Save as PDF.');
   }
  };
- window.exportToPdf=async(id,name)=>{try{const file=await prepare(id,name),url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}catch(e){window.showToast?.(e.message);}};
  const selected=g=>g==='clinical'?'cdoc-'+$('clinDocSelect').value:'cert-'+$('certTypeSelect').value;
  window.shareSelectedCertificate=g=>window.shareDocumentPdf(selected(g),'Dr_Kulkarni_'+selected(g));window.exportCurrentClinDocPdf=()=>window.exportToPdf(selected('clinical'),'Dr_Kulkarni_'+selected('clinical'));window.exportCurrentDeathFormPdf=()=>window.exportToPdf(selected('death'),'Dr_Kulkarni_'+selected('death'));
  window.universalShareDocument=type=>{const config={rx:{id:'rxSheet',name:'Prescription.pdf'},path:{id:'pathSlipSheet',name:'Lab_Slip.pdf'},rad:{id:'radSlipSheet',name:'Radiology_Slip.pdf'}}[type];if(config)window.shareDocumentPdf(config.id,config.name);};
