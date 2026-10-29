@@ -29,3 +29,16 @@ The preview contains the login, cloud save/open controls, API and database migra
 - https://supabase.com/docs/guides/auth/passwords
 - https://supabase.com/docs/guides/getting-started/api-keys
 - https://github.com/supabase/auth
+
+## Owner password setup and recovery — review-branch addition
+
+The Doctor Workstation login now has a **Send setup / reset email** action. The API sends a Supabase Auth recovery email to the single configured clinic-owner address; the reset page accepts the short-lived recovery token, verifies that it belongs to `CLINIC_OWNER_USER_ID`, and updates only that owner's password. It does not store the password in browser storage.
+
+Before this can work on a preview or production deployment:
+1. Provision the verified owner account in Supabase Auth first. A password-recovery flow does not create a new account by itself.
+2. Configure `CLINIC_OWNER_EMAIL` to that exact verified account email in the relevant Vercel environment. Do not commit it to source control.
+3. Add the exact HTTPS `/reset-password.html` URL for the deployed preview/production origin to the Supabase Auth redirect allowlist and verify email delivery/template settings.
+4. Redeploy and test email receipt, expired-link handling, wrong-user token rejection, successful password update, and new-password sign-in using a test account before using the owner account.
+5. Keep public signup disabled. Do not use a public “create owner account” endpoint. If the account does not yet exist, provision/invite it through the authenticated Supabase administrator workflow, then set `CLINIC_OWNER_USER_ID` to the verified Auth UUID.
+
+The recovery API fails closed when the owner email or cloud configuration is missing. Email recovery is not the same as email OTP login: this branch implements a time-limited recovery/setup link and password update, not one-time-code sign-in. Never claim OTP, passkeys, or MFA are active unless separately configured and tested.
