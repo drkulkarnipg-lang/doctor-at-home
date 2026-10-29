@@ -140,3 +140,9 @@ This resume instruction supersedes the historical “PAUSED by owner, 26 October
 - [ ] No merge, production deploy, patient message, real payment, external publishing or paid integration without the relevant explicit approval.
 
 Evidence note: the current PR preview URL was supplied by Vercel's PR comment: https://home-visiting-icu-doctor-pune-git-fix-d78f6a-drkulkarnipg-lang.vercel.app/ . Vercel marked the deployment Ready, but full live browser QA and the test suite remain unverified.
+
+
+### Follow-up evidence — 29 October 2026
+- [x] Added focused regression test `tests/end-to-end-contact-emergency.test.cjs` covering emergency strip language/links, doctor contact and email links, corrected prescription emergency wording, responsive CSS, and core workspace/booking entry points.
+- [ ] Test has not been executed; the current environment cannot clone the repository because GitHub hostname resolution fails. Do not report it as passing.
+- [ ] Vercel preview is Ready, but interactive preview inspection and real-device call/WhatsApp checks remain pending.
