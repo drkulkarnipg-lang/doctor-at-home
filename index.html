@@ -184,7 +184,7 @@
 <div class="max-w-4xl">
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">A home visit, planned clearly.</h3>
 <p class="text-sm text-slate-600 mb-4">Need help quickly? Enter only what you know, attach your latest prescription or discharge summary if available, and send the request. You can add details later; the doctor confirms availability and the final fee. For an emergency, call 112/108 now.</p>
-<fieldset class="quick-clinical-intake"><legend>Quick patient details (optional — do not delay urgent care)</legend><div class="quick-intake-grid"><label>Current complaints<input id="quickComplaints" type="text" maxlength="500" placeholder="What is troubling the patient?"/></label><label>Known case / medical history<input id="quickKnownCase" type="text" maxlength="500" placeholder="e.g. diabetes, heart disease"/></label><label>Known allergies<input id="quickAllergies" type="text" maxlength="300" placeholder="Medicines / food / unknown"/></label><label>Past surgeries<input id="quickSurgeries" type="text" maxlength="300" placeholder="If any"/></label><label>Last menstrual period (if relevant)<input id="quickLmp" type="date"/></label><label>Height (cm)<input id="quickHeight" type="number" min="30" max="250" step="0.1" inputmode="decimal"/></label><label>Weight (kg)<input id="quickWeight" type="number" min="1" max="500" step="0.1" inputmode="decimal"/></label><label>BMI (calculated from entered height/weight)<output id="quickBmi" aria-live="polite">—</output></label><label>Temperature (°C)<input id="quickTemperature" type="number" min="25" max="45" step="0.1" inputmode="decimal" placeholder="If measured"/></label><label>Current medicines / reconciliation notes<input id="quickMedicines" type="text" maxlength="1000" placeholder="Medicine names, dose, frequency, last dose"/></label></div><div class="quick-intake-files"><label>Attach latest prescription / discharge summary<input id="quickClinicalFiles" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*" multiple/></label><label>Attach medicine reconciliation form (if available)<input id="quickMedicationFile" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*"/></label><p>Attachments are shared only when you choose a supported device share target. If your browser cannot share files, WhatsApp may open with the text request and you may need to attach the files manually.</p></div></fieldset>
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
@@ -214,6 +214,7 @@
 <input id="bkGpsMapUrl" type="hidden" value=""/>
 </div>
 </div>
+<fieldset class="quick-clinical-intake"><legend>Quick patient details (optional — do not delay urgent care)</legend><div class="quick-intake-grid"><label>Current complaints<input id="quickComplaints" type="text" maxlength="500" placeholder="What is troubling the patient?"/></label><label>Known case / medical history<input id="quickKnownCase" type="text" maxlength="500" placeholder="e.g. diabetes, heart disease"/></label><label>Known allergies<input id="quickAllergies" type="text" maxlength="300" placeholder="Medicines / food / unknown"/></label><label>Past surgeries<input id="quickSurgeries" type="text" maxlength="300" placeholder="If any"/></label><label>Last menstrual period (if relevant)<input id="quickLmp" type="date"/></label><label>Height (cm)<input id="quickHeight" type="number" min="30" max="250" step="0.1" inputmode="decimal"/></label><label>Weight (kg)<input id="quickWeight" type="number" min="1" max="500" step="0.1" inputmode="decimal"/></label><label>BMI (calculated from entered height/weight)<output id="quickBmi" aria-live="polite">—</output></label><label>Temperature (°C)<input id="quickTemperature" type="number" min="25" max="45" step="0.1" inputmode="decimal" placeholder="If measured"/></label><label>Current medicines / reconciliation notes<input id="quickMedicines" type="text" maxlength="1000" placeholder="Medicine names, dose, frequency, last dose"/></label></div><div class="quick-intake-files"><label>Attach latest prescription / discharge summary<input id="quickClinicalFiles" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*" multiple/></label><label>Attach medicine reconciliation form (if available)<input id="quickMedicationFile" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*"/></label><p>Attachments are shared only when you choose a supported device share target. If your browser cannot share files, WhatsApp may open with the text request and you may need to attach the files manually.</p></div></fieldset>
 <!-- Time Slab with Live Auto-Detector -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
@@ -439,7 +440,7 @@
 </div>
 <div class="bg-red-50 border-l-4 border-red-600 p-2 rounded-r-xl text-red-900 font-bold flex items-center justify-between">
 <span>⚠️ KNOWN DRUG ALLERGIES:</span>
-<input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="NKDA (No Known Drug Allergies)"/>
+<input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" placeholder="Record allergies after checking with the patient or source documents"/>
 </div>
 <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
 <div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
@@ -680,7 +681,7 @@
 <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl" id="pathCheckboxesGrid">
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Coagulation:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
+<label class="flex items-center gap-1.5"><input id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
 <label class="flex items-center gap-1.5"><input id="t_esr" type="checkbox" value="ESR (Westergren)"/> ESR (Westergren)</label>
 <label class="flex items-center gap-1.5"><input id="t_pt" type="checkbox" value="PT / INR (Coagulation)"/> PT / INR (Coagulation)</label>
 <label class="flex items-center gap-1.5"><input id="t_ddimer" type="checkbox" value="D-Dimer Quantitative"/> D-Dimer Quantitative</label>
@@ -689,8 +690,8 @@
 </div>
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Panels:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
-<label class="flex items-center gap-1.5"><input checked="" id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
+<label class="flex items-center gap-1.5"><input id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
+<label class="flex items-center gap-1.5"><input id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
 <label class="flex items-center gap-1.5"><input id="t_lft" type="checkbox" value="LFT Complete"/> LFT Complete</label>
 <label class="flex items-center gap-1.5"><input id="t_sugar" type="checkbox" value="Blood Sugar Fasting/PP"/> Fasting / PP Sugar</label>
 <label class="flex items-center gap-1.5"><input id="t_hba1c" type="checkbox" value="HbA1c"/> HbA1c</label>
@@ -744,7 +745,7 @@
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
 <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-<label class="flex items-center gap-2"><input checked="" id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="Bedside 2D Echo"/> <strong>Bedside 2D Echocardiography</strong></label>
