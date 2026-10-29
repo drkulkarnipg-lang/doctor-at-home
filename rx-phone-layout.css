@@ -1,0 +1,45 @@
+/* Phone layout for the on-screen Prescription editor only (29 Oct 2026).
+   Scoped to #rxSheet / #rxTable, which exist only in the live editor. The PDF, print and share copies
+   have their ids removed, so the A4 prescription layout is unchanged. No field, button or id is removed. */
+@media screen and (max-width:640px){
+ #rxSheet{padding:14px!important;border-radius:20px!important}
+ /* letterhead: same content, smaller */
+ #rxSheet h2.serif-brand{font-size:19px!important;line-height:1.2!important}
+ #rxSheet>div:first-child{padding-bottom:8px!important}
+ #rxSheet>div:first-child .w-12{width:40px!important;height:40px!important}
+ /* allergy bar: label above, field full width */
+ #rxSheet>div:nth-child(2){display:block!important}
+ #rxSheet #rxAllergies{display:block;width:100%!important;margin-top:4px;font-size:15px}
+ /* patient details: two columns instead of four, vitals three instead of six */
+ #rxSheet .grid-cols-4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #rxSheet .grid-cols-4>.col-span-4{grid-column:span 2/span 2!important}
+ #rxSheet .grid-cols-6{grid-template-columns:repeat(3,minmax(0,1fr))!important;row-gap:8px}
+ #rxSheet label{font-size:12px!important}
+ #rxSheet #rxDateTime{font-size:14px!important}
+ #rxSheet input,#rxSheet textarea,#rxSheet select{font-size:16px!important;min-height:40px}
+ /* medicines: one card per medicine instead of a seven-column table */
+ #rxTable{display:block;border:0!important}
+ #rxTable thead{display:none}
+ #rxTable tbody{display:block;counter-reset:rxmed}
+ #rxTable tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 8px;position:relative;
+  padding:10px 10px 10px;margin:0 0 10px;border:1px solid #D9CFC0;border-radius:14px;background:#FFFDF9;counter-increment:rxmed}
+ #rxTable tbody td{display:block;border:0!important;padding:0!important}
+ #rxTable tbody td:nth-child(1){display:none}
+ #rxTable tbody td:nth-child(2){grid-column:1/-1;padding-right:34px!important}
+ #rxTable tbody td:nth-child(2)::before{content:"Medicine " counter(rxmed);display:block;font-size:12px;font-weight:700;color:#0F2942;margin-bottom:2px}
+ #rxTable tbody td:nth-child(3)::before{content:"Timing"}
+ #rxTable tbody td:nth-child(4)::before{content:"Freq"}
+ #rxTable tbody td:nth-child(5)::before{content:"Days"}
+ #rxTable tbody td:nth-child(6)::before{content:"Instructions"}
+ #rxTable tbody td:nth-child(n+3):nth-child(-n+6)::before{display:block;font-size:12px;color:#42474D;margin-bottom:2px}
+ #rxTable tbody td:nth-child(3){grid-column:span 2}
+ #rxTable tbody td:nth-child(6){grid-column:1/-1}
+ #rxTable tbody td:nth-child(7){position:absolute;top:6px;right:8px}
+ #rxTable tbody td input{border:1px solid #D9CFC0!important;border-radius:10px;background:#fff!important;padding:6px 8px!important;width:100%}
+ #rxTable tbody td:nth-child(7) button{width:36px;height:36px;font-size:18px;border-radius:10px}
+ /* add-row and formulary buttons: full width, comfortable to tap */
+ #rxSheet button[onclick="addRxRow()"],#rxSheet button[onclick^="openDrugModal"]{min-height:44px;font-size:14px!important;padding:8px 12px!important}
+ #rxSheet button[onclick="addRxRow()"]{display:block;width:100%;border:1px dashed #0D9488;border-radius:12px;margin-top:4px!important}
+ /* room above the floating Close button */
+ #viewRxPad{padding-bottom:80px}
+}
