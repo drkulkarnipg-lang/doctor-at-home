@@ -21,6 +21,8 @@ alter table public.consultation_payments enable row level security;
 alter table public.consultation_payment_webhook_events enable row level security;
 revoke all on public.consultation_payments from public,anon,authenticated;
 revoke all on public.consultation_payment_webhook_events from public,anon,authenticated;
+grant select,insert,update on public.consultation_payments to service_role;
+grant select,insert on public.consultation_payment_webhook_events to service_role;
 comment on table public.consultation_payments is 'Minimal payment reconciliation only; no patient symptoms, diagnoses, reports or other clinical data.';
 comment on table public.consultation_payment_webhook_events is 'Idempotency/audit record for verified Razorpay webhook event IDs; server-side service role only.';
 commit;
