@@ -35,10 +35,6 @@ try{
  const output=path.join(root,'reports','inventory.json');writeInventory(inv,output);const saved=fs.readFileSync(output,'utf8');assert.ok(saved.endsWith('\n')&&!saved.endsWith('\\n'),'Generated inventory must end with a real newline, not a literal backslash-n');assert.deepEqual(JSON.parse(saved),inv,'Generated inventory file must parse as exactly one JSON document');
  const committed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','external-link-inventory-2026-10-30.json'),'utf8'));
  const current=generateInventory({sourceRevision:committed.source_revision});
- if(JSON.stringify(committed.links)!==JSON.stringify(current.links)){
-  const encoded=JSON.stringify(current);
-  for(let offset=0,part=0;offset<encoded.length;offset+=3000,part++)console.log('INVENTORY_REGEN_PART_'+String(part).padStart(3,'0')+'='+Buffer.from(encoded.slice(offset,offset+3000)).toString('base64'));
- }
  assert.deepEqual(committed.source_files_scanned,current.source_files_scanned,'Committed inventory must cover the current active source-file set');
  assert.deepEqual(committed.links,current.links,'Committed inventory destinations, classifications and source-line evidence must match current source');
  assert.equal(committed.unique_extracted_destinations,current.unique_extracted_destinations,'Committed unique destination count must match regenerated inventory');
