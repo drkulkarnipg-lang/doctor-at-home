@@ -103,3 +103,11 @@ For every row, retain: **owner's request → current source/live evidence → ac
 - Changed the default to blank with the prompt `Confirm and document allergy status`; added an assertion to `tests/prescription-initialization.test.cjs`.
 - Source commit `03d76614002a66fd1e624bd850a9bfebfb0d9a76`; test commit `95c8a45557c5190e40470e4897642eca65b1ad3b`.
 - This is a source-level safety correction; current-head CI and preview/device checks remain pending.
+
+
+## Latest Health Library correction — reader navigation and clutter (30 October 2026)
+- The source still rendered separate “Share original PDF” and “Download original PDF” controls on each patient guide card, contrary to the owner’s instruction to use a standard read/back flow for patient articles. Removed those redundant card actions; owner article publishing/export workflows are not changed.
+- Added browser-history entries when opening an article. Browser Back returns to the library; Forward reopens the same article; the reader's single “Health library / लेखसूचीकडे परत” control closes the article and restores prior history. Existing Escape/backdrop/focus handling is retained.
+- Updated tests/patient-reader-exit.test.cjs to cover removal of redundant controls and Back/Forward behaviour.
+- Source commit a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test commit fb5cc6d3bc01a6d76f60ab46f17aadac61883792.
+- Pending current-head CI and preview/mobile verification; do not claim live completion.
