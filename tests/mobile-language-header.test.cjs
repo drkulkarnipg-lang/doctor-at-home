@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const html=fs.readFileSync('index.html','utf8');
+assert.match(html,/layout:\s*google\.translate\.TranslateElement\.InlineLayout\.SIMPLE/,'Language widget must use compact inline layout');
+const mobile=html.match(/@media\(max-width:640px\)\{([^\n]*?\.site-header\{position:relative!important;[^\n]*?)\}\s*\.register-type-controls/s);
+assert.ok(mobile,'Phone breakpoint must explicitly override the sticky header');
+assert.match(mobile[1],/\.site-header>div\{display:flex;flex-direction:column;align-items:stretch/,'Brand and controls must stack in normal flow on phones');
+assert.match(mobile[1],/\.language-control\{flex:1 1 100%;width:100%;min-width:0;max-width:100%/,'Language control must use the full available phone width');
+assert.match(mobile[1],/\.language-status,\.language-help-link\{display:none!important\}/,'Explanatory text and external help link must not inflate the mobile header');
+assert.match(mobile[1],/\.goog-te-banner-frame,\.goog-te-banner-frame\.skiptranslate\{display:none!important\}/,'Google Translate banner must not cover the phone viewport');
+assert.match(mobile[1],/body\{top:0!important\}/,'Translate widget must not leave a blank offset above the page');
+console.log('Mobile language/header regression checks passed.');
