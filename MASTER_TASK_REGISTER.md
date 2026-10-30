@@ -281,3 +281,8 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 ### Pre-visit form compactness regression — 30 October 2026
 
 | H16 | [ ] CI PENDING — LIVE MOBILE QA OPEN | Keep pre-visit intake short: only essential patient/problem sections open; optional details remain collapsed without removing fields. | GitHub Actions run `41103557791` failed because source opened only section 2 while the test and quick-start instruction require sections 1 and 2 open. Fixed in `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` by opening sections 1–2 and keeping 3–6 collapsed. Await a green regression run on a head containing this fix. Vercel build-rate-limit prevents live/mobile confirmation. |
+
+
+### Settings control preservation / webhook safety — 30 October 2026
+
+| H18 | [ ] CI PENDING — EXTERNAL INTEGRATION NOT CONNECTED | Preserve existing interface controls without allowing browser-side webhook secrets. | Latest regression run `41104505406` exposed that `webhookUrlInput` remained in the preservation list but had been removed from the UI. Restored the ID as a visible disabled placeholder in `ef666dc6aad56b9585e2db6b43edb2488779710c`; added assertions in `425b47d3d6a9610b1e19d0cb2bd3a2e8006fca12` that the control exists, is disabled and says server-side setup. This preserves the interface without accepting a webhook URL or credential in browser storage. Actual n8n/Make integration remains disconnected until server-side setup and end-to-end verification. |
