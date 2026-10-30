@@ -271,7 +271,7 @@ calculateFee=function(){
  const services=Array.from(document.querySelectorAll('#procedureList input:checked')).reduce((sum,c)=>sum+(parseInt(c.value,10)||0),0);
  const total=base+distance+services;
  document.getElementById('totalFeeDisplay').textContent='₹'+total.toLocaleString('en-IN');
- const upi='upi://pay?pa=9561394341%40sbi&pn=Dr%20Pramod%20G%20Kulkarni&am='+total+'&cu=INR';
+ const payee=window.KULKARNI_UPI_ID||'drkulkarnipg@upi';const upi='upi://pay?pa='+encodeURIComponent(payee)+'&pn=Dr%20Pramod%20G%20Kulkarni&am='+total+'&cu=INR';const paymentLink=document.getElementById('upiPaymentLink');if(paymentLink)paymentLink.href=upi;
  const image=document.getElementById('upiQrImg');image.alt=`UPI payment QR for estimated fee ₹${total}`;
  const request=String(total);image.dataset.amount=request;
  if(window.KulkarniQRCode)window.KulkarniQRCode.toDataURL(upi,{width:180,margin:2}).then(url=>{if(image.dataset.amount===request)image.src=url;}).catch(()=>{image.alt='QR unavailable. Use the displayed UPI ID.';});
