@@ -25,10 +25,10 @@ assert.equal(d.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked').
 
 // The clinical document module creates the radiology identity/date/time fields at runtime.
 const clinicalDocuments = fs.readFileSync('clinical-documents.js', 'utf8');
-assert.match(clinicalDocuments, /field\(row,'radPatName','Patient name'/);
-assert.match(clinicalDocuments, /field\(row,'radPatAge','Age \/ sex'/);
-assert.match(clinicalDocuments, /field\(row,'radDate','Document date'/);
-assert.match(clinicalDocuments, /field\(row,'radTime','Time \(IST\)'/);
+assert.match(clinicalDocuments, /\['radPatName','Patient name'\]/);
+assert.match(clinicalDocuments, /\['radPatAge','Age \/ sex'\]/);
+assert.match(clinicalDocuments, /\['radDate','Document date','date',now\.date\]/);
+assert.match(clinicalDocuments, /\['radTime','Time \(IST\)','time',now\.time\]/);
 for (const id of ['rad_usg', 'rad_dop_v', 'rad_dop_a', 'rad_ct_brain', 'rad_ct_chest', 'rad_mri_brain', 'rad_mri_spine']) {
   assert.ok(d.getElementById(id), `radiology choice ${id} must exist`);
 }
