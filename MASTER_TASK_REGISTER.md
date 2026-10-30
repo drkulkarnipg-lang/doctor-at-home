@@ -233,3 +233,13 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Latest verified automated CI is successful on main `af656eb1a6f999182e8cff6b56fcd308a2d2c365` and on PR #54. Current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`; verify its post-merge deployment independently.
 - No production database migrations, payment setup, credentials, paid subscriptions, or destructive operations were changed. The workstation register migration remains manual pending backup, Supabase owner/RLS validation and restore test.
 - Next: complete the broader sentence-by-sentence audit; inspect all source files for external destinations and unresolved placeholders; test live desktop/mobile flows and PDFs; verify Form 2/4/4A sources for Maharashtra/Pune; confirm provider configuration and secure media storage; record deployment smoke-test evidence.
+
+
+## Latest correction batch — 30 October 2026, 10:14 India
+
+- PR #50: homepage search now submits the `q` query to the published article index; regression test covers hero links and targets.
+- PR #52: public navigation wraps visibly on mobile; no horizontal scroller hiding tabs under/after the language selector.
+- PR #53: prescription, lab/radiology requisition and statutory Form 2/4/4A working-layout PDFs omit the generic website footer and use compact margins. General guidance documents retain provenance.
+- PR #55: separate official blank Form 2, Form 4 and Form 4A one-page downloads added from the central CRS combined PDF; full source PDF remains available for instructions. The website's editable working layouts remain clearly distinct from official blank originals.
+- Vercel is rate-limited on main commit `fd979007be80a41fe6aded1cc0746f2c764f4f60`; the latest source changes are merged but not confirmed live. Last confirmed successful deployment: `0ba9a434f6a39535fdf3a654b31ec86c16776663`.
+- Do not merge additional application changes to main until deployment capacity returns. Continue review-branch work and keep all unverified/live-only tasks open.

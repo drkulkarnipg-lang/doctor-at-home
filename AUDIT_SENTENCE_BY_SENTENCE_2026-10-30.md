@@ -156,3 +156,14 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - Current main source includes the compact language-selector layout, “Elderly care” wording, a Prescription PDF filename, blank allergy-status field, and a dedicated no-wrap registration-number class. These are source-level observations; current mobile/physical PDF appearance still needs device verification.
 - The public site was reachable through the deployment provider's successful check on a recent main commit, but the latest deployment after inventory-only merge must be checked separately. A browser-based live visual review could not be completed from this environment; do not represent source scans as live visual testing.
 - Open release gates: complete repository-wide external-link crawl; inspect every sentence/line in the source request and reconcile against this matrix; live mobile/desktop actions; real WhatsApp/PDF device handoff; Form 2/4/4A jurisdiction and separate official downloads; Supabase owner-only RLS/migration and restore test; owner email recovery; real payment gateway transaction/refund/settlement; secure cloud media; full backup and verified restore.
+
+
+## Update after official-form download work — 30 October 2026, 10:14 India
+
+- PR #50 merged: homepage health-search form now submits `GET /articles?q=...`; existing article endpoint filters published titles/descriptions.
+- PR #52 merged: mobile navigation wraps instead of hiding links in a horizontal scroller; language selector remains in normal flow.
+- PR #53 merged: prescription, lab/radiology requisition and statutory Form 2/4/4A working-layout PDFs omit the generic website footer; compact margins used. General guidance PDFs retain provenance.
+- PR #55 merged as `fd979007be80a41fe6aded1cc0746f2c764f4f60`: separate one-page official blank Form 2, Form 4 and Form 4A downloads are generated from the central CRS combined PDF; the complete official source remains linked for reverse-side instructions.
+- Main regression run after PR #55 is in progress as of this update; the feature branch run passed on `3462e6ddd8a2cc597c38ddd7d5c8f3701929abfd`.
+- Vercel reports `Deployment rate limited — retry in 24 hours` for `fd979007be80a41fe6aded1cc0746f2c764f4f60`. Source merge is **not** proof of live publication. Last positively confirmed deployment remains `0ba9a434f6a39535fdf3a654b31ec86c16776663`.
+- Remaining high-priority items: verify exact Maharashtra/Pune Registrar requirements; secure Supabase migration/RLS and recovery-email configuration; actual payment gateway and settlement; cloud article/media storage; real device/mobile/share/print checks; supported languages and translation of source documents; full end-to-end live verification.

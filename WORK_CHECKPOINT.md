@@ -289,3 +289,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 4. **Duplicate branches closed, not merged**: PR #33 and #34 were 27 commits behind and current main already contains newer implementations. Closing them preserves the main code and avoids applying stale changes.
 5. **Deployment boundary**: current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`. Main CI passed on the immediately preceding source commit and PR #54 passed CI; post-merge deployment status and live visual/mobile tests remain unverified at this checkpoint.
 6. **Unresolved high-risk gates**: verify full backup/restore; inspect all external links; actual phone/WhatsApp handoff; generated PDF visual checks; Form 2/4/4A jurisdiction and separate downloads; Supabase migration/RLS and owner-only tests; email recovery; real gateway settlement/refund; secure article media storage.
+
+
+## 10:14 India — latest source status
+
+- Homepage search, mobile nav wrapping, Article Manager/RSS grouping, quick home-visit intake, registration-number alignment, clinical PDF footer cleanup and separate official Form 2/4/4A downloads are merged and regression-tested on their respective feature branches.
+- PR #55 main merge is `fd979007be80a41fe6aded1cc0746f2c764f4f60`. Main regression is still running as of this checkpoint; do not claim its result until the run completes.
+- Vercel build is rate-limited on that commit. The last confirmed successful deployment is `0ba9a434f6a39535fdf3a654b31ec86c16776663`. Newer source fixes are not confirmed live.
+- Official form route uses central CRS PDF pages 5, 9 and 11 (one-page Form 2, Form 4 and Form 4A). Local Maharashtra/Pune registrar acceptance must be confirmed; reverse instructions remain in the complete source PDF.
+- Keep payment settlement, cloud media storage, Supabase migration/RLS, recovery-email delivery, real mobile/share/print checks and full language/source-document translation open.

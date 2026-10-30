@@ -70,3 +70,13 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 - Current main `6b551b4450422978d01683e0474f19047a761cf0`: regression run `41038198126` passed.
 - Last successful application-code deployment: `0ba9a434f6a39535fdf3a654b31ec86c16776663`; current main is Vercel-rate-limited and not confirmed deployed.
 - The new prescription/lab/radiology footer correction is merged and tested in source. Editable government Form 2/4/4A working layouts retain the legal-status disclaimer; original government PDFs remain unchanged.
+
+
+## Added line status — 30 October 2026, 10:14 India
+
+- Lines 50, 53, 56: PR #55 adds separate one-page official blank Form 2/4/4A PDFs; editable working layouts remain separate. Actual local registrar requirements and live downloads still need verification.
+- Line 65: PR #53 removes generic website footer from lab/radiology requisitions and uses compact margins; live print geometry remains unverified.
+- Lines 68, 71: PR #46 exposes RSS/evidence review from Article Manager while preserving the dedicated RSS tab and workstation directory.
+- Lines 100, 137: PR #52 wraps mobile navigation links rather than hiding them in a horizontal scroller; PR #50 wires the homepage search to `/articles?q=...`.
+- Line 140: separate official-form downloads now exist in source; cloud media storage, world-language translation, payment gateway and live device checks remain open.
+- Current main `fd979007be80a41fe6aded1cc0746f2c764f4f60` is Vercel rate-limited; no post-`0ba9a434` behavior is claimed live.
