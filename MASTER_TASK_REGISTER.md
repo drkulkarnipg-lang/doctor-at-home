@@ -174,3 +174,6 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 
 
 | H12 | [ ] CI PENDING — PREVIEW BLOCKED | Health Library articles should open in a clean reader with normal browser Back/Forward behaviour, not redundant share/download controls on patient guide cards. | Removed share/download buttons from patient guide cards; added a history state per opened article and popstate handling so Back closes and Forward restores the reader. Single reader Back control remains. Tests updated in tests/patient-reader-exit.test.cjs. Source commit a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test commit fb5cc6d3bc01a6d76f60ab46f17aadac61883792. Await CI and preview/device checks. |
+
+
+Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
