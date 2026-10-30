@@ -8,6 +8,7 @@
     "pdf-lib": "1.17.1"
   },
   "scripts": {
-    "audit:links": "node scripts/audit-external-links.cjs"
+    "audit:links": "node scripts/audit-external-links.cjs",
+    "inventory:links": "node scripts/generate-external-link-inventory.cjs"
   }
 }

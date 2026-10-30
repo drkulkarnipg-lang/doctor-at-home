@@ -16,7 +16,7 @@ concurrency:
 jobs:
   check-public-destinations:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -27,14 +27,19 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
-      - name: Check public external destinations
+      - name: Generate current source inventory
         run: |
           mkdir -p reports
-          npm run audit:links -- --concurrency=3 --timeout=10000 --output=reports/external-link-check-${{ github.run_id }}.json
-      - name: Upload link-check report
+          npm run inventory:links -- --output=reports/external-link-inventory-${{ github.run_id }}.json
+      - name: Check public external destinations
+        run: |
+          npm run audit:links -- --inventory=reports/external-link-inventory-${{ github.run_id }}.json --concurrency=3 --timeout=10000 --output=reports/external-link-check-${{ github.run_id }}.json
+      - name: Upload inventory and link-check report
         uses: actions/upload-artifact@v4
         with:
           name: external-link-audit-${{ github.run_id }}
-          path: reports/external-link-check-${{ github.run_id }}.json
+          path: |
+            reports/external-link-inventory-${{ github.run_id }}.json
+            reports/external-link-check-${{ github.run_id }}.json
           if-no-files-found: error
           retention-days: 30
