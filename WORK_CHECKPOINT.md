@@ -429,3 +429,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **Invoice/payment traceability reconciled:** duplicated source rows `P10-L0031/P10-L0052` and all sentence units now record that invoice/receipt, PDF share/download/print, prescription detail copy and UPI QR disclosure exist in source and their tests passed in run `41115928252`. This does not prove actual live PDF output, QR payee/amount scan, settlement/refund or payment-gateway configuration.
+
+
+- **Traceability privacy regression fixed:** CI failed at `tests/pasted-text-10-sentence-traceability.test.cjs` because the newly added invoice/payment evidence copied an 11-digit workflow run ID into public traceability JSONL. Removed that run ID from both line and sentence maps and checked that neither file contains any 11–18 digit numeric sequence. A fresh full CI run on the newest head is required.
