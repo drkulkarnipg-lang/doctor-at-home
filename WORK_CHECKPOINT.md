@@ -426,3 +426,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **Traceability reconciliation:** updated the three repeated language-selector source lines (`P10-L0032/0044/0053`) and all mapped sentence units. They now distinguish the existing main-branch selector fix from the review-branch reader-translator mount ID; they no longer incorrectly say current-main CI is merely queued. Review-branch code/test commit `3ffef411c46ec2fd857e0f075e2f64d2e1840bce` passed; live/mobile/keyboard/supported-language checks remain open.
+
+
+- **Invoice/payment traceability reconciled:** duplicated source rows `P10-L0031/P10-L0052` and all sentence units now record that invoice/receipt, PDF share/download/print, prescription detail copy and UPI QR disclosure exist in source and their tests passed in run `41115928252`. This does not prove actual live PDF output, QR payee/amount scan, settlement/refund or payment-gateway configuration.
