@@ -16,6 +16,7 @@ try{
  fs.writeFileSync(path.join(root,'index.html'),'<link rel="preconnect" href="https://fonts.googleapis.com"><a href="https://example.org/clinical">Reference</a><input placeholder="https://hook.eu1.make.com/...">');
  fs.writeFileSync(path.join(root,'api','provider.js'),"fetch('https://api.example.org/v1');");
  fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
+ fs.writeFileSync(path.join(root,'server','ai-client.js'),"request('https://ai-gateway.vercel.sh/v1/chat/completions');");
  fs.writeFileSync(path.join(root,'source-translation.js'),"function translatedUrl(url,lang){return 'https://translate.google.com/translate?sl=auto&tl='+encodeURIComponent(lang)+'&u='+encodeURIComponent(url);}");
  fs.writeFileSync(path.join(root,'assets','tailwind.css'),'/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}');
  fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
@@ -33,6 +34,7 @@ try{
  assert.equal(get('https://hook.eu1.make.com/').classification,'placeholder');
  assert.equal(get('https://api.example.org/v1').classification,'service-endpoint');
  assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint');
+ assert.equal(get('https://ai-gateway.vercel.sh/v1/chat/completions').classification,'service-endpoint');
  assert.equal(get('https://translate.google.com/translate?sl=auto&tl=').classification,'runtime-template');
  assert.equal(get('https://tailwindcss.com').classification,'external-destination');
  assert.equal(get('https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}'),undefined,'CSS comment delimiters must not be captured as part of a URL');
