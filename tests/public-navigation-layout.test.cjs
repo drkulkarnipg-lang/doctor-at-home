@@ -10,5 +10,7 @@ assert.match(nav[1],/white-space:normal/,'Navigation labels may wrap on narrow s
 assert.doesNotMatch(nav[1],/overflow-x:auto|white-space:nowrap/);
 assert.ok(css.includes('.portal-nav{padding:10px 16px;gap:8px 12px;overflow:visible;white-space:normal;flex-wrap:wrap}'),'Mobile navigation explicitly wraps');
 assert.ok(css.includes('html{scroll-padding-top:280px}'),'Anchor targets account for the expanded mobile header');
-assert.ok(html.includes('@media(max-width:640px){.language-control{flex:1 1 100%;width:100%;padding:5px 0}'),'Language selector stays in normal flow at mobile width');
+assert.ok(html.includes('@media(max-width:640px){.language-control{flex:0 1 240px;width:auto;min-width:170px;max-width:100%;padding:3px 0}'),'Language selector remains compact and in normal flow at mobile width');
+assert.ok(html.includes('#google_translate_element .goog-te-combo{max-width:140px;width:100%;min-height:38px;font-size:12px}'),'Mobile language dropdown stays compact and tappable');
+assert.ok(html.includes('Machine translation') || html.includes('Automatic translation may not preserve medical meaning'),'Translation caution remains available to patients');
 console.log('Responsive navigation checks passed: all links wrap visibly and the language selector cannot cover the navigation row.');
