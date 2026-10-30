@@ -28,7 +28,7 @@ function validateInput(input) {
 function validateOutput(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw Error('AI response is not a valid article object.');
   const { title, standfirst, bodyMarkdown, editorialNotes } = value;
-  if (typeof bodyMarkdown === 'string' && (/<\\s*(script|iframe|object|embed)\\b/i.test(bodyMarkdown) || /javascript:/i.test(bodyMarkdown))) throw Error('AI response contains disallowed markup.');
+  if (typeof bodyMarkdown === 'string' && (/<\s*(script|iframe|object|embed)\b/i.test(bodyMarkdown) || /javascript:/i.test(bodyMarkdown))) throw Error('AI response contains disallowed markup.');
   if (typeof title !== 'string' || title.trim().length < 3 || title.length > 200 ||
       typeof standfirst !== 'string' || standfirst.trim().length < 20 || standfirst.length > 1000 ||
       typeof bodyMarkdown !== 'string' || bodyMarkdown.trim().length < 100 || bodyMarkdown.length > 30000 ||
