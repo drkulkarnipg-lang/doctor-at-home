@@ -142,3 +142,15 @@ GitHub Actions run 41018433870 passed all 24 tests/*.test.cjs files on Node 22. 
 ### Still blocked
 - Vercel status on the PR head remains failure with upgradeToPro=build-rate-limit; no deployable preview exists for this batch. Do not merge or call these source changes live until the preview/production release can be verified under the project's release rules.
 - The green test suite does not verify real UPI app handoff, physical-device share/print, the owner's device passkey, production Supabase RLS, or external provider configuration.
+
+
+## Owner password recovery — implementation and verification status (30 October 2026)
+
+Implemented on the active PR42 review branch:
+- API `api/clinical-cloud.js`: `reset-request` requires a valid `CLINIC_OWNER_EMAIL`, returns a generic message for non-matching emails, sends provider recovery only for the configured owner email, and uses a fixed production redirect. `reset-password` validates input length, asks Supabase to validate the recovery access token, confirms the returned user ID equals `CLINIC_OWNER_USER_ID`, then updates the password through the provider. No recovery token is placed in a cookie or returned in a response.
+- Login UI: `workstation-auth.js` adds “Set / reset password by email” with an accessible status message; `cloud-records.js` exposes the same-origin request action.
+- Recovery page: `password-reset.html` and `password-recovery.js` accept only a recovery-type link, immediately scrub the token from the URL, keep it in memory only, require matching passwords of at least 12 characters, submit only to the same-origin API, and clear both password fields. No local/session storage is used.
+- Tests: `tests/clinical-cloud.test.cjs`, `tests/workstation-auth.test.cjs`, and new `tests/password-recovery.test.cjs` cover owner restriction, generic non-owner response, missing config, wrong/expired token, password length, no session cookie, token URL scrubbing, password mismatch and field clearing.
+- GitHub Actions run `41019188114` passed all 25 regression test files.
+
+External configuration still required before this can work in production: set Vercel environment variable `CLINIC_OWNER_EMAIL` to the actual owner account email and add `https://home-visiting-icu-doctor.vercel.app/password-reset.html` to the Supabase Auth redirect URL allowlist. Do not put secrets in source or chat. Mobile OTP and 30-day remembered-device behaviour remain separate tasks. Vercel build-rate-limit currently prevents preview/live confirmation; email delivery is not yet verified.
