@@ -7,7 +7,7 @@ daily:{label:'Daily patient register',fields:[
 death:{label:'Death register',fields:[
 ['entryDate','Register entry date','date',true],['patientName','Patient name','text',true],['patientCode','Patient code / file no.','text',false],['age','Age (years)','number',false],['sex','Sex','select',false,[['','Choose…'],['Female','Female'],['Male','Male'],['Other','Other / not recorded']]],['deathDateTime','Recorded date and time of death','datetime-local',true],['place','Place','text',true],['certificateReference','Certificate / record reference','text',false],['notes','Minimum necessary factual note','textarea',false]],columns:['entryDate','patientName','deathDateTime','place','certificateReference']},
 stock:{label:'Stock register',fields:[
-['entryDate','Movement date','date',true],['itemName','Item / medicine name','text',true],['category','Category','text',false],['batch','Batch / lot number','text',false],['expiry','Expiry date','date',false],['quantity','Quantity moved','number',true],['unit','Unit (vials, strips, packs, etc.)','text',true],['movement','Movement','select',true,[['','Choose…'],['received','Received'],['issued','Issued'],['adjustment','Adjustment']]],['supplier','Supplier / source','text',false],['reference','Invoice / issue reference','text',false],['notes','Notes','textarea',false]],columns:['entryDate','itemName','batch','expiry','quantity','unit','movement']}
+['entryDate','Movement date','date',true],['itemName','Item / medicine name','text',true],['category','Category','text',false],['batch','Batch / lot number','text',false],['expiry','Expiry date','date',false],['quantity','Quantity moved','number',true],['unit','Unit (vials, strips, packs, etc.)','text',true],['movement','Movement','select',true,[['','Choose…'],['received','Received'],['issued','Issued'],['adjustment','Adjustment']]],['adjustmentDirection','Adjustment direction','select',false,[['','Not applicable'],['increase','Increase stock'],['decrease','Decrease stock']]],['supplier','Supplier / source','text',false],['reference','Invoice / issue reference','text',false],['notes','Notes','textarea',false]],columns:['entryDate','itemName','batch','expiry','quantity','unit','movement','adjustmentDirection']}
 };
 let current='daily',records=[],editing=null,loading=false;
 const status=t=>{const e=$('registerStatus');if(e)e.textContent=t;};
@@ -25,6 +25,7 @@ input.id='register-'+key;input.name=key;input.dataset.registerField=key;input.ty
 function renderForm(){
 const host=$('registerEntryFields'),form=$('registerEntryForm');if(!host||!form)return;host.replaceChildren();
 const schema=schemas[current];for(const field of schema.fields){const key=field[0],value=key==='entryDate'?(editing?.entry_date||editing?.data?.[key]||(!editing?today():'')):(editing?.data?.[key]??'');host.append(makeField(field,value));}
+$('registerFormHeading').textContent=(editing?'Edit ':'New ')+schema.label.toLowerCase()+' entry';
 $('registerSave').textContent=editing?'Save changes':'Save entry';$('registerCancel').hidden=!editing;form.hidden=!signedIn();
 }
 function safeCell(value){return value===null||value===undefined?'':String(value);}
