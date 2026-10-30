@@ -41,6 +41,7 @@ change('calculator-30-acid','hco3');assert.equal(w.document.getElementById('calc
 change('calculator-18-method','p421');assert.equal(w.document.getElementById('calculator-18-factor').disabled,true);
 const search=w.document.getElementById('clinicalCalculatorSearch');search.value='Wells';search.oninput();assert.equal([...w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card')].filter(e=>!e.hidden).length,2);
 for(const id of require('./existing-feature-ids.json'))assert.ok(w.document.getElementById(id),`Lost existing interface element ${id}`);
+assert.equal(w.document.getElementById('webhookUrlInput').disabled,true,'Automation webhook entry must remain disabled until server-side configuration and security review');assert.match(w.document.getElementById('webhookUrlInput').placeholder,/server/i);
 const websiteSchema=JSON.parse(w.document.querySelector('script[type="application/ld+json"]').textContent);assert.equal(websiteSchema['@graph'][0].name,'Dr. Pramod G. Kulkarni');assert.ok(w.document.querySelector('link[rel=canonical]'));assert.ok(w.document.querySelector('a[href="site-information.html"]'));
 const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size,'Duplicate HTML IDs');
 for(const id of ['rxSheet','pathSlipSheet','radSlipSheet','viewChart20','viewLegalForms','viewClinicalCertificates','viewDrugDir','viewArticlesHub','viewJournalsHub','chatbotWindow','patientFaq','bookingSection'])assert.ok(w.document.getElementById(id),`Lost feature ${id}`);
