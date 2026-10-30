@@ -234,3 +234,10 @@ Standard bilirubin thresholds shown; cholestatic-disease variants differ. Ascite
 12 acute physiology components + age points + chronic health points. GCS component = 15 − GCS.
 
 Adult ICU: select worst values in the first 24 hours, using the displayed measurement precision. Choose pH OR bicarbonate, never both. A–a gradient is required if FiO₂ ≥0.50. No default normal values and no patient-specific mortality percentage.
+
+
+## Implementation update — 30 October 2026
+
+The reference/interpretation copy for all 30 calculators was expanded in `clinical-calculators.js` and merged via PR #43 (`5bea88738cd68475c38449b6eb4415416de47e46`). It adds sourced interpretation bands where appropriate (including adult BMI, GCS, CURB-65, qSOFA, P/F ratio, Wells DVT/PE, HAS-BLED, Norton, MELD 3.0, Child–Pugh and APACHE II) and explicit caveats where a universal normal range is not meaningful. UI tests assert every calculator card has a source link and substantive interpretation. This is not a substitute for local protocol approval or clinician judgement.
+
+**Deployment status:** latest calculator code is merged but not confirmed live because Vercel reports a 24-hour build-rate limit. Verify the live calculator cards after the deployment succeeds.

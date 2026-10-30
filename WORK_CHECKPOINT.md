@@ -247,3 +247,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Vercel status for this commit: success, deployment completed. Deployment success is not a substitute for feature-level live/device verification.
 - Continue from `MASTER_TASK_REGISTER.md`, using `ATTACHMENT_LINE_RECONCILIATION_2026-10-30.md` to track the newly attached source line by line. The old “STOP until owner asks” paragraph above is historical only.
 - Immediate next items: reconcile all composite requirements into atomic sub-items; verify calculator references/normal ranges for each of the 30 calculators; check actual live phone/mobile layout, tab navigation, reader language and history, document share/save/print, Form 2/4/4A jurisdictional layouts, and contact handoffs; complete provider configuration for password recovery; apply and test register migration with RLS; continue evidence-based research and article workflow without auto-publishing clinical content.
+
+
+## Update after PR #43–#45 — 30 October 2026
+
+- PR #43 calculator interpretation/reference notes: merged and regression-tested.
+- PR #44 Article Manager refresh/load/start controls: merged and regression-tested; start-new now protects unsaved text with confirmation and clears all editor metadata only after confirmation.
+- PR #45 prescription PDF: website URL/provenance footer and per-page footer stamp removed from the prescription only; compact margins added. Other clinical documents retain provenance. Main regression passed on `cde9f74684036f556100d1e514240d4f57278673`.
+- Vercel rate-limit failure blocks deployment of these latest commits. The last positively confirmed deployment was commit `233040e281ff975e151d98f77bb606768074d54f`; later changes must be treated as source-merged but not yet live.
+- Do not merge more batches solely to trigger builds while rate-limited. Continue audit and prepare a consolidated, tested release batch; retry deployment after the rate limit resets, then verify live behavior and PDF rendering.
