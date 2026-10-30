@@ -24,7 +24,7 @@ input.id='register-'+key;input.name=key;input.dataset.registerField=key;input.ty
 }
 function renderForm(){
 const host=$('registerEntryFields'),form=$('registerEntryForm');if(!host||!form)return;host.replaceChildren();
-const schema=schemas[current];for(const field of schema.fields){const key=field[0],value=editing?.data?.[key]??(key==='entryDate'&&!editing?today():'');host.append(makeField(field,value));}
+const schema=schemas[current];for(const field of schema.fields){const key=field[0],value=key==='entryDate'?(editing?.entry_date||editing?.data?.[key]||(!editing?today():'')):(editing?.data?.[key]??'');host.append(makeField(field,value));}
 $('registerSave').textContent=editing?'Save changes':'Save entry';$('registerCancel').hidden=!editing;form.hidden=!signedIn();
 }
 function safeCell(value){return value===null||value===undefined?'':String(value);}
