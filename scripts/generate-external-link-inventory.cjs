@@ -31,8 +31,9 @@ function walk(root, directory = root, files = []) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const full = path.join(directory, entry.name);
     const rel = path.relative(root, full).replace(/\\/g, '/');
+    const excludedPrefix = EXCLUDED_PREFIXES.some(prefix => rel === prefix.slice(0, -1) || rel.startsWith(prefix));
     if (entry.isDirectory()) {
-      if (!EXCLUDED_DIRS.has(entry.name) && !EXCLUDED_PREFIXES.some(prefix => rel.startsWith(prefix))) walk(root, full, files);
+      if (!EXCLUDED_DIRS.has(entry.name) && !excludedPrefix) walk(root, full, files);
     } else if (entry.isFile() && shouldScan(rel)) files.push({ full, rel });
   }
   return files;
