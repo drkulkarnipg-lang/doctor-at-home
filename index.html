@@ -387,8 +387,8 @@
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm" id="tabSymptom" onclick="switchDocTab('symptomChecker')">🩺 WebMD Symptom &amp; Interaction Suite</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1" id="tabJournals" onclick="switchDocTab('journalsHub')">📡 Live RSS &amp; AI Research Agent</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabEverydayTools" onclick="switchDocTab('everydayTools')">🌿 Diet &amp; Conversions</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabChart" onclick="switchDocTab('chart20')">📈 Patient BP, Sugar &amp; Trends</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCheat" onclick="switchDocTab('pathCheatSheet')">🔬 Pathology Cheat Sheet (150+)</button>
-<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabPath" onclick="switchDocTab('pathReq')">🩸 Lab Slip</button>
-<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabRad" onclick="switchDocTab('radReq')">☢️ Radiology Slip</button>
+<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabPath" onclick="switchDocTab('pathReq')">🩸 Lab Requisition</button>
+<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabRad" onclick="switchDocTab('radReq')">☢️ Radiology Requisition</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCertificates" onclick="switchDocTab('clinicalCertificates')">📜 Referral, Consent &amp; Fitness</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Certificates (4A, 4, 2)</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabDrug" onclick="switchDocTab('drugDir')">💊 1-Click Formulary &amp; CIMS</button>
@@ -1532,7 +1532,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         const selected = [...document.querySelectorAll('#pathCheckboxesGrid input[type="checkbox"]:checked')].map(el => el.value);
         const notes = document.getElementById('pathNotes').value.trim();
         title = "Lab Requisition - Dr. Kulkarni";
-        text = `*LAB REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nTests: ${selected.length ? selected.join(', ') : 'No preset tests selected'}${notes ? `\nAdditional tests / notes: ${notes}` : ''}\nUrgent reports: WhatsApp 9561394341`;
+        text = `*LAB REQUISITION*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nTests: ${selected.length ? selected.join(', ') : 'No preset tests selected'}${notes ? `\nAdditional tests / notes: ${notes}` : ''}\nUrgent reports: WhatsApp 9561394341`;
       } else if(type === 'rad') {
         const name = document.getElementById('reqPatName').value || "Patient";
         const age = document.getElementById('reqPatAge').value || "Not entered";
@@ -1540,7 +1540,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         const selected = [...document.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked')].map(el => el.value);
         const indication = document.getElementById('radIndication').value.trim();
         title = "Radiology Requisition - Dr. Kulkarni";
-        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nImaging requested: ${selected.length ? selected.join(', ') : 'No preset imaging selected'}${indication ? `\nClinical indication: ${indication}` : ''}\nConfirm ETA: WhatsApp 9561394341`;
+        text = `*RADIOLOGY REQUISITION*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nImaging requested: ${selected.length ? selected.join(', ') : 'No preset imaging selected'}${indication ? `\nClinical indication: ${indication}` : ''}\nConfirm ETA: WhatsApp 9561394341`;
       }
 
       if(navigator.share) {
