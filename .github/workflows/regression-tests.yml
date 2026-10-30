@@ -35,7 +35,12 @@ jobs:
         run: |
           set -euo pipefail
           count=0
+          echo "::group::tests/external-link-inventory-generator.test.cjs (temporary inventory reconciliation)"
+          node tests/external-link-inventory-generator.test.cjs
+          echo "::endgroup::"
+          count=$((count + 1))
           for test_file in tests/*.test.cjs; do
+            if [[ "${test_file}" == "tests/external-link-inventory-generator.test.cjs" ]]; then continue; fi
             echo "::group::${test_file}"
             node "${test_file}"
             echo "::endgroup::"
