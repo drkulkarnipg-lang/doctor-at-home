@@ -420,3 +420,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **WhatsApp test harness correction:** initial CI for the new short-history test failed because the stub `w.open=url=>opens.push(url)` returned the numeric array length, not a browser WindowProxy/null. This made the source handler attempt `.opener=null` on a number. Corrected the stub to record the URL and return `null` to simulate popup blocking, which exercises the intended visible fallback. New CI required on commit `10d5d5598276ed75bc6b521b9cc3d6172a30b007`.
+
+
+- **Pre-visit WhatsApp test verified:** GitHub Actions run `41115928252` passed on exact head `3ffef411c46ec2fd857e0f075e2f64d2e1840bce`. Short-history handoff assertions check destination `wa.me/919561394341`, inclusion of synthetic patient name, chief complaint, medicine and allergy history, and visible fallback when popup opening returns `null`. Long histories still route to complete PDF/share rather than truncating. Real WhatsApp app, device share-sheet and recipient-side delivery are still not tested; this PR is draft and Vercel remains build-rate-limited.
