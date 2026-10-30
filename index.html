@@ -1520,7 +1520,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     function saveRecordAsPrompt() {
       const name = document.getElementById('rxPatName').value.trim() || "Patient";
       const dt = new Date().toISOString().slice(0, 10);
-      const filename = prompt("Enter Filename to Save Record:", `Rx_${name.replace(/\s+/g, '_')}_${dt}.txt`);
+      const filename = prompt("Enter filename for prescription text export:", `Prescription_${dt}.txt`);
       if(!filename) return;
 
       const recordContent = generatePrescriptionText();
