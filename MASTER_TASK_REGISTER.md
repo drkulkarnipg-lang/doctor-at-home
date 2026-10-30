@@ -177,3 +177,13 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 
 
 Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
+
+
+## Release and audit update — 30 October 2026 (after owner instruction)
+
+- Owner's latest instruction: treat the attached `Pasted text(20261030-092936).txt` as controlling; read every request, implement without asking the owner to repeat it, continue through the backlog, and report the exact request / verified action / remaining work. This does **not** authorize inventing clinical guidance or claiming unverified functionality.
+- PR #42 was merged to `main` as `233040e281ff975e151d98f77bb606768074d54f`. The pre-merge regression run `41033185988` passed on branch head `a33dff87a6068a54f6085d758d3f9df9b403fb96`; post-merge regression run `41033995852` completed successfully on the exact main commit `233040e281ff975e151d98f77bb606768074d54f`.
+- Vercel commit status for `233040e281ff975e151d98f77bb606768074d54f` reports **success — deployment completed**. This confirms deployment status, not every user journey, real-device share, physical print, third-party email delivery, or payment settlement.
+- The merged batch includes UPI payee URI consistency, temperature/weight conversion wiring, prescription blank-row/allergy safety, document-specific filenames, article-reader browser history, workstation register UI/API source, password-recovery UI/API source, and their regression tests. Live verification remains separate.
+- **Still blocked / not claimed complete:** the Supabase register migration must be reviewed and applied in the correct project; recovery email requires owner-email environment configuration and the Supabase redirect allowlist; Razorpay merchant/KYC/order/webhook/refund and payment settlement are not established; real device OTP/passkey, native phone/WhatsApp share, PDF save/print, filled government forms, and physical layout need actual-device checks. Do not expose bank account details in public HTML or logs.
+- The companion `ATTACHMENT_LINE_RECONCILIATION_2026-10-30.md` maps every non-empty source line of the newly attached requirements to the existing task IDs and unresolved work. Composite source lines are explicitly broken into requirement clusters; unresolved rows remain open.
