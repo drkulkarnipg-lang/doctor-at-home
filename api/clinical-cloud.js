@@ -2,7 +2,7 @@
 const {randomUUID}=require('node:crypto');
 const {patientCode,consent:validateConsent}=require('../server/patient-privacy');
 const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,ID=/^pt-[0-9a-f-]{36}$/i;
-const FIELDS=['date','time','sbp','dbp','glucose','context','weight','pulse','spo2','temperature','creatinine','hba1c','notes'];
+const FIELDS=['date','time','sbp','dbp','glucose','context','weight','height','bmi','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
 const REGISTER_FIELDS={
 daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
