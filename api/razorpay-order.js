@@ -8,7 +8,7 @@ module.exports=async function(req,res){
  try{
   const b=body(req);
   if(!uuid(b.bookingReference)||b.appointmentConfirmed!==true)return res.status(400).json({message:'Confirm the doctor-approved appointment before starting payment.'});
-  const existing=await db('consultation_payments?select=booking_reference,order_id,status,amount_paise,currency,attempt_number&booking_reference=eq.'+encodeURIComponent(b.bookingReference)+'&limit=1');
+  const existing=await db('consultation_payments?select=booking_reference,order_id,status,amount_paise,currency,attempt_number&booking_reference=eq.'+encodeURIComponent(b.bookingReference)+'&order=attempt_number.desc&limit=1');
   if(!existing.ok)throw Error();
   if(existing.data?.length){
    const row=existing.data[0];
