@@ -9,7 +9,7 @@ daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary
 death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
 stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,supplier:160,reference:120,notes:2000}
 };
-function validISODate(value){if(typeof value!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(value))return false;const d=new Date(value+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;}
+function validISODate(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const d=new Date(value+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;}
 function validateRegister(entry){
 if(!entry||typeof entry!=='object'||Array.isArray(entry)||!['daily','death','stock'].includes(entry.registerType))throw Error('Choose a valid register type.');
 if(!validISODate(entry.entryDate))throw Error('Enter a valid register date.');
@@ -21,7 +21,7 @@ if(entry.id&& !entry.revision)throw Error('Reload the current record before edit
 if(entry.registerType==='daily'&&(!data.patientName||!data.visitType))throw Error('Enter the patient name and visit type.');
 if(entry.registerType==='death'){
 if(!data.patientName||!data.deathDateTime||!data.place)throw Error('Enter the name, date/time of death and place.');
-if(!/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}/.test(data.deathDateTime)||!Number.isFinite(Date.parse(data.deathDateTime)))throw Error('Enter a valid date and time of death.');
+if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(data.deathDateTime)||!Number.isFinite(Date.parse(data.deathDateTime)))throw Error('Enter a valid date and time of death.');
 }
 if(entry.registerType==='stock'){
 if(!data.itemName||!data.unit||!['received','issued','adjustment'].includes(data.movement))throw Error('Enter the item, unit and stock movement.');
