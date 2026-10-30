@@ -193,3 +193,13 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 3. Continue bounded source checks for UPI payee, both converters, diet presets, full previsit history, article Back/Forward and PDF share, prescription add-row visibility, forms, requisitions, and registers.
 4. Keep the register and checkpoint updated after each completed bounded step. Wait for Vercel preview availability; then verify desktop/mobile before asking for release approval.
 5. External setup blockers remain: Supabase owner-email/redirect configuration, owner-device recovery test, register migration/RLS test, and actual phone/email/PDF share/print. Do not include bank details or provider secrets in source control.
+
+
+## Latest bounded source correction — prescription initialization safety (30 October 2026)
+
+- **Original defect:** `initRxPad()` emptied the prescription table and inserted three example drugs. Reinitialisation could lose clinician-entered rows; sample medicines could be mistaken for an actual regimen.
+- **Correction:** `index.html` now creates one entirely blank row only if the prescription table is empty; re-opening does not clear existing rows; `addRxRow()` adds a completely blank row. Existing formulary selection remains available.
+- **Regression test:** new `tests/prescription-initialization.test.cjs` covers blank first row, absence of sample drug names, preserving entered values after reinitialisation, and adding a blank second row.
+- **Commits:** implementation `8412292db14a5ec2d195dd08c8ee84a69dcf700c`; test `df2c089892ad8d1426f7050da7328b280e909e4d`; audit matrix update `e994a1fb78728d7664c539978fa6d0c861b992d5`; master register update `a9bb4c5254c7cb80a5e7ec35033aef830dafc84f`.
+- **Status:** source correction and test are committed on PR42 review branch only. Await the regression run on the exact latest head; no preview/live/device verification yet. Do not merge or deploy.
+- **Next:** inspect the current GitHub Actions run against latest branch head, correct any failures, then continue the next high-priority open source defect. Keep the exact tested SHA in the checkpoint.
