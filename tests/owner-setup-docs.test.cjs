@@ -12,5 +12,5 @@ assert.ok(passkeys.includes('activation not completed'),'Passkey setup must rema
 assert.ok(api.includes("env.CLINIC_OWNER_EMAIL")&&api.includes("reset-request"),'Recovery implementation must use configured owner email');
 assert.ok(api.includes("password.length<12"),'Server must enforce the minimum password length');
 assert.ok(reset.includes("history.replaceState")&&reset.includes("accessToken=''"),'Recovery token must be removed from URL history and cleared from memory');
-assert.ok(setup.includes('no public signup'),'Runbook must explicitly preserve the no-public-signup rule');
+assert.ok(setup.includes('Disable public signup'),'Runbook must explicitly preserve the no-public-signup rule');
 console.log('Owner setup documentation checks passed: environment, password recovery, first-time setup, passkey activation and token-handling claims align with source.');
