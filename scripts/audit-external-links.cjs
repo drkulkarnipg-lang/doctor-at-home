@@ -101,13 +101,15 @@ async function runAudit({ inventoryPath = INVENTORY, fetchImpl = globalThis.fetc
 async function main() {
   const args = process.argv.slice(2);
   const limitArg = args.find(arg => arg.startsWith('--limit='));
+  const inventoryArg = args.find(arg => arg.startsWith('--inventory='));
   const concurrencyArg = args.find(arg => arg.startsWith('--concurrency='));
   const timeoutArg = args.find(arg => arg.startsWith('--timeout='));
   const outputArg = args.find(arg => arg.startsWith('--output='));
   const limit = limitArg ? Math.max(0, Number(limitArg.split('=')[1]) || 0) : Infinity;
   const concurrency = concurrencyArg ? Math.max(1, Number(concurrencyArg.split('=')[1]) || 4) : 4;
   const timeoutMs = timeoutArg ? Math.max(1000, Number(timeoutArg.split('=')[1]) || 10000) : 10000;
-  const report = await runAudit({ limit, concurrency, timeoutMs });
+  const inventoryPath = inventoryArg ? path.resolve(inventoryArg.split('=').slice(1).join('=')) : INVENTORY;
+  const report = await runAudit({ inventoryPath, limit, concurrency, timeoutMs });
   const json = JSON.stringify(report, null, 2) + '\n';
   if (outputArg) {
     const target = path.resolve(outputArg.split('=').slice(1).join('='));
