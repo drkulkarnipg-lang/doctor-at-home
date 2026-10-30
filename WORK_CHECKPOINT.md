@@ -220,3 +220,10 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 - Added `tests/document-filenames.test.cjs`.
 - Commits: source `859cb6cd82e9b0b9f4fbe691aaa66059a361dfff`; test `74d0973f72fa3cbc8dcc97070370b112b43d3a18`.
 - Await CI on the latest head and device confirmation. Continue checking that the generated prescription excludes unwanted website footer/contact metadata and that registration number typography is aligned.
+
+
+## Latest clinical safety correction — allergy status (30 October 2026)
+- Found the prescription allergy field defaulted to `NKDA (No Known Drug Allergies)` without any confirmation. This could imply a clinical assessment that did not occur.
+- Changed default to blank and placeholder to `Confirm and document allergy status`; added regression assertion in `tests/prescription-initialization.test.cjs`.
+- Source commit `03d76614002a66fd1e624bd850a9bfebfb0d9a76`; test commit `95c8a45557c5190e40470e4897642eca65b1ad3b`.
+- Await latest-head CI and preview/device verification; not live-verified.
