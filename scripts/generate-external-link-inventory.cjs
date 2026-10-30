@@ -122,7 +122,7 @@ function main() {
   if (outputArg) {
     const outputPath = path.resolve(outputArg.split('=').slice(1).join('='));
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    fs.writeFileSync(outputPath, JSON.stringify(inventory, null, 2) + '\\n');
+    fs.writeFileSync(outputPath, JSON.stringify(inventory, null, 2) + '\n');
   }
   console.log(JSON.stringify({
     scanned_files: inventory.source_files_scanned.length,
