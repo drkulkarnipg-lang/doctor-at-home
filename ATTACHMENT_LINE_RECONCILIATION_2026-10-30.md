@@ -1,0 +1,50 @@
+# Attached request line reconciliation — 30 October 2026
+
+**Controlling source:** `Pasted text(20261030-092936).txt` (166 physical lines). This is a traceability index, not a completion certificate. Every non-empty source line is represented below. Long composite lines map to multiple requirements; duplicated instructions remain visible as repeated emphasis. Each item stays open until implementation and the appropriate tests/live/device/provider checks support closure.
+
+| Source line(s) | Requirement cluster from the owner's line | Register / audit pointers | Current disposition |
+|---|---|---|---|
+| 1 | Work on the named existing website/repository, not a replacement. | A01; standing instructions | Repo changes merged; feature-level live audit remains. |
+| 4 | Professional explicit design and colour system; decide Stitch vs Google AI Studio. | Design identity; C07 | Full visual audit and Stitch-export comparison remain. |
+| 7 | Report exactly what the owner asked and what was done. | Audit format; standing instructions | Mandatory format for every future checkpoint. |
+| 10 | Research reusable patient resources; review clinical reference/hospital best practices; cover elderly, hypertension, cardiovascular risk, COPD, palliative cancer, CKD, diabetes, cirrhosis; calculators; AI/workflow and consultation tiers. | B/C/D/F; CALCULATOR_AUDIT.md; patient-education review | Research and authoring remain staged; clinical content requires sources and doctor review. |
+| 15 | Search, sitemap, article production and correct qualifications. | A08; C03–C10; site-information.html | Search/SEO and credentials placement need full verification. |
+| 18–22 | Payment account/UPI instructions; convenient secure payment without exposing bank details publicly. | D01; D05–D06 | UPI URI correction deployed; gateway/settlement/invoice remain incomplete. Keep account number/IFSC out of public HTML and logs. |
+| 27 | Ensure all calculators work. | Calculator audit/tests | 30 tools in source (2 public, 28 workstation); per-tool range/source audit remains. |
+| 30 | Language selector overlaps/hides portal, especially mobile. | A09–A10; C07 | Responsive visual check remains. |
+| 33 | Workstation email/password setup fails; secure setup, access and logout. | F01–F04; F12 | Recovery code deployed; provider configuration and real-device login/recovery remain unverified. |
+| 38 | Tabs after Book a Visit are hidden by language selector. | A09–A10; C07 | Actual mobile/desktop visibility check remains. |
+| 41, 44 | Add Medicine / Add Row must add blank prescription rows. | H01; prescription tests | Source and regression tests merged; actual PDF/device output remains. |
+| 47 | Sentence-by-sentence reporting is mandatory. | Audit file; this map | Continue request → evidence → action → verification → status. |
+| 50 | Form 4 and 4A separate downloads. | E06 | Verify filled output and device download. |
+| 53 | Downloaded forms should be editable and save correctly. | E06 | Distinguish on-page editing from flattened PDF; verify exported form. |
+| 56 | Forms 2, 4 and 4A in Hindi, Marathi and English. | E06; language work | Correct authored multilingual government forms not yet verified. |
+| 59 | Search/import drug identity from RxNorm/open directories; consider data sources/agent. | B01–B07 | Existing catalogue is not proof of every identity/product. Keep ambiguous or withdrawn records blocked for review. |
+| 62 | Make the site AI-enabled where feasible. | F07–F11 | Requires scoped sources, budgets, doctor approval and escalation; no autonomous prescribing. |
+| 65 | Lab/radiology requisition sign-off must follow full requisition; use “Requisition”, not “Slip”. | E01–E09; H10 | Code exists; short/long PDF and physical print checks remain. |
+| 68 | Article manager needs live RSS and AI research agent. | F07–F10; C11 | Successful provider fetch/review/publish workflow not proven. |
+| 71, 74, 77 | Group prescription/formulary/lab/radiology/RSS; death/referral/consent/fitness; group remaining tools without losing features. | Workstation navigation; H09; E06 | Audit information architecture and preserve every existing feature. |
+| 80 | Each calculator should show an appropriate reference/normal range and credible source. | Calculator audit; clinical safety | “Reference / interpretation” panels exist; audit all 30 for population, range, source, exceptions and applicability. Do not imply universal society consensus where none exists. |
+| 85 | Green/blue and light petal shades; avoid indiscriminate red; strong hero. | Design identity; C07 | Visual review across viewport sizes remains; do not promise literal 32K browser rendering. |
+| 90, 93, 142 | Stitch/design workflow; attractive, refined, accessible, reassuring site that clearly communicates home visits. | C07–C10; patient-experience review | Hero, spacing, type, accessibility, speed and actual mobile rendering need audit. |
+| 96, 144 | Daily patient, death and stock registers in Doctor Workstation. | H09; F05 | UI/API merged; Supabase migration/RLS and owner/non-owner tests remain. |
+| 97, 145 | Invoice, visible QR and flexible gateway/NEFT/UPI payment. | D01; D05–D06 | UPI URI source deployed; gateway, verified settlement, invoice and receipt remain. |
+| 100, 128, 147 | Language selector must not cover portal controls; adjust spacing/buttons. | A09–A10; C07 | Responsive browser/device verification required. |
+| 103–104, 131–132, 149–150 | Know Your Numbers should display appropriate reference ranges. | Calculator audit; public BMI/HbA1c | Public tools exist; verify reference text for all 30 calculators. |
+| 107, 135, 152 | Bidirectional Celsius/Fahrenheit conversion. | Converter wiring; calculator UI tests | Source and tests deployed; confirm live both-way behavior and invalid-input handling. |
+| 112, 155 | Translate original external health-source documents where supported. | A09; C11 | Translation links/widget do not alter source documents; verify navigation and third-party limits. |
+| 115–116, 157–158 | Create/change/recover workstation password; email recovery preferred if secure. | F01–F04; F12 | Recovery source deployed; owner-email env, redirect allowlist, email delivery and token expiry remain unverified. |
+| 119–123 | Forwarded-email headers/timestamp included as context. | Provenance | Not a separate feature requirement. |
+| 137 | Composite: global language dropdown; never hide tabs; clean article reader with browser Back/Forward; click-to-call and WhatsApp choice; fast home-visit intake with prescription/discharge attachments and focused history; remove decorative prefilled boxes; each tab shows its own content; move health sources to a clear location; direct prescription sharing with correct filename; remove website/contact metadata from prescription; align registration number; keep contact details on site; use government forms; ensure save/print/share works; fix actual WhatsApp file sharing; import articles/media from device/cloud; make RSS controls work; refine hero/design. | A03, A09–A10, C07–C11, D01, E01–E09, H01–H12 | Mixed: some source changes merged; live feature, mobile, file-share, government-form, cloud-import and RSS execution checks remain open. |
+| 140 | Composite: preserve all data/features/references; worldwide language support; named PDF export/print/share for forms and clinical documents; RSS/Feedly fetch; payment QR/gateway; secure workstation login; consolidate reference/AI/RSS tools; prominent article gallery; import/export articles/images/videos; support large article library; patient/doctor converters and calculators; retain GPS/distance/time; registers; professional/web standards, performance and patient-comfort design. | A08–A10; B–F; E06; F05–F12; C03–C10 | Keep as separate backlog items; no claim of complete languages, unlimited storage, active RSS, full AI or production payment gateway without evidence. |
+| 160 | Re-audit repository and backup/Stitch export; implement all unfinished requirements; preserve home-visit purpose; SEO/web/accessibility/security; speed; visible tabs; secure password changes and click navigation. | A01–A10; C01–C12; F01–F12 | Compare backups before large changes; preserve recovery points and existing features. |
+| 162 | Read end-to-end and find all unfinished instructions. | Entire register | Continue from next open ID; do not ask owner to repeat the file. |
+| 164 | Website URL. | A01 | Vercel status for commit `233040e281ff975e151d98f77bb606768074d54f` reports success; feature-level verification remains separate. |
+| 166 | Backup and Stitch export exist; preserve them; fix icons/tab visibility without destroying existing work. | A01; C07; standing instructions | Compare backups/Stitch assets when accessible; never overwrite or discard existing working features. |
+
+## Release evidence — 30 October 2026
+
+- Merge commit: `233040e281ff975e151d98f77bb606768074d54f`.
+- Regression run `41033995852`: passed on the exact merged commit.
+- Vercel status for that commit: success — deployment completed.
+- This does not prove all requirements complete. Database migration, provider configuration, real payment settlement, actual device sharing, physical printing and clinical review remain separate.
