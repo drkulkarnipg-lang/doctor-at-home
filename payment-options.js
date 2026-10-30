@@ -11,7 +11,7 @@ async function copyUpi(){
 }
 document.addEventListener('DOMContentLoaded',()=>{
  const copy=$('upiCopyId'),details=$('upiQrDetails'),link=$('upiPaymentLink');
- if(link)link.href='upi://pay?pa='+encodeURIComponent(UPI)+'&pn=Dr%20Pramod%20G%20Kulkarni&cu=INR';
+ if(link){link.href='upi://pay?pa='+encodeURIComponent(UPI)+'&pn=Dr%20Pramod%20G%20Kulkarni&cu=INR';link.addEventListener('click',()=>{if(typeof window.calculateFee==='function')window.calculateFee();});}
  if(copy)copy.addEventListener('click',copyUpi);
  if(details)details.addEventListener('toggle',()=>{if(details.open&&typeof window.calculateFee==='function')window.calculateFee();});
  const controls=[$('calcTime'),$('calcDistance'),...document.querySelectorAll('#procedureList input[type="checkbox"]')].filter(Boolean);
