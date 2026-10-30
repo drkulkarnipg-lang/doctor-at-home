@@ -206,3 +206,10 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Main regression run `41036710598` passed on exact commit `aab1741e32dd1489a8756fb6d44e19f5c9cd6230`.
 - Vercel status remains **failure: Deployment rate limited — retry in 24 hours**. These latest changes are merged and tested in source, not confirmed live. Last positively confirmed deployed commit remains `233040e281ff975e151d98f77bb606768074d54f`.
 - Keep the current blockers explicit: actual live/mobile checks, secure attachment sharing, exact official Form 2/4/4A outputs, Supabase migration/RLS, recovery email provider setup, and payment gateway settlement.
+
+
+## Deployment status correction — 30 October 2026
+
+- Vercel status for current main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663`: **success — deployment completed**. The earlier rate-limit blocker is no longer the current status for this commit.
+- The deployed code includes the home-visit intake, RSS/Article Manager grouping, registration-number styling, homepage search and mobile-navigation wrapping changes.
+- Live interaction, actual device share/print, government form outputs, real payment settlement, Supabase migration/RLS and recovery email remain feature-level verification tasks.

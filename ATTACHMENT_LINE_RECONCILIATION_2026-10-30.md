@@ -57,3 +57,9 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 - Line 140: quick home-visit intake now exposes essentials and attachments first while preserving optional history and existing booking logic.
 - Lines 68 and 71: RSS/evidence workflow is accessible from Article Manager and the Workstation Home directory; dedicated RSS tab remains.
 - All these source changes passed regression checks, but live deployment is blocked by Vercel's 24-hour rate limit. This is source status, not live verification.
+
+
+## Latest deployment status — 30 October 2026
+
+- Current main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663`: Vercel status **success — deployment completed**.
+- The earlier deployment-rate-limit note is historical for this commit. Feature-level live/device/provider verification remains open.

@@ -265,3 +265,9 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - PR #47: quick home-visit intake now asks only essentials up front, keeps optional symptom/history details collapsed, and brings attachments/consent near the top.
 - Regression run `41036710598` passed on main commit `aab1741e32dd1489a8756fb6d44e19f5c9cd6230`.
 - Vercel is still rate-limited for 24 hours. Do not describe post-`233040e` code as live. Continue source audit and test preparation, then retry deployment after the limit clears and verify live website/PDF/mobile behavior.
+
+
+## Deployment status correction — 30 October 2026
+
+- Latest main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663` has Vercel status **success — deployment completed**.
+- This is deployment evidence, not confirmation that every feature is correct on every device. Continue live/mobile and PDF checks; no real payment, patient-data or external-provider success is claimed.
