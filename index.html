@@ -361,7 +361,7 @@
 <main class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6" id="doctorWorkstation"><div class="workstation-heading no-print"><span class="section-eyebrow">Dr. Kulkarni · clinical workspace</span><p class="workspace-area-label">Doctor Workstation</p><p>Prescriptions, investigations, clinical references and research — together at your desk.</p></div>
 <!-- Doctor Sub-Tabs Navigation -->
 <div aria-label="Doctor workstation tools" class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print doctor-tabs">
-<button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabInvoice" onclick="switchDocTab('invoice')">🧾 Invoice / Receipt</button>
+<button class="px-3.5 py-1.5 bg-[#275f4b] text-white rounded-xl text-xs font-bold shadow" id="tabClinicalTools" onclick="switchDocTab('clinicalTools')">🏥 Workstation Home</button><button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabInvoice" onclick="switchDocTab('invoice')">🧾 Invoice / Receipt</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm" id="tabSymptom" onclick="switchDocTab('symptomChecker')">🩺 WebMD Symptom &amp; Interaction Suite</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1" id="tabJournals" onclick="switchDocTab('journalsHub')">📡 Live RSS &amp; AI Research Agent</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabEverydayTools" onclick="switchDocTab('everydayTools')">🌿 Diet &amp; Conversions</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabChart" onclick="switchDocTab('chart20')">📈 Patient BP, Sugar &amp; Trends</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCheat" onclick="switchDocTab('pathCheatSheet')">🔬 Pathology Cheat Sheet (150+)</button>
@@ -435,8 +435,8 @@
 <h2 class="text-2xl font-bold serif-brand text-[#0F2942]">DR. PRAMOD G. KULKARNI</h2>
 <p class="font-semibold text-slate-800">BAMS — Bachelor of Ayurvedic Medicine and Surgery (Pune University, Pune; October 1991)</p>
 <p class="text-[11px] text-slate-600">PGDEMS — Post Graduate Diploma in Emergency Medical Services (Symbiosis, Pune)</p>
-<p class="text-[11px] text-slate-600">Reg. No. <strong>I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
-<p class="text-[11px] text-slate-600">Emergency Helpline: <strong>+91 9561394341</strong> | Email: <a href="mailto:drkulkarnipg@gmail.com" class="underline">drkulkarnipg@gmail.com</a></p>
+<p class="text-[11px] text-slate-600">Reg. No. <strong class="font-sans font-semibold tracking-normal leading-none align-middle whitespace-nowrap">I-24809-A-1</strong> | MCIM Mumbai | Dhayari, Pune – 411041</p>
+<p class="text-[11px] text-slate-600">Emergency Helpline: <strong>+91 9561394341</strong></p>
 </div>
 </div>
 <div class="text-right text-[11px]">
@@ -519,6 +519,29 @@
 <section class="space-y-3"><h3 class="text-lg font-bold">Service and charges</h3><label class="block text-sm font-semibold">Service description<input class="w-full border rounded-lg p-2 mt-1" id="invoiceService" placeholder="e.g. Home visit / online consultation / other service" maxlength="180"/></label><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><label class="block text-sm font-semibold">Amount (INR)<input class="w-full border rounded-lg p-2 mt-1" id="invoiceAmount" type="number" min="0" max="10000000" step="0.01" inputmode="decimal" autocomplete="off"/></label><label class="block text-sm font-semibold">Payment status<select class="w-full border rounded-lg p-2 mt-1" id="invoicePaymentStatus"><option>Not yet confirmed</option><option>Pending</option><option>Paid — manually verified</option><option>Unpaid</option><option>Waived</option></select></label><label class="block text-sm font-semibold">Payment method<select class="w-full border rounded-lg p-2 mt-1" id="invoicePaymentMethod"><option>Not specified</option><option>UPI</option><option>Cash</option><option>Bank transfer</option><option>Payment gateway</option><option>Other</option></select></label></div><div class="flex justify-end border-t border-slate-200 pt-4"><p class="text-xl font-bold">Total: <output id="invoiceTotal">—</output></p></div><label class="block text-sm font-semibold">Notes / receipt reference<textarea class="w-full border rounded-lg p-2 mt-1" id="invoiceNotes" rows="3" maxlength="1000"></textarea></label></section>
 <footer class="border-t border-slate-200 pt-4 text-xs text-slate-600"><p>Payment status is entered by the clinic and is not verified by this website. Confirm the service, amount and receipt details before issuing. Apply any legally required accounting or tax treatment separately.</p><p class="mt-3">Doctor signature: __________________________________</p></footer>
 </article>
+</section>
+<!-- Workstation tools dashboard -->
+<section class="hidden space-y-5" id="viewClinicalTools">
+<header><span class="section-eyebrow">Doctor workstation · tools directory</span><h3>Workstation Home</h3><p>Open the required clinical tool directly. Existing tools and their records remain in their original sections.</p></header>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Daily clinical workflow</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('rxPad')"><strong>📝 A4 Prescription</strong><span>Write, add medicine rows, print and share a prescription.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('drugDir')"><strong>💊 Drug formulary</strong><span>Search the existing catalogue and import an authorised CSV/JSON catalogue.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('pathReq')"><strong>🧪 Lab Requisition</strong><span>Select tests and prepare the A4 requisition.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('radReq')"><strong>🩻 Radiology Requisition</strong><span>Select imaging and record the clinical indication.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('journalsHub')"><strong>📡 Live RSS &amp; AI Research</strong><span>Open the existing source and research workflow.</span></button>
+</div></section>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Certificates, forms and billing</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('legalForms')"><strong>📄 Death Forms 2 / 4 / 4A</strong><span>Open the government-form reference and editable working layouts.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('clinicalCertificates')"><strong>✍️ Referral, Consent, Fitness</strong><span>Open referral, consent, fitness and unfitness documents.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('invoice')"><strong>🧾 Invoice / Receipt</strong><span>Prepare a draft invoice, then verify the amount and payment status.</span></button>
+</div></section>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Monitoring, research and administration</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('clinicalCalculators')"><strong>🧮 Clinical calculators</strong><span>Use calculators with visible interpretation notes and sources.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('chart20')"><strong>📈 Patient trends</strong><span>Review measurements and trends.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('everydayTools')"><strong>🌡️ Unit converters</strong><span>Automatic temperature and weight conversion.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('articlesHub')"><strong>📚 Article Manager</strong><span>Draft, review and publish patient education.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('settingsTab')"><strong>⚙️ Settings</strong><span>Open workstation settings and available controls.</span></button>
+</div></section>
 </section>
 <!-- TAB 2: WEBMD CLINICAL SUITE -->
 <div class="hidden space-y-4 no-print" id="viewSymptomChecker">
@@ -686,7 +709,7 @@
 <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
 <div>
 <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
-<p class="text-[11px] text-slate-700">BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
+<p class="text-[11px] text-slate-700">BAMS (Pune University, October 1991) · PGDEMS, Emergency Medical Services (Symbiosis, Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
 </div>
 <span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Lab Requisition</span>
 </div>
@@ -757,7 +780,7 @@
 <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
 <div>
 <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
-<p class="text-[11px] text-slate-700">BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
+<p class="text-[11px] text-slate-700">BAMS (Pune University, October 1991) · PGDEMS, Emergency Medical Services (Symbiosis, Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
 </div>
 <span class="bg-purple-100 text-purple-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Radiology Requisition</span>
 </div>
@@ -842,8 +865,8 @@
 <div><label class="font-bold">Bedside Treatment Administered:</label><input class="w-full border p-1 rounded" placeholder="O2 started, IV cannula, Inj. Ceftriaxone 1g, Inj. Furosemide 40mg IV" type="text"/></div>
 </div>
 <div class="pt-6 border-t flex justify-between items-end">
-<p>Attending ICU Doctor: <strong>Dr. Pramod G. Kulkarni</strong></p>
-<div class="w-40 border-b border-dashed border-slate-400"></div>
+<p class="text-[11px] text-slate-600">Lab requisition · Please verify patient details and selected tests.</p>
+<div class="text-center"></div>
 </div>
 </div>
 <!-- 3. MEDICAL FITNESS CERTIFICATE -->
@@ -988,7 +1011,7 @@
 </div>
 <!-- Device privacy settings: not a secure clinical backend. -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 no-print" id="securityModal"><section class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-xs" role="dialog" aria-modal="true" aria-labelledby="deviceLockHeading"><button class="float-right" onclick="closeSecuritySettingsModal()" aria-label="Close device lock settings">×</button><h3 id="deviceLockHeading">Device privacy lock</h3><p class="device-lock-help">Set a passphrase for this browser. This hides the workstation from casual viewing; it is not server authentication or encrypted record storage. Stays unlocked on this tab while you work, including brief tab changes and refreshes. Locks after 15 minutes of inactivity, 8 hours, or Lock now. This is a device privacy screen, separate from cloud login.</p><div hidden aria-hidden="true"><input id="secModeOpen" name="secModeRadio" type="radio" value="open" disabled/><input id="secModePin" name="secModeRadio" type="radio" value="pin" disabled/><input id="secModeBiometric" name="secModeRadio" type="radio" value="biometric" disabled/></div><div class="lock-form"><label id="lockCurrentRow">Current passphrase / existing PIN<input id="deviceCurrentPassword" type="password" autocomplete="current-password"/></label><label>New passphrase (8+ characters)<input id="customPinInput" type="password" autocomplete="new-password" minlength="8"/></label><label>Repeat new passphrase<input id="deviceConfirmPassword" type="password" autocomplete="new-password"/></label><button type="button" onclick="lockWorkstationNow(); closeSecuritySettingsModal()">Lock now</button><button type="button" id="deviceLockSave" onclick="saveSecuritySettings()">Save device passphrase</button><p id="deviceLockSettingsError" class="device-lock-error" role="alert"></p><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Privacy and access limitations ↗</a></div></section></div>
-<dialog id="doctorLoginDialog" aria-labelledby="doctorLoginTitle"><h2 id="doctorLoginTitle">Doctor login</h2><p id="doctorLoginHelp">One clinic owner account for Doctor Workstation and cloud trends.</p><form id="doctorLoginForm" class="lock-form"><label>Email<input id="doctorLoginEmail" type="email" autocomplete="username" required/></label><label>Password<input id="doctorLoginPassword" type="password" autocomplete="current-password" required/></label><button type="submit" id="doctorLoginSubmit">Sign in</button><button type="button" id="doctorLoginCancel">Return to patient portal</button><p id="doctorLoginError" role="alert"></p></form></dialog><dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
+<dialog id="doctorLoginDialog" aria-labelledby="doctorLoginTitle"><h2 id="doctorLoginTitle">Doctor login</h2><p id="doctorLoginHelp">One clinic owner account for Doctor Workstation and cloud trends.</p><form id="doctorLoginForm" class="lock-form"><label>Email<input id="doctorLoginEmail" type="email" autocomplete="username" value="drkulkarnipg@gmail.com" required/></label><label>Password<input id="doctorLoginPassword" type="password" autocomplete="current-password" required/></label><button type="submit" id="doctorLoginSubmit">Sign in</button><button type="button" id="doctorLoginCancel">Return to patient portal</button><p id="doctorLoginError" role="alert"></p></form></dialog><dialog id="deviceUnlockDialog" aria-labelledby="deviceUnlockTitle"><h3 id="deviceUnlockTitle">Unlock Doctor Workstation</h3><p class="device-lock-help">Device privacy screen. Clinical records require a separately secured backend.</p><form id="deviceUnlockForm" class="lock-form"><label>Device passphrase<input id="deviceUnlockPassword" type="password" autocomplete="current-password" required/></label><button id="deviceUnlockSubmit" type="submit">Unlock on this tab</button><button id="deviceUnlockCancel" type="button">Return to patient portal</button><p id="deviceUnlockError" class="device-lock-error" role="alert"></p></form></dialog>
 <!-- DRUG SELECT MODAL -->
 <div class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" id="drugModal">
 <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-3 text-xs">
@@ -1130,7 +1153,7 @@
     }
 
     function switchDocTab(tabId) {
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'clinicalTools'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
