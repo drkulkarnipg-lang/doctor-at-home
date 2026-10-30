@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 
+(async () => {
 const html = fs.readFileSync('index.html', 'utf8');
 const dom = new JSDOM(html, { url: 'https://clinic.example.test/', runScripts: 'outside-only' });
 const { window: w } = dom;
@@ -45,7 +46,7 @@ w.switchDocTab = () => {};
 w.scrollTo = () => {};
 w.HTMLElement.prototype.scrollIntoView = () => {};
 w.eval(clinicalDocuments);
-w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+await new Promise(resolve => setTimeout(resolve, 40));
 for (const id of ['radPatName', 'radPatAge', 'radDate', 'radTime']) {
   assert.ok(d.getElementById(id), `runtime radiology patient field ${id} must exist`);
 }
@@ -113,4 +114,5 @@ assert.match(radiologyPdfText, /\[ \]\s*Portable Digital Chest X-Ray/,
   'portable chest X-ray must remain unselected until the clinician chooses it');
 
 dom.window.close();
-console.log('Lab/radiology choices, safe defaults, patient identity and selected-item share output checks passed.');
+console.log('Lab/radiology choices, safe defaults, patient identity, selected-item share and PDF clone checks passed.');
+})().catch(error => { console.error(error); process.exitCode = 1; });
