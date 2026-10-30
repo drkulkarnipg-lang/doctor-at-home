@@ -4,7 +4,9 @@
     "source": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf",
     "retrieved": "2026-10-23",
     "sha256": "3b19259da7143c5d47576f387280bade33253c8d2f28df2be3c8b31d0993afc0",
-    "bytes": 249012
+    "bytes": 249012,
+    "status": "Historical archived source; direct URL returned a network error during the 2026-10-30 automated check. Existing SHA-256 and byte count describe the archived file only.",
+    "superseded_by": "https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf"
   },
   {
     "file": "form2-government-reference.pdf",
@@ -13,5 +15,13 @@
     "retrieved": "2026-10-23",
     "sha256": "9d126bc36e2a4c0758d445c43ac62a4ccd0b07352b60ff00ddc831dfbe3858cd",
     "bytes": 553370
+  },
+  {
+    "file": "all_forms_CRS_2019_new.pdf",
+    "source": "https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf",
+    "authority": "Office of the Registrar General & Census Commissioner, India — CRS official combined forms PDF",
+    "retrieved": "2026-10-30",
+    "status": "Browser PDF inspection verified the 23-page official combined PDF. Form 2 begins at page 5, Form 4 at page 9, and Form 4A at page 11 (1-based page numbering). Separate app downloads extract those pages; the full PDF retains reverse-side instructions.",
+    "checksum_status": "SHA-256 not recorded because the PDF bytes could not be downloaded into this build environment; do not infer a checksum."
   }
 ]
