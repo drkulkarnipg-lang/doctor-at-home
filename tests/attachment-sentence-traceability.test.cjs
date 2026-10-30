@@ -4,6 +4,8 @@ const lines=fs.readFileSync('data/attachment-line-traceability-2026-10-30.jsonl'
 const rows=fs.readFileSync('data/attachment-sentence-traceability-2026-10-30.jsonl','utf8').trimEnd().split('\n').map(JSON.parse);
 const meta=rows[0],units=rows.slice(1);
 assert.equal(meta.record_type,'metadata');
+assert.match(meta.source_document,/Pasted text\.txt/);
+assert.doesNotMatch(meta.source_document,/Pasted text\(10\)/);
 assert.equal(meta.source_line_count,lines.length);
 assert.equal(meta.source_line_count,1059);
 assert.equal(meta.reported_source_lines,1991);

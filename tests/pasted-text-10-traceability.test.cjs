@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const rows=fs.readFileSync('data/pasted-text-10-line-traceability-2026-10-30.jsonl','utf8').trimEnd().split('\n').map(JSON.parse);
+const meta=rows[0],units=rows.slice(1),textAll=rows.map(x=>JSON.stringify(x)).join('\n');
+assert.equal(meta.source_document,'Pasted text(10).txt');assert.equal(meta.source_line_count,166);assert.equal(meta.nonempty_source_lines,63);assert.equal(units.length,63);assert.equal(meta.redacted_line_count,1);
+assert.equal(new Set(units.map(x=>x.source_unit_id)).size,units.length);assert.equal(new Set(units.map(x=>x.source_line)).size,units.length);
+assert.ok(units.every(x=>x.source_text&&x.evidence_pointer&&x.next_action&&x.line_status));
+assert.ok(units.some(x=>x.source_text_redacted&&x.source_text.includes('[REDACTED BANK ACCOUNT NUMBER]')&&x.source_text.includes('[REDACTED IFSC]')));
+assert.doesNotMatch(textAll,/\b\d{11,18}\b/,'Public traceability must not contain bank-account-like digit strings');
+assert.doesNotMatch(textAll,/\b[A-Z]{4}0[A-Z0-9]{6}\b/i,'Public traceability must not contain IFSC-like identifiers');
+assert.ok(units.every(x=>!/\bCOMPLETE\b|\bDONE\b|\bVERIFIED LIVE\b/i.test(x.line_status)));
+console.log('Pasted text(10) line traceability passed: all 63 non-empty source lines are mapped; financial identifiers are redacted from public traceability.');
