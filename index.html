@@ -903,10 +903,11 @@
 <h4 class="font-bold text-base text-[#0F2942]">✍️ Clinical Article Manager &amp; Moon-Reader Hub</h4>
 <p class="text-slate-500">Import web articles, clinical guidelines, attach photos/videos, or format into reader cards.</p>
 </div>
-<div class="flex items-center gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<button type="button" class="research-upload" onclick="switchDocTab('journalsHub')">📡 Open Live RSS &amp; AI Research Agent</button>
 <input accept=".json,.txt,.md,.html,.htm" class="hidden" id="importArticleFileInput" onchange="importArticlesFromFile(this)" type="file"/>
 <button class="bg-amber-100 border border-amber-300 text-amber-950 font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1" onclick="document.getElementById('importArticleFileInput').click()">
-              📂 Import File (.txt / .json)
+              📂 Import File (.txt / .json / .md / .html)
             </button>
 </div>
 </div>
