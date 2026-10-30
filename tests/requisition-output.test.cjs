@@ -49,6 +49,8 @@ w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
 for (const id of ['radPatName', 'radPatAge', 'radDate', 'radTime']) {
   assert.ok(d.getElementById(id), `runtime radiology patient field ${id} must exist`);
 }
+const runtimeIds = [...d.querySelectorAll('[id]')].map(el => el.id);
+assert.equal(new Set(runtimeIds).size, runtimeIds.length, 'runtime mount must not create duplicate element IDs');
 
 // Execute the actual share function against synthetic data and verify chosen tests + correct patient identity.
 const start = html.indexOf('function universalShareDocument(type) {');
