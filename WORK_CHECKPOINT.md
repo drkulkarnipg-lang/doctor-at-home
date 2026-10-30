@@ -227,3 +227,11 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 - Changed default to blank and placeholder to `Confirm and document allergy status`; added regression assertion in `tests/prescription-initialization.test.cjs`.
 - Source commit `03d76614002a66fd1e624bd850a9bfebfb0d9a76`; test commit `95c8a45557c5190e40470e4897642eca65b1ad3b`.
 - Await latest-head CI and preview/device verification; not live-verified.
+
+
+## Latest Health Library correction — browser navigation (30 October 2026)
+- Removed redundant patient-card “Share original PDF” and “Download original PDF” controls, while leaving the separate owner article publishing/export workflows unchanged.
+- Added reader history state: opening an article creates a history entry; Back returns to the library; Forward reopens the article; the reader's single Back control closes it and restores history. Escape/backdrop/focus restoration are retained.
+- Regression coverage added in tests/patient-reader-exit.test.cjs.
+- Commits: source a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test fb5cc6d3bc01a6d76f60ab46f17aadac61883792.
+- Current CI and preview/mobile verification pending.
