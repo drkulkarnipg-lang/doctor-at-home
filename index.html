@@ -1584,14 +1584,42 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       window.ClinicalCalculators.render();
     }
 
-    // WIKI DETAIL MODAL
-    function openWikiModal(id) {
-      const a=window.PatientEducation?.get(id);if(!a)return;
-      document.getElementById('wikiModalTitle').textContent=a.mr.title;
-      document.getElementById('wikiModalContent').textContent=window.PatientEducation.text(a,'mr');
+    // WIKI DETAIL MODAL — preserve browser Back/Forward and keyboard dismissal.
+    function renderWikiArticle(id) {
+      const a = window.PatientEducation?.get(id);
+      if (!a) return false;
+      document.getElementById('wikiModalTitle').textContent = a.mr.title;
+      document.getElementById('wikiModalContent').textContent = window.PatientEducation.text(a, 'mr');
       document.getElementById('wikiModal').classList.remove('hidden');
+      document.getElementById('wikiModalContent').focus({ preventScroll: true });
+      return true;
     }
-    function closeWikiModal() { document.getElementById('wikiModal').classList.add('hidden'); }
+    function openWikiModal(id) {
+      if (!renderWikiArticle(id)) return;
+      const nextState = { ...(history.state && typeof history.state === 'object' ? history.state : {}), wikiArticleId: String(id) };
+      history.pushState(nextState, '', '#article/' + encodeURIComponent(String(id)));
+    }
+    function closeWikiModal() {
+      if (history.state && history.state.wikiArticleId) {
+        history.back();
+        return;
+      }
+      document.getElementById('wikiModal').classList.add('hidden');
+    }
+    window.addEventListener('popstate', function (event) {
+      if (event.state && event.state.wikiArticleId) {
+        renderWikiArticle(event.state.wikiArticleId);
+      } else {
+        document.getElementById('wikiModal').classList.add('hidden');
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      const modal = document.getElementById('wikiModal');
+      if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        event.preventDefault();
+        closeWikiModal();
+      }
+    });
 
     function filterWikiArticles() {
       const q = document.getElementById('wikiSearchInput').value.toLowerCase();
