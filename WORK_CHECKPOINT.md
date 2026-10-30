@@ -154,3 +154,19 @@ Implemented on the active PR42 review branch:
 - GitHub Actions run `41019188114` passed all 25 regression test files.
 
 External configuration still required before this can work in production: set Vercel environment variable `CLINIC_OWNER_EMAIL` to the actual owner account email and add `https://home-visiting-icu-doctor.vercel.app/password-reset.html` to the Supabase Auth redirect URL allowlist. Do not put secrets in source or chat. Mobile OTP and 30-day remembered-device behaviour remain separate tasks. Vercel build-rate-limit currently prevents preview/live confirmation; email delivery is not yet verified.
+
+
+## Latest verified checkpoint — 30 October 2026, India
+
+Active review branch: `fix/upi-payee-single-source-20261030`; current head `cd1198b800171f34f3ce5e54971647039f49d3f3`; PR42 remains unmerged. Permanent request register was updated in the same work batch.
+
+### New corrections implemented and tested
+- Owner email password recovery endpoints and page: owner email only, generic non-owner response, recovery link redirect, token validation against `CLINIC_OWNER_USER_ID`, provider-managed password update, token scrubbed from URL, no browser storage, password mismatch/invalid token handled, no login session created automatically.
+- 30-day remembered-device choice: explicit opt-in on Doctor login. Access session stays 15 minutes; separate 30-day refresh cookie is HttpOnly, Secure, SameSite=Strict and `__Host-` prefixed. Refresh tokens rotate through Supabase, owner identity is checked again, and logout clears both cookies. Existing password sign-in remains.
+- Added/expanded API/UI tests for remembered-cookie issuance, rotation, invalid refresh cleanup, checkbox forwarding and recovery flow.
+
+### Verification
+- GitHub Actions run `41025556041` completed **success** on head `cd1198b800171f34f3ce5e54971647039f49d3f3`; all 25 `tests/*.test.cjs` files passed on Node 22.
+- Vercel status for the same head is **failure**: deployment rate limited, retry in 24 hours. This prevents a usable PR preview. Do not merge or claim live verification.
+- Required provider configuration for email recovery: set Vercel `CLINIC_OWNER_EMAIL` to the clinic owner's actual auth email and allowlist `https://home-visiting-icu-doctor.vercel.app/password-reset.html` in Supabase Auth redirects. These external settings are not changed from repository code and email delivery has not been verified.
+- Mobile OTP is not implemented; it remains separate from email recovery. Owner-device browser, passkey, remembered session and physical-device checks remain unverified.
