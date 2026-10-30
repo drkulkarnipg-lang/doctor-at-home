@@ -9,3 +9,10 @@
 .calc-reference-note>strong{display:block;margin-bottom:5px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#28583f}
 .calc-reference-note p{margin:0}
 .calc-reference-link{display:inline-block;margin-top:8px;color:#245f4a;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Public "Know your numbers" cards: remove the filled green reference boxes while keeping source actions visibly clickable. */
+#calc30Grid .calc-reference-note{margin-top:8px;padding:0;border:0;border-radius:0;background:transparent;color:#475569}
+#calc30Grid .calc-reference-note>strong{color:#475569}
+#calc30Grid .calc-reference-link{display:inline-flex;align-items:center;min-height:36px;margin:8px 8px 0 0;padding:7px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#245f4a;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+#calc30Grid .calc-reference-link:hover{background:#f8fafc;border-color:#94a3b8}
+#calc30Grid .calc-reference-link:focus-visible{outline:3px solid #006e66;outline-offset:3px}
