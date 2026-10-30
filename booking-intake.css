@@ -13,3 +13,13 @@
 .intake-attachments{margin:16px 0;padding:16px;border:1px solid #c5dccc;border-left:4px solid #7fb69b;border-radius:12px;background:#f4f9f4;color:#244b3b}
 .intake-attachments h3{font-weight:750;font-size:15px;margin-bottom:6px}.intake-attachments p{font-size:12px;line-height:1.65;margin:7px 0}
 .intake-attachments label{display:grid;gap:8px;font-weight:650;margin-top:10px}.intake-attachments input[type=file]{width:100%;max-width:100%;padding:10px;border:1px solid #b6d0bd;border-radius:8px;background:white;color:#244b3b}
+
+/* Short, responsive pre-visit essentials: avoid forcing a long questionnaire before a visit. */
+.intake-quick-essentials{margin:14px 0;padding:16px;border:1px solid #c3dced;border-radius:14px;background:#f8fcff}
+.intake-quick-essentials h3{font:700 21px/1.35 Georgia,serif;margin:0 0 8px;color:#173f59}
+.intake-quick-essentials>p{font-size:13px;line-height:1.6;margin:8px 0 12px}
+.intake-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.intake-quick-grid label{min-width:0;font-size:13px;line-height:1.5}
+.intake-quick-grid label:has(textarea){grid-column:1/-1}
+.intake-quick-grid input[readonly]{background:#edf3f7!important;font-weight:700}
+@media(max-width:640px){.intake-quick-grid{grid-template-columns:minmax(0,1fr)}.intake-quick-grid label:has(textarea){grid-column:auto}.intake-quick-essentials{padding:12px}}
