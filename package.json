@@ -6,5 +6,8 @@
   "dependencies": {
     "fast-xml-parser": "5.11.2",
     "pdf-lib": "1.17.1"
+  },
+  "scripts": {
+    "audit:links": "node scripts/audit-external-links.cjs"
   }
 }
