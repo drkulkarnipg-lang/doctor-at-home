@@ -51,6 +51,9 @@ for (const id of ['radPatName', 'radPatAge', 'radDate', 'radTime']) {
 }
 const runtimeIds = [...d.querySelectorAll('[id]')].map(el => el.id);
 assert.equal(new Set(runtimeIds).size, runtimeIds.length, 'runtime mount must not create duplicate element IDs');
+const documentSharing = fs.readFileSync('document-sharing.js', 'utf8');
+w.eval(documentSharing);
+assert.equal(typeof w.buildDocumentPdfClone, 'function', 'document-specific PDF clone builder must be available');
 
 // Execute the actual share function against synthetic data and verify chosen tests + correct patient identity.
 const start = html.indexOf('function universalShareDocument(type) {');
@@ -74,6 +77,11 @@ assert.match(shared.text, /Date: 2026-10-31/);
 assert.match(shared.text, /Lipid Profile/);
 assert.match(shared.text, /Iron Studies/);
 assert.match(shared.text, /Serum Ammonia/);
+const labPdfText = w.buildDocumentPdfClone('pathSlipSheet').textContent;
+assert.match(labPdfText, /\\[x\\]\\s*Lipid Profile/, 'lab PDF clone must preserve selected lipid profile');
+assert.match(labPdfText, /\\[x\\]\\s*Iron Studies/, 'lab PDF clone must preserve selected iron studies');
+assert.match(labPdfText, /\\[x\\]\\s*Serum Ammonia/, 'lab PDF clone must preserve selected ammonia');
+assert.match(labPdfText, /\\[ \\]\\s*CBC \\+ Platelets/, 'unselected CBC must remain visibly unselected in the PDF clone');
 
 shared = null;
 d.getElementById('radPatName').value = 'Radiology Test Patient';
@@ -96,6 +104,13 @@ for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler Lower
   assert.ok(shared.text.includes(label), `shared radiology requisition must include selected ${label}`);
 }
 assert.match(shared.text, /Clinical indication: Synthetic test indication/);
+const radiologyPdfText = w.buildDocumentPdfClone('radSlipSheet').textContent;
+for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler', 'Arterial Color Doppler', 'NCCT Brain', 'CT Chest', 'MRI Brain', 'MRI Spine']) {
+  assert.ok(radiologyPdfText.includes('[x]') && radiologyPdfText.includes(label),
+    `radiology PDF clone must retain the selected ${label} choice`);
+}
+assert.match(radiologyPdfText, /\\[ \\]\\s*Portable Digital Chest X-Ray/,
+  'portable chest X-ray must remain unselected until the clinician chooses it');
 
 dom.window.close();
 console.log('Lab/radiology choices, safe defaults, patient identity and selected-item share output checks passed.');
