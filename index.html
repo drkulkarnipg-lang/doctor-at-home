@@ -1703,7 +1703,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       const navUrl = document.getElementById('bkGpsMapUrl').value || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr || 'Pune')}`;
 
       if (!name || !phone) { alert("Please enter patient name and mobile number."); return; }
-      const phoneDigits = phone.replace(/\\D/g, '');
+      const phoneDigits = phone.replace(/\D/g, '');
       if (!(phoneDigits.length === 10 || (phoneDigits.length === 12 && phoneDigits.startsWith('91')))) {
         alert("Please enter a valid 10-digit Indian mobile number (or +91 followed by 10 digits).");
         return;
@@ -1720,11 +1720,11 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         ['Last menstrual period', getValue('bkLmp')],
         ['Temperature °C', getValue('bkTemperature')],
         ['Weight kg', getValue('bkWeight')]
-      ].filter(([, value]) => value).map(([label, value]) => `* ${label}: ${value}`).join('\\n');
+      ].filter(([, value]) => value).map(([label, value]) => `* ${label}: ${value}`).join('\n');
       const files = Array.from(document.getElementById('bkClinicalAttachments')?.files || []);
-      const attachmentNote = files.length ? `\\n*Files selected in this browser (attach manually in WhatsApp):* ${files.map(file => file.name).join(', ')}` : '';
-      const clinicalNote = details ? `\\n*Optional clinical details:*\\n${details}` : '';
-      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\\n*Dr. Pramod G. Kulkarni* (9561394341)\\n---------------------------------------------\\n*Time:* ${timeStr}\\n*Patient:* ${name}\\n*Phone:* ${phone}\\n*Address:* ${addr}\\n📍 *Maps Navigation:* ${navUrl}\\n*Fee estimate:* ₹${total}${clinicalNote}${attachmentNote}\\n\\nPlease confirm visit availability and final fee with the doctor.`;
+      const attachmentNote = files.length ? `\n*Files selected in this browser (attach manually in WhatsApp):* ${files.map(file => file.name).join(', ')}` : '';
+      const clinicalNote = details ? `\n*Optional clinical details:*\n${details}` : '';
+      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9561394341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee estimate:* ₹${total}${clinicalNote}${attachmentNote}\n\nPlease confirm visit availability and final fee with the doctor.`;
       const whatsappUrl = `https://api.whatsapp.com/send?phone=919561394341&text=${encodeURIComponent(msg)}`;
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
