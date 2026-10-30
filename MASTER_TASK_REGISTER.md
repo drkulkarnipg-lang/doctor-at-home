@@ -1,6 +1,6 @@
 # Dr Kulkarni — permanent request and completion register
 
-Updated: 30 October 2026 (India). Covers requests available from the 25–26 October conversation, recovered prior-context requests, and the project's recorded outstanding commitments. This is the current checklist; older completion claims do not override it. Retrieved requests without implementation evidence stay open. This is not a claim to possess a complete archive of every separate conversation.
+Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers requests available from the 25–26 October conversation, recovered prior-context requests, and the project's recorded outstanding commitments. This is the current checklist; older completion claims do not override it. Retrieved requests without implementation evidence stay open. This is not a claim to possess a complete archive of every separate conversation.
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
 
@@ -145,3 +145,14 @@ Updated: 30 October 2026 (India). Covers requests available from the 25–26 Oct
 - F02 implementation added on PR42 branch: Doctor login exposes an unchecked-by-default “Remember this device for 30 days (private computer only)” checkbox. The choice is passed to the same-origin API; only the clinic owner may receive an HttpOnly `__Host-clinicRefresh` cookie. Refresh-token rotation is performed server-side through Supabase and owner identity is revalidated. Access cookie remains short-lived; logout clears both cookies. No tokens are written to browser storage.
 - Tests added to `tests/clinical-cloud.test.cjs` and `tests/workstation-auth.test.cjs`: 30-day cookie properties, refresh-token rotation, expired refresh cleanup, checkbox forwarding. Full CI run `41025556041` passed all 25 test files on Node 22.
 - Latest source commit: `cd1198b800171f34f3ce5e54971647039f49d3f3`. Vercel check is `failure` due `build-rate-limit` (“retry in 24 hours”); do not merge this batch or call it live until a preview can be tested. Supabase `CLINIC_OWNER_EMAIL` and recovery redirect allowlist are external setup requirements. Mobile OTP is still not implemented.
+
+
+## I. Owner's full 30 October instruction file — sentence-by-sentence reconciliation
+
+- Authoritative matrix: [AUDIT_SENTENCE_BY_SENTENCE_2026-10-30.md](AUDIT_SENTENCE_BY_SENTENCE_2026-10-30.md). It maps each atomic requirement from the owner-supplied 166-line file to source evidence, required correction, verification criteria and status.
+- Owner explicitly resumed the website work on 30 October. The earlier 26 October pause is superseded for the newly requested audit/correction work; it still prohibits treating preview code as production or bypassing explicit release approval.
+- Active editing workflow remains PR42 branch `fix/upi-payee-single-source-20261030`. Audit matrix added in commit `4047831dbf1230b8264d63b26fa15a5a623dd2ba`; it is not a production deployment.
+- Current CI evidence: run `41025556041` passed 25 test files on commit `cd1198b800171f34f3ce5e54971647039f49d3f3`. It must not be described as testing later commits unless a newer successful run explicitly names that exact head.
+- Current deployment blocker: Vercel returned `build-rate-limit` for the review head; preview and production behaviour cannot be certified from that result. Retry after the provider's stated rate-limit interval; do not bypass the provider limit or merge without preview verification and owner release approval.
+- First correction batch to finish: (1) confirm exact current branch/head and run CI on the latest head, (2) reconcile stale UPI payee paths, converters and diet preset rendering, (3) inspect requisition/document share output, (4) test login recovery code and record external configuration requirements, (5) test patient/death/stock register UI and migration/RLS separately.
+- Keep each matrix row open until its own verification is complete. Record completed/preview/pending/blocked counts in each handoff. Never put bank credentials, authentication secrets or real patient data into repository files.
