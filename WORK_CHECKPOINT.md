@@ -414,3 +414,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - **Requisition test source assertion corrected:** the latest run passed the payment-method test and reached `tests/requisition-output.test.cjs`, where a static regex expected individual `field(row,...)` calls but the actual implementation correctly mounts fields through a tuple-driven loop. Updated assertions to match the real tuple definitions. This was a test-shape mismatch; the full runtime/share/PDF-clone assertions still require a green rerun.
 
 - **CBC PDF assertion corrected:** CI confirmed the selected lipid/iron/ammonia checks and reached the unselected CBC assertion; the test expected the checkbox value (“CBC + Platelets”) rather than the visible label (“CBC (Hb, TLC, Platelets)”). Updated the assertion to verify the actual rendered label carries the `[ ]` marker. No source defaults or clinical behaviour were changed.
+
+
+- **New pre-visit WhatsApp test:** commit `613103439b41b89885f136716263d51dca964234` adds synthetic-data coverage for short-history WhatsApp handoff (exact destination, included patient/complaint/medicine/allergy text, visible popup-block fallback) separately from the long-history PDF path. Syntax check passed. Await CI on this exact commit; real WhatsApp/device delivery remains unverified.
