@@ -1533,14 +1533,19 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     }
 
     function universalShareDocument(type) {
+      if (type === 'rx') {
+        if (typeof window.shareDocumentPdf === 'function') {
+          window.shareDocumentPdf('rxSheet', 'Prescription', { direct: true });
+        } else {
+          showToast('Prescription PDF sharing is not ready. Use Print or Export PDF; nothing was sent.');
+        }
+        return;
+      }
       let title = "";
       let text = "";
       const phone = document.getElementById('rxPatPhone').value.replace(/\D/g, '');
 
-      if(type === 'rx') {
-        title = "Dr. Kulkarni ICU Prescription";
-        text = generatePrescriptionText();
-      } else if(type === 'path') {
+      if(type === 'path') {
         const name = document.getElementById('reqPatName').value || "Patient";
         const age = document.getElementById('reqPatAge').value || "Not entered";
         const date = document.getElementById('reqDate').value || "Not entered";
