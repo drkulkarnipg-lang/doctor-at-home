@@ -28,8 +28,8 @@ cookie(data.access_token,Math.min(900,Number(data.expires_in)||900));return repl
 }
 if(action==='reset-request'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
-if(typeof body.email!=='string'||body.email.length>254||! /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(body.email.trim()))return reply(400,{message:'Enter the clinic owner email address.'});
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
+if(typeof body.email!=='string'||body.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim()))return reply(400,{message:'Enter the clinic owner email address.'});
 const generic='If this is the configured clinic owner account, a recovery email will be sent.';
 if(body.email.trim().toLowerCase()!==ownerEmail)return reply(200,{message:generic});
 const redirect='https://home-visiting-icu-doctor.vercel.app/password-reset.html';
