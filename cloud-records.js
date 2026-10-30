@@ -7,7 +7,7 @@ async function check(){try{const data=await api('session');signedIn=data.signedI
 async function refresh(){const records=[];let after='';do{const d=await api('list',undefined,after?{after}:{});records.push(...d.records);after=d.next;if(records.length>10000)throw Error('Patient list exceeds the display limit.');}while(after);const select=$('cloudPatientSelect'),selected=select.value;select.replaceChildren(new Option('Choose cloud patient',''));for(const p of records)select.add(new Option(p.name+' · '+p.id.slice(-8),p.id));select.value=selected;return records;}
 window.ClinicCloud={
 session:async()=>{try{const data=await api('session');signedIn=data.signedIn===true;paint(data.configured===true);return data;}catch(e){if(e.status===503&&e.configured===false){signedIn=false;paint(false);return {configured:false,signedIn:false};}throw e;}},
-login:async(email,password)=>{const data=await api('login',{email,password});signedIn=true;stopped.clear();paint(true);await refresh();window.dispatchEvent(new Event('clinic-owner-signed-in'));return data;},
+login:async(email,password,rememberDevice=false)=>{const data=await api('login',{email,password,rememberDevice});signedIn=true;stopped.clear();paint(true);await refresh();window.dispatchEvent(new Event('clinic-owner-signed-in'));return data;},
 requestPasswordReset:async email=>api('reset-request',{email}),
 logout:async()=>{await api('logout',{});signedIn=false;for(const timer of timers.values())clearTimeout(timer);timers.clear();paint(true);$('cloudPatientSelect').replaceChildren(new Option('Choose cloud patient',''));window.dispatchEvent(new Event('clinic-owner-signed-out'));},
 isSignedIn:()=>signedIn
