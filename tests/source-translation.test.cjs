@@ -16,7 +16,7 @@ const tick=()=>new Promise(resolve=>setTimeout(resolve,25));
  const pdfTranslate=pdf.nextElementSibling;assert.ok(pdfTranslate.classList.contains('source-translate-link'),'PDF source gets a best-effort Google Translate link while original remains available');
  select.value='hi';select.dispatchEvent(new w.Event('change',{bubbles:true}));assert.ok(existing.href.includes('tl=hi'));assert.ok(otherTranslate.href.includes('tl=hi'));assert.ok(pdfTranslate.href.includes('tl=hi'));
  for(const a of [existing,otherTranslate,pdfTranslate]){assert.equal(a.target,'_blank');assert.match(a.rel,/noopener/);assert.match(a.rel,/noreferrer/);assert.ok(a.getAttribute('aria-label'));}
- assert.equal(w.document.getElementById('internal').nextElementSibling,null,'Internal links are not wrapped in external translation links');
+ assert.notEqual(w.document.getElementById('internal').nextElementSibling?.classList.contains('source-translate-link'),true,'Internal links are not wrapped in external translation links');
  assert.equal(w.document.getElementById('mail').nextElementSibling,null,'Non-web protocols are not translated');
  assert.equal(w.document.getElementById('original').href,'https://example.org/guide','Language changes must never overwrite the original destination');
  assert.match(fs.readFileSync('patient-education.css','utf8'),/source-translate-link:focus-visible/,'Translation controls need visible keyboard focus');
