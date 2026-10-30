@@ -12,7 +12,7 @@ for(const script of [...w.document.scripts]){
  else scripts.push(script.textContent);
 }
 w.eval(scripts.join('\n;\n'));
-await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();
+await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();assert.match(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note').textContent,/5\.7–6\.4%/);assert.equal(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note a[href="https://diabetes.org/about-diabetes/diagnosis"]').textContent,'HbA1c diagnostic thresholds ↗');
 assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,28);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid input').length>50,true);
