@@ -156,3 +156,9 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 - Current deployment blocker: Vercel returned `build-rate-limit` for the review head; preview and production behaviour cannot be certified from that result. Retry after the provider's stated rate-limit interval; do not bypass the provider limit or merge without preview verification and owner release approval.
 - First correction batch to finish: (1) confirm exact current branch/head and run CI on the latest head, (2) reconcile stale UPI payee paths, converters and diet preset rendering, (3) inspect requisition/document share output, (4) test login recovery code and record external configuration requirements, (5) test patient/death/stock register UI and migration/RLS separately.
 - Keep each matrix row open until its own verification is complete. Record completed/preview/pending/blocked counts in each handoff. Never put bank credentials, authentication secrets or real patient data into repository files.
+
+
+### Prescription safety correction — 30 October 2026
+| ID | State | Original request | Current evidence / remaining action |
+|---|---|---|---|
+| H08 | [ ] CI PENDING — PREVIEW BLOCKED | Add medicine rows; preserve work and avoid unintentional data loss. | Found that `initRxPad()` cleared existing rows and auto-filled three sample medicines. On PR42 review branch, `index.html` now creates one fully blank row only if no rows exist, preserves entries on re-open, and adds blank rows. Regression test `tests/prescription-initialization.test.cjs` checks the blank initial state, no sample drug names, retention of clinician-entered values and adding a blank second row. Source commit `8412292db14a5ec2d195dd08c8ee84a69dcf700c`; test commit `df2c089892ad8d1426f7050da7328b280e909e4d`. Await CI on the exact current head, then preview and PDF/long-row/device checks. Not live-verified. |
