@@ -17,7 +17,7 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 | Language-panel overlap | Corrected the stylesheet rule that absolutely positioned the header's actual `.language-row` as if it were a dropdown panel. | `869f18e5a7972f8ff6170b4b5457132acc5e7aa1` |
 | Header language selector | Kept the all-language Google Translate selector in the header row and moved authored English/Marathi article controls into the article reader. Header language changes are allowed to translate the whole site; article controls retain authored language behaviour. | `9ea895e7d136d492566d6d905b99975ad754bfba`; `dd8a1454ae0b7445536c11e6bf3f3c0a8e00100d`; `10ef383a1cdff7fc6804d2106006bb77b54ce45c` |
 | Health Library cards | Removed separate “Share original PDF” and “Download original PDF” buttons from article cards so the primary action opens the article. The existing reader history handler supports Back/Forward and Escape. | `9285c71d70ca1c286731c4cfac4f56182325b41a` |
-| Pre-visit workflow | Connected the existing patient-history form's short history text to the WhatsApp booking message and validated Indian mobile-number formats. Existing consent and attachment workflow remains the source of detailed history and files. | `66c3a842f68650d22a11e84dda11e291c233191b` |
+| Pre-visit workflow | Connected the existing patient-history form's short history text to the WhatsApp booking message, validated Indian mobile-number formats, and added optional structured temperature, weight, height, and BMI fields. Existing consent and attachment workflow remains the source of detailed history and files. | `66c3a842f68650d22a11e84dda11e291c233191b` |
 | History-sharing fallback | For long histories or selected files, the fallback now targets the doctor's WhatsApp number and clearly instructs the user to attach the downloaded PDF/original files manually. The site does not claim to upload or auto-attach files. | `935f77ecce77040281a2b5f3260e3954b6f3a029` |
 | Prescription sharing | Clarified the share action label and dialog title, improved the registration-number typography, and made the desktop WhatsApp fallback explain the manual PDF attachment limitation. | `c6c34b6d19546a35a04ebdd1ab4f64c254730f11`; `d746e31ba63533a726477b5364d633eae5a5cb91`; `e80c818985a93d6ca6d21319b2640c62c64fab9f`; `75b377df6a7dea480e3b7db74496aa326fffc875` |
 | Prescription document footer | Source configuration excludes prescription, pathology, and radiology sheets from the generic website-footer stamp. The prescription share filename is based on “Prescription”. | `document-provenance.js` and `document-sharing.js` source review |
@@ -29,6 +29,7 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 - All four inline executable scripts in `index.html` passed syntax compilation.
 - HTML source scan found no duplicate IDs.
 - HTML source scan found no missing targets for internal hash links.
+- Static scan found all 42 unique inline click-handler names in the HTML defined in the inline code or the referenced JavaScript source.
 - Braces are balanced in `international-portal.css` and `workstation.css`.
 - The BMI and HbA1c/eAG public calculators already display reference/interpretation notes and source links.
 - The Celsius/Fahrenheit and kilograms/pounds bidirectional conversion logic already exists in `unit-converters.js`.
@@ -36,7 +37,7 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 ## Deployment and live verification — OPEN
 
 - Commit `88a9181f85cd032af7872ec484cc02587dbf67fd` has a successful Vercel status check.
-- Later commits currently report Vercel failure at the build-rate-limit URL. The latest source changes therefore must **not** be assumed to be deployed.
+- Later commits, including `9888f1e72fd6df7dbf6802cb25c0c07e1fe1a46c`, currently report Vercel failure at the build-rate-limit URL. The latest source changes therefore must **not** be assumed to be deployed.
 - Actual production/mobile visual verification has not been completed in this audit session. In particular, the language panel must be checked at 320 px and 390 px widths, including whether the Patient Portal, Doctor Workstation, hero links, and navigation remain visible and clickable.
 - Prescription sharing must be checked on a device supporting Web Share and on desktop fallback.
 - The pre-visit workflow must be manually tested with synthetic data, with and without attachments, and with both short and long history.
