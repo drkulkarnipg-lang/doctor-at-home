@@ -50,4 +50,5 @@ for(const [p,x] of [[71,0],[70,1],[61,1],[60,3],[55,3],[54,4]])near(30,{...ap,ox
 for(const [p,x] of [[199,0],[200,2],[350,3],[500,4]])near(30,{...ap,oxygen:'high',oxygenValue:p},x);
 near(30,{...ap,acid:'hco3',ph:'4',hco3:'0'},0);reject(30,{...ap,acid:'hco3'});near(30,{...ap,cr:'4',arf:'1'},8);reject(30,{...ap,gcs:14.5});
 near(30,{temp:'4',map:'4',hr:'4',rr:'4',oxygen:'high',oxygenValue:600,acid:'ph',ph:'4',na:'4',k:'4',cr:'4',arf:'1',hct:'4',wbc:'4',gcs:3,age:80,chronic:'5'},71);
+const norton=calculators.find(c=>c.id===25);assert.equal(norton.url,'https://www.ahrq.gov/patient-safety/settings/hospital/resource/pressureulcer/tool/pu7b.html');assert.ok(!norton.url.includes('www26.ha.org.hk'));checks+=2;
 console.log(`${checks} assertions passed across all 30 calculators.`);
