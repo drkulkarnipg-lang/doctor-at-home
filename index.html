@@ -127,7 +127,22 @@
 <link rel="stylesheet" href="evidence-workflow.css"/>
 <link rel="stylesheet" href="patient-welcome.css"/><link rel="stylesheet" href="rx-phone-layout.css"/>
 <link rel="stylesheet" href="patient-age.css"/><link rel="stylesheet" href="password-keyboard.css"/>
-<link rel="stylesheet" href="reading-print-fixes.css"/></head>
+<link rel="stylesheet" href="reading-print-fixes.css"/>
+<style id="mobile-language-panel-flow-fix">
+/* Keep the expanded language chooser in normal document flow on phones. */
+@media (max-width:640px){
+  .site-header{position:relative!important;inset:auto!important;overflow:visible!important;}
+  .site-header>div>div:last-child>.language-control{order:1!important;position:static!important;align-self:stretch!important;flex:0 0 100%!important;width:100%!important;max-width:100%!important;min-width:0!important;}
+  .language-control>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;cursor:pointer;}
+  .language-control[open]{position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;}
+  .language-control[open] .language-row{position:static!important;display:flex;flex-direction:column;align-items:stretch;gap:8px;width:100%;max-width:100%;min-width:0;padding:10px;border:1px solid #dce5e8;border-radius:10px;background:#fff;box-sizing:border-box;}
+  .language-control[open] #google_translate_element{width:100%;max-width:100%;min-width:0;}
+  .language-control[open] #google_translate_element .goog-te-combo{width:100%!important;max-width:100%!important;min-height:44px;box-sizing:border-box;}
+  .language-control[open] .language-status,.language-control[open] .language-help-link{display:none!important;}
+  .goog-te-menu-frame,.goog-te-menu-frame.skiptranslate{max-width:calc(100vw - 16px)!important;}
+}
+</style>
+</head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
 <div class="fixed top-20 right-5 z-50 bg-[#0D9488] text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2 pointer-events-none" id="notificationToast">
