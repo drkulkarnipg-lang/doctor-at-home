@@ -104,3 +104,7 @@ Owner explicitly requested that the original notes be read first and the missing
 
 ### Next action
 Open a review PR and keep it unmerged pending a usable preview. Once Vercel permits a preview, run the clinical document test suite, verify the UPI payee and amount in the actual QR/link on desktop/mobile, then update D01 with evidence. Do not attempt a real payment or expose bank-account details. Continue the next unfinished original-note item only after this bounded fix is checkpointed.
+
+
+## Regression CI finding — 30 October 2026
+Added `.github/workflows/regression-tests.yml` to run all existing `tests/*.test.cjs` on pull requests and relevant pushes. First run `41016442845` failed in `tests/booking-intake.test.cjs`: the assertion expected the status to include “Nothing has been shortened”, but the runtime status said “Nothing is sent automatically.” Updated `booking-intake.js` to clarify “Nothing has been shortened or sent automatically.” This is a genuine test/source wording mismatch discovered by the new automated suite, not a test to delete. Rerun CI and fix any further failures before considering PR42. Vercel remains separately blocked by the build-rate-limit status; passing CI will not imply a live deployment.
