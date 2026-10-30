@@ -67,6 +67,7 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 
 ## Verification still required
 
+- **Current deployment blocker:** GitHub reports the Vercel status check as `failure` with target `https://vercel.com/drkulkarnipg?upgradeToPro=build-rate-limit` for the new form/calculator commits, including `7882d10d192b8eaa8204bb1335b8a971dafcf304`, `572d5192d7569d0c21b8ed8186f264989fc7608b`, `01f460cedad6e819cb8fa7d6b82ca171a9ef23cc`, and `c645d60f1fe4bd851ac3727fb38272dbaa73a28e`. These corrections are committed to GitHub but are **not confirmed live**. No hosting, billing or production configuration was changed.
 - Deploy the latest commits and verify the actual production site, especially the compact form at narrow mobile widths.
 - Manually test BMI calculation for valid and empty weight/height, file selection limits, consent gating, print/PDF, native share, and WhatsApp fallback using synthetic data only.
 - Visually confirm all 30 calculator cards show their reference/interpretation note, source link and disclaimer at desktop and mobile widths.
