@@ -41,6 +41,7 @@ function walk(root, directory = root, files = []) {
 
 function classifyUrl(url, line, relativePath, rawMatch) {
   if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url) ||
+      (/encodeURIComponent|encodeURI/.test(line) && /[?&](?:tl|u)=$/i.test(url)) || /[?&][^=]+=\\$$/.test(url)) return 'runtime-template';
       (/encodeURIComponent|encodeURI/.test(line) && /[?&](?:tl|u)=$/i.test(url))) return 'runtime-template';
   if (/placeholder/i.test(line) && (/hook\.eu1\.make\.com/i.test(url) || /\.\.\./.test(rawMatch))) return 'placeholder';
   let parsed;
