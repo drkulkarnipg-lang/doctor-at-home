@@ -10,7 +10,7 @@ assert.equal(validateRegister(death).registerType,'death');
 assert.throws(()=>validateRegister({...death,deathDateTime:'bad'}));
 const stock={registerType:'stock',entryDate:'2026-10-30',itemName:'Example item',category:'General',batch:'DEMO',expiry:'2027-10-30',quantity:'10',unit:'packs',movement:'received',supplier:'Example supplier',reference:'DEMO',notes:'Test fixture only'};
 assert.equal(validateRegister(stock).registerType,'stock');
-assert.throws(()=>validateRegister({...stock,quantity:'-5'}));
+assert.throws(()=>validateRegister({...stock,quantity:'-5'}));assert.throws(()=>validateRegister({...stock,movement:'adjustment'}));assert.equal(validateRegister({...stock,movement:'adjustment',adjustmentDirection:'decrease'}).data.adjustmentDirection,'decrease');
 (async()=>{
 const owner='11111111-1111-4111-8111-111111111111',other='22222222-2222-4222-8222-222222222222',env={SUPABASE_URL:'https://synthetic.supabase.co',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',CLINIC_OWNER_USER_ID:owner};
 const response=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json'}});
