@@ -18,7 +18,7 @@ assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').l
 for(const card of [...w.document.querySelectorAll('.calc-card')]){
  const ref=card.querySelector('.calc-reference-note');
  assert.ok(ref,'Every calculator must show its reference/interpretation panel');
- assert.ok(ref.textContent.includes('Reference / interpretation'));
+ assert.ok(ref.textContent.includes('Standard reference range / threshold / interpretation'),'Every calculator must use the corrected standard-reference label');
  assert.ok(ref.querySelector('a.calc-reference-link[href]'),'Every calculator must link a clinical source');
  assert.ok(ref.textContent.trim().length>80,'Every calculator needs substantive interpretation/range guidance');
 }
