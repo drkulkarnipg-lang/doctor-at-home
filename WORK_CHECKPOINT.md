@@ -116,3 +116,7 @@ The first converter regression test correctly caught a defect in the new paired-
 
 ## Owner's current instruction supersedes old pause (30 October 2026)
 The original register had a 26 October “PAUSED by owner” note. The owner now explicitly said “dont pause and resume stop only after checking my draft completion,implementation.” That older pause is superseded. Continue working from the original 28.9 KB master prompt and 18.9 KB correction note; do not stop after a plan or one commit. Preserve preview-before-production rules and clearly document external blockers. H01–H03 in MASTER_TASK_REGISTER.md track the new CI and real source defects found during this continuation.
+
+
+### Hero assertion update — 30 October 2026
+CI progressed past the converter checks and exposed another stale assertion in `tests/calculator-ui.test.cjs`: it expected the former “Thoughtful care” headline, while the current hero deliberately says “Home visits. Care at your bedside.” Updated the regression assertion to check the explicit home-visit promise from the owner's original instruction. This is a test expectation update aligned to the current approved design intent, not a weakening of the requirement. Rerun all tests; other stale assumptions may still surface.
