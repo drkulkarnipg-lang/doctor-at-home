@@ -1,0 +1,1776 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-30",
+  "repository": "https://github.com/drkulkarnipg-lang/doctor-at-home",
+  "source_revision": "6b551b4450422978d01683e0474f19047a761cf0",
+  "method": "Static source scan of homepage, preserved feature map, patient education content, research sources, calculators, booking intake, article reader, payments, contact actions and sitemap. Inventory baseline only; URLs were not live-tested.",
+  "unique_extracted_destinations": 194,
+  "source_files_scanned": [
+    "index.html",
+    "preserved-features.js",
+    "patient-education-data.js",
+    "research-sources.js",
+    "clinical-calculators.js",
+    "booking-intake.js",
+    "awareness-library.js",
+    "payment-options.js",
+    "contact-actions.js",
+    "sitemap-pages.xml"
+  ],
+  "verification_policy": "No destination is marked verified unless an actual HTTP/link test was executed. Dynamic templates, placeholders, provider-dependent routes and phone/WhatsApp handoffs require separate tests.",
+  "links": [
+    {
+      "url": "http://www.sitemaps.org/schemas/sitemap/0.9",
+      "source_files": [
+        "sitemap-pages.xml"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://112.gov.in/about",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://academic.oup.com/eurheartj/article/45/36/3314/7738779",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://academic.oup.com/jalm/article/6/5/1316/6272705",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://academic.oup.com/view-large/367989236",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://api.whatsapp.com/send",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://api.whatsapp.com/send?phone=91${phone.slice(-10",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://api.whatsapp.com/send?text=${encodeURIComponent(msg",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://api.whatsapp.com/send?text=${encodeURIComponent(text",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://bmjopen.bmj.com/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://bmjopen.bmj.com/rss/current.xml",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://ccsniah.gov.in/download/format/Medical_Certificate_Form_4_and_Fitness_Certificate_Form_5.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://cdsco.mohfw.gov.in/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://chatgpt.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://chatgpt.com/?q=${encodeURIComponent(promptText",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://claude.ai/new",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://claude.ai/new?q=${encodeURIComponent(promptText",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://copilot.microsoft.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://copilot.microsoft.com/?q=${encodeURIComponent(promptText",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://diabetes.org/about-diabetes/diagnosis",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://diabetesteachingcenter.ucsf.edu/about-diabetes/type-2-diabetes/use-insulin-type-2-diabetes/calculating-insulin-dose",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://drc.bmj.com/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://drc.bmj.com/rss/current.xml",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://drive.google.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://feedly.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://fonts.googleapis.com",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://fonts.gstatic.com",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://gemini.google.com/app",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://gemini.google.com/app?q=${encodeURIComponent(prompt",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://gemini.google.com/app?q=${encodeURIComponent(promptText",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://gmcjjh.edu.in/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://handbook.bcehs.ca/clinical-resources/clinical-references-cards/lab-clinical-values/shock-index/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://handbook.bcehs.ca/drug-monographs/medication-infusions/infusion-drip-rate-formula/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/",
+      "source_files": [
+        "index.html",
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/#bookingSection",
+      "source_files": [
+        "booking-intake.js"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/#owner",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/#practice",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/#website",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/articles",
+      "source_files": [
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/assets/social-card.png",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/editorial-policy.html",
+      "source_files": [
+        "index.html",
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/legal-privacy.html",
+      "source_files": [
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/patient-privacy.html",
+      "source_files": [
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://home-visiting-icu-doctor.vercel.app/site-information.html",
+      "source_files": [
+        "sitemap-pages.xml"
+      ],
+      "classification": "internal-route-or-asset",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://hook.eu1.make.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://jamanetwork.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosmedicine/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosmedicine/feed/atom",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosntds/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosntds/feed/atom",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosone/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plosone/feed/atom",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plospathogens/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://journals.plos.org/plospathogens/feed/atom",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://kidneyhawaii.org/blog/is-coconut-water-good-for-my-kidneys/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://link.springer.com/journal/13054",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://link.springer.com/search.rss?facet-journal-id=13054&sortOrder=newestFirst",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://medicalxpress.com/",
+      "source_files": [
+        "index.html",
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://medicalxpress.com/feeds/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://medicalxpress.com/rss-feed/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://member.thoracic.org/professionals/clinical-resources/critical-care/clinical-education/abgs.php",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://my.clevelandclinic.org/health",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://my.clevelandclinic.org/health/articles/24649-heart-rate-reserve",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://ods.od.nih.gov/factsheets/potassium-Consumer/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://open.fda.gov/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://professional.diabetes.org/glucose_calc",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://publisher.../article",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22797452/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38051821/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/3928249/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://radiopaedia.org/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://reference.medscape.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://schema.org",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://scholar.google.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://scholar.google.com/scholar?q=${encodeURIComponent(q",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://share.google/oNbajE0cqMew0j5Ue",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://symptoms.webmd.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://thepathologist.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://tools.cdc.gov/api/v2/resources/media/132608.rss",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://my.clevelandclinic.org/health",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.cdc.gov/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.mayoclinic.org/patient-care-and-health-information",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.msdmanuals.com/home",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.nice.org.uk/guidance",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.radiologyinfo.org/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.testing.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://vimbook.vumc.org/endocrinology/steroid-conversion",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://wa.me/?text=${encodeURIComponent(msg",
+      "source_files": [
+        "preserved-features.js"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://wa.me/919561394341",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://wa.me/919561394341?text=",
+      "source_files": [
+        "preserved-features.js",
+        "booking-intake.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://wa.me/919561394341?text=Hello%20Dr.%20Kulkarni,%20requesting%20urgent%20home%20ICU%20consultation%20in%20Pune",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.aiims.edu/index.php/en",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.apollohospitals.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.auntminnie.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.boconline.co.uk/en/images/BOC-Oxygen-Cylinders-Equiment-Guide_tcm410-682242.pdf",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.captodayonline.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cdc.gov/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cdc.gov/bmi/adult-calculator/bmi-categories.html",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cdc.gov/falls/data-research/facts-stats/index.html",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cdc.gov/media/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cdc.gov/uti/about/cauti-basics.html",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.cuh.nhs.uk/patient-information/tube-feeding-at-home/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.drugs.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.fda.gov/consumers/womens-health/use-medicines-wisely",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.fda.gov/drugs/find-information-about-drug/finding-and-learning-about-side-effects-adverse-reactions",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.glasgowcomascale.org/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr||",
+      "source_files": [
+        "preserved-features.js"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&q=Dr+Pramod+G+Kulkarni%2CEmergency+and+HomeCare+Specialist",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.heart.org/en/health-topics/heart-failure/living-with-heart-failure-and-managing-advanced-hf/physical-changes-to-report-for-heart-failure",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.heart.org/en/health-topics/heart-failure/treatment-options-for-heart-failure/lifestyle-changes-for-heart-failure",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.heart.org/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.heart.org/en/news/2024/06/25/the-rules-for-measuring-blood-pressure-and-why-they-exist",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.hepatitisc.uw.edu/page/clinical-calculators/ctp",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.hiv.uw.edu/page/clinical-calculators/crcl",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.hrsa.gov/optn/data-calculators/allocation-calculators/meld-calculator",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.ipc.gov.in/images/news/NFI-0414979118.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.jwatch.org/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.kidney.org/kidney-topics/hyperkalemia-high-potassium",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.kidney.org/kidney-topics/potassium-your-ckd-diet",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.mayoclinic.org/patient-care-and-health-information",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.medscape.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.mims.com/india",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.mohfw.gov.in/pdf/Telemedicine.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.msdmanuals.com/home",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.msdmanuals.com/professional",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nanavatimaxhospital.org/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nm/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nm/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrcardio/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrcardio/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrclinonc/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrclinonc/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrendo/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrendo/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrgastro/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrgastro/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrneph/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrneph/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrneurol/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrneurol/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrrheum/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nature.com/nrrheum/current_issue/rss/",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK279037/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK538226/",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nejm.org/",
+      "source_files": [
+        "index.html",
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/conditions/anaphylaxis/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/conditions/head-injury-and-concussion/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/conditions/heart-failure/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/conditions/pressure-sores/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/conditions/swallowing-problems-dysphagia/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/nhs-services/hospitals/going-into-hospital/outpatients-and-day-patients/",
+      "source_files": [
+        "booking-intake.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/symptoms/confusion/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/symptoms/swallowing-problems-dysphagia/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/symptoms/what-to-do-if-someone-has-a-seizure-fit/",
+      "source_files": [
+        "booking-intake.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nhs.uk/tests-and-treatments/urinary-catheters/living-with/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/cg174/chapter/recommendations",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/cg179/chapter/recommendations",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/cg179/chapter/Recommendations",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/cg179/ifp/chapter/prevention",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/cg32/chapter/Recommendations",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/ng158/chapter/recommendations",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/ng236/chapter/Recommendations",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/ng250/chapter/Recommendations",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/healthy-eating-adults-chronic-kidney-disease",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis",
+      "source_files": [
+        "index.html",
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis/eating-nutrition",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.nlm.nih.gov/research/umls/rxnorm/index.html",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.radiologyinfo.org/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.sja.org.uk/first-aid-advice/choking/",
+      "source_files": [
+        "patient-education-data.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.testing.com/",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.thelancet.com/",
+      "source_files": [
+        "index.html",
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.thelancet.com/action/showFeed?jc=lancet&type=etoc&feed=rss",
+      "source_files": [
+        "research-sources.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.uptodate.com/contents/search",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.webmd.com/interaction-checker/default.htm",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    },
+    {
+      "url": "https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "runtime-template",
+      "verification_status": "not-runtime-verifiable-from-static-scan",
+      "notes": "Contains dynamic expression or placeholder; verify at runtime."
+    },
+    {
+      "url": "https://www26.ha.org.hk/Courseware/QEH_CND_PRE2/norton/norton1.asp",
+      "source_files": [
+        "clinical-calculators.js"
+      ],
+      "classification": "external-destination",
+      "verification_status": "not-live-checked",
+      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+    }
+  ]
+}
