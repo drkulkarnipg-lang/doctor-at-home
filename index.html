@@ -1560,9 +1560,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       articles.unshift({ title, cat, body, media: uploadedMediaData, date: new Date().toLocaleDateString('en-GB') });
       localStorage.setItem('patientArticles', JSON.stringify(articles));
       showToast("Saved on this device only. Use the reviewed cloud publisher to publish publicly.");
-      document.getElementById('newArtTitle').value = '';
-      document.getElementById('newArtBody').value = '';
-      uploadedMediaData = null;
+      /* Keep the editor and selected media intact so the same draft can be reviewed and published to the cloud next. */
       renderPublishedArticles();
     }
 
