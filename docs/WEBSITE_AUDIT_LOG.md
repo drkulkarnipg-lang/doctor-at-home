@@ -110,3 +110,11 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 - **Regression coverage:** Commit `1f2d7fdbf4eb37153cfc38162f049ea61a40d915` updates `tests/public-article-editor.test.cjs` to assert the cloud toolbar appears before the content box, the three controls are inside it, pagination is grouped, the status stays visible and the selector is labelled. `new Function` syntax checks pass for the editor/share scripts and all four inline executable scripts; source contains no duplicate HTML IDs.
 - **Limits:** Refresh/load are wired to the existing `/api/articles-admin` endpoint and are tested with synthetic API responses. Actual owner login, Supabase/cloud provider configuration and cross-device persistence remain external gates. Local attachments remain device-local; a Google Drive link retains its own permissions. No content or saved article was deleted.
 - **Status:** SOURCE + TEST COMMITTED — CI and live responsive verification pending.
+
+
+## Pre-visit form essential sections — regression failure corrected (30 October 2026)
+
+- **Owner's requirement:** Keep the pre-visit intake compact and open only the essential patient/problem sections; optional history remains collapsed and no fields are discarded.
+- **CI finding:** Workflow run `41103557791` on commit `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e` failed in `tests/booking-intake.test.cjs`. The assertion expected the first two sections to be open, but the source opened only section 2 because `section()` used `title.startsWith('2.')`. The page's own instruction also said to complete sections 1 and 2.
+- **Correction:** Commit `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` changes the rule to open sections 1 and 2 only; sections 3–6 remain collapsed. This preserves the compact intake and matches the explicit quick-start instruction/test.
+- **Status:** SOURCE FIX COMMITTED — latest-main CI pending. The failing run is retained in the record; do not mark the task CI-passed until a newer run on a head containing `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` passes. Live/mobile form verification remains pending because Vercel reports build-rate-limit.
