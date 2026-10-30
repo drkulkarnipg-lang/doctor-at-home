@@ -361,3 +361,10 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Workflow run `41104015232` on `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` passed the essential-section-open assertion but failed later in `tests/booking-intake.test.cjs`: the long-history booking message did not include the explicit requirement to attach the complete PDF.
 - Corrected `booking-intake.js` in `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc`: the message now says the booking link cannot attach files and requires the user to attach the PDF/originals separately or use the dedicated device share-sheet workflow.
 - Latest-main CI is still required; real WhatsApp/PDF recipient-side delivery remains unverified. Continue with the next source audit while the exact-head regression is pending.
+
+
+## Existing settings control preservation — 30 October 2026
+
+- Regression run `41104505406` passed `tests/booking-intake.test.cjs` after the latest form/message fixes, then failed in `tests/calculator-ui.test.cjs` because `webhookUrlInput` was missing from the current settings UI even though it remains in the protected existing-feature-ID list.
+- Restored `webhookUrlInput` in `index.html` as a visible, disabled placeholder in commit `ef666dc6aad56b9585e2db6b43edb2488779710c`. This preserves the interface but does not permit users to paste a webhook URL/secret into browser storage; the explanatory text says setup must be server-side.
+- Added regression assertions in `425b47d3d6a9610b1e19d0cb2bd3a2e8006fca12` for ID presence, disabled state and server-side placeholder wording. CI still must pass the exact latest head. Make.com/n8n remains disconnected and no booking webhook is claimed active.
