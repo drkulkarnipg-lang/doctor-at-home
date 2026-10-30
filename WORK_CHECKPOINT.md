@@ -368,3 +368,11 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Regression run `41104505406` passed `tests/booking-intake.test.cjs` after the latest form/message fixes, then failed in `tests/calculator-ui.test.cjs` because `webhookUrlInput` was missing from the current settings UI even though it remains in the protected existing-feature-ID list.
 - Restored `webhookUrlInput` in `index.html` as a visible, disabled placeholder in commit `ef666dc6aad56b9585e2db6b43edb2488779710c`. This preserves the interface but does not permit users to paste a webhook URL/secret into browser storage; the explanatory text says setup must be server-side.
 - Added regression assertions in `425b47d3d6a9610b1e19d0cb2bd3a2e8006fca12` for ID presence, disabled state and server-side placeholder wording. CI still must pass the exact latest head. Make.com/n8n remains disconnected and no booking webhook is claimed active.
+
+
+## Workstation register RLS review — 30 October 2026
+
+- Reviewed `supabase/migrations/20261030_workstation_registers.sql` and prerequisite `20261023_patient_trends.sql`. The register migration enables/forces RLS, revokes broad access, grants authenticated SELECT/INSERT/UPDATE only, and scopes each policy to `owner_id = auth.uid()` plus `clinic_members`. No DELETE grant/policy is present. The membership table has no client INSERT grant; only self-read is granted.
+- Reviewed `api/clinical-cloud.js`: the configured owner UUID is checked before register actions; edits include owner, ID and revision constraints; missing migration returns a controlled 503 without changing data.
+- Reviewed `workstation-registers.js` and existing synthetic UI/API tests: daily/death/stock forms, revision-checked edits, no delete action, sign-out clearing, no localStorage persistence and non-owner API denial are covered.
+- Added static migration regression test in commit `0e4afabbf1cace202fee5ecc81411e09ebd16fc5`. This does **not** prove live database RLS; no migration was applied. Await CI and reserve actual owner/non-owner RLS, backup/restore and cross-device testing for a dedicated test project.
