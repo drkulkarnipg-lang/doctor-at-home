@@ -1,6 +1,6 @@
 # Current resumable work checkpoint
 
-Updated: 26 October 2026, India time.
+Updated: 30 October 2026, India time.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
@@ -87,3 +87,19 @@ State: IMPLEMENTED ON REVIEW BRANCH; not production. Next action: add/execute fo
 
 ### Remaining master register priority
 Continue one bounded item at a time from `MASTER_TASK_REGISTER.md`. First verify current Vercel deployment status, then test Step 2. Keep credentials, patient information and bank details out of source and public responses. Report each item as IMPLEMENTED / PREVIEW TESTED / PRODUCTION VERIFIED / BLOCKED with evidence.
+
+
+## Active work — original correction notes, UPI regression (30 October 2026)
+
+Owner explicitly requested that the original notes be read first and the missing corrections implemented, sentence by sentence. Original 18.9 KB note file was read in full. Current `main` source audit found a regression despite the visible HTML and `payment-options.js` showing the requested `drkulkarnipg@upi`: `clinical-documents.js` still overwrote the copied UPI ID and payment URI with `9561394341@sbi`.
+
+### Bounded correction implemented on review branch
+- Branch: `fix/upi-payee-single-source-20261030` (based on current `main`).
+- `payment-options.js`: one canonical payee constant; UPI URI now includes the current fee, INR currency, and correct payee whenever `calculateFee()` runs; initial amount-bearing URI refresh added.
+- `clinical-documents.js`: removed the stale copied-ID handler and conflicting payment-URI override.
+- `tests/clinical-documents.test.cjs`: added assertions for the canonical payee, amount-bearing URI, and copy fallback text.
+- Static validation: JavaScript syntax passed for the two changed runtime scripts; HTML has no duplicate IDs; source assertions confirm the requested payee and absence of the stale override.
+- Vercel status for the latest review-branch commit reports `failure` with `upgradeToPro=build-rate-limit`. Therefore the browser regression test has not run in a deployed preview, and no production/live payment behaviour is claimed.
+
+### Next action
+Open a review PR and keep it unmerged pending a usable preview. Once Vercel permits a preview, run the clinical document test suite, verify the UPI payee and amount in the actual QR/link on desktop/mobile, then update D01 with evidence. Do not attempt a real payment or expose bank-account details. Continue the next unfinished original-note item only after this bounded fix is checkpointed.
