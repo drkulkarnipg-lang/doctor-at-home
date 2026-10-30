@@ -5,11 +5,13 @@ const path = require('node:path');
 const EXTENSIONS = new Set(['.html', '.js', '.mjs', '.cjs', '.css', '.xml', '.json']);
 const EXCLUDED_DIRS = new Set(['.git', 'node_modules', 'tests', 'reports', 'audit-runs', '.github', 'data', 'scripts']);
 const EXCLUDED_PREFIXES = ['assets/drugs/', 'assets/pdf/', 'assets/icons/'];
+const EXCLUDED_FILES = new Set(['assets/tailwind.css']);
 const ROOT_FILES = new Set(['index.html', 'sitemap.xml', 'sitemap-pages.xml', 'robots.txt', 'vercel.json']);
 const INTERNAL_HOSTS = new Set(['home-visiting-icu-doctor.vercel.app']);
 
 function shouldScan(relativePath) {
   const rel = relativePath.replace(/\\/g, '/');
+  if (EXCLUDED_FILES.has(rel)) return false;
   if (EXCLUDED_PREFIXES.some(prefix => rel.startsWith(prefix))) return false;
   const parts = rel.split('/');
   if (parts.some(part => EXCLUDED_DIRS.has(part))) return false;
@@ -41,6 +43,7 @@ function walk(root, directory = root, files = []) {
 
 function classifyUrl(url, line, relativePath, rawMatch) {
   if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url)) return 'runtime-template';
+  if (/^https:\/\/translate\.google\.com\/translate(?:\?|$)/i.test(url)) return 'runtime-template';
   if (/placeholder/i.test(line) && (/hook\.eu1\.make\.com/i.test(url) || /\.\.\./.test(rawMatch))) return 'placeholder';
   let parsed;
   try { parsed = new URL(url); } catch { return 'invalid-url' }
@@ -48,7 +51,7 @@ function classifyUrl(url, line, relativePath, rawMatch) {
   if ((parsed.hostname === 'fonts.googleapis.com' || parsed.hostname === 'fonts.gstatic.com') &&
       (/preconnect/i.test(line) || /content-security-policy|connect-src|font-src/i.test(line))) return 'domain-allowlist';
   if ((relativePath.startsWith('api/') || relativePath.startsWith('server/')) &&
-      (/fetch\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line))) return 'service-endpoint';
+      (/fetch\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line) || /\/(?:europepmc\/webservices\/rest|webservices\/rest|api\/v\d+)\/?$/i.test(parsed.pathname))) return 'service-endpoint';
   return 'external-destination';
 }
 
