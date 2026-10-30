@@ -25,3 +25,12 @@ html,body{background:#f1f8ff!important;color:#17354b}
 #publicPortal .home-care-grid article:nth-child(2) .care-icon{background:#e6f6ee!important;color:#285747!important}#publicPortal .home-care-grid article:nth-child(3) .care-icon{background:#f0eafa!important;color:#574777!important}#publicPortal .home-care-grid article:nth-child(4) .care-icon{background:#fff0df!important;color:#79501e!important}
 #publicPortal .health-library .section-eyebrow{display:inline-block;background:#fff4d8;color:#624b17;border:1px solid #eddfb5;border-radius:20px;padding:6px 12px}#publicPortal .nutrition-grid article:nth-child(3n){background:#f6f1fc!important}#publicPortal #patientFaq{border-top:4px solid #a7cfc3!important}#publicPortal #bookingSection{border-top:4px solid #9cc9e4!important}
 }
+/* Refined home-visit hero: calm green/blue palette, generous spacing and responsive type. */
+#publicPortal .hero-copy{position:relative;padding:clamp(24px,3.5vw,48px)!important;background:linear-gradient(135deg,#fbfdff 0%,#f2f9f5 100%)!important;border:1px solid #d2e5ef!important;border-radius:28px!important;box-shadow:0 18px 48px rgba(23,61,91,.07)!important}
+#publicPortal .hero-copy .original-care-hero{max-width:12ch;font-size:clamp(2.65rem,5.2vw,5.25rem)!important;line-height:1.03!important;letter-spacing:-.045em!important;font-weight:780!important}
+#publicPortal .hero-copy em{display:inline-block;color:#27664f!important;font-style:normal}
+#publicPortal .hero-copy>p{max-width:58ch;font-size:clamp(1rem,1.2vw,1.18rem)!important;line-height:1.8!important;color:#38596e!important}
+#publicPortal .hero-primary-actions{display:flex;flex-wrap:wrap;gap:12px!important;margin-top:26px!important}
+#publicPortal .hero-primary-actions .primary-link{box-shadow:0 10px 24px rgba(39,95,75,.16);font-weight:750}
+#publicPortal .hero-primary-actions :is(.primary-link,.secondary-link){min-height:48px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:640px){#publicPortal .hero-copy{padding:24px 18px!important;border-radius:20px!important}#publicPortal .hero-copy .original-care-hero{font-size:clamp(2.4rem,10vw,3.6rem)!important;max-width:11ch}#publicPortal .hero-primary-actions{display:grid;grid-template-columns:1fr}#publicPortal .hero-primary-actions :is(.primary-link,.secondary-link){width:100%}}
