@@ -64,8 +64,8 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 .workstation-heading{padding:6px 0 20px;border-bottom:1px solid var(--line);margin-bottom:24px}
 .workstation-heading h2{font-size:34px;font-weight:500;line-height:1.2}
 .workstation-heading p{font-size:13px;color:var(--muted);margin-top:8px}
-.doctor-tabs{display:flex;gap:8px;padding:14px!important;background:#f1eee5!important;border:1px solid var(--line);border-radius:18px;box-shadow:none!important}
-.doctor-tabs button{font-size:12px;min-height:40px;box-shadow:none!important;background:transparent!important;color:var(--muted)!important;border:1px solid transparent}
+.doctor-tabs{display:flex;flex-wrap:wrap;overflow:visible;align-items:stretch;justify-content:flex-start;gap:8px;padding:14px!important;background:#f1eee5!important;border:1px solid var(--line);border-radius:18px;box-shadow:none!important}
+.doctor-tabs button{flex:0 1 auto;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;font-size:12px;min-height:40px;box-shadow:none!important;background:transparent!important;color:var(--muted)!important;border:1px solid transparent}
 .doctor-tabs button[aria-selected=true]{background:var(--paper)!important;color:var(--teal)!important;border-color:var(--line);box-shadow:0 2px 5px #0f294208!important}
 #aiLaunchBar{background:var(--ink)!important;border-radius:18px;padding:20px;box-shadow:none}
 #doctorWorkstation>div[id^=view]>div{border-color:var(--line);box-shadow:none}
