@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const html=fs.readFileSync('index.html','utf8'),css=fs.readFileSync('rx-phone-layout.css','utf8');
+assert.ok(html.includes('href="rx-phone-layout.css"'),'Prescription phone layout stylesheet must be loaded');
+assert.match(css,/@media screen and \(max-width:640px\)/);
+for(const selector of ['#rxTable tbody tr','#rxSheet button[onclick="addRxRow()"]','#rxSheet button[onclick^="openDrugModal"]','#rxSheet #rxAllergies'])assert.ok(css.includes(selector),'Phone layout includes '+selector);
+assert.match(css,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Medicine rows become responsive cards');
+assert.match(css,/min-height:44px/,'Medicine actions have touch-friendly target heights');
+assert.match(css,/#viewRxPad\{padding-bottom:80px\}/,'Floating close control has room below the prescription');
+console.log('Prescription phone-layout structural checks passed.');
