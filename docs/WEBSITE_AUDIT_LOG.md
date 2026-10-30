@@ -126,3 +126,11 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 - **Correction:** Commit `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc` updates the long-history booking text to say the booking link cannot attach files and that the user must attach the complete history PDF/original files separately or use the dedicated `Send history to doctor on WhatsApp` share-sheet workflow.
 - **Rationale:** A `wa.me` URL can prefill message text but cannot silently attach a PDF or original files. The dedicated share button uses the device's file-sharing API when supported; the site cannot verify that the recipient actually sent or received the files.
 - **Status:** SOURCE FIX COMMITTED — latest-head CI pending. The failed run remains documented; do not mark long-history sharing CI-verified until a newer run on a head containing `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc` passes. Real WhatsApp/PDF delivery remains a device-level check.
+
+
+## Preserve automation settings control without accepting browser secrets — 30 October 2026
+
+- **CI finding:** Workflow run `41104505406` passed the pre-visit test after the section/message fixes, then failed in `tests/calculator-ui.test.cjs` because `webhookUrlInput` was listed in `tests/existing-feature-ids.json` but absent from the settings UI.
+- **Correction:** Commit `ef666dc6aad56b9585e2db6b43edb2488779710c` restores the existing `webhookUrlInput` identifier as a visible but disabled placeholder. The adjacent explanation says the integration is not connected and webhook configuration must be server-side; users are explicitly told not to paste webhook URLs or credentials into the browser.
+- **Regression protection:** Commit `425b47d3d6a9610b1e19d0cb2bd3a2e8006fca12` keeps the existing-feature-ID preservation test and adds assertions that the webhook field remains disabled and indicates server-side setup.
+- **Status:** SOURCE + TEST COMMITTED — CI pending. This preserves the interface without exposing an unsafe client-side webhook editor. It does not enable Make.com/n8n or prove that any booking webhook executes.
