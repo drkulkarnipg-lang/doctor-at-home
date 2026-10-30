@@ -63,3 +63,10 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 
 - Current main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663`: Vercel status **success — deployment completed**.
 - The earlier deployment-rate-limit note is historical for this commit. Feature-level live/device/provider verification remains open.
+
+
+## Latest source/deployment checkpoint — 30 October 2026
+
+- Current main `6b551b4450422978d01683e0474f19047a761cf0`: regression run `41038198126` passed.
+- Last successful application-code deployment: `0ba9a434f6a39535fdf3a654b31ec86c16776663`; current main is Vercel-rate-limited and not confirmed deployed.
+- The new prescription/lab/radiology footer correction is merged and tested in source. Editable government Form 2/4/4A working layouts retain the legal-status disclaimer; original government PDFs remain unchanged.

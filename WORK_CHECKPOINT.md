@@ -271,3 +271,11 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 - Latest main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663` has Vercel status **success — deployment completed**.
 - This is deployment evidence, not confirmation that every feature is correct on every device. Continue live/mobile and PDF checks; no real payment, patient-data or external-provider success is claimed.
+
+
+## Latest source/deployment checkpoint — 30 October 2026
+
+- Main head `6b551b4450422978d01683e0474f19047a761cf0` passed regression run `41038198126`.
+- The last successful application-code deployment remains `0ba9a434f6a39535fdf3a654b31ec86c16776663`; current main's Vercel status is rate-limited, so the latest lab/radiology footer correction is not confirmed live.
+- The new footer rule is limited to prescription/lab/radiology PDFs; editable statutory working forms keep their legal-status disclaimer and government original PDFs remain unchanged.
+- Do not merge more application changes until the deployment limit clears or the owner authorizes a paid upgrade.

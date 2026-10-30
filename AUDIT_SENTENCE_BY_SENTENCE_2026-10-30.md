@@ -136,3 +136,12 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - Vercel status for current main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663`: **success — deployment completed**.
 - The previous 24-hour deployment-rate-limit status is historical and has cleared for this commit.
 - This verifies deployment status only. It does not replace live visual QA, mobile-device testing, generated-PDF inspection, real payment settlement, Supabase migration/RLS testing or provider email/share checks.
+
+
+## Latest source/deployment checkpoint — 30 October 2026
+
+- Latest successful application-code deployment remains `0ba9a434f6a39535fdf3a654b31ec86c16776663`; Vercel reported success for that commit.
+- Current main `6b551b4450422978d01683e0474f19047a761cf0` includes the newer lab/radiology requisition footer correction. Main regression run `41038198126` passed on the exact current head.
+- Vercel reports `Deployment rate limited — retry in 24 hours` for the current main head. The lab/radiology footer correction and subsequent documentation updates are source-merged and CI-tested but **not confirmed live**.
+- The footer correction excludes website footers from prescription, pathology requisition and radiology requisition PDFs while retaining the legal-status disclaimer and provenance on editable government Form 2/4/4A working layouts. Original government PDFs remain unchanged.
+- Do not merge additional application changes to main until the deployment limit clears or a paid upgrade is explicitly authorized. Continue review-branch testing and preserve existing backups.

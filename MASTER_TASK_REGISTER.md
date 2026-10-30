@@ -213,3 +213,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Vercel status for current main commit `0ba9a434f6a39535fdf3a654b31ec86c16776663`: **success — deployment completed**. The earlier rate-limit blocker is no longer the current status for this commit.
 - The deployed code includes the home-visit intake, RSS/Article Manager grouping, registration-number styling, homepage search and mobile-navigation wrapping changes.
 - Live interaction, actual device share/print, government form outputs, real payment settlement, Supabase migration/RLS and recovery email remain feature-level verification tasks.
+
+
+## Latest source/deployment checkpoint — 30 October 2026
+
+- Current main `6b551b4450422978d01683e0474f19047a761cf0` passed regression run `41038198126`.
+- Latest successful application-code deployment is still `0ba9a434f6a39535fdf3a654b31ec86c16776663`; Vercel rate-limits current main, so later app-code changes are not confirmed live.
+- New source correction: prescription, pathology requisition and radiology requisition PDFs omit website footers; editable government Form 2/4/4A working layouts retain the explicit legal-status disclaimer. Original government PDFs are untouched.
+- Keep payment settlement, Supabase migration/RLS, recovery email, native share/print, separate Form 4/4A downloads and live/device checks open.
+- Hold additional application merges until Vercel allows a new deployment or a paid upgrade is explicitly authorized.
