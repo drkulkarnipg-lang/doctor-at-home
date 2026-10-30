@@ -4,6 +4,34 @@ const {patientCode,consent:validateConsent}=require('../server/patient-privacy')
 const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,ID=/^pt-[0-9a-f-]{36}$/i;
 const FIELDS=['date','time','sbp','dbp','glucose','context','weight','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
+const REGISTER_FIELDS={
+daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
+death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
+stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,supplier:160,reference:120,notes:2000}
+};
+function validISODate(value){if(typeof value!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(value))return false;const d=new Date(value+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;}
+function validateRegister(entry){
+if(!entry||typeof entry!=='object'||Array.isArray(entry)||!['daily','death','stock'].includes(entry.registerType))throw Error('Choose a valid register type.');
+if(!validISODate(entry.entryDate))throw Error('Enter a valid register date.');
+const schema=REGISTER_FIELDS[entry.registerType],data={};
+for(const [key,max] of Object.entries(schema)){const value=entry[key]??'';if(typeof value!=='string'||value.length>max)throw Error('Invalid register field: '+key+'.');data[key]=value.trim();}
+if(entry.id!==undefined&&entry.id!==null&&entry.id!==''&&!UUID.test(entry.id))throw Error('Invalid register record ID.');
+if(entry.revision!==undefined&&entry.revision!==null&&entry.revision!==''&&!UUID.test(entry.revision))throw Error('Invalid register revision.');
+if(entry.id&& !entry.revision)throw Error('Reload the current record before editing it.');
+if(entry.registerType==='daily'&&(!data.patientName||!data.visitType))throw Error('Enter the patient name and visit type.');
+if(entry.registerType==='death'){
+if(!data.patientName||!data.deathDateTime||!data.place)throw Error('Enter the name, date/time of death and place.');
+if(!/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}/.test(data.deathDateTime)||!Number.isFinite(Date.parse(data.deathDateTime)))throw Error('Enter a valid date and time of death.');
+}
+if(entry.registerType==='stock'){
+if(!data.itemName||!data.unit||!['received','issued','adjustment'].includes(data.movement))throw Error('Enter the item, unit and stock movement.');
+if(!data.quantity||!Number.isFinite(Number(data.quantity))||Number(data.quantity)<=0)throw Error('Enter a quantity greater than zero.');
+if(data.expiry&&!validISODate(data.expiry))throw Error('Enter a valid expiry date or leave it blank.');
+}
+if(entry.registerType==='daily'&&data.amount&&(!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>10000000))throw Error('Enter a valid non-negative INR amount.');
+if(data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
+return{id:entry.id||null,revision:entry.revision||null,registerType:entry.registerType,entryDate:entry.entryDate,data};
+}
 function createHandler({env=process.env,request=(...args)=>fetch(...args)}={}){return async(req,res)=>{
 res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','private, no-store');res.setHeader('Vercel-CDN-Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Vary','Cookie');
 const reply=(code,data)=>res.status(code).json(data),cookieHeaders=[];
@@ -69,8 +97,23 @@ const headers={Authorization:'Bearer '+token,'Content-Type':'application/json',P
 if(action==='list'&&method==='GET'){const after=String(req.query?.after||'');if(after&&!ID.test(after))return reply(400,{message:'Invalid page cursor.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,revision,updated_at&order=id.asc&limit=100'+(after?'&id=gt.'+encodeURIComponent(after):''),{headers});if(!r.ok)throw Error();const records=await r.json();return reply(200,{records,next:records.length===100?records.at(-1).id:null});}
 if(action==='patient'&&method==='GET'){const id=String(req.query?.id||'');if(!ID.test(id))return reply(400,{message:'Invalid patient ID.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,readings,revision,updated_at,cloud_consent&id=eq.'+encodeURIComponent(id),{headers});if(!r.ok)throw Error();const records=await r.json();return records.length?reply(200,{patient:records[0]}):reply(404,{message:'Patient not found.'});}
 if(action==='save'&&method==='POST'){let p;try{p=validatePatient(body.patient);}catch(e){return reply(400,{message:e.message});}const revision=randomUUID(),updated_at=new Date().toISOString();const record={id:p.id,owner_id:user.id,name:p.name,readings:p.readings,revision,updated_at,cloud_consent:{...p.cloudConsent,recorded_by:user.id,recorded_at:p.cloudConsent.recorded_at||new Date().toISOString()}};const path='/rest/v1/clinic_patient_trends'+(p.revision?'?id=eq.'+encodeURIComponent(p.id)+'&revision=eq.'+encodeURIComponent(p.revision):'');const r=await api(path,{method:p.revision?'PATCH':'POST',headers,body:JSON.stringify(record)});if(r.status===409)return reply(409,{message:'A cloud history with this ID already exists. Load its latest version before changing it.'});if(!r.ok)throw Error();const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This patient changed on another device. Local entries are safe; compare the latest cloud version before retrying.'});return reply(200,{id:p.id,revision,updated_at,cloudConsent:record.cloud_consent});}
+if(action==='register-list'&&method==='GET'){
+const type=String(req.query?.registerType||'');if(!['daily','death','stock'].includes(type))return reply(400,{message:'Choose daily, death or stock register.'});
+const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
+if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
+return reply(200,{records:await r.json(),limit:500});
+}
+if(action==='register-save'&&method==='POST'){
+let e;try{e=validateRegister(body.entry);}catch(err){return reply(400,{message:err.message});}
+const now=new Date().toISOString(),record={owner_id:user.id,register_type:e.registerType,entry_date:e.entryDate,data:e.data,revision:randomUUID(),updated_at:now};
+const path=e.id?'/rest/v1/clinic_workstation_registers?id=eq.'+encodeURIComponent(e.id)+'&owner_id=eq.'+encodeURIComponent(user.id)+'&revision=eq.'+encodeURIComponent(e.revision):'/rest/v1/clinic_workstation_registers';
+const r=await api(path,{method:e.id?'PATCH':'POST',headers,body:JSON.stringify(record)});
+if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
+const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This register entry changed or was removed elsewhere. Refresh the register before editing; no overwrite occurred.'});
+return reply(200,{record:saved[0]});
+}
 if(action==='delete'&&method==='POST'){if(!ID.test(body.id||'')||!UUID.test(body.revision||'')||body.confirmCode!==patientCode(body.id))return reply(400,{message:'Confirm the exact cloud patient code and latest revision.'});const r=await api('/rest/v1/clinic_patient_trends?id=eq.'+encodeURIComponent(body.id)+'&revision=eq.'+encodeURIComponent(body.revision),{method:'DELETE',headers});if(!r.ok)throw Error();const removed=await r.json();if(removed.length!==1)return reply(409,{message:'This record changed. Refresh and load its latest revision before deleting.'});return reply(200,{deleted:true,id:body.id,message:'Cloud trend history deleted. Device copies and downloaded backups are separate; minimal privacy audit events and provider backups may remain under their retention policies.'});}
 return reply(405,{message:'Unsupported action or method.'});
 }catch{return reply(502,{message:'Cloud request did not complete. Local records are unchanged; retry after checking the connection.'});}
 };}
-module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.validatePatient=validatePatient;
+module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.validatePatient=validatePatient;module.exports.validateRegister=validateRegister;
