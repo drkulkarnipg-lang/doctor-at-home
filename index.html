@@ -251,21 +251,6 @@
 <input id="bkGpsMapUrl" type="hidden" value=""/>
 </div>
 </div>
-<details class="clinical-quick-details rounded-2xl border petal-border bg-white p-3.5 space-y-3">
-  <summary class="cursor-pointer font-bold text-[#0F2942]">Optional clinical details &amp; attach latest prescription / discharge summary</summary>
-  <p class="text-[11px] leading-relaxed text-slate-600">For a faster visit request, add only what you can. You can select up to 3 PDF/image files (10 MB each). Files are not uploaded by this page; after WhatsApp opens, attach them manually in that chat. Avoid sending information you do not wish to share.</p>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    <label class="font-semibold text-slate-700">Main complaint / reason for visit<textarea id="bkComplaint" class="w-full mt-1 p-2 border rounded-xl bg-white" rows="2" placeholder="What is happening now?"></textarea></label>
-    <label class="font-semibold text-slate-700">Known medical conditions<textarea id="bkKnownCases" class="w-full mt-1 p-2 border rounded-xl bg-white" rows="2" placeholder="e.g. diabetes, heart disease; if known"></textarea></label>
-    <label class="font-semibold text-slate-700">Allergies (or write “unknown”)<input id="bkAllergies" class="w-full mt-1 p-2 border rounded-xl bg-white" type="text" placeholder="Known medicine / other allergies"/></label>
-    <label class="font-semibold text-slate-700">Previous surgeries (if any)<input id="bkSurgeries" class="w-full mt-1 p-2 border rounded-xl bg-white" type="text" placeholder="Optional"/></label>
-    <label class="font-semibold text-slate-700">Current medicines / medicine list<textarea id="bkMedicines" class="w-full mt-1 p-2 border rounded-xl bg-white" rows="2" placeholder="Optional; attach current prescription if easier"></textarea></label>
-    <label class="font-semibold text-slate-700">Last menstrual period (if relevant)<input id="bkLmp" class="w-full mt-1 p-2 border rounded-xl bg-white" type="date"/></label>
-    <label class="font-semibold text-slate-700">Temperature °C (if known)<input id="bkTemperature" class="w-full mt-1 p-2 border rounded-xl bg-white" type="number" step="0.1" inputmode="decimal" placeholder="e.g. 37.0"/></label>
-    <label class="font-semibold text-slate-700">Weight kg (if known)<input id="bkWeight" class="w-full mt-1 p-2 border rounded-xl bg-white" type="number" step="0.1" inputmode="decimal" placeholder="e.g. 65"/></label>
-    <label class="sm:col-span-2 font-semibold text-slate-700">Attach latest prescription / discharge summary (optional)<input id="bkClinicalAttachments" class="block w-full mt-1 p-2 border rounded-xl bg-white" type="file" accept="image/*,application/pdf" multiple onchange="validateBookingAttachments(this)"/><span id="bkAttachmentStatus" class="block mt-1 text-[11px] text-slate-600" role="status">No files selected.</span></label>
-  </div>
-</details>
 <!-- Time Slab with Live Auto-Detector -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
@@ -1671,30 +1656,6 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       return total;
     }
 
-    function validateBookingAttachments(input) {
-      const files = Array.from(input.files || []);
-      const status = document.getElementById('bkAttachmentStatus');
-      if (files.length > 3) {
-        input.value = '';
-        status.textContent = 'Please select no more than 3 files.';
-        alert('Please select no more than 3 files.');
-        return;
-      }
-      const maxBytes = 10 * 1024 * 1024;
-      const valid = files.every(file => {
-        const ext = file.name.split('.').pop().toLowerCase();
-        const imageByExtension = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'heic', 'heif'].includes(ext);
-        return file.size <= maxBytes && (file.type === 'application/pdf' || file.type.startsWith('image/') || (file.type === '' && (ext === 'pdf' || imageByExtension)));
-      });
-      if (!valid) {
-        input.value = '';
-        status.textContent = 'Unsupported file or a file exceeds 10 MB. Choose PDF or image files up to 10 MB each.';
-        alert('Choose PDF or image files up to 10 MB each.');
-        return;
-      }
-      status.textContent = files.length ? 'Selected: ' + files.map(file => file.name).join(', ') + '. Attach these manually after WhatsApp opens.' : 'No files selected.';
-    }
-
     function bookAndTriggerFullAutomation() {
       const getValue = id => (document.getElementById(id)?.value || '').trim();
       const name = getValue('bkPatName');
@@ -1711,22 +1672,14 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 
       const total = calculateFee();
       const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const details = [
-        ['Main complaint', getValue('bkComplaint')],
-        ['Known medical conditions', getValue('bkKnownCases')],
-        ['Allergies', getValue('bkAllergies')],
-        ['Previous surgeries', getValue('bkSurgeries')],
-        ['Current medicines', getValue('bkMedicines')],
-        ['Last menstrual period', getValue('bkLmp')],
-        ['Temperature °C', getValue('bkTemperature')],
-        ['Weight kg', getValue('bkWeight')]
-      ].filter(([, value]) => value).map(([label, value]) => `* ${label}: ${value}`).join('\n');
-      const files = Array.from(document.getElementById('bkClinicalAttachments')?.files || []);
-      const attachmentNote = files.length ? `\n*Files selected in this browser (attach manually in WhatsApp):* ${files.map(file => file.name).join(', ')}` : '';
-      const clinicalNote = details ? `\n*Optional clinical details:*\n${details}` : '';
-      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9561394341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee estimate:* ₹${total}${clinicalNote}${attachmentNote}\n\nPlease confirm visit availability and final fee with the doctor.`;
+      const patientHistory = window.BookingIntake?.bookingText() || '';
+      const msg = `*NEW BEDSIDE ICU HOME VISIT BOOKING*\n*Dr. Pramod G. Kulkarni* (9561394341)\n---------------------------------------------\n*Time:* ${timeStr}\n*Patient:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n📍 *Maps Navigation:* ${navUrl}\n*Fee estimate:* ₹${total}${patientHistory}\n\nPlease confirm visit availability and final fee with the doctor.`;
       const whatsappUrl = `https://api.whatsapp.com/send?phone=919561394341&text=${encodeURIComponent(msg)}`;
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      const opened = window.open(whatsappUrl, '_blank');
+      if (opened) opened.opener = null;
+      if (!opened) {
+        alert('Your browser blocked the WhatsApp window. Please allow pop-ups for this website or use the WhatsApp link in the patient-history section.');
+      }
     }
 
     // ARTICLE MANAGER (MOON-READER STYLE CARDS & PDF EXPORT)
