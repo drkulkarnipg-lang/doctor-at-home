@@ -156,3 +156,16 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - Current main source includes the compact language-selector layout, “Elderly care” wording, a Prescription PDF filename, blank allergy-status field, and a dedicated no-wrap registration-number class. These are source-level observations; current mobile/physical PDF appearance still needs device verification.
 - The public site was reachable through the deployment provider's successful check on a recent main commit, but the latest deployment after inventory-only merge must be checked separately. A browser-based live visual review could not be completed from this environment; do not represent source scans as live visual testing.
 - Open release gates: complete repository-wide external-link crawl; inspect every sentence/line in the source request and reconcile against this matrix; live mobile/desktop actions; real WhatsApp/PDF device handoff; Form 2/4/4A jurisdiction and separate official downloads; Supabase owner-only RLS/migration and restore test; owner email recovery; real payment gateway transaction/refund/settlement; secure cloud media; full backup and verified restore.
+
+
+## Builder continuation — 30 October 2026, 10:33 UTC
+
+- Main head `0d32effd3e729e1139d14457c8a3d85dc03ccf5f` passed regression run `41041412389`.
+- PR #55 added separate official Form 2, Form 4 and Form 4A page downloads using the official combined CRS PDF. The form page map was checked against the 23-page official PDF. Maharashtra/local Registrar applicability and live PDF rendering remain open.
+- PR #58 removed the filled green reference boxes from public “Know your numbers” cards while preserving visible, keyboard-accessible source links.
+- PR #59 compacted the Patient Portal language selector and retained the 44px mobile dropdown target and translation caution.
+- PR #60 added `data/attachment-line-traceability-2026-10-30.jsonl`: 1,059 non-empty source lines preserved from the 1,991-line attached specification. Individual source units remain open until mapped to evidence.
+- PRs #61–#62 added the opt-in link checker and GitHub Actions workflow. First audit checked 166 URLs; second audit after correcting classifications checked 163 and found zero confirmed 404/410 destinations. Exact counts and unresolved destinations are in `reports/external-link-audit-summary-2026-10-30.md` and the run artifact.
+- PR #63 replaced the broken Norton-scale source with AHRQ, changed the visible legacy MCCD link to the verified official combined CRS PDF, reclassified false-positive origins/placeholders, and fixed 405/501 reporting. CI passed before merge.
+- The public website is **not confirmed updated**: Vercel status on `0d32effd3e729e1139d14457c8a3d85dc03ccf5f` reports `Deployment rate limited — retry in 24 hours.` Do not claim publication until deployment succeeds and live smoke tests pass.
+- Still open: repository-wide link scan; manual browser checks for blocked/network-error URLs; live desktop/mobile click tests; real WhatsApp/PDF handoff; Form 2 jurisdiction; Supabase migration/RLS/restore; real owner email recovery; payment settlement/refund; secure media storage; full backup and verified restore.
