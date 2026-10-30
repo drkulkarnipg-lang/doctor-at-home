@@ -21,7 +21,7 @@ async function invoke(form,method='GET'){
    const out=await PDFDocument.load(res.body);assert.equal(out.getPageCount(),1,form+' must download as a separate one-page official form');assert.equal(out.getPage(0).getWidth(),300+index);assert.equal(out.getPage(0).getHeight(),500+index);
   }
   assert.equal(fetchCount,1,'Official source PDF is cached per warm function instance');
-  const page=fs.readFileSync('index.html','utf8');for(const form of ['2','4','4a'])assert.ok(page.includes('/api/official-form-pdf?form='+form),'Separate official Form '+form+' download link exists');assert.ok(page.includes('reverse-side instructions remain in the complete official CRS PDF reference above'),'UI explains that reverse-side instructions are in the full official reference');
+  const page=fs.readFileSync('index.html','utf8');for(const form of ['2','4','4a'])assert.ok(page.includes('/api/official-form-pdf?form='+form),'Separate official Form '+form+' download link exists');assert.ok(page.includes('https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf'),'Complete official CRS forms PDF remains directly accessible');assert.ok(page.includes('reverse-side instructions remain in the complete official CRS PDF reference above'),'UI explains that reverse-side instructions are in the full official reference');
   const bad=await invoke('999');assert.equal(bad.statusCode,400);
   const method=await invoke('4','POST');assert.equal(method.statusCode,405);assert.equal(method.headers.allow,'GET');
   console.log('Official Form 2, Form 4 and Form 4A single-page extraction checks passed.');
