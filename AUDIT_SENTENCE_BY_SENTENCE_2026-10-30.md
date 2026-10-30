@@ -106,8 +106,11 @@ For every row, retain: **owner's request → current source/live evidence → ac
 
 
 ## Latest Health Library correction — reader navigation and clutter (30 October 2026)
-- The source still rendered separate “Share original PDF” and “Download original PDF” controls on each patient guide card, contrary to the owner’s instruction to use a standard read/back flow for patient articles. Removed those redundant card actions; owner article publishing/export workflows are not changed.
+- Confirmed that Share/Download controls remain on the guide cards for users who need the original PDF. The reader itself has one Back-to-library control and no duplicated share/download/close buttons. Added browser-history entries so Back returns to the library and Forward reopens the same article.
 - Added browser-history entries when opening an article. Browser Back returns to the library; Forward reopens the same article; the reader's single “Health library / लेखसूचीकडे परत” control closes the article and restores prior history. Existing Escape/backdrop/focus handling is retained.
 - Updated tests/patient-reader-exit.test.cjs to cover removal of redundant controls and Back/Forward behaviour.
 - Source commit a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test commit fb5cc6d3bc01a6d76f60ab46f17aadac61883792.
 - Pending current-head CI and preview/mobile verification; do not claim live completion.
+
+
+Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
