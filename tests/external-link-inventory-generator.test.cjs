@@ -33,5 +33,11 @@ try{
  assert.equal(require('../scripts/generate-external-link-inventory.cjs').classifyUrl('https://www.ebi.ac.uk/europepmc/webservices/rest/','const base = \'https://www.ebi.ac.uk/europepmc/webservices/rest/\';','server/evidence-source.js','https://www.ebi.ac.uk/europepmc/webservices/rest/'),'service-endpoint','API root endpoints may return 404 to HEAD but are not broken user links');
  assert.equal(require('../scripts/generate-external-link-inventory.cjs').classifyUrl('https://translate.google.com/translate?sl=auto&tl=','return \'https://translate.google.com/translate?sl=auto&tl=\'+lang;','source-translation.js','https://translate.google.com/translate?sl=auto&tl='),'runtime-template','Machine-translation URL prefixes are assembled dynamically and should not be HEAD checked as static destinations');
  const output=path.join(root,'reports','inventory.json');writeInventory(inv,output);const saved=fs.readFileSync(output,'utf8');assert.ok(saved.endsWith('\n')&&!saved.endsWith('\\n'),'Generated inventory must end with a real newline, not a literal backslash-n');assert.deepEqual(JSON.parse(saved),inv,'Generated inventory file must parse as exactly one JSON document');
+ const committed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','external-link-inventory-2026-10-30.json'),'utf8'));
+ const current=generateInventory({sourceRevision:committed.source_revision});
+ assert.deepEqual(committed.source_files_scanned,current.source_files_scanned,'Committed inventory must cover the current active source-file set');
+ assert.deepEqual(committed.links,current.links,'Committed inventory destinations, classifications and source-line evidence must match current source');
+ assert.equal(committed.unique_extracted_destinations,current.unique_extracted_destinations,'Committed unique destination count must match regenerated inventory');
+ assert.ok(committed.source_files_scanned.length>50&&committed.unique_extracted_destinations>200,'Committed inventory must remain repository-wide, not only a small shortlist');
  console.log('Full-source link inventory generator checks passed, including valid on-disk JSON output.');
 }finally{fs.rmSync(root,{recursive:true,force:true});}
