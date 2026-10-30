@@ -50,6 +50,9 @@
     },
     "api/official-form-pdf.js": {
       "maxDuration": 30
+    },
+    "api/article-format.js": {
+      "maxDuration": 45
     }
   }
 }
