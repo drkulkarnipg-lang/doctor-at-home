@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {validateRegister}=require('../api/clinical-cloud.js');
+const daily={registerType:'daily',entryDate:'2026-10-30',patientName:'Example Only',patientCode:'PT-DEMO',age:'65',sex:'Female',visitType:'Home visit',clinicalSummary:'Test fixture only',amount:'1200',paymentStatus:'Pending'};
+assert.equal(validateRegister(daily).registerType,'daily');
+assert.throws(()=>validateRegister({...daily,entryDate:'2026-02-30'}));
+assert.throws(()=>validateRegister({...daily,patientName:''}));
+const death={registerType:'death',entryDate:'2026-10-30',patientName:'Example Only',patientCode:'PT-DEMO',age:'65',sex:'Female',deathDateTime:'2026-10-30T09:15',place:'Hospital',certificateReference:'DEMO',notes:'Test fixture only'};
+assert.equal(validateRegister(death).registerType,'death');
+assert.throws(()=>validateRegister({...death,deathDateTime:'bad'}));
+const stock={registerType:'stock',entryDate:'2026-10-30',itemName:'Example item',category:'General',batch:'DEMO',expiry:'2027-10-30',quantity:'10',unit:'packs',movement:'received',supplier:'Example supplier',reference:'DEMO',notes:'Test fixture only'};
+assert.equal(validateRegister(stock).registerType,'stock');
+assert.throws(()=>validateRegister({...stock,quantity:'-5'}));
+console.log('Register validation checks passed for synthetic daily, death and stock records.');
