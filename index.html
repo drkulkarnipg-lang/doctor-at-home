@@ -1117,7 +1117,7 @@
     }
 
     function switchDocTab(tabId) {
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
