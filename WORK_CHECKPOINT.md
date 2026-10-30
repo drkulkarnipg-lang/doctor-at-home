@@ -6,7 +6,7 @@ CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho�
 
 ## Owner pause — 26 October 2026
 
-Owner explicitly requested stopping here with work so far published. PR20 Close/A4 changes are already live and verified. No further medicine additions or agent integrations were implemented after that release; the last response only described a future sequence. STOP at this checkpoint until the owner asks to resume. On resume, read the master register and continue pending work; do not repeat released corrections or restart from zero.
+HISTORICAL PAUSE — superseded on 30 October 2026. The owner has now explicitly instructed the builder to continue without asking them to repeat requirements. PR20 Close/A4 changes remain released and must not be repeated. Continue the master register from the next unfinished row; do not restart from zero.
 
 ## Resume here
 
@@ -238,3 +238,12 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 
 
 Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
+
+
+## Latest owner-authorized release — 30 October 2026
+
+- Main commit: `233040e281ff975e151d98f77bb606768074d54f` (PR #42 merged).
+- Regression workflow `41033995852`: completed successfully on this exact commit.
+- Vercel status for this commit: success, deployment completed. Deployment success is not a substitute for feature-level live/device verification.
+- Continue from `MASTER_TASK_REGISTER.md`, using `ATTACHMENT_LINE_RECONCILIATION_2026-10-30.md` to track the newly attached source line by line. The old “STOP until owner asks” paragraph above is historical only.
+- Immediate next items: reconcile all composite requirements into atomic sub-items; verify calculator references/normal ranges for each of the 30 calculators; check actual live phone/mobile layout, tab navigation, reader language and history, document share/save/print, Form 2/4/4A jurisdictional layouts, and contact handoffs; complete provider configuration for password recovery; apply and test register migration with RLS; continue evidence-based research and article workflow without auto-publishing clinical content.
