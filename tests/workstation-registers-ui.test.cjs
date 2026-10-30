@@ -7,7 +7,7 @@ w.ClinicCloud={isSignedIn:()=>true,session:async()=>({configured:true,signedIn:t
 w.eval(script);await tick();
 assert.ok(w.document.getElementById('tabRegisters'));assert.ok(w.document.getElementById('viewRegisters'));assert.equal(w.localStorage.length,0);
 const choose=type=>w.document.querySelector('[data-register-type="'+type+'"]').click();
-choose('stock');await tick();assert.ok(w.document.getElementById('register-itemName'));assert.ok(w.document.getElementById('register-movement'));
+choose('stock');await tick();assert.ok(w.document.getElementById('register-itemName'));assert.ok(w.document.getElementById('register-movement'));assert.ok(w.document.getElementById('register-adjustmentDirection'));
 const set=(key,value)=>{w.document.getElementById('register-'+key).value=value;};
 set('entryDate','2026-10-30');set('itemName','Example item');set('quantity','5');set('unit','packs');set('movement','received');
 w.document.getElementById('registerEntryForm').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await tick();await tick();assert.equal(records.length,1);assert.equal(records[0].register_type,'stock');assert.match(w.document.getElementById('registerStatus').textContent,/Saved successfully/);
