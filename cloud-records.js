@@ -8,6 +8,7 @@ async function refresh(){const records=[];let after='';do{const d=await api('lis
 window.ClinicCloud={
 session:async()=>{try{const data=await api('session');signedIn=data.signedIn===true;paint(data.configured===true);return data;}catch(e){if(e.status===503&&e.configured===false){signedIn=false;paint(false);return {configured:false,signedIn:false};}throw e;}},
 login:async(email,password)=>{const data=await api('login',{email,password});signedIn=true;stopped.clear();paint(true);await refresh();window.dispatchEvent(new Event('clinic-owner-signed-in'));return data;},
+requestPasswordReset:async email=>api('reset-request',{email}),
 logout:async()=>{await api('logout',{});signedIn=false;for(const timer of timers.values())clearTimeout(timer);timers.clear();paint(true);$('cloudPatientSelect').replaceChildren(new Option('Choose cloud patient',''));window.dispatchEvent(new Event('clinic-owner-signed-out'));},
 isSignedIn:()=>signedIn
 };
