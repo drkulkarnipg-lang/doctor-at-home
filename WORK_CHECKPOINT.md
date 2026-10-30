@@ -417,3 +417,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **New pre-visit WhatsApp test:** commit `613103439b41b89885f136716263d51dca964234` adds synthetic-data coverage for short-history WhatsApp handoff (exact destination, included patient/complaint/medicine/allergy text, visible popup-block fallback) separately from the long-history PDF path. Syntax check passed. Await CI on this exact commit; real WhatsApp/device delivery remains unverified.
+
+
+- **WhatsApp test harness correction:** initial CI for the new short-history test failed because the stub `w.open=url=>opens.push(url)` returned the numeric array length, not a browser WindowProxy/null. This made the source handler attempt `.opener=null` on a number. Corrected the stub to record the URL and return `null` to simulate popup blocking, which exercises the intended visible fallback. New CI required on commit `10d5d5598276ed75bc6b521b9cc3d6172a30b007`.
