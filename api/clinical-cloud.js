@@ -26,6 +26,29 @@ if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'
 // Store only a short-lived secure cookie, never a refresh token or browser-storage token.
 cookie(data.access_token,Math.min(900,Number(data.expires_in)||900));return reply(200,{configured:true,signedIn:true});
 }
+if(action==='reset-request'&&method==='POST'){
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
+if(typeof body.email!=='string'||body.email.length>254||! /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(body.email.trim()))return reply(400,{message:'Enter the clinic owner email address.'});
+const generic='If this is the configured clinic owner account, a recovery email will be sent.';
+if(body.email.trim().toLowerCase()!==ownerEmail)return reply(200,{message:generic});
+const redirect='https://home-visiting-icu-doctor.vercel.app/password-reset.html';
+const sent=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
+if(sent.status===429)return reply(429,{message:'Too many recovery requests. Wait before trying again.'});
+if(!sent.ok)return reply(502,{message:'Password recovery email could not be requested. Check provider configuration; no password was changed.'});
+return reply(200,{message:generic});
+}
+if(action==='reset-password'&&method==='POST'){
+if(typeof body.accessToken!=='string'||body.accessToken.length<20||body.accessToken.length>4096||typeof body.password!=='string'||body.password.length<12||body.password.length>1024)return reply(400,{message:'Use a unique password with at least 12 characters and a valid recovery link.'});
+const recovery=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+body.accessToken}});
+if(!recovery.ok)return reply(401,{message:'Recovery link is invalid or expired. Request a new link from Doctor login.'});
+const recoveryUser=await recovery.json();
+if(recoveryUser.id!==env.CLINIC_OWNER_USER_ID)return reply(403,{message:'This recovery link is not for the clinic owner account.'});
+const updated=await api('/auth/v1/user',{method:'PUT',headers:{Authorization:'Bearer '+body.accessToken,'Content-Type':'application/json'},body:JSON.stringify({password:body.password})});
+if(updated.status===429)return reply(429,{message:'Too many password updates. Wait before trying again.'});
+if(!updated.ok)return reply(400,{message:'Password update was not accepted. Use a unique password and request a fresh link if needed.'});
+return reply(200,{updated:true,message:'Password changed. Return to Doctor login and sign in with the new password.'});
+}
 if(!token)return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Sign in with the clinic owner account.'});
 const auth=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+token}});if(!auth.ok){cookie();return reply(401,{signedIn:false,message:'Session expired. Sign in again.'});}const user=await auth.json();if(user.id!==env.CLINIC_OWNER_USER_ID){cookie();return reply(403,{message:'Owner access required.'});}
 if(action==='session'&&method==='GET')return reply(200,{configured:true,signedIn:true});
