@@ -107,8 +107,10 @@ for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler Lower
 assert.match(shared.text, /Clinical indication: Synthetic test indication/);
 const radiologyPdfText = w.buildDocumentPdfClone('radSlipSheet').textContent;
 for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler', 'Arterial Color Doppler', 'NCCT Brain', 'CT Chest', 'MRI Brain', 'MRI Spine']) {
-  assert.ok(radiologyPdfText.includes('[x]') && radiologyPdfText.includes(label),
-    `radiology PDF clone must retain the selected ${label} choice`);
+  const position = radiologyPdfText.indexOf(label);
+  assert.ok(position >= 0, `radiology PDF clone must include ${label}`);
+  assert.ok(radiologyPdfText.slice(Math.max(0, position - 10), position).includes('[x]'),
+    `radiology PDF clone must mark ${label} as selected`);
 }
 assert.match(radiologyPdfText, /\[ \]\s*Portable Digital Chest X-Ray/,
   'portable chest X-ray must remain unselected until the clinician chooses it');
