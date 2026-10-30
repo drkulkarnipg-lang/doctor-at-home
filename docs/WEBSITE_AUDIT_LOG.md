@@ -72,3 +72,12 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 - Manually test BMI calculation for valid and empty weight/height, file selection limits, consent gating, print/PDF, native share, and WhatsApp fallback using synthetic data only.
 - Visually confirm all 30 calculator cards show their reference/interpretation note, source link and disclaimer at desktop and mobile widths.
 - A GitHub commit or syntax check is not proof of production deployment or end-to-end browser functionality.
+
+
+## Header language-selector overlap — source correction (30 October 2026)
+
+- **User requirement:** The language selector must not hide the Patient Portal or Doctor Workstation controls; retain the language selector at the header and make the header usable on desktop and mobile.
+- **Root cause confirmed in source:** `index.html` used a generic `<div class="language-control">`, while the existing CSS and layout rules target a native `details.language-control[open]` element. Consequently, the intended open/closed disclosure behaviour and its in-flow expanded-panel layout were not activated by the markup.
+- **Correction committed:** Commit `0b2e049d880416f6df78c9f669bf5a74640d1367` converts the control to native `<details>/<summary>` and places it after the Patient Portal / Doctor Workstation button group. The Google Translate mount, translation status, help link, existing CSS, and both portal buttons are preserved.
+- **Source-level validation:** Exactly one language-control details element; no legacy div-based language control; Patient Portal and Doctor Workstation occur before the language panel; Google Translate mount and translation status each occur once; matching in-flow expanded-panel CSS exists. HTML source contains 483 IDs and 0 duplicated ID values.
+- **Status:** SOURCE-CONFIRMED / FIXED — PENDING LIVE VERIFICATION. The current Vercel status check still reports `build-rate-limit`; this commit is not confirmed live. Desktop/mobile visual and click testing remain required after deployment, especially 320 px, 390 px, and desktop widths. No hosting, billing, secrets, or deployment configuration was changed.
