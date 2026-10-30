@@ -1,6 +1,6 @@
 # Sentence-by-sentence audit — Dr Kulkarni website requests
 Updated: 30 October 2026 (India)
-Source of truth: owner-supplied `Pasted text(20261030-091002).txt`, 166 lines. This is an audit register, not a claim that every feature is complete. “Preview/source only” means code exists on a review branch; it is not production-verified. Device, external-provider and clinical validation are recorded separately.
+Source versions: earlier owner-supplied `Pasted text(20261030-091002).txt` and latest controlling attachment `Pasted text(20261030-092936).txt` (166 lines). The companion `ATTACHMENT_LINE_RECONCILIATION_2026-10-30.md` maps every non-empty line in the latest attachment to task IDs and open verification items. This is an audit register, not a claim that every feature is complete. “Preview/source only” means code exists on a review branch; it is not production-verified. Device, external-provider and clinical validation are recorded separately.
 
 ## Required reporting format
 For every row, retain: **owner's request → current source/live evidence → action required → verification evidence → status/blocker**. Do not close a row merely because a prompt, mock-up, code, build, or test exists. Preserve all working features, original data, backups and current branding; do not deploy without explicit release approval.
@@ -114,3 +114,8 @@ For every row, retain: **owner's request → current source/live evidence → ac
 
 
 Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
+
+
+## Latest attachment source update
+
+The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and explicitly directed the builder to continue without asking them to restate instructions. Use this latest attachment together with the earlier audit and task register; duplicated lines are retained as repeated user emphasis, not silently discarded. The line reconciliation is a traceability index, not proof of completion.
