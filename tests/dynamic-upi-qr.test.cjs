@@ -7,7 +7,7 @@ assert.match(html,/id="upiQrImg" loading="lazy" hidden/);
  const dom=new JSDOM('<a id="upiPaymentLink"></a><button id="upiCopyId"></button><p id="upiMethodStatus"></p><details id="upiQrDetails"><summary>Show QR</summary><img id="upiQrImg" hidden></details><button id="bankTransferRequest"></button><input id="calcTime"><input id="calcDistance"><div id="procedureList"><input type="checkbox"></div>',{url:'https://clinic.example.test',runScripts:'outside-only'});
  const w=dom.window,$=id=>w.document.getElementById(id),payloads=[];let fee=1200;
  w.calculateFee=()=>fee;w.openDoctorContact=()=>{};w.KulkarniQRCode={toDataURL:async(uri,options)=>{payloads.push({uri,options});return 'data:image/png;base64,SYNTHETIC_QR';}};
- w.eval(script);w.document.dispatchEvent(new w.Event('DOMContentLoaded'));await new Promise(r=>setTimeout(r,10));
+ w.eval(script);await new Promise(r=>setTimeout(r,20));
  $('upiQrDetails').open=true;$('upiQrDetails').dispatchEvent(new w.Event('toggle'));await new Promise(r=>setTimeout(r,10));
  assert.ok(payloads.length>=1,'Opening the QR control must invoke the QR generator');
  let last=payloads.at(-1);let url=new URL(last.uri);assert.equal(url.protocol,'upi:');assert.equal(url.searchParams.get('pa'),'drkulkarnipg@upi');assert.equal(url.searchParams.get('am'),'1200');assert.equal(url.searchParams.get('cu'),'INR');assert.equal(last.options.width,320);assert.equal($('upiQrImg').hidden,false);assert.match($('upiQrImg').src,/^data:image\/png;base64,/);assert.match($('upiMethodStatus').textContent,/verify the payee.*amount/i);
