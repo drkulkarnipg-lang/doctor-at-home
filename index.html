@@ -86,6 +86,15 @@
     #trendTable input[data-field="weight"],#trendTable input[data-field="height"],#trendTable input[data-field="bmi"]{background:#EAF6EE;border-color:#9DC8A9;color:#1D4930}
     #trendTable input[data-field="temperature"],#trendTable input[data-field="spo2"],#trendTable input[data-field="pulse"]{background:#F3EEFF;border-color:#B7A5E5;color:#3E2D68}
     #trendTable input[readonly]{font-weight:750;background:#E0F0E5}
+
+    /* Article-manager controls: consistent, visible, keyboard-friendly rectangular actions. */
+    .public-article-publisher .article-manager-action,.public-article-publisher .article-manager-pager button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:9px 14px;border:1px solid #C9D9D2;border-radius:8px;background:#FFFDF9;color:#0F2942;font:700 12px/1.4 Inter,sans-serif;text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;box-shadow:none;transition:background-color .15s,border-color .15s}
+    .public-article-publisher .article-manager-action:hover,.public-article-publisher .article-manager-pager button:hover{background:#EAF3EC;border-color:#8AAE9C}
+    .public-article-publisher .article-manager-action.primary{background:#275F4B;color:#fff;border-color:#275F4B}
+    .public-article-publisher .article-manager-action.secondary{background:#F2F6F4;color:#244B3B}
+    .public-article-publisher .article-manager-action:focus-visible,.public-article-publisher .article-manager-pager button:focus-visible{outline:3px solid #0F766E;outline-offset:3px}
+    .public-article-publisher .article-manager-action:disabled,.public-article-publisher .article-manager-pager button:disabled{opacity:.6;cursor:wait}
+    .article-manager-pager{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 </style>
 <script type="text/javascript">
     function googleTranslateElementInit() {
