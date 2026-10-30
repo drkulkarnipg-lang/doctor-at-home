@@ -158,7 +158,6 @@
 <!-- Navigation & Action Controls -->
 <div class="flex items-center flex-wrap gap-2">
 <!-- Language Selector -->
-<div class="language-control" aria-label="Language selector"><div class="language-row"><span id="languageSelectorLabel">Language / भाषा</span><div id="google_translate_element" aria-labelledby="languageSelectorLabel"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language from the menu. Automatic translation may not preserve medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></div>
 <div class="bg-white p-0.5 rounded-xl flex border petal-border text-xs font-semibold shadow-sm">
 <button class="px-3 py-1.5 rounded-lg bg-[#0F2942] text-white shadow font-bold transition" id="navPublicBtn" onclick="switchWorkspace('public')">
             🌐 Patient Portal
@@ -167,7 +166,7 @@
 <i class="fa-solid fa-stethoscope text-teal-600"></i> Doctor Workstation
           </button>
 </div>
-<button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
+<details class="language-control" aria-label="Language selector"><summary>🌐 Language / भाषा <span aria-hidden="true">▾</span></summary><div class="language-row"><span id="languageSelectorLabel">Language / भाषा</span><div id="google_translate_element" aria-labelledby="languageSelectorLabel"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language from the menu. Automatic translation may not preserve medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></details> <button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
 <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access</span>
 </button>
 <!-- Both GMB Profiles -->
