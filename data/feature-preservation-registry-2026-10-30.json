@@ -1,0 +1,444 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-30",
+  "repository": "https://github.com/drkulkarnipg-lang/doctor-at-home",
+  "source_revision": "6b551b4450422978d01683e0474f19047a761cf0",
+  "principle": "Inventory records implementation evidence and open verification gates; source existence alone never marks a feature fully preserved or operational.",
+  "status_legend": {
+    "source_and_tests": "Code and/or automated regression tests exist; live/manual verification may remain open.",
+    "pending_external": "Depends on credentials, provider configuration, paid service, or third-party behavior.",
+    "pending_manual": "Requires browser/device/visual verification.",
+    "blocked_sensitive": "Requires explicit authorization and verified backup before production data/schema action."
+  },
+  "features": [
+    {
+      "feature_id": "PUB-01",
+      "name": "Public homepage and navigation",
+      "source_files": [
+        "index.html",
+        "preserved-features.js"
+      ],
+      "evidence": "Automated navigation regression tests exist; live visual/device verification pending",
+      "preservation_requirement": "Preserve all destinations; repair intended navigation rather than removing links.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "PAT-01",
+      "name": "Patient Portal and language selector",
+      "source_files": [
+        "index.html",
+        "patient-language-access.js",
+        "international-portal.css"
+      ],
+      "evidence": "Automated language-access tests exist; full authored EN/MR/HI coverage and mobile layout pending",
+      "preservation_requirement": "Do not equate third-party translation widget with complete translation.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "ELD-01",
+      "name": "Elderly Care section",
+      "source_files": [
+        "index.html",
+        "preserved-features.js"
+      ],
+      "evidence": "Source and element inventory present; live navigation/device verification pending",
+      "preservation_requirement": "Keep elderly-care naming distinct from general home care.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "BOOK-01",
+      "name": "Home-visit booking form",
+      "source_files": [
+        "index.html",
+        "booking-intake.js"
+      ],
+      "evidence": "Automated booking-intake tests exist; real submission and live mobile verification pending",
+      "preservation_requirement": "Preserve current fee logic and doctor-confirmed availability.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "BOOK-02",
+      "name": "GPS, distance and timing-slab fee estimator",
+      "source_files": [
+        "index.html",
+        "preserved-features.js"
+      ],
+      "evidence": "Source inventory exists; GPS permissions, edge cases and actual location device test pending",
+      "preservation_requirement": "Do not change approved fees without evidence/authorization.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "COM-01",
+      "name": "Phone and WhatsApp contact handoffs",
+      "source_files": [
+        "index.html",
+        "contact-actions.js",
+        "booking-intake.js"
+      ],
+      "evidence": "Static links and regression tests exist; device/app handoff pending",
+      "preservation_requirement": "Recipient and message must be user-reviewable; no automatic sending.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "PRE-01",
+      "name": "Previsit history and WhatsApp/PDF sharing",
+      "source_files": [
+        "booking-intake.js",
+        "document-sharing.js"
+      ],
+      "evidence": "PR #34 has a preview and code-level checks; merge/live handoff pending",
+      "preservation_requirement": "Long histories must not be silently truncated; no cloud upload implied.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "PAY-01",
+      "name": "UPI QR display and payment options",
+      "source_files": [
+        "index.html",
+        "payment-options.js",
+        "assets/qr-code.js"
+      ],
+      "evidence": "Source/tests and main deployment exist; merchant destination and real transaction not verified",
+      "preservation_requirement": "Never claim paid/settled without server-side confirmation.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "LIB-01",
+      "name": "Health Library cards and reader",
+      "source_files": [
+        "awareness-library.js",
+        "patient-education-data.js",
+        "patient-education.css"
+      ],
+      "evidence": "Reader exit tests exist; browser Back/Forward manual verification pending",
+      "preservation_requirement": "Preserve source links and existing guide content.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "ART-01",
+      "name": "Public article pages and sitemap",
+      "source_files": [
+        "api/public-articles.js",
+        "api/article-sitemap.js",
+        "server/article-pages.js",
+        "vercel.json"
+      ],
+      "evidence": "API/SEO regression tests exist; live content/SEO crawl pending",
+      "preservation_requirement": "Keep existing slugs and source references where possible.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "ART-02",
+      "name": "Article authoring, import/export and media attachments",
+      "source_files": [
+        "public-article-editor.js",
+        "article-attachments.js",
+        "api/articles-admin.js"
+      ],
+      "evidence": "Editor/API tests exist; persistent storage and secure media upload not fully configured/verified",
+      "preservation_requirement": "Do not claim cloud media storage until configured.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "high",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "RSS-01",
+      "name": "Medical RSS and research source directory",
+      "source_files": [
+        "research-sources.js",
+        "research-feed.js",
+        "api/research-feeds.js"
+      ],
+      "evidence": "RSS regression tests exist; every feed/provider reachability and rate limits pending",
+      "preservation_requirement": "Keep source URL and licensing/attribution for imported records.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "EVD-01",
+      "name": "Evidence pipeline and review queue",
+      "source_files": [
+        "server/evidence-pipeline.js",
+        "api/evidence-workflow.js",
+        "api/evidence-webhook.js",
+        "evidence-workflow-ui.js"
+      ],
+      "evidence": "Automated workflow tests exist; provider secrets/webhook execution and scheduled operation pending",
+      "preservation_requirement": "Do not claim daily autonomous run without verified scheduler and provider.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "AI-01",
+      "name": "AI-assisted medical research links/chat",
+      "source_files": [
+        "index.html",
+        "research-feed.js",
+        "research-review.js"
+      ],
+      "evidence": "External launch links present; authenticated providers and privacy-safe end-to-end use pending",
+      "preservation_requirement": "Do not transmit identifiable patient data without approved controls.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "RX-01",
+      "name": "Prescription editor and blank medicine-row behavior",
+      "source_files": [
+        "index.html",
+        "clinical-documents.js"
+      ],
+      "evidence": "Initialization and filename tests exist; actual PDF rendering/device test pending",
+      "preservation_requirement": "Do not prefill a drug, regimen, allergy status or diagnosis.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "RX-02",
+      "name": "Prescription registration-number baseline",
+      "source_files": [
+        "index.html",
+        "tests/prescription-registration-layout.test.cjs"
+      ],
+      "evidence": "Dedicated no-wrap style and regression test exist; actual generated PDF visual test pending",
+      "preservation_requirement": "Preserve the existing registration string; do not fabricate credentials.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "DOC-01",
+      "name": "Laboratory and radiology requisitions",
+      "source_files": [
+        "index.html",
+        "clinical-documents.js"
+      ],
+      "evidence": "Source/tests exist; real PDF layout, print and device share pending",
+      "preservation_requirement": "Keep patient identity and dates correctly aligned.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "CERT-01",
+      "name": "Fitness, referral and clinical certificates",
+      "source_files": [
+        "certificate-forms.js",
+        "clinical-documents.js"
+      ],
+      "evidence": "Source/tests exist; legal-purpose, PDF and live visual verification pending",
+      "preservation_requirement": "Do not fabricate signature or professional findings.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "FORM-01",
+      "name": "Form 2, Form 4 and Form 4A",
+      "source_files": [
+        "index.html",
+        "certificate-forms.js",
+        "assets/forms/sources.json"
+      ],
+      "evidence": "Form source references identified; jurisdiction validation and separate official downloads pending",
+      "preservation_requirement": "Do not imply GHMC/CRS source is the correct local Maharashtra authority without verification.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "CALC-01",
+      "name": "Clinical calculators",
+      "source_files": [
+        "clinical-calculators.js",
+        "clinical-calculators.css"
+      ],
+      "evidence": "Calculator tests and source references exist; clinical-source/version review and UI/device testing pending",
+      "preservation_requirement": "Outputs are decision support, not diagnosis or automatic prescribing.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "CONV-01",
+      "name": "Unit converters",
+      "source_files": [
+        "unit-converters.js"
+      ],
+      "evidence": "Source and test coverage present; device usability pending",
+      "preservation_requirement": "Retain units and validate known reference conversions.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "DRUG-01",
+      "name": "Drug formulary/catalogue",
+      "source_files": [
+        "assets/drugs/rxnorm-scd.json",
+        "formulary-import.js",
+        "formulary-coverage.js"
+      ],
+      "evidence": "Catalogue and regression scripts exist; Indian product/brand completeness is not inferred from RxNorm rows",
+      "preservation_requirement": "Do not invent drug identity or silently substitute formulations.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "REG-01",
+      "name": "Patient/stock/death workstation registers",
+      "source_files": [
+        "workstation-registers.js",
+        "api/clinical-cloud.js",
+        "supabase/migrations/20261030_workstation_registers.sql"
+      ],
+      "evidence": "UI/API tests exist; Supabase migration is manual and production RLS/auth test pending",
+      "preservation_requirement": "Do not apply migration to production without reviewed backup and authorization.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "high",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "AUTH-01",
+      "name": "Doctor workstation authentication and passkeys",
+      "source_files": [
+        "workstation-auth.js",
+        "doctor-passkey.js",
+        "api/doctor-passkey.js",
+        "device-lock.js"
+      ],
+      "evidence": "Automated tests exist; owner-account provider setup and real email/device authentication pending",
+      "preservation_requirement": "No credentials or passwords in source or chat.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "high",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "REC-01",
+      "name": "Password recovery and reset",
+      "source_files": [
+        "password-recovery.js",
+        "password-reset.html",
+        "api/clinical-cloud.js"
+      ],
+      "evidence": "Source/tests exist; email provider, redirects and real inbox flow pending",
+      "preservation_requirement": "Do not claim recovery works until the email is received and reset tested.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "CLOUD-01",
+      "name": "Cloud clinical records and patient trends",
+      "source_files": [
+        "cloud-records.js",
+        "patient-trends.js",
+        "api/clinical-cloud.js",
+        "supabase/migrations/20261023_patient_trends.sql"
+      ],
+      "evidence": "Source and tests exist; Supabase configuration, permissions and restore test pending",
+      "preservation_requirement": "Do not use real patient records in tests; no production data overwrite.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "high",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "SHARE-01",
+      "name": "PDF/document sharing and download filenames",
+      "source_files": [
+        "document-sharing.js",
+        "document-sharing.css",
+        "clinical-documents.js"
+      ],
+      "evidence": "Filename/share tests exist; native device sharing and generated file bytes pending",
+      "preservation_requirement": "Fallback must be download/print; do not promise every browser supports direct share.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "SEC-01",
+      "name": "Security headers, privacy routes and authorization",
+      "source_files": [
+        "vercel.json",
+        "server/patient-privacy.js",
+        "api/clinical-cloud.js",
+        "api/articles-admin.js"
+      ],
+      "evidence": "Static security configuration and API tests exist; penetration and deployed-header verification pending",
+      "preservation_requirement": "Do not claim legal compliance based only on policy files.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "SEO-01",
+      "name": "SEO metadata, canonical URLs, robots and sitemaps",
+      "source_files": [
+        "index.html",
+        "robots.txt",
+        "sitemap.xml",
+        "sitemap-pages.xml",
+        "api/article-sitemap.js"
+      ],
+      "evidence": "SEO regression tests exist; live crawl/canonical/route checks pending",
+      "preservation_requirement": "Preserve valuable routes and avoid accidental noindex.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "DATA-01",
+      "name": "Backups, exports, recovery and feature registry",
+      "source_files": [
+        "MASTER_TASK_REGISTER.md",
+        "WORK_CHECKPOINT.md",
+        "tests/existing-feature-ids.json"
+      ],
+      "evidence": "Source inventory and checklist exist; full database/media backup and verified restoration not established",
+      "preservation_requirement": "Source-code history is not a database or media backup.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "high",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    },
+    {
+      "feature_id": "DEP-01",
+      "name": "Build, deployment and rollback",
+      "source_files": [
+        "vercel.json",
+        "GitHub Actions",
+        "Vercel project"
+      ],
+      "evidence": "Main CI passed on recorded head; Vercel check was successful for main at check time; rollback and production smoke tests pending",
+      "preservation_requirement": "Do not equate deployment readiness with every feature being operational.",
+      "release_status": "partial_or_unverified",
+      "data_loss_risk": "low_to_medium",
+      "required_next_test": "Record exact test result and deployment reference before marking live."
+    }
+  ]
+}
