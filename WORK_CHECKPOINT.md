@@ -337,3 +337,13 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Implemented in `0934b175e89b5d4882b584e00d6bd24483612017`: successful fallback share now closes the dialog, releases temporary resources and displays a toast. Status wording explicitly avoids claiming recipient delivery.
 - Regression test commit: `c37e924db498e56e8e008b80a75872580fb45a82` checks that the fallback dialog closes after a successful share. Actual phone/app testing is still required; WhatsApp URL links cannot auto-attach PDFs, so unsupported devices retain clear manual-attach instructions.
 - Next: confirm exact latest-main CI, then continue the source document's remaining high-priority tasks. Keep real-device sharing, PDF print/save and external receipt as pending until tested.
+
+
+## Article manager fetch toolbar correction — 30 October 2026
+
+- Source sentence units: `P10-L0048-S47` (fetch controls above content box) and `P10-L0048-S48` (Refresh/Load/Start controls must be visible and work).
+- Baseline: the cloud selector and Refresh/Load/Start controls were rendered in `publicArticlePublisher` below the editor content box.
+- Implemented: `3c62f7032675e84fba1444578bcba080898a4175` creates `publicCloudArticleImportToolbar` before the content box and moves the existing cloud controls there; `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e` styles it with a bordered light panel, responsive wrapping, focus indicators and 44 px minimum control height; `1f2d7fdbf4eb37153cfc38162f049ea61a40d915` adds placement and control-grouping assertions to the Article Manager test.
+- Source checks: editor and document-sharing JS syntax pass; four inline scripts in `index.html` pass syntax compilation; no duplicate HTML IDs. CI runs remain queued.
+- Limits: cloud API is exercised with synthetic test responses only. Real owner authentication, Supabase/provider configuration, cross-device storage, and mobile visual behaviour remain pending. Existing local file/media import and saved article backups are preserved.
+- Next: confirm exact latest-main regression run, then continue the remaining high-priority items from the owner document.
