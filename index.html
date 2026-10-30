@@ -447,8 +447,8 @@
 <option value="bedsore">Bedridden — individual pressure-care plan</option>
 </select>
 <button class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="saveRecordAsPrompt()">💾 Save As...</button><button type="button" class="bg-[#275f4b] hover:bg-[#1f4c3b] text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="switchDocTab('invoice')">🧾 Create invoice / receipt</button>
-<button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="savePatientPrescriptionToCloud()">
-<i class="fa-solid fa-cloud-arrow-up"></i> ☁️ Patient Cloud Save
+<button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="downloadPatientPrescriptionText()">
+<i class="fa-solid fa-cloud-arrow-up"></i> Download Prescription Text
           </button>
 <button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
@@ -1504,21 +1504,17 @@ ${adv}
 Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     }
 
-    function savePatientPrescriptionToCloud() {
+    function downloadPatientPrescriptionText() {
       const text = generatePrescriptionText();
-      const name = document.getElementById('rxPatName').value.trim() || "Patient";
       const dt = new Date().toISOString().slice(0, 10);
-      
-      const records = JSON.parse(localStorage.getItem('patientCloudPrescriptions') || '[]');
-      records.unshift({ patient: name, date: dt, content: text, timestamp: new Date().toISOString() });
-      localStorage.setItem('patientCloudPrescriptions', JSON.stringify(records));
-
       const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `Cloud_Prescription_${name.replace(/\s+/g, '_')}_${dt}.txt`;
+      a.href = url;
+      a.download = `Prescription_${dt}.txt`;
       a.click();
-      showToast("✓ Prescription Saved to Patient Cloud Storage!");
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast("Prescription text downloaded to this device. It was not uploaded to cloud storage.");
     }
 
     function saveRecordAsPrompt() {
