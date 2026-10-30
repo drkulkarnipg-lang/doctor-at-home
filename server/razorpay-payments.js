@@ -8,7 +8,7 @@ function env(){
 }
 function sameOrigin(req){
  const host=String(req.headers?.host||'').toLowerCase(),origin=String(req.headers?.origin||'').toLowerCase();
- return !!host && origin==='https://'+host && req.headers?.['sec-fetch-site']!=='cross-site';
+ return !!host && origin.startsWith('https:') && (()=>{try{return new URL(origin).host.toLowerCase()===host;}catch{return false;}})() && req.headers?.['sec-fetch-site']!=='cross-site';
 }
 function body(req){if(req.body&&typeof req.body==='object'&&!Buffer.isBuffer(req.body))return req.body;const raw=Buffer.isBuffer(req.body)?req.body.toString('utf8'):String(req.body||'');return JSON.parse(raw||'{}');}
 function safeEqualHex(a,b){if(typeof a!=='string'||typeof b!=='string'||!/^[a-f0-9]{64}$/i.test(a)||!/^[a-f0-9]{64}$/i.test(b))return false;return crypto.timingSafeEqual(Buffer.from(a,'hex'),Buffer.from(b,'hex'));}
