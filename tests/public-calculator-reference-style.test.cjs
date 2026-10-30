@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const css=fs.readFileSync('clinical-calculators.css','utf8');
+const html=fs.readFileSync('index.html','utf8');
+assert.match(css,/#calc30Grid \.calc-reference-note\{[^}]*background:transparent/i,'public Know your numbers references must not use a filled green background');
+assert.match(css,/#calc30Grid \.calc-reference-note\{[^}]*border:0/i,'public reference notes must not retain the green outline box');
+assert.match(css,/#calc30Grid \.calc-reference-link\{[^}]*border:1px solid/i,'source actions must remain visibly clickable');
+assert.match(css,/#calc30Grid \.calc-reference-link\{[^}]*min-height:36px/i,'source links must retain a comfortable touch target');
+assert.match(html,/id="calc30Grid"/,'public Know your numbers tools must remain present');
+console.log('Public health-tools reference styling checks passed: no filled green boxes; source links remain visible and tappable.');
