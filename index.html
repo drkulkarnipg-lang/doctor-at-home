@@ -1558,7 +1558,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       const articles = JSON.parse(localStorage.getItem('patientArticles') || '[]');
       articles.unshift({ title, cat, body, media: uploadedMediaData, date: new Date().toLocaleDateString('en-GB') });
       localStorage.setItem('patientArticles', JSON.stringify(articles));
-      showToast("✓ Article Published to Moon-Reader!");
+      showToast("Saved on this device only. Use the reviewed cloud publisher to publish publicly.");
       document.getElementById('newArtTitle').value = '';
       document.getElementById('newArtBody').value = '';
       uploadedMediaData = null;
