@@ -108,3 +108,7 @@ Open a review PR and keep it unmerged pending a usable preview. Once Vercel perm
 
 ## Regression CI finding — 30 October 2026
 Added `.github/workflows/regression-tests.yml` to run all existing `tests/*.test.cjs` on pull requests and relevant pushes. First run `41016442845` failed in `tests/booking-intake.test.cjs`: the assertion expected the status to include “Nothing has been shortened”, but the runtime status said “Nothing is sent automatically.” Updated `booking-intake.js` to clarify “Nothing has been shortened or sent automatically.” This is a genuine test/source wording mismatch discovered by the new automated suite, not a test to delete. Rerun CI and fix any further failures before considering PR42. Vercel remains separately blocked by the build-rate-limit status; passing CI will not imply a live deployment.
+
+
+### Converter test follow-up — 30 October 2026
+The first converter regression test correctly caught a defect in the new paired-field helper: the helper was passing its conversion callback as a unit selector instead of invoking it. Corrected the callback invocation in `release-tools.js`; rerun the complete CI suite before marking the converter fix validated. The test also verifies below-absolute-zero input clears the paired field and displays an error. Do not remove this test or soften the expected behaviour.
