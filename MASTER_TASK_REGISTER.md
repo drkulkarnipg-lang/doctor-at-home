@@ -171,3 +171,6 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 
 
 | H11 | [ ] CI PENDING — PREVIEW BLOCKED | Do not assume the patient has no known drug allergies unless verified. | Prescription field `rxAllergies` previously defaulted to `NKDA (No Known Drug Allergies)`. Changed to blank with `Confirm and document allergy status`; added regression assertion. Source commit `03d76614002a66fd1e624bd850a9bfebfb0d9a76`; test commit `95c8a45557c5190e40470e4897642eca65b1ad3b`. Verify on latest CI and preview. |
+
+
+| H12 | [ ] CI PENDING — PREVIEW BLOCKED | Health Library articles should open in a clean reader with normal browser Back/Forward behaviour, not redundant share/download controls on patient guide cards. | Removed share/download buttons from patient guide cards; added a history state per opened article and popstate handling so Back closes and Forward restores the reader. Single reader Back control remains. Tests updated in tests/patient-reader-exit.test.cjs. Source commit a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test commit fb5cc6d3bc01a6d76f60ab46f17aadac61883792. Await CI and preview/device checks. |
