@@ -165,3 +165,6 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 
 
 | H09 | [ ] CI PENDING — PREVIEW BLOCKED | Doctor Workstation Daily Patient / Death / Stock Register must open and render its fields. | Latest Actions run `41031803682` exposed a runtime exception: `makeField()` set the `type` property on a `select`/ `textarea`, which prevented the Movement select from rendering. Fixed `workstation-registers.js` to set `type` only for actual `INPUT` elements. Source commit `d4532a243587e726d708aec6ea4adced626a03b5`. Re-run all tests on latest branch head; then test actual owner/non-owner cloud access and migration/RLS separately. |
+
+
+| H10 | [ ] CI PENDING — PREVIEW BLOCKED | Prescription and requisition PDFs must use clear document-specific filenames, not the doctor's name. | Updated download actions to `Prescription.pdf`, `Lab_Requisition.pdf`, and `Radiology_Requisition.pdf`; date-stamping helper appends the India date. Added `tests/document-filenames.test.cjs`. Implementation commit `859cb6cd82e9b0b9f4fbe691aaa66059a361dfff`; test commit `74d0973f72fa3cbc8dcc97070370b112b43d3a18`. Confirm latest CI and actual device filenames. |
