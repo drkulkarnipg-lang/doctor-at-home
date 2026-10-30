@@ -49,7 +49,7 @@ function classifyUrl(url, line, relativePath, rawMatch) {
   if ((parsed.hostname === 'fonts.googleapis.com' || parsed.hostname === 'fonts.gstatic.com') &&
       (/preconnect/i.test(line) || /content-security-policy|connect-src|font-src/i.test(line))) return 'domain-allowlist';
   if ((relativePath.startsWith('api/') || relativePath.startsWith('server/')) &&
-      (/fetch\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line) || /\/europepmc\/webservices\/rest\/?$/.test(parsed.pathname))) return 'service-endpoint';
+      (/(?:fetch|request)\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line) || /\/europepmc\/webservices\/rest\/?$/.test(parsed.pathname))) return 'service-endpoint';
   return 'external-destination';
 }
 
