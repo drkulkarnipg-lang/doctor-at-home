@@ -1,0 +1,15 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const html=fs.readFileSync('index.html','utf8');
+const script=fs.readFileSync('payment-options.js','utf8');
+assert.match(html,/<summary>Payment methods · UPI \/ QR \/ gateway \/ bank transfer<\/summary>/);
+assert.match(html,/id="upiQrDetails"/,'UPI QR is available behind a deliberate Show payment QR action');
+assert.match(html,/id="razorpayPaymentStatus" disabled/,'Razorpay must remain disabled until merchant credentials and verification are configured');
+assert.match(html,/id="billdeskPaymentStatus" disabled/,'BillDesk must remain disabled until merchant credentials and verification are configured');
+assert.match(html,/id="bankTransferRequest"/,'A bank-transfer instruction request path exists without exposing account details');
+assert.match(html,/Bank account numbers are deliberately not published/);
+assert.match(script,/bankTransferRequest/,'The bank-transfer request action must be wired to the existing contact chooser');
+assert.match(script,/window\.openDoctorContact\(\)/);
+assert.doesNotMatch(html,/649601050101|icic0001802/i,'Public page must not expose private bank-account details');
+console.log('Payment-method disclosure checks passed: UPI/QR available, unconfigured gateways disabled, bank details private.');
