@@ -81,7 +81,7 @@ const labPdfText = w.buildDocumentPdfClone('pathSlipSheet').textContent;
 assert.match(labPdfText, /\\[x\\]\\s*Lipid Profile/, 'lab PDF clone must preserve selected lipid profile');
 assert.match(labPdfText, /\\[x\\]\\s*Iron Studies/, 'lab PDF clone must preserve selected iron studies');
 assert.match(labPdfText, /\\[x\\]\\s*Serum Ammonia/, 'lab PDF clone must preserve selected ammonia');
-assert.match(labPdfText, /\\[ \\]\\s*CBC \\+ Platelets/, 'unselected CBC must remain visibly unselected in the PDF clone');
+assert.match(labPdfText, /\\[ \\]\\s*CBC \+ Platelets/, 'unselected CBC must remain visibly unselected in the PDF clone');
 
 shared = null;
 d.getElementById('radPatName').value = 'Radiology Test Patient';
