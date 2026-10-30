@@ -27,5 +27,5 @@ for(const row of units){
 assert.equal(meta.mapping_version,'2.0');
 assert.equal(meta.source_document,'Pasted text.txt — complete website audit master specification');
 assert.doesNotMatch(meta.source_document,/Pasted text\(10\)/);
-assert.ok(meta.mapping_policy.includes('No item is marked fully complete'));
+assert.ok(meta.mapping_policy.includes('No item is marked complete'));
 console.log('Attachment traceability checks passed: all 1,059 non-empty source units preserved, uniquely indexed, evidence-mapped and assigned an explicit remaining gate; no unit is marked complete by inference.');
