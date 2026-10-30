@@ -34,14 +34,16 @@
     if(document.getElementById('newArtUrl').value.trim()){
       const count=pending.length;addLink();if(pending.length===count&&document.getElementById('newArtUrl').value.trim())return;
     }
+    if(!pending.length){originalPublish();return;}
     const title=document.getElementById('newArtTitle');const body=document.getElementById('newArtBody');
     if(pending.length){if(!title.value.trim())title.value=pending[0].name;if(!body.value.trim())body.value='Attached resource. Open the source and review it before using it for patient guidance.';}
     if(!title.value.trim()||!body.value.trim()){originalPublish();return;}
     const attachments=pending.map(a=>({...a}));
     try{
+      const beforeCount=JSON.parse(localStorage.getItem('patientArticles')||'[]').length;
       originalPublish();
       const articles=JSON.parse(localStorage.getItem('patientArticles')||'[]');
-      if(!articles.length)return;
+      if(articles.length!==beforeCount+1){status('The article was not saved. Your selected attachments remain available; add a title and body, then try again.');return;}
       articles[0].attachments=attachments;
       localStorage.setItem('patientArticles',JSON.stringify(articles));pending=[];list();
       renderPublishedArticles();status('Article and attachments saved in this browser. Shared online publication is not connected.');
