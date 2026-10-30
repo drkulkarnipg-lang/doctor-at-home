@@ -1,6 +1,7 @@
 'use strict';
-const assert=require('node:assert/strict');
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {validateRegister,createHandler}=require('../api/clinical-cloud.js');
+const migration=fs.readFileSync(path.join(__dirname,'../supabase/migrations/20261030_workstation_registers.sql'),'utf8');assert.match(migration,/force row level security/i);assert.match(migration,/owner_id=\(select auth\.uid\(\)\)/i);assert.doesNotMatch(migration,/grant\s+[^;]*delete/i,'Register migration must not grant deletion');
 const daily={registerType:'daily',entryDate:'2026-10-30',patientName:'Example Only',patientCode:'PT-DEMO',age:'65',sex:'Female',visitType:'Home visit',clinicalSummary:'Test fixture only',amount:'1200',paymentStatus:'Pending'};
 assert.equal(validateRegister(daily).registerType,'daily');
 assert.throws(()=>validateRegister({...daily,entryDate:'2026-02-30'}));
