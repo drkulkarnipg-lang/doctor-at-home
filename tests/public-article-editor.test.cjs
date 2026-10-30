@@ -10,11 +10,15 @@ w.eval(fs.readFileSync('public-article-editor.js','utf8'));
 const tick=()=>new Promise(resolve=>setTimeout(resolve,25));
 (async()=>{
  await tick();
- const panel=w.document.getElementById('publicArticlePublisher');assert.ok(panel,'Article manager panel should mount');
- const button=label=>[...panel.querySelectorAll('button')].find(b=>b.textContent===label);
- for(const label of ['Refresh cloud articles','Load selected cloud article','Start a new cloud article']){const b=button(label);assert.ok(b,label+' button exists');assert.ok(b.classList.contains('article-manager-action'),label+' has consistent accessible button styling');}
- assert.ok(panel.querySelector('.article-manager-pager'),'Pagination controls are grouped');
- assert.equal(panel.querySelector('.article-manager-pager').textContent,'Previous 100Next 100','Pager must not display class-name text');
+ const panel=w.document.getElementById('publicArticlePublisher');assert.ok(panel,'Article manager publishing panel should mount');
+ const toolbar=w.document.getElementById('publicCloudArticleImportToolbar');assert.ok(toolbar,'Cloud import toolbar should mount separately above the content editor');
+ assert.ok(toolbar.compareDocumentPosition(w.document.getElementById('newArtBody'))&w.Node.DOCUMENT_POSITION_FOLLOWING,'Cloud fetch controls must appear before the content box');
+ const button=label=>[...panel.querySelectorAll('button'),...toolbar.querySelectorAll('button')].find(b=>b.textContent===label);
+ for(const label of ['Refresh cloud articles','Load selected cloud article','Start a new cloud article']){const b=button(label);assert.ok(b,label+' button exists');assert.ok(toolbar.contains(b),label+' must be in the toolbar above the content box');assert.ok(b.classList.contains('article-manager-action'),label+' has consistent accessible button styling');}
+ assert.ok(toolbar.querySelector('.article-manager-pager'),'Pagination controls are grouped in the cloud toolbar');
+ assert.equal(toolbar.querySelector('.article-manager-pager').textContent,'Previous 100Next 100','Pager must not display class-name text');
+ assert.equal(w.document.getElementById('publicArticleStatus').parentElement,toolbar,'Cloud status remains visible with the controls');
+ assert.equal(w.document.getElementById('publicCloudArticleSelect').getAttribute('aria-label'),'Choose an existing cloud article to load');
  button('Refresh cloud articles').click();await tick();
  assert.ok(calls.some(c=>c.url.includes('/api/articles-admin?page=1')),'Refresh fetches cloud article metadata');
  const select=w.document.getElementById('publicCloudArticleSelect');assert.equal(select.value,'');assert.equal(select.options.length,2);
