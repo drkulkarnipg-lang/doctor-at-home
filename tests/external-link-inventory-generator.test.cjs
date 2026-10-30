@@ -9,11 +9,15 @@ const root=fs.mkdtempSync(path.join(os.tmpdir(),'external-link-inventory-'));
 try{
  fs.mkdirSync(path.join(root,'api'),{recursive:true});
  fs.mkdirSync(path.join(root,'server'),{recursive:true});
+ fs.mkdirSync(path.join(root,'server'),{recursive:true});
  fs.mkdirSync(path.join(root,'assets/forms'),{recursive:true});
  fs.mkdirSync(path.join(root,'assets/drugs'),{recursive:true});
  fs.mkdirSync(path.join(root,'tests'),{recursive:true});
  fs.writeFileSync(path.join(root,'index.html'),'<link rel="preconnect" href="https://fonts.googleapis.com"><a href="https://example.org/clinical">Reference</a><input placeholder="https://hook.eu1.make.com/...">');
  fs.writeFileSync(path.join(root,'api','provider.js'),"fetch('https://api.example.org/v1');");
+ fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
+ fs.writeFileSync(path.join(root,'source-translation.js'),"function translatedUrl(url,lang){return 'https://translate.google.com/translate?sl=auto&tl='+encodeURIComponent(lang)+'&u='+encodeURIComponent(url);}");
+ fs.writeFileSync(path.join(root,'assets','tailwind.css'),'/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}');
  fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
  fs.writeFileSync(path.join(root,'assets/forms','sources.json'),JSON.stringify([{source:'https://official.example.gov/forms.pdf'}]));
  fs.writeFileSync(path.join(root,'assets/drugs','catalog.json'),JSON.stringify([{source:'https://should-not-be-scanned.example'}]));
@@ -28,6 +32,10 @@ try{
  assert.equal(get('https://fonts.googleapis.com').classification,'domain-allowlist');
  assert.equal(get('https://hook.eu1.make.com/').classification,'placeholder');
  assert.equal(get('https://api.example.org/v1').classification,'service-endpoint');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint');
+ assert.equal(get('https://translate.google.com/translate?sl=auto&tl=').classification,'runtime-template');
+ assert.equal(get('https://tailwindcss.com').classification,'external-destination');
+ assert.equal(get('https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}'),undefined,'CSS comment delimiters must not be captured as part of a URL');
  assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint','Europe PMC root is an API base path, not a clickable public page');
  assert.equal(get('https://example.org/clinical').classification,'external-destination');
  assert.equal(get('https://official.example.gov/forms.pdf').classification,'external-destination');
