@@ -78,15 +78,16 @@ Owner explicitly asked: “mag ka thambala,jya baki pending aahet tya aatta lage
 ### Step 1 — BMI standard inputs
 PR30 “Remove age option from standard BMI calculator” merged by squash into main as `4f219c902c62445d131e5a72f7d807f14c0df436` on 30 Oct. Its source commit previously had a successful Vercel preview status, but the post-merge production deployment was still pending at the time of this checkpoint. Verify its Vercel status and live calculator before marking production verified. Do not reimplement this change.
 
-### Step 2 — current review branch: lab/radiology requisitions + live unit conversion
-Branch: `fix/requisition-share-converter`, based on current main after PR30.
-Commits:
-- `a5b2230bbe0d20b07f8a5b57876cb7d498ac645e`: `index.html` — changed requisition heading to “Lab Requisition”; added Lipid Profile (TC, LDL, HDL, TG), Iron Studies (Iron, Ferritin, TIBC), Arterial Color Doppler Lower Limb, CT Chest, MRI Brain and MRI Spine (region to be specified); updated WhatsApp/native share text to include patient name, age/sex, date, selected tests/imaging and clinical notes/indication.
-- `33cb80f1d7530644107165bcf0d9d40e5fb555cc`: `release-tools.js` — unit/temperature converter now updates on value entry and conversion-type change, including the mirrored workstation converter.
-State: IMPLEMENTED ON REVIEW BRANCH; not production. Next action: add/execute focused tests and inspect exact branch diff; open/inspect Vercel preview, test both forms and both converters, then update the register and this checkpoint. Do not merge without preview QA and explicit release authorization.
+### Step 2 — lab/radiology requisitions + live unit conversion
+The earlier review branch `fix/requisition-share-converter` was merged through PR31. Its Lab Requisition options and fee-independent Celsius/Fahrenheit and kg/lb conversion changes are now in `main`. The latest full website correction batches PR35–PR41 have also been merged; however, Vercel has since returned a build-rate-limit failure, so those merged source changes are not all verified live. Do not repeat these implementations or treat a merge as browser QA.
+
+### Current active review — UPI payee regression
+PR42: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/42
+Branch: `fix/upi-payee-single-source-20261030`, based on current main `61f4ba2012b08c212c164a30b0c4a2b8ff900a46`.
+Main source had a regression: `clinical-documents.js` overrode the visible/canonical `drkulkarnipg@upi` with `9561394341@sbi`. The branch removes that override and keeps the amount-bearing UPI URI consistent with the requested payee. Static syntax and source checks pass; the Vercel status is failing due to the build-rate-limit error. PR42 is unmerged pending a usable preview and behaviour tests.
 
 ### Remaining master register priority
-Continue one bounded item at a time from `MASTER_TASK_REGISTER.md`. First verify current Vercel deployment status, then test Step 2. Keep credentials, patient information and bank details out of source and public responses. Report each item as IMPLEMENTED / PREVIEW TESTED / PRODUCTION VERIFIED / BLOCKED with evidence.
+Continue one bounded item at a time from `MASTER_TASK_REGISTER.md`, using the actual source and test evidence. Keep credentials, patient information and bank details out of source and public responses. Report each item as IMPLEMENTED / PREVIEW TESTED / PRODUCTION VERIFIED / BLOCKED.
 
 
 ## Active work — original correction notes, UPI regression (30 October 2026)
