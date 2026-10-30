@@ -286,3 +286,8 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 ### Settings control preservation / webhook safety — 30 October 2026
 
 | H18 | [ ] CI PENDING — EXTERNAL INTEGRATION NOT CONNECTED | Preserve existing interface controls without allowing browser-side webhook secrets. | Latest regression run `41104505406` exposed that `webhookUrlInput` remained in the preservation list but had been removed from the UI. Restored the ID as a visible disabled placeholder in `ef666dc6aad56b9585e2db6b43edb2488779710c`; added assertions in `425b47d3d6a9610b1e19d0cb2bd3a2e8006fca12` that the control exists, is disabled and says server-side setup. This preserves the interface without accepting a webhook URL or credential in browser storage. Actual n8n/Make integration remains disconnected until server-side setup and end-to-end verification. |
+
+
+### Workstation register security review — 30 October 2026
+
+| H19 | [ ] CI PENDING — LIVE DATABASE TEST NOT RUN | Test daily patient, death and stock register UI/API and review RLS separately. | Existing UI/API tests use synthetic data and test all three register types, owner-only API rejection, optimistic revision conflicts, no delete action and sign-out clearing. Added `tests/workstation-registers-migration.test.cjs` in `0e4afabbf1cace202fee5ecc81411e09ebd16fc5` to check the migration source's RLS enable/force, owner+membership policies, no client member self-enrolment and no DELETE grant/policy. Migration has not been applied. Actual Supabase RLS and backup/restore require a dedicated test project and remain pending. |
