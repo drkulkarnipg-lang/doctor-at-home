@@ -124,3 +124,5 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 .clinical-tool-card strong{font-size:15px;line-height:1.4;color:#244b3b}.clinical-tool-card span{font-size:12px;line-height:1.6;color:#526a60}
 .clinical-tool-card:hover{background:#eaf4ed;border-color:#9ec9b0;transform:translateY(-1px)}
 .clinical-tool-card:focus-visible{outline:3px solid #3f8c72;outline-offset:3px}
+/* Make the clinician registration identifier legible and visually distinct on the prescription. */
+#rxSheet .rx-registration-number{font-family:Inter,sans-serif;font-size:12px;font-weight:800;letter-spacing:.045em;font-variant-numeric:tabular-nums;color:#0f2942;white-space:nowrap}
