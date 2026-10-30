@@ -1343,13 +1343,12 @@
     // 1-CLICK PRESCRIPTION FORMULARY
     function initRxPad() {
       const tbody = document.getElementById('rxTableBody');
-      tbody.innerHTML = '';
-      addRxRowWithData('Pantoprazole 40mg (Pan-40)', '1-0-0', 'Empty Stomach', '15', 'Morning 30 mins before breakfast');
-      addRxRowWithData('Cidmus 50mg (Sacubitril + Valsartan)', '1-0-1', 'After Food', '30', 'HFrEF guideline therapy');
-      addRxRowWithData('Dytor-Plus 10/50', '1-0-0', 'Morning', '15', 'Take after breakfast');
+      // Never prefill example medicines or overwrite a clinician's in-progress prescription.
+      // Create one entirely blank row only when the editor has no rows yet.
+      if (tbody.rows.length === 0) addRxRowWithData('', '', '', '', '');
     }
 
-    function addRxRow() { addRxRowWithData('', '1-0-1', 'After Food', '5', ''); }
+    function addRxRow() { addRxRowWithData('', '', '', '', ''); }
 
     function addRxRowWithData(med, freq, timing, days, advice) {
       const tbody = document.getElementById('rxTableBody');
