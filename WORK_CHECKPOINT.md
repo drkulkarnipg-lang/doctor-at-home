@@ -124,3 +124,21 @@ CI progressed past the converter checks and exposed another stale assertion in `
 
 ### UPI test syntax issue — 30 October 2026
 CI exposed a syntax error in the newly added UPI assertion: an apostrophe in its single-quoted message was not escaped. Fixed the assertion text and ran a JavaScript parse check on the complete test file successfully. The regression assertion itself remains unchanged in meaning. Rerun the full suite.
+
+
+## Regression suite green — 30 October 2026
+
+GitHub Actions run 41018433870 passed all 24 tests/*.test.cjs files on Node 22. This is a real automated test pass, not a Vercel deployment or live-browser claim.
+
+### Source fixes and test coverage now in the active PR42 branch
+- **UPI:** removed stale 9561394341@sbi override; single requested payee drkulkarnipg@upi; payment URI carries calculated fee and INR. clinical-documents.test.cjs passed.
+- **Converters:** the actual fields in index.html are paired inputs, not the legacy forms expected by release-tools.js. Diet-card rendering is now independent of conversion binding; unit-converters.js owns bidirectional conversions and rejects below-absolute-zero temperatures/negative mass. Both patient and doctor conversions are tested.
+- **Previsit history:** long-history message explicitly says nothing is shortened or sent automatically. Test passed.
+- **Health Library:** duplicated reader controls remain removed; one Back action stays in the reader. Share/Download original PDF actions are now on each library guide card, using existing local PDF assets. All 9 English and 9 Marathi guide PDFs were checked against the expected bytes; download filename and reader-exit behaviour passed.
+- **Language status:** test now checks the real translation-status region, not the form body. The translation helper safely returns if the document is unavailable during observer teardown.
+- **Homepage:** hero regression test checks the explicit “Home visits. Care at your bedside.” promise.
+- **Automation:** added .github/workflows/regression-tests.yml; it runs all 24 existing test files and does not delete or skip tests.
+
+### Still blocked
+- Vercel status on the PR head remains failure with upgradeToPro=build-rate-limit; no deployable preview exists for this batch. Do not merge or call these source changes live until the preview/production release can be verified under the project's release rules.
+- The green test suite does not verify real UPI app handoff, physical-device share/print, the owner's device passkey, production Supabase RLS, or external provider configuration.
