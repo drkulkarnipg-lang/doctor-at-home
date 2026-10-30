@@ -1,6 +1,6 @@
 # Current resumable work checkpoint
 
-Updated: 30 October 2026, India time.
+Updated: 30 October 2026, India time — owner resumed full sentence-by-sentence audit.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
@@ -170,3 +170,26 @@ Active review branch: `fix/upi-payee-single-source-20261030`; current head `cd11
 - Vercel status for the same head is **failure**: deployment rate limited, retry in 24 hours. This prevents a usable PR preview. Do not merge or claim live verification.
 - Required provider configuration for email recovery: set Vercel `CLINIC_OWNER_EMAIL` to the clinic owner's actual auth email and allowlist `https://home-visiting-icu-doctor.vercel.app/password-reset.html` in Supabase Auth redirects. These external settings are not changed from repository code and email delivery has not been verified.
 - Mobile OTP is not implemented; it remains separate from email recovery. Owner-device browser, passkey, remembered session and physical-device checks remain unverified.
+
+
+## Owner resumed full audit — 30 October 2026
+
+The owner explicitly requested: “start the audit and corrections as in the chat.” Continue the task now; do not apply the earlier 26 October stop to this newly authorised audit. Preserve the existing no-production-release-without-explicit-approval rule.
+
+### Current durable source edits
+- Created `AUDIT_SENTENCE_BY_SENTENCE_2026-10-30.md` in the active PR42 review branch, commit `4047831dbf1230b8264d63b26fa15a5a623dd2ba`. It maps the owner's attached 166-line file into 60 atomic requirement groups, with current evidence, action and verification status.
+- Updated `MASTER_TASK_REGISTER.md` in commit `a90b4998377ed18df52035d90b1442ded2549654` to point to the detailed matrix and record the current workflow/deployment blockers.
+- These are review-branch changes only. No production deployment or merge was performed.
+
+### Verified source/test evidence
+- Repository main head remains `61f4ba2012b08c212c164a30b0c4a2b8ff900a46` at the time of this audit.
+- PR42 review branch has the UPI single-source correction, bidirectional patient/workstation converters with bounds validation, password-recovery UI/API, remembered-device option, register code/migration, and tests.
+- GitHub Actions run `41025556041` passed 25 test files on commit `cd1198b800171f34f3ce5e54971647039f49d3f3`. The latest review branch has advanced since that tested SHA; run CI again against the exact latest head before declaring the current branch green.
+- Vercel deployment check reports `build-rate-limit`; no preview/live visual verification is currently available. Do not merge, bypass the limit, or claim these changes are live.
+
+### Next exact action
+1. Fetch current branch head and check whether CI ran after the audit-register commits.
+2. Run or trigger regression tests on the exact current branch head.
+3. Continue bounded source checks for UPI payee, both converters, diet presets, full previsit history, article Back/Forward and PDF share, prescription add-row visibility, forms, requisitions, and registers.
+4. Keep the register and checkpoint updated after each completed bounded step. Wait for Vercel preview availability; then verify desktop/mobile before asking for release approval.
+5. External setup blockers remain: Supabase owner-email/redirect configuration, owner-device recovery test, register migration/RLS test, and actual phone/email/PDF share/print. Do not include bank details or provider secrets in source control.
