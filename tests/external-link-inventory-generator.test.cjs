@@ -18,6 +18,68 @@ try{
  fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
  fs.writeFileSync(path.join(root,'server','ai-client.js'),"request('https://ai-gateway.vercel.sh/v1/chat/completions');");
  fs.writeFileSync(path.join(root,'source-translation.js'),"function translatedUrl(url,lang){return 'https://translate.google.com/translate?sl=auto&tl='+encodeURIComponent(lang)+'&u='+encodeURIComponent(url);}");
+ fs.writeFileSync(path.join(root,'research-feed.js'),"const RSS_PROXY='https://api.rss2json.com/v1/api.json?rss_url=
+ fs.writeFileSync(path.join(root,'assets','tailwind.css'),'/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}');
+ fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
+ fs.writeFileSync(path.join(root,'assets/forms','sources.json'),JSON.stringify([{source:'https://official.example.gov/forms.pdf'}]));
+ fs.writeFileSync(path.join(root,'assets/drugs','catalog.json'),JSON.stringify([{source:'https://should-not-be-scanned.example'}]));
+ fs.writeFileSync(path.join(root,'tests','fixture.js'),"const ignored='https://test-only.example';");
+ const inv=generateInventory({root,sourceRevision:'test-sha'});
+ assert.ok(inv.source_files_scanned.includes('index.html'));
+ assert.ok(inv.source_files_scanned.includes('api/provider.js'));
+ assert.ok(inv.source_files_scanned.includes('assets/forms/sources.json'));
+ assert.ok(!inv.source_files_scanned.some(p=>p.startsWith('tests/')));
+ assert.ok(!inv.source_files_scanned.some(p=>p.startsWith('assets/drugs/')));
+ const get=url=>inv.links.find(link=>link.url===url);
+ assert.equal(get('https://fonts.googleapis.com').classification,'domain-allowlist');
+ assert.equal(get('https://hook.eu1.make.com/').classification,'placeholder');
+ assert.equal(get('https://api.example.org/v1').classification,'service-endpoint');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint');
+ assert.equal(get('https://ai-gateway.vercel.sh/v1/chat/completions').classification,'service-endpoint');
+ assert.equal(get('https://translate.google.com/translate?sl=auto&tl=').classification,'runtime-template');
+ assert.equal(get('https://api.rss2json.com/v1/api.json?rss_url=
+ assert.equal(get('https://tailwindcss.com').classification,'external-destination');
+ assert.equal(get('https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}'),undefined,'CSS comment delimiters must not be captured as part of a URL');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint','Europe PMC root is an API base path, not a clickable public page');
+ assert.equal(get('https://example.org/clinical').classification,'external-destination');
+ assert.equal(get('https://official.example.gov/forms.pdf').classification,'external-destination');
+ console.log('Full-source link inventory generator checks passed.');
+}finally{fs.rmSync(root,{recursive:true,force:true});}
+;");
+ fs.writeFileSync(path.join(root,'assets','tailwind.css'),'/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}');
+ fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
+ fs.writeFileSync(path.join(root,'assets/forms','sources.json'),JSON.stringify([{source:'https://official.example.gov/forms.pdf'}]));
+ fs.writeFileSync(path.join(root,'assets/drugs','catalog.json'),JSON.stringify([{source:'https://should-not-be-scanned.example'}]));
+ fs.writeFileSync(path.join(root,'tests','fixture.js'),"const ignored='https://test-only.example';");
+ const inv=generateInventory({root,sourceRevision:'test-sha'});
+ assert.ok(inv.source_files_scanned.includes('index.html'));
+ assert.ok(inv.source_files_scanned.includes('api/provider.js'));
+ assert.ok(inv.source_files_scanned.includes('assets/forms/sources.json'));
+ assert.ok(!inv.source_files_scanned.some(p=>p.startsWith('tests/')));
+ assert.ok(!inv.source_files_scanned.some(p=>p.startsWith('assets/drugs/')));
+ const get=url=>inv.links.find(link=>link.url===url);
+ assert.equal(get('https://fonts.googleapis.com').classification,'domain-allowlist');
+ assert.equal(get('https://hook.eu1.make.com/').classification,'placeholder');
+ assert.equal(get('https://api.example.org/v1').classification,'service-endpoint');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint');
+ assert.equal(get('https://ai-gateway.vercel.sh/v1/chat/completions').classification,'service-endpoint');
+ assert.equal(get('https://translate.google.com/translate?sl=auto&tl=').classification,'runtime-template');
+ assert.equal(get('https://tailwindcss.com').classification,'external-destination');
+ assert.equal(get('https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}'),undefined,'CSS comment delimiters must not be captured as part of a URL');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint','Europe PMC root is an API base path, not a clickable public page');
+ assert.equal(get('https://example.org/clinical').classification,'external-destination');
+ assert.equal(get('https://official.example.gov/forms.pdf').classification,'external-destination');
+ console.log('Full-source link inventory generator checks passed.');
+}finally{fs.rmSync(root,{recursive:true,force:true});}
+).classification,'runtime-template');
+ assert.equal(get('https://tailwindcss.com').classification,'external-destination');
+ assert.equal(get('https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}'),undefined,'CSS comment delimiters must not be captured as part of a URL');
+ assert.equal(get('https://www.ebi.ac.uk/europepmc/webservices/rest/').classification,'service-endpoint','Europe PMC root is an API base path, not a clickable public page');
+ assert.equal(get('https://example.org/clinical').classification,'external-destination');
+ assert.equal(get('https://official.example.gov/forms.pdf').classification,'external-destination');
+ console.log('Full-source link inventory generator checks passed.');
+}finally{fs.rmSync(root,{recursive:true,force:true});}
+;");
  fs.writeFileSync(path.join(root,'assets','tailwind.css'),'/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box}');
  fs.writeFileSync(path.join(root,'server','evidence-source.js'),"const EUROPE_PMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';");
  fs.writeFileSync(path.join(root,'assets/forms','sources.json'),JSON.stringify([{source:'https://official.example.gov/forms.pdf'}]));
