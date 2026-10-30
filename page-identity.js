@@ -15,6 +15,7 @@ settingsTab:['Connections & settings','Manage configured workflow connections. A
 clinicalCalculators:['Clinical calculators','28 clinician tools with explicit units, formula scope and references. Review the result in the patient’s clinical context.','Clinical tools'],
 everydayTools:['Diet presets & conversions','Append individualised diet guidance; convert temperature and weight with explicit units.','Practical tools'],
 chart20:['Patient trends','Choose one patient to record and compare their measurements. Check local or cloud save status explicitly.','Patient records'],
+registers:['Practice registers','Daily patient, death and stock registers.','Practice records'],
 invoice:['Invoice / receipt','Prepare a draft invoice, verify the amount and payment status, then print or share the PDF. This page does not verify transactions.','Billing documents'],
 documentHome:['Clinical document tools','Choose a document, prepare it, and return here when finished.','Clinical documents'],
 clinicalTools:['Workstation Home','Grouped shortcuts to the existing clinical, document, research, monitoring and publishing tools.','Workstation directory']};
