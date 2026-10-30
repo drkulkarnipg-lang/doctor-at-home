@@ -28,5 +28,6 @@ r=await call(handler,'reset-password','POST',{accessToken:'synthetic-recovery-to
 r=await call(createHandler({env:recoveryEnv,request:async()=>json({id:other})}),'reset-password','POST',{accessToken:'synthetic-recovery-token-0123456789',password:'SyntheticStrong-Password-2026'});assert.equal(r.code,403);
 r=await call(handler,'reset-password','POST',{accessToken:'synthetic-recovery-token-0123456789',password:'short'});assert.equal(r.code,400);
 r=await call(createHandler({env:recoveryEnv,request:async()=>json({message:'expired'},401)}),'reset-password','POST',{accessToken:'synthetic-recovery-token-0123456789',password:'SyntheticStrong-Password-2026'});assert.equal(r.code,401);
+const bmiReading=validatePatient({id,name:'Example',cloudConsent:consent,readings:[{height:'170',weight:'70',bmi:'24.2'}]}).readings[0];assert.equal(bmiReading.height,'170');assert.equal(bmiReading.weight,'70');assert.equal(bmiReading.bmi,'24.2');
 console.log('Cloud API and owner password recovery tests passed: unconfigured fail-closed, CSRF, owner authentication, token cookie flags, no client tokens, wrong-owner rejection, optimistic conflict, validation and logout. Live RLS/integration remains untested.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
