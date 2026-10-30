@@ -1574,9 +1574,9 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         title = "Lab Requisition - Dr. Kulkarni";
         text = `*LAB REQUISITION*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nTests: ${selected.length ? selected.join(', ') : 'No preset tests selected'}${notes ? `\nAdditional tests / notes: ${notes}` : ''}\nUrgent reports: WhatsApp 9561394341`;
       } else if(type === 'rad') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        const age = document.getElementById('reqPatAge').value || "Not entered";
-        const date = document.getElementById('reqDate').value || "Not entered";
+        const name = document.getElementById('radPatName').value || "Patient";
+        const age = document.getElementById('radPatAge').value || "Not entered";
+        const date = document.getElementById('radReqDate').value || "Not entered";
         const selected = [...document.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked')].map(el => el.value);
         const indication = document.getElementById('radIndication').value.trim();
         title = "Radiology Requisition - Dr. Kulkarni";
