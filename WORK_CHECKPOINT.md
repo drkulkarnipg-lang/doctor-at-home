@@ -203,3 +203,11 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 - **Commits:** implementation `8412292db14a5ec2d195dd08c8ee84a69dcf700c`; test `df2c089892ad8d1426f7050da7328b280e909e4d`; audit matrix update `e994a1fb78728d7664c539978fa6d0c861b992d5`; master register update `a9bb4c5254c7cb80a5e7ec35033aef830dafc84f`.
 - **Status:** source correction and test are committed on PR42 review branch only. Await the regression run on the exact latest head; no preview/live/device verification yet. Do not merge or deploy.
 - **Next:** inspect the current GitHub Actions run against latest branch head, correct any failures, then continue the next high-priority open source defect. Keep the exact tested SHA in the checkpoint.
+
+
+## Latest test-driven correction — register form rendering (30 October 2026)
+
+- **Observed failure:** GitHub Actions run `41031803682` failed in `tests/workstation-registers-ui.test.cjs`. In `workstation-registers.js`, `makeField()` assigned `input.type` after creating a `select` or `textarea`; JSDOM threw in strict mode and the Stock Register Movement field did not render. This is a real UI-code defect, not merely a deployment failure.
+- **Fix committed:** set `type` only when the generated element is an `INPUT`; select and textarea fields retain their native element type. Commit `d4532a243587e726d708aec6ea4adced626a03b5`.
+- **Audit records:** `AUDIT_SENTENCE_BY_SENTENCE_2026-10-30.md` update `01a4d0fb7ecf545aab957029a6a024ac56bfb2c6`; master register update `eb83e61ae5782141fea1090b8702e325ede00b65`.
+- **Status:** correction committed on review branch; latest CI still needs to finish. Register database migration/RLS, real owner/non-owner access and Vercel preview remain unverified. Do not mark register feature complete or production-ready yet.
