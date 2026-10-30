@@ -41,6 +41,7 @@ function walk(root, directory = root, files = []) {
 
 function classifyUrl(url, line, relativePath, rawMatch) {
   if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url) ||
+      (/encodeURIComponent|encodeURI/.test(line) && /[?&](?:tl|u)=$/i.test(url)) || /[?&][^=]+ =\$$/.test(url)) return 'runtime-template';
   if (/placeholder/i.test(line) && (/hook\.eu1\.make\.com/i.test(url) || /\.\.\./.test(rawMatch))) return 'placeholder';
   let parsed;
   try { parsed = new URL(url); } catch { return 'invalid-url' }
@@ -51,7 +52,6 @@ function classifyUrl(url, line, relativePath, rawMatch) {
       (/(?:fetch|request)\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line) || /\/europepmc\/webservices\/rest\/?$/.test(parsed.pathname))) return 'service-endpoint';
   return 'external-destination';
 }
-
 function redactSensitiveQuery(url) {
   return url.replace(/([?&](?:token|api[_-]?key|secret|signature|auth|password|code)=)[^&]*/ig, '$1[REDACTED]');
 }
