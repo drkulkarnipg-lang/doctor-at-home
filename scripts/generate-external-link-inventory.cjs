@@ -40,14 +40,14 @@ function walk(root, directory = root, files = []) {
 
 function classifyUrl(url, line, relativePath, rawMatch) {
   if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url)) return 'runtime-template';
-  if (/placeholder/i.test(line) && (/hook\\.eu1\\.make\\.com/i.test(url) || /\\.\\.\\./.test(rawMatch))) return 'placeholder';
+  if (/placeholder/i.test(line) && (/hook\.eu1\.make\.com/i.test(url) || /\.\.\./.test(rawMatch))) return 'placeholder';
   let parsed;
   try { parsed = new URL(url); } catch { return 'invalid-url' }
   if (INTERNAL_HOSTS.has(parsed.hostname)) return 'internal-route-or-asset';
   if ((parsed.hostname === 'fonts.googleapis.com' || parsed.hostname === 'fonts.gstatic.com') &&
       (/preconnect/i.test(line) || /content-security-policy|connect-src|font-src/i.test(line))) return 'domain-allowlist';
   if ((relativePath.startsWith('api/') || relativePath.startsWith('server/')) &&
-      (/fetch\\s*\\(|axios|api[_-]?url|endpoint|webhook/i.test(line))) return 'service-endpoint';
+      (/fetch\s*\(|axios|api[_-]?url|endpoint|webhook/i.test(line))) return 'service-endpoint';
   return 'external-destination';
 }
 
@@ -63,10 +63,10 @@ function generateInventory({ root = path.resolve(__dirname, '..'), sourceRevisio
     let content;
     try { content = fs.readFileSync(file.full, 'utf8'); } catch { continue; }
     scanned.push(file.rel);
-    const lines = content.split(/\\r?\\n/);
+    const lines = content.split(/\r?\n/);
     for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
       const line = lines[lineIndex];
-      for (const match of line.matchAll(/https?:\\/\\/[^\\s"'<>\\x60\\\\)]+/g)) {
+      for (const match of line.matchAll(/https?:\/\/[^\s"'<>\x60\\)]+/g)) {
         const rawMatch = match[0];
         let url = rawMatch.replace(/[),.;]+$/, '').replace(/&amp;/g, '&');
         if (url.length > 1000) continue;
