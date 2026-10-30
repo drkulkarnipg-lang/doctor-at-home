@@ -47,6 +47,9 @@
     },
     "api/evidence-webhook.js": {
       "maxDuration": 180
+    },
+    "api/official-form-pdf.js": {
+      "maxDuration": 30
     }
   }
 }

@@ -1,1 +1,10 @@
-{"name":"dr-kulkarni-doctor-at-home","version":"1.2.0","private":true,"description":"Clinical workspace with allowlisted Vercel RSS endpoint","dependencies":{"fast-xml-parser":"5.11.2"}}
+{
+  "name": "dr-kulkarni-doctor-at-home",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Clinical workspace with allowlisted Vercel RSS endpoint",
+  "dependencies": {
+    "fast-xml-parser": "5.11.2",
+    "pdf-lib": "1.17.1"
+  }
+}

@@ -27,3 +27,15 @@ Print and PDF output use the selected sheet only and replace form controls with 
 ## Verification
 
 Preserved all existing element IDs and inline application scripts, retained the clinical document and legal form selectors, consent/referral actions and existing external links. Browser checks cover all five editable forms, blank defaults, inclusive leave dates and reversed-date handling, selected-only printing, multiline/value preservation and no document overflow at 360px. PDF pages were rendered and visually reviewed. No test patient data is included in the website.
+
+
+## Separate one-page official blank downloads — 30 October 2026
+
+The app now exposes separate download routes for the **official blank form page only**:
+- Form 2: `/api/official-form-pdf?form=2` — zero-based page index 4 (PDF page 5).
+- Form 4: `/api/official-form-pdf?form=4` — zero-based page index 8 (PDF page 9).
+- Form 4A: `/api/official-form-pdf?form=4a` — zero-based page index 10 (PDF page 11).
+
+Source: Government of India Civil Registration System, `https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf` (23-page combined official PDF; each form is followed by its reverse-side instructions). The endpoint extracts the single form page so each form downloads separately; the complete official PDF reference remains available for instructions.
+
+**Important:** this preserves the central CRS form page exactly, but local registrars may prescribe state/local variants or additional instructions. Confirm the current Maharashtra/Pune Registrar requirements before official filing. Editable website working-layout PDFs remain separate and must not be described as exact facsimiles of the government original.
