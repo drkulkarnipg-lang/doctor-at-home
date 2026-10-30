@@ -1232,6 +1232,11 @@
       });
       const activeElem = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
       if(activeElem) activeElem.classList.remove('hidden');
+      // The owner requested RSS and the private evidence agent inside Article Manager as well as a dedicated shortcut tab.
+      if(tabId==='articlesHub'){
+        const research=document.getElementById('viewJournalsHub');
+        if(research)research.classList.remove('hidden');
+      }
     }
 
     function switchClinicalDocView(val) {
