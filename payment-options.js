@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const copy=$('upiCopyId'),details=$('upiQrDetails'),link=$('upiPaymentLink');
  if(link){link.addEventListener('click',()=>{if(typeof window.calculateFee==='function')window.calculateFee();});}
  if(copy)copy.addEventListener('click',copyUpi);
+ const transfer=$('bankTransferRequest');if(transfer)transfer.addEventListener('click',()=>{if(typeof window.openDoctorContact==='function')window.openDoctorContact();else{const status=$('upiMethodStatus');if(status)status.textContent='Use the Contact the doctor options to request verified transfer instructions.';}});
  if(details)details.addEventListener('toggle',()=>{if(details.open&&typeof window.calculateFee==='function')window.calculateFee();});
  const controls=[$('calcTime'),$('calcDistance'),...document.querySelectorAll('#procedureList input[type="checkbox"]')].filter(Boolean);
  controls.forEach(control=>{control.addEventListener('input',()=>{if(typeof window.calculateFee==='function')window.calculateFee();});control.addEventListener('change',()=>{if(typeof window.calculateFee==='function')window.calculateFee();});});
