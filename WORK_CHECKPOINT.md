@@ -347,3 +347,10 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Source checks: editor and document-sharing JS syntax pass; four inline scripts in `index.html` pass syntax compilation; no duplicate HTML IDs. CI runs remain queued.
 - Limits: cloud API is exercised with synthetic test responses only. Real owner authentication, Supabase/provider configuration, cross-device storage, and mobile visual behaviour remain pending. Existing local file/media import and saved article backups are preserved.
 - Next: confirm exact latest-main regression run, then continue the remaining high-priority items from the owner document.
+
+
+## Pre-visit compact-form regression — 30 October 2026
+
+- CI run `41103557791` failed on commit `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e`: `tests/booking-intake.test.cjs` expected sections 1 and 2 open but source opened only section 2. The page's quick-start text also instructs users to complete sections 1 and 2.
+- Corrected `booking-intake.js` in `cc51e9b431820d9852f1f064f8fed6b0defe9ed4`: open only section 1 (patient context) and section 2 (current problem); sections 3–6 stay collapsed. No history fields were removed.
+- Latest-main CI must pass this correction before marking the form compactness task CI-verified. Vercel build-rate-limit still blocks live/mobile verification.
