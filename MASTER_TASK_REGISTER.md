@@ -1,6 +1,6 @@
 # Dr Kulkarni — permanent request and completion register
 
-Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers requests available from the 25–26 October conversation, recovered prior-context requests, and the project's recorded outstanding commitments. This is the current checklist; older completion claims do not override it. Retrieved requests without implementation evidence stay open. This is not a claim to possess a complete archive of every separate conversation.
+Updated: 30 October 2026 (India; sentence-by-sentence audit resumed; language selector markup fix committed). Covers requests available from the 25–26 October conversation, recovered prior-context requests, and the project's recorded outstanding commitments. This is the current checklist; older completion claims do not override it. Retrieved requests without implementation evidence stay open. This is not a claim to possess a complete archive of every separate conversation.
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
 
@@ -27,7 +27,7 @@ Updated: 30 October 2026 (India; sentence-by-sentence audit resumed). Covers req
 | A07 | [x] LIVE | Separate DOB day/month/year boxes and exact age | Date validation, India date and years/months/days calculation tested. Manual age remains. |
 | A08 | [ ] VERIFY | Search button can search “anything in front of it” | Global health search exists in current source; universal cross-module search coverage/intent not established. Do not call every module searchable yet. |
 | A09 | [ ] PARTIAL | Native three-language dropdown and patient form language | English/Marathi authored patient fields exist. Full EN/HI/MR authored UI/articles, translation correctness and all language flows not verified. External translation is not indexed Hindi content. |
-| A10 | [ ] VERIFY | Header/language menu easy to use on phone | Earlier menu fixes recorded; audit's compact header, readable text and touch-target issues need current visual check. |
+| A10 | [ ] PARTIAL | Header/language menu easy to use on phone and must not hide portal controls | Root cause confirmed: header used a generic div although the in-flow open-panel CSS targets details[open]. Commit 0b2e049 converts it to details/summary and places it after Patient Portal/Doctor Workstation controls. Source checks: 483 IDs, zero duplicates; Google Translate mount retained. Live desktop/mobile verification remains blocked by Vercel build-rate-limit. |
 
 ## B. Formulary — actual live data, not just reference links
 
