@@ -20,7 +20,7 @@ const fixtures={
 29:[{bili:1,albumin:4,inr:1.2,ascites:'1',enceph:'1'},5],
 30:[{temp:'0',map:'0',hr:'0',rr:'0',oxygen:'low',oxygenValue:90,acid:'ph',ph:'0',na:'0',k:'0',cr:'0',arf:'0',hct:'0',wbc:'0',gcs:15,age:40,chronic:'0'},0]
 };
-assert.equal(calculators.length,30);assert.equal(new Set(calculators.map(c=>c.id)).size,30);checks+=2;
+assert.equal(calculators.length,30);assert.equal(new Set(calculators.map(c=>c.id)).size,30);assert.ok(calculators.every(c=>c.note&&c.note.trim()&&/^https:\/\//.test(c.url)),'Every calculator must include a reference/interpretation note and a source link');const a1c=calculators.find(c=>c.id===5);assert.match(a1c.note,/<5\.7%/);assert.match(a1c.note,/5\.7–6\.4%/);assert.match(a1c.note,/≥6\.5%/);assert.match(a1c.note,/not personal treatment targets/);assert.equal(a1c.interpretationUrl,'https://diabetes.org/about-diabetes/diagnosis');checks+=7;
 for(const c of calculators){const [v,x]=fixtures[c.id];near(c.id,v,x);reject(c.id,{});for(const field of c.fields){if(field.when&&!field.when(v))continue;for(const bad of ['',null,undefined,'garbage',field.type==='number'?Infinity:'unlisted'])reject(c.id,{...v,[field.key]:bad});if(field.type==='number'){reject(c.id,{...v,[field.key]:field.min-1});if(Number.isFinite(field.max))reject(c.id,{...v,[field.key]:field.max+1});}}}
 near(4,{...fixtures[4][0],sex:'female'},68);
 assert.equal(calculate(6,{eye:'4',verbal:'NT',motor:'6'}).value,null);checks++;

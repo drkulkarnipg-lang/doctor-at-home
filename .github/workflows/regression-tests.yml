@@ -1,0 +1,45 @@
+name: Regression tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "fix/**", "audit/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regression-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked project dependencies
+        run: npm ci
+      - name: Install DOM test dependency without changing the lockfile
+        run: npm install --no-save --package-lock=false jsdom@26.1.0
+      - name: Run every repository regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          for test_file in tests/*.test.cjs; do
+            echo "::group::${test_file}"
+            node "${test_file}"
+            echo "::endgroup::"
+            count=$((count + 1))
+          done
+          test "${count}" -gt 0
+          echo "Completed ${count} regression test files."
