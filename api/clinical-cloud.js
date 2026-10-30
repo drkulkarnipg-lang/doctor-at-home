@@ -7,7 +7,7 @@ function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.
 const REGISTER_FIELDS={
 daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
 death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
-stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,supplier:160,reference:120,notes:2000}
+stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,adjustmentDirection:20,supplier:160,reference:120,notes:2000}
 };
 function validISODate(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const d=new Date(value+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;}
 function validateRegister(entry){
@@ -26,6 +26,7 @@ if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(data.deathDateTime)||!Number.isFinite(
 if(entry.registerType==='stock'){
 if(!data.itemName||!data.unit||!['received','issued','adjustment'].includes(data.movement))throw Error('Enter the item, unit and stock movement.');
 if(!data.quantity||!Number.isFinite(Number(data.quantity))||Number(data.quantity)<=0)throw Error('Enter a quantity greater than zero.');
+if(data.movement==='adjustment'&&!['increase','decrease'].includes(data.adjustmentDirection))throw Error('Choose whether the stock adjustment increases or decreases quantity.');
 if(data.expiry&&!validISODate(data.expiry))throw Error('Enter a valid expiry date or leave it blank.');
 }
 if(entry.registerType==='daily'&&data.amount&&(!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>10000000))throw Error('Enter a valid non-negative INR amount.');
