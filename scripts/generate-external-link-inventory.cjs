@@ -40,7 +40,8 @@ function walk(root, directory = root, files = []) {
 }
 
 function classifyUrl(url, line, relativePath, rawMatch) {
-  if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url)) return 'runtime-template';
+  if (url.includes('${') || rawMatch.includes('${') || /<[^>]+>/.test(url) ||
+      (/encodeURIComponent|encodeURI/.test(line) && /[?&](?:tl|u)=$/i.test(url))) return 'runtime-template';
   if (/placeholder/i.test(line) && (/hook\.eu1\.make\.com/i.test(url) || /\.\.\./.test(rawMatch))) return 'placeholder';
   let parsed;
   try { parsed = new URL(url); } catch { return 'invalid-url' }
@@ -67,7 +68,7 @@ function generateInventory({ root = path.resolve(__dirname, '..'), sourceRevisio
     const lines = content.split(/\r?\n/);
     for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
       const line = lines[lineIndex];
-      for (const match of line.matchAll(/https?:\/\/[^\s"'<>\x60\\)]+/g)) {
+      for (const match of line.matchAll(/https?:\/\/[^\s"'<>\x60\\)\*{}]+/g)) {
         const rawMatch = match[0];
         let url = rawMatch.replace(/[),.;]+$/, '').replace(/&amp;/g, '&');
         if (url.length > 1000) continue;
