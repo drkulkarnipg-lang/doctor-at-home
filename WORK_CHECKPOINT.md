@@ -211,3 +211,12 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 - **Fix committed:** set `type` only when the generated element is an `INPUT`; select and textarea fields retain their native element type. Commit `d4532a243587e726d708aec6ea4adced626a03b5`.
 - **Audit records:** `AUDIT_SENTENCE_BY_SENTENCE_2026-10-30.md` update `01a4d0fb7ecf545aab957029a6a024ac56bfb2c6`; master register update `eb83e61ae5782141fea1090b8702e325ede00b65`.
 - **Status:** correction committed on review branch; latest CI still needs to finish. Register database migration/RLS, real owner/non-owner access and Vercel preview remain unverified. Do not mark register feature complete or production-ready yet.
+
+
+## Latest correction — prescription/requisition filenames (30 October 2026)
+
+- Fixed three PDF download buttons that still used doctor-name filenames: `Prescription_Dr_Kulkarni.pdf`, `Lab_Requisition_Dr_Kulkarni.pdf`, and `Radiology_Requisition_Dr_Kulkarni.pdf`.
+- New base names: `Prescription.pdf`, `Lab_Requisition.pdf`, and `Radiology_Requisition.pdf`. Existing date-stamping remains enabled.
+- Added `tests/document-filenames.test.cjs`.
+- Commits: source `859cb6cd82e9b0b9f4fbe691aaa66059a361dfff`; test `74d0973f72fa3cbc8dcc97070370b112b43d3a18`.
+- Await CI on the latest head and device confirmation. Continue checking that the generated prescription excludes unwanted website footer/contact metadata and that registration number typography is aligned.
