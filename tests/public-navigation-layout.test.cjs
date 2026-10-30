@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const css=fs.readFileSync('workstation.css','utf8'),html=fs.readFileSync('index.html','utf8');
+const nav=css.match(/\.portal-nav\{([^}]*)\}/);
+assert.ok(nav,'Public navigation style exists');
+assert.match(nav[1],/display:flex/);
+assert.match(nav[1],/flex-wrap:wrap/,'Navigation links must wrap instead of being hidden off-screen');
+assert.match(nav[1],/overflow:visible/,'Navigation must not require horizontal scrolling to reveal tabs');
+assert.match(nav[1],/white-space:normal/,'Navigation labels may wrap on narrow screens');
+assert.doesNotMatch(nav[1],/overflow-x:auto|white-space:nowrap/);
+assert.ok(css.includes('.portal-nav{padding:10px 16px;gap:8px 12px;overflow:visible;white-space:normal;flex-wrap:wrap}'),'Mobile navigation explicitly wraps');
+assert.ok(css.includes('html{scroll-padding-top:280px}'),'Anchor targets account for the expanded mobile header');
+assert.ok(html.includes('@media(max-width:640px){.language-control{flex:1 1 100%;width:100%;padding:5px 0}'),'Language selector stays in normal flow at mobile width');
+console.log('Responsive navigation checks passed: all links wrap visibly and the language selector cannot cover the navigation row.');
