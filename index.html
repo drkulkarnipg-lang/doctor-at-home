@@ -1547,7 +1547,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     function universalShareDocument(type) {
       if (type === 'rx') {
         if (typeof window.shareDocumentPdf === 'function') {
-          window.shareDocumentPdf('rxSheet', 'Prescription', { direct: true });
+          window.shareDocumentPdf('rxSheet', 'Prescription', { direct: true, recipientPhone: document.getElementById('rxPatPhone')?.value || '' });
         } else {
           showToast('Prescription PDF sharing is not ready. Use Print or Export PDF; nothing was sent.');
         }
