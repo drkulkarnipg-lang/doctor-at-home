@@ -22,10 +22,12 @@ assert.equal(d.querySelectorAll('#pathCheckboxesGrid input[type="checkbox"]:chec
 assert.equal(d.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked').length, 0,
   'radiology tests must all start unselected');
 
-// Radiology needs its own patient identity fields; it must not borrow the hidden lab form's values.
-for (const id of ['radPatName', 'radPatAge', 'radReqDate']) {
-  assert.ok(d.getElementById(id), `radiology-specific patient field ${id} must exist`);
-}
+// The clinical document module creates the radiology identity/date/time fields at runtime.
+const clinicalDocuments = fs.readFileSync('clinical-documents.js', 'utf8');
+assert.match(clinicalDocuments, /field\(row,'radPatName','Patient name'/);
+assert.match(clinicalDocuments, /field\(row,'radPatAge','Age \/ sex'/);
+assert.match(clinicalDocuments, /field\(row,'radDate','Document date'/);
+assert.match(clinicalDocuments, /field\(row,'radTime','Time \(IST\)'/);
 for (const id of ['rad_usg', 'rad_dop_v', 'rad_dop_a', 'rad_ct_brain', 'rad_ct_chest', 'rad_mri_brain', 'rad_mri_spine']) {
   assert.ok(d.getElementById(id), `radiology choice ${id} must exist`);
 }
@@ -36,6 +38,17 @@ assert.match(d.getElementById('rad_ct_brain').value, /NCCT Brain/);
 assert.match(d.getElementById('rad_ct_chest').value, /CT Chest/);
 assert.match(d.getElementById('rad_mri_brain').value, /MRI Brain/);
 assert.match(d.getElementById('rad_mri_spine').value, /MRI Spine/);
+
+// Execute the real clinical document mount so its dynamic radiology fields are tested.
+w.calculateFee = () => 100;
+w.switchDocTab = () => {};
+w.scrollTo = () => {};
+w.HTMLElement.prototype.scrollIntoView = () => {};
+w.eval(clinicalDocuments);
+w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+for (const id of ['radPatName', 'radPatAge', 'radDate', 'radTime']) {
+  assert.ok(d.getElementById(id), `runtime radiology patient field ${id} must exist`);
+}
 
 // Execute the actual share function against synthetic data and verify chosen tests + correct patient identity.
 const start = html.indexOf('function universalShareDocument(type) {');
@@ -55,7 +68,7 @@ w.universalShareDocument('path');
 assert.ok(shared, 'lab share should hand the prepared requisition to the share API');
 assert.match(shared.text, /Patient: Lab Test Patient/);
 assert.match(shared.text, /Age\/Sex: 64 Y \/ F/);
-assert.match(shared.text, /Date: 31\/10\/2026/);
+assert.match(shared.text, /Date: 2026-10-31/);
 assert.match(shared.text, /Lipid Profile/);
 assert.match(shared.text, /Iron Studies/);
 assert.match(shared.text, /Serum Ammonia/);
@@ -63,7 +76,7 @@ assert.match(shared.text, /Serum Ammonia/);
 shared = null;
 d.getElementById('radPatName').value = 'Radiology Test Patient';
 d.getElementById('radPatAge').value = '71 Y / M';
-d.getElementById('radReqDate').value = '31/10/2026';
+d.getElementById('radDate').value = '2026-10-31';
 d.getElementById('rad_usg').checked = true;
 d.getElementById('rad_dop_v').checked = true;
 d.getElementById('rad_dop_a').checked = true;
