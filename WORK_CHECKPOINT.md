@@ -354,3 +354,10 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - CI run `41103557791` failed on commit `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e`: `tests/booking-intake.test.cjs` expected sections 1 and 2 open but source opened only section 2. The page's quick-start text also instructs users to complete sections 1 and 2.
 - Corrected `booking-intake.js` in `cc51e9b431820d9852f1f064f8fed6b0defe9ed4`: open only section 1 (patient context) and section 2 (current problem); sections 3–6 stay collapsed. No history fields were removed.
 - Latest-main CI must pass this correction before marking the form compactness task CI-verified. Vercel build-rate-limit still blocks live/mobile verification.
+
+
+## Long-history booking-message regression — 30 October 2026
+
+- Workflow run `41104015232` on `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` passed the essential-section-open assertion but failed later in `tests/booking-intake.test.cjs`: the long-history booking message did not include the explicit requirement to attach the complete PDF.
+- Corrected `booking-intake.js` in `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc`: the message now says the booking link cannot attach files and requires the user to attach the PDF/originals separately or use the dedicated device share-sheet workflow.
+- Latest-main CI is still required; real WhatsApp/PDF recipient-side delivery remains unverified. Continue with the next source audit while the exact-head regression is pending.
