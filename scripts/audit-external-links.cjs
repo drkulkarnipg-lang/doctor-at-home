@@ -98,6 +98,20 @@ async function runAudit({ inventoryPath = INVENTORY, fetchImpl = globalThis.fetc
   };
 }
 
+function summarizeReport(report, outputPath = 'stdout') {
+  const unresolved = report.results.filter(result => !['reachable', 'skipped'].includes(result.outcome));
+  return {
+    candidates_checked: report.candidates_checked,
+    counts: report.counts,
+    unresolved_destinations: unresolved.map(({ url, outcome, http_status, method, reason, error, source_files }) => ({
+      url, outcome, http_status: http_status ?? null, method: method ?? null,
+      reason: reason ?? error ?? 'Requires manual verification.',
+      source_files: source_files || []
+    })),
+    output: outputPath
+  };
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const limitArg = args.find(arg => arg.startsWith('--limit='));
@@ -111,12 +125,13 @@ async function main() {
   const inventoryPath = inventoryArg ? path.resolve(inventoryArg.split('=').slice(1).join('=')) : INVENTORY;
   const report = await runAudit({ inventoryPath, limit, concurrency, timeoutMs });
   const json = JSON.stringify(report, null, 2) + '\n';
+  let outputPath = 'stdout';
   if (outputArg) {
-    const target = path.resolve(outputArg.split('=').slice(1).join('='));
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    fs.writeFileSync(target, json);
+    outputPath = path.resolve(outputArg.split('=').slice(1).join('='));
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, json);
   }
-  console.log(JSON.stringify({ candidates_checked: report.candidates_checked, counts: report.counts, output: outputArg ? path.resolve(outputArg.split('=').slice(1).join('=')) : 'stdout' }, null, 2));
+  console.log(JSON.stringify(summarizeReport(report, outputPath), null, 2));
 }
 
 if (require.main === module) main().catch(error => {
@@ -124,4 +139,4 @@ if (require.main === module) main().catch(error => {
   process.exitCode = 1;
 });
 
-module.exports = { classifyStatus, checkOne, runPool, runAudit };
+module.exports = { classifyStatus, checkOne, runPool, runAudit, summarizeReport };
