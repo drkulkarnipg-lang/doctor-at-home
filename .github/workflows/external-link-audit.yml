@@ -34,6 +34,15 @@ jobs:
       - name: Check public external destinations
         run: |
           npm run audit:links -- --inventory=reports/external-link-inventory-${{ github.run_id }}.json --concurrency=3 --timeout=10000 --output=reports/external-link-check-${{ github.run_id }}.json
+      - name: Print unresolved destination details
+        if: success()
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const report = JSON.parse(fs.readFileSync('reports/external-link-check-${{ github.run_id }}.json', 'utf8'));
+          const unresolved = report.results.filter(item => !['reachable', 'skipped'].includes(item.outcome));
+          console.log(JSON.stringify(unresolved.map(({url, source_files, outcome, http_status, final_url, method, reason, error}) => ({url, source_files, outcome, http_status, final_url, method, reason, error})), null, 2));
+          NODE
       - name: Upload inventory and link-check report
         uses: actions/upload-artifact@v4
         with:
