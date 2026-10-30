@@ -28,6 +28,7 @@
    const order=await post('/api/razorpay-order',{bookingReference,appointmentConfirmed:true});
    if(!order.keyId||!order.orderId||order.amount!==50000||order.currency!=='INR')throw Error('The server returned an invalid consultation order.');
    await loadCheckout();
+   let checkoutOpened=false;
    const checkout=new window.Razorpay({
     key:order.keyId,amount:order.amount,currency:order.currency,name:'Dr. Pramod G. Kulkarni',
     description:'Online consultation — ₹500',order_id:order.orderId,
@@ -41,14 +42,15 @@
        setStatus('Payment capture verified by the provider. Keep your receipt. The doctor’s appointment confirmation and consultation remain separate steps.');
       }else setStatus('Payment verification is incomplete. Do not assume success; contact the doctor with your provider receipt.');
      }catch(error){setStatus((error.message||'Payment verification failed.')+' Do not assume success; contact the doctor with your provider receipt.');}
+     finally{busy=false;button.disabled=!checkbox.checked;}
     },
-    modal:{ondismiss:()=>setStatus('Checkout closed. Payment is not confirmed by closing the window; if your app shows a debit, keep the receipt and contact the doctor for verification.')},
+    modal:{ondismiss:()=>{setStatus('Checkout closed. Payment is not confirmed by closing the window; if your app shows a debit, keep the receipt and contact the doctor for verification.');busy=false;button.disabled=!checkbox.checked;}},
     theme:{color:'#0F2942'}
    });
    checkout.on('payment.failed',event=>setStatus('The payment provider reported a failure. No appointment is confirmed. '+(event?.error?.description||'Please contact the doctor if money appears to have been debited.')));
-   checkout.open();
+   checkout.open();checkoutOpened=true;
    setStatus('Secure checkout opened. Approve only after verifying the merchant and amount.');
   }catch(error){setStatus((error.message||'Secure checkout is unavailable.')+' No payment success is recorded.');}
-  finally{busy=false;button.disabled=!checkbox.checked;}
+  finally{if(!checkoutOpened){busy=false;button.disabled=!checkbox.checked;}}
  });
 })();

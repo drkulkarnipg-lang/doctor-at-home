@@ -1,6 +1,5 @@
 'use strict';
 const {env,safeEqualHex,hmac,db}=require('../server/razorpay-payments');
-module.exports.config={api:{bodyParser:false}};
 module.exports=async function(req,res){
  res.setHeader('Cache-Control','no-store');
  if(req.method!=='POST')return res.status(405).end('Use POST.');
@@ -34,3 +33,4 @@ module.exports=async function(req,res){
   return res.status(200).json({received:true});
  }catch{return res.status(500).end('Webhook processing failed; provider may retry.');}
 };
+module.exports.config={api:{bodyParser:false}};
