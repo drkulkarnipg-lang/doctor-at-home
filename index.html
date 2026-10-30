@@ -447,8 +447,8 @@
 <option value="bedsore">Bedridden — individual pressure-care plan</option>
 </select>
 <button class="bg-[#0F2942] hover:bg-slate-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="saveRecordAsPrompt()">💾 Save As...</button><button type="button" class="bg-[#275f4b] hover:bg-[#1f4c3b] text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow" onclick="switchDocTab('invoice')">🧾 Create invoice / receipt</button>
-<button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="downloadPatientPrescriptionText()">
-<i class="fa-solid fa-cloud-arrow-up"></i> Download Prescription Text
+<button class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="savePatientPrescriptionLocally()">
+<i class="fa-solid fa-cloud-arrow-up"></i> Save Locally & Download Text
           </button>
 <button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('rxSheet', 'Prescription.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export PDF
@@ -1504,17 +1504,29 @@ ${adv}
 Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
     }
 
-    function downloadPatientPrescriptionText() {
+    function savePatientPrescriptionLocally() {
       const text = generatePrescriptionText();
-      const dt = new Date().toISOString().slice(0, 10);
+      const name = document.getElementById('rxPatName').value.trim() || "Patient";
+      const dt = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).reduce((o,p)=>(o[p.type]=p.value,o),{});
+      const date = `${dt.year}-${dt.month}-${dt.day}`;
+      let localSaved = false;
+      try {
+        const records = JSON.parse(localStorage.getItem('patientCloudPrescriptions') || '[]');
+        const safeRecords = Array.isArray(records) ? records : [];
+        safeRecords.unshift({ patient: name, date, content: text, timestamp: new Date().toISOString() });
+        localStorage.setItem('patientCloudPrescriptions', JSON.stringify(safeRecords));
+        localSaved = true;
+      } catch (error) {
+        console.warn('Local prescription archive unavailable; continuing with download only.', error);
+      }
       const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Prescription_${dt}.txt`;
+      a.download = `Prescription_${date}.txt`;
       a.click();
       window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-      showToast("Prescription text downloaded to this device. It was not uploaded to cloud storage.");
+      showToast(localSaved ? 'Saved in this browser and downloaded. Not uploaded to cloud; local browser storage is not encrypted.' : 'Downloaded to this device. Local browser save was unavailable; nothing was uploaded to cloud.');
     }
 
     function saveRecordAsPrompt() {
