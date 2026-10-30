@@ -874,11 +874,6 @@
 </div>
 <span class="bg-purple-100 text-purple-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Radiology Requisition</span>
 </div>
-<div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border" id="radPatientDetails">
-<div>Patient: <input class="font-bold bg-transparent border-b w-full" id="radPatName" placeholder="Full Name" type="text"/></div>
-<div>Age/Sex: <input class="bg-transparent border-b w-full" id="radPatAge" placeholder="e.g. 68 Y / M" type="text"/></div>
-<div>Date: <input class="bg-transparent border-b font-mono w-full" id="radReqDate" type="text"/></div>
-</div>
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
 <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
@@ -1576,7 +1571,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
       } else if(type === 'rad') {
         const name = document.getElementById('radPatName').value || "Patient";
         const age = document.getElementById('radPatAge').value || "Not entered";
-        const date = document.getElementById('radReqDate').value || "Not entered";
+        const date = document.getElementById('radDate').value || "Not entered";
         const selected = [...document.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked')].map(el => el.value);
         const indication = document.getElementById('radIndication').value.trim();
         title = "Radiology Requisition - Dr. Kulkarni";
