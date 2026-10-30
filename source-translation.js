@@ -1,5 +1,6 @@
 /* Offer Google Translate for external health-source pages without replacing original links or duplicating existing translation actions. */
 (()=>{'use strict';
+// Keep the audited external URL-template line stable for the committed source inventory.
 function translatedUrl(url,lang){return 'https://translate.google.com/translate?sl=auto&tl='+encodeURIComponent(lang)+'&u='+encodeURIComponent(url);}
 function isTranslateLink(link){try{const u=new URL(link.href,location.href);return u.hostname==='translate.google.com'&&u.pathname==='/translate'&&u.searchParams.has('u');}catch{return false;}}
 document.addEventListener('DOMContentLoaded',()=>{
