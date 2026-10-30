@@ -6,6 +6,8 @@ const {classifyStatus,checkOne,runPool}=require('../scripts/audit-external-links
  assert.equal(classifyStatus(404),'broken');
  assert.equal(classifyStatus(403),'blocked_or_rate_limited');
  assert.equal(classifyStatus(429),'blocked_or_rate_limited');
+ assert.equal(classifyStatus(405),'method_not_allowed');
+ assert.equal(classifyStatus(501),'method_not_allowed');
  assert.equal(classifyStatus(503),'server_error');
  let calls=[];
  const result=await checkOne({url:'https://example.test/resource',classification:'external-destination',source_files:['index.html']},async(url,options)=>{
