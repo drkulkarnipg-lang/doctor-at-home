@@ -37,7 +37,8 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 ## Deployment and live verification — OPEN
 
 - Commit `88a9181f85cd032af7872ec484cc02587dbf67fd` has a successful Vercel status check.
-- Later commits, including `8ca84e7c104bce7b4b8b7720da3e527b684a9dec`, currently report Vercel failure at the build-rate-limit URL. The latest source changes therefore must **not** be assumed to be deployed.
+- The consolidated code commit `8ca84e7c104bce7b4b8b7720da3e527b684a9dec` now reports a successful Vercel status check. This includes the main language-panel, Health Library, pre-visit intake, and prescription-sharing corrections.
+- The later payment-summary wording commit `db5141642f9b520158a0d8fb6d79ad1e4eb5762d` and audit-log-only commits report Vercel build-rate-limit failures. The payment-summary wording update is therefore not confirmed deployed; the main functional corrections are covered by the successful code commit above.
 - Actual production/mobile visual verification has not been completed in this audit session. In particular, the language panel must be checked at 320 px and 390 px widths, including whether the Patient Portal, Doctor Workstation, hero links, and navigation remain visible and clickable.
 - Prescription sharing must be checked on a device supporting Web Share and on desktop fallback.
 - The pre-visit workflow must be manually tested with synthetic data, with and without attachments, and with both short and long history.
