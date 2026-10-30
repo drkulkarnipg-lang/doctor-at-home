@@ -16,3 +16,6 @@
 #calc30Grid .calc-reference-link{display:inline-flex;align-items:center;min-height:36px;margin:8px 8px 0 0;padding:7px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#245f4a;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 #calc30Grid .calc-reference-link:hover{background:#f8fafc;border-color:#94a3b8}
 #calc30Grid .calc-reference-link:focus-visible{outline:3px solid #006e66;outline-offset:3px}
+
+.calc-reference-disclaimer{margin-top:8px!important;padding-top:8px;border-top:1px solid #d7e3dc;color:#52665a;font-size:11px;line-height:1.6}
+#calc30Grid .calc-reference-disclaimer{border-top-color:#dbe5dd;color:#5b6b60}
