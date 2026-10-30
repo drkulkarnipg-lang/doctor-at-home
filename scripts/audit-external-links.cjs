@@ -7,6 +7,7 @@ const INVENTORY = path.join(__dirname, '..', 'data', 'external-link-inventory-20
 function classifyStatus(status) {
   if (status >= 200 && status < 300) return 'reachable';
   if (status === 404 || status === 410) return 'broken';
+  if (status === 405 || status === 501) return 'method_not_allowed';
   if (status === 401 || status === 403 || status === 429) return 'blocked_or_rate_limited';
   if (status >= 500) return 'server_error';
   if (status >= 300 && status < 400) return 'redirect_or_unfollowed';
@@ -51,7 +52,9 @@ async function checkOne(record, fetchImpl = globalThis.fetch, timeoutMs = 10000)
       outcome: classifyStatus(response.status),
       reason: response.status === 403 || response.status === 429
         ? 'Host blocked or rate-limited this automated check; do not classify as a broken link.'
-        : undefined
+        : response.status === 405 || response.status === 501
+          ? 'Host does not support the automated request method; verify manually in a browser.'
+          : undefined
     };
   } catch (error) {
     return {
