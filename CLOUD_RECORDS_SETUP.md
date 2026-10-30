@@ -29,3 +29,12 @@ The preview contains the login, cloud save/open controls, API and database migra
 - https://supabase.com/docs/guides/auth/passwords
 - https://supabase.com/docs/guides/getting-started/api-keys
 - https://github.com/supabase/auth
+
+
+## Practice registers — separate reviewed migration
+
+The optional Doctor Workstation Daily Patient, Death and Stock Registers use `public.clinic_workstation_registers` and the same authenticated clinic-owner/member boundary as patient trends. The application does not save these entries in browser localStorage and does not offer deletion from the UI. Updates use revision checks; CSV exports are local downloads and must be protected as confidential practice data.
+
+**Not enabled merely by merging source code.** Before using the register feature, a database administrator must review and manually apply `supabase/migrations/20261030_workstation_registers.sql` to the dedicated Supabase project, verify that the intended owner UUID is present in `public.clinic_members`, and test RLS with the actual clinic-owner account and a non-owner account. Do not run this migration against a production database until it has been reviewed and tested in a separate project/preview. The migration intentionally grants no DELETE permission. If the table is absent, the UI reports that cloud register storage is not installed and does not create a local fallback.
+
+These working registers do not replace the prescribed Maharashtra/local statutory registers, government death forms, or official medical certification requirements. Confirm the applicable legal fields and retention rules before clinical use. No real patient or death record was entered in tests.
