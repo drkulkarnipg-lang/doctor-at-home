@@ -39,3 +39,12 @@ The app now exposes separate download routes for the **official blank form page 
 Source: Government of India Civil Registration System, `https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf` (23-page combined official PDF; each form is followed by its reverse-side instructions). The endpoint extracts the single form page so each form downloads separately; the complete official PDF reference remains available for instructions.
 
 **Important:** this preserves the central CRS form page exactly, but local registrars may prescribe state/local variants or additional instructions. Confirm the current Maharashtra/Pune Registrar requirements before official filing. Editable website working-layout PDFs remain separate and must not be described as exact facsimiles of the government original.
+
+
+## Current Maharashtra source located — 30 October 2026
+
+A state-specific government reference is already linked in the Doctor Workstation Legal Forms panel as **Maharashtra CRS handbook (2026)**:
+- Official Maharashtra Government booklet (Public Health Department / State Health Information and Vital Statistics Office, Pune), published in 2026 and dated in its front matter to February 2026: `https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf`.
+- The booklet contains Marathi and English CRS/MCCD material, including Form 2 (Death Report), Form 4 (hospital/institutional death) and Form 4A (non-institutional death) and their instructions. It is a full handbook, not a dedicated one-page download bundle.
+- The separate extraction endpoint currently uses the official CRS combined forms PDF at `https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf`. Its current text explicitly references the Registration of Births and Deaths Act, 1969 as amended in 2023. The filename alone should not be taken as proof that its contents are unamended or that it is the latest locally prescribed version.
+- **Release rule:** retain the full official CRS PDF and the Maharashtra 2026 handbook link. Do not silently replace a source or extract page indices from the 106-page Maharashtra handbook without verifying the actual PDF page, form version and instructions. Before clinical/statutory use, confirm which current format the receiving Maharashtra/Pune Registrar requires. The editable website forms are working layouts, not official government originals. Machine-translated forms must not be presented as official government-language editions.
