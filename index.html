@@ -811,7 +811,7 @@
 <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl" id="pathCheckboxesGrid">
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Coagulation:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
+<label class="flex items-center gap-1.5"><input id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
 <label class="flex items-center gap-1.5"><input id="t_esr" type="checkbox" value="ESR (Westergren)"/> ESR (Westergren)</label>
 <label class="flex items-center gap-1.5"><input id="t_pt" type="checkbox" value="PT / INR (Coagulation)"/> PT / INR (Coagulation)</label>
 <label class="flex items-center gap-1.5"><input id="t_ddimer" type="checkbox" value="D-Dimer Quantitative"/> D-Dimer Quantitative</label>
@@ -820,8 +820,8 @@
 </div>
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Panels:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
-<label class="flex items-center gap-1.5"><input checked="" id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
+<label class="flex items-center gap-1.5"><input id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
+<label class="flex items-center gap-1.5"><input id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
 <label class="flex items-center gap-1.5"><input id="t_lft" type="checkbox" value="LFT Complete"/> LFT Complete</label>
 <label class="flex items-center gap-1.5"><input id="t_sugar" type="checkbox" value="Blood Sugar Fasting/PP"/> Fasting / PP Sugar</label>
 <label class="flex items-center gap-1.5"><input id="t_hba1c" type="checkbox" value="HbA1c"/> HbA1c</label>
@@ -874,10 +874,15 @@
 </div>
 <span class="bg-purple-100 text-purple-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Radiology Requisition</span>
 </div>
+<div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border" id="radPatientDetails">
+<div>Patient: <input class="font-bold bg-transparent border-b w-full" id="radPatName" placeholder="Full Name" type="text"/></div>
+<div>Age/Sex: <input class="bg-transparent border-b w-full" id="radPatAge" placeholder="e.g. 68 Y / M" type="text"/></div>
+<div>Date: <input class="bg-transparent border-b font-mono w-full" id="radReqDate" type="text"/></div>
+</div>
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
 <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-<label class="flex items-center gap-2"><input checked="" id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_a" type="checkbox" value="Arterial Color Doppler Lower Limb"/> <strong>Arterial Color Doppler (Lower Limb)</strong></label>
