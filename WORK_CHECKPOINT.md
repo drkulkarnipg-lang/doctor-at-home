@@ -435,3 +435,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **Latest full regression confirmed green:** GitHub Actions completed successfully for exact review-branch head `3880dc6fbbe7b7e28c54c28c0828692f211c5346`. This run includes the traceability privacy-test correction (no long numeric workflow ID embedded in the public JSONL evidence). The successful run verifies repository CI only; it does not replace live mobile/device checks, real WhatsApp delivery, official-form language verification, invoice/QR/payee checks, payment settlement/refund testing, backend/auth/RLS review, or the remaining sentence-by-sentence note audit. Keep PR #85 draft and do not claim production deployment.
+
+
+## Explicit owner priority — payment gateway and actual articles
+
+The owner has explicitly required the payment gateway and articles to be present; these must not be treated as optional follow-on suggestions.
+
+- PAYMENT GATEWAY STATUS: Current payment-options.js is UPI deep-link + local QR + copy-ID/manual-transfer UI. The repository tree has no Razorpay checkout, order API, verified callback/webhook, or durable payment ledger. Therefore the requested gateway is NOT integrated. Next: implement the server-side Razorpay flow and tests on this review branch, fixed ₹500 consultation amount, no browser-trusted payment success, private payment state and webhook verification. Live activation remains blocked until merchant onboarding/KYC, test and production credentials are configured securely in Vercel, database migration/access controls are applied, and controlled end-to-end tests pass. Do not place keys in source/chat or claim settlement without evidence.
+- ARTICLE STATUS: Article editor, cloud admin/public API, /articles renderer and sitemap exist in source; actual published article records have not been verified. The public index code has an explicit empty-state message when there are no published articles. Next: inventory the real database and existing local drafts/source corpus, then import deduplicated articles as private drafts; review source links, clinical content and translations; only then publish with owner's approval. Do not manufacture the owner's missing corpus or auto-publish generated medical text.
+- AUDIT SOURCE: ADDED_NOTE_AUDIT_2026-10-31.md plus the owner's master audit note (sections 11 and 14). Treat PAY-GW-01/02 and ART-01/02/03 as open register items until evidence closes them.
