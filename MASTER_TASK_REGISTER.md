@@ -222,3 +222,14 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - New source correction: prescription, pathology requisition and radiology requisition PDFs omit website footers; editable government Form 2/4/4A working layouts retain the explicit legal-status disclaimer. Original government PDFs are untouched.
 - Keep payment settlement, Supabase migration/RLS, recovery email, native share/print, separate Form 4/4A downloads and live/device checks open.
 - Hold additional application merges until Vercel allows a new deployment or a paid upgrade is explicitly authorized.
+
+
+## Builder-agent checkpoint — 30 October 2026, 10:12 India
+
+- PR #54 merged as `3b053a276111394a1dd212c191d9549e05e67f89`: added `data/external-link-inventory-2026-10-30.json` and `data/feature-preservation-registry-2026-10-30.json`. CI passed before merge. The link scan is intentionally scoped to ten key source files and lists destinations as unverified unless independently tested.
+- PR #56 is open for a test-only guard against duplicate DOM IDs and broken in-page anchor targets. Baseline measured: 478 IDs, no duplicates; 14 explicit hash links, no missing target. Wait for CI before merge.
+- Closed PR #33 and #34 because their implementations are already present in current main in newer form. #33: native browser Back/Forward for Health Library. #34: Previsit consent/attachment validation, full PDF sharing for long histories/files, WhatsApp fallback, and manual-send disclosure. Both old branches were 27 commits behind; no feature code was discarded from main.
+- Latest source-only checks: Patient Portal language selector has responsive wrapping rules; public “Elderly care” wording is present; patient “Know your numbers” links to `#patientToolsSection`; all in-page anchor targets exist; prescription export uses `Prescription.pdf`; allergy field is blank with a confirmation placeholder; registration number has a no-wrap class.
+- Latest verified automated CI is successful on main `af656eb1a6f999182e8cff6b56fcd308a2d2c365` and on PR #54. Current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`; verify its post-merge deployment independently.
+- No production database migrations, payment setup, credentials, paid subscriptions, or destructive operations were changed. The workstation register migration remains manual pending backup, Supabase owner/RLS validation and restore test.
+- Next: complete the broader sentence-by-sentence audit; inspect all source files for external destinations and unresolved placeholders; test live desktop/mobile flows and PDFs; verify Form 2/4/4A sources for Maharashtra/Pune; confirm provider configuration and secure media storage; record deployment smoke-test evidence.

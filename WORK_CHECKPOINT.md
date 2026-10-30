@@ -279,3 +279,13 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - The last successful application-code deployment remains `0ba9a434f6a39535fdf3a654b31ec86c16776663`; current main's Vercel status is rate-limited, so the latest lab/radiology footer correction is not confirmed live.
 - The new footer rule is limited to prescription/lab/radiology PDFs; editable statutory working forms keep their legal-status disclaimer and government original PDFs remain unchanged.
 - Do not merge more application changes until the deployment limit clears or the owner authorizes a paid upgrade.
+
+
+## Latest continuation — 30 October 2026, 10:12 India
+
+1. **Machine-readable inventory added** (PR #54 merged): 194 extracted URL literals/templates across ten key files, plus 31 feature-preservation records. The URL file is a scoped baseline, not the final repository-wide inventory and not live verification.
+2. **Homepage anchor integrity**: static scan measured 478 unique IDs, 14 explicit in-page links, zero duplicate IDs, zero missing anchors. PR #56 adds regression protection; its CI is pending.
+3. **Existing corrections rechecked in source**: patient language selector responsive layout; “Elderly care” labels; “Know your numbers” path to patient tools; Prescription filename; blank allergy field; registration number no-wrap class; reader browser-history support; Previsit complete-history/attachment sharing fallback.
+4. **Duplicate branches closed, not merged**: PR #33 and #34 were 27 commits behind and current main already contains newer implementations. Closing them preserves the main code and avoids applying stale changes.
+5. **Deployment boundary**: current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`. Main CI passed on the immediately preceding source commit and PR #54 passed CI; post-merge deployment status and live visual/mobile tests remain unverified at this checkpoint.
+6. **Unresolved high-risk gates**: verify full backup/restore; inspect all external links; actual phone/WhatsApp handoff; generated PDF visual checks; Form 2/4/4A jurisdiction and separate downloads; Supabase migration/RLS and owner-only tests; email recovery; real gateway settlement/refund; secure article media storage.
