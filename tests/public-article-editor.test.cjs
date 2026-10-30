@@ -1,0 +1,36 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
+const html='<main><div id="editor"><input id="newArtTitle"><textarea id="newArtBody"></textarea></div><section id="viewArticlesHub"></section></main>';
+const dom=new JSDOM(html,{runScripts:'outside-only',url:'https://clinic.example.test/'}),w=dom.window;
+const calls=[];let confirmResult=false;
+w.confirm=()=>confirmResult;
+const article={slug:'existing-guide',title:'Existing guide',body:'Existing article body',description:'Existing description',language:'mr',translation_group:'existing-guide',sources:['https://example.org/source'],status:'draft',revision:'rev-1'};
+w.fetch=async(url,options={})=>{calls.push({url:String(url),options});if(!options.method||options.method==='GET'){if(String(url).includes('?slug='))return{ok:true,json:async()=>({article})};return{ok:true,json:async()=>({page:1,hasNext:true,articles:[{slug:article.slug,title:article.title,status:article.status}]})};}return{ok:true,json:async()=>({article:{...article,revision:'rev-2'},message:'saved'})};};
+w.eval(fs.readFileSync('public-article-editor.js','utf8'));
+const tick=()=>new Promise(resolve=>setTimeout(resolve,25));
+(async()=>{
+ await tick();
+ const panel=w.document.getElementById('publicArticlePublisher');assert.ok(panel,'Article manager panel should mount');
+ const button=label=>[...panel.querySelectorAll('button')].find(b=>b.textContent===label);
+ for(const label of ['Refresh cloud articles','Load selected cloud article','Start a new cloud article']){const b=button(label);assert.ok(b,label+' button exists');assert.ok(b.classList.contains('article-manager-action'),label+' has consistent accessible button styling');}
+ assert.ok(panel.querySelector('.article-manager-pager'),'Pagination controls are grouped');
+ assert.equal(panel.querySelector('.article-manager-pager').textContent,'Previous 100Next 100','Pager must not display class-name text');
+ button('Refresh cloud articles').click();await tick();
+ assert.ok(calls.some(c=>c.url.includes('/api/articles-admin?page=1')),'Refresh fetches cloud article metadata');
+ const select=w.document.getElementById('publicCloudArticleSelect');assert.equal(select.value,'');assert.equal(select.options.length,2);
+ select.value='existing-guide';button('Load selected cloud article').click();await tick();
+ assert.ok(calls.some(c=>c.url.includes('/api/articles-admin?slug=existing-guide')),'Load fetches full selected article');
+ assert.equal(w.document.getElementById('newArtTitle').value,'Existing guide');
+ assert.equal(w.document.getElementById('newArtBody').value,'Existing article body');
+ assert.equal(w.document.getElementById('publicArticleSlug').value,'existing-guide');
+ assert.equal(w.document.getElementById('publicArticleLanguage').value,'mr');
+ const before={title:w.document.getElementById('newArtTitle').value,body:w.document.getElementById('newArtBody').value,slug:w.document.getElementById('publicArticleSlug').value};
+ confirmResult=false;button('Start a new cloud article').click();
+ assert.deepEqual({title:w.document.getElementById('newArtTitle').value,body:w.document.getElementById('newArtBody').value,slug:w.document.getElementById('publicArticleSlug').value},before,'Cancel must preserve unsaved article text');
+ confirmResult=true;button('Start a new cloud article').click();
+ assert.equal(w.document.getElementById('newArtTitle').value,'');assert.equal(w.document.getElementById('newArtBody').value,'');
+ for(const id of ['publicArticleSlug','publicArticleDescription','publicArticleGroup','publicArticleSources'])assert.equal(w.document.getElementById(id).value,'',id+' cleared for a new article');
+ assert.equal(w.document.getElementById('publicArticleLanguage').value,'en');assert.equal(w.document.getElementById('publicArticleReviewed').checked,false);assert.equal(select.value,'');
+ assert.match(w.document.getElementById('publicArticleStatus').textContent,/Existing cloud articles and browser backups are unchanged/);
+ w.close();console.log('Article manager refresh/load/start controls and unsaved-content protection passed.');
+})().catch(e=>{console.error(e);process.exitCode=1;});
