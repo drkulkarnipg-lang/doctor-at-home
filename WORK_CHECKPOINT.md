@@ -120,3 +120,7 @@ The original register had a 26 October “PAUSED by owner” note. The owner now
 
 ### Hero assertion update — 30 October 2026
 CI progressed past the converter checks and exposed another stale assertion in `tests/calculator-ui.test.cjs`: it expected the former “Thoughtful care” headline, while the current hero deliberately says “Home visits. Care at your bedside.” Updated the regression assertion to check the explicit home-visit promise from the owner's original instruction. This is a test expectation update aligned to the current approved design intent, not a weakening of the requirement. Rerun all tests; other stale assumptions may still surface.
+
+
+### UPI test syntax issue — 30 October 2026
+CI exposed a syntax error in the newly added UPI assertion: an apostrophe in its single-quoted message was not escaped. Fixed the assertion text and ran a JavaScript parse check on the complete test file successfully. The regression assertion itself remains unchanged in meaning. Rerun the full suite.
