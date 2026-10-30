@@ -196,3 +196,13 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - **PR #45 — prescription PDF footer:** merged as `cde9f74684036f556100d1e514240d4f57278673`. Prescription PDF now omits the website URL/provenance footer and per-page website/legal stamp, with compact 8 mm margins. Other clinical documents retain provenance. Feature-branch regression passed (`41035676332`); main regression passed on this merge (`41035831773`).
 - **Deployment blocker:** Vercel reports `Deployment rate limited — retry in 24 hours` for main commits after `233040e281ff975e151d98f77bb606768074d54f`. Therefore the calculator, article-manager and prescription-footer changes are merged and tested in source but **not confirmed live**. Do not claim them deployed until Vercel reports success and the actual website/PDF output is checked.
 - **Next critical work:** finish end-to-end live/device checks after deployment access returns; resolve Supabase register migration/RLS and owner recovery-email configuration; verify exact government Form 2/4/4A exports and separate official originals; test payment gateway/settlement; continue auditing intake, navigation, article imports, RSS execution and all other open rows.
+
+
+## Navigation, intake and registration corrections — 30 October 2026
+
+- **PR #46** merged as `757786cb0801ada719909982ab8fb942f148ae59`: Article Manager now shows the existing Live RSS/evidence-review panel as well as the dedicated RSS tab. Regression run `41036276758` passed.
+- **PR #48** merged as `1e21b4fe62680f4ce302643b7a31f43b6c1c000a`: registration number uses a dedicated non-wrapping sans-serif baseline style; identifier remains `I-24809-A-1`. Regression run `41036407568` passed.
+- **PR #47** merged as `aab1741e32dd1489a8756fb6d44e19f5c9cd6230`: home-visit intake opens only the essential patient/problem sections; detailed symptoms/history remain available but collapsed; attachment and consent controls appear before optional details; LMP and optional measured weight/height/BMI fields are included. Regression run `41036578805` passed.
+- Main regression run `41036710598` passed on exact commit `aab1741e32dd1489a8756fb6d44e19f5c9cd6230`.
+- Vercel status remains **failure: Deployment rate limited — retry in 24 hours**. These latest changes are merged and tested in source, not confirmed live. Last positively confirmed deployed commit remains `233040e281ff975e151d98f77bb606768074d54f`.
+- Keep the current blockers explicit: actual live/mobile checks, secure attachment sharing, exact official Form 2/4/4A outputs, Supabase migration/RLS, recovery email provider setup, and payment gateway settlement.

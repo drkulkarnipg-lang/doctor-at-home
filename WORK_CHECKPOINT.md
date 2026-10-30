@@ -256,3 +256,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - PR #45 prescription PDF: website URL/provenance footer and per-page footer stamp removed from the prescription only; compact margins added. Other clinical documents retain provenance. Main regression passed on `cde9f74684036f556100d1e514240d4f57278673`.
 - Vercel rate-limit failure blocks deployment of these latest commits. The last positively confirmed deployment was commit `233040e281ff975e151d98f77bb606768074d54f`; later changes must be treated as source-merged but not yet live.
 - Do not merge more batches solely to trigger builds while rate-limited. Continue audit and prepare a consolidated, tested release batch; retry deployment after the rate limit resets, then verify live behavior and PDF rendering.
+
+
+## Latest merged corrections — 30 October 2026
+
+- PR #46: Article Manager exposes Live RSS/evidence review while retaining the dedicated RSS tab.
+- PR #48: prescription registration number has a dedicated non-wrapping baseline style; the identifier is unchanged.
+- PR #47: quick home-visit intake now asks only essentials up front, keeps optional symptom/history details collapsed, and brings attachments/consent near the top.
+- Regression run `41036710598` passed on main commit `aab1741e32dd1489a8756fb6d44e19f5c9cd6230`.
+- Vercel is still rate-limited for 24 hours. Do not describe post-`233040e` code as live. Continue source audit and test preparation, then retry deployment after the limit clears and verify live website/PDF/mobile behavior.

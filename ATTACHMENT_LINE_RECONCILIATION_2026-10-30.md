@@ -48,3 +48,12 @@
 - Regression run `41033995852`: passed on the exact merged commit.
 - Vercel status for that commit: success — deployment completed.
 - This does not prove all requirements complete. Database migration, provider configuration, real payment settlement, actual device sharing, physical printing and clinical review remain separate.
+
+
+## Latest merged source-line reconciliation
+
+The current controlling attachment remains `Pasted text(20261030-092936).txt`. Additional source fixes now merged after the earlier line-map status:
+- Line 137: prescription website/provenance footer removed from the prescription PDF; Article Manager now opens with RSS/evidence-review panel; registration number baseline fixed.
+- Line 140: quick home-visit intake now exposes essentials and attachments first while preserving optional history and existing booking logic.
+- Lines 68 and 71: RSS/evidence workflow is accessible from Article Manager and the Workstation Home directory; dedicated RSS tab remains.
+- All these source changes passed regression checks, but live deployment is blocked by Vercel's 24-hour rate limit. This is source status, not live verification.
