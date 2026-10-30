@@ -116,13 +116,17 @@ function generateInventory({ root = path.resolve(__dirname, '..'), sourceRevisio
   };
 }
 
+function writeInventory(inventory, outputPath) {
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, JSON.stringify(inventory, null, 2) + '\n');
+}
+
 function main() {
   const outputArg = process.argv.slice(2).find(arg => arg.startsWith('--output='));
   const inventory = generateInventory();
   if (outputArg) {
     const outputPath = path.resolve(outputArg.split('=').slice(1).join('='));
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    fs.writeFileSync(outputPath, JSON.stringify(inventory, null, 2) + '\\n');
+    writeInventory(inventory, outputPath);
   }
   console.log(JSON.stringify({
     scanned_files: inventory.source_files_scanned.length,
@@ -136,4 +140,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { generateInventory, shouldScan, classifyUrl };
+module.exports = { generateInventory, writeInventory, shouldScan, classifyUrl };
