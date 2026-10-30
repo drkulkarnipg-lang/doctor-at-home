@@ -641,9 +641,9 @@
 <!-- TAB 5: PATHOLOGY REQUISITION (WITH 1-CLICK TEST BUNDLES) -->
 <div class="hidden space-y-4" id="viewPathReq">
 <div class="flex flex-wrap justify-between items-center gap-2 no-print">
-<h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Requisition Pad</h3>
+<h3 class="text-xl font-bold serif-brand text-[#0F2942]">Lab Requisition Pad</h3>
 <div class="flex flex-wrap gap-2">
-<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('pathSlipSheet', 'Pathology_Requisition_Dr_Kulkarni.pdf')">
+<button class="bg-blue-700 hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="exportToPdf('pathSlipSheet', 'Lab_Requisition_Dr_Kulkarni.pdf')">
 <i class="fa-solid fa-file-pdf"></i> 📥 Export Official PDF
           </button>
 <button class="bg-[#16A34A] text-white text-xs px-3.5 py-1.5 rounded-xl font-bold shadow flex items-center gap-1" onclick="universalShareDocument('path')">
@@ -674,7 +674,7 @@
 <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
 <p class="text-[11px] text-slate-700">BAMS, PGDEMS (Symbiosis Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
 </div>
-<span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Pathology Requisition</span>
+<span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Lab Requisition</span>
 </div>
 <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-xl border petal-border">
 <div>Patient: <input class="font-bold bg-transparent border-b w-full" id="reqPatName" placeholder="Full Name" type="text"/></div>
@@ -698,6 +698,8 @@
 <label class="flex items-center gap-1.5"><input id="t_lft" type="checkbox" value="LFT Complete"/> LFT Complete</label>
 <label class="flex items-center gap-1.5"><input id="t_sugar" type="checkbox" value="Blood Sugar Fasting/PP"/> Fasting / PP Sugar</label>
 <label class="flex items-center gap-1.5"><input id="t_hba1c" type="checkbox" value="HbA1c"/> HbA1c</label>
+<label class="flex items-center gap-1.5"><input id="t_lipid" type="checkbox" value="Lipid Profile (Total Cholesterol, LDL, HDL, Triglycerides)"/> Lipid Profile (TC, LDL, HDL, TG)</label>
+<label class="flex items-center gap-1.5"><input id="t_iron" type="checkbox" value="Iron Studies (Serum Iron, Ferritin, TIBC)"/> Iron Studies (Iron, Ferritin, TIBC)</label>
 <label class="flex items-center gap-1.5"><input id="t_ammonia" type="checkbox" value="Serum Ammonia"/> Serum Ammonia</label>
 </div>
 <div class="space-y-1">
@@ -751,8 +753,12 @@
 <label class="flex items-center gap-2"><input checked="" id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_dop_a" type="checkbox" value="Arterial Color Doppler Lower Limb"/> <strong>Arterial Color Doppler (Lower Limb)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_echo" type="checkbox" value="Bedside 2D Echo"/> <strong>Bedside 2D Echocardiography</strong></label>
 <label class="flex items-center gap-2"><input id="rad_ct_brain" type="checkbox" value="NCCT Brain (Stroke)"/> <strong>NCCT Brain (Stroke Protocol)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_ct_chest" type="checkbox" value="CT Chest"/> <strong>CT Chest</strong></label>
+<label class="flex items-center gap-2"><input id="rad_mri_brain" type="checkbox" value="MRI Brain"/> <strong>MRI Brain</strong></label>
+<label class="flex items-center gap-2"><input id="rad_mri_spine" type="checkbox" value="MRI Spine (specify region in indication)"/> <strong>MRI Spine (specify region)</strong></label>
 </div>
 <div class="space-y-2">
 <label class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
@@ -1425,12 +1431,20 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         text = generatePrescriptionText();
       } else if(type === 'path') {
         const name = document.getElementById('reqPatName').value || "Patient";
-        title = "Pathology Requisition - Dr. Kulkarni";
-        text = `*PATHOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nPlease send urgent reports via WhatsApp to: 9561394341`;
+        const age = document.getElementById('reqPatAge').value || "Not entered";
+        const date = document.getElementById('reqDate').value || "Not entered";
+        const selected = [...document.querySelectorAll('#pathCheckboxesGrid input[type="checkbox"]:checked')].map(el => el.value);
+        const notes = document.getElementById('pathNotes').value.trim();
+        title = "Lab Requisition - Dr. Kulkarni";
+        text = `*LAB REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nTests: ${selected.length ? selected.join(', ') : 'No preset tests selected'}${notes ? `\nAdditional tests / notes: ${notes}` : ''}\nUrgent reports: WhatsApp 9561394341`;
       } else if(type === 'rad') {
         const name = document.getElementById('reqPatName').value || "Patient";
+        const age = document.getElementById('reqPatAge').value || "Not entered";
+        const date = document.getElementById('reqDate').value || "Not entered";
+        const selected = [...document.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked')].map(el => el.value);
+        const indication = document.getElementById('radIndication').value.trim();
         title = "Radiology Requisition - Dr. Kulkarni";
-        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nConfirm ETA to: 9561394341`;
+        text = `*RADIOLOGY REQUISITION SLIP*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nImaging requested: ${selected.length ? selected.join(', ') : 'No preset imaging selected'}${indication ? `\nClinical indication: ${indication}` : ''}\nConfirm ETA: WhatsApp 9561394341`;
       }
 
       if(navigator.share) {
