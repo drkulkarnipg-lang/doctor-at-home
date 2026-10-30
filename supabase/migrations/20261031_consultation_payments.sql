@@ -1,6 +1,8 @@
 begin;
 create table if not exists public.consultation_payments (
- booking_reference uuid primary key,
+ id uuid primary key default gen_random_uuid(),
+ booking_reference uuid not null,
+ attempt_number integer not null default 1 check(attempt_number>0),
  provider text not null check(provider='razorpay'),
  order_id text not null unique,
  payment_id text unique,
@@ -8,7 +10,8 @@ create table if not exists public.consultation_payments (
  currency text not null check(currency='INR'),
  status text not null check(status in ('created','authorized','captured','failed','refunded')),
  created_at timestamptz not null default now(),
- updated_at timestamptz not null default now()
+ updated_at timestamptz not null default now(),
+ unique(booking_reference,attempt_number)
 );
 create table if not exists public.consultation_payment_webhook_events (
  event_id text primary key,

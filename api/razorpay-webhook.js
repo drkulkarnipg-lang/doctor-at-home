@@ -24,7 +24,7 @@ module.exports=async function(req,res){
     if(nextStatus==='captured'&&row.status==='refunded')finalStatus='refunded';
     const patch={status:finalStatus,updated_at:new Date().toISOString()};
     if(entity?.id&&entity.status==='captured')patch.payment_id=entity.id;
-    const saved=await db('consultation_payments?booking_reference=eq.'+encodeURIComponent(row.booking_reference),'PATCH',patch,'return=representation');
+    const saved=await db('consultation_payments?order_id=eq.'+encodeURIComponent(row.order_id),'PATCH',patch,'return=representation');
     if(!saved.ok)throw Error();
    }
   }
