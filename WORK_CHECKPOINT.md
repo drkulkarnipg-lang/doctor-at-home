@@ -289,3 +289,15 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 4. **Duplicate branches closed, not merged**: PR #33 and #34 were 27 commits behind and current main already contains newer implementations. Closing them preserves the main code and avoids applying stale changes.
 5. **Deployment boundary**: current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`. Main CI passed on the immediately preceding source commit and PR #54 passed CI; post-merge deployment status and live visual/mobile tests remain unverified at this checkpoint.
 6. **Unresolved high-risk gates**: verify full backup/restore; inspect all external links; actual phone/WhatsApp handoff; generated PDF visual checks; Form 2/4/4A jurisdiction and separate downloads; Supabase migration/RLS and owner-only tests; email recovery; real gateway settlement/refund; secure article media storage.
+
+
+## Latest checkpoint — 30 October 2026, 10:33 UTC
+
+- Main: `0d32effd3e729e1139d14457c8a3d85dc03ccf5f`; regression run `41041412389` passed.
+- PRs #55, #58, #59, #60, #61, #62 and #63 are merged.
+- External audit run `41041430784` checked 163 destinations: 127 reachable, 29 blocked/rate-limited, 3 network errors, 1 timeout, 1 HTTP 406, 2 method-not-allowed, zero confirmed 404/410. Artifact `12970218218`; summary file `reports/external-link-audit-summary-2026-10-30.md`.
+- Real broken Norton source fixed; Google Fonts preconnect and bare Make webhook placeholder are not navigable links; visible CRS forms link now uses the verified official combined PDF.
+- Public calculator green reference boxes removed; language selector compacted while preserving the 44px touch target; separate Form 2/4/4A downloads merged.
+- Traceability ledger contains 1,059 non-empty source units from 1,991 source lines. Continue mapping source units to exact code/test/deployment evidence; do not treat the ledger as proof of completion.
+- **Live publication blocked:** Vercel reports `Deployment rate limited — retry in 24 hours.` Do not claim the latest main is live. No hosting changes or paid upgrades were made.
+- Next: run the next link audit after any source changes; manually verify blocked/network-error URLs; retry deployment when rate limit clears; then test live navigation, Patient Portal language, Health Library Back/Forward, booking, WhatsApp/PDF sharing, prescription output, and official form downloads on desktop/mobile.

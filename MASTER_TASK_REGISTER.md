@@ -233,3 +233,26 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Latest verified automated CI is successful on main `af656eb1a6f999182e8cff6b56fcd308a2d2c365` and on PR #54. Current main after PR #54 is `3b053a276111394a1dd212c191d9549e05e67f89`; verify its post-merge deployment independently.
 - No production database migrations, payment setup, credentials, paid subscriptions, or destructive operations were changed. The workstation register migration remains manual pending backup, Supabase owner/RLS validation and restore test.
 - Next: complete the broader sentence-by-sentence audit; inspect all source files for external destinations and unresolved placeholders; test live desktop/mobile flows and PDFs; verify Form 2/4/4A sources for Maharashtra/Pune; confirm provider configuration and secure media storage; record deployment smoke-test evidence.
+
+
+## Builder-agent verified update — 30 October 2026, 10:33 UTC
+
+### Merged and regression-tested
+- PR #55 — separate official Form 2, Form 4 and Form 4A downloads extracted from the official CRS combined PDF; full PDF retained for reverse-side instructions.
+- PR #58 — public `#calc30Grid` reference notes no longer have a filled green box; source links remain clickable and keyboard accessible.
+- PR #59 — language selector compacted; language choices and translation caution preserved; mobile select remains at least 44px high.
+- PR #60 — exhaustive source-unit ledger `data/attachment-line-traceability-2026-10-30.jsonl`, preserving all 1,059 non-empty lines of the 1,991-line attached specification.
+- PR #61/#62 — opt-in external link checker and manual GitHub Actions workflow.
+- PR #63 — replace dead Norton scale reference with AHRQ; replace visible MCCD link with official combined CRS PDF; classify Google Fonts preconnects and Make webhook placeholder correctly; distinguish 405/501 from broken links.
+
+### External link audit
+- Run `41041430784`, artifact `12970218218`: 163 external URLs checked.
+- Results: 127 reachable; 29 blocked/rate-limited; 3 network errors; 1 timeout; 1 HTTP 406; 2 method-not-allowed; 0 confirmed 404/410.
+- Blocked and network-error outcomes are **not** considered broken. Manual browser checks remain pending. The inventory covers ten key source files only; repository-wide scan remains open.
+- Report: `reports/external-link-audit-summary-2026-10-30.md`.
+
+### Deployment and release gate
+- Main `0d32effd3e729e1139d14457c8a3d85dc03ccf5f` passed regression run `41041412389`.
+- Vercel status remains failure: `Deployment rate limited — retry in 24 hours.` Latest changes are merged to main but **not confirmed live**.
+- Do not bypass the Vercel limit by changing hosting or paying for an upgrade without explicit approval.
+- Still blocked/pending: full backup and verified restore; Supabase register migration/RLS; real email recovery; payment settlement/refunds; secure article media; actual mobile/desktop UI, PDFs and WhatsApp handoffs; Form 2 local-jurisdiction validation.
