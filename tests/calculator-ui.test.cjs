@@ -15,6 +15,16 @@ w.eval(scripts.join('\n;\n'));
 await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();assert.match(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note').textContent,/5\.7–6\.4%/);assert.equal(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note a[href="https://diabetes.org/about-diabetes/diagnosis"]').textContent,'HbA1c diagnostic thresholds ↗');
 assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);assert.match(w.document.getElementById('tabPath').textContent,/Lab Requisition/);assert.doesNotMatch(w.document.getElementById('tabPath').textContent,/Slip/);assert.match(w.document.getElementById('tabRad').textContent,/Radiology Requisition/);assert.doesNotMatch(w.document.getElementById('tabRad').textContent,/Slip/);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,28);
+for(const card of [...w.document.querySelectorAll('.calc-card')]){
+ const ref=card.querySelector('.calc-reference-note');
+ assert.ok(ref,'Every calculator must show its reference/interpretation panel');
+ assert.ok(ref.textContent.includes('Reference / interpretation'));
+ assert.ok(ref.querySelector('a.calc-reference-link[href]'),'Every calculator must link a clinical source');
+ assert.ok(ref.textContent.trim().length>80,'Every calculator needs substantive interpretation/range guidance');
+}
+const refText=id=>w.document.querySelector('[data-calculator-id="'+id+'"] .calc-reference-note').textContent;
+for(const [id,terms] of [['1',['18.5','25','30']],['6',['13–15','9–12','3–8']],['11',['0–1','2 intermediate','3–5']],['14',['qSOFA is scored 0–3','≥2']],['15',['mild ARDS','moderate','severe']],['20',['≤1','≥2']],['21',['≤4','>4']],['23',['0–9','≥3']],['25',['5–20','≤14']],['28',['6–40']],['29',['class A 5–6','class B 7–9','class C 10–15']],['30',['0–71']]]){for(const term of terms)assert.ok(refText(id).includes(term),'Reference band '+term+' missing for calculator '+id);}
+
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid input').length>50,true);
 assert.equal(w.document.querySelector('#calculator-6-verbal option[value="2"]').textContent,'2 · sounds');
 assert.equal(w.document.querySelector('#calculator-6-motor option[value="3"]').textContent,'3 · abnormal flexion');
