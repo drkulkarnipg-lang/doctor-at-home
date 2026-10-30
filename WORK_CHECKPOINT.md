@@ -423,3 +423,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **Pre-visit WhatsApp test verified:** GitHub Actions run `41115928252` passed on exact head `3ffef411c46ec2fd857e0f075e2f64d2e1840bce`. Short-history handoff assertions check destination `wa.me/919561394341`, inclusion of synthetic patient name, chief complaint, medicine and allergy history, and visible fallback when popup opening returns `null`. Long histories still route to complete PDF/share rather than truncating. Real WhatsApp app, device share-sheet and recipient-side delivery are still not tested; this PR is draft and Vercel remains build-rate-limited.
+
+
+- **Traceability reconciliation:** updated the three repeated language-selector source lines (`P10-L0032/0044/0053`) and all mapped sentence units. They now distinguish the existing main-branch selector fix from the review-branch reader-translator mount ID; they no longer incorrectly say current-main CI is merely queued. Review-branch code/test commit `3ffef411c46ec2fd857e0f075e2f64d2e1840bce` passed; live/mobile/keyboard/supported-language checks remain open.
