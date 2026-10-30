@@ -294,5 +294,4 @@ document.addEventListener('DOMContentLoaded',()=>{
    e.preventDefault();switchWorkspace('public');const target=document.querySelector(a.getAttribute('href'));setTimeout(()=>target&&target.scrollIntoView({behavior:'smooth'}),200);
   }
  }));
- const stored=localStorage.getItem('makeWebhookUrl');if(stored)document.getElementById('webhookUrlInput').value=stored;
 });
