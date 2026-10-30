@@ -903,7 +903,7 @@
 <p class="text-slate-500">Import web articles, clinical guidelines, attach photos/videos, or format into reader cards.</p>
 </div>
 <div class="flex items-center gap-2">
-<input accept=".json,.txt,.md" class="hidden" id="importArticleFileInput" onchange="importArticlesFromFile(this)" type="file"/>
+<input accept=".json,.txt,.md,.html,.htm" class="hidden" id="importArticleFileInput" onchange="importArticlesFromFile(this)" type="file"/>
 <button class="bg-amber-100 border border-amber-300 text-amber-950 font-bold px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1" onclick="document.getElementById('importArticleFileInput').click()">
               📂 Import File (.txt / .json)
             </button>
@@ -931,11 +931,11 @@
 </div>
 </div>
 <div>
-<label class="font-bold text-slate-800">Spacious Clinical Content (Or Paste from WebMD/CDC):</label>
+<div class="flex flex-wrap items-center justify-between gap-2"><label class="font-bold text-slate-800" for="newArtBody">Spacious Clinical Content (Or Paste from WebMD/CDC):</label><button type="button" class="research-upload" onclick="document.getElementById('importArticleFileInput').click()">📂 Import text / HTML into article</button></div>
 <textarea class="w-full p-3 border rounded-xl bg-white text-xs leading-relaxed mt-1" id="newArtBody" placeholder="Write or paste comprehensive guidelines, foods to avoid, emergency red-flags..." rows="7"></textarea>
 </div>
 <button class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl shadow flex items-center gap-1.5 text-xs" onclick="publishNewArticle()">
-          🚀 Publish to Moon-Reader &amp; Patient Portal
+          Save local reader copy
         </button>
 </div>
 <!-- Published Articles Container (Moon-Reader Styled Cards) -->
