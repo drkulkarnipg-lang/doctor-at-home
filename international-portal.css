@@ -109,3 +109,5 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
     max-width: 100%;
   }
 }
+.source-translate-link{display:inline-block;margin-inline-start:7px;color:#245f4a;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.source-translate-link:focus-visible{outline:3px solid #3f8c72;outline-offset:3px;border-radius:3px}
