@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Existing publicly displayed Elderly care section in index.html on review branch; wording preserved/structured, not newly clinically reviewed.",
+  "createdAt": "2026-10-31",
+  "publicationPolicy": "PRIVATE_DRAFTS_ONLY",
+  "note": "These draft records do not publish automatically. Confirm clinical accuracy, update references, assign an actual review date only after review, and prepare human-reviewed Marathi/Hindi translations before publication.",
+  "articles": [
+    {
+      "slug": "protect-skin-and-comfort-at-home",
+      "title": "Protect Skin and Comfort During Care at Home",
+      "description": "Practical prompts for discussing pressure relief, skin checks and an individual wound-care plan with the patient's healthcare team.",
+      "language": "en",
+      "translation_group": "protect-skin-and-comfort-at-home",
+      "status": "draft",
+      "body": "## Start with an individual plan\nAgree an individual repositioning and pressure-relief plan with the patient's healthcare team. The appropriate plan depends on the person's condition and needs.\n\n## Check skin and comfort\nCheck skin, moisture and comfort. Report persistent redness or broken skin to the healthcare team rather than treating this short guide as an individual wound-care prescription.\n\n## Follow the agreed care plan\nUse the support surface and wound-care plan advised for the patient. Ask the treating team if the plan is unclear or the skin changes.\n\n## Important note\nThis patient-education draft supports discussion with a clinician and does not replace individual assessment.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/cg179/chapter/Recommendations"
+      ],
+      "reviewStatus": "not_reviewed_as_standalone_article",
+      "translationStatus": {
+        "en": "draft",
+        "mr": "not_created",
+        "hi": "not_created"
+      }
+    },
+    {
+      "slug": "supporting-stroke-recovery-and-safe-swallowing",
+      "title": "Supporting Stroke Recovery and Safer Swallowing",
+      "description": "Follow the person's swallowing assessment, use the prescribed food textures and recognise when feeding must stop and help is needed.",
+      "language": "en",
+      "translation_group": "supporting-stroke-recovery-and-safe-swallowing",
+      "status": "draft",
+      "body": "## Follow the swallowing assessment\nFollow the swallowing assessment and the food textures prescribed for the individual. Do not independently change a person's prescribed food or fluid texture.\n\n## Support a safe position\nSupport an upright, comfortable position for meals, in line with the person's care plan.\n\n## Stop and seek help when warning signs occur\nStop feeding and seek help for choking, new breathlessness or reduced alertness. Do not force food or fluid when swallowing may be unsafe.\n\n## Important note\nThis draft is based on the existing patient-facing guidance and must be reviewed before being used as a standalone clinical education article.",
+      "sources": [
+        "https://www.nhs.uk/conditions/swallowing-problems-dysphagia/"
+      ],
+      "reviewStatus": "not_reviewed_as_standalone_article",
+      "translationStatus": {
+        "en": "draft",
+        "mr": "not_created",
+        "hi": "not_created"
+      }
+    },
+    {
+      "slug": "living-with-kidney-disease-individual-care-plan",
+      "title": "Living With Kidney Disease: Follow an Individual Care Plan",
+      "description": "Keep dialysis, medicine and blood-test appointments, and ask the kidney team for personal fluid, salt and potassium guidance.",
+      "language": "en",
+      "translation_group": "living-with-kidney-disease-individual-care-plan",
+      "status": "draft",
+      "body": "## Keep planned follow-up\nKeep dialysis, medicine and blood-test appointments, and discuss missed appointments with the treating team.\n\n## Ask for individual dietary guidance\nAsk the healthcare team for the fluid, salt and potassium plan that applies to the individual. Requirements vary with kidney function, test results and dialysis treatment; a general article cannot set a personal limit.\n\n## Do not change dialysis independently\nChanges to dialysis frequency belong with the nephrology team. Contact the treating service when advice is unclear or the person's condition changes.\n\n## Important note\nThis draft is educational and does not replace an individual kidney-care plan.",
+      "sources": [
+        "https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis"
+      ],
+      "reviewStatus": "not_reviewed_as_standalone_article",
+      "translationStatus": {
+        "en": "draft",
+        "mr": "not_created",
+        "hi": "not_created"
+      }
+    },
+    {
+      "slug": "making-the-home-safer-for-older-adults",
+      "title": "Making the Home Safer for Older Adults",
+      "description": "Simple home-safety prompts covering clear walkways, comfortable lighting, footwear, mobility aids and reporting falls or new confusion.",
+      "language": "en",
+      "translation_group": "making-the-home-safer-for-older-adults",
+      "status": "draft",
+      "body": "## Reduce everyday hazards\nKeep walkways clear and lighting comfortable at night. Review footwear, mobility aids and bathroom supports with the person and their care team.\n\n## Report changes\nReport a fall or new confusion. These changes can have different causes and need appropriate assessment; do not assume they are an inevitable part of ageing.\n\n## Individualise the plan\nChoose home-safety changes around the person's mobility, environment and assessed needs. Ask the healthcare team if additional support is needed.\n\n## Important note\nThis draft is adapted from the existing patient-facing section and requires standalone clinical review before publication.",
+      "sources": [
+        "https://www.nia.nih.gov/health/falls-and-falls-prevention"
+      ],
+      "reviewStatus": "not_reviewed_as_standalone_article",
+      "translationStatus": {
+        "en": "draft",
+        "mr": "not_created",
+        "hi": "not_created"
+      }
+    }
+  ]
+}
