@@ -1,5 +1,5 @@
 /* Branding belongs on app-generated documents. Government originals remain unmodified. */
-(()=>{'use strict';const base='https://home-visiting-icu-doctor.vercel.app/';
+(()=>{'use strict';const base='https://home-visiting-icu-doctor.vercel.app/';const noWebsiteFooter=new Set(['rxSheet','pathSlipSheet','radSlipSheet']);
 const titles={intakeDocument:'Pre-visit patient history',rxSheet:'Prescription',pathSlipSheet:'Pathology requisition',radSlipSheet:'Radiology requisition','cert-form2':'Form 2 - Death report (working layout)','cert-form4':'Form 4 - MCCD (working layout)','cert-form4a':'Form 4A - MCCD (working layout)','cdoc-fitness':'Fitness certificate','cdoc-leave':'Unfitness / medical leave certificate','cdoc-referral':'Referral note','cdoc-consent':'Consent working template',viewChart20:'Patient measurement trend',wikiModalContent:'Health library article'};
 const noWebsiteFooter=new Set(['rxSheet','pathSlipSheet','radSlipSheet','cert-form2','cert-form4','cert-form4a']);
 window.documentReference=id=>({title:titles[id]||document.getElementById(id)?.querySelector('h2,h3,h4')?.textContent||'Patient guidance',url:base+(id==='intakeDocument'?'#bookingSection':id==='wikiModalContent'?'#wikiSection':titles[id]?'#document='+encodeURIComponent(id):'#publicGuidanceSection')});
