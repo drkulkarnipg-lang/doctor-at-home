@@ -85,3 +85,27 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
 .contact-board-phone{display:inline-flex;align-items:center;min-height:44px;padding:6px 12px;margin-top:8px;border:1px solid #9bbdce;border-radius:8px;background:#fff;color:#173e56!important;font-weight:700;text-decoration:underline!important;box-sizing:border-box}.contact-board-phone:focus-visible{outline:3px solid #1a6c93;outline-offset:3px}
 
 .hero-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.hero-contact-actions .compass-contact{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin:0;padding:12px 16px;border:1px solid currentColor;border-radius:10px;font-weight:700}.hero-contact-actions .hero-call{background:#173e56;color:#fff}.hero-contact-actions a:focus-visible{outline:3px solid #1a6c93;outline-offset:3px}
+
+/* Keep the language menu in document flow: it must never cover portal tabs or actions. */
+@media screen {
+  .site-header .language-control[open] {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .site-header .language-control[open] > div {
+    position: static;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    box-shadow: 0 5px 18px #183b3612;
+  }
+  .site-header .language-control[open] #google_translate_element,
+  .site-header .language-control[open] .goog-te-gadget,
+  .site-header .language-control[open] .goog-te-gadget select {
+    max-width: 100%;
+  }
+}
