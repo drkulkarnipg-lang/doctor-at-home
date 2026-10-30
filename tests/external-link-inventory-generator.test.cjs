@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');
-const {generateInventory}=require('../scripts/generate-external-link-inventory.cjs');
+const {generateInventory,writeInventory}=require('../scripts/generate-external-link-inventory.cjs');
 
 const root=fs.mkdtempSync(path.join(os.tmpdir(),'external-link-inventory-'));
 try{
@@ -28,5 +28,6 @@ try{
  assert.equal(get('https://api.example.org/v1').classification,'service-endpoint');
  assert.equal(get('https://example.org/clinical').classification,'external-destination');
  assert.equal(get('https://official.example.gov/forms.pdf').classification,'external-destination');
- console.log('Full-source link inventory generator checks passed.');
+ const output=path.join(root,'reports','inventory.json');writeInventory(inv,output);const saved=fs.readFileSync(output,'utf8');assert.doesNotMatch(saved,/\\\\n$/,'Generated inventory must end with a real newline, not a literal backslash-n');assert.deepEqual(JSON.parse(saved),inv,'Generated inventory file must parse as exactly one JSON document');
+ console.log('Full-source link inventory generator checks passed, including valid on-disk JSON output.');
 }finally{fs.rmSync(root,{recursive:true,force:true});}
