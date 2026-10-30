@@ -80,3 +80,10 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 - **Lines 96/144 — registers:** UI/API and SQL migration are in source; the migration is deliberately not run by deployment. No live cloud persistence is claimed until a database backup, migration review, owner/non-owner RLS checks and restore test are recorded.
 - **Lines 68/71/137/140 — articles, RSS, AI and cloud media:** Article Manager, explicit owner-only publication and reviewed AI formatting exist in source. Local attachments use IndexedDB and links; public cloud publishing explicitly excludes attachments. Cloud/device media import/export, working provider RSS/evidence execution, provider budgets and all publishing destinations remain separate open tasks.
 - **Current main `1ccd34769734b30e83d1ce9ab1bad34a221446ec`: Vercel status failure — deployment rate limited.** The last successful deployment does not certify current-main features. Do not close any line on source presence alone.
+
+
+## Current-source link audit and release status — 30 October 2026
+
+- The committed link inventory is refreshed in the inventory-refresh branch: 86 active source files, 220 URL literals/templates; 172 static external destinations are eligible for automated checks.
+- Run `41090111191` checked 172 destinations: 130 reachable, 31 blocked/rate-limited, 3 method-not-allowed, 2 timeouts, 4 network errors and 1 HTTP 406 (Radiopaedia). No 404/410 destination remained after correcting the Europe PMC API-root false positive. Do not label blocked/timeouts/network errors as broken or as verified healthy; manually test them in a normal browser.
+- PR #81 fixed generated-inventory JSON output and false-positive classifications; PR #80 documented owner account/recovery and local register setup. Both are merged. Current main `6a7819277baf9d5dacb29d8082f4d3713f590aeb` passes regression CI but Vercel is rate-limited, so live deployment remains unconfirmed.
