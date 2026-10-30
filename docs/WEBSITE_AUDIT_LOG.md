@@ -118,3 +118,11 @@ Preserve existing routes, features, clinical content, and data. Make minimal cor
 - **CI finding:** Workflow run `41103557791` on commit `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e` failed in `tests/booking-intake.test.cjs`. The assertion expected the first two sections to be open, but the source opened only section 2 because `section()` used `title.startsWith('2.')`. The page's own instruction also said to complete sections 1 and 2.
 - **Correction:** Commit `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` changes the rule to open sections 1 and 2 only; sections 3–6 remain collapsed. This preserves the compact intake and matches the explicit quick-start instruction/test.
 - **Status:** SOURCE FIX COMMITTED — latest-main CI pending. The failing run is retained in the record; do not mark the task CI-passed until a newer run on a head containing `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` passes. Live/mobile form verification remains pending because Vercel reports build-rate-limit.
+
+
+## Long-history booking message — attachment limitation made explicit (30 October 2026)
+
+- **CI finding:** Regression run `41104015232` reached `tests/booking-intake.test.cjs` and failed because the long-history booking message did not explicitly state that the booking WhatsApp link cannot attach the complete history PDF. The test expected `must attach the complete history PDF`.
+- **Correction:** Commit `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc` updates the long-history booking text to say the booking link cannot attach files and that the user must attach the complete history PDF/original files separately or use the dedicated `Send history to doctor on WhatsApp` share-sheet workflow.
+- **Rationale:** A `wa.me` URL can prefill message text but cannot silently attach a PDF or original files. The dedicated share button uses the device's file-sharing API when supported; the site cannot verify that the recipient actually sent or received the files.
+- **Status:** SOURCE FIX COMMITTED — latest-head CI pending. The failed run remains documented; do not mark long-history sharing CI-verified until a newer run on a head containing `fc0d3755df3d90c52619eea1237a9a8c9db4b2fc` passes. Real WhatsApp/PDF delivery remains a device-level check.
