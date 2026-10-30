@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "generated_at": "2026-10-30",
   "repository": "https://github.com/drkulkarnipg-lang/doctor-at-home",
-  "source_revision": "6b551b4450422978d01683e0474f19047a761cf0",
-  "method": "Static source scan of homepage, preserved feature map, patient education content, research sources, calculators, booking intake, article reader, payments, contact actions and sitemap. Inventory baseline only; URLs were not live-tested.",
+  "source_revision": "5cda654ac9d0189cf31c324e80f12b7da13be8f7",
+  "method": "Static source scan of homepage, preserved feature map, patient education content, research sources, calculators, booking intake, article reader, payments, contact actions and sitemap. Inventory baseline only; URLs were not live-tested. Manual reconciliation after the first automated check: root-only Google Fonts preconnects are not navigable links; the Make webhook URL is a UI placeholder, not a configured destination; a dead Norton scale reference was replaced by AHRQ; and the visible CRS Form 4/4A link was switched to the verified full official forms PDF.",
   "unique_extracted_destinations": 194,
   "source_files_scanned": [
     "index.html",
@@ -209,15 +209,6 @@
       "notes": "Contains dynamic expression or placeholder; verify at runtime."
     },
     {
-      "url": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf",
-      "source_files": [
-        "index.html"
-      ],
-      "classification": "external-destination",
-      "verification_status": "not-live-checked",
-      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
-    },
-    {
       "url": "https://diabetes.org/about-diabetes/diagnosis",
       "source_files": [
         "clinical-calculators.js"
@@ -276,18 +267,18 @@
       "source_files": [
         "index.html"
       ],
-      "classification": "external-destination",
-      "verification_status": "not-live-checked",
-      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+      "classification": "domain-allowlist",
+      "verification_status": "not-a-navigable-link",
+      "notes": "Preconnect origin in index.html, not a user-clickable destination. Root URL returns 404 by design; do not classify as a broken website link."
     },
     {
       "url": "https://fonts.gstatic.com",
       "source_files": [
         "index.html"
       ],
-      "classification": "external-destination",
-      "verification_status": "not-live-checked",
-      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+      "classification": "domain-allowlist",
+      "verification_status": "not-a-navigable-link",
+      "notes": "Preconnect origin in index.html, not a user-clickable destination. Root URL returns 404 by design; do not classify as a broken website link."
     },
     {
       "url": "https://gemini.google.com/app",
@@ -449,9 +440,9 @@
       "source_files": [
         "index.html"
       ],
-      "classification": "external-destination",
-      "verification_status": "not-live-checked",
-      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+      "classification": "placeholder",
+      "verification_status": "not-a-configured-destination",
+      "notes": "Appears only as an example in the webhook input placeholder (https://hook.eu1.make.com/...). No webhook is configured by this value; never send requests to the bare root."
     },
     {
       "url": "https://jamanetwork.com/",
@@ -1764,13 +1755,23 @@
       "notes": "Contains dynamic expression or placeholder; verify at runtime."
     },
     {
-      "url": "https://www26.ha.org.hk/Courseware/QEH_CND_PRE2/norton/norton1.asp",
+      "url": "https://www.ahrq.gov/patient-safety/settings/hospital/resource/pressureulcer/tool/pu7b.html",
       "source_files": [
         "clinical-calculators.js"
       ],
       "classification": "external-destination",
-      "verification_status": "not-live-checked",
-      "notes": "Extracted from source; HTTP reachability and intended destination have not been independently verified."
+      "verification_status": "web-search-verified; direct HTTP check pending",
+      "notes": "Official AHRQ Norton scale reference. The previous Hong Kong Hospital Authority page returned HTTP 404 in the automated audit; this AHRQ page describes the Norton scale and its use with clinical assessment."
+    },
+    {
+      "url": "https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf",
+      "source_files": [
+        "index.html"
+      ],
+      "classification": "external-destination",
+      "verification_status": "browser-pdf-verified; direct HTTP check pending",
+      "notes": "Official 23-page CRS forms PDF verified by browser PDF inspection; contains Form 2, Form 4, Form 4A and reverse-side instructions."
     }
-  ]
+  ],
+  "last_reconciled_at": "2026-10-30"
 }
