@@ -361,7 +361,7 @@
 <main class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6" id="doctorWorkstation"><div class="workstation-heading no-print"><span class="section-eyebrow">Dr. Kulkarni · clinical workspace</span><p class="workspace-area-label">Doctor Workstation</p><p>Prescriptions, investigations, clinical references and research — together at your desk.</p></div>
 <!-- Doctor Sub-Tabs Navigation -->
 <div aria-label="Doctor workstation tools" class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print doctor-tabs">
-<button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabInvoice" onclick="switchDocTab('invoice')">🧾 Invoice / Receipt</button>
+<button class="px-3.5 py-1.5 bg-[#275f4b] text-white rounded-xl text-xs font-bold shadow" id="tabClinicalTools" onclick="switchDocTab('clinicalTools')">🏥 Workstation Home</button><button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabInvoice" onclick="switchDocTab('invoice')">🧾 Invoice / Receipt</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm" id="tabSymptom" onclick="switchDocTab('symptomChecker')">🩺 WebMD Symptom &amp; Interaction Suite</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1" id="tabJournals" onclick="switchDocTab('journalsHub')">📡 Live RSS &amp; AI Research Agent</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabEverydayTools" onclick="switchDocTab('everydayTools')">🌿 Diet &amp; Conversions</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabChart" onclick="switchDocTab('chart20')">📈 Patient BP, Sugar &amp; Trends</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCheat" onclick="switchDocTab('pathCheatSheet')">🔬 Pathology Cheat Sheet (150+)</button>
@@ -519,6 +519,29 @@
 <section class="space-y-3"><h3 class="text-lg font-bold">Service and charges</h3><label class="block text-sm font-semibold">Service description<input class="w-full border rounded-lg p-2 mt-1" id="invoiceService" placeholder="e.g. Home visit / online consultation / other service" maxlength="180"/></label><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><label class="block text-sm font-semibold">Amount (INR)<input class="w-full border rounded-lg p-2 mt-1" id="invoiceAmount" type="number" min="0" max="10000000" step="0.01" inputmode="decimal" autocomplete="off"/></label><label class="block text-sm font-semibold">Payment status<select class="w-full border rounded-lg p-2 mt-1" id="invoicePaymentStatus"><option>Not yet confirmed</option><option>Pending</option><option>Paid — manually verified</option><option>Unpaid</option><option>Waived</option></select></label><label class="block text-sm font-semibold">Payment method<select class="w-full border rounded-lg p-2 mt-1" id="invoicePaymentMethod"><option>Not specified</option><option>UPI</option><option>Cash</option><option>Bank transfer</option><option>Payment gateway</option><option>Other</option></select></label></div><div class="flex justify-end border-t border-slate-200 pt-4"><p class="text-xl font-bold">Total: <output id="invoiceTotal">—</output></p></div><label class="block text-sm font-semibold">Notes / receipt reference<textarea class="w-full border rounded-lg p-2 mt-1" id="invoiceNotes" rows="3" maxlength="1000"></textarea></label></section>
 <footer class="border-t border-slate-200 pt-4 text-xs text-slate-600"><p>Payment status is entered by the clinic and is not verified by this website. Confirm the service, amount and receipt details before issuing. Apply any legally required accounting or tax treatment separately.</p><p class="mt-3">Doctor signature: __________________________________</p></footer>
 </article>
+</section>
+<!-- Workstation tools dashboard -->
+<section class="hidden space-y-5" id="viewClinicalTools">
+<header><span class="section-eyebrow">Doctor workstation · tools directory</span><h3>Workstation Home</h3><p>Open the required clinical tool directly. Existing tools and their records remain in their original sections.</p></header>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Daily clinical workflow</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('rxPad')"><strong>📝 A4 Prescription</strong><span>Write, add medicine rows, print and share a prescription.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('drugDir')"><strong>💊 Drug formulary</strong><span>Search the existing catalogue and import an authorised CSV/JSON catalogue.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('pathReq')"><strong>🧪 Lab Requisition</strong><span>Select tests and prepare the A4 requisition.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('radReq')"><strong>🩻 Radiology Requisition</strong><span>Select imaging and record the clinical indication.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('journalsHub')"><strong>📡 Live RSS &amp; AI Research</strong><span>Open the existing source and research workflow.</span></button>
+</div></section>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Certificates, forms and billing</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('legalForms')"><strong>📄 Death Forms 2 / 4 / 4A</strong><span>Open the government-form reference and editable working layouts.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('clinicalCertificates')"><strong>✍️ Referral, Consent, Fitness</strong><span>Open referral, consent, fitness and unfitness documents.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('invoice')"><strong>🧾 Invoice / Receipt</strong><span>Prepare a draft invoice, then verify the amount and payment status.</span></button>
+</div></section>
+<section><h4 class="text-lg font-bold text-[#173d5b]">Monitoring, research and administration</h4><div class="clinical-tools-grid">
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('clinicalCalculators')"><strong>🧮 Clinical calculators</strong><span>Use calculators with visible interpretation notes and sources.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('chart20')"><strong>📈 Patient trends</strong><span>Review measurements and trends.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('everydayTools')"><strong>🌡️ Unit converters</strong><span>Automatic temperature and weight conversion.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('articlesHub')"><strong>📚 Article Manager</strong><span>Draft, review and publish patient education.</span></button>
+<button type="button" class="clinical-tool-card" onclick="switchDocTab('settingsTab')"><strong>⚙️ Settings</strong><span>Open workstation settings and available controls.</span></button>
+</div></section>
 </section>
 <!-- TAB 2: WEBMD CLINICAL SUITE -->
 <div class="hidden space-y-4 no-print" id="viewSymptomChecker">
@@ -1130,7 +1153,7 @@
     }
 
     function switchDocTab(tabId) {
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'clinicalTools'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if(elem) elem.classList.add('hidden');
       });
