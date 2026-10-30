@@ -302,3 +302,11 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - No secrets were read or changed. No password was created or disclosed. No Supabase migration was applied. No payment gateway was activated. No patient data was uploaded or modified.
 - Next engineering work: (1) validate the docs-only branch regression; (2) continue current-main source audit of security headers/CSP, every calculator reference, lab/radiology item lists and requisition output; (3) inspect Article Manager attachment persistence and define a safe cloud-media path without changing local articles or silently uploading patient information; (4) verify RSS/evidence provider execution and AI budget/configuration; (5) prepare live smoke-test checklist and wait for Vercel build-limit recovery before application-code release; (6) run device/print/share tests and close each source line only with evidence.
 - Keep status distinctions explicit: merged source is not necessarily deployed; deployment status is not a successful user-journey test; synthetic tests do not prove provider delivery, actual payment settlement, physical printing, legal acceptance or real-device share.
+
+
+## Checkpoint update after PR #80 and PR #81 — 30 October 2026
+
+- Current main application source baseline: `6a7819277baf9d5dacb29d8082f4d3713f590aeb`. PR #80 documentation and PR #81 link-audit tooling are merged. Regression CI passes. Vercel remains rate-limited; do not claim latest application source is deployed.
+- PR #82 (inventory refresh) is being prepared from `audit/run-external-link-check-inventory-refresh-20261030`. The committed inventory is regenerated from 86 active source files / 220 unique URL literals/templates. A regression test compares the committed inventory to a fresh scan, preventing a return to the old 10-file shortlist.
+- Fresh external audit: 172 static external destinations checked, 130 reachable, 31 blocked/rate-limited, 3 method-not-allowed, 2 timeouts, 4 network errors, 1 HTTP 406 requiring manual browser verification, 0 HTTP 404/410. These are automated reachability results only; blocked/timeouts/network errors are not declared healthy or broken.
+- No live owner account configuration, Supabase migration, real patient/death data, payment settlement, or real-device sharing/printing was touched or claimed.
