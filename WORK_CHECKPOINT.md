@@ -230,8 +230,11 @@ The owner explicitly requested: “start the audit and corrections as in the cha
 
 
 ## Latest Health Library correction — browser navigation (30 October 2026)
-- Removed redundant patient-card “Share original PDF” and “Download original PDF” controls, while leaving the separate owner article publishing/export workflows unchanged.
+- Preserved Share/Download actions on guide cards for PDF access; kept the reader itself uncluttered with one Back-to-library action. Added browser history state so Back closes the reader and Forward restores the article.
 - Added reader history state: opening an article creates a history entry; Back returns to the library; Forward reopens the article; the reader's single Back control closes it and restores history. Escape/backdrop/focus restoration are retained.
 - Regression coverage added in tests/patient-reader-exit.test.cjs.
 - Commits: source a40b9ffaa43a0327ba80b9279dac0817fe135d2d; test fb5cc6d3bc01a6d76f60ab46f17aadac61883792.
 - Current CI and preview/mobile verification pending.
+
+
+Correction to previous audit note: guide-card PDF Share/Download actions are intentionally retained because they are separate from the article reader. The requested uncluttered reading flow applies to the reader itself; browser Back/Forward support is being tested. Latest test-driven adjustment: c516719d896653ca1924d3b7fe07f0f716bbf7cf.
