@@ -1,6 +1,6 @@
 # Current resumable work checkpoint
 
-Updated: 30 October 2026, India time — owner resumed full sentence-by-sentence audit.
+Updated: 31 October 2026, India time — continuing sentence-by-sentence audit; requisition output defect corrected on review branch.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
@@ -376,3 +376,13 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Reviewed `api/clinical-cloud.js`: the configured owner UUID is checked before register actions; edits include owner, ID and revision constraints; missing migration returns a controlled 503 without changing data.
 - Reviewed `workstation-registers.js` and existing synthetic UI/API tests: daily/death/stock forms, revision-checked edits, no delete action, sign-out clearing, no localStorage persistence and non-owner API denial are covered.
 - Added static migration regression test in commit `0e4afabbf1cace202fee5ecc81411e09ebd16fc5`. This does **not** prove live database RLS; no migration was applied. Await CI and reserve actual owner/non-owner RLS, backup/restore and cross-device testing for a dedicated test project.
+
+
+## Requisition output audit — 31 October 2026
+
+- **Working branch:** `fix/requisition-output-identity-20261031`, based on main `12608d35c02b3afe76a10995e95ebb521087eae4`. This is review-only; no merge or production release performed.
+- **E07 lab requisition:** existing lipid profile, iron studies and serum ammonia choices were present with descriptive values. Found CBC, KFT, electrolytes were preselected by default, which could imply unintended tests. Removed all three default checked states. New test `tests/requisition-output.test.cjs` checks the requested lab choices and that selected tests appear in the actual share payload.
+- **E08 radiology requisition:** existing portable chest X-ray, bedside USG abdomen/pelvis, separate venous and arterial Doppler, CT brain/chest, and MRI brain/spine choices were present. Found the radiology share function was reading name/age/date from the lab slip and the radiology slip had no dedicated identity fields. Added `radPatName`, `radPatAge`, `radReqDate`; changed radiology sharing to use those fields; removed the default checked state for portable chest X-ray. The new test checks all requested imaging options, patient identity, clinical indication and selected-item share output.
+- **Source commits:** HTML correction `e00775f5ddfcf269327e7547404fc6f6975b08b6`; radiology share binding `9c6a73ecbfc5c08c59cb04451095eeba98dd1c61`; regression test `f790cc415311db5a7412d87baaea315c8e53910f`; register update `c6c606fb7497c46f5eae7f4a2924d105b11f4ac6`.
+- **Status:** source changes saved; the new test has not yet been confirmed by GitHub Actions. Check exact branch-head CI and fix any failures before PR review. PDF checkbox rendering/selected output, Vercel preview, mobile layout and real device share/print remain unverified. Vercel rate-limit must not be bypassed; do not merge or claim these changes live.
+- **Next:** confirm test results on the latest exact head; then continue to the next open register row. Preserve no-production-release-without-explicit-owner-approval.
