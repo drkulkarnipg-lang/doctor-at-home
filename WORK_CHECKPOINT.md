@@ -432,3 +432,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - **Traceability privacy regression fixed:** CI failed at `tests/pasted-text-10-sentence-traceability.test.cjs` because the newly added invoice/payment evidence copied an 11-digit workflow run ID into public traceability JSONL. Removed that run ID from both line and sentence maps and checked that neither file contains any 11–18 digit numeric sequence. A fresh full CI run on the newest head is required.
+
+
+- **Latest full regression confirmed green:** GitHub Actions completed successfully for exact review-branch head `3880dc6fbbe7b7e28c54c28c0828692f211c5346`. This run includes the traceability privacy-test correction (no long numeric workflow ID embedded in the public JSONL evidence). The successful run verifies repository CI only; it does not replace live mobile/device checks, real WhatsApp delivery, official-form language verification, invoice/QR/payee checks, payment settlement/refund testing, backend/auth/RLS review, or the remaining sentence-by-sentence note audit. Keep PR #85 draft and do not claim production deployment.
