@@ -1,10 +1,10 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
-const html=fs.readFileSync('index.html','utf8'),script=fs.readFileSync('workstation-registers.js','utf8'),tick=()=>new Promise(r=>setTimeout(r,20));
+const sourceHtml=fs.readFileSync('index.html','utf8'),script=fs.readFileSync('workstation-registers.js','utf8'),tick=()=>new Promise(r=>setTimeout(r,20));
 (async()=>{
-const dom=new JSDOM(html,{url:'https://clinic.example.test/',runScripts:'outside-only'}),w=dom.window;let records=[],next=1;
+const html=sourceHtml.replace('</body>','<script>'+script+'</script></body>');const dom=new JSDOM(html,{url:'https://clinic.example.test/',runScripts:'dangerously'}),w=dom.window;let records=[],next=1;
 w.ClinicCloud={isSignedIn:()=>true,session:async()=>({configured:true,signedIn:true}),listRegister:async type=>({records:records.filter(r=>r.register_type===type)}),saveRegister:async entry=>{let r;const data={...entry};delete data.entryDate;delete data.registerType;if(entry.id){r=records.find(x=>x.id===entry.id);assert.equal(r.revision,entry.revision,'edit must submit the loaded revision');r.entry_date=entry.entryDate;r.data=data;r.revision='rev-'+next++;}else{r={id:'id-'+next++,register_type:entry.registerType,entry_date:entry.entryDate,data,revision:'rev-'+next++};records.push(r);}return{record:r};}};
-w.eval(script);await tick();
+await tick();
 assert.ok(w.document.getElementById('tabRegisters'));assert.ok(w.document.getElementById('viewRegisters'));assert.equal(w.localStorage.length,0);
 const choose=type=>w.document.querySelector('[data-register-type="'+type+'"]').click();
 choose('stock');await tick();assert.ok(w.document.getElementById('register-itemName'));assert.ok(w.document.getElementById('register-movement'));assert.ok(w.document.getElementById('register-adjustmentDirection'));
