@@ -13,7 +13,7 @@ for(const script of [...w.document.scripts]){
 }
 w.eval(scripts.join('\n;\n'));
 await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();assert.match(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note').textContent,/5\.7–6\.4%/);assert.equal(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note a[href="https://diabetes.org/about-diabetes/diagnosis"]').textContent,'HbA1c diagnostic thresholds ↗');
-assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);
+assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);assert.match(w.document.getElementById('tabPath').textContent,/Lab Requisition/);assert.doesNotMatch(w.document.getElementById('tabPath').textContent,/Slip/);assert.match(w.document.getElementById('tabRad').textContent,/Radiology Requisition/);assert.doesNotMatch(w.document.getElementById('tabRad').textContent,/Slip/);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,28);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid input').length>50,true);
 assert.equal(w.document.querySelector('#calculator-6-verbal option[value="2"]').textContent,'2 · sounds');
