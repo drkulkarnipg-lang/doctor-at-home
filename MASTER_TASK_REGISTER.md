@@ -276,3 +276,8 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 ### Article manager import-toolbar follow-up — 30 October 2026
 
 | H15 | [ ] CI PENDING — PROVIDER / LIVE QA OPEN | Place article-fetch controls above the content box; make cloud Refresh, Load and Start visibly boxed and functional. | `public-article-editor.js` moved the existing cloud selector, Refresh, pager, Load, Start and status into `publicCloudArticleImportToolbar` before the content box in commit `3c62f7032675e84fba1444578bcba080898a4175`. `index.html` styles the toolbar responsively in `9a9275bea1cc6527fa9f02f563b21e05f1a6e31e`. `tests/public-article-editor.test.cjs` verifies placement and existing synthetic API interactions in `1f2d7fdbf4eb37153cfc38162f049ea61a40d915`. Local file import and device-local attachments remain unchanged. Await CI, then verify real owner-authenticated cloud refresh/load and mobile layout; provider setup/cross-device persistence remain unverified. |
+
+
+### Pre-visit form compactness regression — 30 October 2026
+
+| H16 | [ ] CI PENDING — LIVE MOBILE QA OPEN | Keep pre-visit intake short: only essential patient/problem sections open; optional details remain collapsed without removing fields. | GitHub Actions run `41103557791` failed because source opened only section 2 while the test and quick-start instruction require sections 1 and 2 open. Fixed in `cc51e9b431820d9852f1f064f8fed6b0defe9ed4` by opening sections 1–2 and keeping 3–6 collapsed. Await a green regression run on a head containing this fix. Vercel build-rate-limit prevents live/mobile confirmation. |
