@@ -328,3 +328,12 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - **Coverage reviewed:** 30 calculator registry entries; UI renders 2 public and 28 clinical cards; reference notes and source links; BMI; two-way Celsius/Fahrenheit and kg/lb conversions in both patient and doctor areas; diet presets preserve previously entered advice; public calculator notes have transparent background and visibly clickable source links. The UI regression test must now pass on the exact latest main head before this item is CI-verified.
 - **External gate:** clinical review of each reference source and live/phone visual verification remain pending. Vercel deployment is still separate and not confirmed for latest source.
 - **Next after this batch:** continue the master prompt in priority order, starting with patient-history / requisition share end-to-end behaviour, then owner recovery and register migration/RLS review. Do not apply migrations or change provider configuration without the documented backup/owner gates.
+
+
+## Document-share fallback correction — 30 October 2026
+
+- Owner's source sentence: `P10-L0048-S44` — lab slip sharing previously appeared to open WhatsApp without completing the share flow.
+- Verified baseline: `document-sharing.js` generates the actual PDF and, when supported, sends the PDF plus selected original files through Web Share. However, if the initial direct attempt failed and the user retried using the fallback dialog, successful `navigator.share()` only changed the status text and left the modal open.
+- Implemented in `0934b175e89b5d4882b584e00d6bd24483612017`: successful fallback share now closes the dialog, releases temporary resources and displays a toast. Status wording explicitly avoids claiming recipient delivery.
+- Regression test commit: `c37e924db498e56e8e008b80a75872580fb45a82` checks that the fallback dialog closes after a successful share. Actual phone/app testing is still required; WhatsApp URL links cannot auto-attach PDFs, so unsupported devices retain clear manual-attach instructions.
+- Next: confirm exact latest-main CI, then continue the source document's remaining high-priority tasks. Keep real-device sharing, PDF print/save and external receipt as pending until tested.
