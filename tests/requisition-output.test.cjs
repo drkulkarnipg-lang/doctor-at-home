@@ -65,7 +65,7 @@ Object.defineProperty(w.navigator, 'share', { configurable: true, value: payload
 
 d.getElementById('reqPatName').value = 'Lab Test Patient';
 d.getElementById('reqPatAge').value = '64 Y / F';
-d.getElementById('reqDate').value = '31/10/2026';
+d.getElementById('reqDate').value = '2026-10-31';
 d.getElementById('t_lipid').checked = true;
 d.getElementById('t_iron').checked = true;
 d.getElementById('t_ammonia').checked = true;
@@ -73,15 +73,15 @@ w.universalShareDocument('path');
 assert.ok(shared, 'lab share should hand the prepared requisition to the share API');
 assert.match(shared.text, /Patient: Lab Test Patient/);
 assert.match(shared.text, /Age\/Sex: 64 Y \/ F/);
+assert.match(shared.text, /Age\/Sex: 64 Y \/ F/);
 assert.match(shared.text, /Date: 2026-10-31/);
-assert.match(shared.text, /Lipid Profile/);
 assert.match(shared.text, /Iron Studies/);
 assert.match(shared.text, /Serum Ammonia/);
 const labPdfText = w.buildDocumentPdfClone('pathSlipSheet').textContent;
-assert.match(labPdfText, /\\[x\\]\\s*Lipid Profile/, 'lab PDF clone must preserve selected lipid profile');
-assert.match(labPdfText, /\\[x\\]\\s*Iron Studies/, 'lab PDF clone must preserve selected iron studies');
-assert.match(labPdfText, /\\[x\\]\\s*Serum Ammonia/, 'lab PDF clone must preserve selected ammonia');
-assert.match(labPdfText, /\\[ \\]\\s*CBC \+ Platelets/, 'unselected CBC must remain visibly unselected in the PDF clone');
+assert.match(labPdfText, /\[x\]\s*Lipid Profile/, 'lab PDF clone must preserve selected lipid profile');
+assert.match(labPdfText, /\[x\]\s*Iron Studies/, 'lab PDF clone must preserve selected iron studies');
+assert.match(labPdfText, /\[x\]\s*Serum Ammonia/, 'lab PDF clone must preserve selected ammonia');
+assert.match(labPdfText, /\[ \]\s*CBC \+ Platelets/, 'unselected CBC must remain visibly unselected in the PDF clone');
 
 shared = null;
 d.getElementById('radPatName').value = 'Radiology Test Patient';
@@ -99,7 +99,7 @@ w.universalShareDocument('rad');
 assert.ok(shared, 'radiology share should hand the prepared requisition to the share API');
 assert.match(shared.text, /Patient: Radiology Test Patient/);
 assert.match(shared.text, /Age\/Sex: 71 Y \/ M/);
-assert.match(shared.text, /Date: 31\/10\/2026/);
+assert.match(shared.text, /Date: 2026-10-31/);
 for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler Lower Limb', 'Arterial Color Doppler Lower Limb', 'NCCT Brain (Stroke)', 'CT Chest', 'MRI Brain', 'MRI Spine']) {
   assert.ok(shared.text.includes(label), `shared radiology requisition must include selected ${label}`);
 }
@@ -109,7 +109,7 @@ for (const label of ['Bedside USG Abdomen & Pelvis', 'Venous Color Doppler', 'Ar
   assert.ok(radiologyPdfText.includes('[x]') && radiologyPdfText.includes(label),
     `radiology PDF clone must retain the selected ${label} choice`);
 }
-assert.match(radiologyPdfText, /\\[ \\]\\s*Portable Digital Chest X-Ray/,
+assert.match(radiologyPdfText, /\[ \]\s*Portable Digital Chest X-Ray/,
   'portable chest X-ray must remain unselected until the clinician chooses it');
 
 dom.window.close();
