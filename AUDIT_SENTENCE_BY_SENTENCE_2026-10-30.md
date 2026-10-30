@@ -96,3 +96,10 @@ For every row, retain: **owner's request → current source/live evidence → ac
 - Added `tests/document-filenames.test.cjs` to assert the three names and reject doctor-name suffixes.
 - Implementation commit: `859cb6cd82e9b0b9f4fbe691aaa66059a361dfff`; regression test commit: `74d0973f72fa3cbc8dcc97070370b112b43d3a18`.
 - Pending: current-head CI, actual download/share filename on desktop/mobile, and review of prescription footer/signature layout. Do not claim live completion.
+
+
+## Latest clinical safety correction — allergy status (30 October 2026)
+- Source inspection found the prescription allergy field was prefilled with `NKDA (No Known Drug Allergies)`, which can incorrectly imply allergies were assessed when they were not.
+- Changed the default to blank with the prompt `Confirm and document allergy status`; added an assertion to `tests/prescription-initialization.test.cjs`.
+- Source commit `03d76614002a66fd1e624bd850a9bfebfb0d9a76`; test commit `95c8a45557c5190e40470e4897642eca65b1ad3b`.
+- This is a source-level safety correction; current-head CI and preview/device checks remain pending.
