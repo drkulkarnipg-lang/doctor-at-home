@@ -521,3 +521,5 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - QR failure-path hardening: the current amount is displayed before QR generation; a failed refresh hides/removes the stale image and disables enlarge/download, while retaining UPI app and copy fallbacks. Added synthetic failure-path assertions. Commits: 1ebf148, 8db1f4a, deed494.
 
 - QR race/stale-view protection: every regeneration invalidates pending QR requests, hides the prior image, closes any enlarged stale QR and clears its image before generating the new amount. Added a regression case for fee refresh while the enlarged dialog is open, including QR-generation failure. Commits: 89d9a48, 319095b, 4f8cfac.
+
+- Exact-head CI run 41180983591 reached the dynamic QR test and failed because its status-text regex expected the old generic wording; the implementation now reports the named payee and exact INR amount. Updated the test to assert the new explicit message in commit c1b1bae. The suite stopped at this first failure; later tests in that run were not executed. Rerun on the corrected head is required.
