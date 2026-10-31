@@ -226,7 +226,7 @@
         "index.html"
       ],
       "source_lines": [
-        1301
+        1308
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -238,7 +238,7 @@
         "index.html"
       ],
       "source_lines": [
-        1828
+        1835
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
