@@ -4,10 +4,10 @@ begin;
 
 create table if not exists public.clinic_workstation_registers (
   id uuid primary key default gen_random_uuid(),
-  owner_id uuid not null references auth.users(id) on delete cascade,
+  owner_id uuid not null references auth.users(id),
   register_type text not null check (register_type in ('daily', 'death', 'stock')),
   entry_date date not null,
-  data jsonb not null default '{}'::jsonb check (jsonb_typeof(data) = 'object'),
+  data jsonb not null default '{}'::jsonb check (jsonb_typeof(data) = 'object' and pg_column_size(data) <= 20000),
   source_event_id text,
   revision uuid not null default gen_random_uuid(),
   created_at timestamptz not null default now(),
@@ -17,7 +17,7 @@ create table if not exists public.clinic_workstation_registers (
 alter table public.clinic_workstation_registers
   add column if not exists source_event_id text;
 
-create index if not exists clinic_workstation_registers_owner_type_date_idx
+create index if not exists clinic_workstation_registers_owner_type_date
   on public.clinic_workstation_registers(owner_id, register_type, entry_date desc, created_at desc);
 
 create unique index if not exists clinic_workstation_registers_source_event_unique
@@ -25,30 +25,26 @@ create unique index if not exists clinic_workstation_registers_source_event_uniq
   where source_event_id is not null;
 
 alter table public.clinic_workstation_registers enable row level security;
+alter table public.clinic_workstation_registers force row level security;
 
-revoke all on table public.clinic_workstation_registers from public, anon;
-grant select, insert, update, delete on table public.clinic_workstation_registers to authenticated;
+revoke all on table public.clinic_workstation_registers from public, anon, authenticated;
+grant select, insert, update on table public.clinic_workstation_registers to authenticated;
 
-drop policy if exists clinic_register_owner_select on public.clinic_workstation_registers;
-create policy clinic_register_owner_select
+drop policy if exists clinic_register_owner_reads on public.clinic_workstation_registers;
+create policy clinic_register_owner_reads
   on public.clinic_workstation_registers for select to authenticated
-  using ((select auth.uid()) = owner_id);
+  using (owner_id = (select auth.uid()) and exists (select 1 from public.clinic_members where user_id = (select auth.uid())));
 
-drop policy if exists clinic_register_owner_insert on public.clinic_workstation_registers;
-create policy clinic_register_owner_insert
+drop policy if exists clinic_register_owner_inserts on public.clinic_workstation_registers;
+create policy clinic_register_owner_inserts
   on public.clinic_workstation_registers for insert to authenticated
-  with check ((select auth.uid()) = owner_id);
+  with check (owner_id = (select auth.uid()) and exists (select 1 from public.clinic_members where user_id = (select auth.uid())));
 
-drop policy if exists clinic_register_owner_update on public.clinic_workstation_registers;
-create policy clinic_register_owner_update
+drop policy if exists clinic_register_owner_updates on public.clinic_workstation_registers;
+create policy clinic_register_owner_updates
   on public.clinic_workstation_registers for update to authenticated
-  using ((select auth.uid()) = owner_id)
-  with check ((select auth.uid()) = owner_id);
-
-drop policy if exists clinic_register_owner_delete on public.clinic_workstation_registers;
-create policy clinic_register_owner_delete
-  on public.clinic_workstation_registers for delete to authenticated
-  using ((select auth.uid()) = owner_id);
+  using (owner_id = (select auth.uid()) and exists (select 1 from public.clinic_members where user_id = (select auth.uid())))
+  with check (owner_id = (select auth.uid()) and exists (select 1 from public.clinic_members where user_id = (select auth.uid())));
 
 -- Merge only non-empty incoming values for one explicit source event.
 -- SECURITY INVOKER preserves authenticated RLS enforcement.
