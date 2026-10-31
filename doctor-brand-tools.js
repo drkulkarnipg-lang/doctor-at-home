@@ -1,0 +1,30 @@
+/* Private doctor branding tools: local-only composition, no upload or server storage. */
+(()=>{'use strict';
+const $=id=>document.getElementById(id);let circleImage=null,rectImage=null,signatureImage=null,lastCanvas=null;
+const status=t=>{if($('brandToolStatus'))$('brandToolStatus').textContent=t;};
+function loadImage(file,done){if(!file)return;const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{done(img);URL.revokeObjectURL(url);};img.onerror=()=>{URL.revokeObjectURL(url);status('Image could not be opened. Choose PNG, JPG or WEBP.');};img.src=url;}
+function imageFit(ctx,img,x,y,w,h){if(!img)return;const scale=Math.min(w/img.width,h/img.height),dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);}
+function baseCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);return[c,x];}
+function renderStamp(kind){const isCircle=kind==='circle',img=isCircle?circleImage:rectImage;if(!img){status('Select the original '+(isCircle?'round':'rectangular')+' stamp image first.');return null;}const[c,x]=baseCanvas(isCircle?1400:1800,isCircle?1400:900);imageFit(x,img,40,40,c.width-80,c.height-80);lastCanvas=c;return c;}
+function renderSignature(){const[c,x]=baseCanvas(1600,650);imageFit(x,signatureImage,80,70,1440,510);lastCanvas=c;return c;}
+function drawCard(){const[c,x]=baseCanvas(1050,600);x.fillStyle=$('cardBg').value;x.fillRect(0,0,c.width,c.height);x.strokeStyle=$('cardAccent').value;x.lineWidth=12;x.strokeRect(18,18,c.width-36,c.height-36);
+x.fillStyle=$('cardAccent').value;x.font='bold 42px Arial';x.fillText($('cardName').value.trim()||'Dr. Pramod G. Kulkarni',58,105);
+x.fillStyle='#18324a';x.font='bold 25px Arial';x.fillText($('cardQualification').value.trim()||'BAMS, PGDEMS',60,155);
+x.font='23px Arial';const lines=[$('cardRole').value,$('cardPhone').value,$('cardEmail').value,$('cardAddress').value,$('cardWebsite').value].filter(Boolean);let y=225;for(const line of lines){x.fillText(line,60,y);y+=55;}
+if(signatureImage){x.fillStyle='#31465b';x.font='18px Arial';x.fillText('Signature',730,470);imageFit(x,signatureImage,700,350,290,110);}
+x.fillStyle='#64748b';x.font='16px Arial';x.fillText('Visiting card preview · Verify all details before printing',60,555);lastCanvas=c;return c;}
+function render(kind){const c=kind==='circle'||kind==='rect'?renderStamp(kind):kind==='signature'?renderSignature():drawCard();if(!c)return;const preview=$('brandToolPreview');preview.replaceChildren(c);c.style.width='100%';c.style.height='auto';c.style.display='block';c.setAttribute('aria-label','Preview of selected doctor branding tool');status('Preview ready. Choose Save PNG, Share, or Print.');}
+function filename(){return ({circle:'Round_Stamp',rect:'Rectangular_Stamp',signature:'Doctor_Signature',card:'Doctor_Visiting_Card'})[$('brandToolType').value]+'_'+new Date().toISOString().slice(0,10)+'.png';}
+function activeCanvas(){if(!lastCanvas)render($('brandToolType').value);return lastCanvas;}
+function save(){const c=activeCanvas();if(!c)return;c.toBlob(b=>{if(!b){status('Image export failed.');return;}const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=filename();a.click();setTimeout(()=>URL.revokeObjectURL(u),30000);status('PNG saved to this device.');},'image/png');}
+async function share(){const c=activeCanvas();if(!c)return;c.toBlob(async b=>{if(!b)return;const f=new File([b],filename(),{type:'image/png'});if(navigator.share&&navigator.canShare?.({files:[f]})){try{await navigator.share({files:[f],title:f.name});status('Share sheet opened. Confirm the destination before sending.');}catch(e){if(e.name!=='AbortError')status('Sharing unavailable. Use Save PNG.');}}else{save();status('Direct file sharing is unavailable on this browser; PNG downloaded for manual sharing.');}},'image/png');}
+function print(){const c=activeCanvas();if(!c)return;const w=window.open('','_blank','noopener');if(!w){status('Pop-up blocked. Allow pop-ups to print, or save PNG.');return;}const data=c.toDataURL('image/png');w.document.write('<!doctype html><html><head><title>Doctor branding print</title><style>body{margin:0;display:grid;place-items:center;min-height:100vh}img{max-width:96vw;max-height:96vh;object-fit:contain}@media print{@page{margin:8mm}img{max-width:100%;max-height:95vh}}</style></head><body><img src="'+data+'" alt="Doctor branding artwork"><script>window.onload=()=>window.print()<\/script></body></html>');w.document.close();status('Print window opened. Check paper size and scale before printing.');}
+document.addEventListener('DOMContentLoaded',()=>{const sig=new Image();sig.onload=()=>{signatureImage=sig;};sig.src='/assets/doctor-signature.svg';
+$('brandCircleUpload')?.addEventListener('change',e=>loadImage(e.target.files[0],i=>{circleImage=i;status('Round stamp loaded locally.');}));
+$('brandRectUpload')?.addEventListener('change',e=>loadImage(e.target.files[0],i=>{rectImage=i;status('Rectangular stamp loaded locally.');}));
+$('brandToolType')?.addEventListener('change',()=>{lastCanvas=null;});
+$('brandToolRender')?.addEventListener('click',()=>render($('brandToolType').value));
+$('brandToolSave')?.addEventListener('click',save);$('brandToolShare')?.addEventListener('click',share);$('brandToolPrint')?.addEventListener('click',print);
+['cardName','cardQualification','cardRole','cardPhone','cardEmail','cardAddress','cardWebsite','cardBg','cardAccent'].forEach(id=>$(id)?.addEventListener('input',()=>{if($('brandToolType').value==='card')lastCanvas=null;}));
+});
+})();
