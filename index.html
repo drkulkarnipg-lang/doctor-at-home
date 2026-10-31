@@ -508,25 +508,25 @@
 <span>⚠️ KNOWN DRUG ALLERGIES:</span>
 <input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="" placeholder="Confirm and document allergy status"/>
 </div>
-<div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
+<div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border" aria-label="Prescription and patient details">
 <div><label class="text-[10px] text-slate-500">Prescription serial no.:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxSerialNo" type="text" placeholder="Enter serial no."/></div>
 <div><label class="text-[10px] text-slate-500">Date:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text" placeholder="DD/MM/YYYY"/></div>
 <div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Age:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="Age in years" type="text"/></div>
+<div><label class="text-[10px] text-slate-500">Age:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="Age" type="text"/></div>
 <div><label class="text-[10px] text-slate-500">Sex:</label><select class="w-full bg-white p-1 border rounded-lg" id="rxPatSex"><option value="">Select sex</option><option>Male</option><option>Female</option><option>Other</option></select></div>
 <div><label class="text-[10px] text-slate-500">Locality (optional):</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="Pune locality" type="text"/></div>
-<div class="col-span-4 grid grid-cols-6 gap-2 pt-2 border-t mt-1 text-center">
-<div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="78" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="130/80" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vSpO2" placeholder="98%" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="98.4" type="text"/></div>
-<div class="bg-amber-100/60 rounded-lg p-0.5"><label class="text-[10px] text-amber-900 font-bold block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold text-amber-950" id="vGRBS" placeholder="140" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="18" type="text"/></div>
-</div>
 </div>
 <div>
-<label class="font-bold text-[#0F2942]">Chief Complaints (C/o) &amp; Bedside Findings:</label>
-<textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="e.g. Acute breathlessness, bilateral crepitations..." rows="2"></textarea>
+<label class="font-bold text-[#0F2942]">Complaints (C/o):</label>
+<textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="Presenting complaints and relevant bedside findings" rows="2"></textarea>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-6 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border text-center" aria-label="Vital signs">
+<div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="Pulse /min" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="e.g. 130/80" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="Temperature" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vSpO2" placeholder="SpO2" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vGRBS" placeholder="GRBS" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="Respiratory rate" type="text"/></div>
 </div>
 <div>
 <label class="font-bold text-[#0F2942]">Provisional Diagnosis:</label>
