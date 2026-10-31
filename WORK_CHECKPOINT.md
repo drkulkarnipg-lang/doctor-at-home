@@ -506,6 +506,9 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - `f42ba91cb907c003f2f57efe5ecd659f227bee8b` — regression assertions for sequence, vitals, medicine table and signature position.
 - `d5ae6c06e3c85543aaf7819664e2a90c736d9993` — E10 master-register entry.
 
+- Follow-up hardening: medicine rows now renumber continuously after a row is removed and another is added; the regression test checks for duplicate/skipped serial numbers. Commits: `b7a3c8e`, `43944ba`.
+
+
 ### Verification / release boundary
 - Source inspection confirms the intended order and retained controls.
 - Exact-head automated test, preview visual inspection, physical print/PDF, and confirmation that the embedded signature matches the owner's original are still open.
