@@ -35,6 +35,10 @@ try{
  const output=path.join(root,'reports','inventory.json');writeInventory(inv,output);const saved=fs.readFileSync(output,'utf8');assert.ok(saved.endsWith('\n')&&!saved.endsWith('\\n'),'Generated inventory must end with a real newline, not a literal backslash-n');assert.deepEqual(JSON.parse(saved),inv,'Generated inventory file must parse as exactly one JSON document');
  const committed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','external-link-inventory-2026-10-30.json'),'utf8'));
  const current=generateInventory({sourceRevision:committed.source_revision});
+ const generatedInventoryJson=JSON.stringify(current);
+ console.log('REGENERATED_INVENTORY_JSON_BEGIN');
+ for(let offset=0;offset<generatedInventoryJson.length;offset+=4000){console.log('REGENERATED_INVENTORY_JSON_CHUNK_'+String(offset).padStart(8,'0')+':'+generatedInventoryJson.slice(offset,offset+4000));}
+ console.log('REGENERATED_INVENTORY_JSON_END');
 
  assert.deepEqual(committed.source_files_scanned,current.source_files_scanned,'Committed inventory must cover the current active source-file set');
  assert.deepEqual(committed.links,current.links,'Committed inventory destinations, classifications and source-line evidence must match current source');
