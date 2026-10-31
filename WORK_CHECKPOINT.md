@@ -448,3 +448,19 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Article Manager/RSS switching passed in both directions; the seven Patient Portal tabs and single-panel/deep-link checks passed. Booking intake, BMI, PDF sharing logic, fee wording, patient-education guards, payment-method disclosure and all 30 calculators passed their regression groups.
 - Main remains unchanged at `12608d35c02b3afe76a10995e95ebb521087eae4`; Actions run `41108470448` still fails at the stale inventory assertion. Vercel status for the latest review head is `build-rate-limit`; the last confirmed production success remains `57d011721e92903c53f76035f43520c296502906`. The last successful review-branch deployment status was for `257920daf124ba430076977928561ddede86050f`, not the current head.
 - No merge, production deploy, gateway activation, billing/secrets/hosting change, database migration or clinical publication was performed. Four source-linked clinical drafts remain unpublished for physician review. Actual phone rendering, live navigation, real booking, native PDF/WhatsApp share and recipient-side delivery remain open.
+
+ 
+## 31 October 2026 — Stitch design experiment (isolated development branch)
+
+Owner instruction: apply the uploaded Stitch design to the DEVELOPMENT experiment only, never to MASTER ORIGINAL or the current live website.
+
+- Stitch export: `stitch_clinical_web_platform_architecture.zip`; four screens (Home Visit, Booking/Telemedicine, Clinical Bedside Calculators, Statutory Forms/Digital Prescriptions), four screenshots and a design-system note.
+- Protected source baseline for this experiment: latest main commit `fe09009b3bd3e0f2a561fe7ca854ebe52d16956d`. Separate experiment branch: `experiment/stitch-clinical-platform-2026-10-31`. No merge or production deployment.
+- Implemented on the experiment branch: `stitch-clinical-design.css` screen-only visual layer; Patient Portal tab order Home visit → Booking → Health library → Elderly care → Search articles → Health tools → Patient FAQ; screen-only refinement for existing calculators and statutory/prescription editors.
+- Existing formulas, blank calculator defaults, validation, interpretation, patient intake, GPS, booking, fees, payment disclosures, WhatsApp, QR/payment links, article/library data, credentials, authentication, APIs, database and external destinations were not replaced.
+- Stitch HTML contains synthetic patient identities, sample observations, sample prescription entries and prefilled calculator values. These were deliberately excluded. Remote Tailwind CDN, Google font/image dependencies and prototype handlers were not imported.
+- Doctor Workstation retains its existing `notranslate` safety safeguard; the shared header language selector remains available. No clinical translation behaviour was silently changed.
+- First CI attempt failed because the new CSS file was absent from the source-link inventory. The inventory was refreshed to include `stitch-clinical-design.css`; 88 active source files and 221 extracted destinations are recorded. This is inventory coverage, not live URL verification.
+- Exact-head regression run `41208870024` on source `be40a151a2e495d150ba5421f54bb6d324ae1394` was pending when this checkpoint was prepared; the subsequent source-inventory metadata commit may start a newer run. Vercel status is pending; no preview URL or visual rendering is yet verified.
+- Next: obtain exact-head full regression result; verify Vercel branch preview; inspect desktop and 320px/390px mobile; test navigation, translation panel, booking, library, all calculators, prescriptions, requisitions, certificates, payment disclosures, QR and external links. Distinguish automated checks from actual device/provider behaviour.
+- Promotion gate: doctor review and explicit approval only. Never merge or deploy this experiment to production without that approval.
