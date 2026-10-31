@@ -202,3 +202,5 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - Patient Health Library PDF actions now live on the library cards (Download PDF / Share PDF); the reader itself retains only the standard Back to Health Library navigation. The full article/PDF regression test passes.
 - The public payment-method disclosure now shows the requested method categories. Existing UPI/QR behavior was retained; Razorpay/BillDesk remain disabled; bank transfer is a contact request only. No merchant credentials, gateway backend, billing settings or database migration were added.
 - The sentence-level traceability test now accepts segment-specific evidence/status and still requires populated parent/child evidence; the language-related source-line and sentence records were refreshed. This keeps the user's sentence-by-sentence audit granular.
+
+- Draft PR #86 is open for review at https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86. Exact head 782bc5cac08166fb0ecb85a1e5b3c6c6c331b94f passed all 60 regression test files in Actions run 41165499172. Vercel remains build-rate-limited for main and review head; no live/mobile visual completion is claimed.
