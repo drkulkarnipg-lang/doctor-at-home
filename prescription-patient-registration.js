@@ -43,6 +43,7 @@ function collect(){
 }
 function snapshot(data){return JSON.stringify(data);}
 async function findOrCreatePatientCode(data){
+ if(!data.phone){assignPatientCode();return patientCode;}
  if(typeof window.ClinicCloud.findPatient==='function'){
   const result=await window.ClinicCloud.findPatient(data.phone,data.patientName);
   if(result?.patientCode)return result.patientCode;
@@ -61,7 +62,7 @@ async function persist(){
  if(saving){dirty=true;return;}
  const data=collect();
  if(!data.patientName){status('Enter the patient name. A patient number will be assigned after the mobile number is entered.');return;}
- if(!validPhone()){status('Enter a valid 10-digit Indian patient mobile number to create or match the patient register entry. Prescription details remain on this screen.');return;}
+ if(data.phone&&!validPhone()){status('Enter a valid 10-digit Indian mobile number, or leave the field blank if the patient has no available mobile. Prescription details remain on this screen.');return;}
  assignPatientCode();
  if(!$('rxPatientRegisterConsent')?.checked){status('Patient number assigned: '+patientCode+'. Confirm that the patient / authorised representative has been informed before the private cloud register is updated.');return;}
  let session;
@@ -107,7 +108,7 @@ function onIdentityEdit(){
  if(!identityKey||!savedRecord)identityKey=next;
  assignPatientCodeIfReady();schedule();
 }
-function assignPatientCodeIfReady(){if($('rxPatName')?.value.trim()&&validPhone())assignPatientCode();}
+function assignPatientCodeIfReady(){if($('rxPatName')?.value.trim()&&(!phoneDigits()||validPhone()))assignPatientCode();}
 document.addEventListener('DOMContentLoaded',()=>{
  const now=indiaNow();
  const date=$('rxDateTime');if(date&&!date.value)date.value=now.date+' '+now.time+' IST';
