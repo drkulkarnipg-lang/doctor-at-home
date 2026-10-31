@@ -35,7 +35,7 @@ function collect(){
   registerType:'daily',entryDate:now.iso,patientDateTime:display,
   patientName:$('rxPatName')?.value.trim()||'',patientCode,
   prescriptionSerial:$('rxSerialNo')?.value.trim()||'',
-  phone:phoneDigits(),address:$('rxPatAddress')?.value.trim()||'',
+  phone:phoneDigits(),address:[$('rxPatAddress')?.value.trim(),$('rxPatLoc')?.value.trim()].filter(Boolean).join(', '),
   age:$('rxPatAge')?.value.trim()||'',sex:$('rxPatSex')?.value||'',
   visitType:'Prescription / clinical encounter',
   clinicalSummary:'',amount:'',paymentStatus:'Not recorded'
@@ -100,7 +100,6 @@ function onIdentityEdit(){
   status('Patient identity changed after a previous register save. A new patient number is being assigned; the earlier patient entry remains unchanged.');
  }
  if(!identityKey||!savedRecord)identityKey=next;
- const display=$('rxPatPhoneDisplay');if(display)display.value=$('rxPatPhone')?.value||'';
  assignPatientCodeIfReady();schedule();
 }
 function assignPatientCodeIfReady(){if($('rxPatName')?.value.trim()&&validPhone())assignPatientCode();}
@@ -109,7 +108,6 @@ document.addEventListener('DOMContentLoaded',()=>{
  const date=$('rxDateTime');if(date&&!date.value)date.value=now.date+' '+now.time+' IST';
  setSerials();
  for(const id of watched){const el=$(id);if(!el)continue;el.addEventListener('input',onIdentityEdit);el.addEventListener('change',onIdentityEdit);}
- const display=$('rxPatPhoneDisplay');if(display)display.value=$('rxPatPhone')?.value||'';
  $('rxPatientRegisterConsent')?.addEventListener('change',schedule);
  window.addEventListener('clinic-owner-signed-in',schedule);
  window.addEventListener('clinic-owner-signed-out',()=>status('Doctor signed out. Patient details remain in the open prescription but no cloud registration can occur until owner login is restored.'));
