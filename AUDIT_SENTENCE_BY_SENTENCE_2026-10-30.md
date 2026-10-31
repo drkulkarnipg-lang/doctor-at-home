@@ -217,3 +217,12 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - Four source-linked clinical drafts (COPD, cancer palliative care, diabetes and cirrhosis) are kept outside the public article dataset. They remain unpublished pending physician review, India-specific adaptation and qualified Marathi translation.
 - Vercel reports `build-rate-limit` for main and the review head. The last positively confirmed Vercel success remains commit `57d011721e92903c53f76035f43520c296502906`. No current preview, 320 px / 390 px rendering, PDF/WhatsApp recipient-side delivery or live booking journey is verified. No secrets, billing configuration, hosting settings, database migrations or clinical publication were changed.
 - Keep PR #86 as a draft and do not merge/deploy until the owner approves and the live/device release checks can be completed.
+
+
+## 31 October 2026 — review-preview deployment verification
+
+- Review branch `fix/mobile-language-article-fee-20261031` commit `65c482a986e44d81452d58c09c98469447cdd837` has a successful full regression run: [Actions 41166510024](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41166510024), **60 test files, zero failures**.
+- Vercel status for that review-branch commit is **success — Deployment has completed**. Preview: https://home-visiting-icu-doctor-pune-git-fix-8f4b2e-drkulkarnipg-lang.vercel.app . This is a branch preview, not a production deployment.
+- Main remains at `12608d35c02b3afe76a10995e95ebb521087eae4`; its run `41108470448` still fails at the stale external-link inventory source-line assertion. Main's Vercel status remains build-rate-limited; last confirmed production success is still `57d011721e92903c53f76035f43520c296502906`.
+- The preview URL was obtained from Vercel's deployment-completed status. A connected browser/device renderer is unavailable in this run, so no visual/interaction claim is made for 320 px, 390 px, navigation, booking/BMI, PDF or WhatsApp recipient delivery. These remain release checks, not CI results.
+- PR #86 remains a draft and unmerged. Do not promote the preview to production or merge the branch without the owner's release approval and the required live/device checks.
