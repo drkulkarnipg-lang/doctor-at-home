@@ -9,12 +9,16 @@ let qrRequest=0;
 async function updatePaymentQr(amount){
  const image=$('upiQrImg'),details=$('upiQrDetails'),status=$('upiMethodStatus');
  if(!image||!details?.open)return;
+ const fee=Number.isFinite(Number(amount))?Math.max(0,Number(amount)):0;
+ const amountLabel=$('upiQrAmount');if(amountLabel)amountLabel.textContent=formatInr(fee);
+ image.hidden=true;image.removeAttribute('src');
+ const download=$('upiQrDownload');if(download){download.hidden=true;download.removeAttribute('href');}
+ const enlarge=$('upiQrEnlarge');if(enlarge)enlarge.disabled=true;
  const qr=window.KulkarniQRCode;
  if(!qr||typeof qr.toDataURL!=='function'){
   if(status)status.textContent='QR generation is unavailable in this browser. Use Open UPI app or Copy UPI ID.';
   return;
  }
- const fee=Number.isFinite(Number(amount))?Math.max(0,Number(amount)):0;
  const uri=paymentUri(fee),request=++qrRequest;
  image.dataset.qrPayload=uri;
  if(status)status.textContent='Preparing UPI QR…';
@@ -23,7 +27,6 @@ async function updatePaymentQr(amount){
   if(request!==qrRequest||!details.open||image.dataset.qrPayload!==uri)return;
   image.src=data;image.hidden=false;
   image.alt='UPI payment QR for Dr Pramod G Kulkarni. Confirm the payee and amount in your UPI app before paying.';
-  const amountLabel=$('upiQrAmount');if(amountLabel)amountLabel.textContent=formatInr(fee);
   const download=$('upiQrDownload');if(download){download.href=data;download.hidden=false;}
   const enlarge=$('upiQrEnlarge');if(enlarge)enlarge.disabled=false;
   const zoomImage=$('upiQrZoomImage');if(zoomImage)zoomImage.src=data;
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   else{
    qrRequest++;closeZoom(zoomDialog);
    if(image){image.hidden=true;image.removeAttribute('src');}
+   const amountLabel=$('upiQrAmount');if(amountLabel)amountLabel.textContent='Calculated after opening';
    if(download){download.hidden=true;download.removeAttribute('href');}
    if(enlarge)enlarge.disabled=true;
    if(zoomImage)zoomImage.removeAttribute('src');
