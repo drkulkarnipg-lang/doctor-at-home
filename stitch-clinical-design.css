@@ -491,3 +491,140 @@
   }
 
 }
+
+
+/* Lovable-inspired primary navigation: calm, editorial, compact.
+   Preserve every existing tab, target, action and workstation control. */
+@media screen {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(251,249,246,.97) !important;
+    backdrop-filter: saturate(130%) blur(10px);
+    border-bottom: 1px solid var(--stitch-line) !important;
+  }
+  .site-header > div:first-child {
+    max-width: 1440px;
+    min-height: 76px;
+    padding: 12px 32px !important;
+    gap: 14px 24px !important;
+  }
+  .site-header .doctor-brand { gap: 12px !important; min-width: 250px; }
+  .site-header .doctor-brand > div:first-child {
+    width: 44px !important; height: 44px !important;
+    border: 1px solid var(--stitch-border) !important;
+    box-shadow: none !important;
+  }
+  .site-header .doctor-wordmark {
+    color: var(--stitch-ink) !important;
+    font: 700 14px/1.2 Hanken Grotesk, sans-serif !important;
+    letter-spacing: .055em;
+  }
+  .site-header .doctor-brand p:nth-of-type(1) {
+    color: var(--stitch-forest) !important;
+    font-size: 11px !important;
+    letter-spacing: .015em;
+  }
+  .site-header .doctor-brand p:nth-of-type(2) {
+    color: var(--stitch-muted) !important;
+    font-size: 9px !important;
+    line-height: 1.4;
+  }
+  .site-header > div:first-child > div:last-child {
+    gap: 7px !important;
+  }
+  .site-header > div:first-child > div:last-child > .bg-white:first-child {
+    padding: 3px !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 5px !important;
+    background: var(--stitch-paper) !important;
+    box-shadow: none !important;
+  }
+  .site-header #navPublicBtn, .site-header #navDoctorBtn {
+    min-height: 38px;
+    padding: 8px 12px !important;
+    border-radius: 3px !important;
+    box-shadow: none !important;
+    font: 650 11px/1.35 Hanken Grotesk, sans-serif !important;
+  }
+  .site-header #navPublicBtn { background: var(--stitch-ink) !important; }
+  .site-header #navDoctorBtn { background: transparent !important; }
+  .site-header .language-control > summary {
+    min-height: 38px;
+    display: flex; align-items: center;
+    padding: 8px 11px;
+    border: 1px solid var(--stitch-line);
+    border-radius: 3px;
+    background: var(--stitch-paper);
+    color: var(--stitch-muted);
+    font: 600 11px/1.35 Hanken Grotesk, sans-serif;
+    cursor: pointer;
+  }
+  .site-header > div:first-child > div:last-child > a[data-direct-call] {
+    min-height: 38px;
+    padding: 9px 13px !important;
+    border: 1px solid var(--stitch-forest) !important;
+    border-radius: 3px !important;
+    background: var(--stitch-forest) !important;
+    box-shadow: none !important;
+    font: 700 11px/1.3 Hanken Grotesk, sans-serif !important;
+  }
+  .portal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px !important;
+    max-width: 1440px;
+    min-height: 54px;
+    padding: 6px 32px !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--stitch-line) !important;
+    background: rgba(251,249,246,.97) !important;
+  }
+  .portal-nav a[role="tab"] {
+    min-height: 40px;
+    padding: 10px 14px !important;
+    border: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--stitch-muted) !important;
+    font: 600 11px/1.35 Hanken Grotesk, sans-serif !important;
+    white-space: nowrap;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .portal-nav a[role="tab"]:hover {
+    color: var(--stitch-forest) !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    border-bottom-color: var(--stitch-eucalyptus) !important;
+  }
+  .portal-nav a[role="tab"][aria-selected="true"] {
+    color: var(--stitch-ink) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid var(--stitch-forest) !important;
+    font-weight: 750 !important;
+  }
+}
+@media (max-width: 760px) {
+  .site-header { position: relative !important; }
+  .site-header > div:first-child { padding: 12px 16px !important; }
+  .portal-nav {
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+    padding: 5px 12px !important;
+  }
+  .portal-nav a[role="tab"] { flex: 0 0 auto; scroll-snap-align: start; }
+}
+@media (max-width: 640px) {
+  .site-header > div:first-child { gap: 10px !important; }
+  .site-header .doctor-brand { min-width: 0 !important; }
+  .site-header > div:first-child > div:last-child { gap: 6px !important; }
+  .site-header #navPublicBtn, .site-header #navDoctorBtn { font-size: 10px !important; padding-inline: 9px !important; }
+  .site-header > div:first-child > div:last-child > a[data-direct-call] { flex: 1 1 auto; justify-content: center; }
+}
