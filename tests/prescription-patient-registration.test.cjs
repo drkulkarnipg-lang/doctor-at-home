@@ -30,10 +30,10 @@ function makeWindow(records=[]){
 (async()=>{
  const {dom,w,saves,lookups,returned}=makeWindow();
  const $=id=>w.document.getElementById(id);
- assert.match($('rxSerialNo').value,/^RX-\d{8}-\d{4}-[A-F0-9]{4}$/,'prescription serial is automatically generated and distinct');
+ assert.match($('rxSerialNo').value,/^RX-\d{8}-\d{4}-[A-F0-9]{8}$/,'prescription serial is automatically generated and distinct');
  $('rxPatName').value='Test Patient';$('rxPatName').dispatchEvent(new w.Event('input',{bubbles:true}));
  $('rxPatPhone').value='+91 98765 43210';$('rxPatPhone').dispatchEvent(new w.Event('input',{bubbles:true}));
- assert.match($('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{8}$/,'patient registration number is automatically assigned after name and valid phone');
+ assert.match($('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{12}$/,'patient registration number is automatically assigned after name and valid phone');
  await wait(750);assert.equal(saves.length,0,'no cloud registration before patient-information confirmation');
  $('rxPatientRegisterConsent').checked=true;$('rxPatientRegisterConsent').dispatchEvent(new w.Event('change',{bubbles:true}));
  await wait(850);
