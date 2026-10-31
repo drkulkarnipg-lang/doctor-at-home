@@ -34,6 +34,7 @@
     "cloud-records.js",
     "contact-actions.js",
     "device-lock.js",
+    "doctor-brand-tools.js",
     "doctor-passkey.js",
     "document-provenance.js",
     "document-sharing.css",
