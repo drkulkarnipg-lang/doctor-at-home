@@ -193,9 +193,12 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 ## 31 October 2026 — exact-head evidence update
 
 - Main head: 12608d35c02b3afe76a10995e95ebb521087eae4; main Actions run 41108470448 failed at the external-link inventory source-line comparison after booking-intake, calculator UI and document-sharing tests passed. Do not mark the main suite green.
-- A safe Actions-based regeneration was performed from main source: 86 scanned source files, 221 unique destinations, inventory source revision 12608d35c02b3afe76a10995e95ebb521087eae4. The generated file is saved on the review branch; diagnostic log code was removed. The final exact-head regression must still pass.
+- A safe Actions-based regeneration was performed from the corrected review-branch source: 86 scanned source files, 221 unique destinations, inventory source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Diagnostic log code was removed. Review-branch Actions run 41165365930 passed all 60 regression test files, including the inventory generator.
 - The phone language panel root cause is a CSS specificity conflict: fixed positioning was marked important globally but the later in-flow rule was not. The review branch corrects the cascade and tests the imported stylesheet. This is a source correction, not phone verification.
 - The Article Manager RSS panel is reparented into Article Manager and restored for the dedicated RSS tab; both transitions are tested.
 - The fee helper distinguishes ₹100 / ₹500 / ₹1,200 and explicitly says it does not collect payment. No billing/payment activation was performed.
 - Four source-linked clinical drafts are saved outside the public data and guarded by a test. They remain unpublished pending physician review and owner approval.
 - Vercel main is still build-rate-limited; last successful status remains commit 57d011721e92903c53f76035f43520c296502906. No current-source live or physical-device claim is made.
+- Patient Health Library PDF actions now live on the library cards (Download PDF / Share PDF); the reader itself retains only the standard Back to Health Library navigation. The full article/PDF regression test passes.
+- The public payment-method disclosure now shows the requested method categories. Existing UPI/QR behavior was retained; Razorpay/BillDesk remain disabled; bank transfer is a contact request only. No merchant credentials, gateway backend, billing settings or database migration were added.
+- The sentence-level traceability test now accepts segment-specific evidence/status and still requires populated parent/child evidence; the language-related source-line and sentence records were refreshed. This keeps the user's sentence-by-sentence audit granular.
