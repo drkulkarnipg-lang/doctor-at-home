@@ -11,7 +11,7 @@ const markup=`<main>
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 function makeWindow(records=[]){
  const dom=new JSDOM(markup,{url:'https://clinic.example.test',runScripts:'outside-only'}),w=dom.window;
- const saves=[],lookups=[];
+ const saves=[],lookups=[],returned=[];
  let revision=0;
  w.ClinicCloud={
   session:async()=>({configured:true,signedIn:true}),
@@ -21,14 +21,14 @@ function makeWindow(records=[]){
   saveRegister:async entry=>{
    saves.push({...entry});
    revision++;
-   return {record:{id:entry.id||'00000000-0000-4000-8000-000000000001',revision:'00000000-0000-4000-8000-'+String(revision).padStart(12,'0'),data:{...entry}}};
+   const record={id:entry.id||'00000000-0000-4000-8000-000000000001',revision:'00000000-0000-4000-8000-'+String(revision).padStart(12,'0'),data:{...entry}};returned.push(record);return {record};
   }
  };
  w.eval(script);w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
- return {dom,w,saves,lookups};
+ return {dom,w,saves,lookups,returned};
 }
 (async()=>{
- const {dom,w,saves,lookups}=makeWindow();
+ const {dom,w,saves,lookups,returned}=makeWindow();
  const $=id=>w.document.getElementById(id);
  assert.match($('rxSerialNo').value,/^RX-\d{8}-\d{4}-[A-F0-9]{4}$/,'prescription serial is automatically generated and distinct');
  $('rxPatName').value='Test Patient';$('rxPatName').dispatchEvent(new w.Event('input',{bubbles:true}));
@@ -50,8 +50,8 @@ function makeWindow(records=[]){
  $('rxPatAddress').value='12 Example Road, Pune';$('rxPatAddress').dispatchEvent(new w.Event('input',{bubbles:true}));
  await wait(850);
  assert.equal(saves.length,2,'later demographic edits update the same register encounter');
- assert.equal(saves[1].id,saves[0].id,'demographic update reuses the same cloud record');
- assert.equal(saves[1].revision,saves[0].revision,'demographic update is revision-checked');
+ assert.equal(saves[1].id,returned[0].id,'demographic update reuses the same cloud record');
+ assert.equal(saves[1].revision,returned[0].revision,'demographic update sends the last saved revision');
  assert.equal(saves[1].age,'65 years 4 months','age text is preserved as entered');
  assert.equal(saves[1].sex,'Female');
  assert.equal(saves[1].address,'12 Example Road, Pune');
