@@ -7,7 +7,7 @@ function res(){return{statusCode:200,headers:{},setHeader(k,v){this.headers[k]=v
 function req(body,extra={}){return{method:'POST',headers:{host:'clinic.test',origin:'https://clinic.test','content-type':'application/json',...extra},body};}
 const mac=(secret,v)=>crypto.createHmac('sha256',secret).update(v).digest('hex');
 (async()=>{
- let savedRows=[],providerPayment=null,orderCreated=0;
+ let savedRows=[],webhookEvents=[],providerPayment=null,orderCreated=0;
  global.fetch=async(url,opts={})=>{
   const u=String(url);
   if(u.includes('/rest/v1/consultation_payments?select=')&&opts.method!=='PATCH'){
@@ -23,7 +23,10 @@ const mac=(secret,v)=>crypto.createHmac('sha256',secret).update(v).digest('hex')
    const o=(u.match(/order_id=eq\.([^&]+)/)||[])[1];const row=savedRows.find(x=>x.order_id===decodeURIComponent(o));if(!row)return new Response('[]');
    Object.assign(row,JSON.parse(opts.body));return new Response(JSON.stringify([row]));
   }
-  if(u.includes('/rest/v1/consultation_payment_webhook_events'))return new Response('',{status:201});
+  if(u.includes('/rest/v1/consultation_payment_webhook_events')){
+   if(opts.method==='GET'){const id=(u.match(/event_id=eq\.([^&]+)/)||[])[1];return new Response(JSON.stringify(webhookEvents.filter(x=>x.event_id===decodeURIComponent(id||''))));}
+   if(opts.method==='POST'){const event=JSON.parse(opts.body);if(webhookEvents.some(x=>x.event_id===event.event_id))return new Response(JSON.stringify({message:'duplicate'}),{status:409});webhookEvents.push(event);return new Response('',{status:201});}
+  }
   throw Error('Unexpected fetch '+u+' '+opts.method);
  };
  let r=res();await orderRoute(req({bookingReference,appointmentConfirmed:false}),r);assert.equal(r.statusCode,400,'must require appointment confirmation');
