@@ -118,16 +118,19 @@ function saveCustomDrug(){
   localStorage.setItem('customDrugs',JSON.stringify(all));closeAddDrugModal();renderDrugDirectory();showToast('Custom medicine saved.');
 }
 // Use DOM text and input properties for custom medicine names, never executable HTML.
-function addRxRowWithData(med,freq,timing,days,advice){
+function addRxRowWithData(med,strength,timing,freq,days,advice){
  const tbody=document.getElementById('rxTableBody');const tr=tbody.insertRow();
  const num=tr.insertCell();num.className='border p-1 text-center';num.textContent=tbody.rows.length;
- for(const [i,value] of [med,timing,freq,days,advice].entries()){
-  const cell=tr.insertCell();cell.className='border p-1';const input=document.createElement('input');
-  input.type='text';input.value=value==null?'':String(value);input.className='w-full bg-transparent px-1 py-0.5';
-  if(i===0){input.placeholder='Medicine Name';input.addEventListener('dblclick',()=>openDrugModal(input));}
-  cell.appendChild(input);
- }
- const cell=tr.insertCell();cell.className='border p-1 no-print';const remove=document.createElement('button');remove.type='button';remove.textContent='✕';remove.className='text-red-600';remove.addEventListener('click',()=>tr.remove());cell.appendChild(remove);
+ const addInput=(placeholder,value,extra='')=>{const cell=tr.insertCell();cell.className='border p-1';const input=document.createElement('input');input.type='text';input.value=value==null?'':String(value);input.placeholder=placeholder;input.className='w-full bg-transparent px-1 py-0.5 '+extra;if(placeholder==='Medicine Name')input.addEventListener('dblclick',()=>openDrugModal(input));cell.appendChild(input);return input;};
+ addInput('Medicine Name',med,'font-bold');
+ addInput('e.g. 5 mg',strength);
+ const timingCell=tr.insertCell();timingCell.className='border p-1';const timingSelect=document.createElement('select');timingSelect.className='w-full text-center';timingSelect.setAttribute('aria-label','Timing / food instructions');
+ for(const [value,label] of [['','Select timing'],['before-food','Before food'],['after-food','After food'],['empty-stomach','Empty stomach'],['with-food','With food'],['at-night','At night'],['morning','Morning'],['evening','Evening'],['as-directed','As directed']]){const option=document.createElement('option');option.value=value;option.textContent=label;timingSelect.appendChild(option);}
+ timingSelect.value=timing==null?'':String(timing);timingCell.appendChild(timingSelect);
+ addInput('e.g. OD / BD / TDS',freq);
+ addInput('e.g. 5 days',days);
+ addInput('Additional instructions',advice);
+ const cell=tr.insertCell();cell.className='border p-1 no-print';const remove=document.createElement('button');remove.type='button';remove.textContent='✕';remove.className='text-slate-500 hover:text-slate-800 font-bold';remove.setAttribute('aria-label','Remove this medicine row');remove.addEventListener('click',()=>tr.remove());cell.appendChild(remove);
 }
 function renderDrugDirectory(){
  const tbody=document.getElementById('drugDirBody');tbody.replaceChildren();
