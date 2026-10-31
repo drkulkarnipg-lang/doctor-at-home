@@ -1,5 +1,5 @@
 # Sentence-by-sentence audit — Dr Kulkarni website requests
-Updated: 31 October 2026 (main head and review-branch source corrections reconciled; no live/device claim).
+Updated: 31 October 2026 (main and latest PR #86 head reconciled; live/device verification still open).
 Source versions: earlier owner-supplied `Pasted text(20261030-091002).txt` and latest controlling attachment `Pasted text(20261030-092936).txt` (166 lines). The companion `ATTACHMENT_LINE_RECONCILIATION_2026-10-30.md` maps every non-empty line in the latest attachment to task IDs and open verification items. This is an audit register, not a claim that every feature is complete. “Preview/source only” means code exists on a review branch; it is not production-verified. Device, external-provider and clinical validation are recorded separately.
 
 ## Required reporting format
@@ -204,3 +204,16 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - The sentence-level traceability test now accepts segment-specific evidence/status and still requires populated parent/child evidence; the language-related source-line and sentence records were refreshed. This keeps the user's sentence-by-sentence audit granular.
 
 - Draft PR #86 is open for review at https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86. Exact head b4e52c1daa248fc43dca6d674013bf273e64667c passed all 60 regression test files in Actions run 41165663130. Vercel remains build-rate-limited for main and review head; no live/mobile visual completion is claimed.
+
+
+## 31 October 2026 — exact-head verification update
+
+- Main remains unchanged at `12608d35c02b3afe76a10995e95ebb521087eae4`. Its Actions run [41108470448](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41108470448) fails at `tests/external-link-inventory-generator.test.cjs`: the committed link inventory has stale source-line evidence. Booking-intake, calculator UI and document-sharing tests passed before the failure. No main-source change is represented as complete.
+- Draft PR [#86](https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86), branch `fix/mobile-language-article-fee-20261031`, exact source head `88d20e746a1a8de9eb37ea0062686ccfdad51658`: Actions run [41165836847](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41165836847) completed successfully on that exact SHA. The job log confirms **60 regression test files**, with no failed test groups. This is review-branch CI evidence, not a merge or production release.
+- The inventory refresh records 86 active source files and 221 unique extracted destinations, with source revision `e0eaf16beca69f547c47f482dd3b3fde1d04b59d`. The generator regression compares destinations, classifications and exact source-line evidence against a fresh scan. Automated inventory coverage is not a live HTTP or clinical-source validation.
+- The phone language-panel root cause is the global `.language-control>div{position:fixed!important;...}` rule in `international-portal.css`. Its fixed positioning defeated the earlier lower-specificity in-flow override. The review branch now overrides position, every viewport edge, width, max-height and overflow with `!important`, and the regression test inspects the imported stylesheet. The 320 px / 390 px rendered-phone check is still pending.
+- Article Manager now reparents the RSS/evidence panel inside its own section, and restores it to the original workstation position for the dedicated RSS tab. Both switching directions and ordinary-tab isolation are covered by the regression test.
+- The patient helper explicitly distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base; it says guided help is not a medical consultation and the helper does not collect payment. No payment was enabled or collected. Existing UPI/QR behavior is unchanged; Razorpay/BillDesk remain disabled.
+- Four source-linked clinical drafts (COPD, cancer palliative care, diabetes and cirrhosis) are kept outside the public article dataset. They remain unpublished pending physician review, India-specific adaptation and qualified Marathi translation.
+- Vercel reports `build-rate-limit` for main and the review head. The last positively confirmed Vercel success remains commit `57d011721e92903c53f76035f43520c296502906`. No current preview, 320 px / 390 px rendering, PDF/WhatsApp recipient-side delivery or live booking journey is verified. No secrets, billing configuration, hosting settings, database migrations or clinical publication were changed.
+- Keep PR #86 as a draft and do not merge/deploy until the owner approves and the live/device release checks can be completed.
