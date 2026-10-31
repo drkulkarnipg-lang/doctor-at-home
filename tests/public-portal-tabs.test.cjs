@@ -16,6 +16,10 @@ const tabs = [...d.querySelectorAll('.portal-nav [role="tab"]')];
 const visible = () => panels.filter(p => !p.hidden);
 assert.equal(panels.length, 7);
 assert.equal(tabs.length, 7);
+assert.deepEqual(tabs.map(tab => tab.dataset.publicTab), ['overview','booking','library','elderly','search','tools','faq'], 'The first three patient destinations must be Home Visit, Booking and Health Library.');
+assert.equal(d.querySelector('#portalTabOverview').textContent.trim(), 'Home visit');
+assert.equal(d.querySelector('#portalTabBooking').textContent.trim(), 'Booking');
+assert.equal(d.querySelector('#portalTabLibrary').textContent.trim(), 'Health library');
 assert.deepEqual(visible().map(p => p.id), ['portalPanelOverview']);
 for (const key of ['elderly','library','search','booking','tools','faq','overview']) {
   const tab = d.querySelector('[data-public-tab="'+key+'"]');
@@ -45,8 +49,8 @@ assert.deepEqual(visible().map(p => p.id), ['portalPanelElderly'], 'Elderly path
 const keyboardTab = d.querySelector('[data-public-tab="overview"]');
 keyboardTab.focus();
 keyboardTab.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
-assert.equal(d.activeElement.dataset.publicTab, 'elderly', 'Arrow keys move focus to the next tab.');
-assert.equal(d.querySelector('[data-public-tab="elderly"]').getAttribute('aria-selected'), 'true');
+assert.equal(d.activeElement.dataset.publicTab, 'booking', 'Arrow keys follow the new Home Visit → Booking → Health Library order.');
+assert.equal(d.querySelector('[data-public-tab="booking"]').getAttribute('aria-selected'), 'true');
 w.switchPublicTab('booking');
 assert.deepEqual(visible().map(p => p.id), ['portalPanelBooking']);
 dom.window.close();
