@@ -5,6 +5,10 @@ assert.ok(html.includes('href="rx-phone-layout.css"'),'Prescription phone layout
 assert.match(css,/@media screen and \(max-width:640px\)/);
 for(const selector of ['#rxTable tbody tr','#rxSheet button[onclick="addRxRow()"]','#rxSheet button[onclick^="openDrugModal"]','#rxSheet #rxAllergies'])assert.ok(css.includes(selector),'Phone layout includes '+selector);
 assert.match(css,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Medicine rows become responsive cards');
+assert.match(html,/<th[^>]*>Medicine Name<\/th>[\s\S]*?<th[^>]*>Strength<\/th>[\s\S]*?<th[^>]*>Timing \/ Food<\/th>/,'Medicine name, strength and timing are separate columns.');
+assert.match(css,/td:nth-child\(3\)::before\{content:"Strength"\}/,'Mobile medicine card labels strength.');
+assert.match(css,/td:nth-child\(7\)::before\{content:"Additional instructions"\}/,'Mobile medicine card labels instructions.');
+assert.match(css,/td:nth-child\(8\)\{position:absolute/,'Mobile medicine card keeps its remove control separate.');
 assert.match(css,/min-height:44px/,'Medicine actions have touch-friendly target heights');
 assert.match(css,/#viewRxPad\{padding-bottom:80px\}/,'Floating close control has room below the prescription');
 console.log('Prescription phone-layout structural checks passed.');

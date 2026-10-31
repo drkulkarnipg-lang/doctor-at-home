@@ -376,3 +376,75 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Reviewed `api/clinical-cloud.js`: the configured owner UUID is checked before register actions; edits include owner, ID and revision constraints; missing migration returns a controlled 503 without changing data.
 - Reviewed `workstation-registers.js` and existing synthetic UI/API tests: daily/death/stock forms, revision-checked edits, no delete action, sign-out clearing, no localStorage persistence and non-owner API denial are covered.
 - Added static migration regression test in commit `0e4afabbf1cace202fee5ecc81411e09ebd16fc5`. This does **not** prove live database RLS; no migration was applied. Await CI and reserve actual owner/non-owner RLS, backup/restore and cross-device testing for a dedicated test project.
+
+
+## 31 October 2026 — resumable checkpoint (source review only)
+
+**Main baseline:** 12608d35c02b3afe76a10995e95ebb521087eae4. **Working review branch:** fix/mobile-language-article-fee-20261031 (latest verified head b4e52c1daa248fc43dca6d674013bf273e64667c).
+
+### Verified findings and saved corrections
+
+1. **Regression inventory:** main run 41108470448 failed at tests/external-link-inventory-generator.test.cjs; booking-intake, calculator UI and document-sharing tests passed before the failure. A GitHub Actions regeneration run on the corrected review branch produced an inventory for 86 active source files / 221 unique destinations, tagged to review source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Temporary diagnostic output was removed. Review-branch run 41165663130 passed all 60 regression test files, including the inventory test.
+2. **Mobile language panel — confirmed root cause:** international-portal.css globally forces .language-control>div to position:fixed!important with fixed viewport coordinates. The later .site-header .language-control[open] > div rule set position:static without !important, so the fixed rule won the cascade and the expanded panel floated over the page. The review branch now overrides position, all edges, width, max-height and overflow with !important, keeps the summary at least 44 px high, and adds a stylesheet regression test. This explains the phone discrepancy; it was not caught by the earlier HTML-only checks.
+3. **Article Manager / RSS:** switchDocTab('articlesHub') previously removed hidden from viewJournalsHub while it remained a sibling. The review branch reparents it into viewArticlesHub for Article Manager and restores it to its original workstation position for the dedicated RSS tab. Tests cover Article Manager → dedicated RSS → Article Manager and ordinary tab isolation.
+4. **Fee/payment display:** patient-helper source distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base, states that guided help is not a medical consultation, and says the helper does not collect payment. A regression test checks all three. The public payment-method panel lists UPI/QR/gateway/bank transfer; the existing UPI link/QR was retained unchanged, Razorpay/BillDesk remain disabled, and bank-transfer instructions open the doctor contact chooser. No gateway backend, merchant credentials, billing configuration, secrets or database migration was changed.
+5. **Clinical article gaps:** source contains nine detailed authored guides. Four source-linked drafts for COPD, cancer palliative care, diabetes and cirrhosis are in content/clinical-topic-drafts-2026-10-31.md. They are not imported or linked publicly; a guard test enforces that. Physician review, India-specific adaptation and qualified Marathi translation are still pending.
+
+### Current external verification limits
+
+- Main Actions run 41108470448 remains failed on the stale inventory evidence because main has not been changed. Review-branch run 41165663130 passed all 60 test files on exact head b4e52c1daa248fc43dca6d674013bf273e64667c. PR #85 head 5d37ae7208e41e30189698b784ecce13733fd223 also has a successful Actions run but is a separate, broader draft branch.
+- Vercel build-rate-limit affects main and the latest review-branch commit; no new preview URL or rendered page was obtained. Last successful Vercel status remains commit 57d011721e92903c53f76035f43520c296502906. Do not claim the new source is live.
+- Actual phone rendering at 320 px and 390 px, desktop/live navigation, public Know Your Numbers cards, booking/BMI, PDF share and WhatsApp recipient-side receipt are not verified. Do not infer provider delivery from CI.
+- No billing activation, secrets, hosting configuration, database migration or clinical publication was performed.
+
+### Next exact actions
+
+1. Check the latest Actions run on the exact current review-branch head; fix every failure and rerun the entire suite.
+2. Re-read the latest main head and ensure the regenerated inventory still corresponds to it before proposing merge.
+3. When Vercel is available, inspect the actual preview at 320 px and 390 px and verify that opening/closing the language selector leaves the page, Patient Portal and Doctor Workstation controls visible.
+4. Verify Article Manager/RSS in both directions, fee helper response, booking/BMI, Know Your Numbers cards, PDF share and WhatsApp handoff; distinguish app behavior from actual recipient delivery.
+5. Obtain physician review and explicit owner approval before converting the clinical drafts into public article records. Keep payment and database/provider setup out of this batch.
+
+6. **Patient article actions:** Download PDF and Share PDF are on the Health Library cards, not inside the reader. The reader keeps the standard Back to Health Library path. The full article/PDF preservation test passes.
+7. **Sentence-level traceability:** the traceability regression now allows sentence fragments to retain their own evidence pointer/status while checking that parent and child records remain populated. This preserves granular reporting instead of flattening every fragment to the parent line.
+
+
+## 31 October 2026 — final run checkpoint
+
+- Draft PR #86: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86 (head b4e52c1daa248fc43dca6d674013bf273e64667c). Keep as draft; do not merge or deploy without the doctor's approval.
+- Latest exact-head regression: Actions run 41165663130 passed all 60 test files. The source code commit 991ebeb26ccdc4166d7f52a3fb355e3caca56f5d also passed all 60 files before documentation synchronization.
+- Vercel for main and review head both reports build-rate-limit. No current preview URL, screenshot or actual phone rendering is verified. Last successful Vercel status remains 57d011721e92903c53f76035f43520c296502906.
+- Main remains unchanged at 12608d35c02b3afe76a10995e95ebb521087eae4 and its Actions run 41108470448 remains failed at the stale inventory assertion. The review PR is the tested correction path; it has not been merged.
+
+
+## 31 October 2026 — exact-head verification update
+
+- Main remains unchanged at `12608d35c02b3afe76a10995e95ebb521087eae4`. Its Actions run [41108470448](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41108470448) fails at `tests/external-link-inventory-generator.test.cjs`: the committed link inventory has stale source-line evidence. Booking-intake, calculator UI and document-sharing tests passed before the failure. No main-source change is represented as complete.
+- Draft PR [#86](https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86), branch `fix/mobile-language-article-fee-20261031`, exact source head `88d20e746a1a8de9eb37ea0062686ccfdad51658`: Actions run [41165836847](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41165836847) completed successfully on that exact SHA. The job log confirms **60 regression test files**, with no failed test groups. This is review-branch CI evidence, not a merge or production release.
+- The inventory refresh records 86 active source files and 221 unique extracted destinations, with source revision `e0eaf16beca69f547c47f482dd3b3fde1d04b59d`. The generator regression compares destinations, classifications and exact source-line evidence against a fresh scan. Automated inventory coverage is not a live HTTP or clinical-source validation.
+- The phone language-panel root cause is the global `.language-control>div{position:fixed!important;...}` rule in `international-portal.css`. Its fixed positioning defeated the earlier lower-specificity in-flow override. The review branch now overrides position, every viewport edge, width, max-height and overflow with `!important`, and the regression test inspects the imported stylesheet. The 320 px / 390 px rendered-phone check is still pending.
+- Article Manager now reparents the RSS/evidence panel inside its own section, and restores it to the original workstation position for the dedicated RSS tab. Both switching directions and ordinary-tab isolation are covered by the regression test.
+- The patient helper explicitly distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base; it says guided help is not a medical consultation and the helper does not collect payment. No payment was enabled or collected. Existing UPI/QR behavior is unchanged; Razorpay/BillDesk remain disabled.
+- Four source-linked clinical drafts (COPD, cancer palliative care, diabetes and cirrhosis) are kept outside the public article dataset. They remain unpublished pending physician review, India-specific adaptation and qualified Marathi translation.
+- Vercel reports `build-rate-limit` for main and the review head. The last positively confirmed Vercel success remains commit `57d011721e92903c53f76035f43520c296502906`. No current preview, 320 px / 390 px rendering, PDF/WhatsApp recipient-side delivery or live booking journey is verified. No secrets, billing configuration, hosting settings, database migrations or clinical publication were changed.
+- Keep PR #86 as a draft and do not merge/deploy until the owner approves and the live/device release checks can be completed.
+
+
+## 31 October 2026 — review-preview deployment verification
+
+- Review branch `fix/mobile-language-article-fee-20261031` commit `65c482a986e44d81452d58c09c98469447cdd837` has a successful full regression run: [Actions 41166510024](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41166510024), **60 test files, zero failures**.
+- Vercel status for that review-branch commit is **success — Deployment has completed**. Preview: https://home-visiting-icu-doctor-pune-git-fix-8f4b2e-drkulkarnipg-lang.vercel.app . This is a branch preview, not a production deployment.
+- Main remains at `12608d35c02b3afe76a10995e95ebb521087eae4`; its run `41108470448` still fails at the stale external-link inventory source-line assertion. Main's Vercel status remains build-rate-limited; last confirmed production success is still `57d011721e92903c53f76035f43520c296502906`.
+- The preview URL was obtained from Vercel's deployment-completed status. A connected browser/device renderer is unavailable in this run, so no visual/interaction claim is made for 320 px, 390 px, navigation, booking/BMI, PDF or WhatsApp recipient delivery. These remain release checks, not CI results.
+- PR #86 remains a draft and unmerged. Do not promote the preview to production or merge the branch without the owner's release approval and the required live/device checks.
+
+
+## 31 October 2026 — exact-head regression and correction checkpoint
+
+- Review branch `fix/mobile-language-article-fee-20261031` exact head: `1bad3b399c682aba09688366dd1790ab3a41c128`. GitHub Actions run [41168638561](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41168638561) passed **all 61 regression test files**.
+- The committed external-link inventory was regenerated by the repository's own `scripts/generate-external-link-inventory.cjs` on the exact review-branch source. It now records 87 active source files and 221 extracted destinations; source revision `5f374c9adbe24c94c81ad98fd3f54bd1247b2928`. The temporary one-time workflow was removed after regeneration. This inventory is source evidence, not a live HTTP validation.
+- The language-panel defect is confirmed, not assumed: the global fixed-position important rule in `international-portal.css` defeated the earlier normal-priority in-flow rule. The review branch now overrides the fixed position and every viewport edge with `!important`; the exact-head mobile-language and responsive-navigation tests passed. Actual 320 px / 390 px phone rendering is still unverified because Vercel is rate-limited.
+- A further prescription regression was found in the active `preserved-features.js` override: its five-argument helper created seven cells and dropped the separate strength/timing-select fields expected by the eight-column table. It now uses the six-field structure; catalogue and prescription tests pass.
+- Article Manager/RSS switching passed in both directions; the seven Patient Portal tabs and single-panel/deep-link checks passed. Booking intake, BMI, PDF sharing logic, fee wording, patient-education guards, payment-method disclosure and all 30 calculators passed their regression groups.
+- Main remains unchanged at `12608d35c02b3afe76a10995e95ebb521087eae4`; Actions run `41108470448` still fails at the stale inventory assertion. Vercel status for the latest review head is `build-rate-limit`; the last confirmed production success remains `57d011721e92903c53f76035f43520c296502906`. The last successful review-branch deployment status was for `257920daf124ba430076977928561ddede86050f`, not the current head.
+- No merge, production deploy, gateway activation, billing/secrets/hosting change, database migration or clinical publication was performed. Four source-linked clinical drafts remain unpublished for physician review. Actual phone rendering, live navigation, real booking, native PDF/WhatsApp share and recipient-side delivery remain open.

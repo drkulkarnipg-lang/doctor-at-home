@@ -2,19 +2,22 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
 const html=fs.readFileSync('index.html','utf8'),dom=new JSDOM(html,{url:'https://clinic.example.test/',runScripts:'outside-only'}),w=dom.window;
 const form=w.document.getElementById('healthGlobalSearchForm'),input=w.document.getElementById('healthGlobalSearch');
-assert.ok(form,'Hero search form exists');
+assert.ok(form,'Dedicated Search articles tab form exists');
+assert.equal(form.closest('[data-public-panel]')?.id,'portalPanelSearch','Global article search belongs in its dedicated Patient Portal tab.');
 assert.equal(form.getAttribute('action'),'/articles','Hero search must navigate to the public article search route');
 assert.equal(form.method.toLowerCase(),'get','Search query must be sent as a GET parameter');
 assert.equal(input.name,'q','The article search endpoint expects the q query parameter');
 assert.equal(form.querySelector('button[type="submit"]')?.textContent.trim(),'Search →','Search button must submit the form');
 const heroLinks=[...w.document.querySelectorAll('.hero-primary-actions a')];
-assert.ok(heroLinks.length>=3,'Home-visit, library and consultation actions remain visible');
+assert.ok(heroLinks.length>=3,'Home-visit, consultation and library actions remain visible');
+assert.match(heroLinks[0].textContent,/Request a home visit/,'Home visit is the first hero action.');
+assert.match(heroLinks[1].textContent,/Online consultation/,'Online consultation is the second hero action.');
 for(const link of heroLinks){const href=link.getAttribute('href');assert.ok(href,'Hero action needs a destination');if(href.startsWith('#'))assert.ok(w.document.getElementById(href.slice(1)),'Hero action target '+href+' must exist');}
 for(const href of ['#bookingSection','#wikiSection','#onlineConsultationNotice','#patientToolsSection','#patientFaq','#elderlySection'])assert.ok(w.document.getElementById(href.slice(1)),'Public navigation target '+href+' must exist');
 assert.ok(w.document.querySelector('.hero-contact-actions a[href^="tel:"]'),'Phone action must open the dialer');
 assert.ok(w.document.querySelector('.hero-contact-actions a[href^="https://wa.me/"]'),'WhatsApp action must remain available');
 assert.ok(w.document.querySelector('.hero-contact-actions a[href^="mailto:"]'),'Email action must remain available');
-assert.ok(w.document.querySelector('.portal-nav a[href="/articles"]'),'Header article search link must remain available');
+assert.ok(w.document.querySelector('.portal-nav a[role="tab"][data-public-tab="search"][href="#portalPanelSearch"]'),'Search articles tab must open its dedicated panel.');
 const routes=JSON.parse(fs.readFileSync('vercel.json','utf8')).rewrites;
 assert.ok(routes.some(r=>r.source==='/articles'&&r.destination==='/api/public-articles'),'Search form destination must reach the HTML article index');
 const api=fs.readFileSync('api/public-articles.js','utf8');

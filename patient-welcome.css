@@ -34,3 +34,9 @@ html,body{background:#f1f8ff!important;color:#17354b}
 #publicPortal .hero-primary-actions .primary-link{box-shadow:0 10px 24px rgba(39,95,75,.16);font-weight:750}
 #publicPortal .hero-primary-actions :is(.primary-link,.secondary-link){min-height:48px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center}
 @media(max-width:640px){#publicPortal .hero-copy{padding:24px 18px!important;border-radius:20px!important}#publicPortal .hero-copy .original-care-hero{font-size:clamp(2.4rem,10vw,3.6rem)!important;max-width:11ch}#publicPortal .hero-primary-actions{display:grid;grid-template-columns:1fr}#publicPortal .hero-primary-actions :is(.primary-link,.secondary-link){width:100%}}
+
+/* Patient guide PDF actions stay on the library card; the reader itself keeps only Back to Health Library. */
+#publicPortal #wikiCardsGrid .wiki-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+#publicPortal #wikiCardsGrid .wiki-card-actions button{min-height:40px;padding:8px 12px;border:1px solid #9ab9cb;border-radius:10px;background:#f4f9fc;color:#174a66;font:650 13px/1.35 system-ui;cursor:pointer}
+#publicPortal #wikiCardsGrid .wiki-card-actions button:focus-visible,#publicPortal #wikiCardsGrid .wiki-card-read:focus-visible{outline:3px solid #175f8c;outline-offset:3px}
+#publicPortal #wikiCardsGrid .wiki-card-actions button:hover{background:#e8f3f8}
