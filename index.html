@@ -1233,7 +1233,9 @@
       else if(engine === 'webmd') url = q ? `https://www.webmd.com/search/search_results/default.aspx?query=${encodeURIComponent(q)}` : `https://symptoms.webmd.com/`;
 
       if(url) {
+        // Navigate in the current tab: avoids popup blockers in embedded/managed browser windows.
         e.currentTarget.href = url;
+        e.currentTarget.target = '_self';
       }
     }
 
