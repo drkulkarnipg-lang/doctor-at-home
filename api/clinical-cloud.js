@@ -5,8 +5,8 @@ const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/
 const FIELDS=['date','time','sbp','dbp','glucose','context','weight','height','bmi','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
 const REGISTER_FIELDS={
-daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
-death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
+daily:{patientName:120,patientCode:80,age:20,sex:30,address:1800,visitType:80,clinicalSummary:2000,amount:20,feeCharged:20,amountReceived:20,balance:20,paymentMethod:40,paymentStatus:40,sourceEventId:80,source:'40'},
+death:{patientName:120,patientCode:80,age:20,sex:30,ageUnit:60,address:1800,deathDateTime:40,place:100,certificateReference:100,sourceEventId:80,sourceForm:20,notes:2000},
 stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,adjustmentDirection:20,supplier:160,reference:120,notes:2000}
 };
 function validISODate(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const d=new Date(value+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;}
@@ -107,8 +107,11 @@ return reply(200,{records:await r.json(),limit:500});
 if(action==='register-save'&&method==='POST'){
 let e;try{e=validateRegister(body.entry);}catch(err){return reply(400,{message:err.message});}
 const now=new Date().toISOString(),record={owner_id:user.id,register_type:e.registerType,entry_date:e.entryDate,data:e.data,revision:randomUUID(),updated_at:now};
-const path=e.id?'/rest/v1/clinic_workstation_registers?id=eq.'+encodeURIComponent(e.id)+'&owner_id=eq.'+encodeURIComponent(user.id)+'&revision=eq.'+encodeURIComponent(e.revision):'/rest/v1/clinic_workstation_registers';
-const r=await api(path,{method:e.id?'PATCH':'POST',headers,body:JSON.stringify(record)});
+const sourceKey=e.data.sourceEventId;
+const path=e.id?'/rest/v1/clinic_workstation_registers?id=eq.'+encodeURIComponent(e.id)+'&owner_id=eq.'+encodeURIComponent(user.id)+'&revision=eq.'+encodeURIComponent(e.revision):sourceKey?'/rest/v1/clinic_workstation_registers?on_conflict=owner_id,register_type,source_event_id':'/rest/v1/clinic_workstation_registers';
+if(sourceKey)record.source_event_id=sourceKey;
+const saveHeaders=sourceKey?{...headers,Prefer:'resolution=merge-duplicates,return=representation'}:headers;
+const r=await api(path,{method:e.id?'PATCH':'POST',headers:saveHeaders,body:JSON.stringify(record)});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
 const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This register entry changed or was removed elsewhere. Refresh the register before editing; no overwrite occurred.'});
 return reply(200,{record:saved[0]});
