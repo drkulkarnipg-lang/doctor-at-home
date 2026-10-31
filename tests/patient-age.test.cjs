@@ -14,7 +14,7 @@ fill('intake-age',['31','04','2000']);assert.equal(w.document.getElementById('in
 fill('intake-age',['25','10','2000']);assert.equal(w.document.getElementById('intake-age').value,String(w.PatientAge.age(25,10,2000).years));assert.equal(w.document.getElementById('intake-birthDate').value,'25 10 2000');
 assert.ok(w.document.getElementById('intake-calendarAge').value.includes('months'));
 w.document.querySelector('#intake-ageDOB button').click();assert.equal(w.document.getElementById('intake-age').value,'55');assert.equal(w.document.getElementById('intake-birthDate').value,'');
-fill('rxPatAge',['25','10','2000']);assert.match(w.document.getElementById('rxPatAge').value,/Y \d+ M \d+ D \/ Male$/);
+assert.equal(w.document.getElementById('rxPatAgeDOB'),null,'prescription editor must not insert a date-of-birth helper; age remains manually entered');
 const html=fs.readFileSync('index.html','utf8');assert.ok(!html.includes('Explore international health resources'));assert.ok(!html.includes('brainCareSection'));assert.match(html,/@page \{ size: A4 portrait/);
 console.log('Calendar age, invalid/future dates, leap day, month end, newborns, manual-age restoration, complete history values and gender preservation passed.');
 dom.window.close();
