@@ -166,3 +166,8 @@ Owner requested proceeding without repeated suggestions after review. PR19 merge
 
 ## PR20 Close and A4 release — 26 October 2026
 Explicit preview publication approval received (“ho”). PR20 merged a110d9c; production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. Persistent top/bottom document exit, data-preserving chooser and Escape layering released. Clinical Rx/lab/radiology PDFs use 194mm×264mm A4 writing area with readable type and lower signoff; genuine overflow retained. Both live source files byte-match tested implementation; all six controls mounted in production DOM and doctor lock retained. Full24 tests and real synthetic PDF geometry passed before release; owner-device printing/download remains unverified.
+
+
+## 31 October 2026 — website correction status
+
+Main source head 12608d35c02b3afe76a10995e95ebb521087eae4 has a failed regression run 41108470448 at the stale external-link inventory assertion; booking-intake, calculator UI and document-sharing tests passed before that failure. A review branch fix/mobile-language-article-fee-20261031 now carries a regenerated inventory for 86 source files / 221 unique destinations, a mobile language-panel CSS cascade fix, isolated Article Manager/RSS switching, explicit separate service-fee wording, and four unpublished source-linked clinical drafts. The exact latest review-branch full regression result must be checked before any merge. Main Vercel remains build-rate-limited; last successful Vercel status is commit 57d011721e92903c53f76035f43520c296502906. No payment activation, billing/secrets/hosting/database change or clinical publication was performed. Actual phone, live navigation, PDF/WhatsApp recipient-side delivery remain unverified.
