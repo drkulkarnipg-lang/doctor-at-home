@@ -31,7 +31,7 @@ if(data.expiry&&!validISODate(data.expiry))throw Error('Enter a valid expiry dat
 }
 if(entry.registerType==='daily'&&data.amount&&(!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>10000000))throw Error('Enter a valid non-negative INR amount.');
 if(entry.registerType==='death'&&data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
-if(entry.registerType==='daily'&&data.phone&&data.phone.replace(/\\D/g,'').length<10)throw Error('Enter a valid patient mobile number or leave it blank.');
+if(entry.registerType==='daily'&&data.phone&&data.phone.replace(/\D/g,'').length<10)throw Error('Enter a valid patient mobile number or leave it blank.');
 return{id:entry.id||null,revision:entry.revision||null,registerType:entry.registerType,entryDate:entry.entryDate,data};
 }
 function createHandler({env=process.env,request=(...args)=>fetch(...args)}={}){return async(req,res)=>{
