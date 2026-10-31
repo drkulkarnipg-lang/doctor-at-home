@@ -5,7 +5,7 @@ const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/
 const FIELDS=['date','time','sbp','dbp','glucose','context','weight','height','bmi','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
 const REGISTER_FIELDS={
-daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
+daily:{patientName:120,patientCode:80,age:40,sex:30,phone:24,address:300,patientDateTime:40,prescriptionSerial:60,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
 death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
 stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,adjustmentDirection:20,supplier:160,reference:120,notes:2000}
 };
@@ -30,7 +30,8 @@ if(data.movement==='adjustment'&&!['increase','decrease'].includes(data.adjustme
 if(data.expiry&&!validISODate(data.expiry))throw Error('Enter a valid expiry date or leave it blank.');
 }
 if(entry.registerType==='daily'&&data.amount&&(!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>10000000))throw Error('Enter a valid non-negative INR amount.');
-if(data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
+if(entry.registerType==='death'&&data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
+if(entry.registerType==='daily'&&data.phone&&data.phone.replace(/\\D/g,'').length<10)throw Error('Enter a valid patient mobile number or leave it blank.');
 return{id:entry.id||null,revision:entry.revision||null,registerType:entry.registerType,entryDate:entry.entryDate,data};
 }
 function createHandler({env=process.env,request=(...args)=>fetch(...args)}={}){return async(req,res)=>{
