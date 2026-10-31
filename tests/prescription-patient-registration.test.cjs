@@ -65,7 +65,7 @@ function makeWindow(records=[]){
  const second=makeWindow([existing]),w2=second.w,$2=id=>w2.document.getElementById(id);
  $2('rxPatName').value='Returning Patient';$2('rxPatName').dispatchEvent(new w2.Event('input',{bubbles:true}));
  $2('rxPatPhone').value='9123456789';$2('rxPatPhone').dispatchEvent(new w2.Event('input',{bubbles:true}));
- assert.match($2('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{8}$/,'a provisional patient number is assigned before private-register lookup');
+ assert.match($2('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{12}$/,'a provisional patient number is assigned before private-register lookup');
  $2('rxPatientRegisterConsent').checked=true;$2('rxPatientRegisterConsent').dispatchEvent(new w2.Event('change',{bubbles:true}));
  await wait(850);
  assert.equal($2('rxPatientCode').value,'PT-EXISTING-01','returning patient reuses the existing patient number after the authenticated lookup');
