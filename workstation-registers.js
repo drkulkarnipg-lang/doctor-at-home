@@ -20,7 +20,7 @@ let input;
 if(type==='select'){input=el('select');for(const [v,t]of options)input.add(new Option(t,v));}
 else if(type==='textarea')input=el('textarea');
 else input=el('input');
-input.id='register-'+key;input.name=key;input.dataset.registerField=key;if(input.tagName==='INPUT')input.type=type==='datetime-local'?'datetime-local':type==='date'?'date':type==='number'?'number':'text';if(type==='number'){input.min='0';input.max=key==='age'?'130':'10000000';input.step='any';}input.required=required;input.maxLength=key==='clinicalSummary'||key==='notes'?2000:160;input.autocomplete='off';input.value=value||'';wrap.append(input);return wrap;
+input.id='register-'+key;input.name=key;input.dataset.registerField=key;if(input.tagName==='INPUT')input.type=type==='datetime-local'?'datetime-local':type==='date'?'date':type==='number'?'number':'text';if(type==='number'){input.min='0';input.max=key==='age'?'130':'10000000';input.step='any';}input.required=required;input.maxLength=key==='clinicalSummary'||key==='notes'?2000:key==='address'?300:160;input.autocomplete='off';input.value=value||'';wrap.append(input);return wrap;
 }
 function renderForm(){
 const host=$('registerEntryFields'),form=$('registerEntryForm');if(!host||!form)return;host.replaceChildren();
