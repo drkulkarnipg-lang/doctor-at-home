@@ -88,17 +88,31 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
 
 /* Keep the language menu in document flow: it must never cover portal tabs or actions. */
 @media screen {
+  .site-header .language-control > summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
   .site-header .language-control[open] {
     flex: 1 1 100%;
     width: 100%;
     max-width: 100%;
     min-width: 0;
+    position: static !important;
   }
+  /* The global popover rule above uses !important. Override every fixed edge here,
+     otherwise the open selector floats over and obscures the page on phones. */
   .site-header .language-control[open] > div {
-    position: static;
-    inset: auto;
-    width: 100%;
-    max-width: 100%;
+    position: static !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
     box-sizing: border-box;
     margin-top: 8px;
     box-shadow: 0 5px 18px #183b3612;
@@ -106,7 +120,10 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
   .site-header .language-control[open] #google_translate_element,
   .site-header .language-control[open] .goog-te-gadget,
   .site-header .language-control[open] .goog-te-gadget select {
-    max-width: 100%;
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    max-width: 100% !important;
   }
 }
 .source-translate-link{display:inline-block;margin-inline-start:7px;color:#245f4a;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
