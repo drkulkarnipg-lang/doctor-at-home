@@ -30,6 +30,7 @@
     "clinical-calculators.css",
     "clinical-calculators.js",
     "clinical-documents.js",
+    "clinical-register-linkage.js",
     "cloud-records.js",
     "contact-actions.js",
     "device-lock.js",
