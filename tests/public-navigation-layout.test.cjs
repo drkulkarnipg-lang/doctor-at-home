@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const css=fs.readFileSync('workstation.css','utf8'),html=fs.readFileSync('index.html','utf8');
+const css=fs.readFileSync('workstation.css','utf8'),stitch=fs.readFileSync('stitch-clinical-design.css','utf8'),html=fs.readFileSync('index.html','utf8');
 const nav=css.match(/\.portal-nav\{([^}]*)\}/);
 assert.ok(nav,'Public navigation style exists');
 assert.match(html,/role="tablist" aria-orientation="horizontal"/,'Patient Portal navigation is an accessible tablist.');
@@ -20,5 +20,12 @@ const workstation=css.match(/\.doctor-tabs\{([^}]*)\}\.doctor-tabs button\{([^}]
 assert.ok(html.includes('#google_translate_element .goog-te-combo{max-width:180px;width:100%;min-height:44px;font-size:13px}'),'Mobile language dropdown stays compact and tappable');
 assert.ok(html.includes('.language-status,.language-help-link{display:none!important}'),'Redundant language instructions do not expand the mobile header');
 assert.ok(html.includes('layout: google.translate.TranslateElement.InlineLayout.SIMPLE'),'Google Translate uses the compact inline layout');
+assert.ok(html.indexOf('href="stitch-clinical-design.css"') > html.indexOf('href="reading-print-fixes.css"'), 'Stitch visual layer must load after existing screen and document styles.');
+for(const token of ['#FAF8F5','#F5F2EB','#0B192C','#4E8765','#3B6E52','#E6DFD5','#D8CEBF']) assert.ok(stitch.includes(token), 'Stitch design token missing: '+token);
+assert.match(stitch,/@media screen\s*\{/,'Visual changes must be screen-only and leave clinical print documents unchanged.');
+assert.match(stitch,/grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,'Phone navigation must display every destination in a visible grid.');
+assert.match(stitch,/--stitch-sky:\s*#3884BE/,'Focus indicators must retain a distinct accessible blue.');
+assert.match(stitch,/online-consultation-warning[\s\S]*#B91C1C/,'Emergency warning red remains reserved for clinical urgency.');
+
 assert.ok(html.includes('Machine translation') || html.includes('Automatic translation may not preserve medical meaning'),'Translation caution remains available to patients');
 console.log('Responsive navigation checks passed: all links wrap visibly and the language selector cannot cover the navigation row.');
