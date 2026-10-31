@@ -13,3 +13,6 @@ assert.match(script,/bankTransferRequest/,'The bank-transfer request action must
 assert.match(script,/window\.openDoctorContact\(\)/);
 assert.doesNotMatch(html,/649601050101|icic0001802/i,'Public page must not expose private bank-account details');
 console.log('Payment-method disclosure checks passed: UPI/QR available, unconfigured gateways disabled, bank details private.');
+
+assert.match(html, /Show my UPI payment QR/, 'payment UI must clearly label the QR action');
+assert.match(html, /drkulkarnipg@upi/, 'payment QR must identify the intended UPI account');

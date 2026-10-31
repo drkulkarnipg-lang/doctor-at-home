@@ -111,3 +111,24 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
 }
 .source-translate-link{display:inline-block;margin-inline-start:7px;color:#245f4a;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .source-translate-link:focus-visible{outline:3px solid #3f8c72;outline-offset:3px;border-radius:3px}
+
+/* Patient portal section navigation: show the selected destination without hiding the care promise. */
+.portal-nav a[aria-current="page"]{color:#155b49;text-decoration:underline;text-decoration-color:#7eaa91;text-decoration-thickness:2px;text-underline-offset:7px}
+#publicPortal>section[hidden]{display:none!important}
+.portal-nav a:focus-visible{outline:3px solid #0f766e;outline-offset:4px;border-radius:4px}
+@media(max-width:640px){.portal-nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px}.portal-nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;border:1px solid #d8e4df;border-radius:8px;background:#fff;white-space:normal}.portal-nav a[aria-current="page"]{background:#eaf3ec;border-color:#8aa998;text-decoration:none}}
+
+/* UPI QR panel: explicit merchant/amount, accessible enlargement and direct download. */
+.upi-qr-payment-details{display:grid;gap:4px;padding:12px 14px;margin:12px 0;border:1px solid #c9dbc8;border-radius:10px;background:#f5f9f2;color:#173e32;font-size:14px}
+.upi-qr-payment-details p{margin:0}
+.upi-qr-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:10px 0}
+.upi-qr-actions button,.upi-qr-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #8daE9b;border-radius:9px;background:#edf5eb;color:#194b37;font-size:14px;font-weight:700;text-decoration:none}
+.upi-qr-actions button:disabled{opacity:.55;cursor:not-allowed}
+.upi-qr-actions button:focus-visible,.upi-qr-actions a:focus-visible{outline:3px solid #0f766e;outline-offset:3px}
+.upi-qr-zoom-dialog{width:min(620px,calc(100vw - 28px));max-width:calc(100vw - 28px);max-height:90vh;overflow:auto;border:1px solid #bfd2c3;border-radius:16px;padding:20px;background:#fffefa;color:#173e32}
+.upi-qr-zoom-dialog:not([open]){display:none}
+.upi-qr-zoom-dialog::backdrop{background:#102b2580}
+.upi-qr-zoom-content{display:grid;justify-items:center;gap:12px}
+.upi-qr-zoom-content h3{font-size:18px;font-weight:700}
+.upi-qr-zoom-content button{min-height:44px;padding:9px 16px;border:1px solid #8dae9b;border-radius:8px;background:#edf5eb;color:#194b37;font-weight:700}
+#upiQrZoomImage{display:block;width:min(560px,82vw);max-height:76vh;object-fit:contain;background:#fff}

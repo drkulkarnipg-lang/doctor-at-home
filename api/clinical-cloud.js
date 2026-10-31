@@ -5,7 +5,7 @@ const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/
 const FIELDS=['date','time','sbp','dbp','glucose','context','weight','height','bmi','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
 const REGISTER_FIELDS={
-daily:{patientName:120,patientCode:80,age:20,sex:30,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
+daily:{patientName:120,patientCode:80,age:40,sex:30,phone:24,address:300,patientDateTime:40,prescriptionSerial:60,visitType:80,clinicalSummary:2000,amount:20,paymentStatus:40},
 death:{patientName:120,patientCode:80,age:20,sex:30,deathDateTime:40,place:100,certificateReference:100,notes:2000},
 stock:{itemName:160,category:100,batch:100,expiry:10,quantity:30,unit:40,movement:20,adjustmentDirection:20,supplier:160,reference:120,notes:2000}
 };
@@ -30,7 +30,8 @@ if(data.movement==='adjustment'&&!['increase','decrease'].includes(data.adjustme
 if(data.expiry&&!validISODate(data.expiry))throw Error('Enter a valid expiry date or leave it blank.');
 }
 if(entry.registerType==='daily'&&data.amount&&(!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>10000000))throw Error('Enter a valid non-negative INR amount.');
-if(data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
+if(entry.registerType==='death'&&data.age&&(!Number.isFinite(Number(data.age))||Number(data.age)<0||Number(data.age)>130))throw Error('Enter a valid age.');
+if(entry.registerType==='daily'&&data.phone&&data.phone.replace(/\D/g,'').length<10)throw Error('Enter a valid patient mobile number or leave it blank.');
 return{id:entry.id||null,revision:entry.revision||null,registerType:entry.registerType,entryDate:entry.entryDate,data};
 }
 function createHandler({env=process.env,request=(...args)=>fetch(...args)}={}){return async(req,res)=>{
@@ -98,9 +99,19 @@ const headers={Authorization:'Bearer '+token,'Content-Type':'application/json',P
 if(action==='list'&&method==='GET'){const after=String(req.query?.after||'');if(after&&!ID.test(after))return reply(400,{message:'Invalid page cursor.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,revision,updated_at&order=id.asc&limit=100'+(after?'&id=gt.'+encodeURIComponent(after):''),{headers});if(!r.ok)throw Error();const records=await r.json();return reply(200,{records,next:records.length===100?records.at(-1).id:null});}
 if(action==='patient'&&method==='GET'){const id=String(req.query?.id||'');if(!ID.test(id))return reply(400,{message:'Invalid patient ID.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,readings,revision,updated_at,cloud_consent&id=eq.'+encodeURIComponent(id),{headers});if(!r.ok)throw Error();const records=await r.json();return records.length?reply(200,{patient:records[0]}):reply(404,{message:'Patient not found.'});}
 if(action==='save'&&method==='POST'){let p;try{p=validatePatient(body.patient);}catch(e){return reply(400,{message:e.message});}const revision=randomUUID(),updated_at=new Date().toISOString();const record={id:p.id,owner_id:user.id,name:p.name,readings:p.readings,revision,updated_at,cloud_consent:{...p.cloudConsent,recorded_by:user.id,recorded_at:p.cloudConsent.recorded_at||new Date().toISOString()}};const path='/rest/v1/clinic_patient_trends'+(p.revision?'?id=eq.'+encodeURIComponent(p.id)+'&revision=eq.'+encodeURIComponent(p.revision):'');const r=await api(path,{method:p.revision?'PATCH':'POST',headers,body:JSON.stringify(record)});if(r.status===409)return reply(409,{message:'A cloud history with this ID already exists. Load its latest version before changing it.'});if(!r.ok)throw Error();const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This patient changed on another device. Local entries are safe; compare the latest cloud version before retrying.'});return reply(200,{id:p.id,revision,updated_at,cloudConsent:record.cloud_consent});}
+if(action==='register-find-patient'&&method==='POST'){
+const phone=String(body.phone||'').replace(/\D/g,'');
+const name=String(body.name||'').trim().toLocaleLowerCase('en');
+if(!/^[6-9]\d{9}$/.test(phone)||!name||name.length>120)return reply(400,{message:'Enter the patient name and a valid mobile number.'});
+const path='/rest/v1/clinic_workstation_registers?select=data&owner_id=eq.'+encodeURIComponent(user.id)+'&register_type=eq.daily&data->>phone=eq.'+encodeURIComponent(phone)+'&order=entry_date.desc,created_at.desc&limit=100';
+const r=await api(path,{headers});
+if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No patient lookup was performed.'});throw Error();}
+const rows=await r.json(),match=rows.find(row=>String(row.data?.patientName||'').trim().toLocaleLowerCase('en')===name&&typeof row.data?.patientCode==='string'&&row.data.patientCode.trim());
+return reply(200,{patientCode:match?.data?.patientCode||null});
+}
 if(action==='register-list'&&method==='GET'){
 const type=String(req.query?.registerType||'');if(!['daily','death','stock'].includes(type))return reply(400,{message:'Choose daily, death or stock register.'});
-const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
+const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&owner_id=eq.'+encodeURIComponent(user.id)+'&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
 return reply(200,{records:await r.json(),limit:500});
 }

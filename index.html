@@ -181,7 +181,7 @@
 <i class="fa-solid fa-stethoscope text-teal-600"></i> Doctor Workstation
           </button>
 </div>
-<details class="language-control" aria-label="Language selector"><summary>🌐 Language / भाषा <span aria-hidden="true">▾</span></summary><div class="language-row"><span id="languageSelectorLabel">Language / भाषा</span><div id="google_translate_element" aria-labelledby="languageSelectorLabel"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language from the menu. Automatic translation may not preserve medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></details> <button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
+<details class="language-control" aria-label="Language selector"><summary>🌐 Language / भाषा <span aria-hidden="true">▾</span></summary><div class="language-row" id="patientArticleTranslator"><span id="languageSelectorLabel">Language / भाषा</span><div id="google_translate_element" aria-labelledby="languageSelectorLabel"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language from the menu. Automatic translation may not preserve medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></details> <button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
 <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access</span>
 </button>
 <!-- Both GMB Profiles -->
@@ -229,6 +229,12 @@
 <div class="online-consultation-warning" aria-labelledby="onlineConsultationEmergencyTitle"><h4 id="onlineConsultationEmergencyTitle">Severe symptoms need urgent in-person care</h4><p>Severe chest pain, severe difficulty breathing, sudden weakness of the face or arm or difficulty speaking, collapse or loss of consciousness: seek emergency medical help immediately. Do not wait for an online appointment, a reply or payment confirmation.</p><p lang="mr">छातीत तीव्र दुखणे, तीव्र श्वासोच्छ्वासाचा त्रास, अचानक चेहरा किंवा हात कमजोर होणे अथवा बोलताना अडचण, कोसळणे किंवा बेशुद्धी—अशी लक्षणे असल्यास तातडीची प्रत्यक्ष वैद्यकीय मदत घ्या. ऑनलाइन भेट, उत्तर किंवा पैसे भरल्याच्या पुष्टीची वाट पाहू नका.</p></div>
 <p lang="mr">ऑनलाइन सल्ला: ₹५००. प्रकृती स्थिर असलेल्या रुग्णांचा फॉलो-अप, आधीच्या तपासणी अहवालांचा आढावा आणि पुढील मार्गदर्शन यासाठी. ऑनलाइन सल्ला योग्य आहे का आणि वेळ उपलब्ध आहे का, हे डॉक्टर निश्चित करतील. प्रत्यक्ष तपासणीची गरज पडू शकते. घरभेटीचे शुल्क वेगळे आहे.</p>
 <a href="tel:+919561394341" data-direct-call class="online-consultation-enquiry">Call 9561394341 to discuss availability</a>
+<div class="consultation-gateway-panel" id="consultationGatewayPanel">
+<label class="consultation-gateway-confirm"><input id="consultationAppointmentConfirmed" type="checkbox"/> I have already discussed this with the doctor and my online consultation appointment has been confirmed.</label>
+<button type="button" id="razorpayConsultationPay" class="online-consultation-enquiry" disabled>Pay ₹500 securely with Razorpay</button>
+<p id="razorpayConsultationStatus" role="status" aria-live="polite">Payment gateway setup is being verified. Do not pay until your appointment is confirmed. Payment does not itself confirm an appointment.</p>
+</div>
+
 <p class="online-consultation-reference">Emergency-care principle: <a href="https://www.mohfw.gov.in/pdf/Telemedicine.pdf" target="_blank" rel="noopener noreferrer">MoHFW telemedicine guidance ↗</a></p>
 </section>
 <!-- BOOKING SECTION: WITH 11:01 PM AUTO TIME-SLAB DETECTOR -->
@@ -314,7 +320,13 @@
               </button>
 </div>
 </div>
-<details class="payment-methods" id="paymentMethods"><summary>Payment options · UPI / QR active · gateway setup required · bank transfer by request</summary><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=drkulkarnipg%40upi&amp;pn=Dr%20Pramod%20G%20Kulkarni&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary>Show payment QR / भुगतान QR दिखाएँ</summary><img alt="UPI payment QR" id="upiQrImg" loading="lazy" hidden/><p>Google Pay / PhonePe / Paytm / BHIM</p><p>Before approving, verify the payee and exact amount shown in your UPI app. / भुगतान से पहले UPI ऐप में प्राप्तकर्ता और राशि जाँचें।</p></details><div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3"><section class="border rounded-xl p-3 bg-white" aria-labelledby="razorpayPaymentTitle"><h4 id="razorpayPaymentTitle" class="font-bold">Razorpay secure checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="razorpayPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="billdeskPaymentTitle"><h4 id="billdeskPaymentTitle" class="font-bold">BillDesk checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="billdeskPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="bankTransferTitle"><h4 id="bankTransferTitle" class="font-bold">NEFT / bank transfer</h4><p>Request verified transfer instructions directly from the doctor. Bank account numbers are deliberately not published on this public page.</p><button type="button" id="bankTransferRequest">Request transfer instructions</button></section></div></details>
+<div class="payment-entry-point no-print"><button type="button" id="showPaymentQr" class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-3 rounded-xl shadow-sm" aria-controls="paymentMethods upiQrDetails">Pay by UPI QR / भुगतान QR</button><span class="text-xs text-slate-600">Scan with any UPI app. The QR shows the calculated visit fee.</span></div><details class="payment-methods" id="paymentMethods"><summary>Payment methods · UPI / QR / gateway / bank transfer</summary><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=drkulkarnipg%40upi&amp;pn=Dr%20Pramod%20G%20Kulkarni&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary><strong>Show my UPI payment QR</strong> / भुगतान QR दिखाएँ</summary>
+<div class="upi-qr-payment-details" aria-live="polite"><p>Payee: <strong>Dr. Pramod G. Kulkarni</strong></p><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><p>Amount: <strong id="upiQrAmount">Calculated after opening</strong></p></div>
+<img alt="UPI payment QR for Dr Pramod G Kulkarni, UPI ID drkulkarnipg@upi" id="upiQrImg" loading="lazy" hidden style="width:min(320px,100%);height:auto;margin:12px auto"/>
+<div class="upi-qr-actions"><button type="button" id="upiQrEnlarge" disabled>Enlarge QR</button><a id="upiQrDownload" download="Dr-Kulkarni-UPI-payment-QR.png" hidden>Download QR</a></div>
+<p>Google Pay / PhonePe / Paytm / BHIM</p><p>Before approving, verify the payee and exact amount in your UPI app. Opening the QR or UPI app does not confirm payment. / भुगतान से पहले UPI ऐप में प्राप्तकर्ता और राशि जाँचें।</p>
+<dialog id="upiQrZoomDialog" class="upi-qr-zoom-dialog" aria-labelledby="upiQrZoomTitle"><div class="upi-qr-zoom-content"><h3 id="upiQrZoomTitle">UPI payment QR</h3><button type="button" id="upiQrZoomClose" aria-label="Close enlarged QR">Close</button><img id="upiQrZoomImage" alt="Enlarged UPI payment QR" /></div></dialog>
+</details><div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3"><section class="border rounded-xl p-3 bg-white" aria-labelledby="razorpayPaymentTitle"><h4 id="razorpayPaymentTitle" class="font-bold">Razorpay secure checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="razorpayPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="billdeskPaymentTitle"><h4 id="billdeskPaymentTitle" class="font-bold">BillDesk checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="billdeskPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="bankTransferTitle"><h4 id="bankTransferTitle" class="font-bold">NEFT / bank transfer</h4><p>Request verified transfer instructions directly from the doctor. Bank account numbers are deliberately not published on this public page.</p><button type="button" id="bankTransferRequest">Request transfer instructions</button></section></div></details>
 </div>
 </div>
 </section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919561394341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
@@ -450,7 +462,7 @@
 <div class="space-y-4" id="viewRxPad">
 <div class="flex flex-wrap justify-between items-center gap-2 no-print bg-white p-3 rounded-2xl border petal-border shadow-sm">
 <div class="flex items-center gap-2">
-<input class="text-xs border p-1.5 rounded-lg w-44 font-mono outline-none" id="rxPatPhone" placeholder="Patient 10-Digit Mobile" type="text"/>
+
 </div>
 <div class="flex flex-wrap gap-2">
 <select class="text-xs bg-amber-50 border border-amber-300 text-amber-900 font-semibold rounded-xl px-2.5 py-1.5" id="prescriptionDietPreset" aria-label="Diet guidance preset" onchange="insertDietPreset(this.value)">
@@ -502,23 +514,36 @@
 <span>⚠️ KNOWN DRUG ALLERGIES:</span>
 <input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="" placeholder="Confirm and document allergy status"/>
 </div>
-<div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
-<div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Age / Gender:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="e.g. 68 Y / Male" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Date &amp; Time:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Pune Locality:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="e.g. Dhayari, Kothrud" type="text"/></div>
-<div class="col-span-4 grid grid-cols-6 gap-2 pt-2 border-t mt-1 text-center">
-<div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="78" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="130/80" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vSpO2" placeholder="98%" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="98.4" type="text"/></div>
-<div class="bg-amber-100/60 rounded-lg p-0.5"><label class="text-[10px] text-amber-900 font-bold block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold text-amber-950" id="vGRBS" placeholder="140" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="18" type="text"/></div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border" aria-label="Prescription and patient details">
+<div><label class="text-[10px] text-slate-500">Prescription serial no.:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxSerialNo" type="text" placeholder="Auto-assigned" readonly aria-readonly="true"/></div>
+<div><label class="text-[10px] text-slate-500">Patient registration no.:</label><input class="w-full bg-white p-1 border rounded-lg font-mono font-bold" id="rxPatientCode" type="text" placeholder="Assigned when registered" readonly aria-readonly="true"/></div>
+<div><label class="text-[10px] text-slate-500">Date and time (IST):</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text" placeholder="DD/MM/YYYY HH:MM IST"/></div>
+<div><label class="text-[10px] text-slate-500">Patient name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full name" type="text" autocomplete="name"/></div>
+<div><label class="text-[10px] text-slate-500">Age:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="Age as recorded" type="text"/></div>
+<div><label class="text-[10px] text-slate-500">Sex:</label><select class="w-full bg-white p-1 border rounded-lg" id="rxPatSex"><option value="">Select sex</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label class="text-[10px] text-slate-500">Patient mobile:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxPatPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number"/></div>
+<div><label class="text-[10px] text-slate-500">Locality (optional):</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="Pune locality" type="text"/></div>
+<div class="col-span-2 md:col-span-4"><label class="text-[10px] text-slate-500">Full patient address:</label><textarea class="w-full bg-white p-2 border rounded-lg" id="rxPatAddress" rows="2" placeholder="House / flat, street, area, city, PIN code" autocomplete="street-address"></textarea></div>
 </div>
+<div class="no-print rounded-lg border border-[#C9D9D2] bg-[#F5F9F5] p-2 text-xs space-y-1">
+<label class="flex items-start gap-2"><input id="rxPatientRegisterConsent" type="checkbox" class="mt-0.5"/><span>Patient / authorised representative informed about creation of a private clinic patient-register record.</span></label>
+<p id="rxPatientRegistrationStatus" role="status" aria-live="polite">A patient number and prescription number will be assigned automatically. The private register is saved only after doctor login and confirmation that the patient has been informed.</p>
 </div>
 <div>
-<label class="font-bold text-[#0F2942]">Chief Complaints (C/o) &amp; Bedside Findings:</label>
-<textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="e.g. Acute breathlessness, bilateral crepitations..." rows="2"></textarea>
+<label class="font-bold text-[#0F2942]">Complaints (C/o):</label>
+<textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="Presenting complaints and relevant bedside findings" rows="2"></textarea>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-6 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border text-center" aria-label="Vital signs">
+<div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="Pulse /min" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="e.g. 130/80" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="Temperature" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vSpO2" placeholder="SpO2" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vGRBS" placeholder="GRBS" type="text"/></div>
+<div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="Respiratory rate" type="text"/></div>
+</div>
+<div>
+<label class="font-bold text-[#0F2942]">Provisional Diagnosis:</label>
+<textarea class="w-full p-2 border rounded-xl mt-1" id="rxProvisionalDiagnosis" placeholder="Enter provisional diagnosis" rows="2"></textarea>
 </div>
 <div>
 <div class="flex justify-between items-center mb-1">
@@ -528,18 +553,26 @@
 <table class="w-full border-collapse border border-slate-300 text-[11px]" id="rxTable">
 <thead class="bg-slate-100 text-slate-700">
 <tr>
-<th class="border p-1 w-8 text-center">#</th>
-<th class="border p-1 text-left">Medicine Name &amp; Strength</th>
-<th class="border p-1 w-24">Timing</th>
-<th class="border p-1 w-20">Freq</th>
-<th class="border p-1 w-16">Days</th>
-<th class="border p-1">Instructions</th>
+<th class="border p-1 w-8 text-center">S. No.</th>
+<th class="border p-1 text-left">Drug name</th>
+<th class="border p-1 text-left">Strength</th>
+<th class="border p-1 w-20">Frequency</th>
+<th class="border p-1 w-20">Duration</th>
+<th class="border p-1">Instructions (before/after food, at night, etc.)</th>
 <th class="border p-1 w-8 text-center no-print">Del</th>
 </tr>
 </thead>
 <tbody id="rxTableBody"></tbody>
 </table>
 <button class="no-print text-xs text-[#0D9488] font-bold mt-1.5" onclick="addRxRow()" type="button" aria-label="Add another medicine to the prescription">+ Add Medicine Row</button>
+</div>
+<div class="flex justify-end items-end pt-2" aria-label="Doctor signature">
+<div class="text-center min-w-[190px]">
+<img src="assets/dr-kulkarni-signature.svg" alt="Doctor's handwritten signature" class="block mx-auto object-contain w-40 h-20" />
+<p class="border-t border-slate-500 pt-1 font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+<p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
+<p class="text-[9px] text-slate-500">Doctor's signature</p>
+</div>
 </div>
 <!-- ADDITIONAL PATHOLOGY & RADIOLOGY ON PRESCRIPTION -->
 <div class="border p-2.5 rounded-xl bg-slate-50/70 space-y-1">
@@ -550,16 +583,9 @@
 <label class="font-bold text-[#0F2942]">Bedside Nursing &amp; Diet Advice:</label>
 <textarea class="w-full p-2 border rounded-xl mt-1" id="rxAdvice" placeholder="Dietary restrictions, fluid limits, positioning..." rows="2"></textarea>
 </div>
-<div class="pt-4 border-t flex justify-between items-end">
-<div>
+<div class="pt-3 border-t">
 <p><strong>Next Review:</strong> <input class="border-b px-1 font-semibold" id="rxFollowUp" type="text" value="After 3 Days / SOS in emergency"/></p>
 <p class="text-[10px] text-red-600 mt-1">⚠️ In emergency (severe breathlessness / chest pain), call 9561394341 immediately.</p>
-</div>
-<div class="text-center">
-<div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
-<p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
-<p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
-</div>
 </div>
 </div>
 </div>
@@ -811,7 +837,7 @@
 <div class="grid grid-cols-3 gap-4 border p-3 rounded-2xl" id="pathCheckboxesGrid">
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Hematology &amp; Coagulation:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
+<label class="flex items-center gap-1.5"><input id="t_cbc" type="checkbox" value="CBC + Platelets"/> CBC (Hb, TLC, Platelets)</label>
 <label class="flex items-center gap-1.5"><input id="t_esr" type="checkbox" value="ESR (Westergren)"/> ESR (Westergren)</label>
 <label class="flex items-center gap-1.5"><input id="t_pt" type="checkbox" value="PT / INR (Coagulation)"/> PT / INR (Coagulation)</label>
 <label class="flex items-center gap-1.5"><input id="t_ddimer" type="checkbox" value="D-Dimer Quantitative"/> D-Dimer Quantitative</label>
@@ -820,8 +846,8 @@
 </div>
 <div class="space-y-1">
 <p class="font-bold text-teal-800 border-b pb-0.5">Biochemistry &amp; Panels:</p>
-<label class="flex items-center gap-1.5"><input checked="" id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
-<label class="flex items-center gap-1.5"><input checked="" id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
+<label class="flex items-center gap-1.5"><input id="t_kft" type="checkbox" value="KFT (Creatinine, Urea)"/> KFT (Creatinine, Urea)</label>
+<label class="flex items-center gap-1.5"><input id="t_lytes" type="checkbox" value="Electrolytes (Na+, K+, Cl-)"/> Electrolytes (Na+, K+, Cl-)</label>
 <label class="flex items-center gap-1.5"><input id="t_lft" type="checkbox" value="LFT Complete"/> LFT Complete</label>
 <label class="flex items-center gap-1.5"><input id="t_sugar" type="checkbox" value="Blood Sugar Fasting/PP"/> Fasting / PP Sugar</label>
 <label class="flex items-center gap-1.5"><input id="t_hba1c" type="checkbox" value="HbA1c"/> HbA1c</label>
@@ -877,7 +903,7 @@
 <div class="grid grid-cols-2 gap-4 border p-4 rounded-2xl">
 <div class="space-y-2">
 <p class="font-bold text-purple-900 border-b pb-1">Bedside &amp; Advanced Imaging:</p>
-<label class="flex items-center gap-2"><input checked="" id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
+<label class="flex items-center gap-2"><input id="rad_cxr" type="checkbox" value="Portable Digital Chest X-Ray"/> <strong>Portable Digital Chest X-Ray (AP View)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_usg" type="checkbox" value="Bedside USG Abdomen &amp; Pelvis"/> <strong>Bedside USG Abdomen &amp; Pelvis</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_v" type="checkbox" value="Venous Color Doppler Lower Limb"/> <strong>Venous Color Doppler (DVT Rule-out)</strong></label>
 <label class="flex items-center gap-2"><input id="rad_dop_a" type="checkbox" value="Arterial Color Doppler Lower Limb"/> <strong>Arterial Color Doppler (Lower Limb)</strong></label>
@@ -1370,6 +1396,8 @@
     // 1-CLICK PRESCRIPTION FORMULARY
     function initRxPad() {
       const tbody = document.getElementById('rxTableBody');
+      const dateField = document.getElementById('rxDateTime');
+      if (dateField && !dateField.value) { const now = new Date(); dateField.value = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', day: '2-digit', month: '2-digit', year: 'numeric' }).format(now); }
       // Never prefill example medicines or overwrite a clinician's in-progress prescription.
       // Create one entirely blank row only when the editor has no rows yet.
       if (tbody.rows.length === 0) addRxRowWithData('', '', '', '', '');
@@ -1377,20 +1405,31 @@
 
     function addRxRow() { addRxRowWithData('', '', '', '', ''); }
 
-    function addRxRowWithData(med, freq, timing, days, advice) {
+    function renumberRxRows() {
       const tbody = document.getElementById('rxTableBody');
-      const idx = tbody.rows.length + 1;
+      [...tbody.rows].forEach((row, index) => {
+        if (row.cells[0]) row.cells[0].textContent = String(index + 1);
+      });
+    }
+
+    function removeRxRow(button) {
+      const row = button && button.closest('tr');
+      if (row) row.remove();
+      renumberRxRows();
+    }
+
+    function addRxRowWithData(med, strength, freq, duration, instructions) {
+      const tbody = document.getElementById('rxTableBody');
       const tr = document.createElement('tr');
+      const values = [String(med || ''), String(strength || ''), String(freq || ''), String(duration || ''), String(instructions || '')];
       tr.innerHTML = `
-        <td class="border p-1 text-center font-bold text-slate-500">${idx}</td>
-        <td class="border p-1"><input type="text" value="${med}" placeholder="Medicine Name" class="w-full font-bold outline-none px-1 py-0.5 bg-transparent"></td>
-        <td class="border p-1"><input type="text" value="${timing}" class="w-full text-center"></td>
-        <td class="border p-1"><input type="text" value="${freq}" class="w-full text-center font-bold"></td>
-        <td class="border p-1"><input type="text" value="${days}" class="w-full text-center"></td>
-        <td class="border p-1"><input type="text" value="${advice}" placeholder="Instructions" class="w-full"></td>
-        <td class="border p-1 text-center no-print"><button onclick="this.closest('tr').remove()" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
+        <td class="border p-1 text-center font-bold text-slate-500"></td>
+        ${values.map((value, i) => '<td class="border p-1"><input type="text" class="w-full min-w-0 '+(i===0?'font-bold ':'')+'outline-none px-1 py-0.5 bg-transparent" placeholder="'+['Drug name','Strength','Frequency','Duration','Instructions'][i]+'"></td>').join('')}
+        <td class="border p-1 text-center no-print"><button type="button" aria-label="Remove medicine row" onclick="removeRxRow(this)" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
       `;
+      [...tr.querySelectorAll('input')].forEach((input,i)=>{input.value=values[i];});
       tbody.appendChild(tr);
+      renumberRxRows();
     }
 
     function renderDrugDirectory() {
@@ -1412,7 +1451,7 @@
     }
 
     function addDrugDirectlyToRx(med, freq, timing, days, advice) {
-      addRxRowWithData(med, freq, timing, days, advice);
+      addRxRowWithData(med, '', freq, days, [timing, advice].filter(Boolean).join('; '));
       showToast("✓ " + med + " added to Prescription!");
       switchDocTab('rxPad');
     }
@@ -1569,9 +1608,9 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
         title = "Lab Requisition - Dr. Kulkarni";
         text = `*LAB REQUISITION*\n*Dr. Pramod G. Kulkarni* (9561394341)\nPatient: ${name}\nAge/Sex: ${age}\nDate: ${date}\nTests: ${selected.length ? selected.join(', ') : 'No preset tests selected'}${notes ? `\nAdditional tests / notes: ${notes}` : ''}\nUrgent reports: WhatsApp 9561394341`;
       } else if(type === 'rad') {
-        const name = document.getElementById('reqPatName').value || "Patient";
-        const age = document.getElementById('reqPatAge').value || "Not entered";
-        const date = document.getElementById('reqDate').value || "Not entered";
+        const name = document.getElementById('radPatName').value || "Patient";
+        const age = document.getElementById('radPatAge').value || "Not entered";
+        const date = document.getElementById('radDate').value || "Not entered";
         const selected = [...document.querySelectorAll('#radSlipSheet input[type="checkbox"]:checked')].map(el => el.value);
         const indication = document.getElementById('radIndication').value.trim();
         title = "Radiology Requisition - Dr. Kulkarni";
@@ -1819,7 +1858,7 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 <button class="bg-[#0D9488] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow" onclick="sendChatMessage()">Send</button>
 </div>
 </div>
-</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="workstation-registers.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script><script src="clinical-documents.js"></script><script src="unit-converters.js"></script><script src="payment-options.js"></script><script src="invoice-generator.js"></script><script src="source-translation.js"></script>
+</div><script src="assets/qr-code.js"></script><script src="patient-education-data.js"></script><script src="preserved-features.js"></script><script src="article-attachments.js"></script><script src="formulary-import.js"></script><script src="certificate-forms.js"></script><script src="research-sources.js"></script><script src="research-feed.js"></script><script src="document-sharing.js"></script><script src="patient-helper.js"></script><script src="clinical-calculators.js"></script><script src="awareness-library.js"></script><script src="contact-actions.js"></script><script src="release-tools.js"></script><script src="patient-trends.js"></script><script src="cloud-records.js"></script><script src="workstation-registers.js"></script><script src="prescription-patient-registration.js"></script><script src="document-provenance.js"></script><script src="device-lock.js"></script><script src="page-identity.js"></script><script src="workstation-auth.js"></script><script src="doctor-passkey.js"></script><script src="public-article-editor.js"></script><script src="booking-intake.js"></script><script src="patient-language-access.js"></script><div class="pdf-share-backdrop no-print" id="pdfShareDialog" hidden role="dialog" aria-modal="true" aria-labelledby="pdfShareTitle"><section class="pdf-share-card"><button type="button" class="pdf-close" id="pdfShareClose" aria-label="Close PDF share">✕</button><h2 id="pdfShareTitle">Share document as PDF</h2><p id="pdfShareStatus" role="status" aria-live="polite"></p><p id="pdfShareHelp"></p><div class="pdf-share-actions"><button id="pdfNativeShare" class="primary" type="button" disabled>Share PDF - choose app</button><button id="pdfDownload" type="button" disabled>Download PDF</button><a id="pdfWhatsApp" href="https://api.whatsapp.com/send" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></div><p id="pdfShareError" role="alert"></p><p>The PDF stays on this device until you choose an app and complete sharing.</p></section></div><dialog id="doctorContactDialog" class="doctor-contact-dialog no-print" aria-labelledby="doctorContactTitle" aria-describedby="doctorContactHelp"><button type="button" id="contactClose" class="contact-close" aria-label="Close contact options">×</button><span class="section-eyebrow">Contact the doctor</span><h2 id="doctorContactTitle">A clear way to connect.</h2><p id="doctorContactHelp">Choose an option below. Calling opens your device’s phone app; this website stays here.</p><label for="contactNumber">Dr. Pramod G. Kulkarni</label><input id="contactNumber" readonly value="9561394341" aria-label="Doctor phone number"/><div class="contact-choices"><a id="contactDial" href="tel:+919561394341" data-direct-call>Open phone dialler ↗</a><a href="https://wa.me/919561394341" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a><button type="button" id="contactCopy">Copy phone number</button></div><p id="contactCopyStatus" role="status" aria-live="polite"></p><p class="contact-help">If a phone app does not open, copy the number and dial it manually. Close this panel to continue browsing.</p></dialog><script src="evidence-workflow-ui.js"></script><script src="patient-age.js"></script><script src="password-keyboard.js"></script><script src="clinical-documents.js"></script><script src="unit-converters.js"></script><script src="payment-options.js"></script><script src="razorpay-checkout.js"></script><script src="invoice-generator.js"></script><script src="source-translation.js"></script>
 <script>
 /* Keep the main homepage actions on their intended in-page destinations. */
 document.addEventListener('click', function (event) {
@@ -1843,5 +1882,6 @@ document.addEventListener('click', function (event) {
   });
 });
 </script>
+<script src="portal-navigation.js"></script>
 </body>
 </html>

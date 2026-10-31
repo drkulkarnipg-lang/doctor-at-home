@@ -10,6 +10,7 @@ session:async()=>{try{const data=await api('session');signedIn=data.signedIn===t
 login:async(email,password,rememberDevice=false)=>{const data=await api('login',{email,password,rememberDevice});signedIn=true;stopped.clear();paint(true);await refresh();window.dispatchEvent(new Event('clinic-owner-signed-in'));return data;},
 requestPasswordReset:async email=>api('reset-request',{email}),
 listRegister:async registerType=>api('register-list',undefined,{registerType}),
+findPatient:async(phone,name)=>api('register-find-patient',{phone,name}),
 saveRegister:async entry=>api('register-save',{entry}),
 logout:async()=>{await api('logout',{});signedIn=false;for(const timer of timers.values())clearTimeout(timer);timers.clear();paint(true);$('cloudPatientSelect').replaceChildren(new Option('Choose cloud patient',''));window.dispatchEvent(new Event('clinic-owner-signed-out'));},
 isSignedIn:()=>signedIn

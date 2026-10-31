@@ -1,6 +1,6 @@
 # Current resumable work checkpoint
 
-Updated: 30 October 2026, India time — owner resumed full sentence-by-sentence audit.
+Updated: 31 October 2026, India time — continuing sentence-by-sentence audit; requisition output defect corrected on review branch.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
@@ -376,3 +376,186 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Reviewed `api/clinical-cloud.js`: the configured owner UUID is checked before register actions; edits include owner, ID and revision constraints; missing migration returns a controlled 503 without changing data.
 - Reviewed `workstation-registers.js` and existing synthetic UI/API tests: daily/death/stock forms, revision-checked edits, no delete action, sign-out clearing, no localStorage persistence and non-owner API denial are covered.
 - Added static migration regression test in commit `0e4afabbf1cace202fee5ecc81411e09ebd16fc5`. This does **not** prove live database RLS; no migration was applied. Await CI and reserve actual owner/non-owner RLS, backup/restore and cross-device testing for a dedicated test project.
+
+
+## Requisition output audit — 31 October 2026
+
+- **Working branch:** `fix/requisition-output-identity-20261031`, based on main `12608d35c02b3afe76a10995e95ebb521087eae4`. This is review-only; no merge or production release performed.
+- **E07 lab requisition:** existing lipid profile, iron studies and serum ammonia choices were present with descriptive values. Found CBC, KFT, electrolytes were preselected by default, which could imply unintended tests. Removed all three default checked states. New test `tests/requisition-output.test.cjs` checks the requested lab choices and that selected tests appear in the actual share payload.
+- **E08 radiology requisition:** existing portable chest X-ray, bedside USG abdomen/pelvis, separate venous and arterial Doppler, CT brain/chest, and MRI brain/spine choices were present. Found the radiology share function was reading name/age/date from the lab slip and the radiology slip had no dedicated identity fields. Added `radPatName`, `radPatAge`, `radReqDate`; changed radiology sharing to use those fields; removed the default checked state for portable chest X-ray. The new test checks all requested imaging options, patient identity, clinical indication and selected-item share output.
+- **Source commits:** HTML correction `e00775f5ddfcf269327e7547404fc6f6975b08b6`; radiology share binding `9c6a73ecbfc5c08c59cb04451095eeba98dd1c61`; regression test `f790cc415311db5a7412d87baaea315c8e53910f`; register update `c6c606fb7497c46f5eae7f4a2924d105b11f4ac6`.
+- **Status:** source changes saved; the new test has not yet been confirmed by GitHub Actions. Check exact branch-head CI and fix any failures before PR review. PDF checkbox rendering/selected output, Vercel preview, mobile layout and real device share/print remain unverified. Vercel rate-limit must not be bypassed; do not merge or claim these changes live.
+- **Next:** confirm test results on the latest exact head; then continue to the next open register row. Preserve no-production-release-without-explicit-owner-approval.
+
+- **Follow-up found during regression-test preparation:** `clinical-documents.js` already dynamically mounts radiology patient name/age/date/time fields. Removed the redundant static block to avoid a second date control; share output now reads the existing runtime `radDate` field. The regression test now executes that real mount and asserts there are no duplicate IDs after runtime initialization.
+- Follow-up source commits: `11e94b5448e934b65f2ac027bf4f15b8a59a40f4` (reuse dynamic fields), `cce193d7750fdd55cbdaa91f8b3b0a64e8903689` (exercise runtime mount), `61bf9e2ed2570853e3cb25abdfb10e37ac2b6db9` (assert runtime ID uniqueness). The master register records this reconciliation in `47569043daee9df5af299a58748da23887916461`.
+- Re-check all latest branch commits, not the earlier in-progress run, because the branch advanced while Actions was running. Vercel continues to report the provider build-rate-limit failure; no preview or production verification is claimed.
+
+- **Regression investigation:** GitHub Actions run `41110603146` failed at `tests/external-link-inventory-generator.test.cjs` before reaching the new requisition test. It exposed stale committed source-line evidence (and one active WhatsApp URL missing from the inventory), not a failure of the new requisition assertions. Regenerated the inventory from current source files in bounded batches, preserving the generator's classification policy; current 86-file inventory has 221 destinations and zero `invalid-url` classifications. Added the cause and corrected counts to `MASTER_TASK_REGISTER.md` in `eb90baab388a1021b39b3cc124c3fbbf6319926f`.
+- Static checks on the latest HTML/test source passed: no checked input defaults remain; no duplicate static IDs; requisition test JavaScript syntax parses; runtime radiology field creation and date binding are consistent. These checks are not a substitute for running the test file in Node/jsdom.
+- **Next gate:** wait for the regression workflow triggered by the inventory correction and rerun on the exact final branch head after ledger updates. Do not mark E07/E08 CI-verified until a green run names the final SHA. Vercel still reports build-rate-limit; no preview, merge or production release.
+- Inventory metadata now records source revision `6c3a5e95a2369071ce53770e250a67aa6c1d3ac3` (the source tree used to regenerate the 86-file inventory; subsequent changes affect only the audit ledger/test).
+- **Expanded PDF-clone assertions:** `tests/requisition-output.test.cjs` now loads the real `document-sharing.js` clone builder and asserts the chosen lab tests appear with `[x]`, unselected CBC remains `[ ]`, each selected imaging item is individually marked `[x]`, and portable chest X-ray remains `[ ]`. The test waits for the actual `DOMContentLoaded` mount instead of manually firing it, avoiding a duplicate-mount race. The source parses successfully; GitHub Actions must still run the test on the exact latest head.
+
+- **Inventory synchronization resolved in source:** captured the exact generated `current` inventory object from the diagnostic CI run (86 files, 221 URLs, zero invalid classifications) and replaced the committed inventory with that exact generator output. Removed the temporary base64 diagnostic from `tests/external-link-inventory-generator.test.cjs` and restored the original regression workflow ordering in `.github/workflows/regression-tests.yml`. This temporary instrumentation is not left in the final source.
+- Latest source-level requisition test now checks actual selected/unselected checkbox markers in the PDF clone and uses the existing dynamic radiology date field. The remaining gate is a full green CI run on the final branch head, followed by preview/device checks. Do not merge or deploy while the exact-head result is unknown.
+
+- **Traceability regression fix:** the first complete run after inventory sync failed at `tests/pasted-text-10-sentence-traceability.test.cjs`: 13 child sentence units had stale `line_status`/`evidence_pointer` compared with their canonical source-line parent. Updated those 13 units to inherit the parent values; source text, segment order and next actions remain intact. Static alignment check now reports all 220 units aligned across 63 source lines. Final full CI must still confirm.
+- **Privacy-screen correction:** removed an 11-digit GitHub Actions run identifier from parent/child `Pasted text(10)` traceability next-actions and replaced it with “latest regression run.” Re-ran the full traceability invariants in the editing workflow: 63 parent source lines, 220 units, exact source-line reconstruction, aligned parent status/evidence, no overclaimed completion states, and no long-number/IFSC-like matches; all passed. The repository CI must still confirm on the final head.
+
+- **Next regression defect fixed:** after traceability alignment passed, `tests/patient-education.test.cjs` failed because the existing reader code expects the global Google Translate widget's header parent to have ID `patientArticleTranslator`, but the header language row had no ID. Added that stable ID to the existing `.language-row` (no duplicate widget or second translator created). The reader's existing `translatorMount()` can now move the widget into `openArticleTranslator` while an article is open and return it to the header when closed. Live layout and Google Translate provider behaviour still need browser/device verification.
+
+- **Health-library PDF controls restored:** `tests/patient-education.test.cjs` next failed because guide cards lacked the expected Share PDF and Download PDF controls. Added both actions to each English/Marathi health-library card in `awareness-library.js`, wired them to the existing PDF generation/sharing pipeline, and added responsive/focus-visible styles in `patient-education.css`. The existing test exercises named PDF download and verifies that the native shared file equals the complete verified guide PDF; final CI must confirm it.
+
+- **Language regression test reconciled:** `tests/patient-language-access.test.cjs` still asserted the former generic `div.language-control` and prohibited `details/summary`. Updated the test to require the semantic keyboard-operable details/summary selector and visible language summary; all existing native Marathi, retained-entry, dynamic medicine and unavailable-language assertions remain.
+
+- **Payment disclosure label corrected:** `tests/payment-options-ui.test.cjs` caught that the summary had drifted from the requested “Payment methods · UPI / QR / gateway / bank transfer” label. Restored the exact label; the QR remains behind its deliberate nested disclosure, unconfigured Razorpay/BillDesk remain disabled, and bank-account details remain private.
+
+- **Requisition test source assertion corrected:** the latest run passed the payment-method test and reached `tests/requisition-output.test.cjs`, where a static regex expected individual `field(row,...)` calls but the actual implementation correctly mounts fields through a tuple-driven loop. Updated assertions to match the real tuple definitions. This was a test-shape mismatch; the full runtime/share/PDF-clone assertions still require a green rerun.
+
+- **CBC PDF assertion corrected:** CI confirmed the selected lipid/iron/ammonia checks and reached the unselected CBC assertion; the test expected the checkbox value (“CBC + Platelets”) rather than the visible label (“CBC (Hb, TLC, Platelets)”). Updated the assertion to verify the actual rendered label carries the `[ ]` marker. No source defaults or clinical behaviour were changed.
+
+
+- **New pre-visit WhatsApp test:** commit `613103439b41b89885f136716263d51dca964234` adds synthetic-data coverage for short-history WhatsApp handoff (exact destination, included patient/complaint/medicine/allergy text, visible popup-block fallback) separately from the long-history PDF path. Syntax check passed. Await CI on this exact commit; real WhatsApp/device delivery remains unverified.
+
+
+- **WhatsApp test harness correction:** initial CI for the new short-history test failed because the stub `w.open=url=>opens.push(url)` returned the numeric array length, not a browser WindowProxy/null. This made the source handler attempt `.opener=null` on a number. Corrected the stub to record the URL and return `null` to simulate popup blocking, which exercises the intended visible fallback. New CI required on commit `10d5d5598276ed75bc6b521b9cc3d6172a30b007`.
+
+
+- **Pre-visit WhatsApp test verified:** GitHub Actions run `41115928252` passed on exact head `3ffef411c46ec2fd857e0f075e2f64d2e1840bce`. Short-history handoff assertions check destination `wa.me/919561394341`, inclusion of synthetic patient name, chief complaint, medicine and allergy history, and visible fallback when popup opening returns `null`. Long histories still route to complete PDF/share rather than truncating. Real WhatsApp app, device share-sheet and recipient-side delivery are still not tested; this PR is draft and Vercel remains build-rate-limited.
+
+
+- **Traceability reconciliation:** updated the three repeated language-selector source lines (`P10-L0032/0044/0053`) and all mapped sentence units. They now distinguish the existing main-branch selector fix from the review-branch reader-translator mount ID; they no longer incorrectly say current-main CI is merely queued. Review-branch code/test commit `3ffef411c46ec2fd857e0f075e2f64d2e1840bce` passed; live/mobile/keyboard/supported-language checks remain open.
+
+
+- **Invoice/payment traceability reconciled:** duplicated source rows `P10-L0031/P10-L0052` and all sentence units now record that invoice/receipt, PDF share/download/print, prescription detail copy and UPI QR disclosure exist in source and their tests passed in run `41115928252`. This does not prove actual live PDF output, QR payee/amount scan, settlement/refund or payment-gateway configuration.
+
+
+- **Traceability privacy regression fixed:** CI failed at `tests/pasted-text-10-sentence-traceability.test.cjs` because the newly added invoice/payment evidence copied an 11-digit workflow run ID into public traceability JSONL. Removed that run ID from both line and sentence maps and checked that neither file contains any 11–18 digit numeric sequence. A fresh full CI run on the newest head is required.
+
+
+- **Latest full regression confirmed green:** GitHub Actions completed successfully for exact review-branch head `3880dc6fbbe7b7e28c54c28c0828692f211c5346`. This run includes the traceability privacy-test correction (no long numeric workflow ID embedded in the public JSONL evidence). The successful run verifies repository CI only; it does not replace live mobile/device checks, real WhatsApp delivery, official-form language verification, invoice/QR/payee checks, payment settlement/refund testing, backend/auth/RLS review, or the remaining sentence-by-sentence note audit. Keep PR #85 draft and do not claim production deployment.
+
+
+## Explicit owner priority — payment gateway and actual articles
+
+The owner has explicitly required the payment gateway and articles to be present; these must not be treated as optional follow-on suggestions.
+
+- PAYMENT GATEWAY STATUS: Current payment-options.js is UPI deep-link + local QR + copy-ID/manual-transfer UI. The repository tree has no Razorpay checkout, order API, verified callback/webhook, or durable payment ledger. Therefore the requested gateway is NOT integrated. Next: implement the server-side Razorpay flow and tests on this review branch, fixed ₹500 consultation amount, no browser-trusted payment success, private payment state and webhook verification. Live activation remains blocked until merchant onboarding/KYC, test and production credentials are configured securely in Vercel, database migration/access controls are applied, and controlled end-to-end tests pass. Do not place keys in source/chat or claim settlement without evidence.
+- ARTICLE STATUS: Article editor, cloud admin/public API, /articles renderer and sitemap exist in source; actual published article records have not been verified. The public index code has an explicit empty-state message when there are no published articles. Next: inventory the real database and existing local drafts/source corpus, then import deduplicated articles as private drafts; review source links, clinical content and translations; only then publish with owner's approval. Do not manufacture the owner's missing corpus or auto-publish generated medical text.
+- AUDIT SOURCE: ADDED_NOTE_AUDIT_2026-10-31.md plus the owner's master audit note (sections 11 and 14). Treat PAY-GW-01/02 and ART-01/02/03 as open register items until evidence closes them.
+
+## Payment gateway implementation checkpoint — 31 October 2026
+
+Saved review-branch implementation at commit c5221e791db4d4eb0c75739aa2023a0213ddd91f (after gateway code commit 54d50ffb1bfa3df49fb1a1be564726c2dc853628):
+- Razorpay Checkout UI is now added to the online consultation notice, gated by the user's acknowledgement that the doctor has already confirmed the appointment.
+- Server-side order creation is fixed at INR 500 / 50,000 paise; the browser cannot set the amount.
+- Checkout signature verification is combined with a provider API lookup requiring the matching order, INR amount and captured status before the ledger is marked captured.
+- A raw-body, HMAC-verified webhook endpoint handles captured/failed/refund-processed events; a private Supabase ledger schema and event log migration are included.
+- Regression test added at tests/razorpay-gateway.test.cjs.
+- Four source-derived English article drafts saved at content/article-drafts-2026-10-31.json based on the existing public Elderly care cards and their existing reference links. They are not imported into the article database and are not published at /articles/<slug>.
+
+**Not live / still blocked:** exact-head CI has not yet been confirmed for the latest code; Razorpay merchant keys and webhook secret, Supabase service-role configuration, and the SQL migration must be configured/applied in preview. The public homepage must not claim a gateway is active until end-to-end test payments, forged-signature rejection, webhook replay/failure/refund handling, and stored payment states are verified. Payment capture does not itself confirm or complete a consultation. Do not configure production keys or initiate a real payment without the controlled owner-approved launch gate.
+
+**Article gap remains open:** no live cloud article count has been verified. The four drafts are only a small source-derived starting batch. Preserve all device drafts and existing article records; inventory the supplied source corpus and import drafts without auto-publishing. Hindi/Marathi versions require human medical-language review.
+
+## Article-corpus import implementation — 31 October 2026
+
+Added a doctor-login-only bulk import control in public-article-editor.js to turn the existing PatientEducation source corpus into cloud article drafts in English and Marathi where present. It builds article bodies from the existing localized title, intro, sections, FAQ and takeaway; carries the existing HTTPS reference URLs; creates language-specific slugs and a shared translation group; inventories cloud slugs before importing; skips known slugs; and saves as drafts only. It does not publish, set a review date, or mark medical review as complete. The regression test was extended to verify separate EN/MR records, source URLs and reviewConfirmed=false.
+
+Also saved four source-derived English drafts in content/article-drafts-2026-10-31.json from existing public Elderly care cards. These are a separate small draft manifest and are not auto-imported or published. Avoid duplicate topical publication when deduplicating them against the existing PatientEducation corpus.
+
+Still required: run the bulk importer from an authenticated Doctor Workstation session after preview Supabase is configured, verify the actual cloud count and article URLs, compare against all existing local/cloud drafts and the supplied Day 1–13 corpus, deduplicate overlaps, then physician-review each article and translation before any publication. The public /articles list must not be claimed populated until a real cloud query proves it.
+
+## Latest exact-head CI and gateway hardening — 31 October 2026
+
+- Latest branch head: `e6a56d0f9ed0e47da1c412053451ef8cd42137b9`.
+- GitHub Actions run `41177912280` completed successfully. The full regression workflow reports **60 regression test files completed**; Razorpay gateway and requisition-output tests passed.
+- Gateway hardening since the earlier pass: raw webhook body is read from the request stream when body parsing is disabled, with a 1 MiB limit; duplicate provider event IDs are acknowledged idempotently; partial refunds are recorded separately from full refunds so a partial refund is never overstated as a full refund.
+- PR #85 remains draft. GitHub's Vercel status check is still failing on a Vercel build-rate-limit deployment; no current-head preview or production release is verified.
+- Razorpay keys, webhook secret and Supabase service-role configuration are not installed by this work. The migration has not been applied. No live charge, refund, bank settlement or appointment confirmation is claimed.
+- The PatientEducation corpus importer is implemented and covered by synthetic tests, but it has not been run against the authenticated live cloud article database. Cloud counts, actual imported records and public article URLs remain unverified.
+- Continue from this exact head; do not mark gateway or article publishing complete based only on CI. No merge/deploy until preview and owner-controlled checks are complete.
+
+## Patient Portal section navigation — 31 October 2026
+
+- Continued from the exact review branch; did not restart or alter production.
+- The 30 October / 31 October owner notes explicitly require the seven Patient Portal topics to show only the selected section, with articles centralized and the home-visit / online-consultation purpose immediately visible.
+- Confirmed the existing header navigation was anchor-only and left the full Patient Portal as one long page. The home-visit hero and all original section content are retained.
+- Added `portal-navigation.js`: Overview, Elderly care, Health library, Booking, Health tools and Patient FAQ are isolated views; the home-visit hero remains visible; online consultation is available in Overview and Booking; Explore health sources remains with the library; Search articles continues to the separate `/articles` route.
+- Navigation uses the existing hash destinations, preserves browser Back/Forward via `popstate`, updates `aria-current`, and does not remove or rewrite section content. The original page remains fully visible if JavaScript is unavailable because panels are hidden only after the controller loads.
+- Added `tests/portal-navigation.test.cjs` for panel isolation, retained hero, all six views, browser history and the separate article route. Added responsive active-tab/focus styling in `international-portal.css`.
+- Source commits: `46da767e0dbbc9fe0f0423bf23d32dbed94f85ef` (controller), `fc12abd3e0dc8875119043f1a41553a2f185e967` (initial test), `a78a7553a13c5579d1288946dc729827badba198` (test assertion correction), `abdca06d3ef59c2eadabcaed40d60717c9970d16` (HTML script load), `9fe92ec40b4f66c3382234ad2ea2dd430c474d5d` (responsive styling).
+- The master register records this as A11, source committed but CI/visual/live verification open. The latest GitHub workflow lookup returned no run for the newest source commit; the Vercel check still reports the provider build-rate-limit failure. Do not claim preview, production, mobile or device verification. PR #85 remains a draft; no merge/deployment.
+- Next: obtain a full regression run on the final branch head; review the portal navigation in desktop/mobile preview; then continue the next open register items. Keep payment gateway activation, cloud article import/publication, device handoff and authentication in their existing blocked/verification states until independently proven.
+
+
+## Prescription sequence correction — 31 October 2026
+
+Owner's 31 October instruction was read from the saved source note. Immediate priority: prescription pad and payment QR.
+
+### Implemented on review branch
+- Reordered the prescription to: serial number, date, patient name, age, sex; complaints; vital signs (pulse, BP, temperature, SpO2, GRBS, respiratory rate); provisional diagnosis; medicine table; signature.
+- Renamed the complaints label to **Complaints (C/o)** and placed it before vital signs, as requested.
+- Preserved the existing blank medicine fields, formulary selection, manual medicine entry, Add Medicine Row, and the requested columns: S. No., drug name, strength, frequency, duration, instructions.
+- Preserved the existing embedded signature SVG without editing it. Do not claim it is confirmed to be the owner's original upload until compared with the original signed image.
+- Kept the prescription free of a patient DOB field. The date shown is the prescription date.
+
+### Saved commits
+- `78ffe2377d3ede9686046ea206b97b1d08580580` — prescription section order and labels in `index.html`.
+- `f42ba91cb907c003f2f57efe5ecd659f227bee8b` — regression assertions for sequence, vitals, medicine table and signature position.
+- `d5ae6c06e3c85543aaf7819664e2a90c736d9993` — E10 master-register entry.
+- Payment QR enhancement: QR panel now displays payee, UPI ID and calculated INR amount; adds accessible enlarge dialog and direct QR image download after generation. Existing UPI app handoff, copy ID and QR failure fallback retained. Updated synthetic interaction assertions; no real scan or payment claimed. Source commits: 6130902, c465f72, 82e82cf, 1d484d3, 3b971ac, b118817.
+
+- Follow-up hardening: medicine rows now renumber continuously after a row is removed and another is added; the regression test checks for duplicate/skipped serial numbers. Commits: `b7a3c8e`, `43944ba`.
+
+
+### Verification / release boundary
+- Source inspection confirms the intended order and retained controls.
+- Exact-head automated test, preview visual inspection, physical print/PDF, and confirmation that the embedded signature matches the owner's original are still open.
+- Existing UPI QR code is wired to reveal on click and generate a fee-bearing UPI URI for `drkulkarnipg@upi`; existing tests cover that behaviour synthetically. Actual scan/payee confirmation and live deployment remain open.
+- PR #85 remains draft; do not merge or deploy without the required approval. Vercel's build-rate-limit failure remains an external preview blocker.
+
+- Prescription PDF preservation check added: the clinical-document regression now asserts the signature image is retained in the generated prescription clone, unchanged by source path, and remains below the medication table. Commit: c9d04eb. The test has not yet executed on the exact head.
+
+- QR failure-path hardening: the current amount is displayed before QR generation; a failed refresh hides/removes the stale image and disables enlarge/download, while retaining UPI app and copy fallbacks. Added synthetic failure-path assertions. Commits: 1ebf148, 8db1f4a, deed494.
+
+- QR race/stale-view protection: every regeneration invalidates pending QR requests, hides the prior image, closes any enlarged stale QR and clears its image before generating the new amount. Added a regression case for fee refresh while the enlarged dialog is open, including QR-generation failure. Commits: 89d9a48, 319095b, 4f8cfac.
+
+- Exact-head CI run 41180983591 reached the dynamic QR test and failed because its status-text regex expected the old generic wording; the implementation now reports the named payee and exact INR amount. Updated the test to assert the new explicit message in commit c1b1bae. The suite stopped at this first failure; later tests in that run were not executed. Rerun on the corrected head is required.
+
+- Removed the generated DOB/day-month-year helper from the prescription editor entirely. The pre-visit intake age calculator remains; the prescription keeps manual age entry and date, patient name and sex only. Updated patient-age and clinical-document regressions to assert no prescription DOB helper is mounted. Commit: e4b7aaf (test updates in the same continuation).
+
+## Prescription → automatic patient registration — 31 October 2026
+
+### Owner's instruction
+“As soon as I enter information in the prescription it must be treated as the patient of the business” and the patient's name, address, phone, date/time, age and sex must be added automatically against a serial number.
+
+### Code changes saved on the review branch
+- Prescription now has separate automatically generated identifiers: patient registration number (`PT-...`) and prescription/encounter serial (`RX-...`).
+- Patient mobile is now an editable field inside the printable prescription demographics; full address and optional locality are available there too.
+- Date/time is initialized in India Standard Time. Age is stored exactly as entered; sex is selected from the existing field.
+- After the patient name and a valid Indian mobile number are entered, the patient number is assigned. When the owner is signed in and the clinician confirms the patient/representative has been informed, the Daily Patient Register is automatically created/updated.
+- Returning-patient lookup uses normalized patient name + mobile; an existing patient code is reused. Every new prescription is a new encounter row; subsequent edits update that same encounter with the cloud revision token.
+- Daily register now shows patient number, phone, address, age, sex, encounter date/time and prescription serial. Full address is also used by the invoice helper.
+- The register receives demographics only. Symptoms, diagnosis and medicine contents are not copied into the patient register.
+- Patient details are not placed in browser localStorage. If the owner is not signed in, the screen states that the patient is not yet saved to cloud. A retry control is provided.
+
+### Privacy and technical conditions
+- Cloud auto-registration requires owner authentication and the on-screen clinician confirmation that the patient/representative has been informed. The check is not preselected.
+- The existing Supabase register migration `supabase/migrations/20261030_workstation_registers.sql` is still a manual, not-yet-verified database step. New lookup index migration: `supabase/migrations/20261031_daily_patient_phone_lookup.sql`. Both must be reviewed/applied in the intended Supabase project, in order.
+- Returning-patient lookup is restricted to the authenticated server endpoint; name/mobile are sent in the same-origin POST body, not in the browser URL.
+- Returning-patient search checks the whole daily register by phone, then exact normalized name; it is not limited to the UI's latest-500 display.
+
+### Regression and release
+- Added `tests/prescription-patient-registration.test.cjs` for separate serials, consent gate, automatic cloud create, revision-checked demographic update, returning-patient code reuse, no localStorage, and API validation.
+- Static JavaScript syntax checks pass for the changed source and test files.
+- GitHub regression run `41182622122` is in progress / awaiting final result at this checkpoint.
+- No live patient record was created, no live Supabase migration was applied, and no production deployment or device workflow is claimed.
+
+
+- Regression refinement: a mobile number is used for returning-patient matching when available, but the workflow does not block emergency/other registration if no mobile is available; it assigns a new patient number and saves a blank phone field. Added a regression scenario for this case.
+- **Exact-head automated regression:** GitHub Actions run `41183587616` PASSED on source head `9389a86ea224fb7ed7cd89c9d1cb180a827f3782`, including the new prescription patient-registration tests and all repository regression tests.
+- This is source/CI verification only. The Supabase register table migration and phone lookup index migration are not applied/verified, so actual cloud persistence remains blocked pending the intended project setup. Vercel status still reports build-rate-limit; no production release or live UI/device verification.
+
+- Final identifier hardening: patient registration numbers now use a 12-hex unique suffix and prescription encounter serials use an 8-hex suffix. Mobile number is optional when unavailable; if supplied, it is validated and used for returning-patient matching. Exact-head full regression run `41184083412` PASSED on `36b22e5386f5e145e35a492eb9f9a7f558d71bab`, including the no-mobile registration case.
