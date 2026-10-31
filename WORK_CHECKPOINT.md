@@ -476,3 +476,15 @@ Still required: run the bulk importer from an authenticated Doctor Workstation s
 - Razorpay keys, webhook secret and Supabase service-role configuration are not installed by this work. The migration has not been applied. No live charge, refund, bank settlement or appointment confirmation is claimed.
 - The PatientEducation corpus importer is implemented and covered by synthetic tests, but it has not been run against the authenticated live cloud article database. Cloud counts, actual imported records and public article URLs remain unverified.
 - Continue from this exact head; do not mark gateway or article publishing complete based only on CI. No merge/deploy until preview and owner-controlled checks are complete.
+
+## Patient Portal section navigation — 31 October 2026
+
+- Continued from the exact review branch; did not restart or alter production.
+- The 30 October / 31 October owner notes explicitly require the seven Patient Portal topics to show only the selected section, with articles centralized and the home-visit / online-consultation purpose immediately visible.
+- Confirmed the existing header navigation was anchor-only and left the full Patient Portal as one long page. The home-visit hero and all original section content are retained.
+- Added `portal-navigation.js`: Overview, Elderly care, Health library, Booking, Health tools and Patient FAQ are isolated views; the home-visit hero remains visible; online consultation is available in Overview and Booking; Explore health sources remains with the library; Search articles continues to the separate `/articles` route.
+- Navigation uses the existing hash destinations, preserves browser Back/Forward via `popstate`, updates `aria-current`, and does not remove or rewrite section content. The original page remains fully visible if JavaScript is unavailable because panels are hidden only after the controller loads.
+- Added `tests/portal-navigation.test.cjs` for panel isolation, retained hero, all six views, browser history and the separate article route. Added responsive active-tab/focus styling in `international-portal.css`.
+- Source commits: `46da767e0dbbc9fe0f0423bf23d32dbed94f85ef` (controller), `fc12abd3e0dc8875119043f1a41553a2f185e967` (initial test), `a78a7553a13c5579d1288946dc729827badba198` (test assertion correction), `abdca06d3ef59c2eadabcaed40d60717c9970d16` (HTML script load), `9fe92ec40b4f66c3382234ad2ea2dd430c474d5d` (responsive styling).
+- The master register records this as A11, source committed but CI/visual/live verification open. The latest GitHub workflow lookup returned no run for the newest source commit; the Vercel check still reports the provider build-rate-limit failure. Do not claim preview, production, mobile or device verification. PR #85 remains a draft; no merge/deployment.
+- Next: obtain a full regression run on the final branch head; review the portal navigation in desktop/mobile preview; then continue the next open register items. Keep payment gateway activation, cloud article import/publication, device handoff and authentication in their existing blocked/verification states until independently proven.
