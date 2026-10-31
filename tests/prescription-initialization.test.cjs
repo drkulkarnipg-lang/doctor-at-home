@@ -12,7 +12,7 @@ const start = html.indexOf('function initRxPad() {');
 const end = html.indexOf('function renderDrugDirectory()', start);
 assert.ok(start >= 0 && end > start, 'prescription initializer and row helpers must exist');
 const helpers = html.slice(start, end);
-const dom = new JSDOM('<!doctype html><input id="rxDateTime" type="date"><table><tbody id="rxTableBody"></tbody></table>', {
+const dom = new JSDOM('<!doctype html><input id="rxDateTime" type="text"><table><tbody id="rxTableBody"></tbody></table>', {
   url: 'https://clinic.example.test/',
   runScripts: 'outside-only'
 });
@@ -22,7 +22,7 @@ w.eval(helpers);
 const body = w.document.getElementById('rxTableBody');
 w.initRxPad();
 assert.equal(body.rows.length, 1, 'first open should create one blank row');
-assert.match(w.document.getElementById('rxDateTime').value, /^\d{4}-\d{2}-\d{2}$/, 'prescription date defaults to the local calendar date');
+assert.match(w.document.getElementById('rxDateTime').value, /^\d{2}\/\d{2}\/\d{4}$/, 'prescription date defaults to the local calendar date');
 assert.deepEqual(
   [...body.rows[0].querySelectorAll('input')].map(input => input.value),
   ['', '', '', '', ''],

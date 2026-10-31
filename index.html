@@ -510,7 +510,7 @@
 </div>
 <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
 <div><label class="text-[10px] text-slate-500">Prescription serial no.:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxSerialNo" type="text" placeholder="Enter serial no."/></div>
-<div><label class="text-[10px] text-slate-500">Date:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="date"/></div>
+<div><label class="text-[10px] text-slate-500">Date:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text" placeholder="DD/MM/YYYY"/></div>
 <div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
 <div><label class="text-[10px] text-slate-500">Age:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="Age in years" type="text"/></div>
 <div><label class="text-[10px] text-slate-500">Sex:</label><select class="w-full bg-white p-1 border rounded-lg" id="rxPatSex"><option value="">Select sex</option><option>Male</option><option>Female</option><option>Other</option></select></div>
@@ -1384,7 +1384,7 @@
     function initRxPad() {
       const tbody = document.getElementById('rxTableBody');
       const dateField = document.getElementById('rxDateTime');
-      if (dateField && !dateField.value) { const now = new Date(); dateField.value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+      if (dateField && !dateField.value) { const now = new Date(); dateField.value = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', day: '2-digit', month: '2-digit', year: 'numeric' }).format(now); }
       // Never prefill example medicines or overwrite a clinician's in-progress prescription.
       // Create one entirely blank row only when the editor has no rows yet.
       if (tbody.rows.length === 0) addRxRowWithData('', '', '', '', '');
