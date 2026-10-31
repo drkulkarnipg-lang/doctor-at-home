@@ -3,19 +3,19 @@
    translation, authentication and document/print templates remain untouched. */
 @media screen {
   :root {
-    --stitch-canvas: #FBF9F6;
+    --stitch-canvas: #EAF5FC;
     --stitch-paper: #FFFFFF;
-    --stitch-ink: #0B192C;
-    --stitch-navy: #102A43;
-    --stitch-muted: #44474C;
-    --stitch-petal: #35684D;
-    --stitch-forest: #1C5036;
-    --stitch-sky: #3E89C4;
-    --stitch-sky-wash: #EBF4FB;
-    --stitch-linen: #F5F3F0;
-    --stitch-line: #E6DFD5;
-    --stitch-border: #D8CEBF;
-    --stitch-eucalyptus: #6B8E78;
+    --stitch-ink: #172B3D;
+    --stitch-navy: #173B5A;
+    --stitch-muted: #526575;
+    --stitch-petal: #C987A2;
+    --stitch-forest: #527C83;
+    --stitch-sky: #4C9ACB;
+    --stitch-sky-wash: #DCEFFA;
+    --stitch-linen: #F4F8FB;
+    --stitch-line: #D6E6F0;
+    --stitch-border: #C8DCE9;
+    --stitch-eucalyptus: #7A9FA5;
   }
 
   html, body {
