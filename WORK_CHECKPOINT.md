@@ -376,3 +376,31 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Reviewed `api/clinical-cloud.js`: the configured owner UUID is checked before register actions; edits include owner, ID and revision constraints; missing migration returns a controlled 503 without changing data.
 - Reviewed `workstation-registers.js` and existing synthetic UI/API tests: daily/death/stock forms, revision-checked edits, no delete action, sign-out clearing, no localStorage persistence and non-owner API denial are covered.
 - Added static migration regression test in commit `0e4afabbf1cace202fee5ecc81411e09ebd16fc5`. This does **not** prove live database RLS; no migration was applied. Await CI and reserve actual owner/non-owner RLS, backup/restore and cross-device testing for a dedicated test project.
+
+
+## 31 October 2026 — resumable checkpoint (source review only)
+
+**Main baseline:** 12608d35c02b3afe76a10995e95ebb521087eae4. **Working review branch:** fix/mobile-language-article-fee-20261031 (latest head must be re-read from GitHub before the next edit).
+
+### Verified findings and saved corrections
+
+1. **Regression inventory:** main run 41108470448 failed at tests/external-link-inventory-generator.test.cjs; booking-intake, calculator UI and document-sharing tests passed before the failure. A GitHub Actions regeneration run produced an inventory for 86 active source files / 221 unique destinations, tagged to main source revision 12608d35c02b3afe76a10995e95ebb521087eae4. The generated inventory is committed to the review branch. Temporary diagnostic output was removed. The final review-branch full regression result is still required.
+2. **Mobile language panel — confirmed root cause:** international-portal.css globally forces .language-control>div to position:fixed!important with fixed viewport coordinates. The later .site-header .language-control[open] > div rule set position:static without !important, so the fixed rule won the cascade and the expanded panel floated over the page. The review branch now overrides position, all edges, width, max-height and overflow with !important, keeps the summary at least 44 px high, and adds a stylesheet regression test. This explains the phone discrepancy; it was not caught by the earlier HTML-only checks.
+3. **Article Manager / RSS:** switchDocTab('articlesHub') previously removed hidden from viewJournalsHub while it remained a sibling. The review branch reparents it into viewArticlesHub for Article Manager and restores it to its original workstation position for the dedicated RSS tab. Tests cover Article Manager → dedicated RSS → Article Manager and ordinary tab isolation.
+4. **Fee clarity:** patient-helper source now distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base, states that guided help is not a medical consultation, and says the helper does not collect payment. A regression test checks all three. No payment gateway, billing, secrets or payment collection was changed/enabled.
+5. **Clinical article gaps:** source contains nine detailed authored guides. Four source-linked drafts for COPD, cancer palliative care, diabetes and cirrhosis are in content/clinical-topic-drafts-2026-10-31.md. They are not imported or linked publicly; a guard test enforces that. Physician review, India-specific adaptation and qualified Marathi translation are still pending.
+
+### Current external verification limits
+
+- Main Actions run 41108470448 failed on the stale inventory evidence. PR #85 head 5d37ae7208e41e30189698b784ecce13733fd223 has a successful regression run, but it is a different, broader draft branch and its Vercel check is rate-limited.
+- Main Vercel status is build-rate-limit. Last successful Vercel status is commit 57d011721e92903c53f76035f43520c296502906. Do not claim the new source is live.
+- Actual phone rendering at 320 px and 390 px, desktop/live navigation, public Know Your Numbers cards, booking/BMI, PDF share and WhatsApp recipient-side receipt are not verified. Do not infer provider delivery from CI.
+- No billing activation, secrets, hosting configuration, database migration or clinical publication was performed.
+
+### Next exact actions
+
+1. Check the latest Actions run on the exact current review-branch head; fix every failure and rerun the entire suite.
+2. Re-read the latest main head and ensure the regenerated inventory still corresponds to it before proposing merge.
+3. When Vercel is available, inspect the actual preview at 320 px and 390 px and verify that opening/closing the language selector leaves the page, Patient Portal and Doctor Workstation controls visible.
+4. Verify Article Manager/RSS in both directions, fee helper response, booking/BMI, Know Your Numbers cards, PDF share and WhatsApp handoff; distinguish app behavior from actual recipient delivery.
+5. Obtain physician review and explicit owner approval before converting the clinical drafts into public article records. Keep payment and database/provider setup out of this batch.
