@@ -505,6 +505,7 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - `78ffe2377d3ede9686046ea206b97b1d08580580` — prescription section order and labels in `index.html`.
 - `f42ba91cb907c003f2f57efe5ecd659f227bee8b` — regression assertions for sequence, vitals, medicine table and signature position.
 - `d5ae6c06e3c85543aaf7819664e2a90c736d9993` — E10 master-register entry.
+- Payment QR enhancement: QR panel now displays payee, UPI ID and calculated INR amount; adds accessible enlarge dialog and direct QR image download after generation. Existing UPI app handoff, copy ID and QR failure fallback retained. Updated synthetic interaction assertions; no real scan or payment claimed. Source commits: 6130902, c465f72, 82e82cf, 1d484d3, 3b971ac, b118817.
 
 - Follow-up hardening: medicine rows now renumber continuously after a row is removed and another is added; the regression test checks for duplicate/skipped serial numbers. Commits: `b7a3c8e`, `43944ba`.
 
