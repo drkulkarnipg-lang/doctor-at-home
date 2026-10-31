@@ -525,3 +525,30 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - Exact-head CI run 41180983591 reached the dynamic QR test and failed because its status-text regex expected the old generic wording; the implementation now reports the named payee and exact INR amount. Updated the test to assert the new explicit message in commit c1b1bae. The suite stopped at this first failure; later tests in that run were not executed. Rerun on the corrected head is required.
 
 - Removed the generated DOB/day-month-year helper from the prescription editor entirely. The pre-visit intake age calculator remains; the prescription keeps manual age entry and date, patient name and sex only. Updated patient-age and clinical-document regressions to assert no prescription DOB helper is mounted. Commit: e4b7aaf (test updates in the same continuation).
+
+## Prescription → automatic patient registration — 31 October 2026
+
+### Owner's instruction
+“As soon as I enter information in the prescription it must be treated as the patient of the business” and the patient's name, address, phone, date/time, age and sex must be added automatically against a serial number.
+
+### Code changes saved on the review branch
+- Prescription now has separate automatically generated identifiers: patient registration number (`PT-...`) and prescription/encounter serial (`RX-...`).
+- Patient mobile is now an editable field inside the printable prescription demographics; full address and optional locality are available there too.
+- Date/time is initialized in India Standard Time. Age is stored exactly as entered; sex is selected from the existing field.
+- After the patient name and a valid Indian mobile number are entered, the patient number is assigned. When the owner is signed in and the clinician confirms the patient/representative has been informed, the Daily Patient Register is automatically created/updated.
+- Returning-patient lookup uses normalized patient name + mobile; an existing patient code is reused. Every new prescription is a new encounter row; subsequent edits update that same encounter with the cloud revision token.
+- Daily register now shows patient number, phone, address, age, sex, encounter date/time and prescription serial. Full address is also used by the invoice helper.
+- The register receives demographics only. Symptoms, diagnosis and medicine contents are not copied into the patient register.
+- Patient details are not placed in browser localStorage. If the owner is not signed in, the screen states that the patient is not yet saved to cloud. A retry control is provided.
+
+### Privacy and technical conditions
+- Cloud auto-registration requires owner authentication and the on-screen clinician confirmation that the patient/representative has been informed. The check is not preselected.
+- The existing Supabase register migration `supabase/migrations/20261030_workstation_registers.sql` is still a manual, not-yet-verified database step. New lookup index migration: `supabase/migrations/20261031_daily_patient_phone_lookup.sql`. Both must be reviewed/applied in the intended Supabase project, in order.
+- Returning-patient lookup is restricted to the authenticated server endpoint; name/mobile are sent in the same-origin POST body, not in the browser URL.
+- Returning-patient search checks the whole daily register by phone, then exact normalized name; it is not limited to the UI's latest-500 display.
+
+### Regression and release
+- Added `tests/prescription-patient-registration.test.cjs` for separate serials, consent gate, automatic cloud create, revision-checked demographic update, returning-patient code reuse, no localStorage, and API validation.
+- Static JavaScript syntax checks pass for the changed source and test files.
+- GitHub regression run `41182622122` is in progress / awaiting final result at this checkpoint.
+- No live patient record was created, no live Supabase migration was applied, and no production deployment or device workflow is claimed.
