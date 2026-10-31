@@ -31,3 +31,12 @@ These are tracked in `MASTER_TASK_REGISTER.md`, `WORK_CHECKPOINT.md` and the exi
 ## Current gate
 
 The prior regression run passed on code head `3880dc6fbbe7b7e28c54c28c0828692f211c5346`. The task-register/checkpoint documentation commits after that code head have not yet had an exact-new-head regression result. Vercel has reported a build-rate-limit failure; do not claim latest changes are live. PR #85 remains draft. The confirmed tab-navigation gap above should be prioritized next, but implement it with tests and preserve existing section content and links.
+
+## 31 October addendum — prescription and payment QR
+
+| Owner's exact request (normalized without changing intent) | Code action recorded | State / evidence |
+| --- | --- | --- |
+| “prescriptionpad-- name agessex,date … complaints/of … temp,pulse,bp … medicine name, strength, frequency, any instructions … medicine row extras to be added” | Reordered patient identifiers, complaints, vitals, provisional diagnosis, medication table and signature. Kept blank manual fields and Add Medicine Row. | Source committed; exact-head test and rendered preview pending. |
+| “prescription pad --serial no, drug name, strength frequency, duration, any instructions … ten date, patient name age and sex … under that complaint/of … pulse … bp … provisional diagnosis … under all drugs sign” | Added explicit regression assertions for this sequence; medicine rows now renumber after delete/add. | Source commits 78ffe23, f42ba91, b7a3c8e, 43944ba; exact-head CI pending. |
+| “sign i will upload the sign immediately please make sure that will remain as it is” | Kept the existing assets/dr-kulkarni-signature.svg embedded in the prescription; no alteration made. | Asset presence verified. Its match to the owner's original signed image is not proven by the available upload/search results; do not claim authenticity until compared. |
+| “QR code … as soon as the user will click QR” and “allow the QR to be enlarged / download … show payee and amount … fallback” | QR action opens payment and QR panels; added visible payee/UPI/amount, enlarge dialog, download link, exact-amount refresh and failure fallback. | Source committed; synthetic regression updated; exact-head CI and actual UPI scan/payment verification pending. |
