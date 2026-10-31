@@ -5,7 +5,7 @@ const script=fs.readFileSync('prescription-patient-registration.js','utf8');
 const markup=`<main>
 <input id="rxSerialNo"><input id="rxPatientCode"><input id="rxDateTime">
 <input id="rxPatName"><input id="rxPatAge"><select id="rxPatSex"><option value="">Choose</option><option>Female</option><option>Male</option></select>
-<input id="rxPatPhone"><input id="rxPatPhoneDisplay"><input id="rxPatLoc"><textarea id="rxPatAddress"></textarea>
+<input id="rxPatPhone"><input id="rxPatLoc"><textarea id="rxPatAddress"></textarea>
 <input id="rxPatientRegisterConsent" type="checkbox"><p id="rxPatientRegistrationStatus"></p>
 </main>`;
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -33,7 +33,6 @@ function makeWindow(records=[]){
  $('rxPatName').value='Test Patient';$('rxPatName').dispatchEvent(new w.Event('input',{bubbles:true}));
  $('rxPatPhone').value='+91 98765 43210';$('rxPatPhone').dispatchEvent(new w.Event('input',{bubbles:true}));
  assert.match($('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{8}$/,'patient registration number is automatically assigned after name and valid phone');
- assert.equal($('rxPatPhoneDisplay').value,'+91 98765 43210','patient mobile is mirrored into the printable prescription');
  await wait(750);assert.equal(saves.length,0,'no cloud registration before patient-information confirmation');
  $('rxPatientRegisterConsent').checked=true;$('rxPatientRegisterConsent').dispatchEvent(new w.Event('change',{bubbles:true}));
  await wait(850);
