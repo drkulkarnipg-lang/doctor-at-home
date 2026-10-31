@@ -331,3 +331,20 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Main remains at `12608d35c02b3afe76a10995e95ebb521087eae4`; its run `41108470448` still fails at the stale external-link inventory source-line assertion. Main's Vercel status remains build-rate-limited; last confirmed production success is still `57d011721e92903c53f76035f43520c296502906`.
 - The preview URL was obtained from Vercel's deployment-completed status. A connected browser/device renderer is unavailable in this run, so no visual/interaction claim is made for 320 px, 390 px, navigation, booking/BMI, PDF or WhatsApp recipient delivery. These remain release checks, not CI results.
 - PR #86 remains a draft and unmerged. Do not promote the preview to production or merge the branch without the owner's release approval and the required live/device checks.
+
+ 
+## Stitch clinical design experiment — 31 October 2026
+
+| ID | Status | Requirement / evidence |
+|---|---|---|
+| ST01 | DONE — EXPERIMENT BRANCH ONLY | Imported and inspected the four-screen Stitch ZIP and design-system note. |
+| ST02 | DONE — EXPERIMENT BRANCH ONLY | Created `experiment/stitch-clinical-platform-2026-10-31` from latest main source `fe09009b3bd3e0f2a561fe7ca854ebe52d16956d`; MASTER ORIGINAL and production were not modified. |
+| ST03 | DONE — EXPERIMENT BRANCH ONLY | Added the screen-only Stitch visual layer with warm ivory, linen, deep navy, petal/forest greens, restrained sky focus accent and classical controls. |
+| ST04 | DONE — EXPERIMENT BRANCH ONLY | Patient Portal order is Home visit → Booking → Health library; all other tabs and panel IDs remain. |
+| ST05 | DONE — EXPERIMENT BRANCH ONLY | Existing calculator and statutory/prescription editors receive screen-only styling; no calculator formula or clinical document-generation logic was copied from Stitch. |
+| ST06 | DONE — EXPERIMENT BRANCH ONLY | Prototype patient data, sample prescriptions, prefilled calculator values, remote prototype dependencies and static handlers were excluded. |
+| ST07 | PENDING | Full exact-head regression suite and Vercel branch preview must complete successfully. |
+| ST08 | PENDING | Desktop and 320px/390px mobile visual QA; functional smoke tests for navigation, translator, booking, library, calculators, documents, payment disclosures, QR and external destinations. |
+| ST09 | OWNER APPROVAL REQUIRED | No merge, production deployment or replacement of the live site without explicit doctor approval. |
+
+These statuses describe source changes on the isolated experiment branch only. They do not assert a live release, completed visual QA, payment settlement, actual WhatsApp recipient delivery, clinical validation or successful PDF printing.
