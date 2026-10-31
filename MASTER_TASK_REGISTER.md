@@ -64,7 +64,7 @@ Updated: 31 October 2026 (review branch head `1bad3b399c682aba09688366dd1790ab3a
 
 | ID | Tick / state | What you asked | Evidence or exact remaining action |
 | --- | --- | --- | --- |
-| D01 | [ ] CODE + TESTED — LIVE/PAYMENT HANDOFF VERIFY | QR hidden inside Payment methods, reveal when tapped; correct UPI payee and amount | Current main `6a7819277baf9d5dacb29d8082f4d3713f590aeb` contains the canonical `drkulkarnipg@upi` payee and dynamic amount-bearing QR logic from PR #75. Source/tests pass; Vercel reports `Deployment rate limited — retry in 24 hours`, so the latest QR build is not confirmed live. Still scan the real QR with a UPI app and verify payee/amount before payment; no settlement, Razorpay activation or refund workflow is claimed. |
+| D01 | [ ] SOURCE + REGRESSION TEST — LIVE SCAN PENDING | UPI QR visible by default in the booking payment panel; dynamic amount and approved UPI payee | Isolated payment branch `feature/payment-qr-visible-gateway-readiness` opens both the Payment methods panel and QR panel by default; QR is generated client-side from the current estimated fee and approved UPI ID. Regression test added. Actual browser render, handset scan, payee/amount confirmation and production release remain pending. |
 | D02 | [x] LIVE | **Online consultation / Telemedicine notice: ₹500** | Implemented 26 Oct: hero link and English/Marathi notice, ₹500 clearly separated from home-visit fee; availability/suitability confirmed by doctor. Clinical regression and focused DOM checks passed; desktop preview inspected. Released PR19; live notice verified. |
 | D03 | [x] LIVE | Say who should not rely on online consultation in severe conditions | Prominent English/Marathi warning beside ₹500: severe chest pain, severe breathing difficulty, sudden face/arm weakness or speech problems, collapse/unconsciousness; seek emergency help without waiting for booking/reply/payment. Primary MoHFW guidance checked; local desktop screenshot/hero navigation and focused DOM checks passed. Released PR19; production notice verified. Phone layout check remains. |
 | D04 | [ ] TODO | Actual online consultation workflow | Availability confirmation, screening/consent and private access not end-to-end verified. Notice alone is not an operating consultation backend. |
@@ -351,3 +351,13 @@ These statuses describe source changes on the isolated experiment branch only. T
 
  
 | ST10 | DONE — EXPERIMENT BRANCH ONLY | Calculators update automatically on input/change after all active required fields are complete; formulas, validation, interpretation, blank defaults and no-persistence behaviour remain unchanged. Regression assertions cover BMI, incomplete inputs and GCS conditional response. |
+
+
+### Payment QR visibility correction — 31 October 2026
+
+- Isolated branch: `feature/payment-qr-visible-gateway-readiness`, based on Stitch experiment head `6e01d44e1e6a3f982e918f585ba09fcad9b445a4`.
+- Booking payment methods and the nested UPI QR panel now open by default, addressing the previous hidden-by-default presentation. The existing QR library generates the UPI payload client-side using the current fee estimate, clinic payee name, INR currency and approved UPI ID.
+- Added `tests/payment-qr-visibility.test.cjs` for default visibility, payload fields and public bank-detail exclusion. Exact-head CI and actual handset scan are not yet verified.
+- Razorpay/BillDesk are still not active. A real gateway requires merchant onboarding/KYC, provider-issued credentials, server-side order creation, signed payment verification, webhook handling, refunds/reconciliation and a live test transaction. Do not display a gateway as active until all those checks pass.
+- Bank account number and IFSC remain deliberately excluded from public HTML and repository files. The public payment route remains the approved UPI ID; bank transfer instructions are requested privately from the doctor.
+- No production deployment, payment settlement, refund, or gateway activation is claimed.
