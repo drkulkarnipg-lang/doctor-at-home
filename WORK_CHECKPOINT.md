@@ -519,3 +519,5 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - Prescription PDF preservation check added: the clinical-document regression now asserts the signature image is retained in the generated prescription clone, unchanged by source path, and remains below the medication table. Commit: c9d04eb. The test has not yet executed on the exact head.
 
 - QR failure-path hardening: the current amount is displayed before QR generation; a failed refresh hides/removes the stale image and disables enlarge/download, while retaining UPI app and copy fallbacks. Added synthetic failure-path assertions. Commits: 1ebf148, 8db1f4a, deed494.
+
+- QR race/stale-view protection: every regeneration invalidates pending QR requests, hides the prior image, closes any enlarged stale QR and clears its image before generating the new amount. Added a regression case for fee refresh while the enlarged dialog is open, including QR-generation failure. Commits: 89d9a48, 319095b, 4f8cfac.
