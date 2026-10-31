@@ -65,9 +65,10 @@ function makeWindow(records=[]){
  const second=makeWindow([existing]),w2=second.w,$2=id=>w2.document.getElementById(id);
  $2('rxPatName').value='Returning Patient';$2('rxPatName').dispatchEvent(new w2.Event('input',{bubbles:true}));
  $2('rxPatPhone').value='9123456789';$2('rxPatPhone').dispatchEvent(new w2.Event('input',{bubbles:true}));
- assert.equal($2('rxPatientCode').value,'PT-EXISTING-01','returning patient reuses the existing patient number');
+ assert.match($2('rxPatientCode').value,/^PT-\\d{8}-[A-F0-9]{8}$/,'a provisional patient number is assigned before private-register lookup');
  $2('rxPatientRegisterConsent').checked=true;$2('rxPatientRegisterConsent').dispatchEvent(new w2.Event('change',{bubbles:true}));
  await wait(850);
+ assert.equal($2('rxPatientCode').value,'PT-EXISTING-01','returning patient reuses the existing patient number after the authenticated lookup');
  assert.equal(second.saves.length,1,'a new prescription creates a new encounter row for the returning patient');
  assert.equal(second.saves[0].patientCode,'PT-EXISTING-01');
  assert.equal(second.saves[0].id,undefined,'a new encounter does not overwrite the previous encounter');
