@@ -22,6 +22,10 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 .portal-nav{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;overflow:visible;padding:13px 32px;border-top:1px solid var(--line);font-size:12px;white-space:normal;background:#f6f3ea}
 .portal-nav a{display:inline-flex;align-items:center;min-height:36px;color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;white-space:normal}
 .portal-nav a:hover,.portal-nav a:focus{color:var(--teal);border-color:var(--teal)}
+.portal-nav a[role=tab][aria-selected=true]{color:#0F2942;border-color:#0D9488;font-weight:700;background:rgba(13,148,136,.08);border-radius:8px 8px 0 0}
+.portal-nav a[role=tab]:focus-visible{outline:3px solid #0D9488;outline-offset:2px}
+.public-portal-panel{min-width:0}
+.public-portal-panel[hidden]{display:none!important}
 #publicPortal,#doctorWorkstation{max-width:1360px;padding:34px 32px 48px}
 #publicPortal{display:flex;flex-direction:column;gap:52px}
 #publicPortal>*{margin-top:0!important}
