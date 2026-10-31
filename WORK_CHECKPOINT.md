@@ -488,3 +488,26 @@ Still required: run the bulk importer from an authenticated Doctor Workstation s
 - Source commits: `46da767e0dbbc9fe0f0423bf23d32dbed94f85ef` (controller), `fc12abd3e0dc8875119043f1a41553a2f185e967` (initial test), `a78a7553a13c5579d1288946dc729827badba198` (test assertion correction), `abdca06d3ef59c2eadabcaed40d60717c9970d16` (HTML script load), `9fe92ec40b4f66c3382234ad2ea2dd430c474d5d` (responsive styling).
 - The master register records this as A11, source committed but CI/visual/live verification open. The latest GitHub workflow lookup returned no run for the newest source commit; the Vercel check still reports the provider build-rate-limit failure. Do not claim preview, production, mobile or device verification. PR #85 remains a draft; no merge/deployment.
 - Next: obtain a full regression run on the final branch head; review the portal navigation in desktop/mobile preview; then continue the next open register items. Keep payment gateway activation, cloud article import/publication, device handoff and authentication in their existing blocked/verification states until independently proven.
+
+
+## Prescription sequence correction — 31 October 2026
+
+Owner's 31 October instruction was read from the saved source note. Immediate priority: prescription pad and payment QR.
+
+### Implemented on review branch
+- Reordered the prescription to: serial number, date, patient name, age, sex; complaints; vital signs (pulse, BP, temperature, SpO2, GRBS, respiratory rate); provisional diagnosis; medicine table; signature.
+- Renamed the complaints label to **Complaints (C/o)** and placed it before vital signs, as requested.
+- Preserved the existing blank medicine fields, formulary selection, manual medicine entry, Add Medicine Row, and the requested columns: S. No., drug name, strength, frequency, duration, instructions.
+- Preserved the existing embedded signature SVG without editing it. Do not claim it is confirmed to be the owner's original upload until compared with the original signed image.
+- Kept the prescription free of a patient DOB field. The date shown is the prescription date.
+
+### Saved commits
+- `78ffe2377d3ede9686046ea206b97b1d08580580` — prescription section order and labels in `index.html`.
+- `f42ba91cb907c003f2f57efe5ecd659f227bee8b` — regression assertions for sequence, vitals, medicine table and signature position.
+- `d5ae6c06e3c85543aaf7819664e2a90c736d9993` — E10 master-register entry.
+
+### Verification / release boundary
+- Source inspection confirms the intended order and retained controls.
+- Exact-head automated test, preview visual inspection, physical print/PDF, and confirmation that the embedded signature matches the owner's original are still open.
+- Existing UPI QR code is wired to reveal on click and generate a fee-bearing UPI URI for `drkulkarnipg@upi`; existing tests cover that behaviour synthetically. Actual scan/payee confirmation and live deployment remain open.
+- PR #85 remains draft; do not merge or deploy without the required approval. Vercel's build-rate-limit failure remains an external preview blocker.
