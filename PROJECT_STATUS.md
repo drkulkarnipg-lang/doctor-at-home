@@ -193,3 +193,12 @@ Main source head 12608d35c02b3afe76a10995e95ebb521087eae4 has a failed regressio
 - Article Manager/RSS switching passed in both directions; the seven Patient Portal tabs and single-panel/deep-link checks passed. Booking intake, BMI, PDF sharing logic, fee wording, patient-education guards, payment-method disclosure and all 30 calculators passed their regression groups.
 - Main remains unchanged at `12608d35c02b3afe76a10995e95ebb521087eae4`; Actions run `41108470448` still fails at the stale inventory assertion. Vercel status for the latest review head is `build-rate-limit`; the last confirmed production success remains `57d011721e92903c53f76035f43520c296502906`. The last successful review-branch deployment status was for `257920daf124ba430076977928561ddede86050f`, not the current head.
 - No merge, production deploy, gateway activation, billing/secrets/hosting change, database migration or clinical publication was performed. Four source-linked clinical drafts remain unpublished for physician review. Actual phone rendering, live navigation, real booking, native PDF/WhatsApp share and recipient-side delivery remain open.
+
+ 
+## 31 October 2026 — Stitch design experiment (development only)
+
+The owner supplied `stitch_clinical_web_platform_architecture.zip`. Its four visual concepts are being adapted on the isolated branch `experiment/stitch-clinical-platform-2026-10-31`, based on main source `fe09009b3bd3e0f2a561fe7ca854ebe52d16956d`. The MASTER ORIGINAL and current live website have not been modified by this experiment.
+
+Implemented so far: a screen-only Stitch visual stylesheet; Patient Portal priority order Home visit → Booking → Health library; and screen-only refinements for existing calculator and statutory/prescription editors. Existing clinical logic, blank calculator defaults, document generation, links, payment configuration and authentication are retained. Static Stitch sample patient data, example medicines, preset calculator values and remote prototype dependencies are excluded.
+
+Exact-head automated regression and Vercel preview are pending. Desktop/mobile visual review and real functional smoke tests remain open. This branch must not be merged or deployed to production without the doctor's explicit approval.
