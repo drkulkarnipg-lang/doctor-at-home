@@ -72,11 +72,16 @@ async function persist(){
   let repeat=true;
   while(repeat){
    dirty=false;
+   const requestIdentity=currentIdentity();
    const payload=collect();payload.patientCode=patientCode;
    const body={...payload};
    if(savedRecord){body.id=savedRecord.id;body.revision=savedRecord.revision;}
    const result=await window.ClinicCloud.saveRegister(body);
    if(!result?.record?.id||!result.record.revision)throw Error('The cloud did not return a saved record ID and revision.');
+   if(requestIdentity!==currentIdentity()){
+    savedRecord=null;lastSavedSnapshot='';patientCode='';identityKey=currentIdentity();assignPatientCode();
+    repeat=true;continue;
+   }
    savedRecord=result.record;lastSavedSnapshot=snapshot(collect());
    const latest=collect();repeat=dirty||snapshot(latest)!==lastSavedSnapshot;
   }
