@@ -549,7 +549,11 @@
   .site-header #navPublicBtn { background: var(--stitch-ink) !important; }
   .site-header #navDoctorBtn { background: transparent !important; }
   /* Full, scrollable native language list; never clip the D–Z entries. */
-  .patient-language-picker{display:block!important;width:100%;max-width:100%;min-height:42px;padding:9px 38px 9px 12px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:600 13px/1.4 Inter,sans-serif;}
+  .patient-language-search{display:block!important;width:100%;max-width:100%;min-height:42px;margin:0 0 7px;padding:9px 12px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:500 13px/1.4 Inter,sans-serif;box-sizing:border-box;}
+  .patient-language-picker{display:block!important;width:100%;max-width:100%;height:184px;min-height:184px;max-height:40vh;overflow-y:auto!important;padding:5px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:500 13px/1.4 Inter,sans-serif;box-sizing:border-box;}
+  .patient-language-picker option{padding:7px 9px;white-space:normal;}
+  .patient-language-picker option:checked{background:var(--stitch-sky);color:var(--stitch-ink);}
+  .patient-language-search:focus-visible,.patient-language-picker:focus-visible{outline:3px solid var(--stitch-sky);outline-offset:2px;}
   #google_translate_element .patient-language-native-hidden{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;}
   .language-control[open]{position:relative;z-index:1000;}
   .language-control[open] .language-row{position:relative;z-index:1001;}
