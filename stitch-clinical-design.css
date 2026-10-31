@@ -23,7 +23,7 @@
     color: var(--stitch-ink);
     font-variant-numeric: lining-nums tabular-nums;
   }
-  body { font-family: Inter, 'Noto Sans Devanagari', sans-serif !important; }
+  body { font-family: Inter, 'Noto Sans Devanagari', sans-serif !important; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   h1, h2, h3, h4, .serif-brand {
     font-family: Newsreader, 'Noto Sans Devanagari', Georgia, serif !important;
     color: var(--stitch-ink);
@@ -214,6 +214,7 @@
     padding: clamp(20px, 3vw, 36px) !important;
   }
   #publicPortal .health-library { background: var(--stitch-linen) !important; }
+  #publicPortal .online-consultation-notice { background: var(--stitch-sky-wash) !important; }
   #publicPortal :is(.home-care-grid article, .nutrition-grid article,
     #wikiCardsGrid > article, #calc30Grid .calc-card) {
     background: var(--stitch-paper) !important;
@@ -247,7 +248,7 @@
     padding: 10px 12px;
     border: 1px solid var(--stitch-border) !important;
     border-radius: 4px !important;
-    background: var(--stitch-paper) !important;
+    background: var(--stitch-canvas) !important;
     color: var(--stitch-ink) !important;
     font: 500 13px/1.5 Inter, 'Noto Sans Devanagari', sans-serif;
   }
@@ -296,7 +297,7 @@
     min-height: 44px;
     border: 1px solid var(--stitch-border) !important;
     border-radius: 4px !important;
-    background: var(--stitch-paper) !important;
+    background: var(--stitch-canvas) !important;
     color: var(--stitch-ink) !important;
   }
   #clinicalCalculatorGrid .calc-actions button {
@@ -361,7 +362,7 @@
     #publicPortal .home-care-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 767px) {
-    #publicPortal { padding: 20px 16px 36px; gap: 34px; }
+    #publicPortal { padding: 20px 20px 36px; gap: 34px; }
     #publicPortal .portal-hero { grid-template-columns: minmax(0, 1fr); gap: 16px !important; }
     #publicPortal .hero-copy { padding: 22px 18px !important; }
     #publicPortal .hero-copy .original-care-hero { font-size: clamp(31px, 9vw, 42px); }
