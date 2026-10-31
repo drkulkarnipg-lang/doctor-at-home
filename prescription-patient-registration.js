@@ -85,7 +85,7 @@ async function persist(){
    savedRecord=result.record;lastSavedSnapshot=snapshot(collect());
    const latest=collect();repeat=dirty||snapshot(latest)!==lastSavedSnapshot;
   }
-  status('Registered in the private Daily Patient Register · '+patientCode+'. Prescription '+($('rxSerialNo')?.value||'')+' remains a separate document serial.');
+  const missing=[];if(!$('rxPatAge')?.value.trim())missing.push('age');if(!$('rxPatSex')?.value)missing.push('sex');if(!$('rxPatAddress')?.value.trim())missing.push('full address');status('Registered in the private Daily Patient Register · '+patientCode+'. '+(missing.length?'Complete the remaining patient details: '+missing.join(', ')+'.':'Patient demographics are complete.')+' Prescription '+($('rxSerialNo')?.value||'')+' remains a separate document serial.');
   window.dispatchEvent(new CustomEvent('clinic-patient-register-updated',{detail:{patientCode,recordId:savedRecord.id}}));
  }catch(e){status('PATIENT NOT REGISTERED IN CLOUD: '+e.message+'. Prescription entries remain on screen; correct the issue and retry.');}
  finally{saving=false;}
