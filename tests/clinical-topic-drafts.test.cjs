@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const draft=fs.readFileSync('content/clinical-topic-drafts-2026-10-31.md','utf8');
+const publicData=fs.readFileSync('patient-education-data.js','utf8');
+const html=fs.readFileSync('index.html','utf8');
+assert.match(draft,/DRAFT ONLY[^\n]*NOT PUBLISHED[^\n]*NOT IMPORTED/i);
+for(const topic of ['COPD','Cancer palliative care','Diabetes','Cirrhosis'])assert.match(draft,new RegExp('Draft \\d — '+topic,'i'),topic+' draft must exist');
+for(const source of ['www.who.int/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease','www.cancer.gov/about-cancer/advanced-cancer/care-choices/palliative-care-fact-sheet','www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/ICMR_GuidelinesType2diabetes2018_0.pdf','pmc.ncbi.nlm.nih.gov/articles/PMC9534592/','www.niddk.nih.gov/health-information/liver-disease/cirrhosis/symptoms-causes'])assert.ok(draft.includes(source),'source link missing: '+source);
+assert.doesNotMatch(publicData,/clinical-topic-drafts-2026-10-31|Draft 1 — COPD|Draft 2 — Cancer palliative care/i,'review drafts must not be imported into the public article dataset');
+assert.doesNotMatch(html,/clinical-topic-drafts-2026-10-31/,'review drafts must not be linked from the public site');
+console.log('Clinical-topic draft gate passed: COPD, palliative cancer, diabetes and cirrhosis drafts are source-linked and remain unpublished.');
