@@ -108,10 +108,14 @@ if(action==='register-save'&&method==='POST'){
 let e;try{e=validateRegister(body.entry);}catch(err){return reply(400,{message:err.message});}
 const now=new Date().toISOString(),record={owner_id:user.id,register_type:e.registerType,entry_date:e.entryDate,data:e.data,revision:randomUUID(),updated_at:now};
 const sourceKey=e.data.sourceEventId;
-const path=e.id?'/rest/v1/clinic_workstation_registers?id=eq.'+encodeURIComponent(e.id)+'&owner_id=eq.'+encodeURIComponent(user.id)+'&revision=eq.'+encodeURIComponent(e.revision):sourceKey?'/rest/v1/clinic_workstation_registers?on_conflict=owner_id,register_type,source_event_id':'/rest/v1/clinic_workstation_registers';
-if(sourceKey)record.source_event_id=sourceKey;
-const saveHeaders=sourceKey?{...headers,Prefer:'resolution=merge-duplicates,return=representation'}:headers;
-const r=await api(path,{method:e.id?'PATCH':'POST',headers:saveHeaders,body:JSON.stringify(record)});
+if(sourceKey&&!e.id){
+const merged=await api('/rest/v1/rpc/upsert_clinic_register_source_event',{method:'POST',headers:{...headers,Prefer:'return=representation'},body:JSON.stringify({p_register_type:e.registerType,p_entry_date:e.entryDate,p_data:e.data,p_source_event_id:sourceKey})});
+if(!merged.ok){if(merged.status===404||merged.status===400)return reply(503,{message:'Source-linkage database migration is not installed yet. No register data was changed.'});throw Error();}
+const rows=await merged.json();if(rows.length!==1)return reply(409,{message:'Linked register event could not be confirmed. Refresh before retrying.'});
+return reply(200,{record:rows[0]});
+}
+const path=e.id?'/rest/v1/clinic_workstation_registers?id=eq.'+encodeURIComponent(e.id)+'&owner_id=eq.'+encodeURIComponent(user.id)+'&revision=eq.'+encodeURIComponent(e.revision):'/rest/v1/clinic_workstation_registers';
+const r=await api(path,{method:e.id?'PATCH':'POST',headers,body:JSON.stringify(record)});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
 const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This register entry changed or was removed elsewhere. Refresh the register before editing; no overwrite occurred.'});
 return reply(200,{record:saved[0]});
