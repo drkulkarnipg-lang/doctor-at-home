@@ -517,3 +517,5 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - PR #85 remains draft; do not merge or deploy without the required approval. Vercel's build-rate-limit failure remains an external preview blocker.
 
 - Prescription PDF preservation check added: the clinical-document regression now asserts the signature image is retained in the generated prescription clone, unchanged by source path, and remains below the medication table. Commit: c9d04eb. The test has not yet executed on the exact head.
+
+- QR failure-path hardening: the current amount is displayed before QR generation; a failed refresh hides/removes the stale image and disables enlarge/download, while retaining UPI app and copy fallbacks. Added synthetic failure-path assertions. Commits: 1ebf148, 8db1f4a, deed494.
