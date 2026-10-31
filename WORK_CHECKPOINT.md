@@ -464,3 +464,11 @@ Owner instruction: apply the uploaded Stitch design to the DEVELOPMENT experimen
 - Exact-head regression run `41208870024` on source `be40a151a2e495d150ba5421f54bb6d324ae1394` was pending when this checkpoint was prepared; the subsequent source-inventory metadata commit may start a newer run. Vercel status is pending; no preview URL or visual rendering is yet verified.
 - Next: obtain exact-head full regression result; verify Vercel branch preview; inspect desktop and 320px/390px mobile; test navigation, translation panel, booking, library, all calculators, prescriptions, requisitions, certificates, payment disclosures, QR and external links. Distinguish automated checks from actual device/provider behaviour.
 - Promotion gate: doctor review and explicit approval only. Never merge or deploy this experiment to production without that approval.
+
+ 
+## 31 October 2026 — automatic calculator interaction added to Stitch experiment
+
+- On `experiment/stitch-clinical-platform-2026-10-31`, the existing calculator UI now recalculates on input/change once all active required fields are present and valid. Incomplete values show a clear completion prompt; invalid values use the existing validation error. The manual `Calculate now` action remains.
+- Existing formulas, units, reference ranges, interpretation text, conditional-field logic, blank initial state, and no-persistence rule are unchanged. Public BMI and the 28 clinician calculators use the same existing calculation API.
+- Regression coverage now checks automatic BMI calculation, incomplete-input handling, and automatic GCS recalculation after a previously untestable component becomes valid.
+- Source-code snapshot for this change: `138ed7c022097196fe2a727ebf729c6a3aa51055`. The inventory records 88 active source files / 221 destinations and points to that source snapshot. Exact-head CI and Vercel preview remain pending.

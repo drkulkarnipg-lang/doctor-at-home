@@ -79,6 +79,7 @@ No external destination, phone link, WhatsApp route, QR/payment destination, API
 - [x] Separate experiment branch created from the latest main source baseline.
 - [x] First visual layer and requested navigation order implemented.
 - [x] Calculator and statutory-form screen styling added without importing prototype data or formulas.
+- [x] Calculator results update automatically after all active required inputs are complete; manual calculation remains available.
 - [x] Regression tests added for the navigation and design layer.
 - [x] Link inventory updated for the new stylesheet.
 - [ ] Full exact-head regression suite: pending latest workflow run.
@@ -86,3 +87,8 @@ No external destination, phone link, WhatsApp route, QR/payment destination, API
 - [ ] Desktop and 320px / 390px mobile visual review: pending.
 - [ ] Functional smoke tests for booking, language selector, library, calculators, prescription, requisitions, certificates, payment disclosures, QR and external links: pending.
 - [ ] Owner review and explicit approval: required before any promotion or production release.
+
+ 
+## Automatic calculator behaviour added after the first visual pass
+
+The existing public and clinical calculator UI now recalculates when an input or select changes, once all currently active required fields are complete and valid. Incomplete fields show a completion prompt; invalid values continue to use the existing validation messages. The manual **Calculate now** action remains available. No formulas, units, source references, blank initial values, patient persistence or clinical interpretation were changed.

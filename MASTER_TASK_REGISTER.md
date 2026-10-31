@@ -348,3 +348,6 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 | ST09 | OWNER APPROVAL REQUIRED | No merge, production deployment or replacement of the live site without explicit doctor approval. |
 
 These statuses describe source changes on the isolated experiment branch only. They do not assert a live release, completed visual QA, payment settlement, actual WhatsApp recipient delivery, clinical validation or successful PDF printing.
+
+ 
+| ST10 | DONE — EXPERIMENT BRANCH ONLY | Calculators update automatically on input/change after all active required fields are complete; formulas, validation, interpretation, blank defaults and no-persistence behaviour remain unchanged. Regression assertions cover BMI, incomplete inputs and GCS conditional response. |

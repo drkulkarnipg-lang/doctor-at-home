@@ -202,3 +202,6 @@ The owner supplied `stitch_clinical_web_platform_architecture.zip`. Its four vis
 Implemented so far: a screen-only Stitch visual stylesheet; Patient Portal priority order Home visit → Booking → Health library; and screen-only refinements for existing calculator and statutory/prescription editors. Existing clinical logic, blank calculator defaults, document generation, links, payment configuration and authentication are retained. Static Stitch sample patient data, example medicines, preset calculator values and remote prototype dependencies are excluded.
 
 Exact-head automated regression and Vercel preview are pending. Desktop/mobile visual review and real functional smoke tests remain open. This branch must not be merged or deployed to production without the doctor's explicit approval.
+
+ 
+Calculator interaction refinement on the Stitch experiment branch: public BMI and the 28 clinical calculators now recalculate on input/change after all active required fields are complete and valid. Incomplete fields show a prompt; invalid values retain validation feedback. Manual calculation remains available. Formulas, units, references, interpretation, blank defaults and no-persistence behaviour were not changed. Exact-head regression and Vercel preview are pending.
