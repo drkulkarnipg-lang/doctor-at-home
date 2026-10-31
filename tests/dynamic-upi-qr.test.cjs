@@ -40,5 +40,6 @@ assert.match(html,/id="upiQrImg" loading="lazy" hidden/);
  $('upiQrDetails').open=false;$('upiQrDetails').dispatchEvent(new w.Event('toggle'));assert.equal($('upiQrImg').hidden,true,'Closing QR details clears the rendered QR');
  assert.equal($('upiQrDownload').hidden,true,'closing the QR panel hides the download link');
  assert.equal($('upiQrEnlarge').disabled,true,'closing the QR panel disables enlargement');
+ await new Promise(r=>setTimeout(r,30));
  dom.window.close();console.log('Dynamic UPI QR checks passed: opens on demand, embeds current fee, refreshes after fee changes, and clears on close.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
