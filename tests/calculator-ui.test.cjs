@@ -32,10 +32,13 @@ assert.equal(w.document.querySelector('#calculator-6-eye').value,'');
 w.switchDocTab('clinicalCalculators');assert.equal(w.document.querySelector('#viewClinicalCalculators').classList.contains('hidden'),false);
 w.switchDocTab('rxPad');assert.equal(w.document.querySelector('#viewClinicalCalculators').classList.contains('hidden'),true);
 const change=(id,v)=>{const x=w.document.getElementById(id);x.value=v;x.dispatchEvent(new w.Event('input',{bubbles:true}));};
+change('calculator-1-weight','70');assert.match(w.document.getElementById('calculator-result-1').textContent,/Complete the remaining required fields/,'Incomplete calculator input must not show a stale or partial result.');
+change('calculator-1-height','175');assert.match(w.document.getElementById('calculator-result-1').textContent,/BMI 22\.9 kg\/m²/,'Public BMI result must update automatically when all required values are entered.');
+
 change('calculator-6-eye','4');change('calculator-6-verbal','NT');change('calculator-6-motor','6');
 w.document.querySelector('[data-calculator-id="6"] form').dispatchEvent(new w.Event('submit',{cancelable:true}));
 assert.match(w.document.getElementById('calculator-result-6').textContent,/Total not calculated/);
-change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/calculate again/);
+change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/Total 15\/15/,'Completed GCS fields must calculate automatically without another button press.');
 change('calculator-30-acid','ph');assert.equal(w.document.getElementById('calculator-30-hco3').disabled,true);
 change('calculator-30-acid','hco3');assert.equal(w.document.getElementById('calculator-30-ph').disabled,true);
 change('calculator-18-method','p421');assert.equal(w.document.getElementById('calculator-18-factor').disabled,true);
