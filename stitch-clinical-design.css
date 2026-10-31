@@ -1,0 +1,407 @@
+/* Stitch clinical architecture — visual layer only.
+   Screen-only styling: existing clinical logic, form data, calculators, links,
+   translation, authentication and document/print templates remain untouched. */
+@media screen {
+  :root {
+    --stitch-canvas: #FAF8F5;
+    --stitch-paper: #FFFEFB;
+    --stitch-ink: #0B192C;
+    --stitch-navy: #102A43;
+    --stitch-muted: #536273;
+    --stitch-petal: #4E8765;
+    --stitch-forest: #3B6E52;
+    --stitch-sky: #3884BE;
+    --stitch-sky-wash: #EBF4FB;
+    --stitch-linen: #F5F2EB;
+    --stitch-line: #E6DFD5;
+    --stitch-border: #D8CEBF;
+    --stitch-eucalyptus: #6B8E78;
+  }
+
+  html, body {
+    background: var(--stitch-canvas) !important;
+    color: var(--stitch-ink);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  body { font-family: Inter, 'Noto Sans Devanagari', sans-serif !important; }
+  h1, h2, h3, h4, .serif-brand {
+    font-family: Newsreader, 'Noto Sans Devanagari', Georgia, serif !important;
+    color: var(--stitch-ink);
+  }
+  a, button, input, select, textarea { touch-action: manipulation; }
+  :is(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--stitch-sky) !important;
+    outline-offset: 3px;
+  }
+
+  .site-header {
+    background: var(--stitch-canvas) !important;
+    color: var(--stitch-ink) !important;
+    border-bottom: 1px solid var(--stitch-line) !important;
+    box-shadow: none !important;
+  }
+  .site-header .original-georgia-brand { color: var(--stitch-ink) !important; }
+  .portal-nav {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding: 12px 32px;
+    gap: 8px 12px;
+    background: var(--stitch-canvas) !important;
+    border-top: 1px solid var(--stitch-line);
+    border-bottom: 1px solid var(--stitch-line);
+  }
+  .portal-nav a[role="tab"] {
+    min-height: 44px;
+    padding: 9px 13px;
+    border: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 4px;
+    color: var(--stitch-muted) !important;
+    font: 600 12px/1.4 Inter, sans-serif;
+    text-align: center;
+    text-decoration: none;
+  }
+  .portal-nav a[role="tab"]:hover {
+    color: var(--stitch-forest) !important;
+    background: var(--stitch-linen) !important;
+    border-color: var(--stitch-line);
+  }
+  .portal-nav a[role="tab"][aria-selected="true"] {
+    color: var(--stitch-ink) !important;
+    background: var(--stitch-linen) !important;
+    border: 1px solid var(--stitch-border);
+    border-bottom: 2px solid var(--stitch-petal);
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  #publicPortal, #doctorWorkstation {
+    max-width: 1440px;
+    color: var(--stitch-ink);
+  }
+  #publicPortal {
+    background: var(--stitch-canvas) !important;
+    padding: 36px 32px 52px;
+    gap: 56px;
+  }
+  #publicPortal :is(h1, h2, h3, h4) { color: var(--stitch-ink); }
+  #publicPortal p { color: var(--stitch-muted); }
+  #publicPortal .section-eyebrow {
+    color: var(--stitch-forest) !important;
+    letter-spacing: .12em;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  #publicPortal .portal-hero {
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, .9fr);
+    gap: 24px !important;
+    align-items: stretch;
+  }
+  #publicPortal .hero-copy {
+    padding: clamp(24px, 3.5vw, 48px) !important;
+    background: var(--stitch-paper) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px -2px rgba(11, 25, 44, .045) !important;
+  }
+  #publicPortal .hero-copy .original-care-hero {
+    color: var(--stitch-ink) !important;
+    font-size: clamp(34px, 4.2vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -.025em;
+  }
+  #publicPortal .hero-copy em { color: var(--stitch-forest) !important; }
+  #publicPortal .hero-copy > p {
+    max-width: 690px;
+    color: var(--stitch-muted) !important;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  #publicPortal .hero-primary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  #publicPortal .hero-primary-actions a {
+    min-height: 46px;
+    padding: 12px 16px;
+    border-radius: 4px !important;
+    font: 650 12px/1.45 Inter, sans-serif;
+    box-shadow: none !important;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  #publicPortal .hero-primary-actions .primary-link {
+    background: var(--stitch-ink) !important;
+    color: var(--stitch-paper) !important;
+    border: 1px solid var(--stitch-ink) !important;
+  }
+  #publicPortal .hero-primary-actions .primary-link:hover {
+    background: var(--stitch-navy) !important;
+  }
+  #publicPortal .hero-primary-actions .secondary-link {
+    background: transparent !important;
+    color: var(--stitch-forest) !important;
+    border: 1px solid var(--stitch-forest) !important;
+  }
+  #publicPortal .hero-primary-actions .secondary-link:hover {
+    background: var(--stitch-linen) !important;
+  }
+
+  #publicPortal .dispatch-card.care-compass {
+    padding: clamp(24px, 3vw, 38px) !important;
+    background: var(--stitch-linen) !important;
+    color: var(--stitch-ink) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+  #publicPortal .care-compass :is(h3, p, .compass-credentials) {
+    color: var(--stitch-ink) !important;
+  }
+  #publicPortal .care-compass .section-eyebrow,
+  #publicPortal .care-mark { color: var(--stitch-forest) !important; }
+  #publicPortal .hero-contact-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  #publicPortal .hero-contact-actions .compass-contact {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px !important;
+    margin: 0 !important;
+    border: 1px solid var(--stitch-border);
+    border-radius: 4px !important;
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+    font: 650 12px/1.4 Inter, sans-serif;
+    text-align: center;
+  }
+  #publicPortal .hero-contact-actions .hero-call {
+    background: var(--stitch-forest) !important;
+    border-color: var(--stitch-forest) !important;
+    color: white !important;
+  }
+
+  #publicPortal .care-pathways {
+    border-top: 1px solid var(--stitch-line);
+    border-bottom: 1px solid var(--stitch-line);
+  }
+  #publicPortal .care-pathways > a {
+    min-width: 0;
+    padding: 22px 20px;
+    background: var(--stitch-paper) !important;
+    border-right: 1px solid var(--stitch-line) !important;
+    border-radius: 0 !important;
+  }
+  #publicPortal .care-pathways > a:first-child { padding-left: 20px; }
+  #publicPortal .care-pathways > a:hover { background: var(--stitch-linen) !important; }
+  #publicPortal .pathway-number,
+  #publicPortal .care-pathways > a > span:last-child { color: var(--stitch-forest); }
+
+  #publicPortal :is(.health-library, #bookingSection, #patientToolsSection,
+    .research-review, .online-consultation-notice, .conversion-panel) {
+    background: var(--stitch-paper) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+  #publicPortal :is(.health-library, #bookingSection, #patientToolsSection,
+    .research-review, .online-consultation-notice) {
+    padding: clamp(20px, 3vw, 36px) !important;
+  }
+  #publicPortal .health-library { background: var(--stitch-linen) !important; }
+  #publicPortal :is(.home-care-grid article, .nutrition-grid article,
+    #wikiCardsGrid > article, #calc30Grid .calc-card) {
+    background: var(--stitch-paper) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+  #publicPortal .home-care-grid article { border-top: 3px solid var(--stitch-petal) !important; }
+  #publicPortal .care-icon {
+    background: var(--stitch-linen) !important;
+    color: var(--stitch-forest) !important;
+    border: 1px solid var(--stitch-line);
+    border-radius: 6px !important;
+  }
+  #publicPortal :is(.library-topic-filters button, #wikiCardsGrid button) {
+    min-height: 42px;
+    border-radius: 4px !important;
+    border-color: var(--stitch-border) !important;
+    box-shadow: none !important;
+  }
+  #publicPortal .library-topic-filters button[aria-pressed="true"] {
+    background: var(--stitch-ink) !important;
+    border-color: var(--stitch-ink) !important;
+    color: white !important;
+  }
+
+  #publicPortal :is(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    select, textarea) {
+    max-width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--stitch-border) !important;
+    border-radius: 4px !important;
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+    font: 500 13px/1.5 Inter, 'Noto Sans Devanagari', sans-serif;
+  }
+  #publicPortal textarea { min-height: 88px; }
+  #publicPortal input::placeholder, #publicPortal textarea::placeholder {
+    color: #6B7280;
+    opacity: .8;
+  }
+  #publicPortal input:focus, #publicPortal select:focus, #publicPortal textarea:focus {
+    border-color: var(--stitch-sky) !important;
+    outline: 2px solid rgba(56, 132, 190, .2) !important;
+    outline-offset: 1px;
+  }
+  #publicPortal button {
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  #publicPortal :is(#bookingSection button, #patientToolsSection button,
+    .health-library button, .research-review button) {
+    min-height: 44px;
+    border-radius: 4px !important;
+    font-weight: 650;
+  }
+  #publicPortal .online-consultation-warning {
+    border-radius: 4px !important;
+    border-left: 3px solid #B91C1C;
+  }
+
+  /* Calculator visual refinement only. Blank defaults, equations, units,
+     validation and interpretation are owned by the existing calculator code. */
+  #calc30Grid .calc-card, #clinicalCalculatorGrid .calc-card {
+    background: var(--stitch-paper) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    padding: 24px;
+    box-shadow: none !important;
+  }
+  #calc30Grid .calc-card h4, #clinicalCalculatorGrid .calc-card h4 {
+    color: var(--stitch-ink) !important;
+    font-family: Newsreader, Georgia, serif !important;
+    font-weight: 600;
+  }
+  #clinicalCalculatorGrid .calc-field input,
+  #clinicalCalculatorGrid .calc-field select,
+  #clinicalCalculatorSearch {
+    min-height: 44px;
+    border: 1px solid var(--stitch-border) !important;
+    border-radius: 4px !important;
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+  }
+  #clinicalCalculatorGrid .calc-actions button {
+    min-height: 44px;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+  #clinicalCalculatorGrid .calc-actions .calc-primary {
+    background: var(--stitch-ink) !important;
+    border-color: var(--stitch-ink) !important;
+  }
+  #clinicalCalculatorGrid .calc-result {
+    border-color: var(--stitch-line) !important;
+    border-radius: 4px !important;
+    background: var(--stitch-linen) !important;
+    color: var(--stitch-ink) !important;
+  }
+  #clinicalCalculatorGrid .calc-reference-note {
+    background: var(--stitch-linen) !important;
+    border-color: #C8D9CA !important;
+    border-radius: 4px !important;
+    color: var(--stitch-navy) !important;
+  }
+
+  #doctorWorkstation {
+    background: var(--stitch-canvas);
+    padding: 32px;
+  }
+  #doctorWorkstation .workstation-heading {
+    border-bottom: 1px solid var(--stitch-line);
+    padding-bottom: 18px;
+  }
+  #doctorWorkstation .doctor-tabs button {
+    min-height: 44px;
+    padding: 9px 13px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    font: 650 12px/1.4 Inter, sans-serif;
+  }
+  #doctorWorkstation .calculator-workspace {
+    background: var(--stitch-paper);
+    border: 1px solid var(--stitch-line);
+    border-radius: 8px;
+    padding: clamp(18px, 2.5vw, 30px);
+  }
+
+  /* Preserve the existing compact translator, its language choices and
+     mobile in-flow panel behaviour; only harmonise its visible control. */
+  #google_translate_element .goog-te-combo {
+    border-color: var(--stitch-border) !important;
+    border-radius: 4px !important;
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+  }
+
+  @media (min-width: 1200px) {
+    #publicPortal { padding-inline: 40px; }
+  }
+  @media (min-width: 768px) and (max-width: 1199px) {
+    #publicPortal { padding-inline: 24px; gap: 44px; }
+    #publicPortal .portal-hero { grid-template-columns: minmax(0, 1.25fr) minmax(250px, .9fr); }
+    #publicPortal .home-care-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 767px) {
+    #publicPortal { padding: 20px 16px 36px; gap: 34px; }
+    #publicPortal .portal-hero { grid-template-columns: minmax(0, 1fr); gap: 16px !important; }
+    #publicPortal .hero-copy { padding: 22px 18px !important; }
+    #publicPortal .hero-copy .original-care-hero { font-size: clamp(31px, 9vw, 42px); }
+    #publicPortal .hero-copy > p { font-size: 14px; }
+    #publicPortal .hero-primary-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+    #publicPortal .hero-primary-actions a { width: 100%; justify-content: space-between; }
+    #publicPortal .dispatch-card.care-compass { padding: 22px 18px !important; }
+    #publicPortal .care-pathways { grid-template-columns: minmax(0, 1fr); }
+    #publicPortal .care-pathways > a,
+    #publicPortal .care-pathways > a:first-child {
+      padding: 16px 14px;
+      border-right: 0 !important;
+      border-bottom: 1px solid var(--stitch-line);
+    }
+    #publicPortal .care-pathways > a:last-child { border-bottom: 0; }
+    #publicPortal .section-intro { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    #publicPortal :is(.health-library, #bookingSection, #patientToolsSection,
+      .research-review, .online-consultation-notice) { padding: 20px 16px !important; }
+    #publicPortal .home-care-grid,
+    #publicPortal .nutrition-grid { grid-template-columns: minmax(0, 1fr); }
+    #publicPortal .hero-contact-actions { grid-template-columns: minmax(0, 1fr); }
+    .portal-nav {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      padding: 10px 14px;
+      overflow: visible !important;
+      white-space: normal !important;
+    }
+    .portal-nav a[role="tab"] {
+      min-width: 0;
+      min-height: 44px;
+      padding: 8px 6px;
+      overflow-wrap: anywhere;
+      white-space: normal;
+      font-size: 11px;
+    }
+    #doctorWorkstation { padding: 20px 14px 36px; }
+    #doctorWorkstation .doctor-tabs { gap: 7px; }
+    #doctorWorkstation .doctor-tabs button { max-width: 100%; white-space: normal; }
+    #calc30Grid, #clinicalCalculatorGrid { grid-template-columns: minmax(0, 1fr); }
+  }
+}
