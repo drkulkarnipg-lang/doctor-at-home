@@ -25,6 +25,15 @@ assert.match(html,/id="upiQrImg" loading="lazy" hidden/);
 
  fee=1500;w.calculateFee();await new Promise(r=>setTimeout(r,10));last=payloads.at(-1);assert.equal(new URL(last.uri).searchParams.get('am'),'1500','QR updates when the calculated visit fee changes');
  assert.equal($('upiQrAmount').textContent,'₹1,500.00','visible amount updates with the calculated fee');
+
+ w.KulkarniQRCode.toDataURL=async()=>{throw new Error('synthetic QR failure');};
+ fee=1600;w.calculateFee();await new Promise(r=>setTimeout(r,20));
+ assert.equal($('upiQrAmount').textContent,'₹1,600.00','amount remains visible if QR generation fails');
+ assert.equal($('upiQrImg').hidden,true,'a failed refresh must not leave an old QR visible');
+ assert.equal($('upiQrDownload').hidden,true,'download must stay unavailable when QR generation fails');
+ assert.equal($('upiQrEnlarge').disabled,true,'enlarge must stay unavailable when QR generation fails');
+ assert.match($('upiMethodStatus').textContent,/could not generate the QR/i,'clear QR failure fallback must be shown');
+
  $('upiQrDetails').open=false;$('upiQrDetails').dispatchEvent(new w.Event('toggle'));assert.equal($('upiQrImg').hidden,true,'Closing QR details clears the rendered QR');
  assert.equal($('upiQrDownload').hidden,true,'closing the QR panel hides the download link');
  assert.equal($('upiQrEnlarge').disabled,true,'closing the QR panel disables enlargement');
