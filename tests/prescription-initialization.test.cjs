@@ -25,17 +25,17 @@ assert.equal(body.rows.length, 1, 'first open should create one blank row');
 assert.deepEqual(
   [...body.rows[0].querySelectorAll('input')].map(input => input.value),
   ['', '', '', '', ''],
-  'no medicine, frequency, timing, duration or instructions may be prefilled'
+  'no drug, strength, frequency, duration or instruction may be prefilled'
 );
 assert.doesNotMatch(body.textContent, /Pantoprazole|Cidmus|Dytor-Plus/);
 
 const fields = body.rows[0].querySelectorAll('input');
 fields[0].value = 'Owner-entered medicine';
-fields[1].value = 'Owner-entered timing';
+fields[1].value = 'Owner-entered strength';
 w.initRxPad();
 assert.equal(body.rows.length, 1, 'reopening must not clear or duplicate an existing row');
 assert.equal(body.rows[0].querySelectorAll('input')[0].value, 'Owner-entered medicine');
-assert.equal(body.rows[0].querySelectorAll('input')[1].value, 'Owner-entered timing');
+assert.equal(body.rows[0].querySelectorAll('input')[1].value, 'Owner-entered strength');
 
 w.addRxRow();
 assert.equal(body.rows.length, 2, 'Add Medicine Row should add another row');
@@ -47,3 +47,9 @@ assert.deepEqual(
 
 dom.window.close();
 console.log('Prescription initialization safety and row-preservation checks passed.');
+
+assert.match(html, /id="rxSerialNo"/, 'prescription must include a serial number');
+assert.match(html, /id="rxPatSex"/, 'age and sex must be separate patient fields');
+assert.match(html, /id="rxProvisionalDiagnosis"/, 'prescription must include provisional diagnosis');
+assert.match(html, /src="assets\/dr-kulkarni-signature\.svg"/, 'doctor signature asset must be embedded in the prescription');
+assert.match(html, /Drug name[\s\S]*Strength[\s\S]*Frequency[\s\S]*Duration[\s\S]*Instructions/, 'prescription medication columns must match requested order');

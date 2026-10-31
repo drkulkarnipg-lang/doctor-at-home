@@ -320,7 +320,7 @@
               </button>
 </div>
 </div>
-<details class="payment-methods" id="paymentMethods"><summary>Payment methods · UPI / QR / gateway / bank transfer</summary><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=drkulkarnipg%40upi&amp;pn=Dr%20Pramod%20G%20Kulkarni&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary>Show payment QR / भुगतान QR दिखाएँ</summary><img alt="UPI payment QR" id="upiQrImg" loading="lazy" hidden/><p>Google Pay / PhonePe / Paytm / BHIM</p><p>Before approving, verify the payee and exact amount shown in your UPI app. / भुगतान से पहले UPI ऐप में प्राप्तकर्ता और राशि जाँचें।</p></details><div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3"><section class="border rounded-xl p-3 bg-white" aria-labelledby="razorpayPaymentTitle"><h4 id="razorpayPaymentTitle" class="font-bold">Razorpay secure checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="razorpayPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="billdeskPaymentTitle"><h4 id="billdeskPaymentTitle" class="font-bold">BillDesk checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="billdeskPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="bankTransferTitle"><h4 id="bankTransferTitle" class="font-bold">NEFT / bank transfer</h4><p>Request verified transfer instructions directly from the doctor. Bank account numbers are deliberately not published on this public page.</p><button type="button" id="bankTransferRequest">Request transfer instructions</button></section></div></details>
+<details class="payment-methods" id="paymentMethods"><summary>Payment methods · UPI / QR / gateway / bank transfer</summary><p>UPI ID: <strong>drkulkarnipg@upi</strong></p><div class="payment-options"><a id="upiPaymentLink" href="upi://pay?pa=drkulkarnipg%40upi&amp;pn=Dr%20Pramod%20G%20Kulkarni&amp;cu=INR">Open UPI app</a><button id="upiCopyId" type="button">Copy UPI ID</button></div><p id="upiMethodStatus" role="status">Confirm the payee and amount in your UPI app.</p><details id="upiQrDetails"><summary><strong>Show my UPI payment QR</strong> / भुगतान QR दिखाएँ</summary><img alt="UPI payment QR for Dr Pramod G Kulkarni, UPI ID drkulkarnipg@upi" id="upiQrImg" loading="lazy" hidden style="width:min(320px,100%);height:auto;margin:12px auto"/><p>Google Pay / PhonePe / Paytm / BHIM</p><p>Before approving, verify the payee and exact amount shown in your UPI app. / भुगतान से पहले UPI ऐप में प्राप्तकर्ता और राशि जाँचें।</p></details><div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3"><section class="border rounded-xl p-3 bg-white" aria-labelledby="razorpayPaymentTitle"><h4 id="razorpayPaymentTitle" class="font-bold">Razorpay secure checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="razorpayPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="billdeskPaymentTitle"><h4 id="billdeskPaymentTitle" class="font-bold">BillDesk checkout</h4><p>Not active yet. Merchant credentials and server-side payment verification are required before accepting payments through this gateway.</p><button type="button" id="billdeskPaymentStatus" disabled class="opacity-70 cursor-not-allowed">Setup required — not available</button></section><section class="border rounded-xl p-3 bg-white" aria-labelledby="bankTransferTitle"><h4 id="bankTransferTitle" class="font-bold">NEFT / bank transfer</h4><p>Request verified transfer instructions directly from the doctor. Bank account numbers are deliberately not published on this public page.</p><button type="button" id="bankTransferRequest">Request transfer instructions</button></section></div></details>
 </div>
 </div>
 </section><section aria-labelledby="faqHeading" class="research-review" id="patientFaq"><span class="section-eyebrow">Patient help · quick answers</span><h3 id="faqHeading">Your questions. Clear answers.</h3><p>Find answers about home visits, fees, reports and using this website. Personal treatment decisions need your doctor.</p><label for="faqSearch">Search questions</label><input class="w-full p-3 border rounded-xl" id="faqSearch" placeholder="Try booking, fees, reports or location…" type="search"/><div aria-label="FAQ topics" class="research-flow" id="faqFilters"></div><p aria-live="polite" id="faqCount" role="status"></p><div id="faqList"></div><p class="hidden" id="faqEmpty">No matching answer. Use the button below to contact the doctor on WhatsApp.</p><a class="faq-contact" href="https://wa.me/919561394341" id="faqAskDoctor" rel="noopener noreferrer" target="_blank">Ask the doctor on WhatsApp ↗</a></section>
@@ -509,10 +509,12 @@
 <input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="" placeholder="Confirm and document allergy status"/>
 </div>
 <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
+<div><label class="text-[10px] text-slate-500">Prescription serial no.:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxSerialNo" type="text" placeholder="Enter serial no."/></div>
+<div><label class="text-[10px] text-slate-500">Date:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="date"/></div>
 <div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Age / Gender:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="e.g. 68 Y / Male" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Date &amp; Time:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Pune Locality:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="e.g. Dhayari, Kothrud" type="text"/></div>
+<div><label class="text-[10px] text-slate-500">Age:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="Age in years" type="text"/></div>
+<div><label class="text-[10px] text-slate-500">Sex:</label><select class="w-full bg-white p-1 border rounded-lg" id="rxPatSex"><option value="">Select sex</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label class="text-[10px] text-slate-500">Locality (optional):</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="Pune locality" type="text"/></div>
 <div class="col-span-4 grid grid-cols-6 gap-2 pt-2 border-t mt-1 text-center">
 <div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="78" type="text"/></div>
 <div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="130/80" type="text"/></div>
@@ -527,6 +529,10 @@
 <textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="e.g. Acute breathlessness, bilateral crepitations..." rows="2"></textarea>
 </div>
 <div>
+<label class="font-bold text-[#0F2942]">Provisional Diagnosis:</label>
+<textarea class="w-full p-2 border rounded-xl mt-1" id="rxProvisionalDiagnosis" placeholder="Enter provisional diagnosis" rows="2"></textarea>
+</div>
+<div>
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-[#0F2942] text-sm">℞ MEDICATIONS PRESCRIBED:</span>
 <button class="no-print bg-[#0D9488] text-white text-[11px] px-2.5 py-1 rounded-lg shadow" onclick="openDrugModal()" type="button">+ 1-Click Select from Formulary</button>
@@ -534,18 +540,26 @@
 <table class="w-full border-collapse border border-slate-300 text-[11px]" id="rxTable">
 <thead class="bg-slate-100 text-slate-700">
 <tr>
-<th class="border p-1 w-8 text-center">#</th>
-<th class="border p-1 text-left">Medicine Name &amp; Strength</th>
-<th class="border p-1 w-24">Timing</th>
-<th class="border p-1 w-20">Freq</th>
-<th class="border p-1 w-16">Days</th>
-<th class="border p-1">Instructions</th>
+<th class="border p-1 w-8 text-center">S. No.</th>
+<th class="border p-1 text-left">Drug name</th>
+<th class="border p-1 text-left">Strength</th>
+<th class="border p-1 w-20">Frequency</th>
+<th class="border p-1 w-20">Duration</th>
+<th class="border p-1">Instructions (before/after food, at night, etc.)</th>
 <th class="border p-1 w-8 text-center no-print">Del</th>
 </tr>
 </thead>
 <tbody id="rxTableBody"></tbody>
 </table>
 <button class="no-print text-xs text-[#0D9488] font-bold mt-1.5" onclick="addRxRow()" type="button" aria-label="Add another medicine to the prescription">+ Add Medicine Row</button>
+</div>
+<div class="flex justify-end items-end pt-2" aria-label="Doctor signature">
+<div class="text-center min-w-[190px]">
+<img src="assets/dr-kulkarni-signature.svg" alt="Doctor's handwritten signature" class="block mx-auto object-contain w-40 h-20" />
+<p class="border-t border-slate-500 pt-1 font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
+<p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
+<p class="text-[9px] text-slate-500">Doctor's signature</p>
+</div>
 </div>
 <!-- ADDITIONAL PATHOLOGY & RADIOLOGY ON PRESCRIPTION -->
 <div class="border p-2.5 rounded-xl bg-slate-50/70 space-y-1">
@@ -556,16 +570,9 @@
 <label class="font-bold text-[#0F2942]">Bedside Nursing &amp; Diet Advice:</label>
 <textarea class="w-full p-2 border rounded-xl mt-1" id="rxAdvice" placeholder="Dietary restrictions, fluid limits, positioning..." rows="2"></textarea>
 </div>
-<div class="pt-4 border-t flex justify-between items-end">
-<div>
+<div class="pt-3 border-t">
 <p><strong>Next Review:</strong> <input class="border-b px-1 font-semibold" id="rxFollowUp" type="text" value="After 3 Days / SOS in emergency"/></p>
 <p class="text-[10px] text-red-600 mt-1">⚠️ In emergency (severe breathlessness / chest pain), call 9561394341 immediately.</p>
-</div>
-<div class="text-center">
-<div class="w-36 border-b border-dashed border-slate-400 mb-1"></div>
-<p class="font-bold text-[#0F2942]">Dr. Pramod G. Kulkarni</p>
-<p class="text-[10px] text-slate-500">Reg. No. I-24809-A-1 (MCIM)</p>
-</div>
 </div>
 </div>
 </div>
@@ -1383,19 +1390,17 @@
 
     function addRxRow() { addRxRowWithData('', '', '', '', ''); }
 
-    function addRxRowWithData(med, freq, timing, days, advice) {
+    function addRxRowWithData(med, strength, freq, duration, instructions) {
       const tbody = document.getElementById('rxTableBody');
       const idx = tbody.rows.length + 1;
       const tr = document.createElement('tr');
+      const values = [String(med || ''), String(strength || ''), String(freq || ''), String(duration || ''), String(instructions || '')];
       tr.innerHTML = `
         <td class="border p-1 text-center font-bold text-slate-500">${idx}</td>
-        <td class="border p-1"><input type="text" value="${med}" placeholder="Medicine Name" class="w-full font-bold outline-none px-1 py-0.5 bg-transparent"></td>
-        <td class="border p-1"><input type="text" value="${timing}" class="w-full text-center"></td>
-        <td class="border p-1"><input type="text" value="${freq}" class="w-full text-center font-bold"></td>
-        <td class="border p-1"><input type="text" value="${days}" class="w-full text-center"></td>
-        <td class="border p-1"><input type="text" value="${advice}" placeholder="Instructions" class="w-full"></td>
-        <td class="border p-1 text-center no-print"><button onclick="this.closest('tr').remove()" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
+        ${values.map((value, i) => '<td class="border p-1"><input type="text" class="w-full min-w-0 '+(i===0?'font-bold ':'')+'outline-none px-1 py-0.5 bg-transparent" placeholder="'+['Drug name','Strength','Frequency','Duration','Instructions'][i]+'"></td>').join('')}
+        <td class="border p-1 text-center no-print"><button type="button" aria-label="Remove medicine row" onclick="this.closest('tr').remove()" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
       `;
+      [...tr.querySelectorAll('input')].forEach((input,i)=>{input.value=values[i];});
       tbody.appendChild(tr);
     }
 
@@ -1418,7 +1423,7 @@
     }
 
     function addDrugDirectlyToRx(med, freq, timing, days, advice) {
-      addRxRowWithData(med, freq, timing, days, advice);
+      addRxRowWithData(med, '', freq, days, [timing, advice].filter(Boolean).join('; '));
       showToast("✓ " + med + " added to Prescription!");
       switchDocTab('rxPad');
     }
