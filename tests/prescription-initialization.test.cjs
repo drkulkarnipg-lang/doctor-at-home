@@ -46,6 +46,14 @@ assert.deepEqual(
   'an added row must be blank so no regimen is accidentally implied'
 );
 
+assert.deepEqual([...body.rows].map(row => row.cells[0].textContent), ['1', '2']);
+w.removeRxRow(body.rows[0].querySelector('button'));
+assert.equal(body.rows.length, 1, 'removing one medicine row should preserve the remaining row');
+assert.equal(body.rows[0].cells[0].textContent, '1', 'remaining medicine rows must be renumbered');
+w.addRxRow();
+assert.deepEqual([...body.rows].map(row => row.cells[0].textContent), ['1', '2'], 'adding a row after deletion must not create duplicate or skipped serial numbers');
+
+
 dom.window.close();
 console.log('Prescription initialization safety and row-preservation checks passed.');
 
