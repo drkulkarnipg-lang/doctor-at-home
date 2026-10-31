@@ -1383,6 +1383,8 @@
     // 1-CLICK PRESCRIPTION FORMULARY
     function initRxPad() {
       const tbody = document.getElementById('rxTableBody');
+      const dateField = document.getElementById('rxDateTime');
+      if (dateField && !dateField.value) { const now = new Date(); dateField.value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
       // Never prefill example medicines or overwrite a clinician's in-progress prescription.
       // Create one entirely blank row only when the editor has no rows yet.
       if (tbody.rows.length === 0) addRxRowWithData('', '', '', '', '');
