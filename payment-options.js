@@ -16,8 +16,9 @@ async function copyUpi(){
  }catch{status.textContent='UPI ID: '+UPI+'. Select and copy it, then confirm the payee and amount in your UPI app.';}
 }
 document.addEventListener('DOMContentLoaded',()=>{
- const copy=$('upiCopyId'),details=$('upiQrDetails'),link=$('upiPaymentLink');
+ const copy=$('upiCopyId'),details=$('upiQrDetails'),link=$('upiPaymentLink'),paymentMethods=$('paymentMethods'),showQr=$('showPaymentQr');
  if(link){link.addEventListener('click',()=>{if(typeof window.calculateFee==='function')window.calculateFee();});}
+ if(showQr){showQr.addEventListener('click',()=>{if(paymentMethods)paymentMethods.open=true;if(details){details.open=true;details.dispatchEvent(new Event('toggle'));}details?.scrollIntoView?.({behavior:'smooth',block:'center'});});}
  if(copy)copy.addEventListener('click',copyUpi);
  const transfer=$('bankTransferRequest');if(transfer)transfer.addEventListener('click',()=>{if(typeof window.openDoctorContact==='function')window.openDoctorContact();else{const status=$('upiMethodStatus');if(status)status.textContent='Use the Contact the doctor options to request verified transfer instructions.';}});
  if(details)details.addEventListener('toggle',()=>{if(details.open){if(typeof window.calculateFee==='function')window.calculateFee();else updatePaymentQr(0);}else{qrRequest++;const image=$('upiQrImg');if(image){image.hidden=true;image.removeAttribute('src');}}});
