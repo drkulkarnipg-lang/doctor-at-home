@@ -103,7 +103,7 @@ if(action==='register-find-patient'&&method==='POST'){
 const phone=String(body.phone||'').replace(/\D/g,'');
 const name=String(body.name||'').trim().toLocaleLowerCase('en');
 if(!/^[6-9]\d{9}$/.test(phone)||!name||name.length>120)return reply(400,{message:'Enter the patient name and a valid mobile number.'});
-const path='/rest/v1/clinic_workstation_registers?select=data&register_type=eq.daily&data->>phone=eq.'+encodeURIComponent(phone)+'&order=entry_date.desc,created_at.desc&limit=100';
+const path='/rest/v1/clinic_workstation_registers?select=data&owner_id=eq.'+encodeURIComponent(user.id)+'&register_type=eq.daily&data->>phone=eq.'+encodeURIComponent(phone)+'&order=entry_date.desc,created_at.desc&limit=100';
 const r=await api(path,{headers});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No patient lookup was performed.'});throw Error();}
 const rows=await r.json(),match=rows.find(row=>String(row.data?.patientName||'').trim().toLocaleLowerCase('en')===name&&typeof row.data?.patientCode==='string'&&row.data.patientCode.trim());
@@ -111,7 +111,7 @@ return reply(200,{patientCode:match?.data?.patientCode||null});
 }
 if(action==='register-list'&&method==='GET'){
 const type=String(req.query?.registerType||'');if(!['daily','death','stock'].includes(type))return reply(400,{message:'Choose daily, death or stock register.'});
-const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
+const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&owner_id=eq.'+encodeURIComponent(user.id)+'&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
 return reply(200,{records:await r.json(),limit:500});
 }
