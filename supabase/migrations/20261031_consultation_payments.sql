@@ -8,7 +8,7 @@ create table if not exists public.consultation_payments (
  payment_id text unique,
  amount_paise integer not null check(amount_paise=50000),
  currency text not null check(currency='INR'),
- status text not null check(status in ('created','authorized','captured','failed','refunded')),
+ status text not null check(status in ('created','authorized','captured','failed','partially_refunded','refunded')),
  created_at timestamptz not null default now(),
  updated_at timestamptz not null default now(),
  unique(booking_reference,attempt_number)
@@ -18,6 +18,7 @@ create table if not exists public.consultation_payment_webhook_events (
  event_type text not null,
  order_id text,
  payment_id text,
+ amount_paise integer check(amount_paise is null or amount_paise>0),
  received_at timestamptz not null default now()
 );
 alter table public.consultation_payments enable row level security;
