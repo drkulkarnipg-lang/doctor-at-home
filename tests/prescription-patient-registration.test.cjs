@@ -17,6 +17,7 @@ function makeWindow(records=[]){
   session:async()=>({configured:true,signedIn:true}),
   isSignedIn:()=>true,
   listRegister:async type=>{lookups.push(type);return {records};},
+  findPatient:async(phone,name)=>{lookups.push({phone,name});const match=records.find(record=>String(record.data?.phone||'').replace(/\D/g,'')===phone&&String(record.data?.patientName||'').trim().toLowerCase()===name.trim().toLowerCase());return {patientCode:match?.data?.patientCode||null};},
   saveRegister:async entry=>{
    saves.push({...entry});
    revision++;
@@ -57,7 +58,7 @@ function makeWindow(records=[]){
  assert.equal(saves[1].prescriptionSerial,$('rxSerialNo').value,'prescription serial is linked to the patient register encounter');
  assert.equal(w.localStorage.length,0,'patient demographics are not silently stored in browser local storage');
  assert.match($('rxPatientRegistrationStatus').textContent,/Registered in the private Daily Patient Register/);
- assert.ok(lookups.every(x=>x==='daily'));
+ assert.ok(lookups.every(x=>x.phone&&x.name),'returning-patient lookup uses the patient's mobile and name');
  dom.window.close();
 
  const existing={data:{patientName:'Returning Patient',phone:'9123456789',patientCode:'PT-EXISTING-01'}};
