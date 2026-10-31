@@ -76,7 +76,7 @@ function makeWindow(records=[]){
 
  const third=makeWindow(),w3=third.w,$3=id=>w3.document.getElementById(id);
  $3('rxPatName').value='Emergency Patient';$3('rxPatName').dispatchEvent(new w3.Event('input',{bubbles:true}));
- assert.match($3('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{8}$/,'patient number can be assigned when no mobile is available');
+ assert.match($3('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{12}$/,'patient number can be assigned when no mobile is available');
  $3('rxPatientRegisterConsent').checked=true;$3('rxPatientRegisterConsent').dispatchEvent(new w3.Event('change',{bubbles:true}));
  await wait(850);
  assert.equal(third.saves.length,1,'patient can still be registered without a mobile number');
