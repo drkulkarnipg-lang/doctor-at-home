@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const html=fs.readFileSync('index.html','utf8'),js=fs.readFileSync('doctor-brand-tools.js','utf8');
+for(const id of ['viewBrandTools','tabBrandTools','brandCircleUpload','brandRectUpload','brandToolType','brandToolPreview','brandToolSave','brandToolShare','brandToolPrint','cardName','cardPhone','cardWebsite'])assert.ok(html.includes(id),'Missing brand tool UI: '+id);
+assert.match(html,/doctor-brand-tools\.js/);
+assert.match(html,/rectSigned/);
+assert.match(js,/assets\/doctor-signature\.svg/);
+assert.match(js,/navigator\.share/);
+assert.match(js,/toBlob/);
+assert.match(js,/window\.print\(\)/);
+assert.match(js,/Doctor_Visiting_Card/);
+assert.match(js,/Rectangular_Stamp_With_Signature/);
+assert.match(js,/createObjectURL/);
+console.log('Doctor branding tools static checks passed: stamp uploads, embedded signature, card fields, PNG save, native share and print.');
