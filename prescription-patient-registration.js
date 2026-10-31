@@ -61,7 +61,7 @@ async function findOrCreatePatientCode(data){
 async function persist(){
  if(saving){dirty=true;return;}
  const data=collect();
- if(!data.patientName){status('Enter the patient name. A patient number will be assigned after the mobile number is entered.');return;}
+ if(!data.patientName){status('Enter the patient name to assign a patient number. The mobile number is optional when unavailable.');return;}
  if(data.phone&&!validPhone()){status('Enter a valid 10-digit Indian mobile number, or leave the field blank if the patient has no available mobile. Prescription details remain on this screen.');return;}
  assignPatientCode();
  if(!$('rxPatientRegisterConsent')?.checked){status('Patient number assigned: '+patientCode+'. Confirm that the patient / authorised representative has been informed before the private cloud register is updated.');return;}
