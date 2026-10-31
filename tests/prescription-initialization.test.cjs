@@ -55,3 +55,24 @@ assert.match(html, /id="rxProvisionalDiagnosis"/, 'prescription must include pro
 assert.match(html, /src="assets\/dr-kulkarni-signature\.svg"/, 'doctor signature asset must be embedded in the prescription');
 assert.ok(fs.existsSync('assets/dr-kulkarni-signature.svg'), 'signature image asset must exist in the repository');
 assert.match(html, /Drug name[\s\S]*Strength[\s\S]*Frequency[\s\S]*Duration[\s\S]*Instructions/, 'prescription medication columns must match requested order');
+
+const prescriptionOrder = [
+  html.indexOf('id="rxSerialNo"'),
+  html.indexOf('id="rxDateTime"'),
+  html.indexOf('id="rxPatName"'),
+  html.indexOf('id="rxPatAge"'),
+  html.indexOf('id="rxPatSex"'),
+  html.indexOf('id="rxComplaints"'),
+  html.indexOf('aria-label="Vital signs"'),
+  html.indexOf('id="rxProvisionalDiagnosis"'),
+  html.indexOf('id="rxTable"'),
+  html.indexOf('assets/dr-kulkarni-signature.svg')
+];
+assert.ok(prescriptionOrder.every((position, index) => position >= 0 && (index === 0 || position > prescriptionOrder[index - 1])),
+  'prescription must follow serial/date/patient demographics → complaints → vital signs → provisional diagnosis → medicine table → signature');
+assert.match(html, /id="vPulse"/, 'pulse must be available');
+assert.match(html, /id="vBP"/, 'blood pressure must be available');
+assert.match(html, /id="vTemp"/, 'temperature must be available');
+assert.doesNotMatch(html.slice(html.indexOf('id="rxSheet"'), html.indexOf('<!-- Owner-authenticated cloud registers')), /id="rxPatDob"/,
+  'prescription must not add an unsolicited patient date-of-birth field');
+
