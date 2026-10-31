@@ -552,3 +552,8 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - Static JavaScript syntax checks pass for the changed source and test files.
 - GitHub regression run `41182622122` is in progress / awaiting final result at this checkpoint.
 - No live patient record was created, no live Supabase migration was applied, and no production deployment or device workflow is claimed.
+
+
+- Regression refinement: a mobile number is used for returning-patient matching when available, but the workflow does not block emergency/other registration if no mobile is available; it assigns a new patient number and saves a blank phone field. Added a regression scenario for this case.
+- **Exact-head automated regression:** GitHub Actions run `41183587616` PASSED on source head `9389a86ea224fb7ed7cd89c9d1cb180a827f3782`, including the new prescription patient-registration tests and all repository regression tests.
+- This is source/CI verification only. The Supabase register table migration and phone lookup index migration are not applied/verified, so actual cloud persistence remains blocked pending the intended project setup. Vercel status still reports build-rate-limit; no production release or live UI/device verification.
