@@ -380,11 +380,11 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 ## 31 October 2026 — resumable checkpoint (source review only)
 
-**Main baseline:** 12608d35c02b3afe76a10995e95ebb521087eae4. **Working review branch:** fix/mobile-language-article-fee-20261031 (latest head must be re-read from GitHub before the next edit).
+**Main baseline:** 12608d35c02b3afe76a10995e95ebb521087eae4. **Working review branch:** fix/mobile-language-article-fee-20261031 (latest verified head b4e52c1daa248fc43dca6d674013bf273e64667c).
 
 ### Verified findings and saved corrections
 
-1. **Regression inventory:** main run 41108470448 failed at tests/external-link-inventory-generator.test.cjs; booking-intake, calculator UI and document-sharing tests passed before the failure. A GitHub Actions regeneration run on the corrected review branch produced an inventory for 86 active source files / 221 unique destinations, tagged to review source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Temporary diagnostic output was removed. Review-branch run 41165365930 passed all 60 regression test files, including the inventory test.
+1. **Regression inventory:** main run 41108470448 failed at tests/external-link-inventory-generator.test.cjs; booking-intake, calculator UI and document-sharing tests passed before the failure. A GitHub Actions regeneration run on the corrected review branch produced an inventory for 86 active source files / 221 unique destinations, tagged to review source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Temporary diagnostic output was removed. Review-branch run 41165663130 passed all 60 regression test files, including the inventory test.
 2. **Mobile language panel — confirmed root cause:** international-portal.css globally forces .language-control>div to position:fixed!important with fixed viewport coordinates. The later .site-header .language-control[open] > div rule set position:static without !important, so the fixed rule won the cascade and the expanded panel floated over the page. The review branch now overrides position, all edges, width, max-height and overflow with !important, keeps the summary at least 44 px high, and adds a stylesheet regression test. This explains the phone discrepancy; it was not caught by the earlier HTML-only checks.
 3. **Article Manager / RSS:** switchDocTab('articlesHub') previously removed hidden from viewJournalsHub while it remained a sibling. The review branch reparents it into viewArticlesHub for Article Manager and restores it to its original workstation position for the dedicated RSS tab. Tests cover Article Manager → dedicated RSS → Article Manager and ordinary tab isolation.
 4. **Fee/payment display:** patient-helper source distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base, states that guided help is not a medical consultation, and says the helper does not collect payment. A regression test checks all three. The public payment-method panel lists UPI/QR/gateway/bank transfer; the existing UPI link/QR was retained unchanged, Razorpay/BillDesk remain disabled, and bank-transfer instructions open the doctor contact chooser. No gateway backend, merchant credentials, billing configuration, secrets or database migration was changed.
@@ -392,7 +392,7 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 ### Current external verification limits
 
-- Main Actions run 41108470448 remains failed on the stale inventory evidence because main has not been changed. Review-branch run 41165365930 passed all 60 test files on code commit 991ebeb26ccdc4166d7f52a3fb355e3caca56f5d. PR #85 head 5d37ae7208e41e30189698b784ecce13733fd223 also has a successful Actions run but is a separate, broader draft branch.
+- Main Actions run 41108470448 remains failed on the stale inventory evidence because main has not been changed. Review-branch run 41165663130 passed all 60 test files on exact head b4e52c1daa248fc43dca6d674013bf273e64667c. PR #85 head 5d37ae7208e41e30189698b784ecce13733fd223 also has a successful Actions run but is a separate, broader draft branch.
 - Vercel build-rate-limit affects main and the latest review-branch commit; no new preview URL or rendered page was obtained. Last successful Vercel status remains commit 57d011721e92903c53f76035f43520c296502906. Do not claim the new source is live.
 - Actual phone rendering at 320 px and 390 px, desktop/live navigation, public Know Your Numbers cards, booking/BMI, PDF share and WhatsApp recipient-side receipt are not verified. Do not infer provider delivery from CI.
 - No billing activation, secrets, hosting configuration, database migration or clinical publication was performed.
@@ -411,7 +411,7 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 ## 31 October 2026 — final run checkpoint
 
-- Draft PR #86: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86 (head 782bc5cac08166fb0ecb85a1e5b3c6c6c331b94f). Keep as draft; do not merge or deploy without the doctor's approval.
-- Latest exact-head regression: Actions run 41165499172 passed all 60 test files. The source code commit 991ebeb26ccdc4166d7f52a3fb355e3caca56f5d also passed all 60 files before documentation synchronization.
+- Draft PR #86: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86 (head b4e52c1daa248fc43dca6d674013bf273e64667c). Keep as draft; do not merge or deploy without the doctor's approval.
+- Latest exact-head regression: Actions run 41165663130 passed all 60 test files. The source code commit 991ebeb26ccdc4166d7f52a3fb355e3caca56f5d also passed all 60 files before documentation synchronization.
 - Vercel for main and review head both reports build-rate-limit. No current preview URL, screenshot or actual phone rendering is verified. Last successful Vercel status remains 57d011721e92903c53f76035f43520c296502906.
 - Main remains unchanged at 12608d35c02b3afe76a10995e95ebb521087eae4 and its Actions run 41108470448 remains failed at the stale inventory assertion. The review PR is the tested correction path; it has not been merged.
