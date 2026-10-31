@@ -74,7 +74,7 @@ const { JSDOM } = require('jsdom');
     assert.equal(w.PatientPortalNavigation.show('unknown'), false);
 
     // Search articles remains a normal page navigation, not a local tab.
-    assert.equal(nav('/articles'), null);
+    assert.equal(nav('/articles').getAttribute('href'), '/articles');
     console.log('Patient portal navigation checks passed: isolated sections, persistent home-visit hero, overview/elderly/library/booking/tools/FAQ views, browser history and direct hash routing.');
   } finally {
     dom.window.close();
