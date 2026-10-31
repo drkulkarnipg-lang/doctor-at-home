@@ -97,9 +97,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   const combo=widget?.querySelector('.goog-te-combo');if(!combo)return;
   combo.setAttribute('aria-label','Website translation language');combo.setAttribute('title','Website translation language');
   let picker=document.getElementById('patientLanguagePicker');
-  if(!picker){picker=document.createElement('select');picker.id='patientLanguagePicker';picker.className='patient-language-picker';picker.setAttribute('aria-label','Choose website language');picker.add(new Option('Choose language / भाषा निवडा',''));combo.parentNode.insertBefore(picker,combo);picker.addEventListener('change',()=>{if(!picker.value)return;choose(picker.value);closePanel();});}
+  let search=document.getElementById('patientLanguageSearch');
+  if(!search){search=document.createElement('input');search.type='search';search.id='patientLanguageSearch';search.className='patient-language-search';search.placeholder='Search language / भाषा शोधा';search.setAttribute('aria-label','Search languages by name');combo.parentNode.insertBefore(search,combo);}
+  if(!picker){picker=document.createElement('select');picker.id='patientLanguagePicker';picker.className='patient-language-picker';picker.size=8;picker.setAttribute('aria-label','Scrollable language list');picker.setAttribute('aria-describedby','patientLanguageSearch');combo.parentNode.insertBefore(picker,combo);picker.addEventListener('change',()=>{if(!picker.value)return;choose(picker.value);closePanel();});}
   const signature=[...combo.options].map(o=>o.value+'|'+o.textContent).join('~');
-  if(picker.dataset.signature!==signature){const currentValue=picker.value;picker.replaceChildren(new Option('Choose language / भाषा निवडा',''));[...combo.options].filter(o=>o.value).forEach(o=>picker.add(new Option(o.textContent.trim(),o.value)));picker.dataset.signature=signature;picker.value=[...picker.options].some(o=>o.value===currentValue)?currentValue:combo.value;}
+  if(picker.dataset.signature!==signature){const currentValue=picker.value;picker.replaceChildren();[...combo.options].filter(o=>o.value).forEach(o=>picker.add(new Option(o.textContent.trim(),o.value)));picker.dataset.signature=signature;picker.value=[...picker.options].some(o=>o.value===currentValue)?currentValue:combo.value;}
+  const filterLanguages=()=>{const q=search.value.trim().toLocaleLowerCase();let first=null;[...picker.options].forEach(o=>{const visible=!q||o.textContent.toLocaleLowerCase().includes(q)||o.value.toLocaleLowerCase().includes(q);o.hidden=!visible;if(visible&&!first)first=o;});if(q&&first)picker.selectedIndex=first.index;};
+  if(!search.dataset.bound){search.addEventListener('input',filterLanguages);search.dataset.bound='1';}
+  filterLanguages();
   combo.tabIndex=-1;combo.setAttribute('aria-hidden','true');combo.classList.add('patient-language-native-hidden');
  };
  buildLanguagePicker();if(widget)new MutationObserver(buildLanguagePicker).observe(widget,{childList:true,subtree:true});
