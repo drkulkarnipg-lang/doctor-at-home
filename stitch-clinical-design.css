@@ -404,4 +404,87 @@
     #doctorWorkstation .doctor-tabs button { max-width: 100%; white-space: normal; }
     #calc30Grid, #clinicalCalculatorGrid { grid-template-columns: minmax(0, 1fr); }
   }
+  /* Formal clinical documents: refine only the on-screen editors. The existing
+     A4/PDF clone styles and all print rules remain owned by their source CSS. */
+  #doctorWorkstation .certificate-sheet,
+  #doctorWorkstation .clinical-document-home,
+  #doctorWorkstation .payment-methods {
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+  #doctorWorkstation .certificate-page { color: var(--stitch-ink); }
+  #doctorWorkstation .certificate-title {
+    border-bottom-color: var(--stitch-navy) !important;
+  }
+  #doctorWorkstation .certificate-title h2,
+  #doctorWorkstation .certificate-letterhead strong {
+    color: var(--stitch-ink) !important;
+    font-family: Newsreader, Georgia, serif !important;
+  }
+  #doctorWorkstation .certificate-letterhead {
+    border-bottom-color: var(--stitch-line) !important;
+  }
+  #doctorWorkstation .certificate-field input,
+  #doctorWorkstation .certificate-field select,
+  #doctorWorkstation .certificate-field textarea,
+  #doctorWorkstation #rxSheet input,
+  #doctorWorkstation #rxSheet select,
+  #doctorWorkstation #rxSheet textarea {
+    border: 1px solid var(--stitch-border) !important;
+    border-radius: 4px !important;
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+  }
+  #doctorWorkstation .certificate-field input:focus-visible,
+  #doctorWorkstation .certificate-field select:focus-visible,
+  #doctorWorkstation .certificate-field textarea:focus-visible,
+  #doctorWorkstation #rxSheet input:focus-visible,
+  #doctorWorkstation #rxSheet select:focus-visible,
+  #doctorWorkstation #rxSheet textarea:focus-visible {
+    border-color: var(--stitch-sky) !important;
+  }
+  #doctorWorkstation .certificate-help {
+    background: var(--stitch-linen) !important;
+    border-color: var(--stitch-line) !important;
+    border-radius: 8px !important;
+    color: var(--stitch-navy) !important;
+  }
+  #doctorWorkstation .certificate-help a,
+  #doctorWorkstation .certificate-value { color: var(--stitch-forest); }
+  #doctorWorkstation #rxSheet {
+    background: var(--stitch-paper) !important;
+    color: var(--stitch-ink) !important;
+    border: 1px solid var(--stitch-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+  #doctorWorkstation #rxSheet h2,
+  #doctorWorkstation #rxSheet h3 { color: var(--stitch-ink) !important; }
+  #doctorWorkstation #rxTable tbody tr {
+    background: var(--stitch-paper) !important;
+    border-color: var(--stitch-line) !important;
+    border-radius: 6px !important;
+  }
+  #doctorWorkstation #rxTable tbody td input,
+  #doctorWorkstation #rxTable tbody td select {
+    border-color: var(--stitch-border) !important;
+    border-radius: 4px !important;
+  }
+  #doctorWorkstation .clinical-document-exit button,
+  #doctorWorkstation .clinical-document-home button,
+  #doctorWorkstation .payment-options a,
+  #doctorWorkstation .payment-options button {
+    min-height: 44px;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+  #doctorWorkstation .clinical-document-exit-bottom button {
+    background: var(--stitch-ink) !important;
+    border-color: var(--stitch-ink) !important;
+    color: white !important;
+  }
+
 }
