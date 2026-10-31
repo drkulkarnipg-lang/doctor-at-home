@@ -111,3 +111,9 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
 }
 .source-translate-link{display:inline-block;margin-inline-start:7px;color:#245f4a;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .source-translate-link:focus-visible{outline:3px solid #3f8c72;outline-offset:3px;border-radius:3px}
+
+/* Patient portal section navigation: show the selected destination without hiding the care promise. */
+.portal-nav a[aria-current="page"]{color:#155b49;text-decoration:underline;text-decoration-color:#7eaa91;text-decoration-thickness:2px;text-underline-offset:7px}
+#publicPortal>section[hidden]{display:none!important}
+.portal-nav a:focus-visible{outline:3px solid #0f766e;outline-offset:4px;border-radius:4px}
+@media(max-width:640px){.portal-nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px}.portal-nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;border:1px solid #d8e4df;border-radius:8px;background:#fff;white-space:normal}.portal-nav a[aria-current="page"]{background:#eaf3ec;border-color:#8aa998;text-decoration:none}}
