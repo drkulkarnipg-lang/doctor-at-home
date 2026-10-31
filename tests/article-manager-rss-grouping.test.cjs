@@ -10,7 +10,7 @@ const research=w.document.getElementById('viewJournalsHub'),articles=w.document.
 assert.ok(research&&articles,'both Article Manager and dedicated RSS panels must exist');
 const originalParent=research.parentElement;
 assert.notEqual(originalParent,articles,'the source layout starts with the RSS panel in its own dedicated workstation position');
-const visibleTopLevel=()=>views.filter(v=>{const el=w.document.getElementById('view'+v[0].toUpperCase()+v.slice(1));return !articles.contains(el)&&!el.classList.contains('hidden');});
+const visibleTopLevel=()=>views.filter(v=>{const el=w.document.getElementById('view'+v[0].toUpperCase()+v.slice(1));return !(el !== articles && articles.contains(el))&&!el.classList.contains('hidden');});
 w.switchDocTab('articlesHub');
 assert.equal(research.parentElement,articles,'Article Manager must mount the RSS/evidence panel inside its own section');
 assert.deepEqual(visibleTopLevel(),['articlesHub'],'Article Manager must be the only visible top-level workstation section');
