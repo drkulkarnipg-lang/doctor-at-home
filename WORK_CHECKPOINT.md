@@ -515,3 +515,5 @@ Owner's 31 October instruction was read from the saved source note. Immediate pr
 - Exact-head automated test, preview visual inspection, physical print/PDF, and confirmation that the embedded signature matches the owner's original are still open.
 - Existing UPI QR code is wired to reveal on click and generate a fee-bearing UPI URI for `drkulkarnipg@upi`; existing tests cover that behaviour synthetically. Actual scan/payee confirmation and live deployment remain open.
 - PR #85 remains draft; do not merge or deploy without the required approval. Vercel's build-rate-limit failure remains an external preview blocker.
+
+- Prescription PDF preservation check added: the clinical-document regression now asserts the signature image is retained in the generated prescription clone, unchanged by source path, and remains below the medication table. Commit: c9d04eb. The test has not yet executed on the exact head.
