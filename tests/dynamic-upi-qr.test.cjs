@@ -11,7 +11,7 @@ assert.match(html,/id="upiQrImg" loading="lazy" hidden/);
  $('showPaymentQr').click();await new Promise(r=>setTimeout(r,20));
  assert.equal($('paymentMethods').open,true,'patient-facing QR action opens payment methods');assert.equal($('upiQrDetails').open,true,'patient-facing QR action opens QR panel');await new Promise(r=>setTimeout(r,10));
  assert.ok(payloads.length>=1,'Opening the QR control must invoke the QR generator');
- let last=payloads.at(-1);let url=new URL(last.uri);assert.equal(url.protocol,'upi:');assert.equal(url.searchParams.get('pa'),'drkulkarnipg@upi');assert.equal(url.searchParams.get('am'),'1200');assert.equal(url.searchParams.get('cu'),'INR');assert.equal(last.options.width,320);assert.equal($('upiQrImg').hidden,false);assert.match($('upiQrImg').src,/^data:image\/png;base64,/);assert.match($('upiMethodStatus').textContent,/verify the payee.*amount/i);
+ let last=payloads.at(-1);let url=new URL(last.uri);assert.equal(url.protocol,'upi:');assert.equal(url.searchParams.get('pa'),'drkulkarnipg@upi');assert.equal(url.searchParams.get('am'),'1200');assert.equal(url.searchParams.get('cu'),'INR');assert.equal(last.options.width,320);assert.equal($('upiQrImg').hidden,false);assert.match($('upiQrImg').src,/^data:image\/png;base64,/);assert.match($('upiMethodStatus').textContent,/verify Dr\. Pramod G\. Kulkarni and ₹1,200\.00 in your UPI app/i);
 
  assert.equal($('upiQrAmount').textContent,'₹1,200.00','QR panel must show the exact calculated amount');
  assert.equal($('upiQrDownload').hidden,false,'download action appears only after QR generation');
