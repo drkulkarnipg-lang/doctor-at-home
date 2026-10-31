@@ -407,3 +407,11 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 6. **Patient article actions:** Download PDF and Share PDF are on the Health Library cards, not inside the reader. The reader keeps the standard Back to Health Library path. The full article/PDF preservation test passes.
 7. **Sentence-level traceability:** the traceability regression now allows sentence fragments to retain their own evidence pointer/status while checking that parent and child records remain populated. This preserves granular reporting instead of flattening every fragment to the parent line.
+
+
+## 31 October 2026 — final run checkpoint
+
+- Draft PR #86: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86 (head 782bc5cac08166fb0ecb85a1e5b3c6c6c331b94f). Keep as draft; do not merge or deploy without the doctor's approval.
+- Latest exact-head regression: Actions run 41165499172 passed all 60 test files. The source code commit 991ebeb26ccdc4166d7f52a3fb355e3caca56f5d also passed all 60 files before documentation synchronization.
+- Vercel for main and review head both reports build-rate-limit. No current preview URL, screenshot or actual phone rendering is verified. Last successful Vercel status remains 57d011721e92903c53f76035f43520c296502906.
+- Main remains unchanged at 12608d35c02b3afe76a10995e95ebb521087eae4 and its Actions run 41108470448 remains failed at the stale inventory assertion. The review PR is the tested correction path; it has not been merged.
