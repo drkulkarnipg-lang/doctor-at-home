@@ -74,6 +74,15 @@ function makeWindow(records=[]){
  assert.equal(second.saves[0].id,undefined,'a new encounter does not overwrite the previous encounter');
  second.dom.window.close();
 
+ const third=makeWindow(),w3=third.w,$3=id=>w3.document.getElementById(id);
+ $3('rxPatName').value='Emergency Patient';$3('rxPatName').dispatchEvent(new w3.Event('input',{bubbles:true}));
+ assert.match($3('rxPatientCode').value,/^PT-\d{8}-[A-F0-9]{8}$/,'patient number can be assigned when no mobile is available');
+ $3('rxPatientRegisterConsent').checked=true;$3('rxPatientRegisterConsent').dispatchEvent(new w3.Event('change',{bubbles:true}));
+ await wait(850);
+ assert.equal(third.saves.length,1,'patient can still be registered without a mobile number');
+ assert.equal(third.saves[0].phone,'');
+ third.dom.window.close();
+
  const valid=validateRegister({registerType:'daily',entryDate:'2026-10-31',patientName:'Test Patient',patientCode:'PT-20261031-ABC12345',phone:'9876543210',address:'Pune',patientDateTime:'31/10/2026 12:00 IST',prescriptionSerial:'RX-20261031-1200-ABCD',age:'65 years 4 months',sex:'Female',visitType:'Prescription / clinical encounter'});
  assert.equal(valid.data.age,'65 years 4 months','daily register accepts the age format entered on a prescription');
  assert.equal(valid.data.address,'Pune');
