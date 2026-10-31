@@ -57,7 +57,8 @@ assert.ok(w.document.querySelector('.hero-contact-actions a[href="https://wa.me/
 assert.ok(!w.document.querySelector('a[onclick="handleDirectCall(event)"]'));
 w.document.getElementById('contactClose').click();assert.equal(w.document.getElementById('doctorContactDialog').open,false);
 let copied='';Object.defineProperty(w.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});w.openDoctorContact();w.document.getElementById('contactCopy').click();await new Promise(resolve=>setTimeout(resolve,0));assert.equal(copied,'9561394341');assert.match(w.document.getElementById('contactCopyStatus').textContent,/Number copied/);w.document.getElementById('contactClose').click();
-assert.equal(w.document.querySelector('.portal-nav a').getAttribute('aria-current'),'location');
+assert.equal(w.document.querySelector('#portalTabOverview')?.getAttribute('aria-selected'),'true','The initial Patient Portal tab must be selected using tab semantics.');
+assert.equal(w.document.querySelector('#portalPanelOverview')?.hidden,false,'The initial Patient Portal panel must be visible.');
 
 // Local privacy lock: no default passphrase, password fields masked, verifier only.
 for(const id of ['deviceCurrentPassword','customPinInput','deviceConfirmPassword','deviceUnlockPassword'])assert.equal(w.document.getElementById(id).type,'password');
