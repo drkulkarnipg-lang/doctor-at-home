@@ -1392,18 +1392,31 @@
 
     function addRxRow() { addRxRowWithData('', '', '', '', ''); }
 
+    function renumberRxRows() {
+      const tbody = document.getElementById('rxTableBody');
+      [...tbody.rows].forEach((row, index) => {
+        if (row.cells[0]) row.cells[0].textContent = String(index + 1);
+      });
+    }
+
+    function removeRxRow(button) {
+      const row = button && button.closest('tr');
+      if (row) row.remove();
+      renumberRxRows();
+    }
+
     function addRxRowWithData(med, strength, freq, duration, instructions) {
       const tbody = document.getElementById('rxTableBody');
-      const idx = tbody.rows.length + 1;
       const tr = document.createElement('tr');
       const values = [String(med || ''), String(strength || ''), String(freq || ''), String(duration || ''), String(instructions || '')];
       tr.innerHTML = `
-        <td class="border p-1 text-center font-bold text-slate-500">${idx}</td>
+        <td class="border p-1 text-center font-bold text-slate-500"></td>
         ${values.map((value, i) => '<td class="border p-1"><input type="text" class="w-full min-w-0 '+(i===0?'font-bold ':'')+'outline-none px-1 py-0.5 bg-transparent" placeholder="'+['Drug name','Strength','Frequency','Duration','Instructions'][i]+'"></td>').join('')}
-        <td class="border p-1 text-center no-print"><button type="button" aria-label="Remove medicine row" onclick="this.closest('tr').remove()" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
+        <td class="border p-1 text-center no-print"><button type="button" aria-label="Remove medicine row" onclick="removeRxRow(this)" class="text-slate-500 hover:text-slate-800 font-bold">✕</button></td>
       `;
       [...tr.querySelectorAll('input')].forEach((input,i)=>{input.value=values[i];});
       tbody.appendChild(tr);
+      renumberRxRows();
     }
 
     function renderDrugDirectory() {
