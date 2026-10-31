@@ -193,7 +193,7 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 ## 31 October 2026 — exact-head evidence update
 
 - Main head: 12608d35c02b3afe76a10995e95ebb521087eae4; main Actions run 41108470448 failed at the external-link inventory source-line comparison after booking-intake, calculator UI and document-sharing tests passed. Do not mark the main suite green.
-- A safe Actions-based regeneration was performed from the corrected review-branch source: 86 scanned source files, 221 unique destinations, inventory source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Diagnostic log code was removed. Review-branch Actions run 41165365930 passed all 60 regression test files, including the inventory generator.
+- A safe Actions-based regeneration was performed from the corrected review-branch source: 86 scanned source files, 221 unique destinations, inventory source revision e0eaf16beca69f547c47f482dd3b3fde1d04b59d. Diagnostic log code was removed. Review-branch Actions run 41165663130 passed all 60 regression test files, including the inventory generator.
 - The phone language panel root cause is a CSS specificity conflict: fixed positioning was marked important globally but the later in-flow rule was not. The review branch corrects the cascade and tests the imported stylesheet. This is a source correction, not phone verification.
 - The Article Manager RSS panel is reparented into Article Manager and restored for the dedicated RSS tab; both transitions are tested.
 - The fee helper distinguishes ₹100 / ₹500 / ₹1,200 and explicitly says it does not collect payment. No billing/payment activation was performed.
@@ -203,4 +203,4 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - The public payment-method disclosure now shows the requested method categories. Existing UPI/QR behavior was retained; Razorpay/BillDesk remain disabled; bank transfer is a contact request only. No merchant credentials, gateway backend, billing settings or database migration were added.
 - The sentence-level traceability test now accepts segment-specific evidence/status and still requires populated parent/child evidence; the language-related source-line and sentence records were refreshed. This keeps the user's sentence-by-sentence audit granular.
 
-- Draft PR #86 is open for review at https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86. Exact head 782bc5cac08166fb0ecb85a1e5b3c6c6c331b94f passed all 60 regression test files in Actions run 41165499172. Vercel remains build-rate-limited for main and review head; no live/mobile visual completion is claimed.
+- Draft PR #86 is open for review at https://github.com/drkulkarnipg-lang/doctor-at-home/pull/86. Exact head b4e52c1daa248fc43dca6d674013bf273e64667c passed all 60 regression test files in Actions run 41165663130. Vercel remains build-rate-limited for main and review head; no live/mobile visual completion is claimed.
