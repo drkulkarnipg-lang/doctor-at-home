@@ -7,7 +7,7 @@ const migration=fs.readFileSync('supabase/migrations/20261031_clinical_register_
 assert.match(js,/ClinicCloud\.saveRegister/);assert.match(js,/value\('rxDateTime'\)/);assert.match(js,/sourceEventId/);assert.match(js,/rxPatName/);assert.match(js,/f2Name/);assert.match(js,/f4Name/);assert.match(js,/f4aName/);
 assert.match(migration,/create table if not exists public\.clinic_workstation_registers/i);
 assert.match(migration,/unique index/i);assert.match(migration,/upsert_clinic_register_source_event/i);assert.match(migration,/security invoker/i);
-assert.match(migration,/enable row level security/i);assert.match(migration,/grant select, insert, update[\\s\\S]*to authenticated/i);assert.doesNotMatch(migration,/grant[^;]*delete/i,'Clinical register must not grant deletion.');
+assert.match(migration,/enable row level security/i);assert.match(migration,/grant select, insert, update[\s\S]*to authenticated/i);assert.doesNotMatch(migration,/grant[^;]*delete/i,'Clinical register must not grant deletion.');
 assert.match(migration,/force row level security/i);assert.match(migration,/exists \(select 1 from public\.clinic_members where user_id = \(select auth\.uid\(\)\)\)/i);
 assert.match(migration,/with check \(owner_id = \(select auth\.uid\(\)\) and exists/i);
 assert.match(migration,/data = public\.clinic_workstation_registers\.data \|\| excluded\.data/i);
