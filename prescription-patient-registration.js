@@ -79,7 +79,7 @@ async function persist(){
    const result=await window.ClinicCloud.saveRegister(body);
    if(!result?.record?.id||!result.record.revision)throw Error('The cloud did not return a saved record ID and revision.');
    if(requestIdentity!==currentIdentity()){
-    savedRecord=null;lastSavedSnapshot='';patientCode='';identityKey=currentIdentity();assignPatientCode();
+    savedRecord=null;lastSavedSnapshot='';patientCode='';identityKey=currentIdentity();patientCode=await findOrCreatePatientCode(collect());$('rxPatientCode').value=patientCode;
     repeat=true;continue;
    }
    savedRecord=result.record;lastSavedSnapshot=snapshot(collect());
