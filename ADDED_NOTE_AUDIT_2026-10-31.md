@@ -51,3 +51,6 @@ The prior regression run passed on code head `3880dc6fbbe7b7e28c54c28c0828692f21
 
 
 **CI result update:** GitHub Actions run `41183587616` passed on exact source head `9389a86ea224fb7ed7cd89c9d1cb180a827f3782`. This includes the new registration test and full repository regression suite. A mobile number is optional when unavailable; when supplied it supports returning-patient matching. Supabase migrations and live owner-authenticated preview test remain pending.
+
+
+**Final regression update:** patient number suffix increased to 12 hexadecimal characters and prescription serial suffix to 8; mobile remains optional when unavailable. Full GitHub regression run `41184083412` PASSED on exact source head `36b22e5386f5e145e35a492eb9f9a7f558d71bab`, including the no-mobile path.
