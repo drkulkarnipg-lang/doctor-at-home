@@ -2,7 +2,7 @@ name: Regression tests
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, experiment/**]
   push:
     branches: [main, "fix/**", "audit/**", "experiment/**"]
   workflow_dispatch:
