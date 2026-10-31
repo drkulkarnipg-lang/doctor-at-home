@@ -548,6 +548,14 @@
   }
   .site-header #navPublicBtn { background: var(--stitch-ink) !important; }
   .site-header #navDoctorBtn { background: transparent !important; }
+  /* Full, scrollable native language list; never clip the D–Z entries. */
+  .patient-language-picker{display:block!important;width:100%;max-width:100%;min-height:42px;padding:9px 38px 9px 12px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:600 13px/1.4 Inter,sans-serif;}
+  #google_translate_element .patient-language-native-hidden{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;}
+  .language-control[open]{position:relative;z-index:1000;}
+  .language-control[open] .language-row{position:relative;z-index:1001;}
+  .language-control > summary{list-style:none;}
+  .language-control > summary::-webkit-details-marker{display:none;}
+  .language-control > summary:focus-visible{outline:3px solid var(--stitch-sky);outline-offset:2px;}
   .site-header .language-control > summary {
     min-height: 38px;
     display: flex; align-items: center;
