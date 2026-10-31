@@ -646,6 +646,18 @@
   canvas {
     image-rendering: pixelated;
   }
+  #upiQrImg {
+    width: min(100%, 256px);
+    max-width: 256px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    image-rendering: pixelated;
+    background: #fff;
+    padding: 8px;
+    border: 1px solid var(--stitch-line);
+    border-radius: 6px;
+  }
   svg {
     shape-rendering: geometricPrecision;
   }
