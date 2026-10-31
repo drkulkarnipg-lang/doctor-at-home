@@ -43,13 +43,18 @@ function collect(){
 }
 function snapshot(data){return JSON.stringify(data);}
 async function findOrCreatePatientCode(data){
- const listed=await window.ClinicCloud.listRegister('daily');
- const match=(listed.records||[]).find(record=>
-  normal(record.data?.patientName)===normal(data.patientName) &&
-  String(record.data?.phone||'').replace(/\D/g,'').replace(/^91(?=\d{10}$)/,'')===data.phone &&
-  typeof record.data?.patientCode==='string'&&record.data.patientCode.trim()
- );
- if(match)return match.data.patientCode.trim();
+ if(typeof window.ClinicCloud.findPatient==='function'){
+  const result=await window.ClinicCloud.findPatient(data.phone,data.patientName);
+  if(result?.patientCode)return result.patientCode;
+ }else{
+  const listed=await window.ClinicCloud.listRegister('daily');
+  const match=(listed.records||[]).find(record=>
+   normal(record.data?.patientName)===normal(data.patientName) &&
+   String(record.data?.phone||'').replace(/\D/g,'').replace(/^91(?=\d{10}$)/,'')===data.phone &&
+   typeof record.data?.patientCode==='string'&&record.data.patientCode.trim()
+  );
+  if(match)return match.data.patientCode.trim();
+ }
  assignPatientCode();return patientCode;
 }
 async function persist(){
