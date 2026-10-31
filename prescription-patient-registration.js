@@ -23,10 +23,10 @@ function dateParts(){
 }
 function setSerials(){
  const now=indiaNow(),rx=$('rxSerialNo');
- if(rx&&!rx.value)rx.value='RX-'+now.stamp+'-'+suffix(4);
+ if(rx&&!rx.value)rx.value='RX-'+now.stamp+'-'+suffix(8);
 }
 function assignPatientCode(){
- if(!patientCode){const now=indiaNow();patientCode='PT-'+now.iso.replace(/-/g,'')+'-'+suffix(8);}
+ if(!patientCode){const now=indiaNow();patientCode='PT-'+now.iso.replace(/-/g,'')+'-'+suffix(12);}
  const input=$('rxPatientCode');if(input)input.value=patientCode;
 }
 function collect(){
