@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
 const script=fs.readFileSync('payment-options.js','utf8'),html=fs.readFileSync('index.html','utf8');
-assert.match(html,/Show payment QR \/ भुगतान QR दिखाएँ/);
+assert.match(html,/Show my UPI payment QR[\s\S]*भुगतान QR दिखाएँ/);
 assert.match(html,/id="upiQrImg" loading="lazy" hidden/);
 (async()=>{
  const dom=new JSDOM('<a id="upiPaymentLink"></a><button id="upiCopyId"></button><p id="upiMethodStatus"></p><details id="upiQrDetails"><summary>Show QR</summary><img id="upiQrImg" hidden></details><button id="bankTransferRequest"></button><input id="calcTime"><input id="calcDistance"><div id="procedureList"><input type="checkbox"></div>',{url:'https://clinic.example.test',runScripts:'outside-only'});
