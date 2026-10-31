@@ -6,7 +6,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require
  w.eval(fs.readFileSync('patient-helper.js','utf8'));
  await new Promise(resolve=>setTimeout(resolve,20));
  const input=w.document.getElementById('chatInput');input.value='fees';w.sendChatMessage();
- const response=w.document.querySelector('#chatMessages .helper-message.assistant')?.textContent||'';
+ const responses=[...w.document.querySelectorAll('#chatMessages .helper-message.assistant')];const response=responses.at(-1)?.textContent||'';
  assert.match(response,/₹100[^.]*service-assistant \/ guided help/i,'show the separate ₹100 guided-help fee');
  assert.match(response,/₹500[^.]*online consultation/i,'show the separate ₹500 online-consultation fee');
  assert.match(response,/₹1,200[^.]*daytime home-visit fee/i,'show the separate ₹1,200 daytime home-visit base');
