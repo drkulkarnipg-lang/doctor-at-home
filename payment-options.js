@@ -9,17 +9,20 @@ let qrRequest=0;
 async function updatePaymentQr(amount){
  const image=$('upiQrImg'),details=$('upiQrDetails'),status=$('upiMethodStatus');
  if(!image||!details?.open)return;
+ const request=++qrRequest;
  const fee=Number.isFinite(Number(amount))?Math.max(0,Number(amount)):0;
  const amountLabel=$('upiQrAmount');if(amountLabel)amountLabel.textContent=formatInr(fee);
  image.hidden=true;image.removeAttribute('src');
  const download=$('upiQrDownload');if(download){download.hidden=true;download.removeAttribute('href');}
  const enlarge=$('upiQrEnlarge');if(enlarge)enlarge.disabled=true;
+ closeZoom($('upiQrZoomDialog'));
+ const zoomImage=$('upiQrZoomImage');if(zoomImage)zoomImage.removeAttribute('src');
  const qr=window.KulkarniQRCode;
  if(!qr||typeof qr.toDataURL!=='function'){
   if(status)status.textContent='QR generation is unavailable in this browser. Use Open UPI app or Copy UPI ID.';
   return;
  }
- const uri=paymentUri(fee),request=++qrRequest;
+ const uri=paymentUri(fee);
  image.dataset.qrPayload=uri;
  if(status)status.textContent='Preparing UPI QR…';
  try{
