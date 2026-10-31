@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const api=require('../api/clinical-cloud.js');
+const js=fs.readFileSync('clinical-register-linkage.js','utf8');
+const ui=fs.readFileSync('workstation-registers.js','utf8');
+const migration=fs.readFileSync('supabase/migrations/20261031_clinical_register_source_linkage.sql','utf8');
+assert.match(js,/ClinicCloud\.saveRegister/);assert.match(js,/sourceEventId/);assert.match(js,/rxPatName/);assert.match(js,/f2Name/);assert.match(js,/f4Name/);assert.match(js,/f4aName/);
+assert.match(migration,/unique index/i);assert.match(migration,/owner_id, register_type, source_event_id/i);
+assert.match(ui,/feeCharged/);assert.match(ui,/amountReceived/);assert.match(ui,/balance/);assert.match(ui,/address/);
+const daily=api.validateRegister({registerType:'daily',entryDate:'2026-10-31',patientName:'Example',visitType:'Home visit',sourceEventId:'visit-demo-1',address:'Test address',feeCharged:'1200',amountReceived:'0',balance:'1200',paymentStatus:'Not recorded'});
+assert.equal(daily.data.sourceEventId,'visit-demo-1');assert.equal(daily.data.address,'Test address');
+const death=api.validateRegister({registerType:'death',entryDate:'2026-10-31',patientName:'Example',deathDateTime:'2026-10-31T10:30',place:'Not stated on Form 4A',sourceEventId:'death-demo-1',sourceForm:'form4a',address:'Residence address'});
+assert.equal(death.data.sourceEventId,'death-demo-1');assert.equal(death.data.address,'Residence address');
+console.log('Automatic register linkage checks passed.');
