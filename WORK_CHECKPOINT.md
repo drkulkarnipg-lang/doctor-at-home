@@ -466,3 +466,13 @@ Added a doctor-login-only bulk import control in public-article-editor.js to tur
 Also saved four source-derived English drafts in content/article-drafts-2026-10-31.json from existing public Elderly care cards. These are a separate small draft manifest and are not auto-imported or published. Avoid duplicate topical publication when deduplicating them against the existing PatientEducation corpus.
 
 Still required: run the bulk importer from an authenticated Doctor Workstation session after preview Supabase is configured, verify the actual cloud count and article URLs, compare against all existing local/cloud drafts and the supplied Day 1–13 corpus, deduplicate overlaps, then physician-review each article and translation before any publication. The public /articles list must not be claimed populated until a real cloud query proves it.
+
+## Latest exact-head CI and gateway hardening — 31 October 2026
+
+- Latest branch head: `e6a56d0f9ed0e47da1c412053451ef8cd42137b9`.
+- GitHub Actions run `41177912280` completed successfully. The full regression workflow reports **60 regression test files completed**; Razorpay gateway and requisition-output tests passed.
+- Gateway hardening since the earlier pass: raw webhook body is read from the request stream when body parsing is disabled, with a 1 MiB limit; duplicate provider event IDs are acknowledged idempotently; partial refunds are recorded separately from full refunds so a partial refund is never overstated as a full refund.
+- PR #85 remains draft. GitHub's Vercel status check is still failing on a Vercel build-rate-limit deployment; no current-head preview or production release is verified.
+- Razorpay keys, webhook secret and Supabase service-role configuration are not installed by this work. The migration has not been applied. No live charge, refund, bank settlement or appointment confirmation is claimed.
+- The PatientEducation corpus importer is implemented and covered by synthetic tests, but it has not been run against the authenticated live cloud article database. Cloud counts, actual imported records and public article URLs remain unverified.
+- Continue from this exact head; do not mark gateway or article publishing complete based only on CI. No merge/deploy until preview and owner-controlled checks are complete.
