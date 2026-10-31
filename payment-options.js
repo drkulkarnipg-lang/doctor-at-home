@@ -45,7 +45,7 @@ async function copyUpi(){
  status.textContent='UPI ID copied: '+UPI+'. Confirm the payee and amount in your UPI app before paying.';
  }catch{status.textContent='UPI ID: '+UPI+'. Select and copy it, then confirm the payee and amount in your UPI app.';}
 }
-function closeZoom(dialog){if(!dialog)return;if(typeof dialog.close==='function'&&dialog.open)dialog.close();else dialog.removeAttribute('open');}
+function closeZoom(dialog){if(!dialog)return;try{if(typeof dialog.close==='function'&&dialog.open){dialog.close();return;}}catch{}dialog.removeAttribute('open');}
 document.addEventListener('DOMContentLoaded',()=>{
  const copy=$('upiCopyId'),details=$('upiQrDetails'),link=$('upiPaymentLink'),paymentMethods=$('paymentMethods'),showQr=$('showPaymentQr');
  const image=$('upiQrImg'),download=$('upiQrDownload'),enlarge=$('upiQrEnlarge'),zoomDialog=$('upiQrZoomDialog'),zoomImage=$('upiQrZoomImage'),zoomClose=$('upiQrZoomClose');
