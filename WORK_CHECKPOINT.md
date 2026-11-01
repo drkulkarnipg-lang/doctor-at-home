@@ -559,3 +559,15 @@ Owner reported that prescription Save, Download and Export controls do not work.
 - Regression test covers picker save, fallback download, text copy, PDF handoff and preservation of other document exports.
 
 Verification: the repository-wide inventory test passes after adding the new source file to the committed inventory. The focused test now handles jsdom Blob metadata and awaits the asynchronous share wrapper. The latest full run exposed only the missing `await` in the test's Share assertion; corrected. Fresh Actions run pending. Keep PR #91 preview-only; do not mark production live until the full suite passes and browser/device verification is recorded. No cloud storage, patient-data upload, database migration or prescribing changes are introduced.
+
+
+## Lab Normal Reference Check Table — 2 November 2026
+
+- Current seed: 27 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
+- New `lab-reference-governance.js` loads after `clinical-calculators.js` in Doctor Workstation. Adds searchable test input plus explicit dropdown, source evidence panel, adult age/sex matching, pregnancy guard, explicit result unit and no silent conversion, and local report interval override.
+- Reference intervals and decision limits are distinguished (eGFR threshold is not labelled a population normal range). No matching age/sex interval = no classification; no guess.
+- Previous ungoverned CSV import that activated arbitrary rows has been removed. Evidence CSV requires source title + HTTPS URL, specimen, method, population, adult age band, sex partition, unit and range type. Rows enter pending review and only become selectable after explicit clinician review/approval. Reviewed catalogue is stored locally on that workstation and can be exported as JSON; patient results are never stored or uploaded.
+- Added `tests/lab-reference-governance.test.cjs` and `npm run test:lab-reference`. Development-runtime syntax and core validation/boundary checks pass. Exact-head CI and actual browser/device tests are still pending.
+- Target remains 750 distinct source-backed records (minimum 700). Synonyms, unit conversions and arbitrary partitions do not count. Clinical pathology/laboratory governance and local method verification remain required.
+- Evidence plan and source/licensing rules: `LAB_NORMAL_REFERENCE_CHECK_TABLE_PLAN.md`.
+- Deployment status must be checked against the exact latest commit; GitHub commits are not proof of production publication.
