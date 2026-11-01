@@ -768,38 +768,6 @@
 <section class="research-review"><h3>Additional existing reference links</h3><a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&amp;q=Dr+Pramod+G+Kulkarni%2CEmergency+and+HomeCare+Specialist" rel="noopener noreferrer" target="_blank">GMB</a><a href="https://wa.me/919561394341?text=Hello%20Dr.%20Kulkarni,%20requesting%20urgent%20home%20ICU%20consultation%20in%20Pune." rel="noopener noreferrer" target="_blank">WhatsApp Dr. Kulkarni</a><a href="https://www.msdmanuals.com/professional" rel="noopener noreferrer" target="_blank">📚 MSD Manuals (Professional Edition)</a><a href="https://reference.medscape.com/" rel="noopener noreferrer" target="_blank">🩺 Medscape Reference &amp; Drug Interactions</a><a href="https://medicalxpress.com/" rel="noopener noreferrer" target="_blank">⚡ Medical Xpress Updates</a></section></div>
 <!-- TAB 4: PATHOLOGY CHEAT SHEET -->
 <div class="hidden space-y-4" id="viewPathCheatSheet">
-<section class="lab-reference-checker" id="labReferenceChecker" aria-labelledby="labReferenceHeading">
- <div class="lab-reference-heading"><span class="section-eyebrow">Clinician decision support · source-traceable</span><h3 id="labReferenceHeading">Lab Normal Reference Check Table</h3><p>Choose a test, enter the measured value and get an immediate comparison. Adult reference intervals only in this initial verified release. The reporting laboratory's own interval takes priority.</p></div>
- <div class="lab-reference-grid">
-  <label>Search / select test<input id="labRefSearch" type="search" list="labRefOptions" placeholder="e.g. sodium, Hb, creatinine…" autocomplete="off"/><datalist id="labRefOptions"></datalist></label>
-  <label>Patient age (years)<input id="labRefAge" type="number" min="0" max="120" step="1" placeholder="Age"/></label>
-  <label>Sex partition (when applicable)<select id="labRefSex"><option value="">Not specified</option><option value="male">Male</option><option value="female">Female</option></select></label>
-  <label>Measured value<input id="labRefValue" type="number" step="any" inputmode="decimal" placeholder="Enter result"/></label>
- </div>
- <div class="lab-reference-selected" id="labRefSelected" aria-live="polite">Select a test to display its reference interval and unit.</div>
- <div class="lab-reference-override">
-  <details><summary>Use the interval printed on this patient's laboratory report (preferred)</summary>
-   <p>Enter the exact lower and upper limits from the same report. These override the general comparator interval for this calculation.</p>
-   <div class="lab-reference-grid"><label>Report lower limit<input id="labRefLocalLow" type="number" step="any"/></label><label>Report upper limit<input id="labRefLocalHigh" type="number" step="any"/></label><label>Report unit<input id="labRefLocalUnit" type="text" placeholder="Same unit as measured result"/></label></div>
-  </details>
- </div>
- <div id="labRefResult" class="lab-reference-result" role="status" aria-live="polite">Result classification will appear here as soon as a value is entered.</div>
- <p class="lab-reference-caution"><strong>Clinical safeguard:</strong> “Within reference interval” is not equivalent to “healthy”; an out-of-range result is not by itself a diagnosis. Reference intervals vary by age, sex, pregnancy, specimen, assay, instrument and population. This release is a source-attributed adult comparator, not a universal global standard. Do not use it to assess neonates, children, pregnancy-specific tests, critical values or clinical decision limits.</p>
- <div class="lab-reference-meta"><span id="labRefCount"></span><span>Patient values are processed in this browser only; this checker does not upload or save them.</span></div>
-</section>
-<style>
-.lab-reference-checker{background:rgba(255,255,255,.76);border:1px solid rgba(153,174,183,.28);border-radius:22px;padding:clamp(16px,3vw,28px);margin:18px 0 24px;box-shadow:0 12px 36px rgba(49,72,80,.045)}
-.lab-reference-heading h3{font-size:clamp(23px,3vw,31px);font-weight:600;color:#304654;margin:4px 0 8px}.lab-reference-heading p,.lab-reference-caution,.lab-reference-override p{font-size:13px;line-height:1.7;color:#627582}
-.lab-reference-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
-.lab-reference-grid label{display:grid;gap:6px;font-size:12px;font-weight:650;color:#435965}
-.lab-reference-grid input,.lab-reference-grid select{width:100%;min-height:43px;border:1px solid rgba(147,171,174,.48);border-radius:10px;background:rgba(255,255,255,.92);padding:9px 11px;color:#263b49}
-.lab-reference-selected{border:1px solid rgba(153,174,183,.22);background:rgba(242,247,244,.8);padding:13px 15px;border-radius:12px;font-size:13px;line-height:1.65;color:#425b65}
-.lab-reference-override{margin-top:12px}.lab-reference-override summary{cursor:pointer;color:#527f7a;font-size:13px;font-weight:700;padding:8px 0}
-.lab-reference-result{margin-top:14px;border:1px solid rgba(153,174,183,.24);background:#f7faf8;border-radius:14px;padding:15px;font-weight:650;font-size:15px;color:#405761;min-height:56px}
-.lab-reference-result.is-normal{background:#eff7f1;border-color:#b9d4c1;color:#24563c}.lab-reference-result.is-low,.lab-reference-result.is-high{background:#fff7ed;border-color:#f0d0a7;color:#8a4b16}.lab-reference-result.is-warning{background:#f4f5f6;border-color:#d5dce0;color:#52636d}
-.lab-reference-caution{margin-top:14px;padding:12px 14px;background:#fbfaf6;border-left:3px solid #c9b98f;border-radius:6px}
-.lab-reference-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:10px;font-size:11px;color:#71828b}
-</style>
 <div class="flex flex-wrap justify-between items-center gap-2 no-print">
 <div>
 <h3 class="text-xl font-bold serif-brand text-[#0F2942]">Pathology Master Cheat Sheet (150+ Standard Reference Values)</h3>
@@ -1521,73 +1489,6 @@
       });
     }
     function closeDrugModal() { document.getElementById('drugModal').classList.add('hidden'); }
-
-
-// Source-attributed adult comparator intervals. These are not universal standards.
-// The reporting laboratory's assay-specific interval must override these values.
-const LAB_REFERENCE_TESTS = [
- {id:'na',name:'Sodium',aliases:'Na; serum sodium',cat:'Electrolytes',unit:'mmol/L',low:135,high:145,source:'Mayo Clinic Laboratories · Basic Metabolic Panel',note:'Adult comparator; age-specific paediatric interval not included.'},
- {id:'k',name:'Potassium',aliases:'K; serum potassium',cat:'Electrolytes',unit:'mmol/L',low:3.6,high:5.2,source:'Mayo Clinic Laboratories · Basic Metabolic Panel'},
- {id:'cl',name:'Chloride',aliases:'Cl; serum chloride',cat:'Electrolytes',unit:'mmol/L',low:98,high:107,source:'Mayo Clinic Laboratories · Basic Metabolic Panel'},
- {id:'hco3',name:'Bicarbonate',aliases:'HCO3; total CO2',cat:'Electrolytes',unit:'mmol/L',low:22,high:29,source:'Mayo Clinic Laboratories · Basic Metabolic Panel'},
- {id:'bun',name:'Blood urea nitrogen',aliases:'BUN',cat:'Renal',unit:'mg/dL',sex:{male:{low:8,high:24},female:{low:6,high:21}},source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel'},
- {id:'creat',name:'Creatinine',aliases:'Serum creatinine; SCr',cat:'Renal',unit:'mg/dL',sex:{male:{low:0.74,high:1.35},female:{low:0.59,high:1.04}},source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel',note:'Creatinine depends strongly on muscle mass; use eGFR and clinical context.'},
- {id:'egfr',name:'Estimated GFR (CKD-EPI 2021)',aliases:'eGFR; estimated glomerular filtration rate',cat:'Renal',unit:'mL/min/1.73 m²',low:60,high:Infinity,source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel',note:'This is a clinical threshold (≥60), not a healthy-population reference interval. CKD requires persistence/other markers.'},
- {id:'ca',name:'Calcium, total',aliases:'Total calcium; Ca',cat:'Electrolytes',unit:'mg/dL',low:8.6,high:10.0,source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel',note:'Age partition applies; this comparator is for adults 18–59 years.'},
- {id:'mg',name:'Magnesium',aliases:'Mg; serum magnesium',cat:'Electrolytes',unit:'mg/dL',low:1.7,high:2.3,source:'Mayo Clinic Laboratories · Magnesium, Serum'},
- {id:'glucose',name:'Glucose, non-fasting',aliases:'Random glucose; blood glucose',cat:'Metabolic',unit:'mg/dL',low:70,high:140,source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel',note:'Not a fasting diagnostic threshold. Fasting, post-load and random glucose use different decision limits.'},
- {id:'protein',name:'Total protein',aliases:'Serum total protein',cat:'Liver / protein',unit:'g/dL',low:6.3,high:7.9,source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel'},
- {id:'albumin',name:'Albumin',aliases:'Serum albumin',cat:'Liver / protein',unit:'g/dL',low:3.5,high:5.0,source:'Mayo Clinic Laboratories · Albumin, Serum'},
- {id:'ast',name:'AST (SGOT)',aliases:'Aspartate aminotransferase; SGOT',cat:'Liver',unit:'U/L',sex:{male:{low:8,high:48},female:{low:8,high:43}},source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel'},
- {id:'alt',name:'ALT (SGPT)',aliases:'Alanine aminotransferase; SGPT',cat:'Liver',unit:'U/L',sex:{male:{low:7,high:55},female:{low:7,high:45}},source:'Mayo Clinic Laboratories · Comprehensive Metabolic Panel'},
- {id:'alp',name:'Alkaline phosphatase',aliases:'ALP',cat:'Liver / bone',unit:'U/L',sex:{male:{low:40,high:129},female:{low:35,high:104}},source:'Mayo Clinic Laboratories · Alkaline Phosphatase, Serum'},
- {id:'bilirubin',name:'Bilirubin, total',aliases:'Total bilirubin; TSB',cat:'Liver',unit:'mg/dL',low:0,high:1.2,source:'Mayo Clinic Laboratories · Liver Profile',note:'Neonatal bilirubin requires postnatal age in hours and gestational age; this adult interval must not be used in newborns.'},
- {id:'dbil',name:'Bilirubin, direct',aliases:'Direct bilirubin; conjugated bilirubin',cat:'Liver',unit:'mg/dL',low:0,high:0.3,source:'Mayo Clinic Laboratories · Liver Profile'},
- {id:'rbc',name:'RBC count',aliases:'Red blood cell count; erythrocytes',cat:'Haematology',unit:'×10¹²/L',sex:{male:{low:4.35,high:5.65},female:{low:3.92,high:5.13}},source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'hb',name:'Haemoglobin',aliases:'Hemoglobin; Hb',cat:'Haematology',unit:'g/dL',sex:{male:{low:13.2,high:16.6},female:{low:11.6,high:15.0}},source:'Mayo Clinic Laboratories · CBC with Differential',note:'This is a laboratory reference interval, not WHO anaemia diagnostic cut-offs.'},
- {id:'hct',name:'Haematocrit',aliases:'Hematocrit; PCV',cat:'Haematology',unit:'%',sex:{male:{low:38.3,high:48.6},female:{low:35.5,high:44.9}},source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'mcv',name:'MCV',aliases:'Mean corpuscular volume',cat:'Haematology',unit:'fL',low:78.2,high:97.9,source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'rdw',name:'RDW',aliases:'Red cell distribution width',cat:'Haematology',unit:'%',low:11.8,high:14.5,source:'Mayo Clinic Laboratories · CBC with Differential',note:'Mayo adult male interval; female interval is 12.2–16.1%. Select female sex for the female-specific interval.'},
- {id:'wbc',name:'WBC count',aliases:'White blood cell count; leukocyte count',cat:'Haematology',unit:'×10⁹/L',low:3.4,high:9.6,source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'plt',name:'Platelet count',aliases:'Platelets; thrombocytes',cat:'Haematology',unit:'×10⁹/L',sex:{male:{low:135,high:317},female:{low:157,high:371}},source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'anc',name:'Absolute neutrophil count',aliases:'ANC; neutrophils absolute',cat:'Haematology',unit:'×10⁹/L',low:1.56,high:6.45,source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'alc',name:'Absolute lymphocyte count',aliases:'ALC; lymphocytes absolute',cat:'Haematology',unit:'×10⁹/L',low:0.95,high:3.07,source:'Mayo Clinic Laboratories · CBC with Differential'},
- {id:'ft4',name:'Free T4',aliases:'FT4; free thyroxine',cat:'Endocrine',unit:'ng/dL',low:0.9,high:1.7,source:'Mayo Clinic Laboratories · T4, Free, Serum',note:'Interpret with TSH, assay and clinical context.'}
-];
-function initLabReferenceChecker(){
- const $=id=>document.getElementById(id), search=$('labRefSearch'), value=$('labRefValue'), age=$('labRefAge'), sex=$('labRefSex'), result=$('labRefResult'), selected=$('labRefSelected'), list=$('labRefOptions');
- if(!search||search.dataset.ready)return;search.dataset.ready='1';
- const options=[...LAB_REFERENCE_TESTS].sort((a,b)=>a.name.localeCompare(b.name));
- options.forEach(t=>{const o=document.createElement('option');o.value=t.name;list.appendChild(o);});
- $('labRefCount').textContent=options.length+' source-attributed test intervals loaded in this initial adult release · 700+ test expansion is the next validation milestone.';
- let active=null;
- const match=()=>options.find(t=>t.name.toLowerCase()===search.value.trim().toLowerCase()||t.id===search.value.trim().toLowerCase()||t.aliases.toLowerCase().split(';').map(x=>x.trim()).includes(search.value.trim().toLowerCase()));
- function evaluate(){
-  if(!active){result.className='lab-reference-result is-warning';result.textContent='Select a test from the searchable list.';return;}
-  const ageN=Number(age.value), v=Number(value.value), localLow=$('labRefLocalLow').value,localHigh=$('labRefLocalHigh').value,localUnit=$('labRefLocalUnit').value.trim();
-  if(!age.value||!Number.isFinite(ageN)||ageN<18){selected.textContent=active.name+' · '+active.unit+' · '+active.source;result.className='lab-reference-result is-warning';result.textContent='Adult reference comparator only. Enter age ≥18 years. Paediatric and neonatal ranges are not loaded in this release.';return;}
-  let range=null,source=active.source,unit=active.unit;
-  if(localLow!==''||localHigh!==''){
-   if(localLow===''||localHigh===''||!Number.isFinite(Number(localLow))||!Number.isFinite(Number(localHigh))||Number(localLow)>Number(localHigh)){result.className='lab-reference-result is-warning';result.textContent='Enter both valid report limits; lower limit must not exceed upper limit.';return;}
-   range={low:Number(localLow),high:Number(localHigh)};source='Patient report interval (user-entered)';if(localUnit)unit=localUnit;
-  } else if(active.sex){
-   if(!sex.value){result.className='lab-reference-result is-warning';result.textContent='Select the sex partition used by the laboratory to apply the correct interval.';return;}
-   range=active.sex[sex.value];
-   if(active.id==='rdw'&&sex.value==='female')range={low:12.2,high:16.1};
-  } else range={low:active.low,high:active.high};
-  selected.textContent=active.name+' · Reference: '+(range.high===Infinity?'≥'+range.low:range.low+'–'+range.high)+' '+unit+' · Source: '+source+(active.note?' · '+active.note:'');
-  if(value.value===''){result.className='lab-reference-result';result.textContent='Enter the measured value for immediate classification.';return;}
-  if(!Number.isFinite(v)){result.className='lab-reference-result is-warning';result.textContent='Enter a valid numeric result.';return;}
-  const status=v<range.low?'LOW':v>range.high?'HIGH':'WITHIN REFERENCE INTERVAL';
-  result.className='lab-reference-result '+(status==='LOW'?'is-low':status==='HIGH'?'is-high':'is-normal');
-  result.textContent=status+' · '+active.name+': '+v+' '+unit+' (reference '+range.low+'–'+(range.high===Infinity?'∞':range.high)+' '+unit+'). '+(status==='WITHIN REFERENCE INTERVAL'?'This result falls within the selected comparator interval.':'This result is outside the selected comparator interval; interpret clinically and verify against the report.');
- }
- function selectTest(){const t=match();if(!t){active=null;selected.textContent='No exact catalogue match. Check spelling or use the laboratory report interval with a curated test entry.';result.className='lab-reference-result is-warning';result.textContent='Test not found in this verified release. Do not guess a reference range.';return;}active=t;evaluate();}
- search.addEventListener('change',selectTest);search.addEventListener('input',()=>{const t=match();if(t){active=t;evaluate();}else if(search.value.trim()){active=null;result.className='lab-reference-result is-warning';result.textContent='Choose an exact test name from the suggestions. No range will be guessed.';}});
- [value,age,sex,$('labRefLocalLow'),$('labRefLocalHigh'),$('labRefLocalUnit')].forEach(el=>el.addEventListener('input',evaluate));
- sex.addEventListener('change',evaluate);
-}
-document.addEventListener('DOMContentLoaded',initLabReferenceChecker);
 
     // PATHOLOGY CHEAT SHEET
     function renderCheatSheet() {
