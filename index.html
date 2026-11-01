@@ -715,14 +715,14 @@
 </div>
 <p class="text-xs text-slate-600 mt-1">Read available RSS excerpts from journals and research news; open the original source to assess evidence.</p>
 </div>
-<div class="flex items-center gap-2">
-<select class="text-xs border p-2 rounded-xl bg-slate-50 font-bold text-slate-700 outline-none" id="rssFeedSource">
+<div class="research-feed-controls flex flex-wrap items-center gap-2 w-full md:w-auto min-w-0">
+<select class="research-feed-source text-xs border p-2 rounded-xl bg-slate-50 font-bold text-slate-700 outline-none" id="rssFeedSource">
 <option value="nejm">NEJM (New England Journal of Medicine)</option>
 <option value="naturemedicine" selected>Nature Medicine — journal feed</option><option value="criticalcare">Critical Care - latest journal feed</option>
 <option value="lancet">The Lancet Online First</option>
 <option value="cdc">CDC Newsroom - public health updates</option>
 <option value="medicalxpress">Medical Xpress - research news updates</option></select>
-<button class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex items-center gap-1" id="rssFetchLatest">
+<button class="research-feed-fetch bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex items-center justify-center gap-2" id="rssFetchLatest" type="button" aria-controls="rssFeedContainer">
               🔄 Fetch Latest Feeds
             </button>
 </div>
