@@ -155,7 +155,55 @@ api.render=function(){const publicGrid=document.getElementById('calc30Grid');con
  ['irf-mayo-female','Immature reticulocyte fraction','IRF; immature reticulocyte fraction','Haematology','%',3.0,15.9,'Mayo Clinic Laboratories · Reticulocyte Profile, Blood',null,{sourceName:'Mayo Clinic Laboratories, Reticulocyte Profile, Blood (RETB)',sourceUrl:'https://www.mayocliniclabs.com/test-catalog/overview/616856',specimen:'Whole Blood EDTA',method:'Flow Cytometry',population:'Mayo-derived adult reference population; female partition, adults ≥18 years',collectionConditions:'EDTA whole blood; no fasting condition specified on source page',ageMin:18,ageMax:120,sex:'female',rangeType:'reference_interval',reviewStatus:'Source-verified Mayo reference interval; local method transfer pending'}],
  ['ret-he-mayo-male','Reticulocyte haemoglobin','RET-He; reticulocyte haemoglobin content; CHr','Haematology','pg',30.0,37.6,'Mayo Clinic Laboratories · Reticulocyte Profile, Blood',null,{sourceName:'Mayo Clinic Laboratories, Reticulocyte Profile, Blood (RETB)',sourceUrl:'https://www.mayocliniclabs.com/test-catalog/overview/616856',specimen:'Whole Blood EDTA',method:'Flow Cytometry',population:'Mayo-derived adult reference population; male partition, adults ≥18 years',collectionConditions:'EDTA whole blood; no fasting condition specified on source page',ageMin:18,ageMax:120,sex:'male',rangeType:'reference_interval',reviewStatus:'Source-verified Mayo reference interval; local method transfer pending'}],
  ['ret-he-mayo-female','Reticulocyte haemoglobin','RET-He; reticulocyte haemoglobin content; CHr','Haematology','pg',30.0,37.6,'Mayo Clinic Laboratories · Reticulocyte Profile, Blood',null,{sourceName:'Mayo Clinic Laboratories, Reticulocyte Profile, Blood (RETB)',sourceUrl:'https://www.mayocliniclabs.com/test-catalog/overview/616856',specimen:'Whole Blood EDTA',method:'Flow Cytometry',population:'Mayo-derived adult reference population; female partition, adults ≥18 years',collectionConditions:'EDTA whole blood; no fasting condition specified on source page',ageMin:18,ageMax:120,sex:'female',rangeType:'reference_interval',reviewStatus:'Source-verified Mayo reference interval; local method transfer pending'}]
-]; TESTS.forEach(entry=>{const meta=entry[9]&&typeof entry[9]==='object'?entry[9]:{};if(!meta.pregnancyScope)meta.pregnancyScope=String(meta.sourceName||'').includes('Shah et al. (2018)')?'non_pregnant_not_postpartum':'not_validated_for_pregnancy';entry[9]=meta;}); if(typeof module==='object'&&module.exports)module.exports.LAB_REFERENCE_TESTS=TESTS; if(typeof window==='undefined'||typeof document==='undefined')return;window.LAB_REFERENCE_TESTS=TESTS;function init(){
+];
+const cbcSourceUrl='https://www.mayocliniclabs.com/test-catalog/Overview/9109';
+const cbcMeta={
+ sourceName:'Mayo Clinic Laboratories · CBC with Differential, Blood (CBC)',
+ sourceUrl:cbcSourceUrl,
+ specimen:'Whole Blood EDTA',
+ method:'RF/DC detection; hydrodynamic focusing; flow cytometry (semiconductor laser); sodium lauryl sulfate haemoglobin method',
+ population:'Mayo-derived adult reference interval, age ≥18 years; sex-specific where listed; not a universal global or Indian population interval',
+ collectionConditions:'EDTA whole blood; no fasting requirement stated. Mayo page lists XN 9100 in Method Name and XN 9000 in Method Description; confirm the performing laboratory analyser before transferring this interval.',
+ ageMin:18,ageMax:120,sex:'all',rangeType:'reference_interval',
+ reviewStatus:'Primary Mayo catalogue source checked; local method transfer pending; analyser-model discrepancy (XN 9100 vs XN 9000) explicitly flagged.',
+ pregnancyScope:'not_validated_for_pregnancy'
+};
+const cbcUpgrades=[
+ ['rbc',null,null,{male:[4.35,5.65],female:[3.92,5.13]}],
+ ['hb',null,null,{male:[13.2,16.6],female:[11.6,15.0]}],
+ ['hct',null,null,{male:[38.3,48.6],female:[35.5,44.9]}],
+ ['mcv',78.2,97.9,{male:[78.2,97.9],female:[78.2,97.93]}],
+ ['rdw',null,null,{male:[11.8,14.5],female:[12.2,16.1]}],
+ ['wbc',3.4,9.6,null],
+ ['plt',null,null,{male:[135,317],female:[157,371]}],
+ ['anc',1.56,6.45,null],
+ ['alc',0.95,3.07,null],
+ ['monoabs',0.26,0.81,null],
+ ['eosabs',0.03,0.48,null],
+ ['basoabs',0.01,0.08,null]
+];
+cbcUpgrades.forEach(([id,low,high,sexRanges])=>{
+ const entry=TESTS.find(x=>x[0]===id);
+ if(!entry)throw new Error('CBC catalogue entry missing: '+id);
+ entry[5]=low;entry[6]=high;entry[7]=cbcMeta.sourceName;entry[8]=sexRanges;
+ entry[9]={...(entry[9]||{}),...cbcMeta};
+});
+const cbcAliases={
+ rbc:'red blood cell count; erythrocyte count; erythrocytes',
+ hb:'hemoglobin; Hb',
+ hct:'hematocrit; HCT',
+ mcv:'mean corpuscular volume',
+ rdw:'red cell distribution width',
+ wbc:'white blood cell count; leukocyte count',
+ plt:'platelets; thrombocytes',
+ anc:'ANC; absolute neutrophils',
+ alc:'ALC; absolute lymphocytes',
+ monoabs:'absolute monocytes',
+ eosabs:'absolute eosinophils',
+ basoabs:'absolute basophils'
+};
+Object.entries(cbcAliases).forEach(([id,aliases])=>{const e=TESTS.find(x=>x[0]===id);if(e)e[2]=[e[2],aliases].filter(Boolean).join('; ');});
+TESTS.forEach(entry=>{const meta=entry[9]&&typeof entry[9]==='object'?entry[9]:{};if(!meta.pregnancyScope)meta.pregnancyScope=String(meta.sourceName||'').includes('Shah et al. (2018)')?'non_pregnant_not_postpartum':'not_validated_for_pregnancy';entry[9]=meta;}); if(typeof module==='object'&&module.exports)module.exports.LAB_REFERENCE_TESTS=TESTS; if(typeof window==='undefined'||typeof document==='undefined')return;window.LAB_REFERENCE_TESTS=TESTS;function init(){
  const host=document.getElementById('viewPathCheatSheet');
  if(!host||host.dataset.labCheckerReady)return;
  host.dataset.labCheckerReady='1';

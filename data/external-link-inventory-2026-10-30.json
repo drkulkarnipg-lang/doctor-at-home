@@ -2716,10 +2716,12 @@
     {
       "url": "https://www.mayocliniclabs.com/test-catalog/Overview/9109",
       "source_files": [
+        "clinical-calculators.js",
         "lab-reference-governance.js"
       ],
       "source_lines": [
-        16
+        16,
+        159
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
