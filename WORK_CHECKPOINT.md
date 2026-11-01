@@ -1,6 +1,6 @@
 # Current resumable work checkpoint
 
-Updated: 1 November 2026, India time — main head 820219a5a22ce089ae3701f9ac0cfb0920e99e16; Actions run 41333482047 passed; Vercel build-rate-limit; continue with live/device gates after a successful deployment.
+Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
@@ -537,3 +537,14 @@ Next actions, in order:
 2. When a new main deployment reports success, inspect the actual deployed site at 320 px and 390 px and exercise navigation, Know Your Numbers, booking/BMI, PDF save/print/share and WhatsApp handoff.
 3. Record recipient-side delivery only after a real recipient receives the PDF/message.
 4. Continue the sentence-level audit against the controlling attachment; preserve all existing features and keep the four clinical topic drafts unpublished until physician review and owner approval.
+
+
+### Follow-up — 1 November 2026
+
+## 1 November 2026 — follow-up status after documentation synchronization
+
+- **Application source tree:** 820219a5a22ce089ae3701f9ac0cfb0920e99e16. The current main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 was a documentation-only synchronization; it changed the five audit/checkpoint records and no application source.
+- **Exact-current-main regression:** GitHub Actions [run 41333816068](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41333816068), run #1266, completed SUCCESS on exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172. The node-regression job and full repository regression step both passed.
+- **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
+- **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
+- **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.

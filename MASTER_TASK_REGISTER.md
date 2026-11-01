@@ -1,6 +1,6 @@
 # Dr Kulkarni — permanent request and completion register
 
-Updated: 1 November 2026 (main head 820219a5a22ce089ae3701f9ac0cfb0920e99e16; Actions run 41333482047 passed on exact head; Vercel build-rate-limit; live/device verification pending).
+Updated: 1 November 2026 (application source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; documentation-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; exact-head CI and Vercel status SUCCESS; live visual verification pending).
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
 
@@ -389,3 +389,14 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - **Still open:** once Vercel reports success for a new main deployment, verify 320 px / 390 px language panel, navigation targets, public Know Your Numbers cards, booking/BMI on the live page, PDF download/save/print/share, and native WhatsApp handoff. Keep recipient-side receipt unverified until actually received.
 - **Release boundaries:** this monitoring run changed no application code, billing, payment gateway, secrets, hosting configuration or database migration; no clinical draft was published. Existing SQL migration files remain source artifacts and must not be applied without separate authorization.
 
+
+
+## L. 1 November 2026 — successful exact-main check after documentation synchronization
+
+## 1 November 2026 — follow-up status after documentation synchronization
+
+- **Application source tree:** 820219a5a22ce089ae3701f9ac0cfb0920e99e16. The current main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 was a documentation-only synchronization; it changed the five audit/checkpoint records and no application source.
+- **Exact-current-main regression:** GitHub Actions [run 41333816068](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41333816068), run #1266, completed SUCCESS on exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172. The node-regression job and full repository regression step both passed.
+- **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
+- **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
+- **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.
