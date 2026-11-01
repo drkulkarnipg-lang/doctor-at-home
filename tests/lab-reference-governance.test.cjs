@@ -52,4 +52,7 @@ for(const [id,lo,hi,unit,amin,amax] of indianExpected){
  const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[5],lo);assert.equal(e[6],hi);assert.equal(e[4],unit);assert.equal(e[9].ageMin,amin);assert.equal(e[9].ageMax,amax);assert.equal(e[9].sourceUrl,'https://doi.org/10.1515/cclm-2018-0152');checks+=6;
 }
 
+
+
+for(const id of ['glu-india-under45','glu-india-45plus']){const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.equal(e[9].requiresFasting,true);assert.ok(e[9].collectionConditions.includes('10–12 h'));checks+=2;}
 console.log('Lab reference governance tests passed: '+checks+' assertions.');
