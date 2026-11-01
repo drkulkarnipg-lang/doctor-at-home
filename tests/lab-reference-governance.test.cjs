@@ -224,7 +224,7 @@ const hsTniBatch=LAB_REFERENCE_TESTS.filter(x=>x[1]==='High-sensitivity troponin
 assert.equal(matchInterval(hsTniBatch,45,'male')[0],'hstni-mayo-male');checks++;
 assert.equal(matchInterval(hsTniBatch,45,'female','no')[0],'hstni-mayo-female');checks++;
 assert.equal(matchInterval(hsTniBatch,17,'male'),null);checks++;
-assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[0].startsWith('ferritin-')||x[0].includes('-mayo-')).length,26);checks++;
+assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[0].startsWith('ferritin-')||x[0].includes('-mayo-')||x[0].endsWith('-mayo')).length,26);checks++;
 
 
 const reticBatch=LAB_REFERENCE_TESTS.filter(x=>x[7]==='Mayo Clinic Laboratories · Reticulocyte Profile, Blood');
