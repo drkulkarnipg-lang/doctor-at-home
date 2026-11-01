@@ -4,7 +4,7 @@
 **Clinical status:** decision-support comparator only; it does not diagnose or replace the performing laboratory's own interval.
 
 ## Current baseline
-- The current comparator contains 30 source-attributed adult interval entries.
+- The current comparator contains 40 source-attributed adult interval entries.
 - The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 700-entry database.
 - A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
 
@@ -98,11 +98,16 @@ Each interval partition must carry:
 - Existing local report interval override remains available and is clearly labelled as the performing-laboratory interval.
 - CSV evidence import now requires HTTPS source URL, specimen, method, population, age bounds, sex partition and range type. Imports are staged as pending; individual clinician approval is required before they become selectable. Approved catalogue metadata are stored locally on the workstation, with JSON export. Patient results are not stored or uploaded.
 - Removed the previous CSV import path that immediately activated arbitrary rows without complete provenance.
-- Existing seed remains 30 source-linked adult entries; they are not all method/population verified. No artificial values were added to inflate the count. Target remains 750 distinct evidence-backed records.
+- Existing seed remains 40 source-linked adult entries; they are not all method/population verified. No artificial values were added to inflate the count. Target remains 750 distinct evidence-backed records.
 - Added `tests/lab-reference-governance.test.cjs` and `npm run test:lab-reference`. Helper-level syntax and validation/classification checks passed in the development runtime; exact-head CI, browser interaction, desktop/mobile visual inspection and production deployment remain open.
 - Official sources researched: CLSI EP28/EP28IG, IFCC C-RIDL, Shah et al. Indian C-RIDL 33-analyte study, Mayo Clinic Laboratories test catalogue, MedlinePlus and NABL/ISO 15189. Source and licensing restrictions are recorded in this plan.
 
 
 ### Seed expansion — 2 November 2026
 
-Three additional adult absolute differential-count entries were added from the Mayo Clinic Laboratories CBC with Differential test page (Test ID CBC): absolute monocytes 0.26–0.81 ×10⁹/L, eosinophils 0.03–0.48 ×10⁹/L and basophils 0.01–0.08 ×10⁹/L. Source page specifies EDTA whole blood and the CBC analytical method. These are source-specific comparator intervals, not universal Indian laboratory limits. Direct source: https://www.mayocliniclabs.com/test-catalog/Overview/9109. The active seed is now 30 entries; the 750 target remains open.
+Three additional adult absolute differential-count entries were added from the Mayo Clinic Laboratories CBC with Differential test page (Test ID CBC): absolute monocytes 0.26–0.81 ×10⁹/L, eosinophils 0.03–0.48 ×10⁹/L and basophils 0.01–0.08 ×10⁹/L. Source page specifies EDTA whole blood and the CBC analytical method. These are source-specific comparator intervals, not universal Indian laboratory limits. Direct source: https://www.mayocliniclabs.com/test-catalog/Overview/9109. The active seed is now 40 entries; the 750 target remains open.
+
+
+### Indian population-specific seed batch — 2 November 2026
+
+Added ten Indian IFCC C-RIDL adult serum records from Table 4 of Shah et al. (2018): sodium, potassium, chloride, total calcium, inorganic phosphate, magnesium, total protein, LDL-C, and fasting glucose partitioned into ages 18–44 and 45–65. The study recruited 512 healthy Indian volunteers, collected fasting serum after 10–12 hours, and used Beckman Coulter Unicel DxC 800 / Immage 800 platforms. The table reports the intervals as population-specific; method transfer to a local Pune laboratory has not been validated. Where the same test now has both Mayo-derived and Indian-study intervals, the new source/method dropdown requires an explicit selection instead of silently choosing one. The live seed is now 40 records (30 prior source-linked records plus 10 Indian C-RIDL records); 750 remains the target.
