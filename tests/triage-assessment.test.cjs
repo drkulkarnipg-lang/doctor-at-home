@@ -35,6 +35,7 @@ w.eval(fs.readFileSync(require.resolve('../triage-assessment.js'),'utf8'));
 w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
 assert.ok(w.document.getElementById('tabTriage'));assert.ok(w.document.getElementById('viewTriageAssessment'));checks+=2;
 assert.ok(w.document.getElementById('triage_applySignature'),'Approved signature must be opt-in for printed triage reports.');assert.ok(w.document.querySelector('#triageSignaturePrint img[src="/assets/doctor-signature.svg"]'),'Printed triage report must use the approved signature asset.');checks+=2;
+assert.ok(w.document.getElementById('triage_applySignature'),'Approved signature must be opt-in for printed triage reports.');assert.ok(w.document.querySelector('#triageSignaturePrint img[src="/assets/doctor-signature.svg"]'),'Printed triage report must use the approved signature asset.');checks+=2;
 
 w.switchDocTab('triageAssessment');assert.equal(w.document.getElementById('viewTriageAssessment').classList.contains('hidden'),false);checks++;
 function set(id,v){const e=w.document.getElementById('triage_'+id);assert.ok(e,'missing field '+id);e.value=String(v);}
