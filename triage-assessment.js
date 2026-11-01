@@ -69,7 +69,8 @@ function field(id,label,type='text',size='',opts=[]){
 }
 function getForm(){
  const required=['age','sex','rr','spo2','sbp','dbp','hr','temp','conscious','oxygen','duration',...requiredYesNo,'decision','override'];
- const missing=required.filter(k=>val(k)===''||val(k)==='unassessed');\n if(!document.getElementById('triage_confirm')?.checked)missing.push('Doctor confirmation');
+ const missing=required.filter(k=>val(k)===''||val(k)==='unassessed');
+ if(!document.getElementById('triage_confirm')?.checked)missing.push('Doctor confirmation');
  const bools=requiredYesNo;
  const yes=bools.filter(k=>checked(k));
  return {missing,yes,age:Number(val('age')),sex:val('sex'),duration:Number(val('duration')),v:{rr:val('rr'),spo2:val('spo2'),sbp:val('sbp'),hr:val('hr'),temp:val('temp'),conscious:val('conscious'),oxygen:val('oxygen')==='yes'?'yes':val('oxygen')==='no'?'no':''}};
@@ -93,7 +94,8 @@ function calculate(){
  if(scoreHigh){category='red';reasons.push('NEWS2 ≥7: high-risk physiological score.');}
  if(category!=='red'&&(scoreMedium||single3||anyYellow||f.yes.includes('clinicalConcern'))){category='yellow';if(scoreMedium)reasons.push('NEWS2 5–6: urgent assessment threshold.');if(single3)reasons.push('At least one NEWS2 parameter scores 3: urgent clinician review irrespective of aggregate.');if(anyYellow)reasons.push('WHO urgent/high-risk feature(s) present.');}
  if(category==='green'&&sepsis&&n.score===0)reasons.push('NEWS2 0 does not exclude sepsis; reassess if clinical concern or deterioration.');
- if(category==='green'&&n.score>=1)reasons.push('NEWS2 1–4: low physiological score band only; it is not a home-treatment clearance.');\n if(category==='green'&&sepsis&&n.score===0)reasons.push('For suspected infection, NEWS2 0 does not exclude sepsis or deterioration.');
+ if(category==='green'&&n.score>=1)reasons.push('NEWS2 1–4: low physiological score band only; it is not a home-treatment clearance.');
+ if(category==='green'&&sepsis&&n.score===0)reasons.push('For suspected infection, NEWS2 0 does not exclude sepsis or deterioration.');
  const canConsiderHome=category==='green'&&n.score<=4&&!single3&&!whoHigh&&f.yes.includes('oralIntake')&&f.yes.includes('urine')&&f.yes.includes('caregiver')&&f.yes.includes('followup')&&!f.yes.includes('frail')&&!f.yes.includes('immunosuppressed')&&!f.yes.includes('severeWeakness')&&!f.yes.includes('highFever')&&!f.yes.includes('vomiting')&&!f.yes.includes('clinicalConcern')&&val('decision')==='home-treatment-with-documented-safety-net'&&val('homeReason').trim()&&val('diagnosis').trim()&&val('treatment').trim()&&val('review').trim()&&document.getElementById('triage_confirm')?.checked===true;
  const partLabels={rr:'Respiratory rate',spo2:'SpO₂',sbp:'Systolic BP',hr:'Pulse',conscious:'Consciousness',temp:'Temperature',oxygen:'Supplemental oxygen'};
  const breakdown=Object.entries(n.parts).map(([k,v])=>'<li>'+partLabels[k]+': <b>'+v+'</b></li>').join('');
