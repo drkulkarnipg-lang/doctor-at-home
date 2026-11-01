@@ -1,6 +1,6 @@
 # Dr Kulkarni — permanent request and completion register
 
-Updated: 31 October 2026 (review branch head `1bad3b399c682aba09688366dd1790ab3a41c128`; Actions run `41168638561` passed all 61 regression test files; PR #86 remains draft/review-only; production unchanged).
+Updated: 1 November 2026 (main head 820219a5a22ce089ae3701f9ac0cfb0920e99e16; Actions run 41333482047 passed on exact head; Vercel build-rate-limit; live/device verification pending).
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
 
@@ -371,3 +371,21 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 | H20 | [ ] NOT IMPLEMENTED — SOURCE AUDIT | Death Form should auto-populate the Death Register once, without duplicate manual entry. | `exportCurrentDeathFormPdf()` exists in `index.html`; `workstation-registers.js` has an independent Death Register form/save flow. No linkage, event bridge or auto-population found in current source. Must design a safe one-time handoff with explicit save confirmation, owner identity and duplicate protection; preserve correction/revision audit. |
 
 **1 November 2026 — death-form/register linkage audit:** inspected `index.html` and `workstation-registers.js`. The Death Form PDF export and Death Register currently remain separate workflows. Owner requirement for automatic register population is not implemented. Keep H20 open; do not state death form auto-populates the register.
+
+
+## K. 1 November 2026 — latest exact-main monitoring checkpoint
+
+## 1 November 2026 — latest exact-main monitoring checkpoint (supersedes earlier main-head and deployment entries)
+
+- **Current main:** 820219a5a22ce089ae3701f9ac0cfb0920e99e16. The prior base source head 12608d35c02b3afe76a10995e95ebb521087eae4 is an ancestor, not the current branch head.
+- **Latest GitHub regression:** [Actions run 41333482047]( https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41333482047 ), run #1264, completed SUCCESS on this exact main SHA. The node-regression job and its “Run every repository regression test” step both completed successfully. The current repository tree contains 64 regression-test files. This is exact-head CI evidence, not live-site or device evidence.
+- **Vercel for current main:** status is FAILURE with build-rate-limit. [Vercel status]( https://vercel.com/drkulkarnipg-lang?upgradeToPro=build-rate-limit ). The latest main head is therefore **not confirmed deployed**. The last confirmed production-success commit remains 57d011721e92903c53f76035f43520c296502906. An earlier success on a prior commit does not supersede this newer failure.
+- **External-link inventory:** data/external-link-inventory-2026-10-30.json currently covers 90 active source files and 243 extracted destinations. The full-suite run passes tests/external-link-inventory-generator.test.cjs; its generated file list, destinations/classifications and source-line evidence are compared with a fresh source scan. The stored source_revision label is 5f374c9adbe24c94c81ad98fd3f54bd1247b2928; the test uses that label as the generator input and does not assert that the label equals HEAD. This is static inventory parity, not live HTTP reachability.
+- **Fee wording:** patient-helper.js now distinguishes ₹100 service-assistant/guided help, ₹500 online consultation and ₹1,200 daytime home-visit base. It says guided help is not a medical consultation, the home-visit total may vary, the doctor confirms the final amount, and the helper does not collect payment. No payment collection or gateway activation is claimed.
+- **Article Manager / RSS isolation:** index.html moves viewJournalsHub inside viewArticlesHub only for the Article Manager tab, then restores it to its original workstation position for the dedicated RSS tab. tests/article-manager-rss-grouping.test.cjs checks both switching directions and isolation from other workstation tabs.
+- **Mobile language panel:** current CSS contains the responsive menu positioning overrides and the mobile-language regression is included in the full suite. Actual 320 px and 390 px phone rendering remains unverified.
+- **Patient education:** the public dataset retains nine detailed guides. content/clinical-topic-drafts-2026-10-31.md contains source-linked COPD, cancer palliative-care, diabetes and cirrhosis drafts, with a test preventing their import/linkage into public content. They remain unpublished pending physician review, India-specific adaptation and qualified Marathi translation.
+- **Compact pre-visit / booking / BMI / PDF:** current source and dedicated regression checks cover the compact intake, attachment/consent ordering, booking flow, calculator UI and document-sharing logic; the exact-head full regression job passes. No live-page, real-phone, PDF recipient or WhatsApp recipient verification is available because the latest Vercel deployment is rate-limited.
+- **Still open:** once Vercel reports success for a new main deployment, verify 320 px / 390 px language panel, navigation targets, public Know Your Numbers cards, booking/BMI on the live page, PDF download/save/print/share, and native WhatsApp handoff. Keep recipient-side receipt unverified until actually received.
+- **Release boundaries:** this monitoring run changed no application code, billing, payment gateway, secrets, hosting configuration or database migration; no clinical draft was published. Existing SQL migration files remain source artifacts and must not be applied without separate authorization.
+
