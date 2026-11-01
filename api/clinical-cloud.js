@@ -104,6 +104,26 @@ const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Register cloud storage is not installed yet. No register data was changed.'});throw Error();}
 return reply(200,{records:await r.json(),limit:500});
 }
+if(action==='register-death-from-form'&&method==='POST'){
+const e=body.entry;
+if(!e||typeof e!=='object'||!['form4','form4a','form2'].includes(e.formType))return reply(400,{message:'Choose a valid death form.'});
+const clean=(v,max)=>typeof v==='string'?v.trim().slice(0,max):'';
+const patientName=clean(e.patientName,120),deathDate=clean(e.deathDate,10),deathTime=clean(e.deathTime,5),place=clean(e.place,100);
+if(!patientName||!validISODate(deathDate)||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
+const entryDate=validISODate(e.entryDate)?e.entryDate:deathDate;
+const sourceKey=require('node:crypto').createHash('sha256').update(['death-form-v1',e.formType,patientName.toLocaleLowerCase(),deathDate,deathTime,place.toLocaleLowerCase()].join('|')).digest('hex');
+const data={patientName,patientCode:'',age:clean(e.age,20),sex:clean(e.sex,30),deathDateTime:deathDate+'T'+deathTime,place,certificateReference:'Source form: '+e.formType.toUpperCase(),notes:'Entered from the doctor's selected death form; verify against the signed source before final filing.'};
+const record={owner_id:user.id,register_type:'death',entry_date:entryDate,data,source_form_key:sourceKey,revision:randomUUID(),updated_at:new Date().toISOString()};
+const r=await api('/rest/v1/clinic_workstation_registers?on_conflict=owner_id,source_form_key',{method:'POST',headers:{...headers,Prefer:'resolution=ignore-duplicates,return=representation'},body:JSON.stringify(record)});
+if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Death register cloud storage is not ready. No register entry was saved.'});throw Error();}
+const inserted=await r.json();
+if(inserted.length===1)return reply(200,{saved:true,duplicate:false,record:inserted[0]});
+const existing=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&owner_id=eq.'+encodeURIComponent(user.id)+'&source_form_key=eq.'+encodeURIComponent(sourceKey),{headers});
+if(!existing.ok)throw Error();
+const rows=await existing.json();
+if(rows.length!==1)throw Error('Could not confirm the existing idempotent death register entry.');
+return reply(200,{saved:true,duplicate:true,record:rows[0]});
+}
 if(action==='register-save'&&method==='POST'){
 let e;try{e=validateRegister(body.entry);}catch(err){return reply(400,{message:err.message});}
 const now=new Date().toISOString(),record={owner_id:user.id,register_type:e.registerType,entry_date:e.entryDate,data:e.data,revision:randomUUID(),updated_at:now};
