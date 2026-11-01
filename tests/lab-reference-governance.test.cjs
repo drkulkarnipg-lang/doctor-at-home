@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict');
 const {parseCSV,validateEntry,classify,matchInterval}=require('../lab-reference-governance.js');
 let checks=0;
-const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,reference_interval';
+const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,pregnancy_scope,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,not_validated_for_pregnancy,reference_interval';
 const rows=parseCSV(csv);assert.equal(rows.length,2);checks++;
 const row=Object.fromEntries(rows[0].map((k,i)=>[k.toLowerCase(),rows[1][i]]));
 assert.equal(validateEntry(row).valid,true);checks++;
@@ -13,6 +13,8 @@ for(const bad of [
  {...row,age_min:'17'},
  {...row,age_max:'121'},
  {...row,sex:'unspecified'},
+ {...row,pregnancy_scope:''},
+ {...row,pregnancy_scope:'unknown'},
  {...row,range_type:'normal'},
  {...row,low:'150',high:'140'},
  {...row,source_url:'not a url'}
@@ -31,6 +33,9 @@ checks++;
 
 const {LAB_REFERENCE_TESTS}=require('../clinical-calculators.js');
 assert.equal(LAB_REFERENCE_TESTS.length,85);checks++;
+assert.ok(LAB_REFERENCE_TESTS.every(x=>x[9]&&x[9].pregnancyScope));checks++;
+assert.equal(LAB_REFERENCE_TESTS.find(x=>x[0]==='na-india')[9].pregnancyScope,'non_pregnant_not_postpartum');checks++;
+assert.equal(LAB_REFERENCE_TESTS.find(x=>x[0]==='na')[9].pregnancyScope,'not_validated_for_pregnancy');checks++;
 assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,85);checks++;
 for(const [id,lo,hi] of [['monoabs',0.26,0.81],['eosabs',0.03,0.48],['basoabs',0.01,0.08]]){
  const entry=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(entry);assert.equal(entry[5],lo);assert.equal(entry[6],hi);assert.match(entry[7],/Mayo Clinic Laboratories · CBC with Differential/);checks+=4;
@@ -58,14 +63,19 @@ for(const id of ['glu-india-under45','glu-india-45plus']){const e=LAB_REFERENCE_
 
 
 const sodiumRecords=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Sodium');
-assert.equal(matchInterval(sodiumRecords,40,'male'),null);checks++;
+assert.equal(matchInterval(sodiumRecords,40,'male',''),null);checks++;
 const fastingGlucose=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Fasting glucose');
-assert.equal(matchInterval(fastingGlucose,40,'female')[0],'glu-india-under45');checks++;
-assert.equal(matchInterval(fastingGlucose,55,'male')[0],'glu-india-45plus');checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','no')[0],'glu-india-under45');checks++;
+assert.equal(matchInterval(fastingGlucose,55,'male','')[0],'glu-india-45plus');checks++;
 const haemoglobin=LAB_REFERENCE_TESTS.filter(x=>x[0]==='hb');
-assert.equal(matchInterval(haemoglobin,35,'male')[0],'hb');checks++;
-assert.equal(matchInterval(haemoglobin,35,'female')[0],'hb');checks++;
-assert.equal(matchInterval(haemoglobin,17,'male'),null);checks++;
+assert.equal(matchInterval(haemoglobin,35,'male','no')[0],'hb');checks++;
+assert.equal(matchInterval(haemoglobin,35,'female','no')[0],'hb');checks++;
+assert.equal(matchInterval(haemoglobin,17,'male','no'),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female',''),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','yes'),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','recent'),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'',''),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'','no')[0],'glu-india-under45');checks++;
 
 
 const indianExpandedExpected=[

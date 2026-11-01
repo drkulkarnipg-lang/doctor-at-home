@@ -74,6 +74,7 @@
     const target = document.getElementById('rxAdvice');
     if (!preset || !target) return false;
     const block = preset.title + '\n' + preset.advice.map((line, i) => (i + 1) + '. ' + line).join('\n');
+    if (target.value.includes(block)) return true;
     target.value = target.value.trim() ? target.value.trim() + '\n\n' + block : block;
     target.dispatchEvent(new Event('input', { bubbles: true }));
     target.focus();
@@ -111,14 +112,26 @@
     });
   }
 
+  // Preserve the seven established release-tools.js presets while adding the five acute-illness cards.
+  const legacyInsertDietPreset = typeof root.insertDietPreset === 'function'
+    ? root.insertDietPreset.bind(root)
+    : null;
   root.insertDietPreset = function (key) {
-    const ok = appendAdvice(key);
-    const select = document.getElementById('prescriptionDietPreset');
-    if (select) select.value = '';
-    if (ok) {
-      const status = document.getElementById('rxAdvice');
-      if (status) status.setAttribute('aria-label', 'Diet advice populated; review and individualize before signing');
+    if (presets[key]) {
+      const ok = appendAdvice(key);
+      const select = document.getElementById('prescriptionDietPreset');
+      if (select) select.value = '';
+      if (ok) {
+        const status = document.getElementById('rxAdvice');
+        if (status) status.setAttribute('aria-label', 'Diet advice populated; review and individualize before signing');
+      }
+      return ok;
     }
+    if (legacyInsertDietPreset && root.ReleaseTools?.diets?.[key]) {
+      legacyInsertDietPreset(key);
+      return true;
+    }
+    return false;
   };
   root.ClinicalDietPresets = Object.freeze({
     keys: Object.freeze(Object.keys(presets)),
