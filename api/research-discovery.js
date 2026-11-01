@@ -10,7 +10,7 @@ const BASE={
 const CONFIG={
  pubmed:{name:'PubMed / MEDLINE',kind:'indexed biomedical literature',home:'https://pubmed.ncbi.nlm.nih.gov/',fields:['All specialties']},
  europepmc:{name:'Europe PMC',kind:'biomedical literature + abstracts',home:'https://europepmc.org/',fields:['All specialties']},
- trials:{name:'ClinicalTrials.gov',kind:'registered clinical trials — not proof of efficacy',home:'https://clinicaltrials.gov/',fields:['Clinical trials']},
+ clinicaltrials:{name:'ClinicalTrials.gov',kind:'registered clinical trials — not proof of efficacy',home:'https://clinicaltrials.gov/',fields:['Clinical trials']},
  crossref:{name:'Crossref',kind:'scholarly publication metadata',home:'https://search.crossref.org/',fields:['All specialties']}
 };
 const safeQuery=v=>String(v||'').replace(/[<>\u0000-\u001f]/g,' ').replace(/\s+/g,' ').trim().slice(0,180);
@@ -27,7 +27,7 @@ async function search(id,q){
  }else if(id==='europepmc'){
   const u=new URL(BASE.europepmc);u.search=new URLSearchParams({query:q,resultType:'core',pageSize:'12',format:'json',sort_date:'y'}).toString();
   const rows=(await get(u.href)).resultList?.result||[];items=rows.map(x=>({title:trim(x.title,800),link:x.doi?'https://doi.org/'+x.doi:'https://europepmc.org/article/'+encodeURIComponent(x.source||'MED')+'/'+encodeURIComponent(x.id||''),pubDate:x.firstPublicationDate||x.pubYear||'',description:[x.journalTitle,x.authorString,x.abstractText].filter(Boolean).join(' · ')}));
- }else if(id==='trials'){
+ }else if(id==='clinicaltrials'){
   const u=new URL(BASE.trials);u.search=new URLSearchParams({'query.term':q,pageSize:'12',format:'json',countTotal:'true','sort':'LastUpdatePostDate:desc'}).toString();
   const rows=(await get(u.href)).studies||[];items=rows.map(x=>{const p=x.protocolSection||{},idm=p.identificationModule||{},s=p.statusModule||{},d=p.designModule||{};const n=idm.nctId;return{title:trim(idm.briefTitle||idm.officialTitle,800),link:n?'https://clinicaltrials.gov/study/'+n:'https://clinicaltrials.gov/',pubDate:s.studyFirstPostDateStruct?.date||s.studyFirstPostDate||'',description:[n,s.overallStatus,(d.phases||[]).join(', '),d.studyType,idm.organization?.fullName].filter(Boolean).join(' · ')};});
  }else{
