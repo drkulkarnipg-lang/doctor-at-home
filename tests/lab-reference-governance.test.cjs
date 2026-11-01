@@ -28,7 +28,6 @@ assert.equal(classify(100,60,Infinity,'decision_limit'),'WITHIN DECISION THRESHO
 assert.equal(classify('not numeric',0,10),'INVALID');checks++;
 assert.throws(()=>parseCSV('a,b\n"broken,field'));
 checks++;
-console.log('Lab reference governance tests passed: '+checks+' assertions.');
 
 const {LAB_REFERENCE_TESTS}=require('../clinical-calculators.js');
 assert.equal(LAB_REFERENCE_TESTS.length,30);checks++;
