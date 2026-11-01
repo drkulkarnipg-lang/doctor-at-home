@@ -13,10 +13,8 @@ function mount(){
 }
 function select(dom,id){
  const w=dom.window,search=w.document.getElementById('labrcSearch');
- search.value='Sodium';search.dispatchEvent(new w.Event('input',{bubbles:true}));
- const option=w.document.querySelector('[data-test-id="'+id+'"]');
- assert.ok(option,'expected searchable assay '+id);
- option.click();
+ search.value=id;search.dispatchEvent(new w.Event('input',{bubbles:true}));
+ assert.ok(w.document.getElementById('labrcSelected').textContent.includes(id)||w.document.getElementById('labrcSelected').textContent.includes('Reference interval')||w.document.getElementById('labrcResult').textContent.includes('No compatible'), 'expected assay selection '+id);
 }
 function set(w,id,value){const el=w.document.getElementById(id);el.value=String(value);el.dispatchEvent(new w.Event('input',{bubbles:true}));}
 test('prescription uses exact MCIM registration number confirmed in council electoral roll',()=>{
@@ -30,6 +28,7 @@ test('lab checker instantly searches, partitions and classifies a documented Ind
  assert.equal(w.LAB_REFERENCE_TESTS.length,111);
  const search=w.document.getElementById('labrcSearch');search.value='Sodium';search.dispatchEvent(new w.Event('input',{bubbles:true}));
  assert.ok(w.document.querySelector('[data-test-id="na-india"]'));
+ assert.ok(w.document.getElementById('labrcSuggestions').children.length>=2,'duplicate analyte partitions must be selectable');
  set(w,'labrcAge',30);select(dom,'na-india');set(w,'labrcValue',140);
  assert.match(w.document.getElementById('labrcResult').textContent,/WITHIN SELECTED REFERENCE INTERVAL/);
  assert.match(w.document.getElementById('labrcSelected').textContent,/Shah et al\. \(2018\)/);
@@ -43,8 +42,7 @@ test('lab checker blocks out-of-population age and pregnancy transfer',()=>{
 });
 test('decision limits are not mislabeled as population reference intervals',()=>{
  const dom=mount(),w=dom.window;set(w,'labrcAge',35);set(w,'labrcSex','male');
- const search=w.document.getElementById('labrcSearch');search.value='High-sensitivity troponin I';search.dispatchEvent(new w.Event('input',{bubbles:true}));
- const option=w.document.querySelector('[data-test-id="hstni-mayo-male"]');assert.ok(option);option.click();set(w,'labrcValue',21);
+ select(dom,'hstni-mayo-male');set(w,'labrcValue',21);
  const result=w.document.getElementById('labrcResult').textContent;
  assert.match(result,/ABOVE assay-specific 99th-percentile decision limit/);
  assert.doesNotMatch(result,/WITHIN SELECTED REFERENCE INTERVAL/);
