@@ -21,10 +21,10 @@ assert.ok(html.includes('#google_translate_element .goog-te-combo{max-width:180p
 assert.ok(html.includes('.language-status,.language-help-link{display:none!important}'),'Redundant language instructions do not expand the mobile header');
 assert.ok(html.includes('layout: google.translate.TranslateElement.InlineLayout.SIMPLE'),'Google Translate uses the compact inline layout');
 assert.ok(html.indexOf('href="stitch-clinical-design.css"') > html.indexOf('href="reading-print-fixes.css"'), 'Stitch visual layer must load after existing screen and document styles.');
-for(const token of ['#FBF9F6','#F5F3F0','#0B192C','#35684D','#1C5036','#E6DFD5','#D8CEBF']) assert.ok(stitch.includes(token), 'Current Stitch design token missing: '+token);
+for(const token of ['#EAF5FC','#FFFFFF','#172B3D','#173B5A','#C987A2','#4C9ACB','#DCEFFA','#D6E6F0','#C8DCE9']) assert.ok(stitch.includes(token), 'Current sky-blue and petal design token missing: '+token);
 assert.match(stitch,/@media screen\s*\{/,'Visual changes must be screen-only and leave clinical print documents unchanged.');
 assert.match(stitch,/grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,'Phone navigation must display every destination in a visible grid.');
-assert.match(stitch,/--stitch-sky:\s*#3E89C4/,'Focus indicators must retain a distinct accessible blue.');
+assert.match(stitch,/--stitch-sky:\s*#4C9ACB/,'Focus indicators must retain a distinct accessible blue.');
 assert.match(stitch,/online-consultation-warning[\s\S]*#B91C1C/,'Emergency warning red remains reserved for clinical urgency.');
 
 assert.ok(html.includes('Machine translation') || html.includes('Automatic translation may not preserve medical meaning'),'Translation caution remains available to patients');
