@@ -705,9 +705,9 @@
 </div>
 <!-- TAB 3: LIVE RSS & AI RESEARCH AGENT -->
 <div class="hidden space-y-6" id="viewJournalsHub"><section aria-labelledby="researchReviewTitle" class="research-review no-print"><span class="section-eyebrow">Research desk · physician review</span><h3 id="researchReviewTitle">Daily evidence, ready for your review.</h3><span class="research-status">On-demand feeds · private evidence workflow below</span><p>Import summaries from your research workflow, check the original sources, and edit patient guidance before publishing. Drafts and review notes stay in this browser. Export a backup before changing devices.</p><div aria-label="Research workflow" class="research-flow"><span>1. RSS / Feedly</span><span>2. Source &amp; evidence checks</span><span>3. AI draft</span><span>4. Physician review</span></div><p>An RSS excerpt or abstract is not a full article. Each imported draft must state what text was available. API credentials belong in a secure backend or n8n credentials, never this page.</p><div class="flex flex-wrap gap-2"><label class="research-upload">Import research drafts (JSON)<input accept=".json,application/json" class="sr-only" id="researchImport" type="file"/></label><button id="researchExport" type="button">Export review backup</button><a class="text-sm underline" href="RESEARCH_AGENT_SETUP.md" rel="noopener noreferrer" target="_blank">Connection guide ↗</a></div><p aria-live="polite" id="researchImportStatus" role="status"></p><p id="researchDraftCount"></p><div id="researchDraftList"></div></section>
-<div class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-4 no-print">
-<div class="flex flex-wrap justify-between items-center gap-2 border-b pb-3">
-<div>
+<div id="rssFeedPanel" class="bg-white p-6 rounded-3xl border petal-border shadow-sm space-y-4 no-print rss-feed-panel">
+<div class="flex flex-wrap justify-between items-center gap-3 border-b pb-3 rss-feed-header">
+<div class="rss-feed-title">
 <div class="flex items-center gap-2">
 <span class="text-2xl">📡</span>
 <h4 class="font-bold text-base text-[#0F2942]">Clinical RSS Reader &amp; AI Summary Handoff</h4>
@@ -715,19 +715,17 @@
 </div>
 <p class="text-xs text-slate-600 mt-1">Read available RSS excerpts from journals and research news; open the original source to assess evidence.</p>
 </div>
-<div class="flex items-center gap-2">
-<select class="text-xs border p-2 rounded-xl bg-slate-50 font-bold text-slate-700 outline-none" id="rssFeedSource">
+<div class="rss-feed-controls">
+<select class="text-xs border p-2 rounded-xl bg-slate-50 font-bold text-slate-700 outline-none rss-feed-select" id="rssFeedSource">
 <option value="nejm">NEJM (New England Journal of Medicine)</option>
 <option value="naturemedicine" selected>Nature Medicine — journal feed</option><option value="criticalcare">Critical Care - latest journal feed</option>
 <option value="lancet">The Lancet Online First</option>
 <option value="cdc">CDC Newsroom - public health updates</option>
 <option value="medicalxpress">Medical Xpress - research news updates</option></select>
-<button class="bg-[#0D9488] hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex items-center gap-1" id="rssFetchLatest">
-              🔄 Fetch Latest Feeds
-            </button>
+<button type="button" class="rss-fetch-button" id="rssFetchLatest" aria-label="Fetch latest research feeds"><span class="rss-fetch-icon" aria-hidden="true">↻</span> Fetch Latest Feeds</button>
 </div>
 </div>
-<div class="space-y-3 text-xs" id="rssFeedContainer">
+<div class="space-y-3 text-xs rss-feed-results" id="rssFeedContainer">
 <p class="text-slate-500 italic">Fetch available RSS excerpts, then open an article in your AI tool for review. Daily automation is not yet connected.</p>
 </div>
 </div>
@@ -765,7 +763,7 @@
 <a class="block p-2 rounded-xl bg-slate-50 font-semibold" href="https://jamanetwork.com/" rel="noopener noreferrer" target="_blank">🏥 JAMA Network ↗</a>
 </div>
 </div>
-<section class="research-review"><h3>Additional existing reference links</h3><a href="https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&amp;q=Dr+Pramod+G+Kulkarni%2CEmergency+and+HomeCare+Specialist" rel="noopener noreferrer" target="_blank">GMB</a><a href="https://wa.me/919561394341?text=Hello%20Dr.%20Kulkarni,%20requesting%20urgent%20home%20ICU%20consultation%20in%20Pune." rel="noopener noreferrer" target="_blank">WhatsApp Dr. Kulkarni</a><a href="https://www.msdmanuals.com/professional" rel="noopener noreferrer" target="_blank">📚 MSD Manuals (Professional Edition)</a><a href="https://reference.medscape.com/" rel="noopener noreferrer" target="_blank">🩺 Medscape Reference &amp; Drug Interactions</a><a href="https://medicalxpress.com/" rel="noopener noreferrer" target="_blank">⚡ Medical Xpress Updates</a></section></div>
+</div>
 <!-- TAB 4: PATHOLOGY CHEAT SHEET -->
 <div class="hidden space-y-4" id="viewPathCheatSheet">
 <div class="flex flex-wrap justify-between items-center gap-2 no-print">
