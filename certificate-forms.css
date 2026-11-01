@@ -52,8 +52,8 @@
 @media print{body.certificate-printing{background:#fff!important;min-height:0!important}}
 
 /* Owner-approved doctor signature artwork: shared across clinical sign-offs and PDF/print clones. */
-.doctor-signature-image{display:block;width:150px;height:auto;max-height:72px;object-fit:contain;object-position:left center;margin:2px 0 4px;}
+.doctor-signature-image{display:block;width:75px;height:auto;max-height:36px;object-fit:contain;object-position:left center;margin:2px 0 4px;}
 .clinical-signoff .doctor-signature-image{margin-left:auto;}
 .certificate-signature .doctor-signature-image{margin-left:auto;}
-.certificate-export .doctor-signature-image{width:38mm;max-height:18mm;}
+.certificate-export .doctor-signature-image{width:19mm;max-height:9mm;}
 @media print{.doctor-signature-image{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
