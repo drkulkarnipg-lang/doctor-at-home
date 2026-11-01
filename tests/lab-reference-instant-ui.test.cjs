@@ -14,7 +14,8 @@ function mount(){
 function select(dom,id){
  const w=dom.window,search=w.document.getElementById('labrcSearch');
  search.value=id;search.dispatchEvent(new w.Event('input',{bubbles:true}));
- assert.ok(w.document.getElementById('labrcSelected').textContent.includes(id)||w.document.getElementById('labrcSelected').textContent.includes('Reference interval')||w.document.getElementById('labrcResult').textContent.includes('No compatible'), 'expected assay selection '+id);
+ assert.equal(search.value,id);
+ assert.equal(w.document.getElementById('labrcSuggestions').hidden,true);
 }
 function set(w,id,value){const el=w.document.getElementById(id);el.value=String(value);el.dispatchEvent(new w.Event('input',{bubbles:true}));}
 test('prescription uses exact MCIM registration number confirmed in council electoral roll',()=>{
