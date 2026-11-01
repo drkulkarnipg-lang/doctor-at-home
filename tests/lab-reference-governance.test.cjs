@@ -187,6 +187,8 @@ assert.ok(calculatorSource.includes('Decision limits are separately labelled and
 const sourceInventory=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/external-link-inventory-2026-10-30.json'),'utf8'));
 assert.ok(sourceInventory.source_files_scanned.includes('clinical-diet-presets.js'));checks++;
 assert.ok(sourceInventory.source_files_scanned.includes('lab-reference-governance.js'));checks++;
+const indianStudyInventory=sourceInventory.links.find(x=>x.url==='https://doi.org/10.1515/cclm-2018-0152');
+assert.ok(indianStudyInventory&&indianStudyInventory.source_files.includes('clinical-calculators.js')&&indianStudyInventory.source_lines.includes(81));checks++;
 const mayoInventoryLines=[
  ['https://www.mayocliniclabs.com/test-catalog/overview/619953',[132,133,134]],
  ['https://www.mayocliniclabs.com/test-catalog/Overview/8725',[135]],
