@@ -164,6 +164,10 @@ for(const [id,lo,hi,unit,amin,amax,sex,kind,url,specimen,method] of mayoBatchExp
  checks+=4;
 }
 
+const calculatorSource=fs.readFileSync(path.join(__dirname,'../clinical-calculators.js'),'utf8');
+assert.ok(calculatorSource.includes('750-record evidence expansion target remains open.'));checks++;
+assert.ok(!calculatorSource.includes('700+ test validation remains the expansion target'));checks++;
+assert.ok(calculatorSource.includes('Decision limits are separately labelled and require assay-specific clinical interpretation'));checks++;
 const sourceInventory=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/external-link-inventory-2026-10-30.json'),'utf8'));
 assert.ok(sourceInventory.source_files_scanned.includes('clinical-diet-presets.js'));checks++;
 assert.ok(sourceInventory.source_files_scanned.includes('lab-reference-governance.js'));checks++;
