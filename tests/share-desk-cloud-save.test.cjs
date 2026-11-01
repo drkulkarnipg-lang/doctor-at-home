@@ -6,7 +6,7 @@ assert.match(ui,/window\.saveDeskDocument=async function/);
 assert.match(ui,/cloud\.isSignedIn\?\./,'cloud saving must require an authenticated cloud session');
 assert.match(ui,/window\.WorkstationAuth\?\.isOwnerSession\?\./,'cloud saving must require the owner workstation session');
 assert.match(ui,/window\.confirm\(/,'cloud saving must require explicit patient-document consent');
-assert.match(ui,/crypto\.subtle\.digest\('SHA-256'/,'client must calculate a document integrity hash');
+assert.match(ui,/crypto\?\.subtle\.digest\('SHA-256'/,'client must calculate a document integrity hash');
 assert.match(ui,/documentType:doc\.type/);
 assert.match(ui,/base64:btoa\(binary\)/);
 assert.match(ui,/file\.size>7864320/,'cloud save must respect the 7.5 MB server limit');
