@@ -43,7 +43,7 @@ const search=w.document.getElementById('clinicalCalculatorSearch');search.value=
 for(const id of require('./existing-feature-ids.json'))assert.ok(w.document.getElementById(id),`Lost existing interface element ${id}`);
 assert.equal(w.document.getElementById('webhookUrlInput').disabled,true,'Automation webhook entry must remain disabled until server-side configuration and security review');assert.match(w.document.getElementById('webhookUrlInput').placeholder,/server/i);
 const websiteSchema=JSON.parse(w.document.querySelector('script[type="application/ld+json"]').textContent);assert.equal(websiteSchema['@graph'][0].name,'Dr. Pramod G. Kulkarni');assert.ok(w.document.querySelector('link[rel=canonical]'));assert.ok(w.document.querySelector('a[href="site-information.html"]'));
-const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size,'Duplicate HTML IDs');
+const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);const duplicateIds=[...new Set(ids.filter((id,i)=>ids.indexOf(id)!==i))];assert.equal(ids.length,new Set(ids).size,'Duplicate HTML IDs: '+duplicateIds.join(', '));
 for(const id of ['rxSheet','pathSlipSheet','radSlipSheet','viewChart20','viewLegalForms','viewClinicalCertificates','viewDrugDir','viewArticlesHub','viewJournalsHub','chatbotWindow','patientFaq','bookingSection'])assert.ok(w.document.getElementById(id),`Lost feature ${id}`);
 assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,9);
 w.document.getElementById('wikiSearchInput').value='catheter';w.filterWikiArticles();assert.equal(w.document.querySelectorAll('#wikiCardsGrid article').length,1);
