@@ -89,7 +89,8 @@ function calculate(){
  const sepsis=f.yes.includes('infection');
  const scoreHigh=n.score>=7,scoreMedium=n.score>=5&&n.score<=6,single3=n.red3.length>0;
  let category='green',reasons=[];
- if(red.length){category='red';reasons.push('WHO emergency danger sign(s): '+red.map(k=>labels[k]).join('; '));}\n if(vit.hr<50||vit.hr>150){category='red';reasons.push('WHO red vital-sign threshold: heart rate <50 or >150/min.');}
+ if(red.length){category='red';reasons.push('WHO emergency danger sign(s): '+red.map(k=>labels[k]).join('; '));}
+ if(vit.hr<50||vit.hr>150){category='red';reasons.push('WHO red vital-sign threshold: heart rate <50 or >150/min.');}
  if(f.yes.includes('clinicalConcern')){category='yellow';reasons.push('Doctor reports overriding concern: do not home-treat; urgent in-person reassessment/escalation is required.');}
  if(scoreHigh){category='red';reasons.push('NEWS2 ≥7: high-risk physiological score.');}
  if(category!=='red'&&(scoreMedium||single3||anyYellow||f.yes.includes('clinicalConcern'))){category='yellow';if(scoreMedium)reasons.push('NEWS2 5–6: urgent assessment threshold.');if(single3)reasons.push('At least one NEWS2 parameter scores 3: urgent clinician review irrespective of aggregate.');if(anyYellow)reasons.push('WHO urgent/high-risk feature(s) present.');}
