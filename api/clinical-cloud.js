@@ -112,7 +112,7 @@ const patientName=clean(e.patientName,120),deathDate=clean(e.deathDate,10),death
 if(!patientName||!validISODate(deathDate)||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
 const entryDate=validISODate(e.entryDate)?e.entryDate:deathDate;
 const sourceKey=require('node:crypto').createHash('sha256').update(['death-form-v1',e.formType,patientName.toLocaleLowerCase(),deathDate,deathTime,place.toLocaleLowerCase()].join('|')).digest('hex');
-const data={patientName,patientCode:'',age:clean(e.age,20),sex:clean(e.sex,30),deathDateTime:deathDate+'T'+deathTime,place,certificateReference:'Source form: '+e.formType.toUpperCase(),notes:'Entered from the doctor's selected death form; verify against the signed source before final filing.'};
+const data={patientName,patientCode:'',age:clean(e.age,20),sex:clean(e.sex,30),deathDateTime:deathDate+'T'+deathTime,place,certificateReference:'Source form: '+e.formType.toUpperCase(),notes:"Entered from the doctor-selected death form; verify against the signed source before final filing."};
 const record={owner_id:user.id,register_type:'death',entry_date:entryDate,data,source_form_key:sourceKey,revision:randomUUID(),updated_at:new Date().toISOString()};
 const r=await api('/rest/v1/clinic_workstation_registers?on_conflict=owner_id,source_form_key',{method:'POST',headers:{...headers,Prefer:'resolution=ignore-duplicates,return=representation'},body:JSON.stringify(record)});
 if(!r.ok){if(r.status===404||r.status===400)return reply(503,{message:'Death register cloud storage is not ready. No register entry was saved.'});throw Error();}
