@@ -424,3 +424,5 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 - Indian population-specific batch: 10 additional entries from the IFCC C-RIDL Indian study (Na, K, Cl, Ca, inorganic phosphate, Mg, total protein, LDL-C and fasting glucose with two age partitions). Mayo-vs-Indian source/method duplicates now require explicit interval-source selection. Study platform transfer to local assays remains unvalidated. Seed total: 40; target: 750.
+
+- Lab checker safety refinement: source/method/population applicability attestation is mandatory for external intervals; fasting status is mandatory for the two Indian fasting-glucose age partitions; ambiguous same-name intervals require explicit source/method selection. Pregnancy/recent pregnancy blocked; units must match exactly. Helper and seed regression now also tests fasting metadata.
