@@ -11,6 +11,7 @@ login:async(email,password,rememberDevice=false)=>{const data=await api('login',
 requestPasswordReset:async email=>api('reset-request',{email}),
 listRegister:async registerType=>api('register-list',undefined,{registerType}),
 saveRegister:async entry=>api('register-save',{entry}),
+registerDeathFromForm:async entry=>api('register-death-from-form',{entry}),
 logout:async()=>{await api('logout',{});signedIn=false;for(const timer of timers.values())clearTimeout(timer);timers.clear();paint(true);$('cloudPatientSelect').replaceChildren(new Option('Choose cloud patient',''));window.dispatchEvent(new Event('clinic-owner-signed-out'));},
 isSignedIn:()=>signedIn
 };
