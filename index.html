@@ -453,9 +453,23 @@
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabLegal" onclick="switchDocTab('legalForms')">⚖️ Death Certificates (4A, 4, 2)</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabDrug" onclick="switchDocTab('drugDir')">💊 1-Click Formulary &amp; CIMS</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabArticles" onclick="switchDocTab('articlesHub')">📑 Article Manager &amp; Moon-Reader</button>
-<button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabSet" onclick="switchDocTab('settingsTab')">⚙️ Settings</button>
+<button type="button" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl" id="tabShareDesk" onclick="switchDocTab('shareDesk')">📤 Share Desk</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabSet" onclick="switchDocTab('settingsTab')">⚙️ Settings</button>
 <button class="px-3 py-1.5 bg-slate-100 text-slate-800 border border-slate-300 rounded-xl text-xs font-bold hover:bg-slate-200 ml-auto flex items-center gap-1" onclick="lockWorkstationNow()">🔒 Lock Session</button>
 <button type="button" class="px-3 py-2 rounded-xl text-xs font-bold" id="tabCalculators" onclick="switchDocTab('clinicalCalculators')">Clinical calculators · 28</button></div>
+
+<section id="viewShareDesk" class="hidden share-desk space-y-5" aria-labelledby="shareDeskTitle">
+ <div class="share-desk-heading"><span class="section-eyebrow">Document distribution · local-first</span><h2 id="shareDeskTitle">Share Desk</h2><p>One place to prepare and share prescriptions, laboratory and radiology requisitions, invoices, certificates, and patient articles. Nothing is uploaded automatically; review the recipient and file in your chosen app before sending.</p></div>
+ <div class="share-desk-grid">
+  <article class="share-desk-card"><span class="share-desk-icon">📝</span><h3>Prescription</h3><p>Share the current A4 prescription as a PDF.</p><button type="button" onclick="shareDeskDocument('rx')">Share prescription</button><button type="button" class="secondary" onclick="switchDocTab('rxPad')">Open prescription</button></article>
+  <article class="share-desk-card"><span class="share-desk-icon">🧪</span><h3>Laboratory requisition</h3><p>Share the current investigation request slip.</p><button type="button" onclick="shareDeskDocument('path')">Share lab sheet</button><button type="button" class="secondary" onclick="switchDocTab('pathReq')">Open lab requisition</button></article>
+  <article class="share-desk-card"><span class="share-desk-icon">☢️</span><h3>Radiology requisition</h3><p>Share the current imaging request slip.</p><button type="button" onclick="shareDeskDocument('rad')">Share radiology</button><button type="button" class="secondary" onclick="switchDocTab('radReq')">Open radiology requisition</button></article>
+  <article class="share-desk-card"><span class="share-desk-icon">🧾</span><h3>Invoice / receipt</h3><p>Prepare and share the current invoice PDF.</p><button type="button" onclick="shareDeskInvoice()">Share invoice PDF</button><button type="button" class="secondary" onclick="switchDocTab('invoice')">Open invoice</button></article>
+  <article class="share-desk-card"><span class="share-desk-icon">📜</span><h3>Certificates &amp; forms</h3><p>Choose a completed statutory form.</p><select id="shareDeskCertificate" aria-label="Choose certificate or form"><option value="form4">Form 4</option><option value="form4a">Form 4A</option><option value="form2">Form 2</option></select><button type="button" onclick="shareDeskCertificate()">Share selected certificate</button><button type="button" class="secondary" onclick="switchDocTab('clinicalCertificates')">Open clinical certificates</button><button type="button" class="secondary" onclick="switchDocTab('legalForms')">Open statutory forms</button></article>
+  <article class="share-desk-card"><span class="share-desk-icon">📚</span><h3>Patient articles</h3><p>Share a published patient guidance article as a PDF.</p><select id="shareDeskArticle" aria-label="Choose patient article"><option value="">Load available articles…</option></select><button type="button" onclick="shareDeskArticle()">Share selected article</button><button type="button" class="secondary" onclick="shareDeskLoadArticles()">Refresh article list</button><button type="button" class="secondary" onclick="switchDocTab('articlesHub')">Open Article Manager</button></article>
+ </div>
+ <section class="share-desk-card share-desk-any"><div><span class="share-desk-icon">📎</span><h3>Share any file from this device</h3><p>Choose a PDF, image, report or other file. It stays on this device until you select a sharing app and recipient.</p></div><input type="file" id="shareDeskFile" aria-label="Choose a file to share"><button type="button" id="shareDeskAnyButton" onclick="shareDeskAnyFile()">Share selected file</button><p id="shareDeskStatus" role="status" aria-live="polite">No file selected.</p></section>
+ <p class="share-desk-safety"><strong>Privacy:</strong> no public link is created and no patient document is uploaded automatically.</p>
+</section>
 <!-- 1-CLICK ALL-AI CLINICAL SEARCH BAR (Direct, Pop-up Proof <a> Links) -->
 <div class="bg-gradient-to-r from-teal-900 via-[#0F2942] to-slate-900 text-white p-3.5 rounded-2xl flex flex-wrap justify-between items-center gap-2.5 no-print shadow-sm text-xs" id="aiLaunchBar">
 <div class="flex items-center gap-1.5">
@@ -1282,7 +1296,7 @@
           placeholder.parentNode.insertBefore(research, placeholder.nextSibling);
         }
       }
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'registers', 'clinicalTools'].forEach(t => {
+      ['rxPad', 'shareDesk', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'registers', 'clinicalTools'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if (elem) elem.classList.add('hidden');
       });
