@@ -563,7 +563,7 @@ Verification: the repository-wide inventory test passes after adding the new sou
 
 ## Lab Normal Reference Check Table — 2 November 2026
 
-- Current seed: 40 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
+- Current seed: 85 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
 - New `lab-reference-governance.js` loads after `clinical-calculators.js` in Doctor Workstation. Adds searchable test input plus explicit dropdown, source evidence panel, adult age/sex matching, pregnancy guard, explicit result unit and no silent conversion, and local report interval override.
 - Reference intervals and decision limits are distinguished (eGFR threshold is not labelled a population normal range). No matching age/sex interval = no classification; no guess.
 - Previous ungoverned CSV import that activated arbitrary rows has been removed. Evidence CSV requires source title + HTTPS URL, specimen, method, population, adult age band, sex partition, unit and range type. Rows enter pending review and only become selectable after explicit clinician review/approval. Reviewed catalogue is stored locally on that workstation and can be exported as JSON; patient results are never stored or uploaded.
@@ -573,9 +573,11 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - Deployment status must be checked against the exact latest commit; GitHub commits are not proof of production publication.
 
 
-- 2 Nov seed expansion: three CBC differential absolute counts added with direct Mayo test-page provenance; seed count 40. No claim of 700+ completion or live deployment.
+- 2 Nov seed expansion: three CBC differential absolute counts added with direct Mayo test-page provenance; seed count 85. No claim of 700+ completion or live deployment.
 
 
-- 2 Nov additional India-specific batch: 10 adult serum reference interval entries transcribed from Shah et al. Indian IFCC C-RIDL Table 4, including fasting glucose age partitions. A source/method selector now prevents silently choosing between the Indian study and Mayo comparator for overlapping tests. Study assay transfer to local laboratories is not yet verified. Catalogue seed: 40; target: 750.
+- 2 Nov additional India-specific batch: 55 adult serum reference interval partitions transcribed from Shah et al. Indian IFCC C-RIDL Table 4, including fasting glucose age partitions. A source/method selector now prevents silently choosing between the Indian study and Mayo comparator for overlapping tests. Study assay transfer to local laboratories is not yet verified. Catalogue seed: 85; target: 750.
 
 - Lab comparator safety gates added: clinician confirmation of source/specimen/method/population, explicit fasting confirmation for Indian fasting glucose, method/source dropdown for ambiguous duplicates, pregnancy guard and no silent unit conversion. Tests cover fasting metadata.
+
+- 2 Nov full Indian C-RIDL Table 4 expansion: 45 additional partitions covering albumin, lipids, creatinine/urea/urate, liver/muscle enzymes, iron/transferrin, inflammatory markers, immunoglobulins, complement and transthyretin. All 33 analytes from the paper are now represented by 55 Indian-population records. Total seed: 85 (30 Mayo/source-linked + 55 Indian C-RIDL). Local method transfer remains unverified. Development regression: 467 assertions passed.
