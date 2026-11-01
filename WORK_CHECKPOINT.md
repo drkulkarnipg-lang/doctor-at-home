@@ -508,3 +508,8 @@ Next: verify documentation checkpoint commit statuses; continue integrating the 
 - Exact documentation checkpoint commit `0cfed2f8836a295104e3fb36d57a3cd93c8e33bf`: GitHub Actions run `41326227416` completed SUCCESS; Vercel status SUCCESS. Main points to this commit; protected baseline still points to `ab8855374d376cca6e2158417385f10bebcb4965`.
 
 Do not attempt to enable cloud records, change the owner's credentials, add a new password, alter auth provider settings, or run database migrations without access to the owner's connected provider project and verified owner-controlled configuration.
+
+
+### Death Form → Death Register linkage gap — 1 November 2026
+
+Inspected `index.html` death-form PDF export and `workstation-registers.js`. The Death Form export exists, and the Death Register is a separate owner-authenticated cloud form. No auto-population/event linkage or duplicate-prevention bridge exists in current source. Added open task H20 to `MASTER_TASK_REGISTER.md`. This must be implemented with explicit save confirmation, source form reference/idempotency key and revision-safe correction; do not silently create a second death entry or claim automatic register entry. Live Supabase remains unconfigured.
