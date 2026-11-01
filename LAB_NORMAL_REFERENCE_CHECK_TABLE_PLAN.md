@@ -4,7 +4,7 @@
 **Clinical status:** decision-support comparator only; it does not diagnose or replace the performing laboratory's own interval.
 
 ## Current baseline
-- The current comparator contains 105 source-attributed adult records (50 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated.
+- The current comparator contains 111 source-attributed adult records (50 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions + 6 Mayo Reticulocyte Profile partitions merged in PR #102). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated.
 - The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 750-record catalogue.
 - A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
 
@@ -164,9 +164,9 @@ The batch does not claim local Pune method transfer or universal Indian/global a
 - These are software/data-governance checks. The physician remains responsible for clinical applicability; no paediatric or pregnancy-specific reference pathway is implied.
 
 
-### Reticulocyte profile batch — 2 November 2026 (PR #102 review branch)
+### Reticulocyte profile batch — 2 November 2026 (PR #102 merged)
 
-The current main seed is 105 source-attributed records. Six additional, non-duplicated Mayo adult partitions in PR #102 propose a review-branch seed of **111** if accepted. Ferritin and TSH partitions from the earlier PR #102 draft were not duplicated because those tests are already present in current main.
+The current main seed is **111 source-attributed adult records**. Six additional, non-duplicated Mayo adult Reticulocyte Profile partitions were merged into main via PR #102. Ferritin and TSH partitions from the earlier PR #102 draft were not duplicated because those tests were already present in main.
 
 - **Reticulocyte Profile, Blood (RETB):** reticulocyte percentage 0.60–2.71%; absolute reticulocytes 30.4–110.9 ×10⁹/L; immature reticulocyte fraction male 2.3–13.4% and female 3.0–15.9%; reticulocyte haemoglobin male and female 30.0–37.6 pg.
 - Specimen: whole blood EDTA. Method: flow cytometry. Adult age partition: ≥18 years. Sex-specific partitions are retained only where the Mayo source provides them.
