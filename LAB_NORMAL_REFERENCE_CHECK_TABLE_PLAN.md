@@ -1,6 +1,6 @@
-# Lab Normal Reference Check Table — 700+ interval expansion plan
+# Lab Normal Reference Check Table — 750-record evidence expansion plan
 
-**Target:** at least 700 distinct numerical laboratory test/analyte entries, with age-, sex-, pregnancy-, specimen- and method-specific interval partitions wherever evidence supports them.  
+**Target:** at least 750 distinct source-attributed laboratory test/analyte/population/method records, with age-, sex-, pregnancy-, specimen- and method-specific interval partitions wherever evidence supports them.  
 **Clinical status:** decision-support comparator only; it does not diagnose or replace the performing laboratory's own interval.
 
 ## Current baseline
