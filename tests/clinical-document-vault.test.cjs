@@ -7,7 +7,7 @@ const cloud=fs.readFileSync(path.join(root,'cloud-records.js'),'utf8');
 const ui=fs.readFileSync(path.join(root,'workstation-registers.js'),'utf8');
 const migration=fs.readdirSync(path.join(root,'supabase/migrations')).filter(x=>x.includes('clinic_document_vault'));
 assert.ok(migration.length===1,'A versioned document vault migration must exist.');
-for(const id of ['clinicDocumentVault','vaultTitle','vaultType','vaultFile','vaultUpload','vaultRefresh','vaultRows'])assert.match(html,new RegExp('id="'+id+'"'),'Vault UI element '+id+' must exist.');
+for(const id of ['clinicDocumentVault','vaultTitle','vaultType','vaultFile','vaultUpload','vaultRefresh','vaultRows'])assert.ok((html+ui).includes('id="'+id+'"'),'Vault UI element '+id+' must exist.');
 for(const action of ['documents-list','document-upload','document-download'])assert.ok(api.includes("action==='"+action+"'"),'Server must implement '+action);
 assert.match(api,/clinic-document-vault/,'Documents must use the private storage bucket.');
 assert.match(api,/owner_id:user\.id/,'Document metadata must be owner scoped.');
