@@ -37,7 +37,7 @@ test('lab checker instantly searches, partitions and classifies a documented Ind
 test('lab checker blocks out-of-population age and pregnancy transfer',()=>{
  let dom=mount(),w=dom.window;set(w,'labrcAge',70);select(dom,'na-india');
  assert.match(w.document.getElementById('labrcResult').textContent,/No compatible age partition/);dom.window.close();
- dom=mount();w=dom.window;set(w,'labrcAge',30);set(w,'labrcPregnancy','pregnant');select(dom,'na-india');
+ dom=mount();w=dom.window;set(w,'labrcAge',30);set(w,'labrcPregnancyContext','pregnant');select(dom,'na-india');
  assert.match(w.document.getElementById('labrcResult').textContent,/No pregnancy\/postpartum-specific interval/);dom.window.close();
 });
 test('decision limits are not mislabeled as population reference intervals',()=>{
