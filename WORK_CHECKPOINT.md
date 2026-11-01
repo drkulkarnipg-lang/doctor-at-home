@@ -464,3 +464,24 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - **Still open — real rendered/device checks:** no evidence in this run establishes the actual page rendering at 320 px and 390 px, physical-device navigation/target operation, public Know Your Numbers cards, a live booking/BMI journey, PDF save/print/share on a real device, or native WhatsApp handoff and recipient receipt. Keep each item open until directly exercised and evidenced. The connected browser/device context was unavailable for this run, and external page retrieval was not successful.
 - **Clinical and financial release boundaries:** the four new topic drafts remain unpublished for physician review, India-specific adaptation and qualified Marathi translation. No payment gateway was enabled, no payment collection is claimed, and no billing configuration, secrets, hosting configuration or database migration was changed.
 - **Inventory evidence boundary:** the regenerated committed inventory is now covered by a passing exact-main regression. This is repository/source evidence; it is not a live HTTP reachability audit of every external destination.
+
+
+## 1 November 2026 — latest resume checkpoint
+
+Latest verified application commit before this checkpoint: `8666b92d69fe80638f2185ea0f5cf5943f4c6762`. Exact-head GitHub Actions run `41325633145` completed SUCCESS, including the full repository regression-test step. Vercel status for that exact commit was SUCCESS. Follow-on documentation-only checkpoint commit: `557aab60ef700bfa7e58def0eda3f028d5fc3b26` (MASTER_TASK_REGISTER.md updated; deployment/CI for this documentation commit must be checked separately).
+
+Completed this session:
+- Corrected the external-link inventory source-line evidence until the generator regression passed.
+- Corrected the stale prescription registration test to the owner's approved exact value `I24809-A-1` (no extra hyphen after I); exact-head full CI then passed.
+- Re-verified the protected baseline ref still points to `ab8855374d376cca6e2158417385f10bebcb4965`.
+- Reviewed current auth/cloud/register/passkey code and setup documents. The code is not proof of live service activation.
+
+Next actions, in order:
+1. Check GitHub Actions and Vercel status for documentation checkpoint commit `557aab60ef700bfa7e58def0eda3f028d5fc3b26`.
+2. Continue requisition audit E07/E08 and inspect selected-item PDF output.
+3. Add the owner's original round and rectangular stamp photos as unchanged binary assets. They were visually inspected locally but have NOT been committed; do not redraw/vectorise. Preserve blank patient/relative/witness signature fields.
+4. Supabase remains unconnected per CLOUD_RECORDS_SETUP.md: do not claim cloud patient/register persistence. Need owner's connected Supabase/Vercel project settings, correct owner Auth UUID, environment configuration, manual migrations, RLS and synthetic two-device tests.
+5. Current Doctor login is email/password + email recovery. Username/mobile OTP is not implemented. Passkeys are optional and provider/device activation is incomplete. Keep password fallback and do not invent credentials or weaken auth.
+6. Perform real mobile/desktop visual, phone dialler, WhatsApp/PDF share, print and save checks when connected browser/device access is available.
+
+Never alter the protected baseline branch. Keep main and any Stitch experiment separate. Do not mark provider/device work complete from CI or a Vercel build alone.
