@@ -594,3 +594,12 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - Main Vercel status for `adbc914`: failure, `build-rate-limit`. No production deployment is confirmed. No empty/artificial commit, billing change, DNS/hosting change or provider-control bypass is permitted.
 - Lab seed: 85 records on main. PR #102 review branch adds 10 Mayo source-specific adult partitions, proposing 95 if merged. All remain subject to local method transfer and physician review. Target 750 distinct evidence-backed entries remains open.
 - No custom-domain HTTP, desktop/mobile browser, device or recipient-side verification is claimed in this checkpoint.
+
+
+### Exact review-head checkpoint — 2 November 2026
+
+- PR #102 current review head after the source-verified Mayo batch: `0035948384183cfd74b58815cf12d893e09569ad`; base remains `adbc9142711f0299b32397f07d283a4863fd405e`.
+- The review branch now contains 95 proposed source-attributed adult records (85 existing + 10 Mayo-derived). Main remains at 85 until a fully passing PR is merged. The 750-entry target remains open.
+- Previous exact-head run #1448 (`41346814447`) failed because `vercel.json` was last rather than locale-sorted in the committed inventory. The source-file order was corrected; the next regression must run on this exact review head.
+- Main run #1399 (`41345607572`) failed at the legacy DASH assertion; PR #102 includes the DASH-handler correction and GCS tests.
+- Vercel on main `adbc914` remains `build-rate-limit`. No production deployment or custom-domain/browser verification is confirmed.
