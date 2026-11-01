@@ -485,3 +485,15 @@ Next actions, in order:
 6. Perform real mobile/desktop visual, phone dialler, WhatsApp/PDF share, print and save checks when connected browser/device access is available.
 
 Never alter the protected baseline branch. Keep main and any Stitch experiment separate. Do not mark provider/device work complete from CI or a Vercel build alone.
+
+
+### E07/E08 requisition audit — 1 November 2026
+
+- Reviewed the current pathology and radiology forms in main.
+- Pathology source includes separate Lipid Profile, Serum Ammonia and Iron Studies (serum iron, ferritin, TIBC).
+- Radiology source includes Portable Digital Chest X-Ray, Bedside USG Abdomen & Pelvis, separate Venous and Arterial Color Doppler, Bedside 2D Echo, NCCT Brain, CT Chest and MRI Brain/Spine.
+- `document-sharing.js` preserves selected/unselected checkbox state as `[x]` / `[ ]` in the generated PDF clone. Both requisitions have their own A4 export and PDF-sharing mapping; `clinical-documents.js` mounts date/time and doctor signoff on both.
+- Added `tests/requisition-coverage.test.cjs`. Exact-head commit `faba5316844107d68b826b5a99497f50242c99ac`; Actions run `41326111081` passed the full regression suite and Vercel status was SUCCESS.
+- This does not establish real-device PDF visual quality or WhatsApp/email recipient delivery. Original round/rectangular stamps are still not committed; do not claim stamped output. The optional `stampDocumentPdf` hook exists in the PDF pipeline but no implementation was found in current main.
+
+Next: verify documentation checkpoint commit statuses; continue integrating the exact original stamp photos when their bytes can be transferred without redraw; keep Supabase/provider/device setup explicitly pending.
