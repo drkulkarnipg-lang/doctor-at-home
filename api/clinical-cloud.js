@@ -133,7 +133,7 @@ const signed=await api('/storage/v1/object/sign/clinic-document-vault/'+path.spl
 if(!signed.ok)throw Error();
 const result=await signed.json();const signedURL=result.signedURL||result.signedUrl;
 if(typeof signedURL!=='string')throw Error();
-return reply(200,{url:signedURL,title:rows[0].title,mimeType:rows[0].mime_type,expiresIn:90});
+return reply(200,{url:new URL(signedURL,url.origin).href,title:rows[0].title,mimeType:rows[0].mime_type,expiresIn:90});
 }
 if(action==='register-list'&&method==='GET'){
 const type=String(req.query?.registerType||'');if(!['daily','death','stock'].includes(type))return reply(400,{message:'Choose daily, death or stock register.'});
