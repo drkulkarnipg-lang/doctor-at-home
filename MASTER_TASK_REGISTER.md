@@ -410,7 +410,7 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 ## Lab Normal Reference Check Table — 2 November 2026
 
-- Current seed: 30 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
+- Current seed: 40 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
 - New `lab-reference-governance.js` loads after `clinical-calculators.js` in Doctor Workstation. Adds searchable test input plus explicit dropdown, source evidence panel, adult age/sex matching, pregnancy guard, explicit result unit and no silent conversion, and local report interval override.
 - Reference intervals and decision limits are distinguished (eGFR threshold is not labelled a population normal range). No matching age/sex interval = no classification; no guess.
 - Previous ungoverned CSV import that activated arbitrary rows has been removed. Evidence CSV requires source title + HTTPS URL, specimen, method, population, adult age band, sex partition, unit and range type. Rows enter pending review and only become selectable after explicit clinician review/approval. Reviewed catalogue is stored locally on that workstation and can be exported as JSON; patient results are never stored or uploaded.
@@ -420,4 +420,7 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Deployment status must be checked against the exact latest commit; GitHub commits are not proof of production publication.
 
 
-- Seed expansion on 2 Nov: added absolute monocytes, eosinophils and basophils (Mayo CBC with Differential; 0.26–0.81, 0.03–0.48 and 0.01–0.08 ×10⁹/L respectively). Total seed: 30 entries. Source page: https://www.mayocliniclabs.com/test-catalog/Overview/9109. Exact-head regression and production deployment remain pending.
+- Seed expansion on 2 Nov: added absolute monocytes, eosinophils and basophils (Mayo CBC with Differential; 0.26–0.81, 0.03–0.48 and 0.01–0.08 ×10⁹/L respectively). Total seed: 40 entries. Source page: https://www.mayocliniclabs.com/test-catalog/Overview/9109. Exact-head regression and production deployment remain pending.
+
+
+- Indian population-specific batch: 10 additional entries from the IFCC C-RIDL Indian study (Na, K, Cl, Ca, inorganic phosphate, Mg, total protein, LDL-C and fasting glucose with two age partitions). Mayo-vs-Indian source/method duplicates now require explicit interval-source selection. Study platform transfer to local assays remains unvalidated. Seed total: 40; target: 750.
