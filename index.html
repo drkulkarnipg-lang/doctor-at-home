@@ -590,6 +590,19 @@
 <!-- Owner-authenticated cloud registers; requires the reviewed Supabase migration. -->
 <section class="hidden space-y-5" id="viewRegisters">
 <header class="no-print"><span class="section-eyebrow">Doctor Workstation · practice records</span><h3>Practice Registers</h3><p>Daily patient register, death register and stock register. Entries are saved only to the authenticated clinic cloud; this page does not keep a local copy. Apply the reviewed Supabase migration and verify access controls before use. These working registers do not replace prescribed statutory government forms or official death certification.</p></header>
+<section class="certificate-help no-print" id="clinicDocumentVault" aria-labelledby="clinicVaultHeading">
+<h4 id="clinicVaultHeading">Private Clinical Document Cloud Vault</h4>
+<p>Save completed prescriptions, requisitions, referrals, certificates, invoices, clinical notes and patient attachments here. Files are private to the clinic owner. Upload is limited to 7.5 MB per file. Save first; then export, share or print from this vault. This vault does not automatically save every document until the relevant document workflow is connected.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<label>Document title<input id="vaultTitle" maxlength="240" autocomplete="off" placeholder="Patient code · document · date"/></label>
+<label>Document category<select id="vaultType"><option value="prescription">Prescription</option><option value="lab_requisition">Lab requisition</option><option value="radiology_requisition">Radiology requisition</option><option value="referral">Referral</option><option value="fitness">Fitness certificate</option><option value="unfitness">Unfitness certificate</option><option value="consent">Consent</option><option value="invoice">Invoice / receipt</option><option value="death_form">Death form</option><option value="patient_attachment">Patient attachment</option><option value="clinical_note">Clinical note</option><option value="article_draft">Article draft</option><option value="other">Other</option></select></label>
+<label>Choose completed file<input id="vaultFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.txt,.json,application/pdf,image/png,image/jpeg,text/plain,application/json"/></label>
+<label>Source reference (optional)<input id="vaultSourceRef" maxlength="160" placeholder="Prescription number / visit reference"/></label>
+</div>
+<div class="flex flex-wrap gap-2 mt-3"><button class="research-upload" type="button" id="vaultUpload">Save document to cloud</button><button class="research-upload" type="button" id="vaultRefresh">Refresh saved documents</button></div>
+<p id="vaultStatus" role="status" aria-live="polite"></p>
+<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr><th>Document</th><th>Type</th><th>Date</th><th>Size</th><th>Actions</th></tr></thead><tbody id="vaultRows"><tr><td colspan="5">Sign in to load private documents.</td></tr></tbody></table></div>
+</section>
 <div class="register-type-controls no-print flex flex-wrap gap-2" role="group" aria-label="Choose practice register">
 <button type="button" data-register-type="daily" aria-pressed="true">Daily patient register</button>
 <button type="button" data-register-type="death" aria-pressed="false">Death register</button>
