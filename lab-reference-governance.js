@@ -39,6 +39,7 @@
     if(!String(r.specimen||'').trim()||!String(r.method||'').trim()||!String(r.population||'').trim())errors.push('Specimen, method and population are mandatory');
     return {valid:errors.length===0,errors,low:lo,high:hi};
   }
+  function matchInterval(records,age,sex){const a=Number(age);if(!Number.isFinite(a))return null;const eligible=(records||[]).filter(t=>{const m=t[9]||{};if(a<(m.ageMin??18)||a>(m.ageMax??120))return false;if(m.sex&&['male','female'].includes(m.sex)&&m.sex!==sex)return false;if(t[8]&&(!sex||!t[8][sex]))return false;return true;});return eligible.length===1?eligible[0]:null;}
   function classify(value,low,high,kind='reference_interval'){
     const n=Number(value);if(!Number.isFinite(n))return 'INVALID';
     if(n<low)return kind==='decision_limit'?'BELOW DECISION THRESHOLD':'LOW';
@@ -147,8 +148,8 @@
     const evidence=document.createElement('div');evidence.className='labrc-selected';evidence.id='labrcEvidence';evidence.textContent='Source, specimen, method and population details appear here after selecting a test.';selected.after(evidence);
     function addTestOptionSafe(name){addTestOption(name);}
     function candidates(){const q=(search.value||testSelect.value||'').trim().toLowerCase();if(!q)return [];return tests.filter(t=>t[1].toLowerCase()===q||t[0].toLowerCase()===q||(t[2]||'').toLowerCase().split(';').some(a=>a.trim()===q));}
-    function chosen(){const list=candidates();if(!list.length)return null;const selectedId=intervalSelect.value;if(selectedId)return list.find(t=>t[0]===selectedId)||null;const a=Number(age.value),sx=sex.value;const eligible=list.filter(t=>{const m=t[9]||{};const min=m.ageMin??18,max=m.ageMax??120;if(!Number.isFinite(a)||a<min||a>max)return false;if(m.sex&&['male','female'].includes(m.sex)&&m.sex!==sx)return false;if(t[8]&&(!sx||!t[8][sx]))return false;return true;});return eligible.length===1?eligible[0]:null;}
-    function populateIntervals(){const list=candidates(),previous=intervalSelect.value;intervalSelect.replaceChildren();const first=document.createElement('option');first.value='';first.textContent=list.length>1?'Choose matching source / method / population…':'Auto-matched source / method';intervalSelect.append(first);list.forEach(t=>{const m=t[9]||{};const o=document.createElement('option');o.value=t[0];o.textContent=[m.sourceName||t[7],m.specimen||'specimen n/a',m.method||'method n/a','age '+(m.ageMin??18)+'–'+(m.ageMax??120),m.sex||'all'].join(' · ');intervalSelect.append(o);});if(previous&&list.some(t=>t[0]===previous))intervalSelect.value=previous;else if(list.length===1)intervalSelect.value=list[0][0];else{const a=Number(age.value),sx=sex.value;const eligible=list.filter(t=>{const m=t[9]||{};if(!Number.isFinite(a)||a<(m.ageMin??18)||a>(m.ageMax??120))return false;if(m.sex&&['male','female'].includes(m.sex)&&m.sex!==sx)return false;if(t[8]&&(!sx||!t[8][sx]))return false;return true;});if(eligible.length===1)intervalSelect.value=eligible[0][0];}}
+    function chosen(){const list=candidates();if(!list.length)return null;const selectedId=intervalSelect.value;if(selectedId)return list.find(t=>t[0]===selectedId)||null;const a=Number(age.value),sx=sex.value;return matchInterval(list,a,sx);}
+    function populateIntervals(){const list=candidates(),previous=intervalSelect.value;intervalSelect.replaceChildren();const first=document.createElement('option');first.value='';first.textContent=list.length>1?'Choose matching source / method / population…':'Auto-matched source / method';intervalSelect.append(first);list.forEach(t=>{const m=t[9]||{};const o=document.createElement('option');o.value=t[0];o.textContent=[m.sourceName||t[7],m.specimen||'specimen n/a',m.method||'method n/a','age '+(m.ageMin??18)+'–'+(m.ageMax??120),m.sex||'all'].join(' · ');intervalSelect.append(o);});if(previous&&list.some(t=>t[0]===previous))intervalSelect.value=previous;else if(list.length===1)intervalSelect.value=list[0][0];else{const matched=matchInterval(list,age.value,sex.value);if(matched)intervalSelect.value=matched[0];}}
     function refreshEvidence(){
       const list=candidates();const t=chosen();if(!t){evidence.textContent=list.length?'More than one source/method/population interval matches, or no demographic partition is available. Choose the exact interval in the source/method dropdown.':'Select an exact test name; partial text is only a search.';return;}
       const m=t[9]||{};const url=m.sourceUrl||SOURCE_URLS[String(t[7]||'').split('·').pop()?.trim()]||'';
@@ -190,7 +191,7 @@
     search.value='';testSelect.value='';unitInput.value='';
     renderPending();updateCounts();
   }
-  const api={parseCSV,validateEntry,classify};
+  const api={parseCSV,validateEntry,classify,matchInterval};
   root.LabReferenceGovernance=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',attach);else attach();}
