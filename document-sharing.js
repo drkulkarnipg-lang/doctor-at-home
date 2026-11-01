@@ -5,7 +5,16 @@
  function clone(id){const source=$(id);if(!source)throw Error('Open a document first.');if(source.dataset.certificateTemplate&&window.buildCertificatePdfClone)return window.buildCertificatePdfClone(id);
   const education=source.querySelector('[data-education-key]');const copy=(education||source).cloneNode(true);copy.classList.remove('hidden','document-share-temporary');copy.classList.add('document-pdf-sheet');copy.style.position='static';copy.style.maxHeight='none';copy.style.height='auto';copy.style.overflow='visible';copy.querySelectorAll('details').forEach(d=>d.open=true);
   const originals=[...source.querySelectorAll('input,textarea,select')];
-  copy.querySelectorAll('input,textarea,select').forEach((c,i)=>{const o=originals[i],span=document.createElement('span');span.className='document-pdf-value';let v=o.value;if(o.type==='checkbox'||o.type==='radio')v=o.checked?'[x]':'[ ]';if(o.type==='date'&&/^\d{4}-\d{2}-\d{2}$/.test(v))v=v.split('-').reverse().join('-');if(o.tagName==='SELECT')v=o.selectedOptions[0]?.textContent||'';span.textContent=v||'\u00a0';c.replaceWith(span);});
+  const copies=[...copy.querySelectorAll('input,textarea,select')];
+  copies.forEach((control,i)=>{const original=originals[i],span=document.createElement('span');span.className='document-pdf-value';let v=original?.value??control.value;
+   if(control.type==='checkbox'||control.type==='radio'){const checked=!!original?.checked;span.classList.add('document-pdf-check-state');span.setAttribute('role','img');span.setAttribute('aria-label',checked?'Selected':'Not selected');span.textContent=checked?'☑':'☐';}
+   else if(control.tagName==='TEXTAREA')v=original?.value??control.value;
+   else if(control.type==='date'&&/^\d{4}-\d{2}-\d{2}$/.test(v))v=v.split('-').reverse().join('/');
+   else if(control.tagName==='SELECT')v=original?.selectedOptions[0]?.textContent||control.selectedOptions[0]?.textContent||'';
+   else if(control.type==='checkbox'||control.type==='radio')v='';
+   if(!span.classList.contains('document-pdf-check-state'))span.textContent=v||'\u00a0';
+   control.replaceWith(span);
+  });
   copy.querySelectorAll('.no-print,button,video,script').forEach(e=>e.remove());copy.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));copy.removeAttribute('id');
   if(/^(publicArticle_|moonArticle_)/.test(id)){const h=document.createElement('div');h.className='document-pdf-brand';h.textContent='Dr. Pramod G. Kulkarni | Patient guidance | 9561394341';copy.prepend(h);const n=document.createElement('p');n.className='document-pdf-note';n.textContent='Educational information. Individual assessment and treatment decisions require consultation with your doctor.';copy.append(n);}return window.decorateDocumentClone?window.decorateDocumentClone(copy,id):copy;
  }
