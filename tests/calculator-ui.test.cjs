@@ -1,17 +1,17 @@
 (async()=>{
-const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const {JSDOM}=require('jsdom');
 const base=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(base,'index.html'),'utf8');
 const dom=new JSDOM(html,{runScripts:'outside-only',url:'https://preview.example.test/'}),w=dom.window;
 Object.defineProperty(w,'crypto',{value:require('node:crypto').webcrypto});w.TextEncoder=TextEncoder;
 w.scrollTo=()=>{};w.alert=()=>{};w.tailwind={};w.showToast=()=>{};
-const scripts=[];
+const scripts=[],scriptSources=[];
 for(const script of [...w.document.scripts]){
  if(script.type==='application/ld+json')continue;
- if(script.src){const src=script.getAttribute('src');if(/^(https?:)?\/\//.test(src))continue;if(['assets/tailwind-config-compat.js','assets/pdf/html2pdf.bundle.min.js','assets/qr-code.js'].includes(src))continue;scripts.push(fs.readFileSync(path.join(base,src),'utf8'));}
- else scripts.push(script.textContent);
+ if(script.src){const src=script.getAttribute('src');if(/^(https?:)?\/\//.test(src))continue;if(['assets/tailwind-config-compat.js','assets/pdf/html2pdf.bundle.min.js','assets/qr-code.js'].includes(src))continue;const code=fs.readFileSync(path.join(base,src),'utf8');scripts.push(code);scriptSources.push({name:src,code});}
+ else {const code=script.textContent;scripts.push(code);scriptSources.push({name:'inline-script-'+(scriptSources.length+1),code});}
 }
-w.eval(scripts.join('\n;\n'));
+for(const entry of scriptSources){try{new vm.Script(entry.code,{filename:entry.name});}catch(error){throw new Error('Syntax error in '+entry.name+': '+error.message);}}\nw.eval(scripts.join('\n;\n'));
 await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();assert.match(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note').textContent,/5\.7–6\.4%/);assert.equal(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note a[href="https://diabetes.org/about-diabetes/diagnosis"]').textContent,'HbA1c diagnostic thresholds ↗');
 assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);assert.match(w.document.getElementById('tabPath').textContent,/Lab Requisition/);assert.doesNotMatch(w.document.getElementById('tabPath').textContent,/Slip/);assert.match(w.document.getElementById('tabRad').textContent,/Radiology Requisition/);assert.doesNotMatch(w.document.getElementById('tabRad').textContent,/Slip/);
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,28);

@@ -32,7 +32,7 @@ checks++;
 require('../clinical-calculators.js');
 const {LAB_REFERENCE_TESTS}=globalThis;
 assert.equal(LAB_REFERENCE_TESTS.length,95);checks++;
-assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,85);checks++;
+assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,95);checks++;
 for(const [id,lo,hi] of [['monoabs',0.26,0.81],['eosabs',0.03,0.48],['basoabs',0.01,0.08]]){
  const entry=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(entry);assert.equal(entry[5],lo);assert.equal(entry[6],hi);assert.match(entry[7],/Mayo Clinic Laboratories · CBC with Differential/);checks+=4;
 }
