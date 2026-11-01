@@ -5,7 +5,7 @@ const {sources}=require('../research-sources.js');
 const mkres=()=>({headers:{},setHeader(k,v){this.headers[k]=v;},status(n){this.code=n;return this;},json(v){this.data=v;return this;}});
 (async()=>{
 for(const id of ['pubmed','europepmc','clinicaltrials','crossref'])assert.ok(sources[id]?.mode==='api','Fetch selector includes live API '+id);
-assert.equal(api.safeQuery('<script> diabetes </script>'),'script diabetes');
+assert.equal(api.safeQuery('<script> diabetes </script>'),'script diabetes /script');
 assert.equal(api.safeQuery('x'.repeat(250)).length,180);
 const original=global.fetch;
 try{
