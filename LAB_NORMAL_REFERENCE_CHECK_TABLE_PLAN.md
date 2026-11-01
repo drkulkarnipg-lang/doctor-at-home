@@ -5,7 +5,7 @@
 
 ## Current baseline
 - The current comparator contains 105 source-attributed adult records (50 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated.
-- The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 700-entry database.
+- The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 750-record catalogue.
 - A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
 
 ## Scientific rule: no single universal global reference interval
