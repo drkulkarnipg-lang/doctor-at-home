@@ -603,3 +603,13 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - Previous exact-head run #1448 (`41346814447`) failed because `vercel.json` was last rather than locale-sorted in the committed inventory. The source-file order was corrected; the next regression must run on this exact review head.
 - Main run #1399 (`41345607572`) failed at the legacy DASH assertion; PR #102 includes the DASH-handler correction and GCS tests.
 - Vercel on main `adbc914` remains `build-rate-limit`. No production deployment or custom-domain/browser verification is confirmed.
+
+
+### PR #102 exact-head diagnostic checkpoint — 2 November 2026
+
+- Current PR #102 head: `75ce2e5e541207f15edb2ff38e4fab5ad7cbb5a0`; base/main remains `adbc9142711f0299b32397f07d283a4863fd405e`.
+- The review seed contains 95 unique IDs (85 existing + 10 Mayo-derived adult partitions). Main remains at 85 until PR acceptance. The 750 distinct-entry target remains open.
+- Run #1461 (`41347141755`) on prior head `4b876ae9c17c38d72a0ca30a09802a1475d97f41` failed in `tests/calculator-ui.test.cjs` during combined-script evaluation with `SyntaxError: Unexpected token ';'`. This is not a passing run.
+- The 4b876 source correction fixed the missing tuple separator; the current review head adds per-script Node VM syntax diagnostics and corrects the lab test's unique-ID expectation from 85 to 95. Exact-head regression on `75ce2e5` is still required.
+- The external-link inventory source-file list is now locale-sorted, with 94 active source files and 261 extracted destinations. Exact generator regression is still pending after the latest source/order corrections.
+- Main Vercel status remains `build-rate-limit`; PR preview status is also not production. No deployment, domain HTTP check or real desktop/mobile interaction is confirmed.
