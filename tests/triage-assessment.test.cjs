@@ -39,8 +39,8 @@ function set(id,v){const e=w.document.getElementById('triage_'+id);assert.ok(e,'
 function complete(){
  set('age',38);set('sex','female');set('rr',16);set('spo2',98);set('sbp',120);set('dbp',80);set('hr',75);set('temp',37);set('conscious','alert');set('oxygen','no');set('duration',2);
  for(const k of requiredYesNo)set(k,'no');
- set('infection','yes');set('oralIntake','yes');set('foodIntake','yes');set('urine','yes');set('newOxygen','no');set('caregiver','yes');set('followup','yes');set('decision','home-treatment-with-documented-safety-net');set('override','no');
- set('diagnosis','Clinically assessed uncomplicated viral URTI');set('homeReason','Stable ABCDE, oral intake maintained, no red flags, reliable follow-up');set('treatment','Documented symptomatic plan and monitoring');set('review','Reassess within 24 hours or sooner if worsening');
+ set('infection','yes');set('oralIntake','yes');set('foodIntake','yes');set('urine','yes');set('newOxygen','no');set('caregiver','yes');set('followup','yes');set('patientUnderstands','yes');set('decision','home-treatment-with-documented-safety-net');set('override','no');
+ set('diagnosis','Clinically assessed uncomplicated viral URTI');set('homeReason','Stable ABCDE, oral intake maintained, no red flags, reliable follow-up');set('treatment','Documented symptomatic plan and monitoring');set('review','Reassess within 24 hours or sooner if worsening');set('returnPrecautions','Immediate transfer for dyspnoea, chest pain, confusion, poor intake, reduced urine, persistent fever or deterioration');
  w.document.getElementById('triage_confirm').checked=true;
 }
 complete();w.document.getElementById('triageCalculate').click();
