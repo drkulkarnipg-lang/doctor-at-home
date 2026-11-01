@@ -1,4 +1,6 @@
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
 const {parseCSV,validateEntry,classify,matchInterval}=require('../lab-reference-governance.js');
 let checks=0;
 const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,reference_interval';
@@ -160,6 +162,34 @@ for(const [id,lo,hi,unit,amin,amax,sex,kind,url,specimen,method] of mayoBatchExp
  assert.equal(classify(lo-0.001,lo,hi,kind),kind==='decision_limit'?'BELOW DECISION THRESHOLD':'LOW',id+' below lower boundary');
  assert.equal(classify(hi+0.001,lo,hi,kind),kind==='decision_limit'?'ABOVE DECISION THRESHOLD':'HIGH',id+' above upper boundary');
  checks+=4;
+}
+
+const sourceInventory=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/external-link-inventory-2026-10-30.json'),'utf8'));
+assert.ok(sourceInventory.source_files_scanned.includes('clinical-diet-presets.js'));checks++;
+assert.ok(sourceInventory.source_files_scanned.includes('lab-reference-governance.js'));checks++;
+const mayoInventoryLines=[
+ ['https://www.mayocliniclabs.com/test-catalog/overview/619953',[132,133,134]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/8725',[135]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/8939',[136]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/800093',[137]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/8724',[138]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/9154',[139]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/601685',[140]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/8352',[141]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/800058',[142]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/8328',[143]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/40934',[144,145]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/40935',[146]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/602173',[147]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/28379',[148]],
+ ['https://www.mayocliniclabs.com/test-catalog/overview/40947',[149]],
+ ['https://www.mayocliniclabs.com/test-catalog/Overview/614422',[150,151]]
+];
+for(const [url,expectedLines] of mayoInventoryLines){
+ const link=sourceInventory.links.find(x=>x.url===url);assert.ok(link,'Source inventory must contain '+url);
+ assert.ok(link.source_files.includes('clinical-calculators.js'),'Inventory must cite clinical-calculators.js for '+url);
+ for(const line of expectedLines){assert.ok(link.source_lines.includes(line),'Inventory must retain exact source line '+line+' for '+url);checks++;}
+ checks+=2;
 }
 const ferritinBatch=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'&&x[9]?.sourceUrl==='https://www.mayocliniclabs.com/test-catalog/overview/619953');
 assert.equal(ferritinBatch.length,3);checks++;
