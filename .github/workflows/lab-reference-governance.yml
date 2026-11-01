@@ -1,0 +1,35 @@
+name: Lab reference governance
+
+on:
+  pull_request:
+    paths:
+      - 'clinical-calculators.js'
+      - 'lab-reference-governance.js'
+      - 'tests/lab-reference-governance.test.cjs'
+      - 'package.json'
+      - '.github/workflows/lab-reference-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'clinical-calculators.js'
+      - 'lab-reference-governance.js'
+      - 'tests/lab-reference-governance.test.cjs'
+      - 'package.json'
+      - '.github/workflows/lab-reference-governance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lab-reference:
+    name: Lab reference governance regression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run focused lab-reference regression
+        run: npm run test:lab-reference
