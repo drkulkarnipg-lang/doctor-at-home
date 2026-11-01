@@ -12,6 +12,9 @@ requestPasswordReset:async email=>api('reset-request',{email}),
 listRegister:async registerType=>api('register-list',undefined,{registerType}),
 saveRegister:async entry=>api('register-save',{entry}),
 registerDeathFromForm:async entry=>api('register-death-from-form',{entry}),
+listDocuments:async()=>api('documents-list'),
+uploadDocument:async document=>api('document-upload',{document}),
+downloadDocument:async id=>api('document-download',{id}),
 logout:async()=>{await api('logout',{});signedIn=false;for(const timer of timers.values())clearTimeout(timer);timers.clear();paint(true);$('cloudPatientSelect').replaceChildren(new Option('Choose cloud patient',''));window.dispatchEvent(new Event('clinic-owner-signed-out'));},
 isSignedIn:()=>signedIn
 };
