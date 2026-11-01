@@ -1402,6 +1402,8 @@
         "index.html"
       ],
       "source_lines": [
+        467,
+        672,
         686,
         1202
       ],
@@ -1608,6 +1610,8 @@
         "patient-helper.js"
       ],
       "source_lines": [
+        5,
+        224,
         407,
         1870
       ],
