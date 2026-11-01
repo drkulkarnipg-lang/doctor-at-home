@@ -77,6 +77,7 @@ function getForm(){
 }
 function calculate(){
  const f=getForm(),out=document.getElementById('triageResult');if(!out)return;
+ delete out.dataset.category;delete out.dataset.score;delete out.dataset.homeConsideration;
  if(f.missing.length){out.className='triage-result yellow';out.innerHTML='<b>Assessment incomplete — no risk category assigned.</b><p class="triage-output">Complete all mandatory fields: '+f.missing.map(html).join(', ')+'. Do not interpret missing values as normal.</p>';return;}
  if(f.age<16||f.age>120){out.className='triage-result yellow';out.innerHTML='<b>Outside validated age scope.</b><p class="triage-output">This adult pathway is limited to age ≥16 years. Use a paediatric pathway for children. Review age entry.</p>';return;}
  if(f.yes.includes('pregnant')){out.className='triage-result yellow';out.innerHTML='<b>Pregnancy / recent pregnancy pathway required.</b><p class="triage-output">Do not use this non-pregnant adult pathway. Use an obstetric emergency/sepsis pathway.</p>';return;}
