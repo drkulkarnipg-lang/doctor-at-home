@@ -10,7 +10,7 @@ const attachment=new w.File(['synthetic original prescription'],'latest-prescrip
 w.eval(fs.readFileSync('document-provenance.js','utf8'));w.eval(fs.readFileSync('document-sharing.js','utf8'));await new Promise(r=>setTimeout(r,25));
 assert.ok(w.document.getElementById('tabShareDesk'),'Workstation must expose a dedicated Share Desk tab.');
 assert.ok(w.document.getElementById('viewShareDesk'),'Share Desk workspace must be present.');
-assert.match(w.document.getElementById('viewShareDesk').textContent,/Prescription[\\s\\S]*Laboratory requisition[\\s\\S]*Radiology requisition[\\s\\S]*Invoice \\/ receipt[\\s\\S]*Certificates[\\s\\S]*Patient articles[\\s\\S]*Share any file/,'Share Desk must expose every requested document category and arbitrary-file sharing.');
+assert.match(w.document.getElementById('viewShareDesk').textContent,/Prescription[\s\S]*Laboratory requisition[\s\S]*Radiology requisition[\s\S]*Invoice \\/ receipt[\s\S]*Certificates[\s\S]*Patient articles[\s\S]*Share any file/,'Share Desk must expose every requested document category and arbitrary-file sharing.');
 assert.match(w.document.getElementById('viewShareDesk').innerHTML,/onclick="shareDeskDocument\('rx'\)"/);
 
 await w.shareDocumentPdf('intakeDocument','Pre_visit_patient_history',{direct:true,attachments:[attachment]});
