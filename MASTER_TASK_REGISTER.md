@@ -406,3 +406,15 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 | ID | State | Requirement | Evidence / next action |
 | --- | --- | --- | --- |
 | E09 | [ ] PREVIEW — CI rerun pending | Prescription Save, Download Text, Export PDF and Share must work reliably without clearing the live editor or silently uploading patient data. | `prescription-actions.js` provides native Save dialog where supported and browser-download fallback; Text Copy uses an attached temporary download link; PDF Export/Share opens the ready-PDF panel so the user explicitly taps Download or Share after generation. Inventory synchronisation is refreshed. Focused test now awaits the asynchronous Share action and stubs the long-lived URL cleanup timer. Await full-suite rerun and preview verification before marking live. No cloud save is implied. |
+
+
+## Lab Normal Reference Check Table — 2 November 2026
+
+- Current seed: 27 source-linked adult entries only; they are not all fully method-/population-verified. Do not advertise 700+ as completed.
+- New `lab-reference-governance.js` loads after `clinical-calculators.js` in Doctor Workstation. Adds searchable test input plus explicit dropdown, source evidence panel, adult age/sex matching, pregnancy guard, explicit result unit and no silent conversion, and local report interval override.
+- Reference intervals and decision limits are distinguished (eGFR threshold is not labelled a population normal range). No matching age/sex interval = no classification; no guess.
+- Previous ungoverned CSV import that activated arbitrary rows has been removed. Evidence CSV requires source title + HTTPS URL, specimen, method, population, adult age band, sex partition, unit and range type. Rows enter pending review and only become selectable after explicit clinician review/approval. Reviewed catalogue is stored locally on that workstation and can be exported as JSON; patient results are never stored or uploaded.
+- Added `tests/lab-reference-governance.test.cjs` and `npm run test:lab-reference`. Development-runtime syntax and core validation/boundary checks pass. Exact-head CI and actual browser/device tests are still pending.
+- Target remains 750 distinct source-backed records (minimum 700). Synonyms, unit conversions and arbitrary partitions do not count. Clinical pathology/laboratory governance and local method verification remain required.
+- Evidence plan and source/licensing rules: `LAB_NORMAL_REFERENCE_CHECK_TABLE_PLAN.md`.
+- Deployment status must be checked against the exact latest commit; GitHub commits are not proof of production publication.
