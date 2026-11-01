@@ -63,6 +63,7 @@ const button=el('button','research-upload','Save to Daily Patient Register');but
 const note=el('p','text-xs text-slate-600');note.id='rxRegisterSaveStatus';note.setAttribute('role','status');note.setAttribute('aria-live','polite');
 wrap.append(select,button,note);rxShare.parentElement.append(wrap);
 }
+$('vaultUpload')?.addEventListener('click',vaultSave);$('vaultRefresh')?.addEventListener('click',vaultLoad);window.addEventListener('clinic-owner-signed-in',vaultLoad);window.addEventListener('clinic-owner-signed-out',()=>{if($('vaultRows'))$('vaultRows').replaceChildren(el('tr','',''));if($('vaultStatus'))$('vaultStatus').textContent='Signed out.';});vaultLoad();
 document.querySelector('[data-register-type="daily"]')?.setAttribute('aria-pressed','true');renderForm();renderTable();load();
 });
 window.savePrescriptionToRegister=async()=>{
@@ -90,5 +91,42 @@ say('SUCCESS: Patient entry saved to the private Daily Patient Register. Open Pr
 }catch(error){say('NOT SAVED: '+(error.message||'Cloud save failed')+'. Prescription remains unchanged; retry after checking the Doctor Station session.');}
 finally{button.disabled=false;}
 };
+async function vaultLoad(){
+const host=$('vaultRows');if(!host)return;
+try{if(!window.ClinicCloud?.isSignedIn?.())throw Error('Sign in to Doctor Workstation to open the private vault.');
+const data=await window.ClinicCloud.listDocuments();host.replaceChildren();
+for(const d of data.documents||[]){const tr=el('tr'),title=el('td','',d.title),type=el('td','',d.document_type.replaceAll('_',' ')),date=el('td','',new Date(d.created_at).toLocaleString()),size=el('td','',(d.byte_size/1024).toFixed(1)+' KB'),actions=el('td');
+for(const [label,mode]of [['Export / Download','download'],['Share','share'],['Print','print']]){const b=el('button','register-edit',label);b.type='button';b.addEventListener('click',()=>vaultOpen(d,mode));actions.append(b);}
+tr.append(title,type,date,size,actions);host.append(tr);}
+if(!host.children.length){const tr=el('tr'),td=el('td','register-empty','No saved documents yet.');td.colSpan=5;tr.append(td);host.append(tr);}
+$('vaultStatus').textContent=(data.documents||[]).length+' private cloud documents loaded.';
+}catch(e){if(host){host.replaceChildren();const tr=el('tr'),td=el('td','register-empty',e.message);td.colSpan=5;tr.append(td);host.append(tr);}if($('vaultStatus'))$('vaultStatus').textContent=e.message;}
+}
+async function vaultOpen(doc,mode){
+try{const result=await window.ClinicCloud.downloadDocument(doc.id),response=await fetch(result.url,{cache:'no-store'});if(!response.ok)throw Error('Private file download failed.');const blob=await response.blob(),file=new File([blob],doc.title+(doc.mime_type==='application/pdf'?'.pdf':''),{type:doc.mime_type});
+if(mode==='share'&&navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({title:doc.title,files:[file]});return;}
+const url=URL.createObjectURL(blob);
+if(mode==='print'){const win=window.open(url,'_blank','noopener');if(!win)throw Error('Allow pop-ups to print this document.');setTimeout(()=>URL.revokeObjectURL(url),60000);}
+else if(mode==='share'){const a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);$('vaultStatus').textContent='File exported. Attach the downloaded file to WhatsApp or email.';}
+else{const a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);$('vaultStatus').textContent='Private document exported to this device.';}
+}catch(e){if($('vaultStatus'))$('vaultStatus').textContent='Action not completed: '+e.message;}
+}
+async function vaultSave(){
+const button=$('vaultUpload'),file=$('vaultFile')?.files?.[0],title=$('vaultTitle')?.value.trim();
+if(!window.ClinicCloud?.isSignedIn?.()){ $('vaultStatus').textContent='NOT SAVED: Sign in first.';return;}
+if(!file||!title){$('vaultStatus').textContent='Choose a file and enter a document title.';return;}
+const mime=file.type||({pdf:'application/pdf',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',txt:'text/plain',json:'application/json'}[file.name.split('.').pop().toLowerCase()]||'');
+if(!['application/pdf','image/png','image/jpeg','text/plain','application/json'].includes(mime)||file.size>7864320){$('vaultStatus').textContent='Use PDF, PNG, JPEG, TXT or JSON up to 7.5 MB.';return;}
+button.disabled=true;
+try{
+$('vaultStatus').textContent='Preparing integrity check and uploading to private cloud…';
+const bytes=await file.arrayBuffer(),digest=await crypto.subtle.digest('SHA-256',bytes),sha256=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+let binary='';const data=new Uint8Array(bytes);for(let i=0;i<data.length;i+=0x8000)binary+=String.fromCharCode(...data.subarray(i,i+0x8000));
+const result=await window.ClinicCloud.uploadDocument({title,documentType:$('vaultType').value,mimeType:mime,sourceRef:$('vaultSourceRef').value.trim(),sha256,base64:btoa(binary)});
+$('vaultStatus').textContent='SAVED TO PRIVATE CLOUD: '+result.document.title+' · SHA-256 verified.';
+$('vaultFile').value='';await vaultLoad();
+}catch(e){$('vaultStatus').textContent='NOT SAVED TO CLOUD: '+e.message+'. Keep the original file and retry.';}
+finally{button.disabled=false;}
+}
 window.WorkstationRegisters={load,schemas};
 })();
