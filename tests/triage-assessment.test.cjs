@@ -30,7 +30,7 @@ expectScore({...normal,oxygen:'yes'},2);
 assert.equal(scoreNEWS2({...normal,rr:''}).complete,false);checks++;
 assert.ok(requiredYesNo.includes('shock'));assert.ok(triageRed.includes('chestPain'));checks+=2;
 const dom=new JSDOM('<!doctype html><html><head></head><body><nav class="doctor-tabs"><button id="tabShareDesk">Share</button><button id="tabSet">Settings</button></nav><main><section id="viewClinicalTools"></section></main></body></html>',{url:'https://example.test',runScripts:'outside-only'});
-const w=dom.window;w.switchDocTab=function(id){document.querySelectorAll('[id^="view"]').forEach(x=>x.classList.add('hidden'));const e=document.getElementById('view'+id[0].toUpperCase()+id.slice(1));if(e)e.classList.remove('hidden');};
+const w=dom.window;w.switchDocTab=function(id){w.document.querySelectorAll('[id^="view"]').forEach(x=>x.classList.add('hidden'));const e=w.document.getElementById('view'+id[0].toUpperCase()+id.slice(1));if(e)e.classList.remove('hidden');};
 w.eval(fs.readFileSync(require.resolve('../triage-assessment.js'),'utf8'));
 w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
 assert.ok(w.document.getElementById('tabTriage'));assert.ok(w.document.getElementById('viewTriageAssessment'));checks+=2;
