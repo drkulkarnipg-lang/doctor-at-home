@@ -188,6 +188,21 @@ cbcUpgrades.forEach(([id,low,high,sexRanges])=>{
  entry[5]=low;entry[6]=high;entry[7]=cbcMeta.sourceName;entry[8]=sexRanges;
  entry[9]={...(entry[9]||{}),...cbcMeta};
 });
+const cbcAliases={
+ rbc:'red blood cell count; erythrocyte count; erythrocytes',
+ hb:'hemoglobin; Hb',
+ hct:'hematocrit; HCT',
+ mcv:'mean corpuscular volume',
+ rdw:'red cell distribution width',
+ wbc:'white blood cell count; leukocyte count',
+ plt:'platelets; thrombocytes',
+ anc:'ANC; absolute neutrophils',
+ alc:'ALC; absolute lymphocytes',
+ monoabs:'absolute monocytes',
+ eosabs:'absolute eosinophils',
+ basoabs:'absolute basophils'
+};
+Object.entries(cbcAliases).forEach(([id,aliases])=>{const e=TESTS.find(x=>x[0]===id);if(e)e[2]=[e[2],aliases].filter(Boolean).join('; ');});
 TESTS.forEach(entry=>{const meta=entry[9]&&typeof entry[9]==='object'?entry[9]:{};if(!meta.pregnancyScope)meta.pregnancyScope=String(meta.sourceName||'').includes('Shah et al. (2018)')?'non_pregnant_not_postpartum':'not_validated_for_pregnancy';entry[9]=meta;}); if(typeof module==='object'&&module.exports)module.exports.LAB_REFERENCE_TESTS=TESTS; if(typeof window==='undefined'||typeof document==='undefined')return;window.LAB_REFERENCE_TESTS=TESTS;function init(){
  const host=document.getElementById('viewPathCheatSheet');
  if(!host||host.dataset.labCheckerReady)return;
