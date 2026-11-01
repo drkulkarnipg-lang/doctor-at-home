@@ -188,3 +188,40 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
 @media(prefers-reduced-motion:reduce){
   button,input[type=button],input[type=submit],[role=button],.research-upload{transition:none!important}
 }
+
+@media screen{
+  #doctorWorkstation .workstation-heading{
+    background:rgba(255,255,255,.64)!important;border:1px solid rgba(158,180,174,.24);
+    border-radius:18px;padding:18px 22px;box-shadow:0 8px 28px rgba(54,79,72,.03);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)
+  }
+  #doctorWorkstation .doctor-tabs{
+    display:flex;flex-wrap:wrap;gap:8px!important;padding:10px;
+    background:rgba(255,255,255,.62);border:1px solid rgba(158,180,174,.23);
+    border-radius:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)
+  }
+  #doctorWorkstation .doctor-tabs button{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    min-height:44px;padding:10px 14px!important;border-radius:11px!important;
+    border:1px solid rgba(158,180,174,.28)!important;
+    background:rgba(255,255,255,.78)!important;color:#53666e!important;
+    box-shadow:none!important;font-size:12px!important;font-weight:650!important;
+    line-height:1.35;white-space:normal
+  }
+  #doctorWorkstation .doctor-tabs button[aria-selected=true]{
+    background:linear-gradient(180deg,rgba(247,251,248,.98),rgba(228,240,233,.92))!important;
+    border-color:rgba(111,153,135,.42)!important;color:#3d6556!important;
+    box-shadow:0 3px 12px rgba(54,86,72,.055)!important
+  }
+  #doctorWorkstation .doctor-tabs button:hover:not(:disabled){border-color:rgba(111,153,135,.48)!important;background:rgba(248,251,249,.96)!important}
+  #doctorWorkstation .doctor-tabs button[aria-selected=true]:hover{background:linear-gradient(180deg,#fff,#e6f0e9)!important}
+  #publicPortal .portal-nav [role=tab]{
+    min-height:44px;padding:10px 14px;border:1px solid rgba(158,180,174,.22);
+    border-radius:11px;background:rgba(255,255,255,.66);color:#596d73;
+    transition:background-color .12s ease,border-color .12s ease,box-shadow .12s ease,transform .08s ease
+  }
+  #publicPortal .portal-nav [role=tab][aria-selected=true]{
+    background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(232,242,236,.9));
+    border-color:rgba(111,153,135,.38);color:#3e6557;box-shadow:0 3px 12px rgba(54,86,72,.045)
+  }
+}
