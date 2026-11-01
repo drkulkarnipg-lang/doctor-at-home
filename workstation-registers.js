@@ -63,6 +63,21 @@ const button=el('button','research-upload','Save to Daily Patient Register');but
 const note=el('p','text-xs text-slate-600');note.id='rxRegisterSaveStatus';note.setAttribute('role','status');note.setAttribute('aria-live','polite');
 wrap.append(select,button,note);rxShare.parentElement.append(wrap);
 }
+const vaultHost=$('viewRegisters');
+if(vaultHost&&!$('clinicDocumentVault')){
+const section=document.createElement('section');section.id='clinicDocumentVault';section.className='certificate-help no-print';
+section.innerHTML=`<h4>Private Clinical Document Cloud Vault</h4>
+<p>Save completed prescriptions, requisitions, referrals, certificates, invoices, clinical notes and patient attachments here. Files are private to the clinic owner. Upload limit: 7.5 MB. Save first; then export, share or print from this vault. Automatic saving from every document workflow is not yet connected.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<label>Document title<input id="vaultTitle" maxlength="240" autocomplete="off" placeholder="Patient code · document · date"/></label>
+<label>Document category<select id="vaultType"><option value="prescription">Prescription</option><option value="lab_requisition">Lab requisition</option><option value="radiology_requisition">Radiology requisition</option><option value="referral">Referral</option><option value="fitness">Fitness certificate</option><option value="unfitness">Unfitness certificate</option><option value="consent">Consent</option><option value="invoice">Invoice / receipt</option><option value="death_form">Death form</option><option value="patient_attachment">Patient attachment</option><option value="clinical_note">Clinical note</option><option value="article_draft">Article draft</option><option value="other">Other</option></select></label>
+<label>Choose completed file<input id="vaultFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.txt,.json,application/pdf,image/png,image/jpeg,text/plain,application/json"/></label>
+<label>Source reference (optional)<input id="vaultSourceRef" maxlength="160" placeholder="Prescription number / visit reference"/></label></div>
+<div class="flex flex-wrap gap-2 mt-3"><button class="research-upload" type="button" id="vaultUpload">Save document to cloud</button><button class="research-upload" type="button" id="vaultRefresh">Refresh saved documents</button></div>
+<p id="vaultStatus" role="status" aria-live="polite"></p>
+<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr><th>Document</th><th>Type</th><th>Date</th><th>Size</th><th>Actions</th></tr></thead><tbody id="vaultRows"><tr><td colspan="5">Sign in to load private documents.</td></tr></tbody></table></div>`;
+const registerHeader=vaultHost.querySelector('header');if(registerHeader)registerHeader.after(section);else vaultHost.prepend(section);
+}
 $('vaultUpload')?.addEventListener('click',vaultSave);$('vaultRefresh')?.addEventListener('click',vaultLoad);window.addEventListener('clinic-owner-signed-in',vaultLoad);window.addEventListener('clinic-owner-signed-out',()=>{if($('vaultRows'))$('vaultRows').replaceChildren(el('tr','',''));if($('vaultStatus'))$('vaultStatus').textContent='Signed out.';});vaultLoad();
 document.querySelector('[data-register-type="daily"]')?.setAttribute('aria-pressed','true');renderForm();renderTable();load();
 });
