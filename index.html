@@ -129,7 +129,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       const picker = document.getElementById('siteLanguageSelector');
       if (!picker) return;
-      const saved = document.cookie.match(/(?:^|;\\s*)googtrans=\\/en\\/([^;]+)/);
+      const savedCookie = document.cookie.split(';').map(part => part.trim()).find(part => part.startsWith('googtrans=/en/'));
+      const saved = savedCookie ? savedCookie.slice('googtrans=/en/'.length) : '';
       if (saved && [...picker.options].some(option => option.value === saved[1])) picker.value = saved[1];
       picker.addEventListener('change', () => quickTranslate(picker.value));
     });
