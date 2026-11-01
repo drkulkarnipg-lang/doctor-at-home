@@ -1,0 +1,58 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const {JSDOM}=require('jsdom');
+const {scoreNEWS2,requiredYesNo,triageRed}=require('../triage-assessment.js');
+let checks=0;
+function expectScore(v,score){const r=scoreNEWS2(v);assert.equal(r.complete,true);assert.equal(r.score,score);checks++;return r;}
+const normal={rr:16,spo2:98,sbp:120,hr:75,temp:37,conscious:'alert',oxygen:'no'};
+expectScore(normal,0);
+expectScore({...normal,rr:8},3);
+expectScore({...normal,rr:9},1);
+expectScore({...normal,rr:21},2);
+expectScore({...normal,spo2:91},3);
+expectScore({...normal,spo2:93},2);
+expectScore({...normal,spo2:95},1);
+expectScore({...normal,sbp:90},3);
+expectScore({...normal,sbp:95},2);
+expectScore({...normal,sbp:105},1);
+expectScore({...normal,sbp:220},3);
+expectScore({...normal,hr:40},3);
+expectScore({...normal,hr:45},1);
+expectScore({...normal,hr:100},1);
+expectScore({...normal,hr:120},2);
+expectScore({...normal,hr:131},3);
+expectScore({...normal,temp:35},3);
+expectScore({...normal,temp:35.5},1);
+expectScore({...normal,temp:38.5},1);
+expectScore({...normal,temp:39.1},2);
+expectScore({...normal,conscious:'not-alert'},3);
+expectScore({...normal,oxygen:'yes'},2);
+assert.equal(scoreNEWS2({...normal,rr:''}).complete,false);checks++;
+assert.ok(requiredYesNo.includes('shock'));assert.ok(triageRed.includes('chestPain'));checks+=2;
+const dom=new JSDOM('<!doctype html><html><head></head><body><nav class="doctor-tabs"><button id="tabShareDesk">Share</button><button id="tabSet">Settings</button></nav><main><section id="viewClinicalTools"></section></main></body></html>',{url:'https://example.test',runScripts:'outside-only'});
+const w=dom.window;w.switchDocTab=function(id){document.querySelectorAll('[id^="view"]').forEach(x=>x.classList.add('hidden'));const e=document.getElementById('view'+id[0].toUpperCase()+id.slice(1));if(e)e.classList.remove('hidden');};
+w.eval(fs.readFileSync(require.resolve('../triage-assessment.js'),'utf8'));
+w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+assert.ok(w.document.getElementById('tabTriage'));assert.ok(w.document.getElementById('viewTriageAssessment'));checks+=2;
+w.switchDocTab('triageAssessment');assert.equal(w.document.getElementById('viewTriageAssessment').classList.contains('hidden'),false);checks++;
+function set(id,v){const e=w.document.getElementById('triage_'+id);assert.ok(e,'missing field '+id);e.value=String(v);}
+function complete(){
+ set('age',38);set('sex','female');set('rr',16);set('spo2',98);set('sbp',120);set('dbp',80);set('hr',75);set('temp',37);set('conscious','alert');set('oxygen','no');set('duration',2);
+ for(const k of requiredYesNo)set(k,'no');
+ set('infection','yes');set('oralIntake','yes');set('urine','yes');set('caregiver','yes');set('followup','yes');set('decision','home-treatment-with-documented-safety-net');set('override','no');
+ set('diagnosis','Clinically assessed uncomplicated viral URTI');set('homeReason','Stable ABCDE, oral intake maintained, no red flags, reliable follow-up');set('treatment','Documented symptomatic plan and monitoring');set('review','Reassess within 24 hours or sooner if worsening');
+ w.document.getElementById('triage_confirm').checked=true;
+}
+complete();w.document.getElementById('triageCalculate').click();
+let result=w.document.getElementById('triageResult');
+assert.equal(result.dataset.score,'0');assert.equal(result.dataset.category,'green');assert.equal(result.dataset.homeConsideration,'true');checks+=3;
+set('oralIntake','no');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');assert.equal(result.dataset.homeConsideration,'false');checks+=2;
+complete();set('dyspnoea','yes');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'red');checks++;
+complete();set('highFever','yes');set('temp',39.5);w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');checks++;
+complete();set('rr',25);set('spo2',90);set('hr',131);w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'red');assert.ok(Number(result.dataset.score)>=7);checks+=2;
+complete();set('shock','unassessed');w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/Assessment incomplete/);assert.equal(result.dataset.category,undefined);checks+=2;
+complete();set('pregnant','yes');w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/Pregnancy/);checks++;
+complete();set('decision','urgent-hospital-assessment');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');checks++;
+complete();set('decision','home-treatment-with-documented-safety-net');set('caregiver','no');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');assert.equal(result.dataset.homeConsideration,'false');checks+=2;
+dom.window.close();
+console.log('Clinician triage tests passed: '+checks+' checks.');
