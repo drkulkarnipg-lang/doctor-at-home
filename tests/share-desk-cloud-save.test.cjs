@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const ui=fs.readFileSync('document-sharing.js','utf8'),cloud=fs.readFileSync('cloud-records.js','utf8'),api=fs.readFileSync('api/clinical-cloud.js','utf8');
+for(const kind of ['rx','path','rad','invoice','certificate','article'])assert.match(ui,new RegExp("saveDeskDocument\\('"+kind+"'"),kind+' must have a private-cloud save action');
+assert.match(ui,/window\.saveDeskDocument=async function/);
+assert.match(ui,/cloud\.isSignedIn\?\./,'cloud saving must require an authenticated cloud session');
+assert.match(ui,/window\.WorkstationAuth\?\.isOwnerSession\?\./,'cloud saving must require the owner workstation session');
+assert.match(ui,/window\.confirm\(/,'cloud saving must require explicit patient-document consent');
+assert.match(ui,/crypto\.subtle\.digest\('SHA-256'/,'client must calculate a document integrity hash');
+assert.match(ui,/documentType:doc\.type/);
+assert.match(ui,/base64:btoa\(binary\)/);
+assert.match(ui,/file\.size>7864320/,'cloud save must respect the 7.5 MB server limit');
+assert.match(cloud,/uploadDocument:async document=>api\('document-upload',\{document\}\)/);
+assert.match(api,/createHash\('sha256'\)/,'server independently verifies SHA-256');
+assert.match(api,/clinic-document-vault/,'uploaded documents must use the private bucket');
+console.log('Share Desk cloud-save checks passed: six document classes, owner session, explicit consent, SHA-256 and private vault.');
