@@ -367,3 +367,7 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 
 
 **E07/E08 follow-up — 1 November 2026:** Added `tests/requisition-coverage.test.cjs` to lock the requested pathology/imaging options, separate arterial/venous Doppler identifiers, A4 export routes, PDF-share mapping, checkbox preservation and requisition signoff. Exact-head commit `faba5316844107d68b826b5a99497f50242c99ac`; Actions run `41326111081` passed the full repository regression suite; Vercel status SUCCESS. This is source/CI evidence only, not owner-device PDF/share confirmation.
+
+| H20 | [ ] NOT IMPLEMENTED — SOURCE AUDIT | Death Form should auto-populate the Death Register once, without duplicate manual entry. | `exportCurrentDeathFormPdf()` exists in `index.html`; `workstation-registers.js` has an independent Death Register form/save flow. No linkage, event bridge or auto-population found in current source. Must design a safe one-time handoff with explicit save confirmation, owner identity and duplicate protection; preserve correction/revision audit. |
+
+**1 November 2026 — death-form/register linkage audit:** inspected `index.html` and `workstation-registers.js`. The Death Form PDF export and Death Register currently remain separate workflows. Owner requirement for automatic register population is not implemented. Keep H20 open; do not state death form auto-populates the register.
