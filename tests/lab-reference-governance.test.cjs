@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {parseCSV,validateEntry,classify}=require('../lab-reference-governance.js');
+const {parseCSV,validateEntry,classify,matchInterval}=require('../lab-reference-governance.js');
 let checks=0;
 const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,reference_interval';
 const rows=parseCSV(csv);assert.equal(rows.length,2);checks++;
@@ -55,4 +55,15 @@ for(const [id,lo,hi,unit,amin,amax] of indianExpected){
 
 
 for(const id of ['glu-india-under45','glu-india-45plus']){const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.equal(e[9].requiresFasting,true);assert.ok(e[9].collectionConditions.includes('10–12 h'));checks+=2;}
+
+
+const sodiumRecords=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Sodium');
+assert.equal(matchInterval(sodiumRecords,40,'male'),null);checks++;
+const fastingGlucose=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Fasting glucose');
+assert.equal(matchInterval(fastingGlucose,40,'female')[0],'glu-india-under45');checks++;
+assert.equal(matchInterval(fastingGlucose,55,'male')[0],'glu-india-45plus');checks++;
+const haemoglobin=LAB_REFERENCE_TESTS.filter(x=>x[0]==='hb');
+assert.equal(matchInterval(haemoglobin,35,'male')[0],'hb');checks++;
+assert.equal(matchInterval(haemoglobin,35,'female')[0],'hb');checks++;
+assert.equal(matchInterval(haemoglobin,17,'male'),null);checks++;
 console.log('Lab reference governance tests passed: '+checks+' assertions.');
