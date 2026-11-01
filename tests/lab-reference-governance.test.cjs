@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {parseCSV,validateEntry,classify,matchInterval}=require('../lab-reference-governance.js');
 let checks=0;
-const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,reference_interval';
+const csv='test,unit,low,high,source,source_url,category,aliases,specimen,method,population,age_min,age_max,sex,pregnancy_scope,range_type\nSodium,mmol/L,135,145,Mayo Clinic Laboratories,https://www.mayocliniclabs.com/test-catalog/Overview/113630,Electrolytes,Na; serum sodium,Serum,ISE,Healthy adult reference population,18,120,all,not_validated_for_pregnancy,reference_interval';
 const rows=parseCSV(csv);assert.equal(rows.length,2);checks++;
 const row=Object.fromEntries(rows[0].map((k,i)=>[k.toLowerCase(),rows[1][i]]));
 assert.equal(validateEntry(row).valid,true);checks++;
@@ -15,6 +15,8 @@ for(const bad of [
  {...row,age_min:'17'},
  {...row,age_max:'121'},
  {...row,sex:'unspecified'},
+ {...row,pregnancy_scope:''},
+ {...row,pregnancy_scope:'unknown'},
  {...row,range_type:'normal'},
  {...row,low:'150',high:'140'},
  {...row,source_url:'not a url'}
@@ -34,6 +36,9 @@ checks++;
 const {LAB_REFERENCE_TESTS}=require('../clinical-calculators.js');
 assert.equal(LAB_REFERENCE_TESTS.length,105);checks++;
 assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,105);checks++;
+assert.ok(LAB_REFERENCE_TESTS.every(x=>x[9]&&x[9].pregnancyScope));checks++;
+assert.equal(LAB_REFERENCE_TESTS.find(x=>x[0]==='na-india')[9].pregnancyScope,'non_pregnant_not_postpartum');checks++;
+assert.equal(LAB_REFERENCE_TESTS.find(x=>x[0]==='na')[9].pregnancyScope,'not_validated_for_pregnancy');checks++;
 for(const [id,lo,hi] of [['monoabs',0.26,0.81],['eosabs',0.03,0.48],['basoabs',0.01,0.08]]){
  const entry=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(entry);assert.equal(entry[5],lo);assert.equal(entry[6],hi);assert.match(entry[7],/Mayo Clinic Laboratories · CBC with Differential/);checks+=4;
 }
@@ -51,7 +56,7 @@ const indianExpected=[
  ['glu-india-45plus',4.3,6.0,'mmol/L',45,65]
 ];
 for(const [id,lo,hi,unit,amin,amax] of indianExpected){
- const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[5],lo);assert.equal(e[6],hi);assert.equal(e[4],unit);assert.equal(e[9].ageMin,amin);assert.equal(e[9].ageMax,amax);assert.equal(e[9].sourceUrl,'https://doi.org/10.1515/cclm-2018-0152');checks+=6;
+ const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[5],lo);assert.equal(e[6],hi);assert.equal(e[4],unit);assert.equal(e[9].ageMin,amin);assert.equal(e[9].ageMax,amax);assert.equal(e[9].sourceUrl,'https://doi.org/10.1515/cclm-2018-0152');assert.equal(e[9].pregnancyScope,'non_pregnant_not_postpartum');checks+=7;
 }
 
 
@@ -62,14 +67,23 @@ for(const id of ['glu-india-under45','glu-india-45plus']){const e=LAB_REFERENCE_
 const sodiumRecords=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Sodium');
 assert.equal(matchInterval(sodiumRecords,40,'male'),null);checks++;
 const fastingGlucose=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Fasting glucose');
-assert.equal(matchInterval(fastingGlucose,40,'female')[0],'glu-india-under45');checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','no')[0],'glu-india-under45');checks++;
 assert.equal(matchInterval(fastingGlucose,55,'male')[0],'glu-india-45plus');checks++;
 const haemoglobin=LAB_REFERENCE_TESTS.filter(x=>x[0]==='hb');
 assert.equal(matchInterval(haemoglobin,35,'male')[0],'hb');checks++;
-assert.equal(matchInterval(haemoglobin,35,'female')[0],'hb');checks++;
+assert.equal(matchInterval(haemoglobin,35,'female','no')[0],'hb');checks++;
 assert.equal(matchInterval(haemoglobin,17,'male'),null);checks++;
 
 
+
+assert.equal(matchInterval(fastingGlucose,40,'female',''),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','yes'),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'female','recent'),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'',''),null);checks++;
+assert.equal(matchInterval(fastingGlucose,40,'','no')[0],'glu-india-under45');checks++;
+assert.equal(matchInterval(fastingGlucose,40,'male','yes'),null);checks++;
+const pregnancyOnly=[{...LAB_REFERENCE_TESTS.find(x=>x[0]==='na'),9:{...LAB_REFERENCE_TESTS.find(x=>x[0]==='na')[9],pregnancyScope:'pregnancy_specific'}}];
+assert.equal(matchInterval(pregnancyOnly,40,'female','no'),null);checks++;
 const indianExpandedExpected=[
  ['alb-india-m18-44',39,52,'g/L',18,44,'male'],
  ['alb-india-m45-65',37,49,'g/L',45,65,'male'],
@@ -154,6 +168,8 @@ for(const [id,lo,hi,unit,amin,amax,sex,kind,url,specimen,method] of mayoBatchExp
  assert.equal(e[9].specimen,specimen,id+' specimen');assert.equal(e[9].method,method,id+' method');
  assert.ok(e[9].sourceName&&e[9].population&&e[9].reviewStatus,id+' provenance metadata');
  assert.ok(!e[8]||Boolean(e[8][sex]),id+' sex tuple must not block matching');
+ assert.equal(e[9].pregnancyScope,'not_validated_for_pregnancy',id+' pregnancy scope');
+ assert.equal(e[9].pregnancyScope,'not_validated_for_pregnancy',id+' pregnancy scope');
  checks+=11;
  const lowLabel=kind==='decision_limit'?'WITHIN DECISION THRESHOLD':'WITHIN REFERENCE INTERVAL';
  const highLabel=kind==='decision_limit'?'WITHIN DECISION THRESHOLD':'WITHIN REFERENCE INTERVAL';
@@ -171,6 +187,8 @@ assert.ok(calculatorSource.includes('Decision limits are separately labelled and
 const sourceInventory=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/external-link-inventory-2026-10-30.json'),'utf8'));
 assert.ok(sourceInventory.source_files_scanned.includes('clinical-diet-presets.js'));checks++;
 assert.ok(sourceInventory.source_files_scanned.includes('lab-reference-governance.js'));checks++;
+const indianStudyInventory=sourceInventory.links.find(x=>x.url==='https://doi.org/10.1515/cclm-2018-0152');
+assert.ok(indianStudyInventory&&indianStudyInventory.source_files.includes('clinical-calculators.js')&&indianStudyInventory.source_lines.includes(81));checks++;
 const mayoInventoryLines=[
  ['https://www.mayocliniclabs.com/test-catalog/overview/619953',[132,133,134]],
  ['https://www.mayocliniclabs.com/test-catalog/Overview/8725',[135]],
@@ -198,12 +216,12 @@ for(const [url,expectedLines] of mayoInventoryLines){
 const ferritinBatch=LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'&&x[9]?.sourceUrl==='https://www.mayocliniclabs.com/test-catalog/overview/619953');
 assert.equal(ferritinBatch.length,3);checks++;
 assert.equal(matchInterval(ferritinBatch,35,'male')[0],'ferritin-m');checks++;
-assert.equal(matchInterval(ferritinBatch,35,'female')[0],'ferritin-f18-50');checks++;
-assert.equal(matchInterval(ferritinBatch,60,'female')[0],'ferritin-f51plus');checks++;
-assert.equal(matchInterval(ferritinBatch,17,'female'),null);checks++;
+assert.equal(matchInterval(ferritinBatch,35,'female','no')[0],'ferritin-f18-50');checks++;
+assert.equal(matchInterval(ferritinBatch,60,'female','no')[0],'ferritin-f51plus');checks++;
+assert.equal(matchInterval(ferritinBatch,17,'female','no'),null);checks++;
 const hsTniBatch=LAB_REFERENCE_TESTS.filter(x=>x[1]==='High-sensitivity troponin I');
 assert.equal(matchInterval(hsTniBatch,45,'male')[0],'hstni-mayo-male');checks++;
-assert.equal(matchInterval(hsTniBatch,45,'female')[0],'hstni-mayo-female');checks++;
+assert.equal(matchInterval(hsTniBatch,45,'female','no')[0],'hstni-mayo-female');checks++;
 assert.equal(matchInterval(hsTniBatch,17,'male'),null);checks++;
 assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[0].startsWith('ferritin-')||x[0].includes('-mayo-')).length,20);checks++;
 

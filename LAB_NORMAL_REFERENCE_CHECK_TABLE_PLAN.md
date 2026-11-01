@@ -152,3 +152,13 @@ Primary source catalogue pages and method/specimen capture:
 
 The batch does not claim local Pune method transfer or universal Indian/global applicability. The performing laboratory's own validated interval takes precedence. The adult comparator continues to block paediatric and pregnancy/recent-pregnancy use. Exact batch regression now asserts all 20 IDs, values, units, source URLs, specimens, methods, age/sex partitions, interval types, inclusive lower/upper boundaries, out-of-range boundaries and sex-specific matching. Exact-head GitHub Actions result is pending; development-runtime execution is not claimed until run.
 
+
+
+### Pregnancy-scope provenance and GCS regression — 2 November 2026
+
+- Every built-in record now carries an explicit pregnancy scope: Indian IFCC C-RIDL entries are marked non-pregnant/not within one year postpartum; Mayo-derived entries are marked not validated for pregnancy. These labels do not establish local method transfer or obstetric validity.
+- CSV import requires pregnancy_scope and accepts only non_pregnant_not_postpartum, not_validated_for_pregnancy or pregnancy_specific. Missing/unknown values remain invalid/pending.
+- The adult comparator requires explicit not-pregnant status for female patients; pregnant, recently pregnant, unknown status or unknown sex applicability blocks automatic matching. Pregnancy-specific rows are not applied by this non-pregnant adult comparator.
+- Added regression assertions for every record's pregnancy scope, Indian/Mayo partition labels, CSV validation and pregnancy matching guards.
+- Added NEWS2/GCS regression tests for E4+V5+M6 = 15/15, minimum E1+V1+M1 = 3/15, incomplete and out-of-range component rejection, and confirmation that GCS remains separate from NEWS2.
+- These are software/data-governance checks. The physician remains responsible for clinical applicability; no paediatric or pregnancy-specific reference pathway is implied.

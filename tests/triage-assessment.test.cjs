@@ -54,5 +54,9 @@ complete();set('shock','unassessed');w.document.getElementById('triageCalculate'
 complete();set('pregnant','yes');w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/Pregnancy/);checks++;
 complete();set('decision','urgent-hospital-assessment');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');checks++;
 complete();set('decision','home-treatment-with-documented-safety-net');set('caregiver','no');w.document.getElementById('triageCalculate').click();assert.equal(result.dataset.category,'yellow');assert.equal(result.dataset.homeConsideration,'false');checks+=2;
+complete();set('gcsEye',4);set('gcsVerbal',5);set('gcsMotor',6);w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/E4 \+ V5 \+ M6 = 15\/15/);assert.equal(result.dataset.score,'0','GCS is displayed separately and must not be added to NEWS2');checks+=2;
+complete();set('gcsEye',4);set('gcsVerbal','');set('gcsMotor','');w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/GCS entry incomplete or outside range/);assert.equal(result.dataset.category,undefined);checks+=2;
+complete();set('gcsEye',5);set('gcsVerbal',5);set('gcsMotor',6);w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/GCS entry incomplete or outside range/);checks++;
+complete();set('gcsEye',1);set('gcsVerbal',1);set('gcsMotor',1);w.document.getElementById('triageCalculate').click();assert.match(result.textContent,/E1 \+ V1 \+ M1 = 3\/15/);assert.equal(result.dataset.score,'0');checks+=2;
 dom.window.close();
 console.log('Clinician triage tests passed: '+checks+' checks.');
