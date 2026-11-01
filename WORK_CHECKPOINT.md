@@ -497,3 +497,14 @@ Never alter the protected baseline branch. Keep main and any Stitch experiment s
 - This does not establish real-device PDF visual quality or WhatsApp/email recipient delivery. Original round/rectangular stamps are still not committed; do not claim stamped output. The optional `stampDocumentPdf` hook exists in the PDF pipeline but no implementation was found in current main.
 
 Next: verify documentation checkpoint commit statuses; continue integrating the exact original stamp photos when their bytes can be transferred without redraw; keep Supabase/provider/device setup explicitly pending.
+
+
+### Doctor Station authentication and register backend source audit — 1 November 2026
+
+- Re-checked latest main source `workstation-auth.js`, `api/clinical-cloud.js`, `api/doctor-passkey.js`, `doctor-passkey.js`, plus the password-recovery and passkey tests.
+- Current owner UI is deliberately a single email/password login. Recovery sends only to the configured `CLINIC_OWNER_EMAIL`, uses a fixed production reset redirect, verifies the recovery token against `CLINIC_OWNER_USER_ID`, and enforces a 12-character minimum. UI tests check URL token scrubbing, mismatch blocking, no localStorage persistence and clearing password fields. This does not verify SMTP delivery or the owner's real login.
+- Passkey API source enforces the canonical main-site origin, owner identity, provider verification and Secure/HttpOnly/SameSite cookie. Passkey provider activation and real-device ceremony remain pending. No mobile OTP implementation found.
+- Register API and migration source exist. The migration must still be applied manually to the intended Supabase project; actual RLS and two-device save/reload/restore tests remain pending. `CLOUD_RECORDS_SETUP.md` explicitly says no database was provisioned and no patient record was uploaded during development.
+- Exact documentation checkpoint commit `0cfed2f8836a295104e3fb36d57a3cd93c8e33bf`: GitHub Actions run `41326227416` completed SUCCESS; Vercel status SUCCESS. Main points to this commit; protected baseline still points to `ab8855374d376cca6e2158417385f10bebcb4965`.
+
+Do not attempt to enable cloud records, change the owner's credentials, add a new password, alter auth provider settings, or run database migrations without access to the owner's connected provider project and verified owner-controlled configuration.
