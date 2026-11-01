@@ -112,6 +112,57 @@
     });
   }
 
+
+  function renderPatientCards() {
+    const host = document.getElementById('patientDietPresetCards');
+    if (!host || host.dataset.patientPresetsRendered === 'true') return;
+    host.dataset.patientPresetsRendered = 'true';
+    const labels = {
+      'viral-fever': 'Fever and viral illness',
+      hepatitis: 'Hepatitis',
+      'liver-disease': 'Long-term liver disease',
+      diarrhoea: 'Loose motions / diarrhoea',
+      vomiting: 'Vomiting'
+    };
+    Object.entries(presets).forEach(([key, preset]) => {
+      const card = document.createElement('article');
+      card.className = 'rounded-2xl border border-[#dce7e1] bg-[#fbfdfc] p-4 shadow-sm';
+      const heading = document.createElement('h5');
+      heading.className = 'font-bold text-base text-[#173b32]';
+      heading.textContent = labels[key] || preset.title;
+      const summary = document.createElement('p');
+      summary.className = 'mt-2 text-sm leading-relaxed text-slate-600';
+      summary.textContent = preset.advice[0];
+      const content = document.createElement('div');
+      content.hidden = true;
+      content.className = 'mt-3';
+      const list = document.createElement('ul');
+      list.className = 'list-disc pl-5 space-y-2 text-sm leading-relaxed text-slate-700';
+      preset.advice.forEach(line => {
+        const item = document.createElement('li');
+        item.textContent = line;
+        list.appendChild(item);
+      });
+      content.appendChild(list);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'mt-3 min-h-[44px] rounded-xl border border-[#b9cec3] bg-[#f1f7f3] px-4 py-2 text-sm font-semibold text-[#173b32]';
+      const contentId = 'patient-diet-' + key;
+      content.id = contentId;
+      button.setAttribute('aria-controls', contentId);
+      button.setAttribute('aria-expanded', 'false');
+      button.textContent = 'Read full guidance';
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        content.hidden = expanded;
+        button.textContent = expanded ? 'Read full guidance' : 'Show less';
+      });
+      card.append(heading, summary, button, content);
+      host.appendChild(card);
+    });
+  }
+
   // Preserve the seven established release-tools.js presets while adding the five acute-illness cards.
   const legacyInsertDietPreset = typeof root.insertDietPreset === 'function'
     ? root.insertDietPreset.bind(root)
@@ -139,7 +190,7 @@
   });
 
   if (typeof document !== 'undefined') {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderCards);
-    else renderCards();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { renderCards(); renderPatientCards(); });
+    else { renderCards(); renderPatientCards(); }
   }
 })(typeof window !== 'undefined' ? window : globalThis);
