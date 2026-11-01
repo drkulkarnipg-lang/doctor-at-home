@@ -40,12 +40,12 @@
 const markup=`<section id="viewShareDesk" class="hidden share-desk space-y-5" aria-labelledby="shareDeskTitle">
 <div class="share-desk-heading"><span class="section-eyebrow">Document distribution · local-first</span><h2 id="shareDeskTitle">Share Desk</h2><p>One place to prepare and share prescriptions, laboratory and radiology requisitions, invoices, certificates, and patient articles. Nothing is uploaded automatically; review the recipient and file in your chosen app before sending.</p></div>
 <div class="share-desk-grid">
-<article class="share-desk-card"><span class="share-desk-icon">📝</span><h3>Prescription</h3><p>Share the current A4 prescription as a PDF.</p><button type="button" onclick="shareDeskDocument('rx')">Share prescription</button><button type="button" class="secondary" onclick="switchDocTab('rxPad')">Open prescription</button></article>
-<article class="share-desk-card"><span class="share-desk-icon">🧪</span><h3>Laboratory requisition</h3><p>Share the current investigation request slip.</p><button type="button" onclick="shareDeskDocument('path')">Share lab sheet</button><button type="button" class="secondary" onclick="switchDocTab('pathReq')">Open lab requisition</button></article>
-<article class="share-desk-card"><span class="share-desk-icon">☢️</span><h3>Radiology requisition</h3><p>Share the current imaging request slip.</p><button type="button" onclick="shareDeskDocument('rad')">Share radiology</button><button type="button" class="secondary" onclick="switchDocTab('radReq')">Open radiology requisition</button></article>
-<article class="share-desk-card"><span class="share-desk-icon">🧾</span><h3>Invoice / receipt</h3><p>Prepare and share the current invoice PDF.</p><button type="button" onclick="shareDeskInvoice()">Share invoice PDF</button><button type="button" class="secondary" onclick="switchDocTab('invoice')">Open invoice</button></article>
-<article class="share-desk-card"><span class="share-desk-icon">📜</span><h3>Certificates &amp; forms</h3><p>Choose a completed statutory form.</p><select id="shareDeskCertificate" aria-label="Choose certificate or form"><option value="referral">Referral letter</option><option value="consent">Consent form</option><option value="fitness">Fitness certificate</option><option value="leave">Unfitness certificate</option><option value="form4">Form 4</option><option value="form4a">Form 4A</option><option value="form2">Form 2</option></select><button type="button" onclick="shareDeskCertificate()">Share selected certificate</button><button type="button" class="secondary" onclick="switchDocTab('clinicalCertificates')">Open clinical certificates</button><button type="button" class="secondary" onclick="switchDocTab('legalForms')">Open statutory forms</button></article>
-<article class="share-desk-card"><span class="share-desk-icon">📚</span><h3>Patient articles</h3><p>Share a published patient guidance article as a PDF.</p><select id="shareDeskArticle" aria-label="Choose patient article"><option value="">Load available articles…</option></select><button type="button" onclick="shareDeskArticle()">Share selected article</button><button type="button" class="secondary" onclick="shareDeskLoadArticles()">Refresh article list</button><button type="button" class="secondary" onclick="switchDocTab('articlesHub')">Open Article Manager</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">📝</span><h3>Prescription</h3><p>Share the current A4 prescription as a PDF.</p><button type="button" onclick="shareDeskDocument('rx')">Share prescription</button><button type="button" class="secondary" onclick="saveDeskDocument('rx',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="switchDocTab('rxPad')">Open prescription</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">🧪</span><h3>Laboratory requisition</h3><p>Share the current investigation request slip.</p><button type="button" onclick="shareDeskDocument('path')">Share lab sheet</button><button type="button" class="secondary" onclick="saveDeskDocument('path',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="switchDocTab('pathReq')">Open lab requisition</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">☢️</span><h3>Radiology requisition</h3><p>Share the current imaging request slip.</p><button type="button" onclick="shareDeskDocument('rad')">Share radiology</button><button type="button" class="secondary" onclick="saveDeskDocument('rad',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="switchDocTab('radReq')">Open radiology requisition</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">🧾</span><h3>Invoice / receipt</h3><p>Prepare and share the current invoice PDF.</p><button type="button" onclick="shareDeskInvoice()">Share invoice PDF</button><button type="button" class="secondary" onclick="saveDeskDocument('invoice',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="switchDocTab('invoice')">Open invoice</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">📜</span><h3>Certificates &amp; forms</h3><p>Choose a completed statutory form.</p><select id="shareDeskCertificate" aria-label="Choose certificate or form"><option value="referral">Referral letter</option><option value="consent">Consent form</option><option value="fitness">Fitness certificate</option><option value="leave">Unfitness certificate</option><option value="form4">Form 4</option><option value="form4a">Form 4A</option><option value="form2">Form 2</option></select><button type="button" onclick="shareDeskCertificate()">Share selected certificate</button><button type="button" class="secondary" onclick="saveDeskDocument('certificate',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="switchDocTab('clinicalCertificates')">Open clinical certificates</button><button type="button" class="secondary" onclick="switchDocTab('legalForms')">Open statutory forms</button></article>
+<article class="share-desk-card"><span class="share-desk-icon">📚</span><h3>Patient articles</h3><p>Share a published patient guidance article as a PDF.</p><select id="shareDeskArticle" aria-label="Choose patient article"><option value="">Load available articles…</option></select><button type="button" onclick="shareDeskArticle()">Share selected article</button><button type="button" class="secondary" onclick="saveDeskDocument('article',this)">☁️ Save to private cloud</button><button type="button" class="secondary" onclick="shareDeskLoadArticles()">Refresh article list</button><button type="button" class="secondary" onclick="switchDocTab('articlesHub')">Open Article Manager</button></article>
 </div>
 <section class="share-desk-card share-desk-any"><div><span class="share-desk-icon">📎</span><h3>Share any file from this device</h3><p>Choose a PDF, image, report or other file. It stays on this device until you select a sharing app and recipient.</p></div><input type="file" id="shareDeskFile" aria-label="Choose a file to share"><button type="button" id="shareDeskAnyButton" onclick="shareDeskAnyFile()">Share selected file</button><p id="shareDeskStatus" role="status" aria-live="polite">No file selected.</p></section>
 <p class="share-desk-safety"><strong>Privacy:</strong> no public link is created and no patient document is uploaded automatically.</p></section>`;
@@ -65,6 +65,49 @@ window.shareDeskCertificate=function(){const type=document.getElementById('share
 window.shareDeskLoadArticles=function(){const s=document.getElementById('shareDeskArticle');if(!s)return;window.renderPublishedArticles?.();const root=document.getElementById('publicGuidanceSection'),cards=[...(root?.querySelectorAll('[id^="publicArticle_"]')||[])];s.replaceChildren();const o=document.createElement('option');o.value='';o.textContent=cards.length?'Choose a patient article…':'No published patient articles are currently available';s.append(o);cards.forEach(card=>{const x=document.createElement('option');x.value=card.id;x.textContent=card.querySelector('h1,h2,h3,h4')?.textContent?.trim()||card.id;s.append(x);});const status=document.getElementById('shareDeskStatus');if(status)status.textContent=cards.length+' patient article(s) available.';return cards.length;};
 window.shareDeskArticle=function(){const id=document.getElementById('shareDeskArticle')?.value;if(!id){window.showToast?.('Select an available patient article first.');return;}const card=document.getElementById(id);if(!card||!/^publicArticle_/.test(id)){window.showToast?.('Selected article is no longer available. Refresh the article list.');return;}return window.shareDocumentPdf(id,card.querySelector('h1,h2,h3,h4')?.textContent?.trim()||'Patient_Guidance',{direct:true});};
 window.shareDeskAnyFile=async function(){const input=document.getElementById('shareDeskFile'),status=document.getElementById('shareDeskStatus'),button=document.getElementById('shareDeskAnyButton'),file=input?.files?.[0];if(!file){if(status)status.textContent='Choose a file first.';return;}if(!navigator.share||!navigator.canShare||!navigator.canShare({files:[file]})){if(status)status.textContent='This browser cannot share files directly. Open your preferred app and attach: '+file.name+'. The file has not been uploaded or sent.';return;}button.disabled=true;button.setAttribute('aria-busy','true');if(status)status.textContent='Opening the device share sheet…';try{await navigator.share({files:[file],title:file.name});if(status)status.textContent='The file was handed to the selected sharing app. Confirm the recipient and press Send there.';}catch(e){if(status)status.textContent=e.name==='AbortError'?'Sharing cancelled. No file was sent.':'Sharing could not be completed: '+(e.message||'try another app');}finally{button.disabled=false;button.removeAttribute('aria-busy');}};
+
+window.saveDeskDocument=async function(kind,button){
+ const cloud=window.ClinicCloud;
+ const status=document.getElementById('shareDeskStatus');
+ const say=(message)=>{if(status)status.textContent=message;window.showToast?.(message);};
+ if(!cloud||typeof cloud.uploadDocument!=='function'){say('Private cloud vault is unavailable. No document was uploaded.');return;}
+ if(!cloud.isSignedIn?.()||!window.WorkstationAuth?.isOwnerSession?.()){say('Sign in to the Doctor Workstation first. No document was uploaded.');window.WorkstationAuth?.open();return;}
+ const docs={
+  rx:{id:'rxSheet',name:'Prescription',type:'prescription'},
+  path:{id:'pathSlipSheet',name:'Laboratory_Requisition',type:'lab_requisition'},
+  rad:{id:'radSlipSheet',name:'Radiology_Requisition',type:'radiology_requisition'},
+  invoice:{id:'invoiceSheet',name:'Invoice_Receipt',type:'invoice'}
+ };
+ let doc=docs[kind];
+ if(kind==='certificate'){
+  const type=document.getElementById('shareDeskCertificate')?.value||'';
+  const choices={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
+  const v=choices[type];if(v)doc={id:v[0],name:v[1],type:v[2]};
+ }
+ if(kind==='article'){
+  const id=document.getElementById('shareDeskArticle')?.value||'';
+  const card=document.getElementById(id);
+  if(card&&/^publicArticle_/.test(id))doc={id,name:card.querySelector('h1,h2,h3,h4')?.textContent?.trim()||'Patient_Guidance',type:'other'};
+ }
+ if(!doc){say('Select an available document before saving.');return;}
+ if(!document.getElementById(doc.id)){say('Open and prepare this document first. No file was uploaded.');return;}
+ if(!window.confirm('This PDF may contain confidential patient health information. Save it to the clinic owner’s private cloud vault only if you are authorised to store this record. Continue?'))return;
+ if(button){button.disabled=true;button.setAttribute('aria-busy','true');}
+ try{
+  const file=await prepare(doc.id,datedName(doc.name));
+  if(file.size>7864320)throw Error('The PDF exceeds the private-vault 7.5 MB limit.');
+  if(!window.crypto?.subtle)throw Error('Secure SHA-256 verification is unavailable in this browser.');
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  const digest=await window.crypto.subtle.digest('SHA-256',bytes);
+  const sha256=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+  let binary='';for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,i+0x8000));
+  const saved=await cloud.uploadDocument({title:file.name,documentType:doc.type,mimeType:'application/pdf',base64:btoa(binary),sha256,sourceRef:'share-desk:'+doc.id,metadata:{source:'share-desk-generated-pdf',savedAt:new Date().toISOString(),originalName:file.name}});
+  if(!saved?.saved||!saved?.document?.id)throw Error('The server did not confirm the cloud save.');
+  say('Saved to the private cloud vault: '+file.name);
+  window.dispatchEvent(new CustomEvent('clinic-document-saved',{detail:{id:saved.document.id,type:doc.type}}));
+ }catch(error){say('Cloud save failed; the PDF was not confirmed saved. '+(error.message||'Try again.'));}
+ finally{if(button){button.disabled=false;button.removeAttribute('aria-busy');}}
+};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
 })();
 
