@@ -39,7 +39,7 @@ module.exports=async function handler(req,res){
  res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Cache-Control','no-store');
  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({status:'error',message:'Use GET.'});}
  const id=String(req.query?.source||''),q=safeQuery(req.query?.q||'diabetes OR cardiovascular disease OR critical care');
- if(!CONFIG[id])return res.status(400).json({status:'error',message:'Choose PubMed, Europe PMC, ClinicalTrials.gov or Crossref.'});
+ if(!Object.hasOwn(CONFIG,id))return res.status(400).json({status:'error',message:'Choose PubMed, Europe PMC, ClinicalTrials.gov or Crossref.'});
  if(q.length<2)return res.status(400).json({status:'error',message:'Enter at least two characters to search.'});
  try{const result=await search(id,q);return res.status(200).json({status:'ok',query:q,totalReturned:result.items.length,...result});}
  catch(e){return res.status(502).json({status:'unavailable',source:CONFIG[id].name,sourceUrl:CONFIG[id].home,message:'The research database did not respond successfully. Retry or select another database. No sample results are shown.'});}
