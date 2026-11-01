@@ -4,9 +4,9 @@
 **Clinical status:** decision-support comparator only; it does not diagnose or replace the performing laboratory's own interval.
 
 ## Current baseline
-- The current comparator contains 111 source-attributed adult records (50 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions + 6 Mayo Reticulocyte Profile partitions merged in PR #102). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated.
+- The current catalogue contains 111 adult entries (50 Mayo-derived records + 55 Indian IFCC C-RIDL study partitions + 6 Mayo Reticulocyte Profile partitions merged in PR #102): 79 have source URL, specimen and method metadata and are typed as reference intervals; 2 are separately typed assay-specific decision limits; 30 legacy entries still lack complete direct source/method/specimen metadata and are blocked from automatic LOW/HIGH classification. None of these intervals is locally method-validated by this website.
 - The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 750-record catalogue.
-- A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
+- A test without a compatible, fully source-documented interval must show a warning and must not guess LOW / NORMAL / HIGH. Legacy entries require the exact performing-laboratory report interval entered locally before classification.
 
 ## Scientific rule: no single universal global reference interval
 Reference intervals depend on reference population, age, sex, pregnancy/physiological state, specimen, analytical method, calibration/traceability, units and laboratory platform. IFCC C-RIDL is working on harmonization and transferability; it does not establish one universal interval for every assay and population. CLSI EP28 provides the framework for establishing, verifying and transferring quantitative laboratory reference intervals.
