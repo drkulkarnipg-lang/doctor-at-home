@@ -210,10 +210,12 @@
     {
       "url": "https://api.crossref.org/works",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
-        8
+        8,
+        27
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -466,10 +468,12 @@
     {
       "url": "https://clinicaltrials.gov/",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
         13,
+        26,
         32
       ],
       "classification": "external-destination",
@@ -491,10 +495,12 @@
     {
       "url": "https://clinicaltrials.gov/api/v2/studies",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
-        7
+        7,
+        26
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -681,11 +687,13 @@
       "url": "https://europepmc.org/",
       "source_files": [
         "api/research-discovery.js",
-        "official-research-sources.js"
+        "official-research-sources.js",
+        "research-sources.js"
       ],
       "source_lines": [
         10,
-        12
+        12,
+        25
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -706,10 +714,12 @@
     {
       "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
-        4
+        4,
+        24
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1355,10 +1365,12 @@
       "url": "https://pubmed.ncbi.nlm.nih.gov/",
       "source_files": [
         "api/research-discovery.js",
-        "index.html"
+        "index.html",
+        "research-sources.js"
       ],
       "source_lines": [
         11,
+        24,
         26,
         473
       ],
@@ -1503,10 +1515,12 @@
     {
       "url": "https://search.crossref.org/",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
-        14
+        14,
+        27
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1960,10 +1974,12 @@
     {
       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
       "source_files": [
-        "api/research-discovery.js"
+        "api/research-discovery.js",
+        "research-sources.js"
       ],
       "source_lines": [
-        6
+        6,
+        25
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
