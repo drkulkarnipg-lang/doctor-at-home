@@ -2716,14 +2716,16 @@
     {
       "url": "https://www.mayocliniclabs.com/test-catalog/Overview/9109",
       "source_files": [
+        "clinical-calculators.js",
         "lab-reference-governance.js"
       ],
       "source_lines": [
-        16
+        16,
+        159
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
-      "notes": "Extracted from active source; reachability and intended destination not yet independently verified."
+      "notes": "Extracted from active source; reachability and intended destination not yet independently verified. Also used for adult CBC result partitions in clinical-calculators.js; Mayo source has an XN 9100/XN 9000 method-description discrepancy flagged in the catalogue."
     },
     {
       "url": "https://www.mayocliniclabs.com/test-catalog/Overview/9154",
