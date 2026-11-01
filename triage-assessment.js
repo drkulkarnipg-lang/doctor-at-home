@@ -25,15 +25,15 @@ function scoreNEWS2(v){
  const red3=Object.entries(parts).filter(([k,x])=>x===3&&k!=='oxygen').map(([k])=>k);
  return {complete:true,score:Object.values(parts).reduce((a,b)=>a+b,0),parts,red3,reason:''};
 }
-const requiredYesNo=['infection','fever3','highFever','severeWeakness','oralIntake','urine','dyspnoea','chestPain','palpitationSyncope','neuroDeficit','confusion','seizure','vomiting','bleeding','rash','frail','immunosuppressed','pregnant','caregiver','followup','clinicalConcern'];
-const labels={infection:'Suspected/confirmed infection',fever3:'Fever for ≥3 days',highFever:'High-grade fever (≥39°C documented or strongly reported)',severeWeakness:'Severe weakness / unable to perform usual activity',oralIntake:'Able to drink and retain oral fluids',urine:'Urine output reasonably maintained',dyspnoea:'Breathlessness at rest / respiratory distress',chestPain:'New or severe chest pain',palpitationSyncope:'Syncope or sustained symptomatic palpitations',neuroDeficit:'New focal neurological deficit / stroke symptoms',confusion:'New confusion / reduced responsiveness',seizure:'Current/recent acute seizure',vomiting:'Persistent vomiting / unable to retain fluids',bleeding:'Significant active bleeding',rash:'Non-blanching purpuric rash / rapidly progressive rash',frail:'Frailty / major functional dependence',immunosuppressed:'Immunosuppression / chemotherapy / transplant',pregnant:'Pregnant or recently pregnant',caregiver:'Reliable caregiver available if home plan considered',followup:'Reliable reassessment / emergency access available',clinicalConcern:'Doctor has any overriding concern about home treatment'};
-const triageRed=['dyspnoea','chestPain','neuroDeficit','confusion','seizure','bleeding','rash'];
-const triageYellow=['severeWeakness','highFever','vomiting'];
+const requiredYesNo=['infection','fever3','highFever','severeWeakness','oralIntake','urine','dyspnoea','stridorCyanosis','chestPain','palpitationSyncope','neuroDeficit','confusion','unresponsive','seizure','vomiting','bleeding','rash','hypoglycaemia','frail','immunosuppressed','pregnant','caregiver','followup','clinicalConcern'];
+const labels={infection:'Suspected/confirmed infection',fever3:'Fever for ≥3 days',highFever:'High-grade fever (≥39°C documented or strongly reported)',severeWeakness:'Severe weakness / unable to perform usual activity',oralIntake:'Able to drink and retain oral fluids',urine:'Urine output reasonably maintained',dyspnoea:'Breathlessness at rest / respiratory distress',stridorCyanosis:'Stridor or central cyanosis',chestPain:'New or severe chest pain',palpitationSyncope:'Syncope or sustained symptomatic palpitations',neuroDeficit:'New focal neurological deficit / stroke symptoms',confusion:'New confusion / reduced responsiveness',unresponsive:'Unresponsive / cannot be roused',seizure:'Current/recent acute seizure',hypoglycaemia:'Clinically significant hypoglycaemia',vomiting:'Persistent vomiting / unable to retain fluids',bleeding:'Significant active bleeding',rash:'Non-blanching purpuric rash / rapidly progressive rash',frail:'Frailty / major functional dependence',immunosuppressed:'Immunosuppression / chemotherapy / transplant',pregnant:'Pregnant or recently pregnant',caregiver:'Reliable caregiver available if home plan considered',followup:'Reliable reassessment / emergency access available',clinicalConcern:'Doctor has any overriding concern about home treatment'};
+const triageRed=['dyspnoea','stridorCyanosis','neuroDeficit','unresponsive','seizure','bleeding','rash','hypoglycaemia'];
+const triageYellow=['severeWeakness','highFever','vomiting','oralIntake','urine'];
 function val(id){return document.getElementById('triage_'+id)?.value??'';}
-function checked(id){return document.getElementById('triage_'+id)?.checked===true;}
+function checked(id){return val(id)==='yes';}
 function html(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function buildMarkup(){
- const yn=requiredYesNo.map(k=>'<label class="triage-check"><input type="checkbox" id="triage_'+k+'"><span>'+labels[k]+'</span></label>').join('');
+ const yn=requiredYesNo.map(k=>'<div class="triage-field"><label for="triage_'+k+'">'+labels[k]+'</label><select id="triage_'+k+'"><option value="">Select</option><option value="no">No</option><option value="yes">Yes</option><option value="unassessed">Unable to assess</option></select></div>').join('');
  return '<section id="viewTriageAssessment" class="hidden triage-shell space-y-5" aria-labelledby="triageTitle">'+
  '<div class="triage-hero"><span class="section-eyebrow">Doctor Workstation · clinician-only decision support</span><h2 id="triageTitle">Home Visit Clinical Triage &amp; Disposition</h2><p>Structured ABCDE assessment, NEWS2 physiology score, WHO emergency danger-sign override and documented home-care suitability review. Designed for clinician completion; it is not an autonomous diagnosis or clearance tool.</p><div class="triage-help"><b>Scope:</b> adult patients aged 16 years or older, not pregnant/recently pregnant. Pregnancy and paediatric cases require their own validated pathway. Record observations at the time of assessment.</div></div>'+
  '<div class="triage-grid"><section class="triage-card"><h3>1 · Patient &amp; encounter</h3><div class="triage-fields">'+
@@ -68,9 +68,9 @@ function field(id,label,type='text',size='',opts=[]){
  return '<div class="triage-field '+(size==='full'?'full':'')+'"><label for="triage_'+id+'">'+label+'</label>'+input+'</div>';
 }
 function getForm(){
- const required=['age','sex','rr','spo2','sbp','dbp','hr','temp','conscious','oxygen','duration','infection','fever3','highFever','severeWeakness','oralIntake','urine','dyspnoea','chestPain','palpitationSyncope','neuroDeficit','confusion','seizure','vomiting','bleeding','rash','frail','immunosuppressed','pregnant','caregiver','followup','clinicalConcern'];
- const missing=required.filter(k=>val(k)==='');
- const bools=['infection','fever3','highFever','severeWeakness','oralIntake','urine','dyspnoea','chestPain','palpitationSyncope','neuroDeficit','confusion','seizure','vomiting','bleeding','rash','frail','immunosuppressed','pregnant','caregiver','followup','clinicalConcern'];
+ const required=['age','sex','rr','spo2','sbp','dbp','hr','temp','conscious','oxygen','duration',...requiredYesNo,'decision','override'];
+ const missing=required.filter(k=>val(k)===''||val(k)==='unassessed');\n if(!document.getElementById('triage_confirm')?.checked)missing.push('Doctor confirmation');
+ const bools=requiredYesNo;
  const yes=bools.filter(k=>checked(k));
  return {missing,yes,age:Number(val('age')),sex:val('sex'),duration:Number(val('duration')),v:{rr:val('rr'),spo2:val('spo2'),sbp:val('sbp'),hr:val('hr'),temp:val('temp'),conscious:val('conscious'),oxygen:val('oxygen')==='yes'?'yes':val('oxygen')==='no'?'no':''}};
 }
@@ -84,17 +84,17 @@ function calculate(){
  const yellow=f.yes.filter(k=>triageYellow.includes(k));
  const vit={hr:Number(f.v.hr),rr:Number(f.v.rr),temp:Number(f.v.temp),spo2:Number(f.v.spo2)};
  const whoHigh=(vit.hr<60||vit.hr>130||vit.rr<10||vit.rr>30||vit.temp<36||vit.temp>39||vit.spo2<92||f.v.conscious!=='alert');
- const anyYellow=yellow.length>0||whoHigh||f.yes.includes('vomiting')||f.yes.includes('palpitationSyncope');
+ const anyYellow=yellow.some(k=>k==='oralIntake'||k==='urine'? !f.yes.includes(k):true)||whoHigh||f.yes.includes('palpitationSyncope');
  const sepsis=f.yes.includes('infection');
  const scoreHigh=n.score>=7,scoreMedium=n.score>=5&&n.score<=6,single3=n.red3.length>0;
  let category='green',reasons=[];
- if(red.length){category='red';reasons.push('WHO emergency danger sign(s): '+red.map(k=>labels[k]).join('; '));}
+ if(red.length){category='red';reasons.push('WHO emergency danger sign(s): '+red.map(k=>labels[k]).join('; '));}\n if(vit.hr<50||vit.hr>150){category='red';reasons.push('WHO red vital-sign threshold: heart rate <50 or >150/min.');}
  if(f.yes.includes('clinicalConcern')){category='red';reasons.push('Doctor reports overriding clinical concern: escalation is required.');}
  if(scoreHigh){category='red';reasons.push('NEWS2 ≥7: high-risk physiological score.');}
  if(category!=='red'&&(scoreMedium||single3||anyYellow)){category='yellow';if(scoreMedium)reasons.push('NEWS2 5–6: urgent assessment threshold.');if(single3)reasons.push('At least one NEWS2 parameter scores 3: urgent clinician review irrespective of aggregate.');if(anyYellow)reasons.push('WHO urgent/high-risk feature(s) present.');}
  if(category==='green'&&sepsis&&n.score===0)reasons.push('NEWS2 0 does not exclude sepsis; reassess if clinical concern or deterioration.');
- if(category==='green'&&n.score>=1)reasons.push('NEWS2 1–4: low physiological score band only; it is not a home-treatment clearance.');
- const canConsiderHome=category==='green'&&n.score<=4&&!single3&&!whoHigh&&f.yes.includes('oralIntake')&&f.yes.includes('urine')&&f.yes.includes('caregiver')&&f.yes.includes('followup')&&!f.yes.includes('frail')&&!f.yes.includes('immunosuppressed')&&!f.yes.includes('severeWeakness')&&!f.yes.includes('highFever')&&!f.yes.includes('vomiting');
+ if(category==='green'&&n.score>=1)reasons.push('NEWS2 1–4: low physiological score band only; it is not a home-treatment clearance.');\n if(category==='green'&&sepsis&&n.score===0)reasons.push('For suspected infection, NEWS2 0 does not exclude sepsis or deterioration.');
+ const canConsiderHome=category==='green'&&n.score<=4&&!single3&&!whoHigh&&f.yes.includes('oralIntake')&&f.yes.includes('urine')&&f.yes.includes('caregiver')&&f.yes.includes('followup')&&!f.yes.includes('frail')&&!f.yes.includes('immunosuppressed')&&!f.yes.includes('severeWeakness')&&!f.yes.includes('highFever')&&!f.yes.includes('vomiting')&&!f.yes.includes('clinicalConcern')&&val('decision')==='home-treatment-with-documented-safety-net'&&val('homeReason').trim()&&val('diagnosis').trim()&&val('treatment').trim()&&val('review').trim()&&document.getElementById('triage_confirm')?.checked===true;
  const partLabels={rr:'Respiratory rate',spo2:'SpO₂',sbp:'Systolic BP',hr:'Pulse',conscious:'Consciousness',temp:'Temperature',oxygen:'Supplemental oxygen'};
  const breakdown=Object.entries(n.parts).map(([k,v])=>'<li>'+partLabels[k]+': <b>'+v+'</b></li>').join('');
  const title=category==='red'?'RED — EMERGENCY / TRANSFER':category==='yellow'?'YELLOW — URGENT IN-PERSON ASSESSMENT':'GREEN — NO CURRENT RED/YELLOW TRIGGER IDENTIFIED';
