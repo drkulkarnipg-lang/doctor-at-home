@@ -130,3 +130,21 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 .clinical-tool-card:focus-visible{outline:3px solid #3f8c72;outline-offset:3px}
 /* Make the clinician registration identifier legible and visually distinct on the prescription. */
 #rxSheet .rx-registration-number{font-family:Inter,sans-serif;font-size:12px;font-weight:800;letter-spacing:.045em;font-variant-numeric:tabular-nums;color:#0f2942;white-space:nowrap}
+
+/* Share Desk: light, touch-first, translucent document hub. */
+@media screen{
+ .share-desk-heading,.share-desk-card{background:rgba(255,255,255,.74);border:1px solid rgba(158,180,174,.25);border-radius:18px;box-shadow:0 8px 28px rgba(54,79,72,.035);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+ .share-desk-heading{padding:22px}.share-desk-heading h2{font-size:clamp(25px,3vw,34px);color:#3d555d;font-weight:700;letter-spacing:-.025em}.share-desk-heading p,.share-desk-card p{font-size:12px;line-height:1.7;color:#718087}
+ .share-desk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:14px}
+ .share-desk-card{padding:18px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0}
+ .share-desk-icon{font-size:23px}.share-desk-card h3{font-size:17px;font-weight:700;color:#435b63}
+ .share-desk-card button,.share-desk-card select,.share-desk-card input{width:100%;min-width:0;min-height:44px;border:1px solid rgba(133,165,151,.30);border-radius:11px;padding:10px 13px;background:rgba(255,255,255,.88);color:#49665d;font-size:12px;font-weight:700;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+ .share-desk-card button{background:linear-gradient(180deg,#fff,#eaf2ed);box-shadow:0 3px 12px rgba(54,86,72,.05);cursor:pointer}
+ .share-desk-card button.secondary{background:rgba(255,255,255,.65);box-shadow:none;color:#64767b}
+ .share-desk-card button:active{transform:translateY(1px) scale(.99)}
+ .share-desk-card button:focus-visible,.share-desk-card select:focus-visible,.share-desk-card input:focus-visible{outline:2px solid #75a596;outline-offset:3px}
+ .share-desk-any{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,1fr) auto;align-items:center;gap:14px}
+ .share-desk-any input{font-weight:500}.share-desk-any button{min-height:46px;border:1px solid rgba(133,165,151,.35);border-radius:11px;padding:10px 18px;background:linear-gradient(180deg,#fff,#eaf2ed);color:#49665d;font-weight:750;touch-action:manipulation}
+ .share-desk-any p{margin:0;font-size:11px;color:#718087}.share-desk-safety{padding:12px 15px;border-left:3px solid #9ab9a8;background:rgba(255,255,255,.52);color:#66777b;font-size:12px;line-height:1.7}
+}
+@media(max-width:700px){.share-desk-any{grid-template-columns:1fr}.share-desk-any button{width:100%}}

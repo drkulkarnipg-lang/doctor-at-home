@@ -34,3 +34,49 @@
   for(const [id,label,name]of [['viewChart20','Share trend PDF','BP_Trend']]){const el=$(id);if(!el)continue;const b=document.createElement('button');b.type='button';b.className='research-upload no-print';b.textContent=label;b.onclick=()=>window.shareDocumentPdf(id,name);el.prepend(b);}
  });
 })();
+
+/* Central Share Desk: reuse the existing document-specific PDF pipeline. */
+window.shareDeskDocument=function(kind){
+ const actions={rx:()=>window.universalShareDocument('rx'),path:()=>window.universalShareDocument('path'),rad:()=>window.universalShareDocument('rad')};
+ if(!actions[kind]){window.showToast?.('Unknown document type.');return;}
+ return actions[kind]();
+};
+window.shareDeskInvoice=function(){
+ if(!document.getElementById('invoiceSheet')){window.showToast?.('Invoice document is not available.');return;}
+ return window.shareDocumentPdf('invoiceSheet','Invoice_Receipt',{direct:true});
+};
+window.shareDeskCertificate=function(){
+ const type=document.getElementById('shareDeskCertificate')?.value||'';
+ if(!['form4','form4a','form2'].includes(type)){window.showToast?.('Select a certificate or statutory form.');return;}
+ return window.shareCertificateFormPdf(type);
+};
+window.shareDeskLoadArticles=function(){
+ const select=document.getElementById('shareDeskArticle');if(!select)return;
+ window.renderPublishedArticles?.();
+ const root=document.getElementById('publicGuidanceSection');
+ const cards=[...(root?.querySelectorAll('[id^="publicArticle_"]')||[])];
+ select.replaceChildren();
+ const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent=cards.length?'Choose a patient article…':'No published patient articles are currently available';select.append(placeholder);
+ cards.forEach(card=>{const title=card.querySelector('h1,h2,h3,h4')?.textContent?.trim()||card.id;const option=document.createElement('option');option.value=card.id;option.textContent=title;select.append(option);});
+ const status=document.getElementById('shareDeskStatus');if(status)status.textContent=cards.length+' patient article(s) available.';
+ return cards.length;
+};
+window.shareDeskArticle=function(){
+ const id=document.getElementById('shareDeskArticle')?.value;
+ if(!id){window.showToast?.('Select an available patient article first.');return;}
+ const card=document.getElementById(id);if(!card||!/^publicArticle_/.test(id)){window.showToast?.('Selected article is no longer available. Refresh the article list.');return;}
+ return window.shareDocumentPdf(id,card.querySelector('h1,h2,h3,h4')?.textContent?.trim()||'Patient_Guidance',{direct:true});
+};
+window.shareDeskAnyFile=async function(){
+ const input=document.getElementById('shareDeskFile'),status=document.getElementById('shareDeskStatus'),button=document.getElementById('shareDeskAnyButton'),file=input?.files?.[0];
+ if(!file){if(status)status.textContent='Choose a file first.';return;}
+ if(!navigator.share||!navigator.canShare||!navigator.canShare({files:[file]})){
+  if(status)status.textContent='This browser cannot share files directly. Open your preferred app and attach: '+file.name+'. The file has not been uploaded or sent.';
+  return;
+ }
+ button.disabled=true;button.setAttribute('aria-busy','true');if(status)status.textContent='Opening the device share sheet…';
+ try{await navigator.share({files:[file],title:file.name});if(status)status.textContent='The file was handed to the selected sharing app. Confirm the recipient and press Send there.';}
+ catch(e){if(status)status.textContent=e.name==='AbortError'?'Sharing cancelled. No file was sent.':'Sharing could not be completed: '+(e.message||'try another app');}
+ finally{button.disabled=false;button.removeAttribute('aria-busy');}
+};
+document.addEventListener('DOMContentLoaded',()=>{window.shareDeskLoadArticles?.();});
