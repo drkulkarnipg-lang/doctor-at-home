@@ -583,3 +583,18 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - 2 Nov full Indian C-RIDL Table 4 expansion: 45 additional partitions covering albumin, lipids, creatinine/urea/urate, liver/muscle enzymes, iron/transferrin, inflammatory markers, immunoglobulins, complement and transthyretin. All 33 analytes from the paper are now represented by 55 Indian-population records. Total seed: 85 (30 Mayo/source-linked + 55 Indian C-RIDL). Local method transfer remains unverified. Development regression: 467 assertions passed.
 
 - Source/method applicability attestation is reset whenever the test, source/method partition, age, sex or pregnancy status changes; it cannot carry over from a prior result. Lab form controls and catalogue buttons use a tinted teal/sage panel rather than a plain-white surface, with ≥44 px touch targets and visible keyboard-focus styles.
+
+
+### Release checkpoint — 2 November 2026
+
+- Current GitHub main advanced from the previously reported `adbc9142711f0299b32397f07d283a4863fd405e` to `a653c63789805e3c23115a53887556f0f4c88be2` after PR #103 merged. Exact-main Actions run #1476 (`41347471728`) passed.
+- PR #102's former head `bd773038cc39f17abd58b0f316e8d517e2b402fd` was based on old main `adbc914`. Its exact-head run #1494 (`41347611631`) failed on an obsolete GCS test assertion. The current main GCS test suite passed on #1476; the branch sync uses the current main test.
+- Main lab seed is 105 (50 Mayo-derived records + 55 Indian IFCC C-RIDL partitions). PR #102 sync adds six unique RETB adult partitions, proposing 111 on the review branch. Ferritin and TSH were not duplicated because they are already on main. Target 750 remains open.
+- The main inventory currently scans 94 active source files and 276 destinations. The six RETB rows add one source URL and exact line evidence, proposing 277 destinations after regeneration.
+- Current main Vercel status is absent; the last status on prior main `adbc914` was failure `build-rate-limit`. The last independently confirmed production commit remains `57d011721e92903c53f76035f43520c296502906`; no current production deployment ID is confirmed.
+- `drkulkarnipg.com` and `www.drkulkarnipg.com` have not been verified. Web retrieval returned internal errors and the connected browser requires its originating browser context. No HTTP 200, exact-release serving, desktop/mobile, device or recipient-side evidence is claimed.
+- PR #97 remains open/draft for local-file Share Desk privacy tests; PR #100 is closed/superseded; PR #104 remains outside this approved release scope and was not changed.
+- Main contains one dynamically injected Share Desk view with a duplicate-view guard; PR #97 local-file privacy tests are not yet merged or production-verified.
+- Main retains seven legacy diet presets and five acute illness presets. The clinician-facing preset panel is in Doctor Workstation; separate doctor-only add/edit controls for patient-facing diet presets remain unverified/open.
+- NEWS2/WHO and separate GCS capture are in main. NICE NG253 is referenced with clinical-concern escalation, but a complete structured community risk-table review has not been independently verified; clinical governance review remains required before routine use.
+- Google Workspace mailbox remains unprovisioned. No billing, secrets, hosting, DNS, database migration or clinical-publication changes were made.
