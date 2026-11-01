@@ -445,3 +445,17 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - Main retains seven legacy diet presets and five acute illness presets. The clinician-facing preset panel is in Doctor Workstation; separate doctor-only add/edit controls for patient-facing diet presets remain unverified/open.
 - NEWS2/WHO and separate GCS capture are in main. NICE NG253 is referenced with clinical-concern escalation, but a complete structured community risk-table review has not been independently verified; clinical governance review remains required before routine use.
 - Google Workspace mailbox remains unprovisioned. No billing, secrets, hosting, DNS, database migration or clinical-publication changes were made.
+
+
+### Release checkpoint — 2 November 2026 (post-PR #107)
+
+- Latest main commit: `ed7d244f1545ba25d7f1ee256993b520efcaca80`.
+- PR #102 (111-record lab catalogue), PR #104 (visible UPI/QR, username owner login, private-cloud prescription save), PR #105 (patient-facing acute illness diet guidance) and PR #107 (18-language whole-site selector and source-language list preservation) are merged. PR #106 was closed as superseded by #107.
+- Exact-head full repository regression passed on PR #105 run `41349175948` and PR #107 run `41349663034`; the latter completed all 69 regression test files successfully. These are PR-head tests, not manual production/device tests.
+- The built-in Lab Normal Reference Check Table contains **111 unique source-attributed adult records**. Six Mayo RETB partitions are now in main. Target remains 750 (minimum 700 requested); no unsupported or fabricated ranges are added. Local method/platform transfer and clinician governance remain necessary.
+- Five acute illness diet topics now appear in a patient-facing read-only section, reusing the clinician presets. Prescription-add controls remain doctor-only. Whole-site language selector now lists 18 languages; Google widget partial loading no longer replaces the complete static source-language list. Machine translation is not clinically certified.
+- Main Vercel status for `ed7d244` is **FAILURE: build-rate-limit**. Earlier main commit `010650` had Vercel SUCCESS, but custom-domain alias/served-commit verification was not obtained. The latest main is therefore not confirmed deployed to production. Keep release open.
+- Doctor signature asset and PDF provenance/signature stamping are retained. Share Desk exists in main; actual desktop/mobile file handoff and recipient receipt remain unverified.
+- UPI QR and private-cloud prescription save are in main. Razorpay/BillDesk remain disabled pending merchant onboarding and server-side payment verification. SMS OTP remains pending Twilio verification; password recovery confirms the new password and requires 12+ characters. Do not claim SMS OTP enabled.
+- Work email is not provisioned. Cloudflare DNS and Vercel hosting do not create a mailbox; provider signup and verified MX/SPF/DKIM/DMARC are required. AI evidence pipeline exists behind owner auth but needs AI Gateway credentials/model/credits; no public AI chatbot is enabled.
+- Do not change billing, DNS, secrets or hosting to bypass the Vercel rate limit. Continue verification when the build limit clears; do not claim live publication until exact main commit and both custom domains are confirmed.
