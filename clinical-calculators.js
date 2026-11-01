@@ -170,7 +170,7 @@ api.render=function(){const publicGrid=document.getElementById('calc30Grid');con
  const documented=TESTS.filter(t=>t[9]?.sourceUrl&&t[9]?.rangeType==='reference_interval').length;
  const decision=TESTS.filter(t=>t[9]?.sourceUrl&&t[9]?.rangeType==='decision_limit').length;
  const legacy=TESTS.length-documented-decision;
- $('labrcCount').textContent=TESTS.length+' catalogue entries: '+documented+' source-documented reference intervals, '+decision+' assay-specific decision limits, '+legacy+' legacy entries requiring source review. Evidence expansion target: 750.';
+ $('labrcCount').textContent=TESTS.length+' catalogue entries: '+documented+' source-documented reference intervals, '+decision+' assay-specific decision limits, '+legacy+' legacy entries requiring source review. 750-record evidence expansion target remains open.';
  [...new Set(TESTS.map(t=>t[3]))].sort().forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;category.appendChild(o);});
  let active=null;
  const norm=s=>String(s||'').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim();
