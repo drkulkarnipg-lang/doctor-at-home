@@ -8,7 +8,7 @@ const fs=require('node:fs'),html=fs.readFileSync(require('node:path').join(__dir
 assert.match(html,/id="rssFetchLatest"/,'Fetch Latest Feeds button must have a stable ID');
 const fetchButton=html.match(/<button[^>]*id="rssFetchLatest"[^>]*>/)?.[0]||'';
 assert.match(html,/<div id="rssFeedPanel"[^>]*>/,'RSS panel must have a stable layout container.');
-assert.match(html,/<div class="rss-feed-controls">[\\s\\S]*?<button[^>]*id="rssFetchLatest"/,'Fetch Latest Feeds must remain inside the RSS control area, never overflow the panel.');
+assert.match(html,/<div class="rss-feed-controls">[\s\S]*?<button[^>]*id="rssFetchLatest"/,'Fetch Latest Feeds must remain inside the RSS control area, never overflow the panel.');
 assert.match(fetchButton,/type="button"/,'Fetch control must not submit a surrounding form.');
 assert.match(fetchButton,/aria-label="Fetch latest research feeds"/,'Fetch control must have an accessible name.');
 assert.match(html,/id="rssFeedContainer"[^>]*class="[^"]*rss-feed-results"/,'Feed results must remain inside the RSS panel.');
