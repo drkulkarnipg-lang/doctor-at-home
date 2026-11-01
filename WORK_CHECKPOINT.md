@@ -577,3 +577,5 @@ Verification: the repository-wide inventory test passes after adding the new sou
 
 
 - 2 Nov additional India-specific batch: 10 adult serum reference interval entries transcribed from Shah et al. Indian IFCC C-RIDL Table 4, including fasting glucose age partitions. A source/method selector now prevents silently choosing between the Indian study and Mayo comparator for overlapping tests. Study assay transfer to local laboratories is not yet verified. Catalogue seed: 40; target: 750.
+
+- Lab comparator safety gates added: clinician confirmation of source/specimen/method/population, explicit fasting confirmation for Indian fasting glucose, method/source dropdown for ambiguous duplicates, pregnancy guard and no silent unit conversion. Tests cover fasting metadata.
