@@ -548,3 +548,14 @@ Next actions, in order:
 - **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
 - **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
 - **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.
+
+## Prescription save/export reliability — 1 November 2026
+
+Owner reported that prescription Save, Download and Export controls do not work. Root causes addressed in branch `fix/prescription-save-export-download-20261101`:
+- Save As now uses the native file picker where supported and a browser-download fallback; it does not upload PHI.
+- Download Text Copy uses an attached temporary anchor and a longer-lived object URL.
+- PDF Export and Share Prescription open the existing PDF-ready panel; the user explicitly taps Download PDF or Share PDF after generation, preserving user activation.
+- The existing PDF download action attaches its temporary anchor to the document before clicking.
+- Regression test covers picker save, fallback download, text copy, PDF handoff and preservation of other document exports.
+
+Verification: the repository-wide inventory test passes after adding the new source file to the committed inventory. The focused test now handles jsdom Blob metadata and awaits the asynchronous share wrapper. The latest full run exposed only the missing `await` in the test's Share assertion; corrected. Fresh Actions run pending. Keep PR #91 preview-only; do not mark production live until the full suite passes and browser/device verification is recorded. No cloud storage, patient-data upload, database migration or prescribing changes are introduced.
