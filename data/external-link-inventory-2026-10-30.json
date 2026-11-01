@@ -469,7 +469,8 @@
         "api/research-discovery.js"
       ],
       "source_lines": [
-        13
+        13,
+        32
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -621,7 +622,8 @@
         "api/research-discovery.js"
       ],
       "source_lines": [
-        29
+        29,
+        35
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
