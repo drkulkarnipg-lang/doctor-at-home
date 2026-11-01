@@ -7,8 +7,8 @@ const html=fs.readFileSync('index.html','utf8');
 const script=fs.readFileSync('clinical-calculators.js','utf8');
 function mount(){
  const dom=new JSDOM('<!doctype html><html><head></head><body><div id="viewPathCheatSheet"></div></body></html>',{url:'https://clinic.example.test',runScripts:'outside-only'});
+ Object.defineProperty(dom.window.document,'readyState',{configurable:true,value:'complete'});
  dom.window.eval(script);
- dom.window.document.dispatchEvent(new dom.window.Event('DOMContentLoaded'));
  return dom;
 }
 function select(dom,id){
