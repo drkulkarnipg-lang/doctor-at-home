@@ -12,3 +12,12 @@ const directory=node('details',undefined,'research-source-directory'),summary=no
 const plan=node('details',undefined,'research-source-directory');plan.append(node('summary','Daily agent source plan — not scheduled'));plan.append(node('p','Select publisher feeds for the future daily workflow. This only saves a source plan in this browser. Scheduling, an AI API and private cloud review storage are not connected; no article will publish automatically.'));let saved;try{saved=JSON.parse(localStorage.getItem(PLAN)||'null');}catch{}const selected=new Set(Array.isArray(saved)?saved:Object.keys(cat.sources));for(const [id,s]of Object.entries(cat.sources)){const label=node('label'),input=node('input');input.type='checkbox';input.checked=selected.has(id);input.dataset.researchSource=id;input.onchange=()=>{input.checked?selected.add(id):selected.delete(id);try{localStorage.setItem(PLAN,JSON.stringify([...selected]));}catch{message.textContent='Source plan could not be saved in this browser.';}};label.append(input,document.createTextNode(' '+s.name));plan.append(label);}const exp=node('button','Export daily source plan (JSON)','research-upload');exp.type='button';exp.onclick=()=>{download(JSON.stringify({version:1,timezone:'Asia/Kolkata',schedule:null,status:'not_connected',autoPublish:false,contentScope:'rss_excerpt',sources:[...selected].map(id=>({id,...cat.sources[id]})).filter(s=>s.url)},null,2),'daily-research-source-plan.json','application/json');};const message=node('p');message.setAttribute('role','status');plan.append(exp,message);directory.after(plan);
 });
 })();
+
+// In the Research Agent workspace, open publisher/AI pages in the same tab.
+// This avoids popup blockers in managed browser windows; Back returns to the saved workspace.
+document.addEventListener('click', event => {
+  const link = event.target.closest('#viewJournalsHub a[href^="https://"]');
+  if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  window.location.assign(link.href);
+});

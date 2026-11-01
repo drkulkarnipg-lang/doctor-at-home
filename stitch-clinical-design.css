@@ -3,19 +3,19 @@
    translation, authentication and document/print templates remain untouched. */
 @media screen {
   :root {
-    --stitch-canvas: #FBF9F6;
+    --stitch-canvas: #EAF5FC;
     --stitch-paper: #FFFFFF;
-    --stitch-ink: #0B192C;
-    --stitch-navy: #102A43;
-    --stitch-muted: #44474C;
-    --stitch-petal: #35684D;
-    --stitch-forest: #1C5036;
-    --stitch-sky: #3E89C4;
-    --stitch-sky-wash: #EBF4FB;
-    --stitch-linen: #F5F3F0;
-    --stitch-line: #E6DFD5;
-    --stitch-border: #D8CEBF;
-    --stitch-eucalyptus: #6B8E78;
+    --stitch-ink: #172B3D;
+    --stitch-navy: #173B5A;
+    --stitch-muted: #526575;
+    --stitch-petal: #C987A2;
+    --stitch-forest: #527C83;
+    --stitch-sky: #4C9ACB;
+    --stitch-sky-wash: #DCEFFA;
+    --stitch-linen: #F4F8FB;
+    --stitch-line: #D6E6F0;
+    --stitch-border: #C8DCE9;
+    --stitch-eucalyptus: #7A9FA5;
   }
 
   html, body {
@@ -548,6 +548,18 @@
   }
   .site-header #navPublicBtn { background: var(--stitch-ink) !important; }
   .site-header #navDoctorBtn { background: transparent !important; }
+  /* Full, scrollable native language list; never clip the D–Z entries. */
+  .patient-language-search{display:block!important;width:100%;max-width:100%;min-height:42px;margin:0 0 7px;padding:9px 12px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:500 13px/1.4 Inter,sans-serif;box-sizing:border-box;}
+  .patient-language-picker{display:block!important;width:100%;max-width:100%;height:184px;min-height:184px;max-height:40vh;overflow-y:auto!important;padding:5px;border:1px solid var(--stitch-border);border-radius:10px;background:#fff;color:var(--stitch-ink);font:500 13px/1.4 Inter,sans-serif;box-sizing:border-box;}
+  .patient-language-picker option{padding:7px 9px;white-space:normal;}
+  .patient-language-picker option:checked{background:var(--stitch-sky);color:var(--stitch-ink);}
+  .patient-language-search:focus-visible,.patient-language-picker:focus-visible{outline:3px solid var(--stitch-sky);outline-offset:2px;}
+  #google_translate_element .patient-language-native-hidden{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;}
+  .language-control[open]{position:relative;z-index:1000;}
+  .language-control[open] .language-row{position:relative;z-index:1001;}
+  .language-control > summary{list-style:none;}
+  .language-control > summary::-webkit-details-marker{display:none;}
+  .language-control > summary:focus-visible{outline:3px solid var(--stitch-sky);outline-offset:2px;}
   .site-header .language-control > summary {
     min-height: 38px;
     display: flex; align-items: center;
