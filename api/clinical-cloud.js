@@ -98,6 +98,43 @@ const headers={Authorization:'Bearer '+token,'Content-Type':'application/json',P
 if(action==='list'&&method==='GET'){const after=String(req.query?.after||'');if(after&&!ID.test(after))return reply(400,{message:'Invalid page cursor.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,revision,updated_at&order=id.asc&limit=100'+(after?'&id=gt.'+encodeURIComponent(after):''),{headers});if(!r.ok)throw Error();const records=await r.json();return reply(200,{records,next:records.length===100?records.at(-1).id:null});}
 if(action==='patient'&&method==='GET'){const id=String(req.query?.id||'');if(!ID.test(id))return reply(400,{message:'Invalid patient ID.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,readings,revision,updated_at,cloud_consent&id=eq.'+encodeURIComponent(id),{headers});if(!r.ok)throw Error();const records=await r.json();return records.length?reply(200,{patient:records[0]}):reply(404,{message:'Patient not found.'});}
 if(action==='save'&&method==='POST'){let p;try{p=validatePatient(body.patient);}catch(e){return reply(400,{message:e.message});}const revision=randomUUID(),updated_at=new Date().toISOString();const record={id:p.id,owner_id:user.id,name:p.name,readings:p.readings,revision,updated_at,cloud_consent:{...p.cloudConsent,recorded_by:user.id,recorded_at:p.cloudConsent.recorded_at||new Date().toISOString()}};const path='/rest/v1/clinic_patient_trends'+(p.revision?'?id=eq.'+encodeURIComponent(p.id)+'&revision=eq.'+encodeURIComponent(p.revision):'');const r=await api(path,{method:p.revision?'PATCH':'POST',headers,body:JSON.stringify(record)});if(r.status===409)return reply(409,{message:'A cloud history with this ID already exists. Load its latest version before changing it.'});if(!r.ok)throw Error();const saved=await r.json();if(saved.length!==1)return reply(409,{message:'This patient changed on another device. Local entries are safe; compare the latest cloud version before retrying.'});return reply(200,{id:p.id,revision,updated_at,cloudConsent:record.cloud_consent});}
+if(action==='documents-list'&&method==='GET'){
+const r=await api('/rest/v1/clinic_documents?select=id,title,document_type,mime_type,byte_size,storage_path,sha256,source_ref,metadata,created_at&order=created_at.desc&limit=300',{headers});
+if(!r.ok)throw Error();
+return reply(200,{documents:await r.json(),limit:300});
+}
+if(action==='document-upload'&&method==='POST'){
+const e=body.document,clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
+if(!e||typeof e!=='object')return reply(400,{message:'Document details are required.'});
+const title=clean(e.title,240),type=clean(e.documentType,40),mime=clean(e.mimeType,60),sourceRef=clean(e.sourceRef,160),base64=typeof e.base64==='string'?e.base64:'',hash=clean(e.sha256,64);
+const allowedTypes=['prescription','lab_requisition','radiology_requisition','referral','fitness','unfitness','consent','invoice','death_form','patient_attachment','clinical_note','article_draft','other'];
+const allowedMime=['application/pdf','image/png','image/jpeg','text/plain','application/json'];
+if(!title||!allowedTypes.includes(type)||!allowedMime.includes(mime)||! /^[a-f0-9]{64}$/.test(hash)||!base64||base64.length>10500000||!/^[A-Za-z0-9+/]*={0,2}$/.test(base64))return reply(400,{message:'Invalid document title, type, format or payload.'});
+const bytes=Buffer.from(base64,'base64');
+if(!bytes.length||bytes.length>7864320||bytes.toString('base64').replace(/=+$/,'')!==base64.replace(/=+$/,''))return reply(400,{message:'File must be valid and no larger than 7.5 MB.'});
+const actual=require('node:crypto').createHash('sha256').update(bytes).digest('hex');
+if(actual!==hash)return reply(400,{message:'Document integrity check failed. Nothing was uploaded.'});
+const sig= mime==='application/pdf'?bytes.subarray(0,5).toString()==='%PDF-':mime==='image/png'?bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])):mime==='image/jpeg'?bytes[0]===255&&bytes[1]===216:mime==='text/plain'? !bytes.includes(0):bytes[0]===123||bytes[0]===91;
+if(!sig)return reply(400,{message:'File content does not match the selected format.'});
+const id=randomUUID(),path=user.id+'/'+id+'.'+({ 'application/pdf':'pdf','image/png':'png','image/jpeg':'jpg','text/plain':'txt','application/json':'json'}[mime]);
+const uploaded=await api('/storage/v1/object/clinic-document-vault/'+path.split('/').map(encodeURIComponent).join('/'),{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':mime,'x-upsert':'false'},body:bytes});
+if(!uploaded.ok)return reply(502,{message:'Private cloud file upload failed. No document was saved.'});
+const metadata={owner_id:user.id,id,title,document_type:type,mime_type:mime,byte_size:bytes.length,storage_path:path,sha256:actual,source_ref:sourceRef,metadata:e.metadata&&typeof e.metadata==='object'&&!Array.isArray(e.metadata)?e.metadata:{},created_at:new Date().toISOString()};
+const saved=await api('/rest/v1/clinic_documents',{method:'POST',headers,body:JSON.stringify(metadata)});
+if(!saved.ok){await api('/storage/v1/object/clinic-document-vault/'+path.split('/').map(encodeURIComponent).join('/'),{method:'DELETE',headers:{Authorization:'Bearer '+token}}).catch(()=>{});throw Error();}
+return reply(201,{saved:true,document:{id,title,documentType:type,mimeType:mime,byteSize:bytes.length,createdAt:metadata.created_at}});
+}
+if(action==='document-download'&&method==='POST'){
+const id=String(body.id||'');if(!UUID.test(id))return reply(400,{message:'Invalid document ID.'});
+const found=await api('/rest/v1/clinic_documents?select=id,storage_path,title,mime_type&id=eq.'+encodeURIComponent(id)+'&limit=1',{headers});
+if(!found.ok)throw Error();const rows=await found.json();if(rows.length!==1)return reply(404,{message:'Document not found in your private vault.'});
+const path=rows[0].storage_path;
+const signed=await api('/storage/v1/object/sign/clinic-document-vault/'+path.split('/').map(encodeURIComponent).join('/'),{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({expiresIn:90})});
+if(!signed.ok)throw Error();
+const result=await signed.json();const signedURL=result.signedURL||result.signedUrl;
+if(typeof signedURL!=='string')throw Error();
+return reply(200,{url:signedURL,title:rows[0].title,mimeType:rows[0].mime_type,expiresIn:90});
+}
 if(action==='register-list'&&method==='GET'){
 const type=String(req.query?.registerType||'');if(!['daily','death','stock'].includes(type))return reply(400,{message:'Choose daily, death or stock register.'});
 const r=await api('/rest/v1/clinic_workstation_registers?select=id,register_type,entry_date,data,revision,created_at,updated_at&register_type=eq.'+encodeURIComponent(type)+'&order=entry_date.desc,created_at.desc&limit=500',{headers});
