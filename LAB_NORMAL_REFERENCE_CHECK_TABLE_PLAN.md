@@ -5,7 +5,7 @@
 
 ## Current baseline
 - The current comparator contains 27 source-attributed adult interval entries.
-- CSV import currently loads extra local intervals for the active browser session; it is not yet a centrally maintained 700-entry database.
+- The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 700-entry database.
 - A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
 
 ## Scientific rule: no single universal global reference interval
@@ -89,3 +89,15 @@ Each interval partition must carry:
 - LabQAR paper (benchmark only; do not copy/adapt its NC-ND dataset into the commercial product): https://www.nature.com/articles/s41597-026-07554-z
 
 **Release principle:** 700 correctly sourced and appropriately partitioned intervals are more valuable than 700 plausible-looking but method-incompatible numbers. Always report the exact count of physician-verified, method-compatible intervals.
+
+
+## Implementation checkpoint — 2 November 2026
+
+- Added `lab-reference-governance.js`, loaded after `clinical-calculators.js` in the Doctor Workstation. It adds a dedicated searchable picker and explicit dropdown, result-unit confirmation, pregnancy guard for adult female comparisons, source/evidence display, and age/sex-specific record matching.
+- The active comparator distinguishes population reference intervals from clinical decision limits (for example, eGFR threshold); it does not call a decision threshold a normal range. It does not silently convert units. Missing or incompatible partitions do not fall back to a guessed range.
+- Existing local report interval override remains available and is clearly labelled as the performing-laboratory interval.
+- CSV evidence import now requires HTTPS source URL, specimen, method, population, age bounds, sex partition and range type. Imports are staged as pending; individual clinician approval is required before they become selectable. Approved catalogue metadata are stored locally on the workstation, with JSON export. Patient results are not stored or uploaded.
+- Removed the previous CSV import path that immediately activated arbitrary rows without complete provenance.
+- Existing seed remains 27 source-linked adult entries; they are not all method/population verified. No artificial values were added to inflate the count. Target remains 750 distinct evidence-backed records.
+- Added `tests/lab-reference-governance.test.cjs` and `npm run test:lab-reference`. Helper-level syntax and validation/classification checks passed in the development runtime; exact-head CI, browser interaction, desktop/mobile visual inspection and production deployment remain open.
+- Official sources researched: CLSI EP28/EP28IG, IFCC C-RIDL, Shah et al. Indian C-RIDL 33-analyte study, Mayo Clinic Laboratories test catalogue, MedlinePlus and NABL/ISO 15189. Source and licensing restrictions are recorded in this plan.
