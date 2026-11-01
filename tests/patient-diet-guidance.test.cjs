@@ -6,8 +6,8 @@ test('patient diet guidance is shared from the clinician presets but has no pres
  assert.match(html,/id="patientDietPresetCards"/);
  const dom=new JSDOM(html,{url:'https://clinic.example.test',runScripts:'outside-only'});
  const w=dom.window;
- w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
  w.eval(script);
+ w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
  const host=w.document.getElementById('patientDietPresetCards');
  assert.ok(host,'patient diet cards render');
  const cards=[...host.querySelectorAll('article')];
@@ -16,9 +16,9 @@ test('patient diet guidance is shared from the clinician presets but has no pres
  for(const title of ['Fever and viral illness','Hepatitis','Long-term liver disease','Loose motions / diarrhoea','Vomiting'])assert.ok(titles.includes(title),title+' is visible');
  assert.equal(host.querySelectorAll('button').length,5,'patient side has only read-more buttons');
  assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button[aria-controls]').length);
- assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button').length);
- assert.equal(host.querySelectorAll('button').length>0,true);
  assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button[aria-expanded]').length);
+ assert.equal(w.document.querySelectorAll('#dietPresetCards button').length,5,'doctor-only add-to-prescription controls remain in the workstation preset cards');
+ assert.equal(host.querySelectorAll('button').length,5);
  const first=host.querySelector('button');assert.equal(first.getAttribute('aria-expanded'),'false');
  first.click();assert.equal(first.getAttribute('aria-expanded'),'true');assert.equal(w.document.getElementById(first.getAttribute('aria-controls')).hidden,false);
  assert.equal(host.querySelectorAll('button').length,5);
