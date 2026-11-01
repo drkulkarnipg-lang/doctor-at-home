@@ -15,6 +15,8 @@ for(const bad of [
  {...row,age_min:'17'},
  {...row,age_max:'121'},
  {...row,sex:'unspecified'},
+ {...row,pregnancy_scope:''},
+ {...row,pregnancy_scope:'unknown'},
  {...row,range_type:'normal'},
  {...row,low:'150',high:'140'},
  {...row,source_url:'not a url'}
@@ -166,6 +168,7 @@ for(const [id,lo,hi,unit,amin,amax,sex,kind,url,specimen,method] of mayoBatchExp
  assert.equal(e[9].specimen,specimen,id+' specimen');assert.equal(e[9].method,method,id+' method');
  assert.ok(e[9].sourceName&&e[9].population&&e[9].reviewStatus,id+' provenance metadata');
  assert.ok(!e[8]||Boolean(e[8][sex]),id+' sex tuple must not block matching');
+ assert.equal(e[9].pregnancyScope,'not_validated_for_pregnancy',id+' pregnancy scope');
  assert.equal(e[9].pregnancyScope,'not_validated_for_pregnancy',id+' pregnancy scope');
  checks+=11;
  const lowLabel=kind==='decision_limit'?'WITHIN DECISION THRESHOLD':'WITHIN REFERENCE INTERVAL';
