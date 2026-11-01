@@ -9,8 +9,8 @@
   const SOURCE_URLS={
     'Basic Metabolic Panel':'https://www.mayocliniclabs.com/test-catalog/Overview/113630',
     'Comprehensive Metabolic Panel':'https://www.mayocliniclabs.com/test-catalog/Overview/113631',
-    'Magnesium, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8417',
-    'Albumin, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/albumin-serum',
+    'Magnesium, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8448',
+    'Albumin, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8436',
     'Alkaline Phosphatase, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8340',
     'Liver Profile':'https://www.mayocliniclabs.com/test-catalog',
     'CBC with Differential':'https://www.mayocliniclabs.com/test-catalog',
@@ -176,7 +176,7 @@
     }
     testSelect.addEventListener('change',()=>{search.value=testSelect.value;refreshEvidence();evaluate();});
     search.addEventListener('change',()=>{testSelect.value=search.value;refreshEvidence();evaluate();});
-    search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();const hits=[...new Set(tests.filter(t=>t[1].toLowerCase().includes(q)||(t[2]||'').toLowerCase().includes(q)).map(t=>t[1]))];if(hits.length===1){testSelect.value=hits[0];refreshEvidence();evaluate();}else if(hits.length>1){result.className='labrc-result warn';result.textContent=hits.length+' matching tests. Select the exact test from the dropdown.';}else if(q){result.className='labrc-result warn';result.textContent='No matching test in the loaded catalogue.';}});
+    search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();const hits=[...new Set(tests.filter(t=>t[1].toLowerCase().includes(q)||(t[2]||'').toLowerCase().includes(q)).map(t=>t[1]))];if(hits.length===1){search.value=hits[0];testSelect.value=hits[0];refreshEvidence();evaluate();}else if(hits.length>1){result.className='labrc-result warn';result.textContent=hits.length+' matching tests. Select the exact test from the dropdown.';}else if(q){result.className='labrc-result warn';result.textContent='No matching test in the loaded catalogue.';}});
     [age,sex,value,unitInput,preg,$('labrcLow'),$('labrcHigh'),$('labrcUnit')].forEach(el=>{el.addEventListener('input',()=>{refreshEvidence();evaluate();});el.addEventListener('change',()=>{refreshEvidence();evaluate();});});
     search.value='';testSelect.value='';unitInput.value='';
     renderPending();updateCounts();
