@@ -14,7 +14,7 @@ const panelStart=html.indexOf('<div class="bg-white p-6 rounded-3xl border petal
 const fetchPosition=html.indexOf('id="rssFetchLatest"');
 const panelEnd=html.indexOf('<!-- Journals Grid -->',panelStart);
 assert.ok(panelStart>=0&&fetchPosition>panelStart&&fetchPosition<panelEnd,'Fetch button must remain inside the RSS reader card.');
-assert.match(fetchButton,/type="button"/,'Fetch control must not submit a surrounding form.');
+assert.match(ui,/fetchButton\.type='button'/,'Fetch control must be initialized as a non-submitting button.');
 assert.match(css,/\.bg-white:has\(#rssFetchLatest\)/,'Responsive layout must bind the feed controls to their card.');
 assert.ok(css.includes('@media(max-width:680px)'),'Feed controls must have a single-column mobile layout.');
 assert.doesNotMatch(html,/api\.rss2json\.com/,'Legacy third-party RSS proxy must not remain in the live page');assert.match(ui,/fetchButton\.addEventListener\('click',\(\)=>window\.fetchAndDisplayRssFeed\(\)\)/,'Fetch button must be bound directly to the same-origin Vercel feed endpoint');assert.match(ui,/cache:'no-store'/,'Manual refresh must bypass browser cache');
