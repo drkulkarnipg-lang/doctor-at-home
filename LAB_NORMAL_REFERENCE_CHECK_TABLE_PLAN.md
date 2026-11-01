@@ -4,7 +4,7 @@
 **Clinical status:** decision-support comparator only; it does not diagnose or replace the performing laboratory's own interval.
 
 ## Current baseline
-- The current comparator contains 105 source-attributed adult records (50 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated.
+- The current comparator contains **111 distinct source-attributed adult records** (56 Mayo source-linked records + 55 Indian IFCC C-RIDL study partitions). This includes both reference intervals and explicitly typed decision limits; records are not all locally method-validated. The 750-record target remains open.
 - The former ungoverned session-only CSV importer has been removed. Evidence-complete CSV imports now enter a pending review queue; a clinician reviews each row before it is added to the local workstation catalogue. Reviewed catalogue metadata persist in browser localStorage and can be exported as JSON. This is still not a centrally maintained 750-record catalogue.
 - A test without a compatible, source-verified interval must show “No validated interval available — use the performing laboratory's report range” and must not guess LOW / NORMAL / HIGH.
 
@@ -98,7 +98,7 @@ Each interval partition must carry:
 - Existing local report interval override remains available and is clearly labelled as the performing-laboratory interval.
 - CSV evidence import now requires HTTPS source URL, specimen, method, population, age bounds, sex partition and range type. Imports are staged as pending; individual clinician approval is required before they become selectable. Approved catalogue metadata are stored locally on the workstation, with JSON export. Patient results are not stored or uploaded.
 - Removed the previous CSV import path that immediately activated arbitrary rows without complete provenance.
-- After the next evidence batch, the built-in seed contains 105 source-linked adult records (50 Mayo catalogue records + 55 Indian IFCC C-RIDL partitions). These are source-attributed but not all locally method/population verified. No artificial values were added to inflate the count. Target remains 750 distinct evidence-backed records.
+- Historical checkpoint before the reticulocyte batch: the built-in seed contained 105 source-linked adult records (50 Mayo catalogue records + 55 Indian IFCC C-RIDL partitions). These were source-attributed but not all locally method/population verified. No artificial values were added to inflate the count. PR #102 subsequently added six non-duplicated Mayo reticulocyte partitions, bringing the current main seed to 111. Target remains 750 distinct evidence-backed records.
 - Added `tests/lab-reference-governance.test.cjs` and `npm run test:lab-reference`. Helper-level syntax and validation/classification checks passed in the development runtime; exact-head CI, browser interaction, desktop/mobile visual inspection and production deployment remain open.
 - Official sources researched: CLSI EP28/EP28IG, IFCC C-RIDL, Shah et al. Indian C-RIDL 33-analyte study, Mayo Clinic Laboratories test catalogue, MedlinePlus and NABL/ISO 15189. Source and licensing restrictions are recorded in this plan.
 
@@ -164,9 +164,9 @@ The batch does not claim local Pune method transfer or universal Indian/global a
 - These are software/data-governance checks. The physician remains responsible for clinical applicability; no paediatric or pregnancy-specific reference pathway is implied.
 
 
-### Reticulocyte profile batch — 2 November 2026 (PR #102 review branch)
+### Reticulocyte profile batch — 2 November 2026 (PR #102 merged into main)
 
-The current main seed is 105 source-attributed records. Six additional, non-duplicated Mayo adult partitions in PR #102 propose a review-branch seed of **111** if accepted. Ferritin and TSH partitions from the earlier PR #102 draft were not duplicated because those tests are already present in current main.
+PR #102 merged the six non-duplicated Mayo adult reticulocyte partitions into main, increasing the catalogue from 105 to **111 distinct records** (56 Mayo source-linked + 55 Indian IFCC C-RIDL partitions). Ferritin and TSH partitions from the earlier PR #102 draft were not duplicated because those tests were already present in main. The exact PR #102 head passed the complete repository regression suite; focused lab governance passed 977 assertions. The 750-record target remains open.
 
 - **Reticulocyte Profile, Blood (RETB):** reticulocyte percentage 0.60–2.71%; absolute reticulocytes 30.4–110.9 ×10⁹/L; immature reticulocyte fraction male 2.3–13.4% and female 3.0–15.9%; reticulocyte haemoglobin male and female 30.0–37.6 pg.
 - Specimen: whole blood EDTA. Method: flow cytometry. Adult age partition: ≥18 years. Sex-specific partitions are retained only where the Mayo source provides them.
