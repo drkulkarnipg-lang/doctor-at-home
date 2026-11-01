@@ -170,3 +170,16 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 - Named action routes inspected: `rxSheet`, `pathSlipSheet`, `radSlipSheet`, `invoiceSheet`, `cdoc-referral`, `cdoc-consent`, `cdoc-fitness`, `cdoc-leave`, `cert-form2`, `cert-form4`, `cert-form4a`, and validated `publicArticle_*`. Arbitrary local files pass the selected File to the native Web Share API only after user action; unsupported browsers get manual-attach guidance. No public URL or automatic upload is created by this handler.
 - The current main test routes named actions but did not invoke `shareDeskAnyFile`; a focused test is added on the audit branch and awaits CI. Do not treat that branch test as main verification until merged.
 - Live domain HTTP, exact deployed release identity, actual button clicks, PDF rendering, native share sheet and WhatsApp receipt remain unverified due unavailable browser context and DNS/web retrieval limitations.
+
+
+## 2 November 2026 — PR #99 and follow-up evidence reconciliation
+
+- PR #99 merged as main `77337d184244cc0f88e40b08318d25fc1c669c6c`. Its source diff is limited to `index.html` and `official-research-sources.css`; the RSS control ID/handler and feed endpoint remain unchanged.
+- Exact PR-head regression [41343409199 / #1326](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343409199) and exact post-merge main regression [41343522313 / #1327](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343522313) passed.
+- PR #99 Vercel preview is success ([DQfV6rFruKRoug1BKyqKLejhBSAc](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/DQfV6rFruKRoug1BKyqKLejhBSAc)); current main Vercel remains build-rate-limit. Preview does not establish production publication.
+- PR #97 exact draft head `cdc6728f8c9ea4f6fb01cbb9b52e3f40939bf0e1` passed full suite [41340226138 / #1312](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41340226138). Its arbitrary-file test covers native share handoff, unsupported browser, missing selection and no fetch/upload call. It is still draft/unmerged and not yet main evidence.
+- `document-sharing.js` injects one Share Desk view/tab and guards against reinsertion; static `index.html` has zero duplicate IDs. All named routes remain present. Live OS share sheet/WhatsApp receipt not established.
+- Current diet controls expose seven clinician-side presets; requested viral fever, hepatitis, liver disease, loose motions and vomiting options are not present. Keep open; no unapproved content added.
+- PR #98 triage module remains in main and regression-tested; clinician governance review remains a pre-routine-use requirement.
+- `index.html` canonical/JSON-LD still reference `home-visiting-icu-doctor.vercel.app`; review only after root/www custom domain is confirmed on expected production build. Domain HTTP status remains unestablished in this run.
+- Lab baseline remains 27 source-attributed adult intervals / target 750; Workspace mailbox remains inactive. No DNS, billing, secrets, hosting config, migration or clinical publication changed.
