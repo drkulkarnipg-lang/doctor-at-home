@@ -581,3 +581,5 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - Lab comparator safety gates added: clinician confirmation of source/specimen/method/population, explicit fasting confirmation for Indian fasting glucose, method/source dropdown for ambiguous duplicates, pregnancy guard and no silent unit conversion. Tests cover fasting metadata.
 
 - 2 Nov full Indian C-RIDL Table 4 expansion: 45 additional partitions covering albumin, lipids, creatinine/urea/urate, liver/muscle enzymes, iron/transferrin, inflammatory markers, immunoglobulins, complement and transthyretin. All 33 analytes from the paper are now represented by 55 Indian-population records. Total seed: 85 (30 Mayo/source-linked + 55 Indian C-RIDL). Local method transfer remains unverified. Development regression: 467 assertions passed.
+
+- Source/method applicability attestation is reset whenever the test, source/method partition, age, sex or pregnancy status changes; it cannot carry over from a prior result. Lab form controls and catalogue buttons use a tinted teal/sage panel rather than a plain-white surface, with ≥44 px touch targets and visible keyboard-focus styles.
