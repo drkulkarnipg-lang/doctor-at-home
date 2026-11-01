@@ -162,3 +162,14 @@ The batch does not claim local Pune method transfer or universal Indian/global a
 - Added regression assertions for every record's pregnancy scope, Indian/Mayo partition labels, CSV validation and pregnancy matching guards.
 - Added NEWS2/GCS regression tests for E4+V5+M6 = 15/15, minimum E1+V1+M1 = 3/15, incomplete and out-of-range component rejection, and confirmation that GCS remains separate from NEWS2.
 - These are software/data-governance checks. The physician remains responsible for clinical applicability; no paediatric or pregnancy-specific reference pathway is implied.
+
+
+### Reticulocyte profile batch — 2 November 2026 (PR #102 review branch)
+
+The current main seed is 105 source-attributed records. Six additional, non-duplicated Mayo adult partitions in PR #102 propose a review-branch seed of **111** if accepted. Ferritin and TSH partitions from the earlier PR #102 draft were not duplicated because those tests are already present in current main.
+
+- **Reticulocyte Profile, Blood (RETB):** reticulocyte percentage 0.60–2.71%; absolute reticulocytes 30.4–110.9 ×10⁹/L; immature reticulocyte fraction male 2.3–13.4% and female 3.0–15.9%; reticulocyte haemoglobin male and female 30.0–37.6 pg.
+- Specimen: whole blood EDTA. Method: flow cytometry. Adult age partition: ≥18 years. Sex-specific partitions are retained only where the Mayo source provides them.
+- Source: https://www.mayocliniclabs.com/test-catalog/overview/616856
+- No fasting condition is specified on the source page. All six entries remain source-specific Mayo-derived intervals; local method/platform transfer and physician approval are pending. Pregnancy use is not validated; paediatric use is not included.
+- The 750 distinct-entry target remains open. No LabQAR data were copied or adapted.

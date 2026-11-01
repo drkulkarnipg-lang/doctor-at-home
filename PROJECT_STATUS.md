@@ -238,3 +238,18 @@ Main source head 12608d35c02b3afe76a10995e95ebb521087eae4 has a failed regressio
 - **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
 - **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
 - **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.
+
+
+### Release checkpoint — 2 November 2026
+
+- Current GitHub main advanced from the previously reported `adbc9142711f0299b32397f07d283a4863fd405e` to `a653c63789805e3c23115a53887556f0f4c88be2` after PR #103 merged. Exact-main Actions run #1476 (`41347471728`) passed.
+- PR #102's former head `bd773038cc39f17abd58b0f316e8d517e2b402fd` was based on old main `adbc914`. Its exact-head run #1494 (`41347611631`) failed on an obsolete GCS test assertion. The current main GCS test suite passed on #1476; the branch sync uses the current main test.
+- Main lab seed is 105 (50 Mayo-derived records + 55 Indian IFCC C-RIDL partitions). PR #102 sync adds six unique RETB adult partitions, proposing 111 on the review branch. Ferritin and TSH were not duplicated because they are already on main. Target 750 remains open.
+- The main inventory currently scans 94 active source files and 276 destinations. The six RETB rows add one source URL and exact line evidence, proposing 277 destinations after regeneration.
+- Current main Vercel status is absent; the last status on prior main `adbc914` was failure `build-rate-limit`. The last independently confirmed production commit remains `57d011721e92903c53f76035f43520c296502906`; no current production deployment ID is confirmed.
+- `drkulkarnipg.com` and `www.drkulkarnipg.com` have not been verified. Web retrieval returned internal errors and the connected browser requires its originating browser context. No HTTP 200, exact-release serving, desktop/mobile, device or recipient-side evidence is claimed.
+- PR #97 remains open/draft for local-file Share Desk privacy tests; PR #100 is closed/superseded; PR #104 remains outside this approved release scope and was not changed.
+- Main contains one dynamically injected Share Desk view with a duplicate-view guard; PR #97 local-file privacy tests are not yet merged or production-verified.
+- Main retains seven legacy diet presets and five acute illness presets. The clinician-facing preset panel is in Doctor Workstation; separate doctor-only add/edit controls for patient-facing diet presets remain unverified/open.
+- NEWS2/WHO and separate GCS capture are in main. NICE NG253 is referenced with clinical-concern escalation, but a complete structured community risk-table review has not been independently verified; clinical governance review remains required before routine use.
+- Google Workspace mailbox remains unprovisioned. No billing, secrets, hosting, DNS, database migration or clinical-publication changes were made.
