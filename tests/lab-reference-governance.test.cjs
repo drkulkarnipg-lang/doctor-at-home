@@ -251,4 +251,9 @@ assert.equal(matchInterval(reticBatch.filter(x=>x[1]==='Reticulocyte percentage'
 assert.equal(matchInterval(reticBatch.filter(x=>x[1]==='Reticulocyte percentage'),40,'female','yes'),null);checks++;
 assert.equal(matchInterval(reticBatch.filter(x=>x[1]==='Reticulocyte percentage'),40,'female',''),null);checks++;
 
+const cbcIds=['rbc','hb','hct','mcv','rdw','wbc','plt','anc','alc','monoabs','eosabs','basoabs'];
+for(const id of cbcIds){const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[9].sourceUrl,'https://www.mayocliniclabs.com/test-catalog/Overview/9109');assert.equal(e[9].specimen,'Whole Blood EDTA');assert.ok(e[9].method.includes('RF/DC detection'));assert.equal(e[9].ageMin,18);assert.equal(e[9].ageMax,120);assert.equal(e[9].rangeType,'reference_interval');assert.equal(e[9].pregnancyScope,'not_validated_for_pregnancy');checks+=7;}
+assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[9]?.sourceUrl&&x[9]?.rangeType==='reference_interval').length,91);checks++;
+assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[9]?.rangeType==='decision_limit').length,2);checks++;
+assert.equal(LAB_REFERENCE_TESTS.filter(x=>!x[9]?.sourceUrl||!x[9]?.specimen||!x[9]?.method).length,18);checks++;
 console.log('Lab reference governance tests passed: '+checks+' assertions.');
