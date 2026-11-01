@@ -55,6 +55,14 @@ document.querySelectorAll('[data-register-type]').forEach(button=>button.addEven
 $('registerEntryForm')?.addEventListener('submit',async event=>{event.preventDefault();if(!signedIn()){status('Sign in through Doctor Workstation before saving.');return;}const button=$('registerSave');button.disabled=true;const entry={registerType:current};for(const input of $('registerEntryFields').querySelectorAll('[data-register-field]'))entry[input.dataset.registerField]=input.value.trim();if(editing){entry.id=editing.id;entry.revision=editing.revision;}try{status('Saving securely to the clinic register…');const result=await window.ClinicCloud.saveRegister(entry);editing=null;await load();status('Saved successfully to the private cloud register.');}catch(error){status('NOT SAVED: '+(error.message||'Cloud save failed')+'. Your entered form remains available for retry.');}finally{button.disabled=false;}});
 $('registerCancel')?.addEventListener('click',clearForm);$('registerRefresh')?.addEventListener('click',load);$('registerExport')?.addEventListener('click',exportCsv);$('registerPrint')?.addEventListener('click',()=>window.print());
 window.addEventListener('clinic-owner-signed-in',load);window.addEventListener('clinic-owner-signed-out',()=>{records=[];editing=null;renderForm();renderTable();status('Signed out. Register data cleared from this page; cloud entries remain stored.');});
+const rxShare=document.querySelector('[onclick="universalShareDocument(\\'rx\\')"]');
+if(rxShare&&!$('rxSaveToPatientRegister')){
+const wrap=el('div','no-print flex flex-wrap items-center gap-2 mt-2');
+const select=el('select','border rounded-lg px-2 py-1 text-xs');select.id='rxRegisterVisitType';for(const v of ['Home visit','Online consultation','Follow-up','Other'])select.add(new Option(v,v));
+const button=el('button','research-upload','Save to Daily Patient Register');button.type='button';button.id='rxSaveToPatientRegister';button.addEventListener('click',()=>window.savePrescriptionToRegister());
+const note=el('p','text-xs text-slate-600');note.id='rxRegisterSaveStatus';note.setAttribute('role','status');note.setAttribute('aria-live','polite');
+wrap.append(select,button,note);rxShare.parentElement.append(wrap);
+}
 document.querySelector('[data-register-type="daily"]')?.setAttribute('aria-pressed','true');renderForm();renderTable();load();
 });
 window.savePrescriptionToRegister=async()=>{
