@@ -5,7 +5,7 @@ function translatedUrl(url,lang){return 'https://translate.google.com/translate?
 document.addEventListener('DOMContentLoaded',()=>{
  const root=document.getElementById('exploreHealthResources'),select=document.getElementById('sourceTranslateLanguage');if(!root||!select)return;
  const widget=document.getElementById('google_translate_element');
- function syncLanguageOptions(){const combo=widget?.querySelector('.goog-te-combo');if(!combo||combo.options.length<2)return;const prior=select.value;const entries=[...combo.options].filter(o=>o.value).map(o=>[o.value,o.textContent.trim()]);if(!entries.length)return;select.replaceChildren(...entries.map(([value,label])=>{const option=document.createElement('option');option.value=value;option.textContent=label;return option;}));select.value=entries.some(([value])=>value===prior)?prior:(entries.some(([value])=>value==='mr')?'mr':entries[0][0]);}
+ function syncLanguageOptions(){const combo=widget?.querySelector('.goog-te-combo');if(!combo)return;const prior=select.value;if([...select.options].some(o=>o.value===prior))select.value=prior;/* Keep the complete static 17-language list; never replace it with a partially loaded Google widget list. */}
  syncLanguageOptions();if(widget)new MutationObserver(syncLanguageOptions).observe(widget,{childList:true,subtree:true});
  for(const link of [...root.querySelectorAll('a[href]')]){
   let url;try{url=new URL(link.href,location.href);}catch{continue;}
