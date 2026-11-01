@@ -29,7 +29,8 @@ assert.equal(classify('not numeric',0,10),'INVALID');checks++;
 assert.throws(()=>parseCSV('a,b\n"broken,field'));
 checks++;
 
-const {LAB_REFERENCE_TESTS}=require('../clinical-calculators.js');
+require('../clinical-calculators.js');
+const {LAB_REFERENCE_TESTS}=globalThis;
 assert.equal(LAB_REFERENCE_TESTS.length,85);checks++;
 assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,85);checks++;
 for(const [id,lo,hi] of [['monoabs',0.26,0.81],['eosabs',0.03,0.48],['basoabs',0.01,0.08]]){
