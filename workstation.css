@@ -148,3 +148,35 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
  .share-desk-any p{margin:0;font-size:11px;color:#718087}.share-desk-safety{padding:12px 15px;border-left:3px solid #9ab9a8;background:rgba(255,255,255,.52);color:#66777b;font-size:12px;line-height:1.7}
 }
 @media(max-width:700px){.share-desk-any{grid-template-columns:1fr}.share-desk-any button{width:100%}}
+
+/* Clinician triage and disposition worksheet */
+@media screen{
+ .triage-shell{color:#40545a}
+ .triage-hero,.triage-card{background:rgba(255,255,255,.78);border:1px solid rgba(148,173,164,.27);border-radius:18px;box-shadow:0 8px 28px rgba(54,79,72,.035)}
+ .triage-hero{padding:22px}.triage-hero h2{font-size:clamp(24px,3vw,34px);font-weight:750;color:#3d555d;letter-spacing:-.025em}
+ .triage-hero p,.triage-help{font-size:12px;line-height:1.7;color:#718087}
+ .triage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .triage-card{padding:17px;min-width:0}.triage-card h3{font-size:15px;font-weight:750;color:#49665d;margin:0 0 12px}
+ .triage-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .triage-field{display:flex;flex-direction:column;gap:5px;min-width:0}.triage-field.full{grid-column:1/-1}
+ .triage-field label{font-size:11px;font-weight:700;color:#536a70}
+ .triage-field input,.triage-field select,.triage-field textarea{width:100%;min-width:0;min-height:42px;border:1px solid rgba(133,165,151,.35);border-radius:10px;padding:9px 11px;background:rgba(255,255,255,.94);color:#40545a;font-size:13px}
+ .triage-field textarea{min-height:70px;resize:vertical}
+ .triage-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .triage-check{display:flex;align-items:flex-start;gap:8px;padding:9px;border:1px solid rgba(148,173,164,.2);border-radius:10px;background:rgba(255,255,255,.58);font-size:11px;line-height:1.45;color:#536a70}
+ .triage-check input{margin-top:2px;accent-color:#5e8978;flex:0 0 auto}
+ .triage-actions{display:flex;flex-wrap:wrap;gap:9px}.triage-actions button{min-height:44px;padding:10px 17px;border-radius:11px;border:1px solid rgba(133,165,151,.35);background:linear-gradient(180deg,#fff,#eaf2ed);color:#49665d;font-weight:750;font-size:12px;touch-action:manipulation;transition:transform .12s ease,box-shadow .12s ease}
+ .triage-actions button:active{transform:translateY(1px) scale(.99)}.triage-actions button:focus-visible{outline:2px solid #75a596;outline-offset:3px}
+ .triage-result{padding:18px;border-radius:16px;border:1px solid #d8e4dc;background:#f8fbf9}
+ .triage-result.red{border-color:#d98c8c;background:#fff5f4}.triage-result.yellow{border-color:#dfc17e;background:#fffaf0}.triage-result.green{border-color:#a9cbb8;background:#f3faf5}
+ .triage-score{font-size:30px;font-weight:800;letter-spacing:-.04em;color:#405d55}.triage-badge{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em}
+ .triage-badge.red{background:#f9d9d6;color:#9c2929}.triage-badge.yellow{background:#faedc8;color:#805a0b}.triage-badge.green{background:#dcefe3;color:#2e694b}
+ .triage-output{font-size:12px;line-height:1.7;color:#52656a}.triage-output ul{padding-left:19px;margin:8px 0}.triage-muted{font-size:10px;color:#78888a}
+}
+@media(max-width:760px){.triage-grid,.triage-fields{grid-template-columns:1fr}.triage-checks{grid-template-columns:1fr}}
+@media print{
+ body *{visibility:hidden!important}#viewTriageAssessment,#viewTriageAssessment *{visibility:visible!important}
+ #viewTriageAssessment{position:absolute!important;inset:0!important;width:100%!important;padding:0!important;background:white!important}
+ #viewTriageAssessment .no-print{display:none!important}.triage-card,.triage-hero,.triage-result{box-shadow:none!important;break-inside:avoid}
+ #viewTriageAssessment input,#viewTriageAssessment select,#viewTriageAssessment textarea{border:0!important;border-bottom:1px solid #aaa!important;background:white!important}
+}
