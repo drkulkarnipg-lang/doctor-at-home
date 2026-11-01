@@ -57,5 +57,30 @@ $('registerCancel')?.addEventListener('click',clearForm);$('registerRefresh')?.a
 window.addEventListener('clinic-owner-signed-in',load);window.addEventListener('clinic-owner-signed-out',()=>{records=[];editing=null;renderForm();renderTable();status('Signed out. Register data cleared from this page; cloud entries remain stored.');});
 document.querySelector('[data-register-type="daily"]')?.setAttribute('aria-pressed','true');renderForm();renderTable();load();
 });
+window.savePrescriptionToRegister=async()=>{
+const button=$('rxSaveToPatientRegister'),status=$('rxRegisterSaveStatus');
+const say=t=>{if(status)status.textContent=t;};
+if(!window.ClinicCloud?.isSignedIn?.()){say('NOT SAVED: Sign in to Doctor Workstation first.');return;}
+const value=id=>$(id)?.value?.trim()||'';
+const patientName=value('rxPatName'),ageSex=value('rxPatAge'),complaints=value('rxComplaints');
+if(!patientName){say('NOT SAVED: Enter the patient name on the prescription.');return;}
+const raw=value('rxDateTime'),m=raw.match(/(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);
+if(!m){say('NOT SAVED: Enter a valid prescription date (DD/MM/YYYY).');return;}
+const entryDate=m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');
+const parsed=new Date(entryDate+'T00:00:00Z');if(!Number.isFinite(parsed.getTime())||parsed.toISOString().slice(0,10)!==entryDate){say('NOT SAVED: Prescription date is invalid.');return;}
+const visitType=value('rxRegisterVisitType')||'Home visit';
+const entry={registerType:'daily',entryDate,patientName,patientCode:'',age:'',sex:'',visitType,clinicalSummary:complaints+(ageSex?' | Age/Gender: '+ageSex:''),amount:'',paymentStatus:'Not recorded'};
+button.disabled=true;
+try{
+say('Checking Daily Patient Register for an existing entry…');
+const existing=await window.ClinicCloud.listRegister('daily');
+const duplicate=(existing.records||[]).find(r=>r.entry_date===entryDate&&String(r.data?.patientName||'').trim().toLocaleLowerCase()===patientName.toLocaleLowerCase());
+if(duplicate){say('ALREADY REGISTERED: This patient already has a Daily Patient Register entry for '+entryDate.split('-').reverse().join('/')+'. No duplicate was created. Open Practice Registers to review it.');return;}
+say('Saving prescription details to the private Daily Patient Register…');
+await window.ClinicCloud.saveRegister(entry);
+say('SUCCESS: Patient entry saved to the private Daily Patient Register. Open Practice Registers to verify it.');
+}catch(error){say('NOT SAVED: '+(error.message||'Cloud save failed')+'. Prescription remains unchanged; retry after checking the Doctor Station session.');}
+finally{button.disabled=false;}
+};
 window.WorkstationRegisters={load,schemas};
 })();
