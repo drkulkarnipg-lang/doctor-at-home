@@ -31,7 +31,7 @@ checks++;
 
 require('../clinical-calculators.js');
 const {LAB_REFERENCE_TESTS}=globalThis;
-assert.equal(LAB_REFERENCE_TESTS.length,85);checks++;
+assert.equal(LAB_REFERENCE_TESTS.length,95);checks++;
 assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,85);checks++;
 for(const [id,lo,hi] of [['monoabs',0.26,0.81],['eosabs',0.03,0.48],['basoabs',0.01,0.08]]){
  const entry=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(entry);assert.equal(entry[5],lo);assert.equal(entry[6],hi);assert.match(entry[7],/Mayo Clinic Laboratories · CBC with Differential/);checks+=4;
@@ -120,5 +120,35 @@ for(const [id,lo,hi,unit,amin,amax,sex] of indianExpandedExpected){
  const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[5],lo);assert.equal(e[6],hi);assert.equal(e[4],unit);assert.equal(e[9].ageMin,amin);assert.equal(e[9].ageMax,amax);assert.equal(e[9].sex,sex);assert.equal(e[9].sourceUrl,'https://doi.org/10.1515/cclm-2018-0152');checks+=8;
 }
 assert.equal(LAB_REFERENCE_TESTS.filter(x=>x[7].includes('Indian IFCC')).length,55);checks++;
+
+
+const mayoExpected=[
+ ['retic-pct-mayo','Reticulocyte percentage',0.60,2.71,'%',18,120,'all','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['retic-abs-mayo','Absolute reticulocyte count',30.4,110.9,'10^9/L',18,120,'all','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['irf-mayo-male','Immature reticulocyte fraction',2.3,13.4,'%',18,120,'male','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['irf-mayo-female','Immature reticulocyte fraction',3.0,15.9,'%',18,120,'female','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['ret-he-mayo-male','Reticulocyte haemoglobin',30.0,37.6,'pg',18,120,'male','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['ret-he-mayo-female','Reticulocyte haemoglobin',30.0,37.6,'pg',18,120,'female','Whole Blood EDTA','Flow Cytometry','https://www.mayocliniclabs.com/test-catalog/overview/616856'],
+ ['ferritin-mayo-male','Ferritin',31,409,'mcg/L',18,120,'male','Serum','Electrochemiluminescence Immunoassay','https://www.mayocliniclabs.com/test-catalog/overview/619953'],
+ ['ferritin-mayo-female-18-50','Ferritin',6,175,'mcg/L',18,50,'female','Serum','Electrochemiluminescence Immunoassay','https://www.mayocliniclabs.com/test-catalog/overview/619953'],
+ ['ferritin-mayo-female-51plus','Ferritin',11,328,'mcg/L',51,120,'female','Serum','Electrochemiluminescence Immunoassay','https://www.mayocliniclabs.com/test-catalog/overview/619953'],
+ ['tsh-mayo-adult20','Thyroid-stimulating hormone',0.3,4.2,'mIU/L',20,120,'all','Serum','Electrochemiluminescent Immunoassay','https://www.mayocliniclabs.com/test-catalog/Overview/605766']
+];
+for(const [id,name,lo,hi,unit,amin,amax,sex,specimen,method,url] of mayoExpected){
+ const e=LAB_REFERENCE_TESTS.find(x=>x[0]===id);assert.ok(e,id+' missing');assert.equal(e[1],name);assert.equal(e[5],lo);assert.equal(e[6],hi);assert.equal(e[4],unit);assert.equal(e[9].ageMin,amin);assert.equal(e[9].ageMax,amax);assert.equal(e[9].sex,sex);assert.equal(e[9].sourceUrl,url);assert.equal(e[9].specimen,specimen);assert.equal(e[9].method,method);assert.equal(e[9].rangeType,'reference_interval');assert.match(e[9].reviewStatus,/local method transfer pending/);checks+=12;
+ assert.equal(classify(lo,lo,hi),'WITHIN REFERENCE INTERVAL');assert.equal(classify(hi,lo,hi),'WITHIN REFERENCE INTERVAL');assert.equal(classify(lo-0.001,lo,hi),'LOW');assert.equal(classify(hi+0.001,lo,hi),'HIGH');checks+=4;
+}
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Reticulocyte percentage'),40,'male')[0],'retic-pct-mayo');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Immature reticulocyte fraction'),40,'male')[0],'irf-mayo-male');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Immature reticulocyte fraction'),40,'female')[0],'irf-mayo-female');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Reticulocyte haemoglobin'),40,'male')[0],'ret-he-mayo-male');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Reticulocyte haemoglobin'),40,'female')[0],'ret-he-mayo-female');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),40,'male')[0],'ferritin-mayo-male');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),50,'female')[0],'ferritin-mayo-female-18-50');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),51,'female')[0],'ferritin-mayo-female-51plus');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),17,'female'),null);checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='TSH'),20,'female')[0],'tsh-mayo-adult20');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='TSH'),19,'female'),null);checks++;
+assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,95);checks++;
 
 console.log('Lab reference governance tests passed: '+checks+' assertions.');

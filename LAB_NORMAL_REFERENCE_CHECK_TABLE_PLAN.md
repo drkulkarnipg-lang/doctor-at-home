@@ -126,3 +126,17 @@ Added ten Indian IFCC C-RIDL adult serum records from Table 4 of Shah et al. (20
 A further 45 sex-/age-partitioned records were transcribed from Table 4 of the same Indian IFCC C-RIDL study, completing all 33 biochemical analytes reported in that study. Added records cover albumin, total cholesterol, HDL-C, triglycerides, creatinine, urea, uric acid, AST, ALT, LDH, ALP, GGT, CK, amylase, total bilirubin, iron, transferrin, hsCRP, IgG, IgA, IgM, C3, C4 and transthyretin. The matching engine uses explicit age/sex partitions and the source/method dropdown to prevent ambiguous silent selection. Current seed: 85 records (30 Mayo/source-linked + 55 Indian-study partitions). These remain source-specific; the study's analyser/platform is not equivalent to every local laboratory, and local method transfer is still pending. Automated data/partition regression now passes 467 assertions in the development runtime.
 
 - Source/method applicability attestation is reset whenever the test, source/method partition, age, sex or pregnancy status changes; it cannot carry over from a prior result. Lab form controls and catalogue buttons use a tinted teal/sage panel rather than a plain-white surface, with ≥44 px touch targets and visible keyboard-focus styles.
+
+
+### Independent Mayo adult interval batch — 2 November 2026 (PR #102 review branch)
+
+The current **main** seed remains 85 source-attributed adult records. This review branch adds 10 independently sourced Mayo-derived adult partitions, proposing 95 records if the PR is accepted. They are not yet part of main or the production site.
+
+- **Reticulocyte Profile, Blood (RETB):** 6 records — reticulocyte percentage 0.60–2.71%; absolute reticulocytes 30.4–110.9 ×10⁹/L; immature reticulocyte fraction male 2.3–13.4% and female 3.0–15.9%; reticulocyte haemoglobin male and female 30.0–37.6 pg. Whole blood EDTA; flow cytometry; adult age ≥18.
+  Source: https://www.mayocliniclabs.com/test-catalog/overview/616856
+- **Ferritin, Serum (FERR1):** 3 records — male ≥18 years 31–409 mcg/L; female 18–50 years 6–175 mcg/L; female ≥51 years 11–328 mcg/L. Serum; electrochemiluminescence immunoassay.
+  Source: https://www.mayocliniclabs.com/test-catalog/overview/619953
+- **Thyroid Function Cascade, Serum (THSCM):** 1 adult TSH record — age ≥20 years 0.3–4.2 mIU/L. Serum; electrochemiluminescent immunoassay.
+  Source: https://www.mayocliniclabs.com/test-catalog/Overview/605766
+
+All 10 are source-specific Mayo-derived intervals. Local method/platform transfer and physician approval remain pending; these are not universal Indian reference intervals. No paediatric or pregnancy ranges were added. No fasting requirement is inferred where the cited page does not specify one. The 750 distinct-entry target remains open.

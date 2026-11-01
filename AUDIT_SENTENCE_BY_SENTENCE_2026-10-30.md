@@ -278,3 +278,14 @@ The owner re-sent the requirements as `Pasted text(20261030-092936).txt` and exp
 - **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
 - **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
 - **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.
+
+
+### Release and laboratory evidence checkpoint — 2 November 2026
+
+- Production/main source head: `adbc9142711f0299b32397f07d283a4863fd405e`.
+- PR #102 is the active release-fix review branch, based on that exact main SHA. Its review head before this evidence batch was `9f5b28a67eb652dd2d1a932b112ed1a5d1145ca6`; PR #100 remains superseded and is not to be merged separately.
+- Main Actions run #1399 (`41345607572`) failed at the legacy DASH UI assertion. PR #102 contains the legacy DASH handler correction and idempotent acute-preset insertion.
+- PR #102 run #1448 (`41346814447`) failed at the external-link inventory source-file ordering assertion. The inventory was reordered to the generator's localeCompare order; a new exact-head run is required before merge.
+- Main Vercel status for `adbc914`: failure, `build-rate-limit`. No production deployment is confirmed. No empty/artificial commit, billing change, DNS/hosting change or provider-control bypass is permitted.
+- Lab seed: 85 records on main. PR #102 review branch adds 10 Mayo source-specific adult partitions, proposing 95 if merged. All remain subject to local method transfer and physician review. Target 750 distinct evidence-backed entries remains open.
+- No custom-domain HTTP, desktop/mobile browser, device or recipient-side verification is claimed in this checkpoint.

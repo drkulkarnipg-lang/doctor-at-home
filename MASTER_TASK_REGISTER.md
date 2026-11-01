@@ -430,3 +430,14 @@ Correction to previous audit note: guide-card PDF Share/Download actions are int
 - 2 Nov expanded Indian C-RIDL Table 4 coverage with 45 additional age-/sex-partitioned records, completing the study's 33 biochemical analytes. Seed now 85 total records: 30 Mayo/source-linked + 55 Indian study partitions. Test suite for this feature passes 467 assertions in the development runtime; exact-head CI and production deployment remain unverified.
 
 - Source/method applicability attestation is reset whenever the test, source/method partition, age, sex or pregnancy status changes; it cannot carry over from a prior result. Lab form controls and catalogue buttons use a tinted teal/sage panel rather than a plain-white surface, with ≥44 px touch targets and visible keyboard-focus styles.
+
+
+### Release and laboratory evidence checkpoint — 2 November 2026
+
+- Production/main source head: `adbc9142711f0299b32397f07d283a4863fd405e`.
+- PR #102 is the active release-fix review branch, based on that exact main SHA. Its review head before this evidence batch was `9f5b28a67eb652dd2d1a932b112ed1a5d1145ca6`; PR #100 remains superseded and is not to be merged separately.
+- Main Actions run #1399 (`41345607572`) failed at the legacy DASH UI assertion. PR #102 contains the legacy DASH handler correction and idempotent acute-preset insertion.
+- PR #102 run #1448 (`41346814447`) failed at the external-link inventory source-file ordering assertion. The inventory was reordered to the generator's localeCompare order; a new exact-head run is required before merge.
+- Main Vercel status for `adbc914`: failure, `build-rate-limit`. No production deployment is confirmed. No empty/artificial commit, billing change, DNS/hosting change or provider-control bypass is permitted.
+- Lab seed: 85 records on main. PR #102 review branch adds 10 Mayo source-specific adult partitions, proposing 95 if merged. All remain subject to local method transfer and physician review. Target 750 distinct evidence-backed entries remains open.
+- No custom-domain HTTP, desktop/mobile browser, device or recipient-side verification is claimed in this checkpoint.
