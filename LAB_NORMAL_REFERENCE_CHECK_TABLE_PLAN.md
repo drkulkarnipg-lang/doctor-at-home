@@ -111,3 +111,11 @@ Three additional adult absolute differential-count entries were added from the M
 ### Indian population-specific seed batch — 2 November 2026
 
 Added ten Indian IFCC C-RIDL adult serum records from Table 4 of Shah et al. (2018): sodium, potassium, chloride, total calcium, inorganic phosphate, magnesium, total protein, LDL-C, and fasting glucose partitioned into ages 18–44 and 45–65. The study recruited 512 healthy Indian volunteers, collected fasting serum after 10–12 hours, and used Beckman Coulter Unicel DxC 800 / Immage 800 platforms. The table reports the intervals as population-specific; method transfer to a local Pune laboratory has not been validated. Where the same test now has both Mayo-derived and Indian-study intervals, the new source/method dropdown requires an explicit selection instead of silently choosing one. The live seed is now 40 records (30 prior source-linked records plus 10 Indian C-RIDL records); 750 remains the target.
+
+
+### Additional comparator safety gate — 2 November 2026
+
+- External intervals now require an explicit clinician attestation that source, specimen, assay/method and patient population are applicable. If uncertain, use the performing laboratory's own report interval instead.
+- Both Indian fasting-glucose age partitions require explicit confirmation of an 8–12 hour fast. The study's serum collection conditions are shown in the evidence panel. The tool does not infer fasting status.
+- Source/method partition dropdown prevents automatic selection when multiple same-name ranges from different catalogues/populations match. The exact age/sex-compatible record is selected only when unambiguous.
+- Result units must exactly match the chosen interval; no automatic conversion is performed. Pregnancy/recent pregnancy is excluded from the adult non-pregnant comparator.
