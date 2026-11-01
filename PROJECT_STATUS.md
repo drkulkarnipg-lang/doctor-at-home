@@ -251,3 +251,17 @@ Main source head 12608d35c02b3afe76a10995e95ebb521087eae4 has a failed regressio
 - **Lab reference table:** plan states 27 source-attributed adult entries and target 750. No unverified intervals added; no LabQAR CC BY-NC-ND data copied/adapted.
 - **Work email:** Google Workspace mailbox remains inactive pending owner signup or generated DNS TXT. No Cloudflare DNS/MX records changed.
 - **Safety boundary:** no billing, secrets, hosting configuration, DNS, database migrations or physician-review clinical publication changed. Release remains open pending Vercel success and live verification.
+
+
+## 2 November 2026 — current release status after PR #99
+
+- **Main head:** `77337d184244cc0f88e40b08318d25fc1c669c6c`; PR #99 merged.
+- **CI:** PR #99 exact-head run [41343409199 / #1326](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343409199) passed; post-merge main run [41343522313 / #1327](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343522313) passed on exact main.
+- **Feed UI:** selector and Fetch Latest action are contained within the Clinical RSS Reader card and responsive; existing handler and endpoint unchanged.
+- **Vercel:** PR #99 preview is successful at [DQfV6rFruKRoug1BKyqKLejhBSAc](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/DQfV6rFruKRoug1BKyqKLejhBSAc). Current main remains `failure / build-rate-limit`. Production not confirmed.
+- **PR #97:** exact draft head passed full regression run [41340226138 / #1312](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41340226138); remains open/draft. Local-file sharing privacy assertions are not yet merged to main.
+- **Share Desk:** single dynamic section/tab guard; zero duplicate IDs in static index. Named routes inspected. No automatic upload/public link; real OS share sheet not tested.
+- **Diet presets:** five requested options (viral fever, hepatitis, liver disease, loose motions, vomiting) are absent; current seven clinician-side presets remain. Keep missing five as open doctor-only work pending approved clinical wording.
+- **Triage:** PR #98 merged and covered by current main regression; NEWS2/WHO/NICE and clinician home gate present. Governance review required before routine clinical use.
+- **Domain:** canonical/JSON-LD still use Vercel hostname. Root/www web retrieval and container DNS checks failed; no HTTP reachability or release identity established. Defer canonical change until production alias is verified.
+- **Release remains OPEN:** wait for current-main Vercel rate-limit reset; then verify custom domains and actual desktop/mobile actions. No billing, secrets, hosting/DNS, migrations or clinical publication changed.
