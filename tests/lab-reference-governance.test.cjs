@@ -147,8 +147,8 @@ assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),40,'
 assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),50,'female')[0],'ferritin-mayo-female-18-50');checks++;
 assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),51,'female')[0],'ferritin-mayo-female-51plus');checks++;
 assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Ferritin'),17,'female'),null);checks++;
-assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='TSH'),20,'female')[0],'tsh-mayo-adult20');checks++;
-assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='TSH'),19,'female'),null);checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Thyroid-stimulating hormone'),20,'female')[0],'tsh-mayo-adult20');checks++;
+assert.equal(matchInterval(LAB_REFERENCE_TESTS.filter(x=>x[1]==='Thyroid-stimulating hormone'),19,'female'),null);checks++;
 assert.equal(new Set(LAB_REFERENCE_TESTS.map(x=>x[0])).size,95);checks++;
 
 console.log('Lab reference governance tests passed: '+checks+' assertions.');
