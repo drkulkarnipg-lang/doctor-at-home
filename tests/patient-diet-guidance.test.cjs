@@ -1,0 +1,27 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
+test('patient diet guidance is shared from the clinician presets but has no prescription-add controls',()=>{
+ const html=fs.readFileSync('index.html','utf8'),script=fs.readFileSync('clinical-diet-presets.js','utf8');
+ assert.match(html,/id="patientDietGuidance"/);
+ assert.match(html,/id="patientDietPresetCards"/);
+ const dom=new JSDOM(html,{url:'https://clinic.example.test',runScripts:'outside-only'});
+ const w=dom.window;
+ w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+ w.eval(script);
+ const host=w.document.getElementById('patientDietPresetCards');
+ assert.ok(host,'patient diet cards render');
+ const cards=[...host.querySelectorAll('article')];
+ assert.equal(cards.length,5,'five requested acute illness topics appear once each');
+ const titles=cards.map(c=>c.querySelector('h5')?.textContent);
+ for(const title of ['Fever and viral illness','Hepatitis','Long-term liver disease','Loose motions / diarrhoea','Vomiting'])assert.ok(titles.includes(title),title+' is visible');
+ assert.equal(host.querySelectorAll('button').length,5,'patient side has only read-more buttons');
+ assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button[aria-controls]').length);
+ assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button').length);
+ assert.equal(host.querySelectorAll('button').length>0,true);
+ assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button[aria-expanded]').length);
+ const first=host.querySelector('button');assert.equal(first.getAttribute('aria-expanded'),'false');
+ first.click();assert.equal(first.getAttribute('aria-expanded'),'true');assert.equal(w.document.getElementById(first.getAttribute('aria-controls')).hidden,false);
+ assert.equal(host.querySelectorAll('button').length,5);
+ assert.equal(host.querySelectorAll('button').length,host.querySelectorAll('button:not([onclick])').length,'patient cards do not expose inline doctor actions');
+ dom.window.close();
+});
