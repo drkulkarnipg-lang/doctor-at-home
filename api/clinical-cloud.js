@@ -54,8 +54,14 @@ const raw=cookiePairs.find(x=>x.startsWith(COOKIE+'=')),refreshRaw=cookiePairs.f
 try{token=raw?decodeURIComponent(raw.slice(COOKIE.length+1)):'';}catch{token='';}
 try{refreshToken=refreshRaw?decodeURIComponent(refreshRaw.slice(REFRESH_COOKIE.length+1)):'';}catch{refreshToken='';}
 if(action==='login'&&method==='POST'){
-if(typeof body.email!=='string'||body.email.length>254||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your cloud login email and password.'});
-const response=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:body.email,password:body.password})});
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
+const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
+const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner login is not configured.'});
+if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
+if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(401,{message:'Cloud sign-in was not accepted.'});
+const response=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:body.password})});
 if(!response.ok)return reply(response.status===429?429:401,{message:response.status===429?'Too many login attempts. Try later.':'Cloud sign-in was not accepted.'});const data=await response.json();
 if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'){clearCookies();return reply(403,{message:'This account is not the clinic owner.'});}
 if(body.rememberDevice===true&&typeof data.refresh_token!=='string'){clearCookies();return reply(502,{message:'Remembered sign-in could not be enabled. Sign in again without remembering this device.'});}
@@ -65,10 +71,13 @@ return reply(200,{configured:true,signedIn:true,remembered:body.rememberDevice==
 }
 if(action==='reset-request'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
-if(typeof body.email!=='string'||body.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim()))return reply(400,{message:'Enter the clinic owner email address.'});
+const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
+const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
+if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254)return reply(400,{message:'Enter your clinic username.'});
 const generic='If this is the configured clinic owner account, a recovery email will be sent.';
-if(body.email.trim().toLowerCase()!==ownerEmail)return reply(200,{message:generic});
+if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(200,{message:generic});
 const redirect='https://home-visiting-icu-doctor.vercel.app/password-reset.html';
 const sent=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
 if(sent.status===429)return reply(429,{message:'Too many recovery requests. Wait before trying again.'});
