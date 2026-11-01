@@ -66,7 +66,7 @@
     #languageSelectorLabel{font-size:10px;font-weight:750;white-space:nowrap;color:#0F2942}
     #google_translate_element{flex:1 1 120px;width:120px;min-width:0;max-width:150px;}
     #google_translate_element .goog-te-gadget{font-size:0!important;max-width:100%;}
-    #google_translate_element .goog-te-combo{display:block;width:100%;max-width:140px;min-height:36px;margin:0!important;padding:6px 24px 6px 8px;border:1px solid #C9D9D2;border-radius:9px;background:#FFFDF9;color:#0F2942;font:600 12px/1.3 Inter,sans-serif;}
+    #google_translate_element .goog-te-combo{display:block;width:100%;max-width:140px;min-height:36px;margin:0!important;padding:6px 24px 6px 8px;border:1px solid #C9D9D2;border-radius:9px;background:#FFFDF9;color:#0F2942;font:600 12px/1.3 Inter,sans-serif;}\n    #google_translate_element{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;opacity:0!important;pointer-events:none!important;}\n    .site-language-picker{display:block;width:100%;max-width:230px;min-height:44px;padding:8px 30px 8px 10px;border:1px solid #C9D9D2;border-radius:10px;background:#fff;color:#173b32;font:600 13px/1.3 Inter,sans-serif;}
     .language-status{margin:1px 0 0;max-width:240px;font-size:9px;line-height:1.25;color:#496174;overflow-wrap:anywhere}
     .language-help-link{font-size:9px;color:#245F4A;text-decoration:underline;text-underline-offset:2px;align-self:flex-start;min-height:24px;display:inline-flex;align-items:center}
     @media(max-width:640px){.site-header{position:relative!important;top:auto!important;z-index:20!important}.site-header>div{display:flex;flex-direction:column;align-items:stretch;gap:8px}.site-header .doctor-brand{width:100%;min-width:0;align-items:flex-start}.site-header .doctor-brand>div:nth-child(2){min-width:0;overflow-wrap:anywhere}.site-header .doctor-brand>div:nth-child(2)>p:last-child{font-size:9px;line-height:1.3}.site-header>div>div:last-child{display:flex;flex-wrap:wrap;width:100%;max-width:100%;min-width:0;align-items:stretch;gap:8px}.site-header>div>div:last-child>.language-control{flex:1 1 100%;width:100%;min-width:0;max-width:100%;order:0}.site-header>div>div:last-child>.language-control+.bg-white{flex:1 1 100%;width:100%;min-width:0;max-width:100%;order:1}.site-header>div>div:last-child>.language-control~button,.site-header>div>div:last-child>.language-control~a{flex:1 1 auto;min-width:0;max-width:100%;order:2}.language-control{flex:1 1 100%;width:100%;min-width:0;max-width:100%;padding:2px 0}.language-row{width:100%;flex-wrap:nowrap}.language-row #google_translate_element{flex:1 1 120px;width:120px;min-width:0;max-width:180px}#google_translate_element .goog-te-combo{max-width:180px;width:100%;min-height:44px;font-size:13px}.language-status,.language-help-link{display:none!important}.site-header .language-control+.bg-white{max-width:100%;width:100%;display:flex;flex-wrap:wrap}.site-header .language-control+.bg-white button{flex:1 1 auto;min-width:0;white-space:normal;line-height:1.25}.site-header .language-control~button,.site-header .language-control~a{min-height:40px}.goog-te-banner-frame,.goog-te-banner-frame.skiptranslate{display:none!important}body{top:0!important}}
@@ -108,16 +108,31 @@
     }
 
     function quickTranslate(langCode) {
+      const code = String(langCode || 'en');
+      if (code === 'en') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax';
+        try { document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=drkulkarnipg.com; SameSite=Lax'; } catch (_) {}
+        const clean = new URL(location.href); clean.hash = ''; location.replace(clean.toString()); return;
+      }
       const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = langCode;
-        select.dispatchEvent(new Event('change'));
-        showToast("Language changed to: " + langCode.toUpperCase());
+      const supported = select && [...select.options].some(option => option.value === code);
+      if (supported) {
+        select.value = code;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        showToast("Language changed to: " + code.toUpperCase());
       } else {
-        window.location.hash = '#googtrans(en|' + langCode + ')';
+        document.cookie = 'googtrans=/en/' + code + '; path=/; SameSite=Lax';
+        window.location.hash = '#googtrans(en|' + code + ')';
         location.reload();
       }
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const picker = document.getElementById('siteLanguageSelector');
+      if (!picker) return;
+      const saved = document.cookie.match(/(?:^|;\\s*)googtrans=\\/en\\/([^;]+)/);
+      if (saved && [...picker.options].some(option => option.value === saved[1])) picker.value = saved[1];
+      picker.addEventListener('change', () => quickTranslate(picker.value));
+    });
   </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript" defer></script>
 <link href="privacy-publishing.css" rel="stylesheet"/><link href="workstation.css" rel="stylesheet"/><link href="certificate-forms.css" rel="stylesheet"/><link href="document-sharing.css" rel="stylesheet"/><link href="patient-helper.css" rel="stylesheet"/><link href="international-portal.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://home-visiting-icu-doctor.vercel.app/#website", "name": "Dr. Pramod G. Kulkarni", "url": "https://home-visiting-icu-doctor.vercel.app/", "inLanguage": "en", "publisher": {"@id": "https://home-visiting-icu-doctor.vercel.app/#owner"}, "about": {"@id": "https://home-visiting-icu-doctor.vercel.app/#practice"}}, {"@type": "Person", "@id": "https://home-visiting-icu-doctor.vercel.app/#owner", "name": "Dr. Pramod G. Kulkarni", "url": "https://home-visiting-icu-doctor.vercel.app/", "telephone": "+919561394341"}, {"@type": ["Physician", "MedicalBusiness"], "@id": "https://home-visiting-icu-doctor.vercel.app/#practice", "name": "Dr. Pramod G. Kulkarni — Home Visiting Doctor", "url": "https://home-visiting-icu-doctor.vercel.app/", "telephone": "+919561394341", "image": "https://home-visiting-icu-doctor.vercel.app/assets/social-card.png", "areaServed": {"@type": "City", "name": "Pune"}, "founder": {"@id": "https://home-visiting-icu-doctor.vercel.app/#owner"}, "description": "Home-visit requests and practical health education. Visit availability is confirmed by the doctor.", "publishingPrinciples": "https://home-visiting-icu-doctor.vercel.app/editorial-policy.html"}]}</script>
@@ -182,7 +197,7 @@
 <i class="fa-solid fa-stethoscope text-teal-600"></i> Doctor Workstation
           </button>
 </div>
-<details class="language-control" aria-label="Language selector"><summary>🌐 Language / भाषा <span aria-hidden="true">▾</span></summary><div class="language-row" id="patientArticleTranslator"><span id="languageSelectorLabel">Language / भाषा</span><div id="google_translate_element" aria-labelledby="languageSelectorLabel"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language from the menu. Automatic translation may not preserve medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></details> <button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
+<details class="language-control" aria-label="Whole website language selector"><summary>🌐 Language / भाषा <span aria-hidden="true">▾</span></summary><div class="language-row" id="patientArticleTranslator"><label id="languageSelectorLabel" for="siteLanguageSelector">Translate this website / संपूर्ण वेबसाइटची भाषा</label><select id="siteLanguageSelector" aria-labelledby="languageSelectorLabel" class="site-language-picker"><option value="en">English</option><option value="mr">मराठी — Marathi</option><option value="hi">हिन्दी — Hindi</option><option value="gu">ગુજરાતી — Gujarati</option><option value="bn">বাংলা — Bengali</option><option value="ta">தமிழ் — Tamil</option><option value="te">తెలుగు — Telugu</option><option value="kn">ಕನ್ನಡ — Kannada</option><option value="ml">മലയാളം — Malayalam</option><option value="ur">اردو — Urdu</option><option value="pa">ਪੰਜਾਬੀ — Punjabi</option><option value="or">ଓଡ଼ିଆ — Odia</option><option value="as">অসমীয়া — Assamese</option><option value="ne">नेपाली — Nepali</option><option value="fr">Français — French</option><option value="es">Español — Spanish</option><option value="ar">العربية — Arabic</option><option value="zh-CN">中文 — Chinese</option></select><div id="google_translate_element" aria-hidden="true"></div></div><p id="translationStatus" class="language-status" role="status" aria-live="polite">Choose a language to translate the current page, tabs and visible library content. Machine translation can alter medical meaning; check the English original.</p><a class="language-help-link" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Google Translate ↗</a></details> <button class="bg-white border petal-border hover:bg-slate-50 text-[#0F2942] text-xs px-2.5 py-1.5 rounded-xl font-bold shadow-sm flex items-center gap-1" onclick="openSecuritySettingsModal()" title="Security Settings">
 <span id="navLockIcon">🔓</span> <span class="hidden sm:inline">Access</span>
 </button>
 <!-- Both GMB Profiles -->
