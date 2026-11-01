@@ -4,7 +4,7 @@ test('whole-site language picker exposes complete language list and has a fallba
  const html=fs.readFileSync('index.html','utf8'),sourceTranslation=fs.readFileSync('source-translation.js','utf8');
  assert.match(html,/id="siteLanguageSelector"/);
  for(const code of ['en','mr','hi','gu','bn','ta','te','kn','ml','ur','pa','or','as','ne','fr','es','ar','zh-CN'])assert.match(html,new RegExp('<option value="'+code.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'">'));
- assert.match(html,/picker\.addEventListener\('change',\(\) => quickTranslate\(picker\.value\)\)/);
+ assert.match(html,/picker\.addEventListener\('change',\s*\(\)\s*=>\s*quickTranslate\(picker\.value\)\)/,'the native picker must invoke the shared whole-site translation handler');
  assert.match(html,/const supported = select && \[\.\.\.select\.options\]\.some\(option => option\.value === code\)/);
  assert.match(html,/googtrans=\/en\/' \+ code/);
  assert.match(html,/code === 'en'/);
