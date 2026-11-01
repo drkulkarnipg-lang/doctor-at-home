@@ -160,3 +160,13 @@ The current controlling attachment remains `Pasted text(20261030-092936).txt`. A
 - **Vercel:** the Vercel status context for exact main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172 is now SUCCESS. [Open deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/86f7SMcymUdeNEz36gnz4YSQzVun). This supersedes the build-rate-limit failure on the preceding application commit 820219a5a22ce089ae3701f9ac0cfb0920e99e16 at the status-check level. The deployment record could not be independently rendered here and does not prove that the custom production alias is serving the expected build.
 - **Live verification remains open:** attempts to retrieve the public domains through the available browser/web context were unsuccessful. No claim is made for actual 320 px / 390 px rendering, production-alias correctness, live navigation, Know Your Numbers, booking/BMI, PDF download/print/share, WhatsApp handoff or recipient receipt.
 - **Unchanged boundaries:** this follow-up changed documentation only. No application code, billing, payment gateway, secrets, hosting configuration, database migration or clinical publication was changed.
+
+
+## 2 November 2026 — Share Desk attachment/action reconciliation
+
+- PR #95 adds `document-sharing.js` Share Desk workspace and `tests/document-sharing.test.cjs` category/action routing. PR #96 changes the same two files to add referral, consent, fitness, unfitness and Forms 2/4/4A options.
+- Exact main head `4227021263c80805bbc9cd0bc72412ddc4676ff0`; exact-head Actions run [41339869885](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41339869885) passed the full regression step.
+- Current-main Vercel status remains `build-rate-limit`; the successful PR #95 deployment record covers only base Share Desk/lab plan commit `a3a1b9f4ad5ea831aa8394b18b75edc9bfef4051`, not PR #96 certificate extensions.
+- Named action routes inspected: `rxSheet`, `pathSlipSheet`, `radSlipSheet`, `invoiceSheet`, `cdoc-referral`, `cdoc-consent`, `cdoc-fitness`, `cdoc-leave`, `cert-form2`, `cert-form4`, `cert-form4a`, and validated `publicArticle_*`. Arbitrary local files pass the selected File to the native Web Share API only after user action; unsupported browsers get manual-attach guidance. No public URL or automatic upload is created by this handler.
+- The current main test routes named actions but did not invoke `shareDeskAnyFile`; a focused test is added on the audit branch and awaits CI. Do not treat that branch test as main verification until merged.
+- Live domain HTTP, exact deployed release identity, actual button clicks, PDF rendering, native share sheet and WhatsApp receipt remain unverified due unavailable browser context and DNS/web retrieval limitations.

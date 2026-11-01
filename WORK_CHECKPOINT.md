@@ -559,3 +559,22 @@ Owner reported that prescription Save, Download and Export controls do not work.
 - Regression test covers picker save, fallback download, text copy, PDF handoff and preservation of other document exports.
 
 Verification: the repository-wide inventory test passes after adding the new source file to the committed inventory. The focused test now handles jsdom Blob metadata and awaits the asynchronous share wrapper. The latest full run exposed only the missing `await` in the test's Share assertion; corrected. Fresh Actions run pending. Keep PR #91 preview-only; do not mark production live until the full suite passes and browser/device verification is recorded. No cloud storage, patient-data upload, database migration or prescribing changes are introduced.
+
+
+## Share Desk release checkpoint — 2 November 2026
+
+**Source:** main `4227021263c80805bbc9cd0bc72412ddc4676ff0` (PR #96), parent/base Share Desk commit `a3a1b9f4ad5ea831aa8394b18b75edc9bfef4051` (PR #95).
+
+**CI:** exact-main push run [41339869885, #1309](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41339869885) passed. The single `node-regression` job and full repository regression step completed successfully.
+
+**Deployment:** Vercel reports success for the PR #95 base Share Desk deployment [Gxe7ZQs19RiuRKBU6aRSjeV6SEht](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/Gxe7ZQs19RiuRKBU6aRSjeV6SEht). Vercel reports `failure / build-rate-limit` for current main PR #96 commit `4227021263c80805bbc9cd0bc72412ddc4676ff0`. Wait for the limit to clear; no empty commit or artificial trigger.
+
+**Routing review:** prescription `rxSheet`; lab `pathSlipSheet`; radiology `radSlipSheet`; invoice `invoiceSheet`; referral `cdoc-referral`; consent `cdoc-consent`; fitness `cdoc-fitness`; unfitness `cdoc-leave`; Forms 2/4/4A `cert-form2`, `cert-form4`, `cert-form4a`; patient article `publicArticle_*`. Arbitrary local files use the browser's native file-share sheet; unsupported browsers receive manual-attach instructions without upload/send. No public link or automatic upload is created by these paths.
+
+**Test follow-up:** existing document-sharing regression routes the named document/form/article actions. It did not execute the arbitrary local-file function, so a focused test for success, unsupported file sharing and no-file selection is added on this audit branch; pending CI. Do not call it verified until that run passes.
+
+**Not verified live:** custom-domain HTTP/release identity, desktop/mobile UI, 320 px/390 px language panel, actual action clicks, OS share sheet, WhatsApp recipient handoff/receipt. Browser extension context was unavailable; web retrieval and container DNS did not establish reachability. This is an environment limitation, not proof of site outage.
+
+**Other workstreams:** Lab plan baseline 27 source-attributed adult intervals; target 750; no new ranges added without source/method/specimen/population evidence and physician review. Google Workspace mailbox remains inactive pending owner signup or provider-generated TXT. No Cloudflare DNS, existing MX, root/www Vercel record, billing, secrets, hosting configuration, database migration or clinical publication was changed.
+
+**Release state: OPEN.** Await Vercel rate-limit reset, then recheck the existing main deployment; after success verify the custom domain and real browser/device interactions.
