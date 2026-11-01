@@ -13,8 +13,8 @@
     'Albumin, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8436',
     'Alkaline Phosphatase, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8340',
     'Liver Profile':'https://www.mayocliniclabs.com/test-catalog',
-    'CBC with Differential':'https://www.mayocliniclabs.com/test-catalog',
-    'T4, Free, Serum':'https://www.mayocliniclabs.com/test-catalog'
+    'CBC with Differential':'https://www.mayocliniclabs.com/test-catalog/Overview/9109',
+    'T4, Free, Serum':'https://www.mayocliniclabs.com/test-catalog/Overview/8725'
   };
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -35,7 +35,7 @@
     if(!Number.isFinite(amin)||!Number.isFinite(amax)||amin<18||amax<amin||amax>120)errors.push('Adult age bounds must be valid (18–120 years)');
     if(!['all','male','female'].includes(String(r.sex).toLowerCase()))errors.push('sex must be all, male or female');
     if(!['reference_interval','decision_limit'].includes(r.range_type))errors.push('range_type must be reference_interval or decision_limit');
-    try{const u=new URL(r.source_url);if(u.protocol!=='https:')errors.push('Source URL must use HTTPS');}catch{errors.push('Source URL must be valid');}
+    if(!/^https:\/\/[A-Za-z0-9.-]+(?::\d+)?(?:\/|$)/i.test(String(r.source_url||'')))errors.push('Source URL must be a valid HTTPS link');
     if(!String(r.specimen||'').trim()||!String(r.method||'').trim()||!String(r.population||'').trim())errors.push('Specimen, method and population are mandatory');
     return {valid:errors.length===0,errors,low:lo,high:hi};
   }
@@ -71,7 +71,7 @@
     ];
     tests.forEach(t=>{
       const src=String(t[7]||'');const pair=sourceMap.find(x=>src.includes(x[0]));
-      t[9]=t[9]||{sourceName:src,sourceUrl:pair?.[1]||'https://www.mayocliniclabs.com/test-catalog',specimen:['Haematology'].includes(t[3])?'EDTA whole blood':'Serum/plasma — verify source page',method:'Assay/platform not captured in legacy seed; verify with performing laboratory',population:'Mayo-derived source catalogue; population partition details must be checked on linked source',ageMin:18,ageMax:120,sex:t[8]?'partitioned':'all',rangeType:t[0]==='egfr'?'decision_limit':'reference_interval',reviewStatus:'source-linked seed; method/population applicability review pending'};
+      t[9]=t[9]||{sourceName:src,sourceUrl:pair?.[1]||'https://www.mayocliniclabs.com/test-catalog',specimen:['Haematology'].includes(t[3])?'EDTA whole blood':'Serum/plasma — verify source page',method:'Assay/platform not captured in legacy seed; verify with performing laboratory',population:'Mayo-derived source catalogue; population partition details must be checked on linked source',ageMin:t[0]==='ft4'?20:18,ageMax:120,sex:t[8]?'partitioned':'all',rangeType:t[0]==='egfr'?'decision_limit':'reference_interval',reviewStatus:'source-linked seed; method/population applicability review pending'};
     });
     const pending=read(PENDING_KEY),approved=read(APPROVED_KEY);
     const known=new Set(tests.map(t=>t[0]));
@@ -164,7 +164,7 @@
       }else if(t[8]){
         if(!sx||!t[8][sx]){result.className='labrc-result warn';result.textContent='Select the correct sex partition for this test.';return;}
         [low,high]=t[8][sx];
-      }else{low=t[5];high=t[6];}
+      }else if(t[0]==='ca'&&a>=60&&a<=90){low=8.8;high=10.2;}else if(t[0]==='ca'&&a>90){low=8.2;high=9.6;}else{low=t[5];high=t[6];}
       if(m.sex&&['male','female'].includes(m.sex)&&m.sex!==sx){result.className='labrc-result warn';result.textContent='Selected test partition does not match patient sex.';return;}
       if(a<(m.ageMin??18)||a>(m.ageMax??120)){result.className='labrc-result warn';result.textContent='No validated interval for this age band.';return;}
       const enteredUnit=unitInput.value.trim();if(!enteredUnit||enteredUnit!==unit){result.className='labrc-result warn';result.textContent='Unit mismatch or missing unit. Result unit must exactly match reference unit ('+unit+'). No automatic conversion is performed.';return;}
