@@ -578,3 +578,26 @@ Verification: the repository-wide inventory test passes after adding the new sou
 **Other workstreams:** Lab plan baseline 27 source-attributed adult intervals; target 750; no new ranges added without source/method/specimen/population evidence and physician review. Google Workspace mailbox remains inactive pending owner signup or provider-generated TXT. No Cloudflare DNS, existing MX, root/www Vercel record, billing, secrets, hosting configuration, database migration or clinical publication was changed.
 
 **Release state: OPEN.** Await Vercel rate-limit reset, then recheck the existing main deployment; after success verify the custom domain and real browser/device interactions.
+
+
+## Follow-up checkpoint — PR #99 merged, 2 November 2026
+
+**Current source:** main `77337d184244cc0f88e40b08318d25fc1c669c6c`; PR #99 merged on top of triage commit `23b6b786e95acea60dabccd804b2ea4690b8ed03`.
+
+**Feed button:** PR #99 changes only `index.html` and `official-research-sources.css`. Selector and existing `rssFetchLatest` button are contained in the Clinical RSS Reader card; responsive wrapping is enabled; at <=640 px controls stack full-width. `research-feed.js` and `/api/research-feeds` are unchanged. Exact PR-head Actions run [41343409199 / #1326](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343409199) passed. Post-merge main run [41343522313 / #1327](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41343522313) also passed on exact main.
+
+**Deployment:** PR #99 preview Vercel status is success ([deployment record](https://vercel.com/drkulkarnipg-lang/home-visiting-icu-doctor-pune/DQfV6rFruKRoug1BKyqKLejhBSAc)). Current main Vercel status is failure / `build-rate-limit`. No production publication is claimed. No empty/artificial commit and no deployment retry while rate-limited.
+
+**PR #97:** exact branch head `cdc6728f8c9ea4f6fb01cbb9b52e3f40939bf0e1`; Actions [41340226138 / #1312](https://github.com/drkulkarnipg-lang/doctor-at-home/actions/runs/41340226138) passed full regression. Focused test covers original selected local File, native share, unsupported browser, missing selection and no fetch/upload call. PR remains draft/open/unmerged; no merge while Vercel main remains rate-limited without a separate owner decision.
+
+**Share Desk:** source guard prevents duplicate dynamic view insertion; static index scan has zero duplicate IDs. Named clinical document, certificate, statutory form and patient-article routes are mapped. Local-file privacy test is passing on PR #97 but is not yet part of main. No automatic upload/public link; device share sheet opens only after explicit user action.
+
+**Diet presets:** existing clinician-side controls are in Doctor Workstation and the prescription advice textarea. Current seven options: diabetes, CKD, DASH, protein support, heart failure, swallowing care, pressure care. Requested viral fever, hepatitis, liver disease, loose motions and vomiting options are absent. Keep as outstanding doctor-only preset work; await clinically approved wording rather than inventing advice or publishing patient-facing content.
+
+**Triage:** PR #98 merged and present on main. NEWS2 Scale 1 thresholds and +2 oxygen modifier; mandatory Yes/No/Unable-to-assess checklist; WHO red/yellow danger signs; NICE NG253 source; age >=16/non-pregnant pathway; clinician-selected disposition and home safety gate; missing/unknown values block classification; no patient data persistence. Regression passed on triage merge and current main. Governance review remains required before routine clinical use.
+
+**Domain/live checks:** `index.html` canonical and JSON-LD still point to `home-visiting-icu-doctor.vercel.app`; defer canonical switch until custom domain production alias is verified. Web fetch of root and www returned internal errors; container curl could not resolve either hostname; connected browser context unavailable. No HTTP or device evidence. No DNS/hosting changes.
+
+**Other workstreams:** lab baseline 27 source-attributed adult intervals / target 750; Google Workspace mailbox inactive pending owner action and provider-generated TXT. No LabQAR restricted material copied. No billing, secrets, hosting/DNS, migrations or clinical drafts changed/published.
+
+**Release state: OPEN.** Next gates: rate-limit reset and successful current-main Vercel deployment; custom-domain verification; real desktop/mobile workflow and Share Desk/WhatsApp testing; keep all patient data local until explicit share.
