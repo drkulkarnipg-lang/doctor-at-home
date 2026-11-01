@@ -23,7 +23,7 @@ w.shareDeskDocument('rx');w.shareDeskDocument('path');w.shareDeskDocument('rad')
 assert.equal(deskCalls.length,3,'Prescription, lab and radiology share buttons must invoke the PDF share pipeline.');
 assert.deepEqual(deskCalls.map(x=>x[0]),['rxSheet','pathSlipSheet','radSlipSheet']);
 w.shareDeskInvoice();assert.equal(deskCalls.at(-1)[0],'invoiceSheet','Invoice share button must target the invoice PDF.');
-w.document.getElementById('shareDeskCertificate').value='form2';w.shareDeskCertificate();assert.equal(deskCalls.at(-1)[0],'cert-form2','Certificate share button must respect the selected form.');
+for(const [type,id] of [['referral','cdoc-referral'],['consent','cdoc-consent'],['fitness','cdoc-fitness'],['leave','cdoc-leave'],['form4','cert-form4'],['form4a','cert-form4a'],['form2','cert-form2']]){w.document.getElementById('shareDeskCertificate').value=type;w.shareDeskCertificate();assert.equal(deskCalls.at(-1)[0],id,'Certificate share must target '+type+'.');}
 const article=w.document.createElement('article');article.id='publicArticle_0';article.innerHTML='<h3>Test patient article</h3>';w.document.getElementById('publicGuidanceSection').append(article);
 w.document.getElementById('shareDeskArticle').innerHTML='<option value="publicArticle_0">Test patient article</option>';w.document.getElementById('shareDeskArticle').value='publicArticle_0';w.shareDeskArticle();assert.equal(deskCalls.at(-1)[0],'publicArticle_0','Article share button must target the selected patient article.');
 dom.window.close();console.log('Document sharing tests passed: selected original files remain attached after direct share fails and the user retries from the share dialog.');
