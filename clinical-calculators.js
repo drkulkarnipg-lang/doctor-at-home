@@ -77,6 +77,8 @@ C(45,'Palliative Performance Scale (PPSv2)','Palliative care',[S('pps','Clinicia
 ];
 calculators.find(c=>c.id===5).interpretationUrl='https://diabetes.org/about-diabetes/diagnosis';
 calculators.find(c=>c.id===18).fields.find(x=>x.key==='factor').when=v=>v.method==='adult';
+calculators.find(c=>c.id===42).fields.find(x=>x.key==='bmi').when=v=>v.measure==='bmi';
+calculators.find(c=>c.id===42).fields.find(x=>x.key==='calf').when=v=>v.measure==='calf';
 function calculate(id,raw){const c=calculators.find(c=>c.id===Number(id));if(!c)throw Error('Unknown calculator.');const v={...raw};for(const field of c.fields){if(field.when&&!field.when(v))continue;const x=v[field.key];if(x===undefined||x===null||String(x).trim()==='')throw Error(`Enter ${field.label}`);if(field.type==='number'){const n=Number(x);if(!Number.isFinite(n)||n<field.min||n>field.max)throw Error(`${field.label}: enter a finite value from ${field.min} to ${field.max}.`);v[field.key]=n;}else{if(!field.options.some(o=>o[0]===String(x)))throw Error(`Select a valid ${field.label}`);v[field.key]=String(x);}}const result=c.compute(v);if(result.value!==null&&!Number.isFinite(result.value))throw Error('Unable to calculate a finite result. Check the inputs.');return result;}
 const api={calculators,calculate};if(typeof module==='object'&&module.exports)module.exports=api;root.ClinicalCalculators=api;
 if(typeof document==='undefined')return;
