@@ -35,7 +35,7 @@ const change=(id,v)=>{const x=w.document.getElementById(id);x.value=v;x.dispatch
 change('calculator-6-eye','4');change('calculator-6-verbal','NT');change('calculator-6-motor','6');
 w.document.querySelector('[data-calculator-id="6"] form').dispatchEvent(new w.Event('submit',{cancelable:true}));
 assert.match(w.document.getElementById('calculator-result-6').textContent,/Total not calculated/);
-change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/calculate again/);
+change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/E4 V5 M6 · Total 15\/15/,'Every calculator must update immediately when the final required input is entered.');assert.equal(w.document.querySelector('[data-calculator-id="6"] .calc-primary'),null,'No Calculate button should be required.');
 change('calculator-30-acid','ph');assert.equal(w.document.getElementById('calculator-30-hco3').disabled,true);
 change('calculator-30-acid','hco3');assert.equal(w.document.getElementById('calculator-30-ph').disabled,true);
 change('calculator-18-method','p421');assert.equal(w.document.getElementById('calculator-18-factor').disabled,true);
