@@ -59,7 +59,7 @@ const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
 const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner login is not configured.'});
+if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail)||! /^[a-z0-9._-]{3,80}$/.test(ownerUsername))return reply(503,{message:'Clinic owner username login is not configured.'});
 if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
 if(suppliedUsername!==ownerUsername)return reply(401,{message:'Cloud sign-in was not accepted.'});
 const response=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:body.password})});
@@ -112,7 +112,7 @@ return reply(200,{configured:true,signedIn:true,remembered:remember,mfaVerified:
 if(action==='reset-request'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
 const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
+if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail)||! /^[a-z0-9._-]{3,80}$/.test(ownerUsername))return reply(503,{message:'Username-based password recovery is not configured. No password was changed.'});
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
 if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail)return reply(400,{message:'Enter your clinic username.'});
