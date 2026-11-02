@@ -74,6 +74,6 @@ assert.match(calculate(40,{...fixtures[40][0],pf:80,respSupport:'1'}).text,/SOFA
 near(42,{...fixtures[42][0],measure:'calf',calf:32},14);reject(42,{...fixtures[42][0],measure:'calf'});checks+=2;
 assert.match(calculate(43,{...fixtures[43][0],iadl_finances:'0'}).text,/Lawton IADL: 7\/8/);checks++;
 assert.match(calculate(44,{...fixtures[44][0],pain:10}).text,/ESAS-r total: 10\/90/);checks++;
-assert.match(calculate(45,{pps:'40'}).text,/PPSv2: 40%/);checks++;
+assert.match(calculate(45,{pps:'40'}).text,/PPSv2\): 40%/);checks++;
 const norton=calculators.find(c=>c.id===25);assert.equal(norton.url,'https://www.ahrq.gov/patient-safety/settings/hospital/resource/pressureulcer/tool/pu7b.html');assert.ok(!norton.url.includes('www26.ha.org.hk'));checks+=2;
 console.log(`${checks} assertions passed across all 45 calculators.`);
