@@ -56,7 +56,7 @@ try{refreshToken=refreshRaw?decodeURIComponent(refreshRaw.slice(REFRESH_COOKIE.l
 if(action==='login'&&method==='POST'){
 clearCookies();
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner login is not configured.'});
