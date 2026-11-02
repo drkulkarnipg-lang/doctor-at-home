@@ -434,3 +434,18 @@ body{touch-action:pan-y}
   .site-header{-webkit-backdrop-filter:none;backdrop-filter:none}
   .portal-nav{scroll-behavior:auto;overscroll-behavior-x:contain}
 }
+
+/* Enforce the fast response budget over earlier component-level hover timings. */
+#publicPortal :where(button,a[href],[role="button"],summary),
+.site-header :where(button,a[href],summary),
+.portal-nav a,
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials,
+#portalPanelOverview .care-pathways>a{
+  transition-duration:90ms!important;
+}
+#publicPortal :where(button,a[href],[role="button"],summary):active,
+.site-header :where(button,a[href],summary):active{
+  transition-duration:45ms!important;
+}
