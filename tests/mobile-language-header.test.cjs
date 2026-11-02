@@ -8,10 +8,10 @@ const mobileEnd=html.indexOf('/* Language picker:',mobileStart);
 const mobile=mobileStart>=0&&mobileEnd>mobileStart?html.slice(mobileStart,mobileEnd):'';
 assert.ok(mobile.includes('.site-header{position:relative!important;'),'Phone breakpoint must explicitly override the sticky header');
 assert.match(mobile,/\.site-header>div\{display:flex;flex-direction:column;align-items:stretch/,'Brand and controls must stack in normal flow on phones');
-assert.match(mobile[1],/\.language-control\{flex:1 1 100%;width:100%;min-width:0;max-width:100%/,'Language control must use the full available phone width');
-assert.match(mobile[1],/\.language-status,\.language-help-link\{display:none!important\}/,'Explanatory text and external help link must not inflate the mobile header');
-assert.match(mobile[1],/\.goog-te-banner-frame,\.goog-te-banner-frame\.skiptranslate\{display:none!important\}/,'Google Translate banner must not cover the phone viewport');
-assert.match(mobile[1],/body\{top:0!important\}/,'Translate widget must not leave a blank offset above the page');
+assert.match(mobile,/\.language-control\{flex:1 1 100%;width:100%;min-width:0;max-width:100%/,'Language control must use the full available phone width');
+assert.match(mobile,/\.language-status,\.language-help-link\{display:none!important\}/,'Explanatory text and external help link must not inflate the mobile header');
+assert.match(mobile,/\.goog-te-banner-frame,\.goog-te-banner-frame\.skiptranslate\{display:none!important\}/,'Google Translate banner must not cover the phone viewport');
+assert.match(mobile,/body\{top:0!important\}/,'Translate widget must not leave a blank offset above the page');
 
 const inFlow=css.match(/\.site-header\s+\.language-control\[open\]\s*>\s*div\s*\{([^}]+)\}/s);
 assert.ok(inFlow,'the open language panel must have a dedicated in-flow override in the imported stylesheet');
