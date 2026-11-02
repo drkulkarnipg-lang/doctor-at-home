@@ -4,18 +4,18 @@ const fs = require('node:fs');
 const html = fs.readFileSync('index.html', 'utf8');
 
 const placements = [
-  ['homeLanguagePicker', 'portalPanelOverview', 'main public home page'],
-  ['libraryLanguagePicker', 'wikiSection', 'patient Health Library'],
-  ['doctorLanguagePicker', 'doctorWorkstation', 'Doctor Workstation'],
-  ['encyclopediaLanguagePicker', 'wikiModal', 'Knowledge Encyclopedia reader']
+  ['homeLanguagePicker', 'portalPanelOverview', 'portalPanelLibrary', 'main public home page'],
+  ['libraryLanguagePicker', 'wikiSection', 'wikiSearchInput', 'patient Health Library'],
+  ['doctorLanguagePicker', 'doctorWorkstation', 'tabClinicalTools', 'Doctor Workstation'],
+  ['encyclopediaLanguagePicker', 'wikiModal', 'wikiModalTitle', 'Knowledge Encyclopedia reader']
 ];
-for (const [id, container, label] of placements) {
+for (const [id, startMarker, endMarker, label] of placements) {
   assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, label + ' translator has one unique control.');
+  const startAt = html.indexOf('id="' + startMarker + '"');
   const controlAt = html.indexOf('id="' + id + '"');
-  const containerAt = html.lastIndexOf('id="' + container + '"', controlAt);
-  assert.ok(containerAt >= 0, label + ' translator is nested in its intended section.');
-  const nextSection = html.indexOf('<section', containerAt + 8);
-  assert.ok(nextSection < 0 || controlAt < nextSection || container === 'wikiModal', label + ' translator placement is within its intended region.');
+  const endAt = html.indexOf('id="' + endMarker + '"', controlAt);
+  assert.ok(startAt >= 0 && controlAt > startAt, label + ' translator follows its intended section start.');
+  assert.ok(endAt > controlAt, label + ' translator appears before the section content/navigation marker.');
 }
 assert.ok(html.includes('class="section-language-picker"'), 'Section selectors share the language-picker class.');
 assert.ok(html.includes('syncSectionLanguagePickers'), 'Section selectors are populated from the canonical language list.');
