@@ -41,7 +41,6 @@ module.exports=async function handler(req,res){
  if(req.method==='GET')return json(res,200,{enabled:!!(token&&model),service:'public-information-assistant',privacy:'Messages are not stored by this endpoint.'});
  if(req.headers['sec-fetch-site']==='cross-site'||req.headers.origin&&req.headers.origin!==`https://${req.headers.host}`)return json(res,403,{message:'Same-origin requests only.'});
  if(!rateLimit(req))return json(res,429,{message:'Too many requests. Please wait a minute and try again.'});
- if(!token||!model)return json(res,503,{message:'The AI assistant is not configured yet. The website service guide remains available.'});
  let messages;
  try{
   const body=typeof req.body==='string'?JSON.parse(req.body):req.body;
@@ -50,6 +49,7 @@ module.exports=async function handler(req,res){
  }catch(e){return json(res,400,{message:e.message||'Invalid request.'});}
  const latest=messages.at(-1).content;
  if(emergency(latest))return json(res,200,{reply:'This may be an emergency. Do not wait for an online chat response. Call India emergency number 112 or go to the nearest emergency department now. Contact the doctor only if doing so does not delay emergency care.'});
+ if(!token||!model)return json(res,503,{message:'The AI assistant is not configured yet. The website service guide remains available.'});
  try{
   const response=await fetch('https://ai-gateway.vercel.sh/v1/chat/completions',{
    method:'POST',redirect:'error',signal:AbortSignal.timeout(25000),
