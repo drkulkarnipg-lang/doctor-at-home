@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: regression-${{ github.workflow }}-${{ github.ref }}
@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,6 +33,31 @@ jobs:
         run: npm ci
       - name: Install DOM test dependency without changing the lockfile
         run: npm install --no-save --package-lock=false jsdom@26.1.0
+      - name: Set up Python for complete bilingual guide PDFs
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PDF rendering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info
+          python -m pip install -r scripts/requirements-guide-pdfs.txt
+      - name: Rebuild every bilingual patient guide PDF from the current source
+        run: |
+          node scripts/export-patient-guide-content.cjs
+          python scripts/build-patient-guide-pdfs.py
+      - name: Commit regenerated PDFs and manifest to the PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$(git status --porcelain -- assets/guides)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/guides
+            git commit -m "Regenerate complete bilingual patient guide PDFs"
+            git push origin "HEAD:${GITHUB_HEAD_REF}"
+          fi
       - name: Run every repository regression test
         shell: bash
         run: |
