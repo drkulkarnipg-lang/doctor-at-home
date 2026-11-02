@@ -82,3 +82,11 @@ Use issue #90 as the authoritative acceptance checklist. Preserve the existing w
 - Read repository metadata, main branch object, recursive tree, issue #90, open PR search and exact-HEAD combined commit status directly from GitHub.
 - No source code, production deployment, billing, DNS, secrets or database migrations changed.
 - Handover-only branch created from current main; this file is intended to be committed on that branch only.
+
+
+## Verification addendum — 2 November 2026, 16:06 IST
+- Exact-main GitHub Actions run `41429159705` (run #1723) completed SUCCESS against `684e520c0203391aa5f1997ff8fe67d78d329afb`. The `node-regression` job and “Run every repository regression test” step both completed successfully.
+- This does not override the separate Vercel commit status: Vercel remains FAILURE with `build-rate-limit`. CI green is not deployment success.
+- The connected browser could not be accessed because this session lacks its originating browser context. Direct web retrieval of the three production domains was disabled by the browsing service. Therefore HTTP status, served SHA, alias routing and visual/device checks remain unverified.
+- A handover document was committed on the isolated branch as `998d7ba0b6d2dd23f0491b2e710d824eb608252f`; the file was fetched back from that branch and its contents confirmed. This documentation commit is not on main.
+- The project remains open; no production changes made.
