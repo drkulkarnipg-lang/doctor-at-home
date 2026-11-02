@@ -4,6 +4,21 @@ Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
+## Permanent task-register operating rule — 2 November 2026
+
+The authoritative task ledger is `MASTER_TASK_REGISTER.md`. Every new concrete owner request/defect/feature/QA finding must be added there once, or reconciled into its existing ID. Work proceeds one bounded item at a time. When an item meets its acceptance criteria, move it out of the active queue into the dated Completed archive in the register; retain its ID and evidence permanently so it is not repeated. Update this checkpoint after meaningful changes with the exact branch/head, tests, deployment evidence, blockers and one next action. At every new conversation, recover this register and checkpoint, inspect current GitHub/Vercel state, and resume without asking the owner to restate known work. Read only the relevant sections/files to avoid repeated analysis and unnecessary token use. This is a persistent repository workflow; ChatGPT cannot install a background listener that automatically captures every message while no conversation is active, so the protocol is applied whenever project work is resumed.
+
+### Current resume pointer — 2 November 2026
+
+- Canonical task register: `MASTER_TASK_REGISTER.md` (OPS-01, LANG-01).
+- Translator implementation: PR #127, branch `feature/section-specific-translators`, latest known head `32aff77525916879e72c86d0789f079940d0d516`.
+- GitHub Actions run `41465691147` was running the full regression suite at last check; poll it and reconcile any workflow-generated branch commit before judging exact-head results.
+- Vercel check on the PR head returned `build-rate-limit`; do not retry around the provider limit. Preview/browser QA and production publication remain open.
+- Main baseline for the new work: `3078767b72461fb83f50fabde03f0d796e65d0a8`. No production change has been made by PR #127 or this register update.
+- Next action: poll PR #127 CI; fix only demonstrated failures, then wait for a valid preview and verify all four selectors on desktop/mobile before merge/release.
+
+---
+
 ## Owner pause — 26 October 2026
 
 HISTORICAL PAUSE — superseded on 30 October 2026. The owner has now explicitly instructed the builder to continue without asking them to repeat requirements. PR20 Close/A4 changes remain released and must not be repeated. Continue the master register from the next unfinished row; do not restart from zero.
@@ -612,3 +627,7 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - UPI QR and private-cloud prescription save are in main. Razorpay/BillDesk remain disabled pending merchant onboarding and server-side payment verification. SMS OTP remains pending Twilio verification; password recovery confirms the new password and requires 12+ characters. Do not claim SMS OTP enabled.
 - Work email is not provisioned. Cloudflare DNS and Vercel hosting do not create a mailbox; provider signup and verified MX/SPF/DKIM/DMARC are required. AI evidence pipeline exists behind owner auth but needs AI Gateway credentials/model/credits; no public AI chatbot is enabled.
 - Do not change billing, DNS, secrets or hosting to bypass the Vercel rate limit. Continue verification when the build limit clears; do not claim live publication until exact main commit and both custom domains are confirmed.
+
+### Owner's Health Library placement correction — 2 November 2026
+
+The owner clarified that the Patient Health Library language selector belongs immediately beside the “Health Library” title, in the same compact heading row, not in a separate block below. PR #127 now places the selector there and shows the actual count from Google Translate's live supported-language catalogue once loaded (broad ~250-language target; do not hard-code a count the provider does not return). Selection applies the existing whole-page translation and synchronises the four selectors. Regression assertion now checks title/selector adjacency. Latest PR head `9102fae6850288a78f88ec2bd4a7ca2992cf3327`; Actions run `41466786833` pending; Vercel reports build-rate-limit. No merge or live claim until exact-head CI, valid preview and desktop/mobile QA pass.
