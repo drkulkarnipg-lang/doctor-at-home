@@ -1,21 +1,27 @@
 # Current resumable work checkpoint
 
-Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
+Updated: 2 November 2026, 23:59 IST — main `64a1e86fe657d5ad6da88f7f6611f276074de2e6`; PR #127 merged by repository owner; exact-head PR regression and Vercel commit status SUCCESS; Production/domain/device verification remains open.
 
-CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
+CURRENT: PR #127 is merged by the repository owner (not by this agent) as `138fecef6a18b5e20901dec55e65663d44624d99`. Its final head `27da7ea0a549583c2408a59adfce27e552521a9e` passed exact-head regression run `41499629591` / job `125463450835` (75 files). The Ready preview status is associated with that head, but real desktop/mobile browser QA and Production alias verification remain outstanding.
 
 ## Permanent task-register operating rule — 2 November 2026
 
 The authoritative task ledger is `MASTER_TASK_REGISTER.md`. Every new concrete owner request/defect/feature/QA finding must be added there once, or reconciled into its existing ID. Work proceeds one bounded item at a time. When an item meets its acceptance criteria, move it out of the active queue into the dated Completed archive in the register; retain its ID and evidence permanently so it is not repeated. Update this checkpoint after meaningful changes with the exact branch/head, tests, deployment evidence, blockers and one next action. At every new conversation, recover this register and checkpoint, inspect current GitHub/Vercel state, and resume without asking the owner to restate known work. Read only the relevant sections/files to avoid repeated analysis and unnecessary token use. This is a persistent repository workflow; ChatGPT cannot install a background listener that automatically captures every message while no conversation is active, so the protocol is applied whenever project work is resumed.
 
-### Current resume pointer — 2 November 2026
+### Current resume pointer — 2 November 2026, 23:59 IST
 
-- Canonical task register: `MASTER_TASK_REGISTER.md` (OPS-01, LANG-01).
-- Translator implementation: PR #127, branch `feature/section-specific-translators`, latest known head `32aff77525916879e72c86d0789f079940d0d516`.
-- GitHub Actions run `41465691147` was running the full regression suite at last check; poll it and reconcile any workflow-generated branch commit before judging exact-head results.
-- Vercel check on the PR head returned `build-rate-limit`; do not retry around the provider limit. Preview/browser QA and production publication remain open.
-- Main baseline for the new work: `3078767b72461fb83f50fabde03f0d796e65d0a8`. No production change has been made by PR #127 or this register update.
-- Next action: poll PR #127 CI; fix only demonstrated failures, then wait for a valid preview and verify all four selectors on desktop/mobile before merge/release.
+- Repository: `drkulkarnipg-lang/doctor-at-home`; default branch `main`.
+- Current main: `64a1e86fe657d5ad6da88f7f6611f276074de2e6`; recent-commit search and compare against `main` agree (identical, 0 ahead/0 behind). Latest commit changes `index.html` only, replacing the public/invoice contact email with `doctor@drkulkarnipg.com`. Tree/parent/signature metadata are not exposed by the current connector.
+- PR #127 is CLOSED/MERGED by the repository owner at 2026-11-02T18:27:01Z. Final PR head `27da7ea0a549583c2408a59adfce27e552521a9e`; merge commit `138fecef6a18b5e20901dec55e65663d44624d99`. Exact-head Actions run `41499629591` / job `125463450835` SUCCESS; log confirms checkout of the exact branch/head and 75 regression files, 1,437 calculator assertions, 1,064 lab assertions, 50 triage checks and section-translator tests. No submitted PR reviews were recorded.
+- PR #127 exact-head Vercel status is SUCCESS, target deployment `FRMSzb7nx5LAnMoiUmESYse9TmMX`; the bot's Ready preview alias is `home-visiting-icu-doctor-pune-git-feat-858bd8-drkulkarnipg-lang.vercel.app`. Preview is not Production. Browser context unavailable; four-selector desktop/mobile QA remains open. Machine translation warning remains mandatory; English is authoritative.
+- PR #128 is merged; OPS-01 remains in the dated Completed archive. Do not claim a background listener.
+- Latest main Vercel status is SUCCESS, target `GRJLxY8PPxh2rQw3S2TRK2ePYnrM`. PR #127 merge commit status is SUCCESS, target `4xuD19rKSHsEauA2YQeWzSNzrmb7`. Neither exposes Production environment, exact deployed commit or alias mapping.
+- Exact-main PUSH Actions for `64a1e86...` are NOT VERIFIED: the available wrapper is PR-triggered-only and returns no main run; direct Actions REST failed due network/DNS access. Do not transfer PR-head CI to main.
+- 26 PRs are open. Important comparisons to current main: #124 4 ahead/10 behind; #116 57/20; #119 3/13; #118 8/13; #120 1/13; #117 12/20; #115 23/20; #109 1/25; #97 7/85; #85 207/181. No other PR was merged.
+- Root, WWW, Vercel hostname and research API/RSS retrieval returned Internal Errors or DNS failures; browser list-tabs requires the originating browser context. These are tool-access failures, not proof of downtime.
+- Lab catalogue last verified at 111 unique adult IDs: 91 documented intervals, 2 assay-specific decision limits, 18 legacy entries blocked from automatic classification; target 750 remains open.
+- Official email source change: `index.html` hero, footer and invoice now show `doctor@drkulkarnipg.com`; targeted inspection of five related files found no old Gmail address. Full-repository/live mailbox verification remains open.
+- Next action: independently obtain Vercel Production deployment ID/environment/exact SHA and both custom-domain aliases; verify served HTML/assets/headers and live PubMed, Europe PMC, ClinicalTrials.gov, Crossref, RSS/Fetch; then test the four translators and complete clinical workflows on actual desktop/mobile using synthetic data. Keep release OPEN.
 
 ---
 
@@ -644,3 +650,14 @@ The owner clarified that the Patient Health Library language selector belongs im
 - Root, WWW, Vercel hostname and all four research API routes plus RSS: web retrieval returned Internal Error; container curl failed DNS resolution. Browser list-tabs requires the originating browser context. These are tool/network failures, not proof of downtime. No live API or desktop/mobile QA is claimed.
 - Lab catalogue remains 111 distinct adult IDs (91 documented intervals, 2 assay-specific decision limits, 18 legacy blocked); target 750 remains open. Preserve all approved site features, original backup, doctor signature/PDF stamping and patient-data safeguards.
 - Next actions: (1) after the preview quota window, recheck PR #127 Vercel; (2) sync PR #127 to current main without force-push and rerun exact-head full regression; (3) inspect a preview built from the exact new head on desktop/mobile before merge; (4) independently establish main deployment environment/commit and both custom-domain aliases, then test live APIs/Fetch and real desktop/mobile workflows. Keep release OPEN.
+
+
+### Latest verification checkpoint — 2 November 2026, 23:59 IST
+
+- Main SHA `64a1e86fe657d5ad6da88f7f6611f276074de2e6` is independently identical to `main`; changed-file scope is `index.html` only. Current commit tree/parent/signature fields were not exposed. Exact-main push Actions could not be retrieved through the PR-only wrapper or direct REST/network; do not claim current-main CI passed.
+- PR #127 was merged by the repository owner, not by this agent. Final head `27da7ea0a549583c2408a59adfce27e552521a9e`, merge commit `138fecef6a18b5e20901dec55e65663d44624d99`; exact-head run `41499629591` / job `125463450835` SUCCESS, 75 regression files, 1,437 calculator assertions, 1,064 lab assertions, 50 triage checks. Four section-translator tests passed. Vercel exact-head status SUCCESS points to `FRMSzb7nx5LAnMoiUmESYse9TmMX` and a Ready preview alias, but no connected-browser desktop/mobile QA was possible. No submitted PR reviews were found.
+- Main Vercel status SUCCESS points to `GRJLxY8PPxh2rQw3S2TRK2ePYnrM`; PR merge commit status SUCCESS points to `4xuD19rKSHsEauA2YQeWzSNzrmb7`. Production environment, exact deployed commit and custom-domain aliases remain unverified.
+- The latest main commit updates the public hero, footer and invoice email to `doctor@drkulkarnipg.com`. Targeted source checks found no old Gmail address in five related files; live website/mailbox verification remains open.
+- Root/WWW/Vercel/research endpoint retrieval and connected browser access failed at the tool/network layer. No downtime conclusion or live API/device claim is made.
+- 26 PRs remain open; no other PR was merged. Important stale/diverged heads are recorded in the current resume pointer above. Lab catalogue remains 111/750 (91 intervals, 2 decision limits, 18 legacy blocked).
+- Next action: Production deployment identity + exact SHA + both aliases, then served asset/header and live API checks, followed by real desktop/mobile functional QA. Preserve all existing features, external links, patient articles, approved signature/PDF stamping and privacy safeguards. Keep release OPEN.
