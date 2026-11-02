@@ -6,7 +6,7 @@ const api=fs.readFileSync('api/clinical-cloud.js','utf8');
 const reset=fs.readFileSync('password-recovery.js','utf8');
 for(const key of ['SUPABASE_URL','SUPABASE_PUBLISHABLE_KEY','CLINIC_OWNER_USER_ID','CLINIC_OWNER_EMAIL'])assert.ok(setup.includes('`'+key+'`'),'Runbook must document '+key);
 assert.ok(setup.includes('/password-reset.html'),'Runbook must document the exact password-recovery redirect');
-assert.ok(setup.includes('First-time account creation is an administrator/provider-dashboard step'),'Runbook must not imply public account creation exists');
+assert.ok(setup.includes('verified clinic owner Auth identity already exists'),'Runbook must reflect the existing owner account and avoid duplicate provisioning');
 assert.ok(setup.includes('MFA is not currently verified as enabled'),'Runbook must not claim unverified MFA');
 assert.ok(passkeys.includes('activation not completed'),'Passkey setup must remain explicitly conditional on provider configuration');
 assert.ok(api.includes("env.CLINIC_OWNER_EMAIL")&&api.includes("reset-request"),'Recovery implementation must use configured owner email');
@@ -15,5 +15,5 @@ assert.ok(api.includes("create_user:false")&&api.includes("session.user?.id!==en
 assert.ok(setup.includes('{{ .Token }}')&&setup.includes('SMTP Settings')&&setup.includes('10 minutes'),'Runbook must specify numeric OTP template, production SMTP and short expiry');
 assert.ok(api.includes("password.length<12"),'Server must enforce the minimum password length');
 assert.ok(reset.includes("history.replaceState")&&reset.includes("accessToken=''"),'Recovery token must be removed from URL history and cleared from memory');
-assert.ok(setup.includes('Disable public signup'),'Runbook must explicitly preserve the no-public-signup rule');
+assert.ok(setup.includes('Keep public signup disabled'),'Runbook must explicitly preserve the no-public-signup rule');
 console.log('Owner setup documentation checks passed: environment, password recovery, first-time setup, passkey activation and token-handling claims align with source.');
