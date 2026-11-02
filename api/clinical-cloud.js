@@ -1,7 +1,7 @@
 'use strict';
 const {randomUUID}=require('node:crypto');
 const {patientCode,consent:validateConsent}=require('../server/patient-privacy');
-const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,ID=/^pt-[0-9a-f-]{36}$/i;
+const COOKIE='__Host-clinicSession',REFRESH_COOKIE='__Host-clinicRefresh',PENDING_COOKIE='__Host-clinicMfaPending',PENDING_REMEMBER='__Host-clinicMfaRemember',OWNER_PHONE='+919561394341',UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,ID=/^pt-[0-9a-f-]{36}$/i;
 const FIELDS=['date','time','sbp','dbp','glucose','context','weight','height','bmi','pulse','spo2','temperature','creatinine','hba1c','notes'];
 function validatePatient(p){if(!p||!ID.test(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!Array.isArray(p.readings)||p.readings.length>2000)throw Error('Invalid patient history.');const readings=p.readings.map(r=>{if(!r||typeof r!=='object'||Array.isArray(r))throw Error('Invalid entry.');return Object.fromEntries(FIELDS.map(k=>{const v=r[k]??'';if(typeof v!=='string'||v.length>(k==='notes'?2000:100))throw Error('Invalid measurement field.');return[k,v];}));});if(p.revision!==null&&p.revision!==undefined&&!UUID.test(p.revision))throw Error('Invalid revision.');return{id:p.id,name:patientCode(p.id),readings,revision:p.revision||null,cloudConsent:validateConsent(p.cloudConsent)};}
 const REGISTER_FIELDS={
@@ -37,7 +37,7 @@ function createHandler({env=process.env,request=(...args)=>fetch(...args)}={}){r
 res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','private, no-store');res.setHeader('Vercel-CDN-Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Vary','Cookie');
 const reply=(code,data)=>res.status(code).json(data),cookieHeaders=[];
 const setCookie=(name,token,ttl)=>{cookieHeaders.push(`${name}=${encodeURIComponent(token)}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${ttl}`);res.setHeader('Set-Cookie',cookieHeaders.length===1?cookieHeaders[0]:cookieHeaders.slice());};
-const cookie=(token='',ttl=0)=>setCookie(COOKIE,token,ttl),refreshCookie=(token='',ttl=0)=>setCookie(REFRESH_COOKIE,token,ttl),clearCookies=()=>{cookie();refreshCookie();};
+const cookie=(token='',ttl=0)=>setCookie(COOKIE,token,ttl),refreshCookie=(token='',ttl=0)=>setCookie(REFRESH_COOKIE,token,ttl),pendingCookie=(token='',ttl=0)=>setCookie(PENDING_COOKIE,token,ttl),pendingRemember=(value='',ttl=0)=>setCookie(PENDING_REMEMBER,value,ttl),clearCookies=()=>{cookie();refreshCookie();pendingCookie();pendingRemember();};
 const ACCESS_TTL=900,REMEMBER_TTL=30*24*60*60;
 const action=String(req.query?.action||'session'),method=req.method;
 if(!['GET','POST'].includes(method)){res.setHeader('Allow','GET, POST');return reply(405,{message:'Unsupported method.'});}
@@ -54,30 +54,70 @@ const raw=cookiePairs.find(x=>x.startsWith(COOKIE+'=')),refreshRaw=cookiePairs.f
 try{token=raw?decodeURIComponent(raw.slice(COOKIE.length+1)):'';}catch{token='';}
 try{refreshToken=refreshRaw?decodeURIComponent(refreshRaw.slice(REFRESH_COOKIE.length+1)):'';}catch{refreshToken='';}
 if(action==='login'&&method==='POST'){
+clearCookies();
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner login is not configured.'});
-if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
-if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(401,{message:'Cloud sign-in was not accepted.'});
+if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail)||! /^[a-z0-9._-]{3,80}$/.test(ownerUsername))return reply(503,{message:'Clinic owner username login is not configured.'});
+if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
+if(suppliedUsername!==ownerUsername)return reply(401,{message:'Cloud sign-in was not accepted.'});
 const response=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:body.password})});
-if(!response.ok)return reply(response.status===429?429:401,{message:response.status===429?'Too many login attempts. Try later.':'Cloud sign-in was not accepted.'});const data=await response.json();
+if(!response.ok)return reply(response.status===429?429:401,{message:response.status===429?'Too many login attempts. Try later.':'Cloud sign-in was not accepted.'});
+const data=await response.json();
 if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'){clearCookies();return reply(403,{message:'This account is not the clinic owner.'});}
-if(body.rememberDevice===true&&typeof data.refresh_token!=='string'){clearCookies();return reply(502,{message:'Remembered sign-in could not be enabled. Sign in again without remembering this device.'});}
-cookie(data.access_token,Math.min(ACCESS_TTL,Number(data.expires_in)||ACCESS_TTL));
-if(body.rememberDevice===true)refreshCookie(data.refresh_token,REMEMBER_TTL);else if(refreshToken)refreshCookie('',0);
-return reply(200,{configured:true,signedIn:true,remembered:body.rememberDevice===true});
+const authHeaders={Authorization:'Bearer '+data.access_token,'Content-Type':'application/json'};
+const factorsResponse=await api('/auth/v1/factors',{headers:authHeaders});
+if(!factorsResponse.ok)return reply(503,{message:'Mandatory phone verification is unavailable. Workstation access is blocked.'});
+const factorData=await factorsResponse.json(),factors=Array.isArray(factorData.all)?factorData.all:Array.isArray(factorData.phone)?factorData.phone:[];
+let factor=factors.find(x=>x.factor_type==='phone'&&x.phone===OWNER_PHONE&&x.status==='verified');
+if(!factor)factor=factors.find(x=>x.factor_type==='phone'&&x.phone===OWNER_PHONE&&x.status!=='verified');
+if(!factor){
+ const enrolled=await api('/auth/v1/factors',{method:'POST',headers:authHeaders,body:JSON.stringify({factor_type:'phone',phone:OWNER_PHONE,friendly_name:'Doctor Workstation primary phone'})});
+ if(!enrolled.ok)return reply(503,{message:'Phone MFA enrollment is not configured. Workstation access is blocked; no password-only login is allowed.'});
+ factor=await enrolled.json();
+}
+if(typeof factor.id!=='string')return reply(503,{message:'Phone MFA factor could not be established. Workstation access is blocked.'});
+const challenge=await api('/auth/v1/factors/'+encodeURIComponent(factor.id)+'/challenge',{method:'POST',headers:authHeaders,body:JSON.stringify({})});
+if(!challenge.ok)return reply(503,{message:'SMS OTP delivery is not configured or unavailable. Workstation access is blocked; no password-only login is allowed.'});
+const challengeData=await challenge.json();
+if(typeof challengeData.id!=='string')return reply(502,{message:'The SMS challenge could not be confirmed. Workstation access is blocked.'});
+pendingCookie(data.access_token,300);
+pendingRemember('0',300);
+return reply(200,{configured:true,mfaRequired:true,phone:'••••••••341',challengeId:challengeData.id,factorId:factor.id,message:'Enter the one-time code sent to the registered clinic mobile.'});
+}
+if(action==='mfa-verify'&&method==='POST'){
+const pendingRaw=cookiePairs.find(x=>x.startsWith(PENDING_COOKIE+'='));
+let pendingToken='';try{pendingToken=pendingRaw?decodeURIComponent(pendingRaw.slice(PENDING_COOKIE.length+1)):'';}catch{}
+const factorId=typeof body.factorId==='string'?body.factorId:'',challengeId=typeof body.challengeId==='string'?body.challengeId:'',code=typeof body.code==='string'?body.code.trim():'';
+if(!pendingToken||!UUID.test(factorId)||!UUID.test(challengeId)||!/^\d{6,10}$/.test(code))return reply(401,{message:'The verification request expired. Sign in again.'});
+const pendingHeaders={Authorization:'Bearer '+pendingToken,'Content-Type':'application/json'};
+const enrolledFactors=await api('/auth/v1/factors',{headers:pendingHeaders});
+if(!enrolledFactors.ok){clearCookies();return reply(401,{message:'The registered phone factor could not be confirmed. Sign in again.'});}
+const factorSet=await enrolledFactors.json(),availableFactors=Array.isArray(factorSet.all)?factorSet.all:Array.isArray(factorSet.phone)?factorSet.phone:[];
+if(!availableFactors.some(item=>item.id===factorId&&item.factor_type==='phone'&&item.phone===OWNER_PHONE)){clearCookies();return reply(403,{message:'This OTP factor is not the registered clinic mobile.'});}
+const pendingUser=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+pendingToken}});
+if(!pendingUser.ok||((await pendingUser.json()).id!==env.CLINIC_OWNER_USER_ID)){clearCookies();return reply(401,{message:'The pending owner login expired. Sign in again.'});}
+const verified=await api('/auth/v1/factors/'+encodeURIComponent(factorId)+'/verify',{method:'POST',headers:pendingHeaders,body:JSON.stringify({challenge_id:challengeId,code})});
+if(!verified.ok)return reply(verified.status===429?429:401,{message:verified.status===429?'Too many OTP attempts. Wait before trying again.':'The one-time code was not accepted. Request a new code and retry.'});
+const session=await verified.json();
+if(typeof session.access_token!=='string'||typeof session.refresh_token!=='string'||session.user?.id!==env.CLINIC_OWNER_USER_ID){clearCookies();return reply(502,{message:'The verified owner session could not be established.'});}
+cookie(session.access_token,Math.min(ACCESS_TTL,Number(session.expires_in)||ACCESS_TTL));
+const rememberRaw=cookiePairs.find(x=>x.startsWith(PENDING_REMEMBER+'='));
+const remember=rememberRaw?rememberRaw.slice(PENDING_REMEMBER.length+1)==='1':false;
+if(remember)refreshCookie(session.refresh_token,REMEMBER_TTL);else refreshCookie('',0);
+pendingCookie('',0);pendingRemember('',0);
+return reply(200,{configured:true,signedIn:true,remembered:remember,mfaVerified:true});
 }
 if(action==='reset-request'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
+if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail)||! /^[a-z0-9._-]{3,80}$/.test(ownerUsername))return reply(503,{message:'Username-based password recovery is not configured. No password was changed.'});
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
-if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254)return reply(400,{message:'Enter your clinic username.'});
+if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail)return reply(400,{message:'Enter your clinic username.'});
 const generic='If this is the configured clinic owner account, a recovery email will be sent.';
-if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(200,{message:generic});
+if(suppliedUsername!==ownerUsername)return reply(200,{message:generic});
 const redirect='https://home-visiting-icu-doctor.vercel.app/password-reset.html';
 const sent=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
 if(sent.status===429)return reply(429,{message:'Too many recovery requests. Wait before trying again.'});
@@ -102,6 +142,24 @@ if(!token&&!user){if(refreshToken)clearCookies();return reply(action==='session'
 if(!user){const auth=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+token}});if(!auth.ok)user=await renew();else user=await auth.json();}
 if(!user){clearCookies();return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Session expired. Sign in again.'});}
 if(user.id!==env.CLINIC_OWNER_USER_ID){clearCookies();return reply(403,{message:'Owner access required.'});}
+let claims={};try{claims=JSON.parse(Buffer.from(String(token||'').split('.')[1]||'','base64url').toString('utf8'));}catch{}
+if(claims.aal!=='aal2'){clearCookies();return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Phone OTP verification is mandatory. Sign in again and complete the SMS challenge.'});}
+if(action==='change-password'&&method==='POST'){
+const currentPassword=typeof body.currentPassword==='string'?body.currentPassword:'';
+const newPassword=typeof body.newPassword==='string'?body.newPassword:'';
+const confirmPassword=typeof body.confirmPassword==='string'?body.confirmPassword:'';
+if(!currentPassword||newPassword.length<12||newPassword.length>1024||newPassword!==confirmPassword)return reply(400,{message:'Enter your current password and the same new password twice (minimum 12 characters).'});
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+const reauth=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:currentPassword})});
+if(!reauth.ok)return reply(401,{message:'Current password was not accepted. Password unchanged.'});
+const reauthData=await reauth.json();
+if(reauthData.user?.id!==env.CLINIC_OWNER_USER_ID)return reply(403,{message:'Owner verification failed. Password unchanged.'});
+const updated=await api('/auth/v1/user',{method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({password:newPassword})});
+if(updated.status===429)return reply(429,{message:'Too many password changes. Wait and try again.'});
+if(!updated.ok)return reply(400,{message:'Password update failed. Password unchanged.'});
+clearCookies();
+return reply(200,{updated:true,signedOut:true,message:'Password changed. Sign in again with username, new password and phone OTP.'});
+}
 if(action==='session'&&method==='GET')return reply(200,{configured:true,signedIn:true,remembered:!!refreshToken});
 const headers={Authorization:'Bearer '+token,'Content-Type':'application/json',Prefer:'return=representation'};
 if(action==='list'&&method==='GET'){const after=String(req.query?.after||'');if(after&&!ID.test(after))return reply(400,{message:'Invalid page cursor.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,revision,updated_at&order=id.asc&limit=100'+(after?'&id=gt.'+encodeURIComponent(after):''),{headers});if(!r.ok)throw Error();const records=await r.json();return reply(200,{records,next:records.length===100?records.at(-1).id:null});}
