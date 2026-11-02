@@ -83,7 +83,7 @@ if(!challenge.ok)return reply(503,{message:'SMS OTP delivery is not configured o
 const challengeData=await challenge.json();
 if(typeof challengeData.id!=='string')return reply(502,{message:'The SMS challenge could not be confirmed. Workstation access is blocked.'});
 pendingCookie(data.access_token,300);
-pendingRemember(body.rememberDevice===true?'1':'0',300);
+pendingRemember('0',300);
 return reply(200,{configured:true,mfaRequired:true,phone:'••••••••341',challengeId:challengeData.id,factorId:factor.id,message:'Enter the one-time code sent to the registered clinic mobile.'});
 }
 if(action==='mfa-verify'&&method==='POST'){
