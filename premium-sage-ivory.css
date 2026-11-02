@@ -45,7 +45,7 @@ body{
 }
 #publicPortal :is(h1,h2,h3,h4,h5){color:var(--site-ink)!important;letter-spacing:-.018em}
 #publicPortal p,#publicPortal li{color:#56675e}
-#publicPortal .section-eyebrow{color:#718675!important;letter-spacing:.13em}
+#publicPortal .section-eyebrow{color:#718675!important;letter-spacing:.13em;text-decoration:underline;text-decoration-color:var(--site-accent);text-decoration-thickness:1px;text-underline-offset:5px}
 #publicPortal :is(.portal-hero,.hero-copy,.dispatch-card,.care-compass,.care-pathways>a,
 .home-care-section,.diet-section,#exploreHealthResources,.health-library,
 #bookingSection,.research-review,#patientFaq,.content-card,.info-card,
