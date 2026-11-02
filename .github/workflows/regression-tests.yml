@@ -33,16 +33,38 @@ jobs:
         run: npm ci
       - name: Install DOM test dependency without changing the lockfile
         run: npm install --no-save --package-lock=false jsdom@26.1.0
+      - name: Check whether bilingual guide PDFs need rebuilding
+        id: guide-pdfs
+        shell: bash
+        run: |
+          node - <<'NODE' >> "$GITHUB_OUTPUT"
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const crypto = require('node:crypto');
+          const education = require('./patient-education-data.js');
+          const root = path.resolve('assets/guides');
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
+          const hash = crypto.createHash('sha256').update(fs.readFileSync('patient-education-data.js')).digest('hex');
+          const entries = Object.entries(manifest);
+          const valid = entries.length === education.articles.length * 2 && entries.every(([name, item]) => {
+            const file = path.join(root, name);
+            return fs.existsSync(file) && item.source_sha256 === hash && item.sha256 === crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+          });
+          console.log('needs_rebuild=' + (valid ? 'false' : 'true'));
+          NODE
       - name: Set up Python for complete bilingual guide PDFs
+        if: steps.guide-pdfs.outputs.needs_rebuild == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install PDF rendering dependencies
+        if: steps.guide-pdfs.outputs.needs_rebuild == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info
           python -m pip install -r scripts/requirements-guide-pdfs.txt
       - name: Rebuild every bilingual patient guide PDF from the current source
+        if: steps.guide-pdfs.outputs.needs_rebuild == 'true'
         run: |
           node scripts/export-patient-guide-content.cjs
           python scripts/build-patient-guide-pdfs.py
