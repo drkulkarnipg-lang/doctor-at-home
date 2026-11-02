@@ -225,3 +225,22 @@ a[href],button,summary,select,input[type=button],input[type=submit],input[type=r
     border-color:rgba(111,153,135,.38);color:#3e6557;box-shadow:0 3px 12px rgba(54,86,72,.045)
   }
 }
+
+
+/* Mobile language dropdown must remain in document flow, never cover portal navigation. */
+@media(max-width:640px){
+  .site-header .language-control[open] > div.language-row{
+    position:static!important;
+    inset:auto!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    width:100%!important;
+    max-width:100%!important;
+    max-height:none!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+  }
+}
+.site-header .language-control > summary{min-height:44px}
