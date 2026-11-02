@@ -18,9 +18,17 @@ const fixtures={
 26:[{hr:100,sbp:80},1.25],27:[{age:40,rest:60,intensity:60},132],
 28:[{age:40,female:'1',bili:2.5,inr:1.8,cr:1.4,na:130,albumin:2.8,dialysis:'0'},26],
 29:[{bili:1,albumin:4,inr:1.2,ascites:'1',enceph:'1'},5],
-30:[{temp:'0',map:'0',hr:'0',rr:'0',oxygen:'low',oxygenValue:90,acid:'ph',ph:'0',na:'0',k:'0',cr:'0',arf:'0',hct:'0',wbc:'0',gcs:15,age:40,chronic:'0'},0]
+30:[{temp:'0',map:'0',hr:'0',rr:'0',oxygen:'low',oxygenValue:90,acid:'ph',ph:'0',na:'0',k:'0',cr:'0',arf:'0',hct:'0',wbc:'0',gcs:15,age:40,chronic:'0'},0],
+31:[{height:175,weight:70},1.8446619684315546],
+32:[{height:175,sex:'male'},70.46456692913385],
+33:[{height:175,actual:100,sex:'male'},82.27874015748031],
+34:[{sbp:120,dbp:80},40],
+35:[{supineSbp:130,supineDbp:80,standingSbp:105,standingDbp:70},-25],
+36:[{age:60,scr:1,sex:'male'},86.16262077966914],
+37:[{albumin:30,creatinine:100},30],
+38:[{age:40,fio2:21,paco2:40,pao2:80},19.73]
 };
-assert.equal(calculators.length,30);assert.equal(new Set(calculators.map(c=>c.id)).size,30);assert.ok(calculators.every(c=>c.note&&c.note.trim()&&/^https:\/\//.test(c.url)),'Every calculator must include a reference/interpretation note and a source link');const a1c=calculators.find(c=>c.id===5);assert.match(a1c.note,/<5\.7%/);assert.match(a1c.note,/5\.7–6\.4%/);assert.match(a1c.note,/≥6\.5%/);assert.match(a1c.note,/not personal treatment targets/);assert.equal(a1c.interpretationUrl,'https://diabetes.org/about-diabetes/diagnosis');checks+=7;
+assert.equal(calculators.length,38);assert.equal(new Set(calculators.map(c=>c.id)).size,30);assert.ok(calculators.every(c=>c.note&&c.note.trim()&&/^https:\/\//.test(c.url)),'Every calculator must include a reference/interpretation note and a source link');const a1c=calculators.find(c=>c.id===5);assert.match(a1c.note,/<5\.7%/);assert.match(a1c.note,/5\.7–6\.4%/);assert.match(a1c.note,/≥6\.5%/);assert.match(a1c.note,/not personal treatment targets/);assert.equal(a1c.interpretationUrl,'https://diabetes.org/about-diabetes/diagnosis');checks+=7;
 for(const c of calculators){const [v,x]=fixtures[c.id];near(c.id,v,x);reject(c.id,{});for(const field of c.fields){if(field.when&&!field.when(v))continue;for(const bad of ['',null,undefined,'garbage',field.type==='number'?Infinity:'unlisted'])reject(c.id,{...v,[field.key]:bad});if(field.type==='number'){reject(c.id,{...v,[field.key]:field.min-1});if(Number.isFinite(field.max))reject(c.id,{...v,[field.key]:field.max+1});}}}
 near(4,{...fixtures[4][0],sex:'female'},68);
 assert.equal(calculate(6,{eye:'4',verbal:'NT',motor:'6'}).value,null);checks++;
@@ -50,5 +58,9 @@ for(const [p,x] of [[71,0],[70,1],[61,1],[60,3],[55,3],[54,4]])near(30,{...ap,ox
 for(const [p,x] of [[199,0],[200,2],[350,3],[500,4]])near(30,{...ap,oxygen:'high',oxygenValue:p},x);
 near(30,{...ap,acid:'hco3',ph:'4',hco3:'0'},0);reject(30,{...ap,acid:'hco3'});near(30,{...ap,cr:'4',arf:'1'},8);reject(30,{...ap,gcs:14.5});
 near(30,{temp:'4',map:'4',hr:'4',rr:'4',oxygen:'high',oxygenValue:600,acid:'ph',ph:'4',na:'4',k:'4',cr:'4',arf:'1',hct:'4',wbc:'4',gcs:3,age:80,chronic:'5'},71);
+near(35,{supineSbp:130,supineDbp:80,standingSbp:110,standingDbp:75},-20);assert.match(calculate(35,fixtures[35][0]).text,/Orthostatic hypotension threshold reached/);checks++;
+assert.match(calculate(36,{...fixtures[36][0],scr:0.5}).text,/G1/);assert.match(calculate(36,{...fixtures[36][0],scr:5}).text,/G5/);checks+=2;
+assert.match(calculate(37,{albumin:29,creatinine:100}).text,/A1/);assert.match(calculate(37,{albumin:301,creatinine:100}).text,/A3/);checks+=2;
+assert.match(calculate(38,{...fixtures[38][0],fio2:50}).text,/A–a gradient/);reject(38,{...fixtures[38][0],pao2:300});checks+=1;
 const norton=calculators.find(c=>c.id===25);assert.equal(norton.url,'https://www.ahrq.gov/patient-safety/settings/hospital/resource/pressureulcer/tool/pu7b.html');assert.ok(!norton.url.includes('www26.ha.org.hk'));checks+=2;
-console.log(`${checks} assertions passed across all 30 calculators.`);
+console.log(`${checks} assertions passed across all 38 calculators.`);
