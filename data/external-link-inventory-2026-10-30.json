@@ -212,9 +212,9 @@
         51,
         54
       ],
-      "classification": "external-destination",
+      "classification": "service-endpoint",
       "verification_status": "not-live-checked",
-      "notes": "Extracted from active source; reachability and intended destination not yet independently verified."
+      "notes": "Dynamic/runtime endpoint; requires context-specific verification, not a public-link HEAD check."
     },
     {
       "url": "https://api.crossref.org/works",
