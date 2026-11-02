@@ -1,0 +1,27 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const helper = fs.readFileSync(path.join(root, 'patient-helper.js'), 'utf8');
+const edge = fs.readFileSync(path.join(root, 'supabase/functions/patient-site-assistant/index.ts'), 'utf8');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+
+new Function(helper);
+assert.match(helper, /patient-site-assistant/);
+assert.match(helper, /AI_SETUP_REQUIRED/);
+assert.match(helper, /apikey/);
+assert.match(html, /AI website navigator/);
+assert.match(edge, /AI_API_KEY/);
+assert.match(edge, /OPENROUTER_API_KEY/);
+assert.match(edge, /SUPABASE_PUBLISHABLE_KEYS/);
+assert.match(edge, /emergencyPattern/);
+assert.match(edge, /clinicalPattern/);
+assert.match(edge, /112 in India/);
+assert.match(edge, /Do not provide medical counselling/);
+assert.match(edge, /max_tokens: 350/);
+assert.match(edge, /AbortController/);
+assert.match(edge, /Access-Control-Allow-Origin/);
+assert.match(edge, /Too many requests/);
+assert.doesNotMatch(edge, /localStorage|insert\(|\.from\(/);
+console.log('Patient AI assistant guardrails and frontend integration checks passed.');

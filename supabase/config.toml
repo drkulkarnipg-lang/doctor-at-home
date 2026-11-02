@@ -1,0 +1,2 @@
+[functions.patient-site-assistant]
+verify_jwt = false

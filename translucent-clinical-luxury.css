@@ -1,0 +1,529 @@
+/* DR. KULKARNI — TRANSLUCENT CLINICAL LUXURY DESIGN SYSTEM
+   Phase 1: public Home / Overview prototype only.
+   Existing content, links, scripts, IDs and clinical workflows remain untouched.
+*/
+:root{
+  --dkl-sky-0:#f7fbff;
+  --dkl-sky-1:#edf5fb;
+  --dkl-ivory:#fffefa;
+  --dkl-glass:rgba(255,255,255,.76);
+  --dkl-glass-strong:rgba(255,255,255,.9);
+  --dkl-sage:#eaf2ec;
+  --dkl-powder:#e8f1fb;
+  --dkl-blush:#f8eef1;
+  --dkl-lavender:#f1eff9;
+  --dkl-ink:#24384b;
+  --dkl-muted:#526577;
+  --dkl-line:rgba(139,163,184,.26);
+  --dkl-blue:#315b7b;
+  --dkl-blue-deep:#203e58;
+  --dkl-radius:22px;
+  --dkl-shadow:0 16px 42px rgba(48,76,101,.075),0 2px 8px rgba(48,76,101,.035);
+  --dkl-shadow-hover:0 20px 48px rgba(48,76,101,.12),0 4px 12px rgba(48,76,101,.055);
+}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+.site-header{
+  background:rgba(249,252,255,.88)!important;
+  border-color:var(--dkl-line)!important;
+  box-shadow:0 8px 30px rgba(53,82,107,.055)!important;
+  -webkit-backdrop-filter:saturate(145%) blur(16px);
+  backdrop-filter:saturate(145%) blur(16px);
+}
+.site-header .doctor-brand>div:first-child{
+  border:1px solid rgba(130,159,184,.42)!important;
+  box-shadow:0 5px 18px rgba(47,80,109,.09)!important;
+}
+.site-header .doctor-wordmark{color:var(--dkl-blue-deep)!important;letter-spacing:.045em}
+.site-header .doctor-brand p{color:var(--dkl-muted)!important}
+.site-header .doctor-brand p:nth-of-type(1){color:#47718d!important}
+.site-header>div:first-child{padding-top:12px!important;padding-bottom:12px!important}
+.site-header>div>div:last-child>.bg-white{
+  border:1px solid var(--dkl-line)!important;
+  background:rgba(255,255,255,.74)!important;
+  box-shadow:0 4px 14px rgba(45,75,101,.045)!important;
+  border-radius:14px!important;
+  padding:4px!important;
+}
+#navPublicBtn{background:linear-gradient(135deg,#315b7b,#426f8e)!important;box-shadow:0 5px 14px rgba(49,91,123,.16)!important}
+#navDoctorBtn{color:var(--dkl-ink)!important}
+.site-header .language-control>summary,.site-header .site-language-picker{
+  border:1px solid var(--dkl-line)!important;border-radius:12px!important;
+  background:rgba(255,255,255,.82)!important;color:var(--dkl-ink)!important;
+}
+.site-header a[href^="tel:"]{
+  background:linear-gradient(135deg,#527e8d,#3e6879)!important;
+  box-shadow:0 6px 18px rgba(54,99,119,.16)!important;
+}
+.portal-nav{
+  display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
+  max-width:1280px;margin:0 auto;padding:10px 16px 12px!important;
+  border-top:1px solid rgba(139,163,184,.15);
+}
+.portal-nav a{
+  min-height:42px;padding:10px 15px!important;border:1px solid transparent!important;
+  border-radius:999px!important;color:#526577!important;
+  font-size:12px;font-weight:650;letter-spacing:.01em;
+  transition:background-color .18s,border-color .18s,color .18s,transform .18s;
+}
+.portal-nav a[aria-selected="true"]{
+  color:var(--dkl-blue-deep)!important;background:rgba(225,238,248,.78)!important;
+  border-color:rgba(130,164,190,.28)!important;box-shadow:inset 0 1px rgba(255,255,255,.8);
+}
+.portal-nav a:hover{background:rgba(235,243,249,.9)!important;color:var(--dkl-blue-deep)!important;transform:translateY(-1px)}
+#publicPortal{
+  max-width:1320px!important;
+  padding-top:clamp(22px,4vw,48px)!important;
+  padding-bottom:48px!important;
+  color:var(--dkl-ink);
+  background:
+    radial-gradient(ellipse at 12% 4%,rgba(218,235,248,.54),transparent 35%),
+    radial-gradient(ellipse at 92% 18%,rgba(239,234,246,.42),transparent 31%),
+    linear-gradient(180deg,rgba(248,251,255,.72),rgba(255,254,250,.48) 48%,rgba(247,250,252,.72));
+  border-radius:30px 30px 0 0;
+}
+#portalPanelOverview{gap:clamp(24px,4vw,42px)!important}
+#portalPanelOverview .portal-hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1.42fr) minmax(280px,.78fr);
+  gap:clamp(22px,4vw,54px);align-items:center;
+  padding:clamp(28px,5vw,68px)!important;
+  border:1px solid rgba(139,166,190,.26)!important;border-radius:30px!important;
+  background:linear-gradient(118deg,rgba(255,255,255,.9),rgba(238,246,252,.82) 58%,rgba(247,243,249,.78))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .portal-hero:before{
+  content:"";position:absolute;z-index:-1;width:420px;height:420px;right:16%;top:-270px;
+  border-radius:50%;background:radial-gradient(circle,rgba(205,226,242,.48),rgba(205,226,242,0) 70%);
+}
+#portalPanelOverview .hero-copy{max-width:760px}
+#portalPanelOverview .section-eyebrow{
+  color:#5d8299!important;font-size:10px!important;font-weight:750!important;
+  letter-spacing:.17em!important;text-transform:uppercase;
+}
+#portalPanelOverview .original-care-hero{
+  color:var(--dkl-blue-deep)!important;
+  font-size:clamp(38px,5.5vw,68px)!important;line-height:1.08!important;
+  letter-spacing:-.045em!important;font-weight:600!important;
+  text-wrap:balance;margin:18px 0 20px!important;
+}
+#portalPanelOverview .original-care-hero em{color:#66899d!important;font-style:normal}
+#portalPanelOverview .hero-copy>p{
+  max-width:650px;color:#526577!important;font-size:clamp(14px,1.35vw,17px)!important;
+  line-height:1.85!important;
+}
+#portalPanelOverview .hero-primary-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;padding:12px 18px!important;border-radius:13px!important;
+  border:1px solid rgba(124,157,183,.32)!important;
+  font-size:12px!important;font-weight:700!important;line-height:1.35;
+  transition:transform .18s,box-shadow .18s,background-color .18s,border-color .18s;
+}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(135deg,#315b7b,#47758f)!important;color:#fff!important;
+  border-color:transparent!important;box-shadow:0 9px 22px rgba(49,91,123,.17)!important;
+}
+#portalPanelOverview .hero-primary-actions .secondary-link{
+  background:rgba(255,255,255,.74)!important;color:var(--dkl-blue-deep)!important;
+}
+#portalPanelOverview .hero-primary-actions a:hover,
+#portalPanelOverview .hero-contact-actions a:hover,
+#portalPanelOverview .compass-credentials:hover{
+  transform:translateY(-2px);box-shadow:var(--dkl-shadow-hover)!important;
+}
+#portalPanelOverview .dispatch-card{
+  padding:clamp(22px,3vw,34px)!important;border:1px solid rgba(136,165,187,.32)!important;
+  border-radius:24px!important;background:rgba(255,255,255,.68)!important;
+  box-shadow:0 12px 36px rgba(53,83,106,.07)!important;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+#portalPanelOverview .care-compass .care-mark{color:#7899ad!important;max-width:100%;height:auto}
+#portalPanelOverview .care-compass h3{
+  color:var(--dkl-blue-deep)!important;font-size:clamp(26px,3vw,36px)!important;
+  line-height:1.14!important;letter-spacing:-.035em!important;margin:12px 0!important;
+}
+#portalPanelOverview .care-compass>p{color:#526577!important;line-height:1.75!important}
+#portalPanelOverview .hero-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+#portalPanelOverview .hero-contact-actions a{background:rgba(245,249,252,.9)!important;color:var(--dkl-blue-deep)!important;padding:10px 12px!important}
+#portalPanelOverview .hero-contact-actions .hero-call{grid-column:1/-1;background:#e8f1f7!important}
+#portalPanelOverview .compass-credentials{
+  width:100%;margin-top:12px;background:rgba(255,255,255,.65)!important;color:#526577!important;
+}
+#portalPanelOverview .care-pathways{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  margin-top:4px!important;
+}
+#portalPanelOverview .care-pathways>a{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
+  min-height:104px;padding:20px 22px!important;
+  border:1px solid var(--dkl-line)!important;border-radius:20px!important;
+  background:rgba(255,255,255,.76)!important;color:var(--dkl-ink)!important;
+  box-shadow:0 8px 24px rgba(49,77,100,.045)!important;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+#portalPanelOverview .care-pathways>a:hover{
+  transform:translateY(-3px);border-color:rgba(112,151,180,.42)!important;box-shadow:var(--dkl-shadow-hover)!important;
+}
+#portalPanelOverview .pathway-number{color:#7093a8!important;font-size:11px!important;letter-spacing:.12em}
+#portalPanelOverview .care-pathways strong{color:var(--dkl-blue-deep)!important;font-size:14px}
+#portalPanelOverview .care-pathways p{color:#637486!important;font-size:12px;line-height:1.55;margin-top:5px}
+#portalPanelOverview .care-pathways>a>span:last-child{color:#7294a8!important}
+#portalPanelOverview .home-care-section,#portalPanelOverview .diet-section,
+#portalPanelOverview #exploreHealthResources{
+  border:1px solid var(--dkl-line)!important;border-radius:24px!important;
+  background:rgba(255,255,255,.72)!important;box-shadow:0 8px 26px rgba(49,77,100,.045)!important;
+}
+#publicPortal input:not([type=checkbox]):not([type=radio]):not([type=hidden]),
+#publicPortal select,#publicPortal textarea{
+  border-color:rgba(131,157,178,.42)!important;border-radius:12px!important;
+  color:var(--dkl-ink)!important;
+}
+#publicPortal button:focus-visible,#publicPortal a:focus-visible,
+#publicPortal input:focus-visible,#publicPortal select:focus-visible,#publicPortal textarea:focus-visible,
+.site-header button:focus-visible,.site-header a:focus-visible,.site-header summary:focus-visible{
+  outline:3px solid #719bb8!important;outline-offset:3px!important;
+}
+@media(max-width:900px){
+  #portalPanelOverview .portal-hero{grid-template-columns:minmax(0,1fr) minmax(250px,.8fr);padding:28px!important}
+  #portalPanelOverview .care-pathways{gap:10px}
+  #portalPanelOverview .care-pathways>a{padding:16px!important;gap:10px}
+}
+@media(max-width:680px){
+  .site-header{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .portal-nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:8px 12px!important}
+  .portal-nav a{flex:0 0 auto;white-space:nowrap}
+  #publicPortal{padding:16px 12px 32px!important;border-radius:20px 20px 0 0}
+  #portalPanelOverview .portal-hero{grid-template-columns:1fr;gap:22px;padding:24px 20px!important;border-radius:22px!important}
+  #portalPanelOverview .original-care-hero{font-size:clamp(36px,10vw,48px)!important}
+  #portalPanelOverview .hero-primary-actions{display:grid;grid-template-columns:1fr}
+  #portalPanelOverview .hero-primary-actions a{width:100%;min-height:48px}
+  #portalPanelOverview .dispatch-card{padding:22px!important}
+  #portalPanelOverview .care-pathways{grid-template-columns:1fr}
+  #portalPanelOverview .care-pathways>a{min-height:82px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #portalPanelOverview *,#publicPortal *{transition:none!important;animation:none!important}
+}
+@media print{
+  #publicPortal{background:#fff!important}
+  #portalPanelOverview .portal-hero,#portalPanelOverview .dispatch-card,#portalPanelOverview .care-pathways>a{box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}
+
+
+/* Precision polish pass — typography, edge definition, depth and interaction detail. */
+:root{
+  --dkl-ink:#1f3448;
+  --dkl-muted:#526679;
+  --dkl-line:rgba(111,143,168,.24);
+  --dkl-edge:rgba(255,255,255,.92);
+  --dkl-shadow:0 22px 56px rgba(36,66,91,.075),0 4px 14px rgba(36,66,91,.035);
+  --dkl-shadow-hover:0 26px 64px rgba(36,66,91,.12),0 8px 20px rgba(36,66,91,.055);
+}
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+#publicPortal{
+  isolation:isolate;
+  position:relative;
+}
+#portalPanelOverview .portal-hero{
+  outline:1px solid rgba(255,255,255,.56);
+  outline-offset:-5px;
+  box-shadow:0 28px 70px rgba(40,72,98,.075),0 2px 8px rgba(40,72,98,.025)!important;
+}
+#portalPanelOverview .hero-copy,
+#portalPanelOverview .dispatch-card,
+#portalPanelOverview .care-pathways>a{
+  min-width:0;
+}
+#portalPanelOverview .original-care-hero{
+  font-kerning:normal;
+  font-feature-settings:"kern" 1,"liga" 1;
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+#portalPanelOverview .hero-copy>p,
+#portalPanelOverview .care-compass>p{
+  text-wrap:pretty;
+  max-width:62ch;
+}
+#portalPanelOverview .dispatch-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.9),rgba(246,250,252,.68))!important;
+  border-color:rgba(255,255,255,.9)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 18px 42px rgba(48,76,101,.075)!important;
+}
+#portalPanelOverview .dispatch-card:after{
+  content:"";
+  position:absolute;
+  width:190px;height:190px;right:-112px;bottom:-116px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(204,225,239,.42),transparent 70%);
+  pointer-events:none;
+}
+#portalPanelOverview .care-mark{
+  filter:drop-shadow(0 5px 10px rgba(69,108,133,.08));
+}
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials{
+  letter-spacing:.005em;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78),0 3px 10px rgba(44,76,101,.035);
+}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(112deg,#2e5878 0%,#3e6b89 58%,#527d95 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 10px 24px rgba(43,82,112,.2)!important;
+}
+#portalPanelOverview .hero-primary-actions .primary-link:hover{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 14px 30px rgba(43,82,112,.25)!important;
+}
+#portalPanelOverview .care-pathways>a{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(248,251,253,.76))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 10px 28px rgba(42,72,96,.045)!important;
+}
+#portalPanelOverview .care-pathways>a:before{
+  content:"";
+  position:absolute;left:0;top:18px;bottom:18px;width:2px;
+  border-radius:2px;background:linear-gradient(180deg,#b9d0df,#d9e7df);
+  opacity:.85;
+}
+#portalPanelOverview .care-pathways>a:nth-child(2):before{background:linear-gradient(180deg,#c7d9e9,#e3ddeb)}
+#portalPanelOverview .care-pathways>a:nth-child(3):before{background:linear-gradient(180deg,#c8ddd0,#d9e5ec)}
+#portalPanelOverview .care-pathways strong{
+  font-size:14px;line-height:1.4;letter-spacing:-.01em;
+}
+#portalPanelOverview .care-pathways p{
+  font-size:12.5px;line-height:1.65;
+}
+#publicPortal :is(h1,h2,h3,h4){
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+}
+#publicPortal :is(button,a,[role=button]){
+  -webkit-tap-highlight-color:transparent;
+}
+#publicPortal :is(button,a[href],[role=button]):active{
+  transform:translateY(0) scale(.985);
+}
+#publicPortal :is(input,select,textarea){
+  box-shadow:inset 0 1px 2px rgba(35,61,82,.035);
+  background-color:rgba(255,255,255,.88);
+}
+#publicPortal :is(input,select,textarea):focus{
+  border-color:#789bb5!important;
+  box-shadow:0 0 0 4px rgba(120,155,181,.13),inset 0 1px 2px rgba(35,61,82,.025)!important;
+}
+#publicPortal img,#publicPortal svg{
+  max-width:100%;
+}
+#publicPortal img{
+  height:auto;
+  image-rendering:auto;
+}
+@media(min-width:1200px){
+  #portalPanelOverview .portal-hero{min-height:480px}
+  #portalPanelOverview .hero-copy{padding-right:clamp(8px,2vw,30px)}
+}
+@media(max-width:680px){
+  #portalPanelOverview .portal-hero{
+    box-shadow:0 16px 38px rgba(40,72,98,.065)!important;
+    outline-offset:-4px;
+  }
+  #portalPanelOverview .dispatch-card{
+    border-radius:20px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 28px rgba(48,76,101,.06)!important;
+  }
+  #portalPanelOverview .care-pathways>a{
+    padding:18px 18px 18px 22px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #portalPanelOverview .hero-primary-actions a,
+  #portalPanelOverview .hero-contact-actions a,
+  #portalPanelOverview .compass-credentials,
+  #portalPanelOverview .care-pathways>a{transform:none!important}
+}
+
+
+/* INSTANT INTERACTION PASS — low-latency, touch-first navigation */
+:root{
+  --dkl-interaction-ms:90ms;
+  --dkl-focus-ring:0 0 0 3px rgba(75,126,161,.20);
+}
+/* Avoid smooth-scroll queues: navigation should land immediately. */
+html{scroll-behavior:auto!important;scroll-padding-top:88px}
+body{touch-action:pan-y}
+:where(button,a[href],summary,[role="button"],input[type="button"],input[type="submit"],input[type="reset"],select){
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+:where(button,a[href],[role="button"],summary){
+  cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
+}
+:where(button,a[href],[role="button"],summary,input[type="button"],input[type="submit"],input[type="reset"]){
+  transition:
+    background-color var(--dkl-interaction-ms) ease,
+    border-color var(--dkl-interaction-ms) ease,
+    color var(--dkl-interaction-ms) ease,
+    box-shadow var(--dkl-interaction-ms) ease,
+    opacity var(--dkl-interaction-ms) ease,
+    transform var(--dkl-interaction-ms) ease;
+}
+:where(button,a[href],[role="button"],summary):active{
+  transform:scale(.985);
+  transition-duration:45ms;
+}
+:where(button,a[href],[role="button"],summary):focus-visible,
+:where(input,select,textarea):focus-visible{
+  outline:2px solid #648eaa!important;
+  outline-offset:2px!important;
+  box-shadow:var(--dkl-focus-ring);
+}
+/* Comfortable, accurate touch targets without enlarging compact icon controls. */
+#publicPortal :where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){
+  min-height:44px;
+}
+#publicPortal :where(a[href]){
+  -webkit-touch-callout:none;
+}
+.site-header :where(button,a[href],summary){
+  min-height:42px;
+}
+.portal-nav a{
+  min-height:44px;
+  padding-inline:16px!important;
+}
+/* Keep interaction feedback immediate; do not animate layout-heavy properties. */
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials,
+#portalPanelOverview .care-pathways>a{
+  transition:background-color 90ms ease,border-color 90ms ease,color 90ms ease,
+    box-shadow 90ms ease,transform 90ms ease!important;
+  will-change:auto;
+}
+.site-header{
+  -webkit-backdrop-filter:saturate(120%) blur(8px);
+  backdrop-filter:saturate(120%) blur(8px);
+}
+@media(hover:hover) and (pointer:fine){
+  :where(button,a[href],[role="button"],summary):hover{
+    filter:brightness(1.025);
+  }
+}
+@media(hover:none),(pointer:coarse){
+  :where(button,a[href],[role="button"],summary):hover{
+    filter:none;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :where(button,a[href],[role="button"],summary){transition:none!important}
+}
+@media(max-width:680px){
+  html{scroll-padding-top:12px}
+  .site-header{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .portal-nav{scroll-behavior:auto;overscroll-behavior-x:contain}
+}
+
+/* Enforce the fast response budget over earlier component-level hover timings. */
+#publicPortal :where(button,a[href],[role="button"],summary),
+.site-header :where(button,a[href],summary),
+.portal-nav a,
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials,
+#portalPanelOverview .care-pathways>a{
+  transition-duration:90ms!important;
+}
+#publicPortal :where(button,a[href],[role="button"],summary):active,
+.site-header :where(button,a[href],summary):active{
+  transition-duration:45ms!important;
+}
+
+
+/* WARM CLINICAL PALETTE — replace stark white with calm cream and pale yellow. */
+:root{
+  --dkl-ivory:#fff8e9;
+  --dkl-cream:#fff7e8;
+  --dkl-butter:#fff3cf;
+  --dkl-paper:#fbf4e7;
+  --dkl-glass:rgba(255,249,235,.82);
+  --dkl-glass-strong:rgba(255,248,231,.94);
+}
+html,body{
+  background-color:#fbf5e9!important;
+}
+body{
+  background-image:
+    radial-gradient(ellipse at 8% 8%,rgba(255,239,193,.34),transparent 34%),
+    linear-gradient(135deg,#fbf6ec 0%,#fff9ed 48%,#f8f3e7 100%)!important;
+}
+.site-header{
+  background:rgba(255,249,237,.94)!important;
+}
+#publicPortal{
+  background:
+    radial-gradient(ellipse at 10% 4%,rgba(255,235,181,.42),transparent 34%),
+    radial-gradient(ellipse at 92% 16%,rgba(232,240,231,.48),transparent 32%),
+    linear-gradient(180deg,#fff8e9 0%,#fbf3df 48%,#f8f2e7 100%)!important;
+}
+#publicPortal :is(input,select,textarea){
+  background-color:rgba(255,249,235,.96)!important;
+}
+#portalPanelOverview .dispatch-card,
+#portalPanelOverview .care-pathways>a{
+  background:linear-gradient(145deg,rgba(255,250,239,.97),rgba(255,243,211,.82))!important;
+}
+#publicPortal :is(section,article)[data-surface="warm"]{
+  background:linear-gradient(145deg,#fff9eb,#fff1cf)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(even){
+  background:linear-gradient(145deg,rgba(255,248,230,.96),rgba(255,243,210,.82))!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(odd){
+  background:linear-gradient(145deg,rgba(255,251,241,.97),rgba(246,241,226,.88))!important;
+}
+@media(prefers-reduced-transparency:reduce){
+  .site-header{background:#fff7e8!important}
+  #publicPortal{background:#fbf3df!important}
+}
+
+
+/* Remove remaining stark-white content panels; alternate warm paper and pale custard surfaces. */
+#publicPortal :is(.bg-white,[class~="bg-white"]){
+  background-color:#fff8e9!important;
+}
+#publicPortal :is(.bg-white,[class~="bg-white"]):nth-child(even){
+  background-color:#fff3d5!important;
+}
+#publicPortal .hero-copy{
+  background:linear-gradient(145deg,#fff9eb 0%,#fff3d7 100%)!important;
+}
+#publicPortal :is(.rounded-xl,.rounded-2xl,.rounded-3xl):not(.primary-link):not(.secondary-link){
+  background-color:rgba(255,249,235,.72);
+}
+#publicPortal :is(.border,.border-slate-100,.border-slate-200){
+  border-color:rgba(173,153,111,.25)!important;
+}
+.site-header .bg-white{
+  background-color:rgba(255,248,232,.94)!important;
+}
+#publicPortal :is(.bg-slate-50,.bg-gray-50){
+  background-color:#fbf3e3!important;
+}
+#publicPortal :is(.bg-blue-50,.bg-sky-50){
+  background-color:#edf4f5!important;
+}
+#publicPortal :is(.bg-amber-50,.bg-yellow-50){
+  background-color:#fff2ce!important;
+}
