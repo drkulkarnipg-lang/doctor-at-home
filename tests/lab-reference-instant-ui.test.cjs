@@ -20,7 +20,7 @@ function select(dom,id){
 function set(w,id,value){const el=w.document.getElementById(id);el.value=String(value);el.dispatchEvent(new w.Event('input',{bubbles:true}));}
 test('prescription uses exact MCIM registration number confirmed in council electoral roll',()=>{
  assert.match(html,/id="rxRegistrationNumber"[^>]*>I-24809-A-1<\/strong>/);
- assert.doesNotMatch(html,/I-24809-A-1/);
+ assert.doesNotMatch(html,/I-24809A-1/);
  const regTest=fs.readFileSync('tests/prescription-registration-layout.test.cjs','utf8');
  assert.match(regTest,/I-24809-A-1/);
 });
