@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
-test('whole-site language picker exposes every A-Z language and a searchable, non-blocking desktop panel',()=>{
+test('whole-site language picker renders every A-Z language vertically with search and fast dismissal',()=>{
  const html=fs.readFileSync('index.html','utf8'),sourceTranslation=fs.readFileSync('source-translation.js','utf8');
  const start=html.indexOf('<select id="siteLanguageSelector"'),end=html.indexOf('</select>',start);
  assert.ok(start>=0&&end>start,'whole-site language selector exists');
@@ -9,11 +9,13 @@ test('whole-site language picker exposes every A-Z language and a searchable, no
  assert.ok(options.length>=100,'full alphabetical language catalogue is present');
  const names=options.map(x=>x[2]);
  for(const name of ['Danish','Dutch','English','French','German','Hindi','Japanese','Marathi','Zulu'])assert.ok(names.some(x=>x.includes(name)),name+' must be present beyond A-C');
- assert.ok(html.includes('picker.size = 9'),'full language picker must be a visible scrollable list');
+ assert.ok(html.includes("list.className = 'language-options'"),'all language options must render as a vertical list, not a truncated native select');
+ assert.ok(html.includes("item.className='language-option'"),'each language must occupy its own row');
+ assert.ok(html.includes('max-height:58vh;overflow-y:auto'),'mobile list must scroll vertically without limiting the number of languages');
  assert.ok(html.includes('Search all website languages'),'language search must be available');
  assert.ok(html.includes('position:fixed;top:var(--language-panel-top'),'desktop panel must float above page content');
  assert.ok(html.includes("document.addEventListener('pointerdown"),'outside pointer close handler must exist');
- assert.ok(html.includes("event.key === 'Escape'"),'Escape close handler must exist');
- assert.ok(html.includes("panel.open = false"),'panel close state must be implemented');
+ assert.ok(html.includes("event.key==='Escape'"),'Escape close handler must exist');
+ assert.ok(html.includes("panel.open=false"),'panel close state must be implemented');
  assert.ok(sourceTranslation.includes('Keep the complete static 17-language list'));
 });
