@@ -1,3 +1,38 @@
+# 2 November 2026 — Doctor Workstation password / email OTP recovery checkpoint
+
+## Current source and release boundary
+- Repository: `drkulkarnipg-lang/doctor-at-home`; branch `main`; exact inspected main SHA: `684e520c0203391aa5f1997ff8fe67d78d329afb`.
+- Regression workflow for that exact main SHA: run `41429159705`, conclusion `success`.
+- Vercel status for that exact SHA: `failure`, reason `Deployment rate limited — retry in 24 hours`. This is a hosting rate-limit status, not a source build/test failure. Do not claim this SHA is deployed.
+- Production remains protected. No merge or deployment was made for this password task.
+
+## Owner's latest authentication decision
+- The owner's 2 Nov 2026 instruction prefers registered-owner EMAIL OTP for first-time password creation and future password changes. This supersedes the older SMS/Twilio preference in issue #90 for this workflow. Do not require mobile OTP for password setup.
+- The current main branch already contains the email OTP flow in `workstation-auth.js`, `cloud-records.js`, and `api/clinical-cloud.js`; UI labels include **Create / change password with email OTP**.
+- The UI requests an OTP only for the server-configured owner email. API uses Supabase Auth `/auth/v1/otp` with `create_user:false`, verifies `type:'email'`, checks the verified Auth UUID against `CLINIC_OWNER_USER_ID`, updates the password through Supabase Auth, attempts global session revocation, and clears application cookies. Password is confirmed twice (12–128 chars); tokens/passwords are not saved in localStorage.
+- Existing owner Auth identity was verified in the active `doctor-at-home` Supabase project: account exists and email is confirmed. No duplicate owner or Supabase project should be created.
+- Main-branch tests explicitly cover email OTP UI, fixed recipient, non-owner rejection, invalid/expired OTP rejection, rate-limit handling, password update, global session revocation and cookie clearing. These are mocked integration tests, not proof of live email delivery.
+
+## Exact external activation blockers
+- Real Supabase Email OTP delivery is NOT yet verified. The runbook already specifies the required provider settings: Email OTP enabled; numeric code template includes `{{ .Token }}`; verified production SMTP sender configured in Supabase; OTP expiry set to a short value (target 10 minutes); Supabase Auth rate limits retained. Do not assume the built-in Supabase sender is production-ready.
+- Vercel environment variables for the owner Auth UUID/email and Supabase project must be confirmed on Production and relevant domains. Connector access did not expose Vercel secrets; do not request or commit secrets in Git.
+- No OTP send/verify request was found in the inspected Supabase auth log window. Therefore no live OTP delivery, first password creation, sign-in or password rotation is claimed.
+- Supabase Security Advisor also reports leaked-password protection disabled (warning) and an RLS-enabled/no-policy informational finding on `clinic_private.evidence_requests`. Track these separately; do not silently alter unrelated RLS policy or claim they are fixed.
+
+## Branch / PR guard
+- PR #116 (`feature/secure-workstation-username-sms-mfa`) is a draft based on `fix/owner-approved-registration-cream-palette`, not current main; comparison showed 57 commits ahead and 10 behind. It implements SMS MFA and must NOT be merged as-is. Owner preference and blockers were recorded in issue #90 and PR #116 comments (comment IDs 6575082081 and 6575083065).
+- Issue #90 remains open as the consolidated owner master brief.
+
+## Next exact actions
+1. In Supabase Dashboard for the existing `doctor-at-home` project, inspect Authentication → Sign In / Providers → Email; confirm Email OTP is enabled and the numeric OTP template renders `{{ .Token }}`.
+2. Inspect Authentication → SMTP Settings and verify a production sender. Do not expose the SMTP password in chat or Git. If not configured, configure it in the Supabase dashboard using the owner's verified mail provider.
+3. Confirm OTP expiry and built-in rate limits; retain anti-abuse limits. Enable leaked-password protection after assessing its effect on existing password acceptance.
+4. Confirm Vercel Production environment variables for the active Supabase project and owner identity on both `drkulkarnipg.com` and `home-visiting-icu-doctor.vercel.app`, without printing secret values.
+5. Once Vercel deployment is available and the owner can receive email, test on the live origin: send OTP; verify inbox delivery; reject wrong/expired OTP; create the first password; sign in with username/password; change password with a fresh OTP; confirm old password fails/new password succeeds; verify logout/session expiry and other-session revocation.
+6. Resume deployment verification after Vercel's reported 24-hour rate-limit window. Do not merge/deploy an unreviewed auth change.
+
+---
+
 # Current resumable work checkpoint
 
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
