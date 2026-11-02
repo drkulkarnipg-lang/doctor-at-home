@@ -69,7 +69,7 @@ near(35,{supineSbp:130,supineDbp:80,standingSbp:110,standingDbp:75},-20);assert.
 assert.match(calculate(36,{...fixtures[36][0],scr:0.5}).text,/G1/);assert.match(calculate(36,{...fixtures[36][0],scr:5}).text,/G5/);checks+=2;
 assert.match(calculate(37,{albumin:29,creatinine:100}).text,/A1/);assert.match(calculate(37,{albumin:301,creatinine:100}).text,/A3/);checks+=2;
 assert.match(calculate(38,{...fixtures[38][0],fio2:50}).text,/A–a gradient/);reject(38,{...fixtures[38][0],pao2:300});checks+=1;
-assert.match(calculate(39,{...fixtures[39][0],rr:8}).text,/Single red score/);assert.match(calculate(39,{...fixtures[39][0],rr:25}).text,/HIGH risk/);checks+=2;assert.equal(calculate(39,{...fixtures[39][0],scale:'2',spo2:95,oxygen:'0'}).value,0);assert.equal(calculate(39,{...fixtures[39][0],scale:'2',spo2:95,oxygen:'1'}).value,4);checks+=2;
+assert.match(calculate(39,{...fixtures[39][0],rr:8}).text,/Single red score/);assert.match(calculate(39,{...fixtures[39][0],rr:25,pulse:140,temp:40,conscious:'confusion'}).text,/HIGH risk/);checks+=2;assert.equal(calculate(39,{...fixtures[39][0],scale:'2',spo2:95,oxygen:'0'}).value,0);assert.equal(calculate(39,{...fixtures[39][0],scale:'2',spo2:95,oxygen:'1'}).value,4);checks+=2;
 assert.match(calculate(40,{...fixtures[40][0],pf:80,respSupport:'1'}).text,/SOFA: 4\/24/);reject(40,{...fixtures[40][0],pf:80,respSupport:'0'});checks+=2;
 assert.match(calculate(42,{...fixtures[42][0],measure:'calf',calf:32}).text,/14\/14/);reject(42,{...fixtures[42][0],measure:'calf',calf:32,bmi:undefined});checks+=2;
 assert.match(calculate(43,{...fixtures[43][0],iadl_finances:'0'}).text,/Lawton IADL: 7\/8/);checks++;
