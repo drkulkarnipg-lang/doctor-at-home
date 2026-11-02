@@ -1963,12 +1963,16 @@ document.addEventListener('click', function (event) {
   if (window.location.hash !== link.getAttribute('href')) {
     history.pushState(null, '', link.getAttribute('href'));
   }
-  window.requestAnimationFrame(function () {
-    target.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      block: 'start'
+  if (typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(function () {
+      target.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
     });
-  });
+  } else {
+    target.scrollIntoView({ behavior: 'auto', block: 'start' });
+  }
 });
 </script>
 <script src="official-research-sources.js"></script>
