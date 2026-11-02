@@ -14,7 +14,7 @@ for(const script of [...w.document.scripts]){
 w.eval(scripts.join('\n;\n'));
 await new Promise(resolve=>setTimeout(resolve,30));w.populate30Calculators();assert.match(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note').textContent,/5\.7–6\.4%/);assert.equal(w.document.querySelector('[data-calculator-id="5"] .calc-reference-note a[href="https://diabetes.org/about-diabetes/diagnosis"]').textContent,'HbA1c diagnostic thresholds ↗');
 assert.equal(w.document.querySelectorAll('#calc30Grid .calc-card').length,2);assert.match(w.document.getElementById('tabPath').textContent,/Lab Requisition/);assert.doesNotMatch(w.document.getElementById('tabPath').textContent,/Slip/);assert.match(w.document.getElementById('tabRad').textContent,/Radiology Requisition/);assert.doesNotMatch(w.document.getElementById('tabRad').textContent,/Slip/);
-assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,28);
+assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid .calc-card').length,43);
 for(const card of [...w.document.querySelectorAll('.calc-card')]){
  const ref=card.querySelector('.calc-reference-note');
  assert.ok(ref,'Every calculator must show its reference/interpretation panel');
@@ -26,6 +26,8 @@ const refText=id=>w.document.querySelector('[data-calculator-id="'+id+'"] .calc-
 for(const [id,terms] of [['1',['18.5','25','30']],['6',['13–15','9–12','3–8']],['11',['0–1','2 intermediate','3–5']],['14',['qSOFA is scored 0–3','≥2']],['15',['mild ARDS','moderate','severe']],['20',['≤1','≥2']],['21',['≤4','>4']],['23',['0–9','≥3']],['25',['5–20','≤14']],['28',['6–40']],['29',['class A 5–6','class B 7–9','class C 10–15']],['30',['0–71']]]){for(const term of terms)assert.ok(refText(id).includes(term),'Reference band '+term+' missing for calculator '+id);}
 
 assert.equal(w.document.querySelectorAll('#clinicalCalculatorGrid input').length>50,true);
+for(const id of [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45]){assert.ok(w.document.querySelector('[data-calculator-id="'+id+'"] .calc-reference-note'),'New calculator '+id+' must display its reference guidance');assert.ok(w.document.querySelector('[data-calculator-id="'+id+'"] .calc-reference-note a[href]'),'New calculator '+id+' must link its source');}
+assert.equal(w.document.querySelector('[data-calculator-id="36"] h4').textContent,'eGFR — 2021 CKD-EPI creatinine (race-free)');
 assert.equal(w.document.querySelector('#calculator-6-verbal option[value="2"]').textContent,'2 · sounds');
 assert.equal(w.document.querySelector('#calculator-6-motor option[value="3"]').textContent,'3 · abnormal flexion');
 assert.equal(w.document.querySelector('#calculator-6-eye').value,'');
@@ -35,7 +37,7 @@ const change=(id,v)=>{const x=w.document.getElementById(id);x.value=v;x.dispatch
 change('calculator-6-eye','4');change('calculator-6-verbal','NT');change('calculator-6-motor','6');
 w.document.querySelector('[data-calculator-id="6"] form').dispatchEvent(new w.Event('submit',{cancelable:true}));
 assert.match(w.document.getElementById('calculator-result-6').textContent,/Total not calculated/);
-change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/calculate again/);
+change('calculator-6-verbal','5');assert.match(w.document.getElementById('calculator-result-6').textContent,/E4 V5 M6 · Total 15\/15/,'Every calculator must update immediately when the final required input is entered.');assert.equal(w.document.querySelector('[data-calculator-id="6"] .calc-primary'),null,'No Calculate button should be required.');
 change('calculator-30-acid','ph');assert.equal(w.document.getElementById('calculator-30-hco3').disabled,true);
 change('calculator-30-acid','hco3');assert.equal(w.document.getElementById('calculator-30-ph').disabled,true);
 change('calculator-18-method','p421');assert.equal(w.document.getElementById('calculator-18-factor').disabled,true);
@@ -89,7 +91,7 @@ const backup=JSON.parse(originalStore);w.PatientTrends.restore(backup);const res
 assert.match(w.document.getElementById('portalHeroTitle').textContent,/Home visits.*Care at your bedside/);assert.equal(w.document.querySelector('.doctor-hero-name'),null);assert.equal(w.document.querySelector('.doctor-wordmark').textContent,'DR. PRAMOD G. KULKARNI');assert.ok(w.document.querySelector('.original-georgia-brand'));w.switchDocTab('legalForms');assert.equal(w.document.getElementById('workspacePageTitle').textContent,'Forms 2, 4 & 4A');assert.equal(w.document.querySelector('#workspacePageIdentity [aria-current="page"]').textContent,'Forms 2, 4 & 4A');w.switchDocTab('everydayTools');assert.equal(w.document.getElementById('workspacePageTitle').textContent,'Diet presets & conversions');w.openWikiModal(1);assert.match(w.document.getElementById('wikiModalContent').textContent,/Sources are listed within each guide/);assert.ok(w.document.querySelector('a[href="editorial-policy.html"]'));assert.equal(w.document.querySelectorAll('.section-location-label').length,0);assert.equal(w.document.querySelectorAll('.public-page-intro').length,9);w.verifyAndOpenWorkstation();change('deviceUnlockPassword','SyntheticTest-2026');await w.document.getElementById('deviceUnlockForm').onsubmit({preventDefault(){}});w.switchDocTab('chart20');assert.equal(w.document.title,'Patient trends | Dr. Pramod G. Kulkarni');assert.equal(w.document.activeElement.id,'workspacePageIdentity');assert.equal(w.location.hash,'#workstation=chart20');assert.equal(w.document.title.includes('Synthetic patient'),false);w.lockWorkstationNow();assert.match(w.document.title,/Home visits/);
 console.log('Patient isolation, glucose/BP switching, preserved legacy backup, non-overwriting restore and workstation tool discovery checks passed.');
 console.log('Privacy lock, conversions, diet preservation and PDF page provenance checks passed.');
-console.log('Calculator UI integration checks passed: 2 public / 28 clinical, full GCS, tab switching, conditional fields, stale-result clearing, search, existing feature IDs retained.');
+console.log('Calculator UI integration checks passed: 2 public / 43 clinical, full GCS, tab switching, conditional fields, stale-result clearing, search, existing feature IDs retained.');
 await new Promise(resolve=>setTimeout(resolve,30));w.close();
 
 })().catch(e=>{console.error(e);process.exitCode=1;});
