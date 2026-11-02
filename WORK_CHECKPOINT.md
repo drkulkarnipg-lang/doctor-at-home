@@ -4,6 +4,21 @@ Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
 
+## Permanent task-register operating rule — 2 November 2026
+
+The authoritative task ledger is `MASTER_TASK_REGISTER.md`. Every new concrete owner request/defect/feature/QA finding must be added there once, or reconciled into its existing ID. Work proceeds one bounded item at a time. When an item meets its acceptance criteria, move it out of the active queue into the dated Completed archive in the register; retain its ID and evidence permanently so it is not repeated. Update this checkpoint after meaningful changes with the exact branch/head, tests, deployment evidence, blockers and one next action. At every new conversation, recover this register and checkpoint, inspect current GitHub/Vercel state, and resume without asking the owner to restate known work. Read only the relevant sections/files to avoid repeated analysis and unnecessary token use. This is a persistent repository workflow; ChatGPT cannot install a background listener that automatically captures every message while no conversation is active, so the protocol is applied whenever project work is resumed.
+
+### Current resume pointer — 2 November 2026
+
+- Canonical task register: `MASTER_TASK_REGISTER.md` (OPS-01, LANG-01).
+- Translator implementation: PR #127, branch `feature/section-specific-translators`, latest known head `32aff77525916879e72c86d0789f079940d0d516`.
+- GitHub Actions run `41465691147` was running the full regression suite at last check; poll it and reconcile any workflow-generated branch commit before judging exact-head results.
+- Vercel check on the PR head returned `build-rate-limit`; do not retry around the provider limit. Preview/browser QA and production publication remain open.
+- Main baseline for the new work: `3078767b72461fb83f50fabde03f0d796e65d0a8`. No production change has been made by PR #127 or this register update.
+- Next action: poll PR #127 CI; fix only demonstrated failures, then wait for a valid preview and verify all four selectors on desktop/mobile before merge/release.
+
+---
+
 ## Owner pause — 26 October 2026
 
 HISTORICAL PAUSE — superseded on 30 October 2026. The owner has now explicitly instructed the builder to continue without asking them to repeat requirements. PR20 Close/A4 changes remain released and must not be repeated. Continue the master register from the next unfinished row; do not restart from zero.
