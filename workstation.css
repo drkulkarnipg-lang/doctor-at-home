@@ -180,3 +180,22 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
  #viewTriageAssessment .no-print{display:none!important}.triage-card,.triage-hero,.triage-result{box-shadow:none!important;break-inside:avoid}
  #viewTriageAssessment input,#viewTriageAssessment select,#viewTriageAssessment textarea{border:0!important;border-bottom:1px solid #aaa!important;background:white!important}
 }
+
+
+/* Owner-approved warm palette: cream and pale-yellow surfaces, never stark white on screen. */
+@media screen {
+ :root{--canvas:#fbf3df;--paper:#fff8e8;--ink:#263447;--muted:#665f52;--line:#e8d8b8;--soft:#f5e9ca}
+ body,.site-header{background-color:#fbf3df!important}
+ .hero-copy,.dispatch-card,#elderlySection>div:last-child>div,#wikiCardsGrid>div,
+ .diet-section>div:last-child>div,#calc30Grid>div,#bookingSection>div:not(:first-child),
+ .share-desk-heading,.share-desk-card,.triage-hero,.triage-card{
+   background-color:#fff8e8!important;
+ }
+ #elderlySection ul li,#procedureList label{background-color:#f6ebd1!important}
+ .portal-nav{background-color:#f3e8ce!important}
+ input:not([type=checkbox]):not([type=radio]),select,textarea,
+ .share-desk-card button,.triage-field input,.triage-field select,.triage-field textarea{
+   background-color:#fff4d9!important;
+ }
+ .moon-reader-card{background-color:#f8edcf!important}
+}
