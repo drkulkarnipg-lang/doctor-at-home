@@ -61,7 +61,7 @@
     .rx-registration-number { display: inline-block !important; white-space: nowrap !important; font-family: Arial, Helvetica, sans-serif !important; font-size: 10px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; vertical-align: baseline !important; }
   
     /* Keep language selection compact so it does not crowd the Patient Portal / Workstation controls. */
-    .language-control{display:block;position:relative;flex:0 1 220px;width:220px;min-width:170px;max-width:240px;align-self:center;padding:2px 0;z-index:40}.language-control>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:40px;padding:8px 11px;border:1px solid #C9D9D2;border-radius:10px;background:#FFFDF9;color:#0F2942;font-size:12px;font-weight:750;cursor:pointer;list-style:none}.language-control>summary::-webkit-details-marker{display:none}.language-control[open]>summary{border-color:#0D9488;border-bottom-left-radius:0;border-bottom-right-radius:0}.language-control[open]>.language-row{position:fixed;top:var(--language-panel-top,72px);left:var(--language-panel-left,12px);width:min(340px,calc(100vw - 24px));max-width:calc(100vw - 24px);display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:12px;border:1px solid #C9D9D2;border-radius:12px;background:#FFFDF9;box-shadow:0 12px 30px rgba(15,41,66,.2);z-index:2147483000;max-height:min(70vh,560px);overflow:hidden}.language-control[open] #languageSelectorLabel{white-space:normal}.language-control[open] .site-language-picker{max-width:100%;height:auto;min-height:0;max-height:42vh;overflow-y:auto}.language-search{width:100%;min-height:40px;padding:8px 10px;border:1px solid #C9D9D2;border-radius:9px;background:#fff;color:#173b32;font:600 13px Inter,sans-serif}.language-control[open] .site-language-picker option{padding:5px 8px}
+    .language-control{display:block;position:relative;flex:0 1 220px;width:220px;min-width:170px;max-width:240px;align-self:center;padding:2px 0;z-index:40}.language-control>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:40px;padding:8px 11px;border:1px solid #C9D9D2;border-radius:10px;background:#FFFDF9;color:#0F2942;font-size:12px;font-weight:750;cursor:pointer;list-style:none}.language-control>summary::-webkit-details-marker{display:none}.language-control[open]>summary{border-color:#0D9488;border-bottom-left-radius:0;border-bottom-right-radius:0}.language-control[open]>.language-row{position:fixed;top:var(--language-panel-top,72px);left:var(--language-panel-left,12px);width:min(340px,calc(100vw - 24px));max-width:calc(100vw - 24px);display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:12px;border:1px solid #C9D9D2;border-radius:12px;background:#FFFDF9;box-shadow:0 12px 30px rgba(15,41,66,.2);z-index:2147483000;max-height:min(70vh,560px);overflow:hidden}.language-control[open] #languageSelectorLabel{white-space:normal}.language-control[open] .site-language-picker{display:none!important}.language-search{width:100%;min-height:42px;padding:9px 11px;border:1px solid #C9D9D2;border-radius:9px;background:#fff;color:#173b32;font:600 13px Inter,sans-serif}.language-options{display:flex;flex-direction:column;align-items:stretch;gap:2px;width:100%;max-height:58vh;overflow-y:auto;overscroll-behavior:contain;padding:2px 4px 2px 0;scrollbar-gutter:stable}.language-option{display:block;width:100%;min-height:42px;padding:9px 12px;border:0;border-bottom:1px solid #e5ece7;border-radius:6px;background:#fffdf9;color:#173b32;text-align:left;font:600 13px/1.35 Inter,sans-serif;cursor:pointer}.language-option:hover,.language-option:focus-visible{background:#eaf3ec;outline:2px solid #78a58d;outline-offset:-2px}.language-option[aria-current=true]{background:#eaf3ec;font-weight:800}.language-empty{padding:12px;color:#596d64;font-size:12px}
     .language-row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:0}
     #languageSelectorLabel{font-size:10px;font-weight:750;white-space:nowrap;color:#0F2942}
     #google_translate_element{flex:1 1 120px;width:120px;min-width:0;max-width:150px;}
@@ -137,50 +137,65 @@
       const panel = picker.closest('.language-control');
       const row = picker.closest('.language-row');
       if (panel && row) {
-        picker.size = 9;
-        picker.setAttribute('aria-label','Choose a language. Scroll the list or search by language name.');
+        picker.setAttribute('aria-hidden','true');
+        picker.tabIndex = -1;
+        const originalOptions = [...picker.options].map(option => ({value:option.value,label:option.textContent}));
         const search = document.createElement('input');
         search.type = 'search'; search.className = 'language-search';
         search.placeholder = 'Search all languages (A–Z)…';
         search.setAttribute('aria-label','Search all website languages');
         search.autocomplete = 'off'; search.spellcheck = false;
+        const list = document.createElement('div');
+        list.className = 'language-options';
+        list.id = 'siteLanguageOptions';
+        list.setAttribute('role','list');
+        list.setAttribute('aria-label','All website languages, alphabetically');
         row.insertBefore(search,picker);
-        const originalOptions = [...picker.options].map(option => ({value:option.value,label:option.textContent}));
-        search.addEventListener('input', () => {
+        row.insertBefore(list,picker);
+        const renderOptions = () => {
           const query = search.value.trim().toLocaleLowerCase();
-          const selected = picker.value;
-          picker.replaceChildren(...originalOptions.filter(option => (option.label+' '+option.value).toLocaleLowerCase().includes(query)).map(option => {
-            const item=document.createElement('option');item.value=option.value;item.textContent=option.label;return item;
-          }));
-          if ([...picker.options].some(option=>option.value===selected)) picker.value=selected;
-          if (!picker.options.length) { const empty=document.createElement('option');empty.disabled=true;empty.textContent='No matching language';picker.append(empty); }
-        });
-        picker.addEventListener('change', () => {
-          if (picker.value) quickTranslate(picker.value);
-          panel.open = false; search.value = '';
-          search.dispatchEvent(new Event('input'));
-        });
+          const filtered = originalOptions.filter(option => (option.label+' '+option.value).toLocaleLowerCase().includes(query));
+          list.replaceChildren();
+          if (!filtered.length) {
+            const empty=document.createElement('p');empty.className='language-empty';empty.textContent='No matching language';list.append(empty);return;
+          }
+          for (const option of filtered) {
+            const item=document.createElement('button');
+            item.type='button';item.className='language-option';item.textContent=option.label;
+            item.setAttribute('role','listitem');
+            if(option.value===picker.value)item.setAttribute('aria-current','true');
+            item.addEventListener('click',()=>{
+              picker.value=option.value;
+              panel.open=false;
+              search.value='';
+              renderOptions();
+              quickTranslate(option.value);
+            });
+            list.append(item);
+          }
+        };
+        search.addEventListener('input',renderOptions);
+        renderOptions();
         const position = () => {
-          if (!panel.open) return;
+          if (!panel.open || window.matchMedia('(max-width: 767px)').matches) return;
           const rect=panel.querySelector('summary').getBoundingClientRect();
           const width=Math.min(340,window.innerWidth-24);
-          const height=Math.min(Math.round(window.innerHeight*.70),560);
+          const height=Math.min(Math.round(window.innerHeight*.78),620);
           const left=Math.max(12,Math.min(rect.left,window.innerWidth-width-12));
           const top=Math.max(12,Math.min(rect.bottom+6,window.innerHeight-height-12));
           row.style.setProperty('--language-panel-left',left+'px');
           row.style.setProperty('--language-panel-top',top+'px');
         };
-        panel.addEventListener('toggle',()=>{if(panel.open){position();search.value='';search.dispatchEvent(new Event('input'));search.focus();}});
+        panel.addEventListener('toggle',()=>{
+          if(panel.open){position();search.value='';renderOptions();search.focus();}
+        });
         window.addEventListener('resize',position,{passive:true});
         window.addEventListener('scroll',position,{passive:true,capture:true});
-        document.addEventListener('pointerdown', event => {
-          if (panel.open && !panel.contains(event.target)) panel.open = false;
+        document.addEventListener('pointerdown',event=>{
+          if(panel.open&&!panel.contains(event.target))panel.open=false;
         },true);
-        document.addEventListener('keydown', event => {
-          if (event.key === 'Escape' && panel.open) {
-            panel.open = false;
-            panel.querySelector('summary')?.focus();
-          }
+        document.addEventListener('keydown',event=>{
+          if(event.key==='Escape'&&panel.open){panel.open=false;panel.querySelector('summary')?.focus();}
         },true);
       }
     });
