@@ -351,3 +351,86 @@ body{
   #portalPanelOverview .compass-credentials,
   #portalPanelOverview .care-pathways>a{transform:none!important}
 }
+
+
+/* INSTANT INTERACTION PASS — low-latency, touch-first navigation */
+:root{
+  --dkl-interaction-ms:90ms;
+  --dkl-focus-ring:0 0 0 3px rgba(75,126,161,.20);
+}
+/* Avoid smooth-scroll queues: navigation should land immediately. */
+html{scroll-behavior:auto!important;scroll-padding-top:88px}
+body{touch-action:pan-y}
+:where(button,a[href],summary,[role="button"],input[type="button"],input[type="submit"],input[type="reset"],select){
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+:where(button,a[href],[role="button"],summary){
+  cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
+}
+:where(button,a[href],[role="button"],summary,input[type="button"],input[type="submit"],input[type="reset"]){
+  transition:
+    background-color var(--dkl-interaction-ms) ease,
+    border-color var(--dkl-interaction-ms) ease,
+    color var(--dkl-interaction-ms) ease,
+    box-shadow var(--dkl-interaction-ms) ease,
+    opacity var(--dkl-interaction-ms) ease,
+    transform var(--dkl-interaction-ms) ease;
+}
+:where(button,a[href],[role="button"],summary):active{
+  transform:scale(.985);
+  transition-duration:45ms;
+}
+:where(button,a[href],[role="button"],summary):focus-visible,
+:where(input,select,textarea):focus-visible{
+  outline:2px solid #648eaa!important;
+  outline-offset:2px!important;
+  box-shadow:var(--dkl-focus-ring);
+}
+/* Comfortable, accurate touch targets without enlarging compact icon controls. */
+#publicPortal :where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){
+  min-height:44px;
+}
+#publicPortal :where(a[href]){
+  -webkit-touch-callout:none;
+}
+.site-header :where(button,a[href],summary){
+  min-height:42px;
+}
+.portal-nav a{
+  min-height:44px;
+  padding-inline:16px!important;
+}
+/* Keep interaction feedback immediate; do not animate layout-heavy properties. */
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials,
+#portalPanelOverview .care-pathways>a{
+  transition:background-color 90ms ease,border-color 90ms ease,color 90ms ease,
+    box-shadow 90ms ease,transform 90ms ease!important;
+  will-change:auto;
+}
+.site-header{
+  -webkit-backdrop-filter:saturate(120%) blur(8px);
+  backdrop-filter:saturate(120%) blur(8px);
+}
+@media(hover:hover) and (pointer:fine){
+  :where(button,a[href],[role="button"],summary):hover{
+    filter:brightness(1.025);
+  }
+}
+@media(hover:none),(pointer:coarse){
+  :where(button,a[href],[role="button"],summary):hover{
+    filter:none;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :where(button,a[href],[role="button"],summary){transition:none!important}
+}
+@media(max-width:680px){
+  html{scroll-padding-top:12px}
+  .site-header{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .portal-nav{scroll-behavior:auto;overscroll-behavior-x:contain}
+}
