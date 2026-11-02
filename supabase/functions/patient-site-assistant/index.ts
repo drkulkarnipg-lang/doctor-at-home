@@ -31,6 +31,13 @@ Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders(origin) });
   if (req.method !== "POST") return json({ error: "Method not allowed." }, 405, origin);
   if (origin && !allowedOrigins.has(origin)) return json({ error: "Origin not allowed." }, 403, origin);
+  const suppliedKey = req.headers.get("apikey") || "";
+  let validPublicKey = suppliedKey === (Deno.env.get("SUPABASE_ANON_KEY") || "");
+  try {
+    const keyMap = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") || "{}");
+    validPublicKey = validPublicKey || Object.values(keyMap).includes(suppliedKey);
+  } catch { /* legacy anon key may still be configured */ }
+  if (!validPublicKey) return json({ error: "A valid website API key is required." }, 401, origin);
 
   const ip = (req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown").split(",")[0].trim();
   const now = Date.now();
@@ -66,7 +73,7 @@ Deno.serve(async (req: Request) => {
     }, 200, origin);
   }
 
-  const apiKey = Deno.env.get("AI_API_KEY");
+  const apiKey = Deno.env.get("AI_API_KEY") || Deno.env.get("OPENROUTER_API_KEY") || Deno.env.get("OPENAI_API_KEY");
   if (!apiKey) {
     return json({
       error: "The AI service is not configured yet. Website guidance remains available through the existing Patient Help shortcuts. The clinic owner must add the AI provider key in Supabase Edge Function Secrets before AI replies can be enabled.",
