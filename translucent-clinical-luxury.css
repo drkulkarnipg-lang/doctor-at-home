@@ -1,0 +1,213 @@
+/* DR. KULKARNI — TRANSLUCENT CLINICAL LUXURY DESIGN SYSTEM
+   Phase 1: public Home / Overview prototype only.
+   Existing content, links, scripts, IDs and clinical workflows remain untouched.
+*/
+:root{
+  --dkl-sky-0:#f7fbff;
+  --dkl-sky-1:#edf5fb;
+  --dkl-ivory:#fffefa;
+  --dkl-glass:rgba(255,255,255,.76);
+  --dkl-glass-strong:rgba(255,255,255,.9);
+  --dkl-sage:#eaf2ec;
+  --dkl-powder:#e8f1fb;
+  --dkl-blush:#f8eef1;
+  --dkl-lavender:#f1eff9;
+  --dkl-ink:#24384b;
+  --dkl-muted:#526577;
+  --dkl-line:rgba(139,163,184,.26);
+  --dkl-blue:#315b7b;
+  --dkl-blue-deep:#203e58;
+  --dkl-radius:22px;
+  --dkl-shadow:0 16px 42px rgba(48,76,101,.075),0 2px 8px rgba(48,76,101,.035);
+  --dkl-shadow-hover:0 20px 48px rgba(48,76,101,.12),0 4px 12px rgba(48,76,101,.055);
+}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+.site-header{
+  background:rgba(249,252,255,.88)!important;
+  border-color:var(--dkl-line)!important;
+  box-shadow:0 8px 30px rgba(53,82,107,.055)!important;
+  -webkit-backdrop-filter:saturate(145%) blur(16px);
+  backdrop-filter:saturate(145%) blur(16px);
+}
+.site-header .doctor-brand>div:first-child{
+  border:1px solid rgba(130,159,184,.42)!important;
+  box-shadow:0 5px 18px rgba(47,80,109,.09)!important;
+}
+.site-header .doctor-wordmark{color:var(--dkl-blue-deep)!important;letter-spacing:.045em}
+.site-header .doctor-brand p{color:var(--dkl-muted)!important}
+.site-header .doctor-brand p:nth-of-type(1){color:#47718d!important}
+.site-header>div:first-child{padding-top:12px!important;padding-bottom:12px!important}
+.site-header>div>div:last-child>.bg-white{
+  border:1px solid var(--dkl-line)!important;
+  background:rgba(255,255,255,.74)!important;
+  box-shadow:0 4px 14px rgba(45,75,101,.045)!important;
+  border-radius:14px!important;
+  padding:4px!important;
+}
+#navPublicBtn{background:linear-gradient(135deg,#315b7b,#426f8e)!important;box-shadow:0 5px 14px rgba(49,91,123,.16)!important}
+#navDoctorBtn{color:var(--dkl-ink)!important}
+.site-header .language-control>summary,.site-header .site-language-picker{
+  border:1px solid var(--dkl-line)!important;border-radius:12px!important;
+  background:rgba(255,255,255,.82)!important;color:var(--dkl-ink)!important;
+}
+.site-header a[href^="tel:"]{
+  background:linear-gradient(135deg,#527e8d,#3e6879)!important;
+  box-shadow:0 6px 18px rgba(54,99,119,.16)!important;
+}
+.portal-nav{
+  display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
+  max-width:1280px;margin:0 auto;padding:10px 16px 12px!important;
+  border-top:1px solid rgba(139,163,184,.15);
+}
+.portal-nav a{
+  min-height:42px;padding:10px 15px!important;border:1px solid transparent!important;
+  border-radius:999px!important;color:#526577!important;
+  font-size:12px;font-weight:650;letter-spacing:.01em;
+  transition:background-color .18s,border-color .18s,color .18s,transform .18s;
+}
+.portal-nav a[aria-selected="true"]{
+  color:var(--dkl-blue-deep)!important;background:rgba(225,238,248,.78)!important;
+  border-color:rgba(130,164,190,.28)!important;box-shadow:inset 0 1px rgba(255,255,255,.8);
+}
+.portal-nav a:hover{background:rgba(235,243,249,.9)!important;color:var(--dkl-blue-deep)!important;transform:translateY(-1px)}
+#publicPortal{
+  max-width:1320px!important;
+  padding-top:clamp(22px,4vw,48px)!important;
+  padding-bottom:48px!important;
+  color:var(--dkl-ink);
+  background:
+    radial-gradient(ellipse at 12% 4%,rgba(218,235,248,.54),transparent 35%),
+    radial-gradient(ellipse at 92% 18%,rgba(239,234,246,.42),transparent 31%),
+    linear-gradient(180deg,rgba(248,251,255,.72),rgba(255,254,250,.48) 48%,rgba(247,250,252,.72));
+  border-radius:30px 30px 0 0;
+}
+#portalPanelOverview{gap:clamp(24px,4vw,42px)!important}
+#portalPanelOverview .portal-hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1.42fr) minmax(280px,.78fr);
+  gap:clamp(22px,4vw,54px);align-items:center;
+  padding:clamp(28px,5vw,68px)!important;
+  border:1px solid rgba(139,166,190,.26)!important;border-radius:30px!important;
+  background:linear-gradient(118deg,rgba(255,255,255,.9),rgba(238,246,252,.82) 58%,rgba(247,243,249,.78))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .portal-hero:before{
+  content:"";position:absolute;z-index:-1;width:420px;height:420px;right:16%;top:-270px;
+  border-radius:50%;background:radial-gradient(circle,rgba(205,226,242,.48),rgba(205,226,242,0) 70%);
+}
+#portalPanelOverview .hero-copy{max-width:760px}
+#portalPanelOverview .section-eyebrow{
+  color:#5d8299!important;font-size:10px!important;font-weight:750!important;
+  letter-spacing:.17em!important;text-transform:uppercase;
+}
+#portalPanelOverview .original-care-hero{
+  color:var(--dkl-blue-deep)!important;
+  font-size:clamp(38px,5.5vw,68px)!important;line-height:1.08!important;
+  letter-spacing:-.045em!important;font-weight:600!important;
+  text-wrap:balance;margin:18px 0 20px!important;
+}
+#portalPanelOverview .original-care-hero em{color:#66899d!important;font-style:normal}
+#portalPanelOverview .hero-copy>p{
+  max-width:650px;color:#526577!important;font-size:clamp(14px,1.35vw,17px)!important;
+  line-height:1.85!important;
+}
+#portalPanelOverview .hero-primary-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+#portalPanelOverview .hero-primary-actions a,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;padding:12px 18px!important;border-radius:13px!important;
+  border:1px solid rgba(124,157,183,.32)!important;
+  font-size:12px!important;font-weight:700!important;line-height:1.35;
+  transition:transform .18s,box-shadow .18s,background-color .18s,border-color .18s;
+}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(135deg,#315b7b,#47758f)!important;color:#fff!important;
+  border-color:transparent!important;box-shadow:0 9px 22px rgba(49,91,123,.17)!important;
+}
+#portalPanelOverview .hero-primary-actions .secondary-link{
+  background:rgba(255,255,255,.74)!important;color:var(--dkl-blue-deep)!important;
+}
+#portalPanelOverview .hero-primary-actions a:hover,
+#portalPanelOverview .hero-contact-actions a:hover,
+#portalPanelOverview .compass-credentials:hover{
+  transform:translateY(-2px);box-shadow:var(--dkl-shadow-hover)!important;
+}
+#portalPanelOverview .dispatch-card{
+  padding:clamp(22px,3vw,34px)!important;border:1px solid rgba(136,165,187,.32)!important;
+  border-radius:24px!important;background:rgba(255,255,255,.68)!important;
+  box-shadow:0 12px 36px rgba(53,83,106,.07)!important;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+#portalPanelOverview .care-compass .care-mark{color:#7899ad!important;max-width:100%;height:auto}
+#portalPanelOverview .care-compass h3{
+  color:var(--dkl-blue-deep)!important;font-size:clamp(26px,3vw,36px)!important;
+  line-height:1.14!important;letter-spacing:-.035em!important;margin:12px 0!important;
+}
+#portalPanelOverview .care-compass>p{color:#526577!important;line-height:1.75!important}
+#portalPanelOverview .hero-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+#portalPanelOverview .hero-contact-actions a{background:rgba(245,249,252,.9)!important;color:var(--dkl-blue-deep)!important;padding:10px 12px!important}
+#portalPanelOverview .hero-contact-actions .hero-call{grid-column:1/-1;background:#e8f1f7!important}
+#portalPanelOverview .compass-credentials{
+  width:100%;margin-top:12px;background:rgba(255,255,255,.65)!important;color:#526577!important;
+}
+#portalPanelOverview .care-pathways{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  margin-top:4px!important;
+}
+#portalPanelOverview .care-pathways>a{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
+  min-height:104px;padding:20px 22px!important;
+  border:1px solid var(--dkl-line)!important;border-radius:20px!important;
+  background:rgba(255,255,255,.76)!important;color:var(--dkl-ink)!important;
+  box-shadow:0 8px 24px rgba(49,77,100,.045)!important;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+#portalPanelOverview .care-pathways>a:hover{
+  transform:translateY(-3px);border-color:rgba(112,151,180,.42)!important;box-shadow:var(--dkl-shadow-hover)!important;
+}
+#portalPanelOverview .pathway-number{color:#7093a8!important;font-size:11px!important;letter-spacing:.12em}
+#portalPanelOverview .care-pathways strong{color:var(--dkl-blue-deep)!important;font-size:14px}
+#portalPanelOverview .care-pathways p{color:#637486!important;font-size:12px;line-height:1.55;margin-top:5px}
+#portalPanelOverview .care-pathways>a>span:last-child{color:#7294a8!important}
+#portalPanelOverview .home-care-section,#portalPanelOverview .diet-section,
+#portalPanelOverview #exploreHealthResources{
+  border:1px solid var(--dkl-line)!important;border-radius:24px!important;
+  background:rgba(255,255,255,.72)!important;box-shadow:0 8px 26px rgba(49,77,100,.045)!important;
+}
+#publicPortal input:not([type=checkbox]):not([type=radio]):not([type=hidden]),
+#publicPortal select,#publicPortal textarea{
+  border-color:rgba(131,157,178,.42)!important;border-radius:12px!important;
+  color:var(--dkl-ink)!important;
+}
+#publicPortal button:focus-visible,#publicPortal a:focus-visible,
+#publicPortal input:focus-visible,#publicPortal select:focus-visible,#publicPortal textarea:focus-visible,
+.site-header button:focus-visible,.site-header a:focus-visible,.site-header summary:focus-visible{
+  outline:3px solid #719bb8!important;outline-offset:3px!important;
+}
+@media(max-width:900px){
+  #portalPanelOverview .portal-hero{grid-template-columns:minmax(0,1fr) minmax(250px,.8fr);padding:28px!important}
+  #portalPanelOverview .care-pathways{gap:10px}
+  #portalPanelOverview .care-pathways>a{padding:16px!important;gap:10px}
+}
+@media(max-width:680px){
+  .site-header{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .portal-nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:8px 12px!important}
+  .portal-nav a{flex:0 0 auto;white-space:nowrap}
+  #publicPortal{padding:16px 12px 32px!important;border-radius:20px 20px 0 0}
+  #portalPanelOverview .portal-hero{grid-template-columns:1fr;gap:22px;padding:24px 20px!important;border-radius:22px!important}
+  #portalPanelOverview .original-care-hero{font-size:clamp(36px,10vw,48px)!important}
+  #portalPanelOverview .hero-primary-actions{display:grid;grid-template-columns:1fr}
+  #portalPanelOverview .hero-primary-actions a{width:100%;min-height:48px}
+  #portalPanelOverview .dispatch-card{padding:22px!important}
+  #portalPanelOverview .care-pathways{grid-template-columns:1fr}
+  #portalPanelOverview .care-pathways>a{min-height:82px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #portalPanelOverview *,#publicPortal *{transition:none!important;animation:none!important}
+}
+@media print{
+  #publicPortal{background:#fff!important}
+  #portalPanelOverview .portal-hero,#portalPanelOverview .dispatch-card,#portalPanelOverview .care-pathways>a{box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}
