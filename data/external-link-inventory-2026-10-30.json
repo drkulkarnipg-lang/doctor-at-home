@@ -231,7 +231,7 @@
         "index.html"
       ],
       "source_lines": [
-        1900
+        1898
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -255,7 +255,7 @@
         "index.html"
       ],
       "source_lines": [
-        1668
+        1666
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -267,7 +267,7 @@
         "index.html"
       ],
       "source_lines": [
-        1740
+        1738
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -292,7 +292,7 @@
         "index.html"
       ],
       "source_lines": [
-        1815
+        1813
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -304,7 +304,7 @@
         "index.html"
       ],
       "source_lines": [
-        1669
+        1667
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -364,7 +364,7 @@
         "index.html"
       ],
       "source_lines": [
-        958
+        956
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -376,7 +376,7 @@
         "index.html"
       ],
       "source_lines": [
-        1023
+        1021
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -400,8 +400,8 @@
         "index.html"
       ],
       "source_lines": [
-        672,
-        1047
+        670,
+        1045
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -415,7 +415,7 @@
       ],
       "source_lines": [
         6,
-        495
+        493
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -427,7 +427,7 @@
         "index.html"
       ],
       "source_lines": [
-        1227
+        1225
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -451,7 +451,7 @@
         "index.html"
       ],
       "source_lines": [
-        496
+        494
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -463,7 +463,7 @@
         "index.html"
       ],
       "source_lines": [
-        1228
+        1226
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -554,7 +554,7 @@
       ],
       "source_lines": [
         6,
-        497
+        495
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -566,7 +566,7 @@
         "index.html"
       ],
       "source_lines": [
-        1229
+        1227
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -607,8 +607,8 @@
         4,
         9,
         21,
-        1021,
-        1023
+        1019,
+        1021
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -716,7 +716,7 @@
         "index.html"
       ],
       "source_lines": [
-        1112
+        1110
       ],
       "classification": "placeholder",
       "verification_status": "not-a-configured-destination",
@@ -782,7 +782,7 @@
         "index.html"
       ],
       "source_lines": [
-        790
+        788
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -820,7 +820,7 @@
       ],
       "source_lines": [
         6,
-        494
+        492
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -832,7 +832,7 @@
         "index.html"
       ],
       "source_lines": [
-        1402
+        1400
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -844,7 +844,7 @@
         "index.html"
       ],
       "source_lines": [
-        1226
+        1224
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -856,7 +856,7 @@
         "index.html"
       ],
       "source_lines": [
-        668
+        666
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -915,7 +915,9 @@
         16,
         17,
         18,
-        141
+        130,
+        130,
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -939,7 +941,9 @@
         "index.html"
       ],
       "source_lines": [
-        141
+        130,
+        130,
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -951,7 +955,8 @@
         "index.html"
       ],
       "source_lines": [
-        141
+        130,
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -963,7 +968,7 @@
         "index.html"
       ],
       "source_lines": [
-        141
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1012,7 +1017,7 @@
       ],
       "source_lines": [
         12,
-        141
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1026,7 +1031,7 @@
       ],
       "source_lines": [
         2,
-        141
+        130
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1126,7 +1131,7 @@
         "index.html"
       ],
       "source_lines": [
-        793
+        791
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1272,8 +1277,8 @@
       ],
       "source_lines": [
         18,
-        790,
-        796
+        788,
+        794
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1285,7 +1290,7 @@
         "index.html"
       ],
       "source_lines": [
-        790
+        788
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1345,8 +1350,8 @@
         "index.html"
       ],
       "source_lines": [
-        289,
-        664
+        287,
+        662
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1394,7 +1399,7 @@
         "index.html"
       ],
       "source_lines": [
-        767
+        765
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1430,7 +1435,7 @@
         "index.html"
       ],
       "source_lines": [
-        1112
+        1110
       ],
       "classification": "placeholder",
       "verification_status": "not-a-configured-destination",
@@ -1447,7 +1452,7 @@
         11,
         24,
         26,
-        499
+        497
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1483,7 +1488,7 @@
         "index.html"
       ],
       "source_lines": [
-        1231
+        1229
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1531,7 +1536,7 @@
         "index.html"
       ],
       "source_lines": [
-        670
+        668
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1543,7 +1548,7 @@
         "index.html"
       ],
       "source_lines": [
-        796
+        794
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1557,7 +1562,7 @@
       ],
       "source_lines": [
         12,
-        141
+        130
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1569,7 +1574,7 @@
         "index.html"
       ],
       "source_lines": [
-        498
+        496
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1581,7 +1586,7 @@
         "index.html"
       ],
       "source_lines": [
-        1230
+        1228
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1607,7 +1612,7 @@
         "index.html"
       ],
       "source_lines": [
-        207
+        205
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1619,10 +1624,10 @@
         "index.html"
       ],
       "source_lines": [
-        493,
-        700,
-        714,
-        1232
+        491,
+        698,
+        712,
+        1230
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1634,7 +1639,7 @@
         "index.html"
       ],
       "source_lines": [
-        784
+        782
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1658,7 +1663,7 @@
         "index.html"
       ],
       "source_lines": [
-        203
+        201
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1669,9 +1674,7 @@
       "source_files": [
         "index.html"
       ],
-      "source_lines": [
-        140
-      ],
+      "source_lines": [],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
       "notes": "Extracted from active source; reachability and intended destination not yet independently verified."
@@ -1694,7 +1697,7 @@
         "index.html"
       ],
       "source_lines": [
-        290
+        288
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1706,7 +1709,7 @@
         "index.html"
       ],
       "source_lines": [
-        283
+        281
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1718,7 +1721,7 @@
         "index.html"
       ],
       "source_lines": [
-        297
+        295
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1730,7 +1733,7 @@
         "index.html"
       ],
       "source_lines": [
-        304
+        302
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1742,7 +1745,7 @@
         "index.html"
       ],
       "source_lines": [
-        325
+        323
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1754,7 +1757,7 @@
         "index.html"
       ],
       "source_lines": [
-        318
+        316
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1766,7 +1769,7 @@
         "index.html"
       ],
       "source_lines": [
-        311
+        309
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -1840,9 +1843,9 @@
       ],
       "source_lines": [
         5,
-        242,
-        433,
-        1900
+        240,
+        431,
+        1898
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1871,7 +1874,7 @@
         "index.html"
       ],
       "source_lines": [
-        796
+        794
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1907,7 +1910,7 @@
         "index.html"
       ],
       "source_lines": [
-        665
+        663
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1919,7 +1922,7 @@
         "index.html"
       ],
       "source_lines": [
-        666
+        664
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1931,7 +1934,7 @@
         "index.html"
       ],
       "source_lines": [
-        786
+        784
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1955,7 +1958,7 @@
         "index.html"
       ],
       "source_lines": [
-        785
+        783
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1967,8 +1970,8 @@
         "index.html"
       ],
       "source_lines": [
-        282,
-        768
+        280,
+        766
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2040,7 +2043,7 @@
         "index.html"
       ],
       "source_lines": [
-        1057
+        1055
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2140,7 +2143,7 @@
       ],
       "source_lines": [
         13,
-        1021
+        1019
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2164,7 +2167,7 @@
         "index.html"
       ],
       "source_lines": [
-        1704
+        1702
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -2176,7 +2179,7 @@
         "index.html"
       ],
       "source_lines": [
-        1727
+        1725
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
@@ -2200,7 +2203,7 @@
         "index.html"
       ],
       "source_lines": [
-        210
+        208
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2212,7 +2215,7 @@
         "index.html"
       ],
       "source_lines": [
-        796
+        794
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2344,8 +2347,8 @@
         "index.html"
       ],
       "source_lines": [
-        671,
-        1047
+        669,
+        1045
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2357,7 +2360,7 @@
         "index.html"
       ],
       "source_lines": [
-        771
+        769
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2417,8 +2420,8 @@
         "index.html"
       ],
       "source_lines": [
-        296,
-        669
+        294,
+        667
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2745,7 +2748,7 @@
         "index.html"
       ],
       "source_lines": [
-        777
+        775
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2769,7 +2772,7 @@
         "index.html"
       ],
       "source_lines": [
-        1054
+        1052
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2781,7 +2784,7 @@
         "index.html"
       ],
       "source_lines": [
-        343
+        341
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2793,8 +2796,8 @@
         "index.html"
       ],
       "source_lines": [
-        303,
-        663
+        301,
+        661
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2818,7 +2821,7 @@
         "index.html"
       ],
       "source_lines": [
-        796
+        794
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2830,7 +2833,7 @@
         "index.html"
       ],
       "source_lines": [
-        667
+        665
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3060,7 +3063,7 @@
       ],
       "source_lines": [
         19,
-        791
+        789
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3132,7 +3135,7 @@
         "index.html"
       ],
       "source_lines": [
-        250
+        248
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3204,7 +3207,7 @@
         "index.html"
       ],
       "source_lines": [
-        252
+        250
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3228,7 +3231,7 @@
         "index.html"
       ],
       "source_lines": [
-        324
+        322
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3264,7 +3267,7 @@
         "index.html"
       ],
       "source_lines": [
-        249
+        247
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3362,7 +3365,7 @@
       ],
       "source_lines": [
         17,
-        251
+        249
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3386,7 +3389,7 @@
         "index.html"
       ],
       "source_lines": [
-        766
+        764
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3398,8 +3401,8 @@
         "index.html"
       ],
       "source_lines": [
-        317,
-        783
+        315,
+        781
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3447,7 +3450,7 @@
         "index.html"
       ],
       "source_lines": [
-        310
+        308
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3461,7 +3464,7 @@
       ],
       "source_lines": [
         20,
-        792
+        790
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3485,7 +3488,7 @@
         "index.html"
       ],
       "source_lines": [
-        774
+        772
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3510,8 +3513,8 @@
         "index.html"
       ],
       "source_lines": [
-        703,
-        721
+        701,
+        719
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3523,7 +3526,7 @@
         "index.html"
       ],
       "source_lines": [
-        1232
+        1230
       ],
       "classification": "runtime-template",
       "verification_status": "not-live-checked",
