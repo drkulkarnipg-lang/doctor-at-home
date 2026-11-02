@@ -1,6 +1,6 @@
 /* Offer Google Translate for external health-source pages without replacing the original source link. */
 (()=>{'use strict';
-const languages=[['mr','Marathi'],['hi','Hindi'],['gu','Gujarati'],['bn','Bengali'],['ta','Tamil'],['te','Telugu'],['kn','Kannada'],['ml','Malayalam'],['ur','Urdu'],['pa','Punjabi'],['or','Odia'],['as','Assamese'],['ne','Nepali'],['fr','French'],['es','Spanish'],['ar','Arabic'],['zh-CN','Chinese (Simplified)']];
+const languages=Array.from(document.querySelectorAll('#siteLanguageSelector option')).map(o=>[o.value,o.textContent.trim()]);
 function translatedUrl(url,lang){return 'https://translate.google.com/translate?sl=auto&tl='+encodeURIComponent(lang)+'&u='+encodeURIComponent(url);}
 document.addEventListener('DOMContentLoaded',()=>{
  const root=document.getElementById('exploreHealthResources'),select=document.getElementById('sourceTranslateLanguage');if(!root||!select)return;
