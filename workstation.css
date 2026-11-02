@@ -180,3 +180,66 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
  #viewTriageAssessment .no-print{display:none!important}.triage-card,.triage-hero,.triage-result{box-shadow:none!important;break-inside:avoid}
  #viewTriageAssessment input,#viewTriageAssessment select,#viewTriageAssessment textarea{border:0!important;border-bottom:1px solid #aaa!important;background:white!important}
 }
+
+
+/* Refined translucent ivory–sage visual system. Preserve contrast and print clarity. */
+@media screen {
+ :root{
+  --lux-canvas:rgba(252,251,248,.96);
+  --lux-surface:rgba(247,248,244,.84);
+  --lux-ivory:rgba(244,240,232,.78);
+  --lux-sage:rgba(234,240,233,.72);
+  --lux-green:#A8B9A8;
+  --lux-ink:#263B35;
+  --lux-muted:#78847D;
+  --lux-border:rgba(232,234,228,.88);
+  --lux-accent:#C9B99A;
+ }
+ html{background:#FCFBF8}
+ body{background:
+   radial-gradient(ellipse at 8% 0%,rgba(234,240,233,.48),transparent 42%),
+   radial-gradient(ellipse at 92% 12%,rgba(244,240,232,.46),transparent 38%),
+   linear-gradient(180deg,#FCFBF8 0%,#F7F8F4 52%,#FCFBF8 100%)!important;
+   color:var(--lux-ink)!important;
+ }
+ .site-header{background:rgba(252,251,248,.88)!important;backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);border-bottom:1px solid var(--lux-border)}
+ .portal-nav{background:rgba(234,240,233,.70)!important;backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-color:var(--lux-border)!important}
+ .hero-copy,.dispatch-card,.triage-hero,.triage-card,.share-desk-card,
+ .research-review,.evidence-workflow,.patient-helper-card{
+   background:var(--lux-surface)!important;
+   border:1px solid var(--lux-border)!important;
+   box-shadow:0 12px 38px rgba(38,59,53,.045),inset 0 1px 0 rgba(255,255,255,.82)!important;
+   backdrop-filter:blur(14px) saturate(118%);
+   -webkit-backdrop-filter:blur(14px) saturate(118%);
+ }
+ input:not([type=checkbox]):not([type=radio]),select,textarea{
+   background:rgba(255,255,255,.76)!important;color:var(--lux-ink)!important;border-color:var(--lux-border)!important;
+ }
+ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid rgba(168,185,168,.9)!important;outline-offset:3px}
+ #chatbotWindow{background:rgba(247,248,244,.94)!important;border:1px solid var(--lux-border)!important;box-shadow:0 24px 70px rgba(38,59,53,.14)!important;backdrop-filter:blur(22px) saturate(130%);-webkit-backdrop-filter:blur(22px) saturate(130%)}
+ #chatbotWindow>div:first-child{background:rgba(38,59,53,.94)!important}
+ #chatMessages{background:rgba(252,251,248,.55)}
+ #chatbotWindow .helper-message{border:1px solid rgba(232,234,228,.9);border-radius:15px;box-shadow:0 3px 12px rgba(38,59,53,.035)}
+ #chatbotWindow .helper-message.assistant{background:rgba(234,240,233,.82)!important;color:var(--lux-ink)!important}
+ #chatbotWindow .helper-message.user{background:rgba(244,240,232,.92)!important;color:var(--lux-ink)!important}
+ #chatInput{border:1px solid var(--lux-border)!important;border-radius:12px!important;background:rgba(255,255,255,.86)!important;min-height:42px}
+ #chatSendButton,#chatbotToggleBtn{background:rgba(38,59,53,.94)!important;color:#fff!important;border:1px solid rgba(201,185,154,.58)!important;box-shadow:0 8px 24px rgba(38,59,53,.12)!important}
+}
+/* Harmonise existing Tailwind-built surfaces with the translucent ivory/sage system. */
+@media screen {
+ main .bg-white,.bg-white:not(dialog){background-color:rgba(247,248,244,.84)!important;border-color:var(--lux-border)}
+ main .bg-slate-50,.bg-slate-50{background-color:rgba(234,240,233,.62)!important}
+ main .bg-slate-100,.bg-slate-100{background-color:rgba(244,240,232,.72)!important}
+ main .border-slate-200,.border-slate-300,.border-gray-200{border-color:var(--lux-border)!important}
+ main .text-slate-800,.text-slate-800,.text-slate-900{color:var(--lux-ink)!important}
+ main .text-slate-500,.text-slate-500,.text-slate-600{color:var(--lux-muted)!important}
+ main .shadow-xl,main .shadow-2xl{box-shadow:0 12px 34px rgba(38,59,53,.055)!important}
+ #chatbotWindow .helper-message p{line-height:1.65}
+ #chatbotWindow button:disabled{opacity:.55;cursor:wait}
+}
+@media (prefers-reduced-transparency: reduce) {
+ .site-header,.portal-nav,.hero-copy,.dispatch-card,.triage-hero,.triage-card,#chatbotWindow{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+}
+@media print {
+ body,.site-header,.portal-nav,.hero-copy,.dispatch-card{background:#fff!important;backdrop-filter:none!important;box-shadow:none!important}
+}

@@ -13,6 +13,7 @@
     "api/evidence-webhook.js",
     "api/evidence-workflow.js",
     "api/official-form-pdf.js",
+    "api/patient-assistant.js",
     "api/public-articles.js",
     "api/research-discovery.js",
     "api/research-feeds.js",
@@ -138,11 +139,13 @@
       "source_files": [
         "api/articles-admin.js",
         "api/clinical-cloud.js",
-        "api/evidence-workflow.js"
+        "api/evidence-workflow.js",
+        "api/patient-assistant.js"
       ],
       "source_lines": [
         3,
         4,
+        42,
         45
       ],
       "classification": "runtime-template",
@@ -200,16 +203,18 @@
     {
       "url": "https://ai-gateway.vercel.sh/v1/chat/completions",
       "source_files": [
+        "api/patient-assistant.js",
         "server/article-format.js",
         "server/evidence-pipeline.js"
       ],
       "source_lines": [
         24,
-        51
+        51,
+        54
       ],
-      "classification": "external-destination",
+      "classification": "service-endpoint",
       "verification_status": "not-live-checked",
-      "notes": "Extracted from active source; reachability and intended destination not yet independently verified."
+      "notes": "Dynamic/runtime endpoint; requires context-specific verification, not a public-link HEAD check."
     },
     {
       "url": "https://api.crossref.org/works",
