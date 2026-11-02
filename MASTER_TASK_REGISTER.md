@@ -1,5 +1,32 @@
 # Dr Kulkarni — permanent request and completion register
 
+## Permanent automatic task-register protocol — effective 2 November 2026
+
+**This file is the single source of truth for project work.** Do not create parallel personal checklists or ask the owner to repeat recorded requirements. At the start of every work session/conversation, read this register and `WORK_CHECKPOINT.md`, inspect current GitHub main/PRs/Actions and Vercel status, then resume the oldest highest-priority actionable item. Reconcile stale historical status against current evidence before acting.
+
+### Automatic intake → execution → completion lifecycle
+
+1. **Intake (automatic):** Every new concrete owner instruction, defect, requested feature, QA finding or deployment blocker is immediately checked against this register. If it is not already represented, append one uniquely numbered row to the appropriate section (or create a new section); capture the exact requested outcome, scope, dependencies, priority, status, source conversation/date and evidence needed. If it is already represented, update that row rather than creating a duplicate. The owner must not be asked to maintain this register manually.
+2. **Execution:** Work one bounded item at a time. Keep its row visible in the active register with one of these explicit states: `TODO`, `IN PROGRESS`, `BLOCKED`, `CODED`, `CI VERIFIED`, `PREVIEW VERIFIED`, `PRODUCTION VERIFIED`. Never equate code, merge, a green check, or a READY deployment with end-to-end completion.
+3. **Completion / automatic cut from active queue:** Once the item's own acceptance criteria are met and evidence is recorded, move its row from the active queue into the dated **Completed archive** at the bottom of this file (retain its ID, original request, completion date, final commit/PR/deployment and test evidence). Remove it from the active queue so it no longer consumes attention or gets repeated. **Never erase the historical record.** If a completed item regresses, reopen the same ID and link the regression evidence; do not create a duplicate.
+4. **Checkpoint synchronisation:** After every meaningful change, update `WORK_CHECKPOINT.md` with the exact current branch/head, what changed, checks run/results, blockers and the single next action. Before ending a session or nearing context limits, sync both files to GitHub. The checkpoint is a short resume pointer; this register remains the authoritative task ledger.
+5. **Efficiency / token discipline:** Read the latest checkpoint first, then only the relevant register sections and source files. Do not re-investigate, re-implement, re-test or re-explain items whose evidence is still valid. Reuse exact SHAs, test-run IDs and deployment IDs. Summarise status in a compact delta, not a repeated full history.
+6. **No false completion:** Keep an item open if a provider quota, unavailable browser/device, unconfigured integration, missing owner action, real transaction, recipient receipt or clinical sign-off prevents its acceptance criteria from being verified. Record the precise blocker and the next safe action. Never bypass CI, branch protection, access controls, provider limits, payments, DNS or secrets.
+7. **Session handoff:** The first project action in a new conversation is to recover this register and checkpoint, verify live repository state, then continue from the recorded next action. Do not ask the owner to re-state the project or re-list known work.
+
+### Active intake — 2 November 2026
+
+| ID | Priority | State | Request / acceptance criteria | Evidence / next action |
+| --- | --- | --- | --- | --- |
+| OPS-01 | P0 | IN PROGRESS | Make this register self-maintaining operationally: every new concrete request is captured once; completed items leave the active queue but remain in a permanent dated archive; checkpoint and handoff stay synchronised; avoid repeated work and unnecessary token use. | This protocol is being added to the canonical register and checkpoint. It is an assistant operating procedure, not a claim that ChatGPT can run a background listener on every new chat. Continue applying it whenever project work is performed. |
+| LANG-01 | P1 | CI IN PROGRESS / PREVIEW BLOCKED | Add four visible, synchronized translators: public front page, Patient Health Library, Doctor Workstation, and Knowledge Encyclopedia reader. Whole-page machine translation; keep medical-meaning warning visible; responsive and keyboard accessible. | PR #127: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/127. Branch `feature/section-specific-translators`; latest known head `32aff77525916879e72c86d0789f079940d0d516`. Actions run `41465691147` was in progress; Vercel check returned `build-rate-limit`. Poll exact-head CI, reconcile any workflow-generated commit, then wait for preview capacity and perform desktop/mobile verification before merge/release. |
+
+### Completed archive
+
+Move completed rows here rather than deleting them. Keep the stable ID and a concise evidence trail so future sessions can skip them without repeating the work. No item is archived as complete merely because it was discussed, coded, merged or deployed; its acceptance criteria must be met.
+
+---
+
 Updated: 1 November 2026 (application source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; documentation-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; exact-head CI and Vercel status SUCCESS; live visual verification pending).
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
