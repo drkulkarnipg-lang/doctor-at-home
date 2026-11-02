@@ -167,6 +167,14 @@
       };
       fill(sitePicker);
       fill(articlePicker);
+      // Refill section controls only after Google's live catalogue is available.
+      // The early DOM-ready sync can see only the fallback list, so it must not
+      // be treated as the final language catalogue.
+      document.querySelectorAll('.section-language-picker').forEach(sectionPicker => {
+        const selected = sectionPicker.value;
+        sectionPicker.replaceChildren(...options.map(option => new Option(option.textContent.trim(), option.value)));
+        if ([...sectionPicker.options].some(option => option.value === selected)) sectionPicker.value = selected;
+      });
       const libraryCount = document.getElementById('libraryLanguageCount');
       if (libraryCount) libraryCount.textContent = options.length + ' available languages · applies to the whole page';
       const cookie = document.cookie.split(';').map(part => part.trim()).find(part => part.startsWith('googtrans=/en/'));
