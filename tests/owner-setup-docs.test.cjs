@@ -10,6 +10,9 @@ assert.ok(setup.includes('First-time account creation is an administrator/provid
 assert.ok(setup.includes('MFA is not currently verified as enabled'),'Runbook must not claim unverified MFA');
 assert.ok(passkeys.includes('activation not completed'),'Passkey setup must remain explicitly conditional on provider configuration');
 assert.ok(api.includes("env.CLINIC_OWNER_EMAIL")&&api.includes("reset-request"),'Recovery implementation must use configured owner email');
+assert.ok(api.includes("password-otp-request")&&api.includes("password-otp-verify"),'Email OTP password creation and rotation must be implemented server-side');
+assert.ok(api.includes("create_user:false")&&api.includes("session.user?.id!==env.CLINIC_OWNER_USER_ID"),'OTP flow must disable public signup and verify the owner UUID');
+assert.ok(setup.includes('{{ .Token }}')&&setup.includes('SMTP Settings')&&setup.includes('10 minutes'),'Runbook must specify numeric OTP template, production SMTP and short expiry');
 assert.ok(api.includes("password.length<12"),'Server must enforce the minimum password length');
 assert.ok(reset.includes("history.replaceState")&&reset.includes("accessToken=''"),'Recovery token must be removed from URL history and cleared from memory');
 assert.ok(setup.includes('Disable public signup'),'Runbook must explicitly preserve the no-public-signup rule');

@@ -9,6 +9,8 @@ window.ClinicCloud={
 session:async()=>{try{const data=await api('session');signedIn=data.signedIn===true;paint(data.configured===true);return data;}catch(e){if(e.status===503&&e.configured===false){signedIn=false;paint(false);return {configured:false,signedIn:false};}throw e;}},
 login:async(identifier,password,rememberDevice=false)=>{const credentials=String(identifier).includes('@')?{email:identifier,password,rememberDevice}:{username:identifier,password,rememberDevice};const data=await api('login',credentials);signedIn=true;stopped.clear();paint(true);await refresh();window.dispatchEvent(new Event('clinic-owner-signed-in'));return data;},
 requestPasswordReset:async identifier=>api('reset-request',String(identifier).includes('@')?{email:identifier}:{username:identifier}),
+requestPasswordOtp:async()=>api('password-otp-request',{}),
+verifyPasswordOtp:async(token,password)=>api('password-otp-verify',{token,password}),
 listRegister:async registerType=>api('register-list',undefined,{registerType}),
 saveRegister:async entry=>api('register-save',{entry}),
 registerDeathFromForm:async entry=>api('register-death-from-form',{entry}),

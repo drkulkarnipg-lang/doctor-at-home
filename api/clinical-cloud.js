@@ -95,6 +95,32 @@ if(updated.status===429)return reply(429,{message:'Too many password updates. Wa
 if(!updated.ok)return reply(400,{message:'Password update was not accepted. Use a unique password and request a fresh link if needed.'});
 return reply(200,{updated:true,message:'Password changed. Return to Doctor login and sign in with the new password.'});
 }
+if(action==='password-otp-request'&&method==='POST'){
+if(Object.keys(body).length)return reply(400,{message:'No email address or account details should be supplied. The code is sent only to the configured clinic owner email.'});
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No code was sent.'});
+const sent=await api('/auth/v1/otp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,create_user:false})});
+if(sent.status===429)return reply(429,{message:'Email code rate limit reached. Wait before requesting another code.'});
+if(!sent.ok)return reply(502,{message:'Email code could not be sent. Check the clinic email provider and OTP template; no password was changed.'});
+return reply(200,{sent:true,message:'If the configured clinic owner account is active, a one-time code has been sent to its verified email address.'});
+}
+if(action==='password-otp-verify'&&method==='POST'){
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No password was changed.'});
+if(Object.keys(body).some(k=>!['token','password'].includes(k))||typeof body.token!=='string'||!/^\d{6,10}$/.test(body.token)||typeof body.password!=='string'||body.password.length<12||body.password.length>128)return reply(400,{message:'Enter the email code and a unique password of 12–128 characters.'});
+const verified=await api('/auth/v1/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,token:body.token,type:'email'})});
+if(verified.status===429)return reply(429,{message:'Too many code verification attempts. Wait before trying again.'});
+if(!verified.ok)return reply(401,{message:'The email code is invalid or expired. Request a new code.'});
+const session=await verified.json();
+if(session.user?.id!==env.CLINIC_OWNER_USER_ID||typeof session.access_token!=='string')return reply(403,{message:'This verified email does not belong to the configured clinic owner account. Password unchanged.'});
+const updated=await api('/auth/v1/user',{method:'PUT',headers:{Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({password:body.password})});
+if(updated.status===429)return reply(429,{message:'Password update rate limit reached. Wait before trying again.'});
+if(!updated.ok)return reply(400,{message:'The password was not accepted. Use a unique password and request a fresh email code if it expires.'});
+let sessionsRevoked=false;
+try{const revoked=await api('/auth/v1/logout?scope=global',{method:'POST',headers:{Authorization:'Bearer '+session.access_token}});sessionsRevoked=revoked.ok;}catch{}
+clearCookies();
+return reply(200,{updated:true,sessionsRevoked,message:sessionsRevoked?'Password changed. Other active sessions were signed out. Return to Doctor login and sign in with the new password.':'Password changed. Return to Doctor login and sign in with the new password. If another device remains signed in, log it out manually.'});
+}
 let user=null;
 const renew=async()=>{if(!refreshToken)return null;try{const refreshed=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({refresh_token:refreshToken})});if(!refreshed.ok)return null;const data=await refreshed.json();if(data.user?.id!==env.CLINIC_OWNER_USER_ID||typeof data.access_token!=='string'||typeof data.refresh_token!=='string'){clearCookies();return null;}cookie(data.access_token,Math.min(ACCESS_TTL,Number(data.expires_in)||ACCESS_TTL));refreshCookie(data.refresh_token,REMEMBER_TTL);token=data.access_token;refreshToken=data.refresh_token;return data.user;}catch{return null;}};
 if(!token&&refreshToken)user=await renew();
@@ -155,7 +181,7 @@ const e=body.entry;
 if(!e||typeof e!=='object'||!['form4','form4a','form2'].includes(e.formType))return reply(400,{message:'Choose a valid death form.'});
 const clean=(v,max)=>typeof v==='string'?v.trim().slice(0,max):'';
 const patientName=clean(e.patientName,120),deathDate=clean(e.deathDate,10),deathTime=clean(e.deathTime,5),place=clean(e.place,100);
-if(!patientName||!validISODate(deathDate)||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
+if(!patientName||!validISODate(deathDate)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
 const entryDate=validISODate(e.entryDate)?e.entryDate:deathDate;
 const sourceKey=require('node:crypto').createHash('sha256').update(['death-form-v1',patientName.normalize('NFKC').toLocaleLowerCase(),deathDate,deathTime,place.normalize('NFKC').toLocaleLowerCase()].join('|')).digest('hex');
 const data={patientName,patientCode:'',age:clean(e.age,20),sex:clean(e.sex,30),deathDateTime:deathDate+'T'+deathTime,place,certificateReference:'Source form: '+e.formType.toUpperCase(),notes:"Entered from the doctor-selected death form; verify against the signed source before final filing."};
