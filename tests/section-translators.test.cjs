@@ -17,6 +17,9 @@ for (const [id, startMarker, endMarker, label] of placements) {
   assert.ok(startAt >= 0 && controlAt > startAt, label + ' translator follows its intended section start.');
   assert.ok(endAt > controlAt, label + ' translator appears before the section content/navigation marker.');
 }
+const libraryHeading = html.slice(html.indexOf('class="library-heading-row'), html.indexOf('</div><div class="section-intro"', html.indexOf('class="library-heading-row')));
+assert.ok(libraryHeading.includes('Health Library') && libraryHeading.includes('id="libraryLanguagePicker"'), 'Health Library translator is directly beside the Health Library title.');
+assert.ok(libraryHeading.includes('library-heading-translator'), 'Health Library title and translator share the compact heading row.');
 assert.ok(html.includes('class="section-language-picker"'), 'Section selectors share the language-picker class.');
 assert.ok(html.includes('syncSectionLanguagePickers'), 'Section selectors are populated from the canonical language list.');
 assert.ok(html.includes("target.matches('.section-language-picker')"), 'Changing a section selector invokes the shared translation action.');
