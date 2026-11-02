@@ -11,17 +11,38 @@ The preview contains the login, cloud save/open controls, API and database migra
 5. Redeploy the preview. Check the cloud panel, sign in as owner, then test all of: anonymous access denied, another authenticated user denied, owner read/insert/update allowed, wrong revision rejected with 409, and owner logout. Run actual RLS integration checks against the configured database; mocked API tests are not evidence that a live project's policies are correct.
 6. Test with two synthetic patients on PC and mobile: save to cloud on one device, open on the other, update and reload. Compare conflicts, offline errors and expired login before using real patient information. After the doctor's preview approval, configure/redeploy production.
 
-## First-time password setup and password recovery
+## First-time password setup, email OTP and password changes
 
-The website does not offer public account creation and must not silently invent a local PIN as a substitute for server authentication.
+The clinic owner Auth identity already exists in the connected Supabase project and is confirmed by email. The public website must never create a second owner or allow public signup.
 
-1. In the intended Supabase project, an administrator creates or verifies the owner's Auth user and email address, disables public sign-ups, and confirms the Auth UUID. Set an initial unique password using the provider's approved admin/recovery flow; do not share the password in ChatGPT, GitHub, tickets or source files.
-2. Set the Vercel environment variables listed above, including `CLINIC_OWNER_EMAIL`, in the correct environment (Preview and Production are separate). Redeploy after the environment change.
-3. In Supabase Auth → URL Configuration, allow the exact recovery redirect `https://home-visiting-icu-doctor.vercel.app/password-reset.html`. Configure the email provider/SMTP sender and verify that the owner can receive mail. Never broaden redirects to arbitrary hosts.
-4. Test the **Set / reset password by email** control with the exact owner email. A recovery email should be sent only for that configured address; other addresses receive the same generic response. The reset page accepts a recovery token from the URL fragment, immediately removes the fragment from browser history, keeps the token in memory only, checks the token against the configured owner UUID, requires at least 12 characters, and clears the password fields after submission.
-5. Verify the full cycle: valid recovery email arrives; valid link opens the reset page; new password is accepted; the old password no longer works; the new password works; expired/reused/wrong-owner tokens are rejected; login/logout and session expiry behave as expected. Test in a private browser window and on the owner's actual device. A mocked regression test does not prove SMTP delivery or live provider configuration.
-6. If recovery fails with “Password recovery is not configured,” do **not** create a second password or change local device-lock settings. Check `CLINIC_OWNER_EMAIL`, `CLINIC_OWNER_USER_ID`, Supabase Auth email delivery, the allowed redirect URL, and whether the user exists in the same project.
-7. Passkeys are optional and remain a separate provider-activation task; follow `PASSKEY_SETUP.md`. Do not claim fingerprint/face/MFA is active until a real device successfully registers and signs in.
+### Preferred first-time password creation / forgotten password / password change
+
+1. Keep public signups disabled. Confirm the existing owner account, `CLINIC_OWNER_USER_ID`, `CLINIC_OWNER_EMAIL` and optional `CLINIC_OWNER_USERNAME` all identify the same owner in the same Supabase project. The server sends codes only to the configured owner email; the browser cannot supply or redirect the recipient.
+2. In Supabase Dashboard → Authentication → Sign In / Providers → Email, keep Email OTP enabled. Set the Magic Link email template to display the numeric code using `{{ .Token }}` (not only `{{ .ConfirmationURL }}`). The website's OTP form accepts 6–10 digits. Configure the OTP expiry to a short interval (recommended 10 minutes; never more than 24 hours).
+3. Configure a production SMTP sender under Authentication → SMTP Settings. Use the clinic's verified Google Workspace sender if that is the chosen provider; keep SMTP credentials in Supabase's secret settings only. Supabase's built-in sender is best-effort, limited to 2 emails/hour and restricted to project-team addresses; it is not a production delivery service.
+4. In Doctor Workstation → Doctor login, select **Create / change password with email OTP** → **Send email OTP**. Enter the code received at the configured owner email, then enter and confirm a unique password (12–128 characters). The API calls Supabase Auth with `create_user:false`, verifies the code, checks the verified Auth UUID against `CLINIC_OWNER_USER_ID`, then updates the password. No public user creation, client-selected email, localStorage password or service-role key is used.
+5. On successful password change, the API attempts to sign out all active Auth sessions, clears its own session cookies, and asks the doctor to sign in again with the new password. If global sign-out cannot be confirmed, the UI states that explicitly; manually log out other devices.
+6. The existing recovery-link control remains as an alternative. Its redirect must be allow-listed exactly as `https://home-visiting-icu-doctor.vercel.app/password-reset.html`. The recovery page strips the token from browser history and keeps it in memory only.
+7. Test on the production origin and actual owner mailbox: request code; confirm delivery; reject wrong/expired code; reject any non-owner Auth UUID; create the first password; sign in; change password with a fresh OTP; confirm the old password fails and the new one works; confirm logout and session expiry. Use a private browser and never enter real patient data in test records.
+
+### Security controls
+
+- The OTP recipient is fixed server-side to `CLINIC_OWNER_EMAIL`; user input cannot choose another address.
+- OTP requests use Supabase Auth rate limits; do not add a resend loop or bypass cooldowns.
+- Passwords must be unique and at least 12 characters; the application never stores them.
+- OTP tokens and Auth access tokens are not returned to the browser by the password setup API.
+- Only the configured clinic owner's verified Auth UUID may change the password.
+- Password updates use Supabase Auth; passwords are never stored in application tables.
+- Public signup remains disabled. A missing owner account is an administrator/provider-dashboard setup issue, not a public signup flow.
+- Email OTP delivery is not considered active until the Auth email template, SMTP sender, real inbox delivery and live password change have all been verified.
+
+### Provider references
+
+- https://supabase.com/docs/guides/auth/auth-email-passwordless
+- https://supabase.com/docs/guides/auth/auth-smtp
+- https://supabase.com/docs/guides/auth/passwords
+- https://supabase.com/docs/guides/auth/rate-limits
+- https://supabase.com/docs/guides/deployment/going-into-prod
 
 ## Register storage activation
 
