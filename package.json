@@ -11,6 +11,7 @@
     "audit:links": "node scripts/audit-external-links.cjs",
     "inventory:links": "node scripts/generate-external-link-inventory.cjs",
     "test:lab-reference": "node tests/lab-reference-governance.test.cjs",
-    "test:patient-ai": "node tests/patient-ai-assistant.test.cjs"
+    "test:patient-ai": "node tests/patient-ai-assistant.test.cjs",
+    "test:fast-navigation": "node tests/fast-navigation.test.cjs"
   }
 }
