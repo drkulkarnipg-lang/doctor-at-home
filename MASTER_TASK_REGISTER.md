@@ -32,7 +32,7 @@ Move completed rows here rather than deleting them. Keep the stable ID and a con
 
 ---
 
-Updated: 3 November 2026, 01:38 IST (main `64a1e86fe657d5ad6da88f7f6611f276074de2e6`; exact-main PUSH CI `41500814823` verified; Vercel status SUCCESS only; Production/domain/device gates remain open; OPS-01 archived; LANG-01 CI VERIFIED but still active pending real device QA).
+Updated: 3 November 2026, 02:56 IST (main `64a1e86fe657d5ad6da88f7f6611f276074de2e6`; exact-main PUSH run `41500814823` / job `125467499136` verified SUCCESS; Vercel main status SUCCESS only, not Production proof; PR #129 head `da35fbfc547cad98d6cd5c5add3f9163269205ff` exact-head regression `41523467991` / job `125545167150` SUCCESS with 75 regression files, 1,437 calculator assertions, 1,064 lab assertions and 50 triage checks; PR preview status SUCCESS target `H55H12cS7WnZncUP5a8yu3U4SyQ8`, not Production; PR #129 remains draft pending owner review; OPS-01 archived; LANG-01 and REL-01 remain active pending Production/domain/device verification).
 
 **Legend:** `[x] LIVE` = released and supported by recorded deployment/source checks; `[ ] PREVIEW` = code saved for review, not live; `[ ] PARTIAL` = only part complete; `[ ] TODO` = unfinished; `[ ] VERIFY` = evidence insufficient. A READY deployment alone does not prove a feature works. Device-only checks are stated separately.
 
