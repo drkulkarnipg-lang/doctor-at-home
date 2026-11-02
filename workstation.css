@@ -182,20 +182,65 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 }
 
 
-/* Owner-approved warm palette: cream and pale-yellow surfaces, never stark white on screen. */
+/* Owner-approved ivory and pale-sage palette. Clinical status colours remain distinct. */
 @media screen {
- :root{--canvas:#fbf3df;--paper:#fff8e8;--ink:#263447;--muted:#665f52;--line:#e8d8b8;--soft:#f5e9ca}
- body,.site-header{background-color:#fbf3df!important}
+ :root{
+  --canvas:#FCFBF8;
+  --paper:#F7F8F4;
+  --ink:#263B35;
+  --muted:#78847D;
+  --line:#E8EAE4;
+  --teal:#49665d;
+  --soft:#F4F0E8;
+  --surface-ivory:#F4F0E8;
+  --surface-sage:#EAF0E9;
+  --accent-muted-green:#A8B9A8;
+  --accent-premium:#C9B99A;
+ }
+ body,.site-header{background-color:var(--canvas)!important;color:var(--ink)}
+ .site-header,.portal-nav{border-color:var(--line)!important}
+ .portal-nav{background-color:var(--surface-sage)!important}
  .hero-copy,.dispatch-card,#elderlySection>div:last-child>div,#wikiCardsGrid>div,
  .diet-section>div:last-child>div,#calc30Grid>div,#bookingSection>div:not(:first-child),
  .share-desk-heading,.share-desk-card,.triage-hero,.triage-card{
-   background-color:#fff8e8!important;
+   background-color:var(--paper)!important;color:var(--ink);
  }
- #elderlySection ul li,#procedureList label{background-color:#f6ebd1!important}
- .portal-nav{background-color:#f3e8ce!important}
+ #elderlySection ul li,#procedureList label,.moon-reader-card{
+   background-color:var(--surface-ivory)!important;
+ }
  input:not([type=checkbox]):not([type=radio]),select,textarea,
  .share-desk-card button,.triage-field input,.triage-field select,.triage-field textarea{
-   background-color:#fff4d9!important;
+   background-color:#fff!important;color:var(--ink);border-color:var(--line)!important;
  }
- .moon-reader-card{background-color:#f8edcf!important}
+ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+   outline-color:var(--accent-muted-green)!important;
+ }
+ .doctor-access-status{color:var(--muted)}
+ #doctorLoginDialog,#doctorSessionDialog,#deviceUnlockDialog{
+   background:var(--paper);color:var(--ink);border:1px solid var(--line);
+   border-radius:18px;box-shadow:0 18px 60px rgba(38,59,53,.18);
+ }
+ #doctorLoginDialog::backdrop,#doctorSessionDialog::backdrop,#deviceUnlockDialog::backdrop{
+   background:rgba(38,59,53,.38);backdrop-filter:blur(3px);
+ }
+ #doctorLoginDialog .lock-form,#doctorSessionDialog .lock-form{
+   display:grid;gap:12px;
+ }
+ #doctorLoginDialog label,#doctorSessionDialog label{
+   display:grid;gap:6px;color:var(--ink);font-size:13px;font-weight:650;
+ }
+ #doctorLoginDialog input,#doctorSessionDialog input{
+   min-height:44px;padding:10px 12px;border:1px solid var(--line);
+   border-radius:10px;background:#fff;color:var(--ink);
+ }
+ #doctorLoginDialog button,#doctorSessionDialog button{
+   min-height:44px;padding:10px 16px;border-radius:10px;
+   border:1px solid var(--accent-muted-green);background:var(--surface-sage);
+   color:var(--ink);font-weight:700;
+ }
+ #doctorChangePasswordForm{
+   margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+ }
+ #doctorChangePasswordForm h3{margin:0;color:var(--ink);font-size:18px}
+ #doctorChangePasswordStatus{color:var(--muted);font-size:12px;line-height:1.5}
 }
