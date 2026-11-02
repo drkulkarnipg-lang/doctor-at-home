@@ -92,6 +92,10 @@ let pendingToken='';try{pendingToken=pendingRaw?decodeURIComponent(pendingRaw.sl
 const factorId=typeof body.factorId==='string'?body.factorId:'',challengeId=typeof body.challengeId==='string'?body.challengeId:'',code=typeof body.code==='string'?body.code.trim():'';
 if(!pendingToken||!UUID.test(factorId)||!UUID.test(challengeId)||!/^\d{6,10}$/.test(code))return reply(401,{message:'The verification request expired. Sign in again.'});
 const pendingHeaders={Authorization:'Bearer '+pendingToken,'Content-Type':'application/json'};
+const enrolledFactors=await api('/auth/v1/factors',{headers:pendingHeaders});
+if(!enrolledFactors.ok){clearCookies();return reply(401,{message:'The registered phone factor could not be confirmed. Sign in again.'});}
+const factorSet=await enrolledFactors.json(),availableFactors=Array.isArray(factorSet.all)?factorSet.all:Array.isArray(factorSet.phone)?factorSet.phone:[];
+if(!availableFactors.some(item=>item.id===factorId&&item.factor_type==='phone'&&item.phone===OWNER_PHONE)){clearCookies();return reply(403,{message:'This OTP factor is not the registered clinic mobile.'});}
 const pendingUser=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+pendingToken}});
 if(!pendingUser.ok||((await pendingUser.json()).id!==env.CLINIC_OWNER_USER_ID)){clearCookies();return reply(401,{message:'The pending owner login expired. Sign in again.'});}
 const verified=await api('/auth/v1/factors/'+encodeURIComponent(factorId)+'/verify',{method:'POST',headers:pendingHeaders,body:JSON.stringify({challenge_id:challengeId,code})});
