@@ -98,7 +98,7 @@ return reply(200,{updated:true,message:'Password changed. Return to Doctor login
 if(action==='password-otp-request'&&method==='POST'){
 if(Object.keys(body).length)return reply(400,{message:'No email address or account details should be supplied. The code is sent only to the configured clinic owner email.'});
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No code was sent.'});
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No code was sent.'});
 const sent=await api('/auth/v1/otp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,create_user:false})});
 if(sent.status===429)return reply(429,{message:'Email code rate limit reached. Wait before requesting another code.'});
 if(!sent.ok)return reply(502,{message:'Email code could not be sent. Check the clinic email provider and OTP template; no password was changed.'});
@@ -106,7 +106,7 @@ return reply(200,{sent:true,message:'If the configured clinic owner account is a
 }
 if(action==='password-otp-verify'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No password was changed.'});
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No password was changed.'});
 if(Object.keys(body).some(k=>!['token','password'].includes(k))||typeof body.token!=='string'||!/^\\d{6,10}$/.test(body.token)||typeof body.password!=='string'||body.password.length<12||body.password.length>128)return reply(400,{message:'Enter the email code and a unique password of 12–128 characters.'});
 const verified=await api('/auth/v1/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,token:body.token,type:'email'})});
 if(verified.status===429)return reply(429,{message:'Too many code verification attempts. Wait before trying again.'});
