@@ -225,6 +225,18 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
  #chatInput{border:1px solid var(--lux-border)!important;border-radius:12px!important;background:rgba(255,255,255,.86)!important;min-height:42px}
  #chatSendButton,#chatbotToggleBtn{background:rgba(38,59,53,.94)!important;color:#fff!important;border:1px solid rgba(201,185,154,.58)!important;box-shadow:0 8px 24px rgba(38,59,53,.12)!important}
 }
+/* Harmonise existing Tailwind-built surfaces with the translucent ivory/sage system. */
+@media screen {
+ main .bg-white,.bg-white:not(dialog){background-color:rgba(247,248,244,.84)!important;border-color:var(--lux-border)}
+ main .bg-slate-50,.bg-slate-50{background-color:rgba(234,240,233,.62)!important}
+ main .bg-slate-100,.bg-slate-100{background-color:rgba(244,240,232,.72)!important}
+ main .border-slate-200,.border-slate-300,.border-gray-200{border-color:var(--lux-border)!important}
+ main .text-slate-800,.text-slate-800,.text-slate-900{color:var(--lux-ink)!important}
+ main .text-slate-500,.text-slate-500,.text-slate-600{color:var(--lux-muted)!important}
+ main .shadow-xl,main .shadow-2xl{box-shadow:0 12px 34px rgba(38,59,53,.055)!important}
+ #chatbotWindow .helper-message p{line-height:1.65}
+ #chatbotWindow button:disabled{opacity:.55;cursor:wait}
+}
 @media (prefers-reduced-transparency: reduce) {
  .site-header,.portal-nav,.hero-copy,.dispatch-card,.triage-hero,.triage-card,#chatbotWindow{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 }
