@@ -1,0 +1,13 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const css = fs.readFileSync(path.join(__dirname, '..', 'translucent-clinical-luxury.css'), 'utf8');
+assert.match(css, /scroll-behavior:auto!important/);
+assert.match(css, /touch-action:manipulation/);
+assert.match(css, /transition-duration:90ms!important/);
+assert.match(css, /transition-duration:45ms!important/);
+assert.match(css, /min-height:44px/);
+assert.match(css, /prefers-reduced-motion:reduce/);
+assert.match(css, /pointer:coarse/);
+console.log('Fast navigation and touch-target CSS checks passed.');
