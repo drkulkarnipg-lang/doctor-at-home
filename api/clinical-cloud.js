@@ -137,6 +137,22 @@ if(!token&&!user){if(refreshToken)clearCookies();return reply(action==='session'
 if(!user){const auth=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+token}});if(!auth.ok)user=await renew();else user=await auth.json();}
 if(!user){clearCookies();return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Session expired. Sign in again.'});}
 if(user.id!==env.CLINIC_OWNER_USER_ID){clearCookies();return reply(403,{message:'Owner access required.'});}
+if(action==='change-password'&&method==='POST'){
+const currentPassword=typeof body.currentPassword==='string'?body.currentPassword:'';
+const newPassword=typeof body.newPassword==='string'?body.newPassword:'';
+const confirmPassword=typeof body.confirmPassword==='string'?body.confirmPassword:'';
+if(!currentPassword||newPassword.length<12||newPassword.length>1024||newPassword!==confirmPassword)return reply(400,{message:'Enter your current password and the same new password twice (minimum 12 characters).'});
+const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
+const reauth=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:currentPassword})});
+if(!reauth.ok)return reply(401,{message:'Current password was not accepted. Password unchanged.'});
+const reauthData=await reauth.json();
+if(reauthData.user?.id!==env.CLINIC_OWNER_USER_ID)return reply(403,{message:'Owner verification failed. Password unchanged.'});
+const updated=await api('/auth/v1/user',{method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({password:newPassword})});
+if(updated.status===429)return reply(429,{message:'Too many password changes. Wait and try again.'});
+if(!updated.ok)return reply(400,{message:'Password update failed. Password unchanged.'});
+clearCookies();
+return reply(200,{updated:true,signedOut:true,message:'Password changed. Sign in again with username, new password and phone OTP.'});
+}
 if(action==='session'&&method==='GET')return reply(200,{configured:true,signedIn:true,remembered:!!refreshToken});
 const headers={Authorization:'Bearer '+token,'Content-Type':'application/json',Prefer:'return=representation'};
 if(action==='list'&&method==='GET'){const after=String(req.query?.after||'');if(after&&!ID.test(after))return reply(400,{message:'Invalid page cursor.'});const r=await api('/rest/v1/clinic_patient_trends?select=id,name,revision,updated_at&order=id.asc&limit=100'+(after?'&id=gt.'+encodeURIComponent(after):''),{headers});if(!r.ok)throw Error();const records=await r.json();return reply(200,{records,next:records.length===100?records.at(-1).id:null});}
