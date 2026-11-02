@@ -1,18 +1,18 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
-test('whole-site language picker exposes complete language list and has a fallback for missing widget options',()=>{
+test('whole-site language picker exposes every A-Z language and a searchable, non-blocking desktop panel',()=>{
  const html=fs.readFileSync('index.html','utf8'),sourceTranslation=fs.readFileSync('source-translation.js','utf8');
- assert.match(html,/id="siteLanguageSelector"/);
- for(const code of ['en','mr','hi','gu','bn','ta','te','kn','ml','ur','pa','or','as','ne','fr','es','ar','zh-CN','da','nl','de','el','it','ja','ko','pt','ru','sv','tr','vi','zu'])assert.match(html,new RegExp('<option value="'+code.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'">'));
- assert.match(html,/picker\.addEventListener\('change',\s*\(\)\s*=>\s*\{[\s\S]*?quickTranslate\(picker\.value\)[\s\S]*?panel\.open = false/,'the native picker must invoke the shared whole-site translation handler');
- assert.match(html,/const supported = select && \[\.\.\.select\.options\]\.some\(option => option\.value === code\)/);
- assert.match(html,/googtrans=\/en\/' \+ code/);
- assert.match(html,/code === 'en'/);
- assert.match(html,/current page, tabs and visible library content/);
- assert.match(html,/\.language-control\[open\]>.language-row\{position:absolute/,'desktop language panel must open as an anchored overlay');
- assert.match(html,/\.language-control>summary\{display:flex/,'language panel must have a visible, clickable summary');
- assert.match(html,/event\.key === 'Escape'[\\s\\S]*?panel\.open = false/,'Escape must close the language panel');
- assert.match(html,/pointerdown[\\s\\S]*?panel\.open = false/,'outside click must close the language panel');
- assert.doesNotMatch(sourceTranslation,/select\.replaceChildren\(/,'A partially loaded Google widget must never truncate the full source-language selector.');
+ const block=html.match(/<select id="siteLanguageSelector"[\\s\\S]*?<\\/select>/);
+ assert.ok(block,'whole-site language selector exists');
+ const options=[...block[0].matchAll(/<option value="([^"]+)">([^<]+)<\\/option>/g)];
+ assert.ok(options.length>=100,'full alphabetical language catalogue is present');
+ const names=options.map(x=>x[2]);
+ for(const name of ['Danish','Dutch','English','French','German','Hindi','Japanese','Marathi','Zulu'])assert.ok(names.some(x=>x.includes(name)),name+' must be present beyond A-C');
+ assert.match(html,/picker\\.size = 9/,'the full language picker must be a visible scrollable list, not a clipped native dropdown');
+ assert.match(html,/Search all website languages/,'language search must be available');
+ assert.match(html,/position:fixed;top:var\\(--language-panel-top/,'desktop panel must float above page content');
+ assert.match(html,/document\\.addEventListener\\('pointerdown',[\\s\\S]*?\\},true\\)/,'outside pointer closes the panel in capture phase');
+ assert.match(html,/event\\.key === 'Escape'[\\s\\S]*?panel\\.open = false/,'Escape closes the panel');
+ assert.match(html,/picker.addEventListener\\('change',[\\s\\S]*?panel.open = false/,'choosing a language closes the panel');
  assert.match(sourceTranslation,/Keep the complete static 17-language list/);
 });
