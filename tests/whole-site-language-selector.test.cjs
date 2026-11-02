@@ -8,7 +8,11 @@ test('whole-site language picker exposes complete language list and has a fallba
  assert.match(html,/const supported = select && \[\.\.\.select\.options\]\.some\(option => option\.value === code\)/);
  assert.match(html,/googtrans=\/en\/' \+ code/);
  assert.match(html,/code === 'en'/);
- assert.match(html,/current page, tabs and visible library content/);\n assert.match(html,/event\.key === 'Escape'[\\s\\S]*?panel\.open = false/,'Escape must close the language panel');\n assert.match(html,/pointerdown[\\s\\S]*?panel\.open = false/,'outside click must close the language panel');
+ assert.match(html,/current page, tabs and visible library content/);
+ assert.match(html,/\.language-control\[open\]>.language-row\{position:absolute/,'desktop language panel must open as an anchored overlay');
+ assert.match(html,/\.language-control>summary\{display:flex/,'language panel must have a visible, clickable summary');
+ assert.match(html,/event\.key === 'Escape'[\\s\\S]*?panel\.open = false/,'Escape must close the language panel');
+ assert.match(html,/pointerdown[\\s\\S]*?panel\.open = false/,'outside click must close the language panel');
  assert.doesNotMatch(sourceTranslation,/select\.replaceChildren\(/,'A partially loaded Google widget must never truncate the full source-language selector.');
  assert.match(sourceTranslation,/Keep the complete static 17-language list/);
 });
