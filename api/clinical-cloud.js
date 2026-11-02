@@ -54,6 +54,7 @@ const raw=cookiePairs.find(x=>x.startsWith(COOKIE+'=')),refreshRaw=cookiePairs.f
 try{token=raw?decodeURIComponent(raw.slice(COOKIE.length+1)):'';}catch{token='';}
 try{refreshToken=refreshRaw?decodeURIComponent(refreshRaw.slice(REFRESH_COOKIE.length+1)):'';}catch{refreshToken='';}
 if(action==='login'&&method==='POST'){
+clearCookies();
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
 const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
@@ -137,6 +138,8 @@ if(!token&&!user){if(refreshToken)clearCookies();return reply(action==='session'
 if(!user){const auth=await api('/auth/v1/user',{headers:{Authorization:'Bearer '+token}});if(!auth.ok)user=await renew();else user=await auth.json();}
 if(!user){clearCookies();return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Session expired. Sign in again.'});}
 if(user.id!==env.CLINIC_OWNER_USER_ID){clearCookies();return reply(403,{message:'Owner access required.'});}
+let claims={};try{claims=JSON.parse(Buffer.from(String(token||'').split('.')[1]||'','base64url').toString('utf8'));}catch{}
+if(claims.aal!=='aal2'){clearCookies();return reply(action==='session'?200:401,{configured:true,signedIn:false,message:'Phone OTP verification is mandatory. Sign in again and complete the SMS challenge.'});}
 if(action==='change-password'&&method==='POST'){
 const currentPassword=typeof body.currentPassword==='string'?body.currentPassword:'';
 const newPassword=typeof body.newPassword==='string'?body.newPassword:'';
