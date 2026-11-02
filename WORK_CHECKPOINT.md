@@ -1,3 +1,38 @@
+# 2 November 2026 — Doctor Workstation password / email OTP recovery checkpoint
+
+## Current source and release boundary
+- Repository: `drkulkarnipg-lang/doctor-at-home`; branch `main`; exact inspected main SHA: `684e520c0203391aa5f1997ff8fe67d78d329afb`.
+- Regression workflow for that exact main SHA: run `41429159705`, conclusion `success`.
+- Vercel status for that exact SHA: `failure`, reason `Deployment rate limited — retry in 24 hours`. This is a hosting rate-limit status, not a source build/test failure. Do not claim this SHA is deployed.
+- Production remains protected. No merge or deployment was made for this password task.
+
+## Owner's latest authentication decision
+- The owner's 2 Nov 2026 instruction prefers registered-owner EMAIL OTP for first-time password creation and future password changes. This supersedes the older SMS/Twilio preference in issue #90 for this workflow. Do not require mobile OTP for password setup.
+- The current main branch already contains the email OTP flow in `workstation-auth.js`, `cloud-records.js`, and `api/clinical-cloud.js`; UI labels include **Create / change password with email OTP**.
+- The UI requests an OTP only for the server-configured owner email. API uses Supabase Auth `/auth/v1/otp` with `create_user:false`, verifies `type:'email'`, checks the verified Auth UUID against `CLINIC_OWNER_USER_ID`, updates the password through Supabase Auth, attempts global session revocation, and clears application cookies. Password is confirmed twice (12–128 chars); tokens/passwords are not saved in localStorage.
+- Existing owner Auth identity was verified in the active `doctor-at-home` Supabase project: account exists and email is confirmed. No duplicate owner or Supabase project should be created.
+- Main-branch tests explicitly cover email OTP UI, fixed recipient, non-owner rejection, invalid/expired OTP rejection, rate-limit handling, password update, global session revocation and cookie clearing. These are mocked integration tests, not proof of live email delivery.
+
+## Exact external activation blockers
+- Real Supabase Email OTP delivery is NOT yet verified. The runbook already specifies the required provider settings: Email OTP enabled; numeric code template includes `{{ .Token }}`; verified production SMTP sender configured in Supabase; OTP expiry set to a short value (target 10 minutes); Supabase Auth rate limits retained. Do not assume the built-in Supabase sender is production-ready.
+- Vercel environment variables for the owner Auth UUID/email and Supabase project must be confirmed on Production and relevant domains. Connector access did not expose Vercel secrets; do not request or commit secrets in Git.
+- No OTP send/verify request was found in the inspected Supabase auth log window. Therefore no live OTP delivery, first password creation, sign-in or password rotation is claimed.
+- Supabase Security Advisor also reports leaked-password protection disabled (warning) and an RLS-enabled/no-policy informational finding on `clinic_private.evidence_requests`. Track these separately; do not silently alter unrelated RLS policy or claim they are fixed.
+
+## Branch / PR guard
+- PR #116 (`feature/secure-workstation-username-sms-mfa`) is a draft based on `fix/owner-approved-registration-cream-palette`, not current main; comparison showed 57 commits ahead and 10 behind. It implements SMS MFA and must NOT be merged as-is. Owner preference and blockers were recorded in issue #90 and PR #116 comments (comment IDs 6575082081 and 6575083065).
+- Issue #90 remains open as the consolidated owner master brief.
+
+## Next exact actions
+1. In Supabase Dashboard for the existing `doctor-at-home` project, inspect Authentication → Sign In / Providers → Email; confirm Email OTP is enabled and the numeric OTP template renders `{{ .Token }}`.
+2. Inspect Authentication → SMTP Settings and verify a production sender. Do not expose the SMTP password in chat or Git. If not configured, configure it in the Supabase dashboard using the owner's verified mail provider.
+3. Confirm OTP expiry and built-in rate limits; retain anti-abuse limits. Enable leaked-password protection after assessing its effect on existing password acceptance.
+4. Confirm Vercel Production environment variables for the active Supabase project and owner identity on both `drkulkarnipg.com` and `home-visiting-icu-doctor.vercel.app`, without printing secret values.
+5. Once Vercel deployment is available and the owner can receive email, test on the live origin: send OTP; verify inbox delivery; reject wrong/expired OTP; create the first password; sign in with username/password; change password with a fresh OTP; confirm old password fails/new password succeeds; verify logout/session expiry and other-session revocation.
+6. Resume deployment verification after Vercel's reported 24-hour rate-limit window. Do not merge/deploy an unreviewed auth change.
+
+---
+
 # Current resumable work checkpoint
 
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
@@ -612,3 +647,24 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - UPI QR and private-cloud prescription save are in main. Razorpay/BillDesk remain disabled pending merchant onboarding and server-side payment verification. SMS OTP remains pending Twilio verification; password recovery confirms the new password and requires 12+ characters. Do not claim SMS OTP enabled.
 - Work email is not provisioned. Cloudflare DNS and Vercel hosting do not create a mailbox; provider signup and verified MX/SPF/DKIM/DMARC are required. AI evidence pipeline exists behind owner auth but needs AI Gateway credentials/model/credits; no public AI chatbot is enabled.
 - Do not change billing, DNS, secrets or hosting to bypass the Vercel rate limit. Continue verification when the build limit clears; do not claim live publication until exact main commit and both custom domains are confirmed.
+
+
+### Owner-approved publication instruction — 2 November 2026 (fresh verification)
+
+- The owner explicitly approved publication of all corrections that are already verified and requested that today's release remain open until the live deployment is verified. This approval does not waive CI, merge-conflict, security, provider-configuration or hosting-rate-limit gates.
+- Freshly verified `main` head: `684e520c0203391aa5f1997ff8fe67d78d329afb`. Repository default branch is `main`.
+- Main combined GitHub status currently reports Vercel `failure`, target URL identifies the account's deployment build-rate-limit page. This exact main SHA is not confirmed deployed. Prior Vercel bot comments show `api-deployments-free-per-day` / more than 100 deployments per day; do not create repeated deployment attempts or change billing to bypass this limit.
+- GitHub Actions exact-main run `41429159705` was independently reported successful in the prior checkpoint review; this current fetch endpoint lists only PR-triggered runs and therefore returned no main workflow run. Treat the successful regression result as the prior verified record, not a new run in this check.
+- Current open review branches were compared against current main. PR #115 is divergent (23 ahead, 10 behind) and its exact-head regression run `41398707312` failed due to a `requestAnimationFrame` ReferenceError. PR #117 is divergent (12 ahead, 10 behind), exact-head regression run `41401132920` passed, but its AI Gateway environment, credits and real Production response are not verified. PR #118 is divergent (8 ahead, 3 behind), exact-head regression run `41404440328` failed because the committed external-link inventory does not match current source. PR #119 is divergent (3 ahead, 3 behind), exact-head regression run `41406862850` failed because the inventory does not cover the current active source-file set. PR #120 is documentation/planning only, divergent (1 ahead, 3 behind), and its exact-head regression run `41408395720` passed. None of these PRs was merged or published in this pass.
+- PR #124 remains the draft handover PR, base `main`, head `0b8814ef2e54f9d324092da5d5cb202ffccf5ef3`; documentation only. PR #116 remains draft and must not be merged: it implements SMS MFA, contrary to the owner's latest EMAIL OTP preference, and is stale/divergent.
+- Direct web retrieval of `https://drkulkarnipg.com` and `https://home-visiting-icu-doctor.vercel.app` returned cache-miss errors; this is not evidence of either availability or outage. Connected browser context was unavailable. Neither exact live served commit nor successful custom-domain HTTP response has been verified.
+- Release remains OPEN. Next action: when Vercel's account deployment quota resets or owner-provided deployment capacity becomes available, deploy the exact approved `main` SHA using the existing production project; then verify deployment READY, deployed commit SHA, both production domains, and core desktop/mobile flows. Do not merge stale/divergent PRs to force a build. Rebase/port each useful correction onto current main, regenerate the link inventory, and obtain exact-head passing CI before merging.
+- Password workflow: main already contains fixed-recipient Supabase EMAIL OTP for first password creation/change; real SMTP delivery, OTP expiry/rejection, first password, password rotation and login remain unverified. Do not switch this workflow to SMS.
+
+
+### Follow-up verification — exact CI logs fetched, 2 November 2026
+
+- Re-fetched GitHub Actions run `41429159705`, job `125223095278`. The job log explicitly checks out `refs/remotes/origin/main` and `git log -1` prints exact SHA `684e520c0203391aa5f1997ff8fe67d78d329afb`. Conclusion: SUCCESS; log reports 73 regression test files completed.
+- The successful CI log still contains jsdom/runtime warnings: navigation not implemented; `tailwind is not defined`; and calculator renderer undefined (`reading 'render'`). They did not fail the workflow but remain browser/runtime acceptance items.
+- Re-fetched PR #124 handover workflow run `41431439135`, job `125230701713`. It checks out exact handover commit `79fbe9bd5ffba1235508706c8377d626587507e4` and completes 73 regression test files successfully. This validates the handover branch, not Production and not current main.
+- Fresh current-main combined status remains Vercel FAILURE. No Production deployment or live domain SHA has been confirmed. Release remains OPEN.
