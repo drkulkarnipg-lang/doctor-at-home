@@ -449,3 +449,51 @@ body{touch-action:pan-y}
 .site-header :where(button,a[href],summary):active{
   transition-duration:45ms!important;
 }
+
+
+/* WARM CLINICAL PALETTE — replace stark white with calm cream and pale yellow. */
+:root{
+  --dkl-ivory:#fff8e9;
+  --dkl-cream:#fff7e8;
+  --dkl-butter:#fff3cf;
+  --dkl-paper:#fbf4e7;
+  --dkl-glass:rgba(255,249,235,.82);
+  --dkl-glass-strong:rgba(255,248,231,.94);
+}
+html,body{
+  background-color:#fbf5e9!important;
+}
+body{
+  background-image:
+    radial-gradient(ellipse at 8% 8%,rgba(255,239,193,.34),transparent 34%),
+    linear-gradient(135deg,#fbf6ec 0%,#fff9ed 48%,#f8f3e7 100%)!important;
+}
+.site-header{
+  background:rgba(255,249,237,.94)!important;
+}
+#publicPortal{
+  background:
+    radial-gradient(ellipse at 10% 4%,rgba(255,235,181,.42),transparent 34%),
+    radial-gradient(ellipse at 92% 16%,rgba(232,240,231,.48),transparent 32%),
+    linear-gradient(180deg,#fff8e9 0%,#fbf3df 48%,#f8f2e7 100%)!important;
+}
+#publicPortal :is(input,select,textarea){
+  background-color:rgba(255,249,235,.96)!important;
+}
+#portalPanelOverview .dispatch-card,
+#portalPanelOverview .care-pathways>a{
+  background:linear-gradient(145deg,rgba(255,250,239,.97),rgba(255,243,211,.82))!important;
+}
+#publicPortal :is(section,article)[data-surface="warm"]{
+  background:linear-gradient(145deg,#fff9eb,#fff1cf)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(even){
+  background:linear-gradient(145deg,rgba(255,248,230,.96),rgba(255,243,210,.82))!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(odd){
+  background:linear-gradient(145deg,rgba(255,251,241,.97),rgba(246,241,226,.88))!important;
+}
+@media(prefers-reduced-transparency:reduce){
+  .site-header{background:#fff7e8!important}
+  #publicPortal{background:#fbf3df!important}
+}
