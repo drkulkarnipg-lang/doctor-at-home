@@ -107,7 +107,7 @@ return reply(200,{sent:true,message:'If the configured clinic owner account is a
 if(action==='password-otp-verify'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner email delivery is not configured. No password was changed.'});
-if(Object.keys(body).some(k=>!['token','password'].includes(k))||typeof body.token!=='string'||!/^\\d{6,10}$/.test(body.token)||typeof body.password!=='string'||body.password.length<12||body.password.length>128)return reply(400,{message:'Enter the email code and a unique password of 12–128 characters.'});
+if(Object.keys(body).some(k=>!['token','password'].includes(k))||typeof body.token!=='string'||!/^\d{6,10}$/.test(body.token)||typeof body.password!=='string'||body.password.length<12||body.password.length>128)return reply(400,{message:'Enter the email code and a unique password of 12–128 characters.'});
 const verified=await api('/auth/v1/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,token:body.token,type:'email'})});
 if(verified.status===429)return reply(429,{message:'Too many code verification attempts. Wait before trying again.'});
 if(!verified.ok)return reply(401,{message:'The email code is invalid or expired. Request a new code.'});
@@ -181,7 +181,7 @@ const e=body.entry;
 if(!e||typeof e!=='object'||!['form4','form4a','form2'].includes(e.formType))return reply(400,{message:'Choose a valid death form.'});
 const clean=(v,max)=>typeof v==='string'?v.trim().slice(0,max):'';
 const patientName=clean(e.patientName,120),deathDate=clean(e.deathDate,10),deathTime=clean(e.deathTime,5),place=clean(e.place,100);
-if(!patientName||!validISODate(deathDate)||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
+if(!patientName||!validISODate(deathDate)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(deathTime)||!place)return reply(400,{message:'Enter patient name, valid death date, 24-hour time and actual place. No missing value is inferred.'});
 const entryDate=validISODate(e.entryDate)?e.entryDate:deathDate;
 const sourceKey=require('node:crypto').createHash('sha256').update(['death-form-v1',patientName.normalize('NFKC').toLocaleLowerCase(),deathDate,deathTime,place.normalize('NFKC').toLocaleLowerCase()].join('|')).digest('hex');
 const data={patientName,patientCode:'',age:clean(e.age,20),sex:clean(e.sex,30),deathDateTime:deathDate+'T'+deathTime,place,certificateReference:'Source form: '+e.formType.toUpperCase(),notes:"Entered from the doctor-selected death form; verify against the signed source before final filing."};
