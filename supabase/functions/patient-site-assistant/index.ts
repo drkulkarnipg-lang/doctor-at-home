@@ -7,8 +7,11 @@ const allowedOrigins = new Set([
   "http://localhost:3000",
   "http://127.0.0.1:3000",
 ]);
+const isAllowedOrigin = (origin: string | null) => !!origin && (
+  allowedOrigins.has(origin) || /^https:\/\/home-visiting-icu-doctor(?:-[a-z0-9-]+)?\.vercel\.app$/.test(origin)
+);
 const corsHeaders = (origin: string | null) => ({
-  "Access-Control-Allow-Origin": origin && allowedOrigins.has(origin) ? origin : "https://home-visiting-icu-doctor.vercel.app",
+  "Access-Control-Allow-Origin": isAllowedOrigin(origin) ? origin! : "https://home-visiting-icu-doctor.vercel.app",
   "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Vary": "Origin",
@@ -30,7 +33,7 @@ Deno.serve(async (req: Request) => {
   const origin = req.headers.get("origin");
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders(origin) });
   if (req.method !== "POST") return json({ error: "Method not allowed." }, 405, origin);
-  if (origin && !allowedOrigins.has(origin)) return json({ error: "Origin not allowed." }, 403, origin);
+  if (origin && !isAllowedOrigin(origin)) return json({ error: "Origin not allowed." }, 403, origin);
   const suppliedKey = req.headers.get("apikey") || "";
   let validPublicKey = suppliedKey === (Deno.env.get("SUPABASE_ANON_KEY") || "");
   try {
