@@ -660,3 +660,11 @@ Verification: the repository-wide inventory test passes after adding the new sou
 - Direct web retrieval of `https://drkulkarnipg.com` and `https://home-visiting-icu-doctor.vercel.app` returned cache-miss errors; this is not evidence of either availability or outage. Connected browser context was unavailable. Neither exact live served commit nor successful custom-domain HTTP response has been verified.
 - Release remains OPEN. Next action: when Vercel's account deployment quota resets or owner-provided deployment capacity becomes available, deploy the exact approved `main` SHA using the existing production project; then verify deployment READY, deployed commit SHA, both production domains, and core desktop/mobile flows. Do not merge stale/divergent PRs to force a build. Rebase/port each useful correction onto current main, regenerate the link inventory, and obtain exact-head passing CI before merging.
 - Password workflow: main already contains fixed-recipient Supabase EMAIL OTP for first password creation/change; real SMTP delivery, OTP expiry/rejection, first password, password rotation and login remain unverified. Do not switch this workflow to SMS.
+
+
+### Follow-up verification — exact CI logs fetched, 2 November 2026
+
+- Re-fetched GitHub Actions run `41429159705`, job `125223095278`. The job log explicitly checks out `refs/remotes/origin/main` and `git log -1` prints exact SHA `684e520c0203391aa5f1997ff8fe67d78d329afb`. Conclusion: SUCCESS; log reports 73 regression test files completed.
+- The successful CI log still contains jsdom/runtime warnings: navigation not implemented; `tailwind is not defined`; and calculator renderer undefined (`reading 'render'`). They did not fail the workflow but remain browser/runtime acceptance items.
+- Re-fetched PR #124 handover workflow run `41431439135`, job `125230701713`. It checks out exact handover commit `79fbe9bd5ffba1235508706c8377d626587507e4` and completes 73 regression test files successfully. This validates the handover branch, not Production and not current main.
+- Fresh current-main combined status remains Vercel FAILURE. No Production deployment or live domain SHA has been confirmed. Release remains OPEN.
