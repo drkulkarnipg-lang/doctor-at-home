@@ -111,7 +111,7 @@ return reply(200,{configured:true,signedIn:true,remembered:remember,mfaVerified:
 }
 if(action==='reset-request'&&method==='POST'){
 const ownerEmail=String(env.CLINIC_OWNER_EMAIL||'').trim().toLowerCase();
-const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).trim().toLowerCase();
+const ownerUsername=String(env.CLINIC_OWNER_USERNAME||'').trim().toLowerCase();
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
