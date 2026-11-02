@@ -401,7 +401,8 @@
       ],
       "source_lines": [
         670,
-        1045
+        1045,
+        1047
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -414,7 +415,8 @@
         "research-feed.js"
       ],
       "source_lines": [
-        493
+        493,
+        495
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -552,7 +554,8 @@
         "research-feed.js"
       ],
       "source_lines": [
-        495
+        495,
+        497
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -602,8 +605,12 @@
         "index.html"
       ],
       "source_lines": [
+        4,
+        9,
         1019,
-        1021
+        1021,
+        1021,
+        1023
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -814,7 +821,8 @@
         "research-feed.js"
       ],
       "source_lines": [
-        492
+        492,
+        494
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -903,13 +911,19 @@
         "sitemap-pages.xml"
       ],
       "source_lines": [
+        1,
+        9,
         9,
         16,
+        16,
         17,
+        17,
+        18,
         18,
         130,
         130,
-        130
+        130,
+        141
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1009,7 +1023,8 @@
       ],
       "source_lines": [
         12,
-        130
+        130,
+        141
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1022,7 +1037,8 @@
         "sitemap-pages.xml"
       ],
       "source_lines": [
-        130
+        130,
+        141
       ],
       "classification": "internal-route-or-asset",
       "verification_status": "not-live-checked",
@@ -1268,7 +1284,9 @@
       ],
       "source_lines": [
         788,
-        794
+        790,
+        794,
+        796
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1341,7 +1359,8 @@
       ],
       "source_lines": [
         287,
-        662
+        662,
+        664
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1439,7 +1458,10 @@
         "research-sources.js"
       ],
       "source_lines": [
-        497
+        11,
+        26,
+        497,
+        499
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1548,7 +1570,8 @@
         "server/article-pages.js"
       ],
       "source_lines": [
-        130
+        130,
+        141
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1612,8 +1635,11 @@
       "source_lines": [
         491,
         698,
+        700,
         712,
-        1230
+        714,
+        1230,
+        1232
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1660,9 +1686,7 @@
       "source_files": [
         "index.html"
       ],
-      "source_lines": [
-        140
-      ],
+      "source_lines": [],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
       "notes": "Extracted from active source; reachability and intended destination not yet independently verified."
@@ -1831,8 +1855,11 @@
       ],
       "source_lines": [
         240,
+        242,
         431,
-        1898
+        433,
+        1898,
+        1900
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -1958,7 +1985,8 @@
       ],
       "source_lines": [
         280,
-        766
+        766,
+        768
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2129,6 +2157,7 @@
         "index.html"
       ],
       "source_lines": [
+        13,
         1019
       ],
       "classification": "external-destination",
@@ -2334,7 +2363,8 @@
       ],
       "source_lines": [
         669,
-        1045
+        1045,
+        1047
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2407,7 +2437,8 @@
       ],
       "source_lines": [
         294,
-        667
+        667,
+        669
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -2783,7 +2814,8 @@
       ],
       "source_lines": [
         301,
-        661
+        661,
+        663
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3048,7 +3080,8 @@
         "research-sources.js"
       ],
       "source_lines": [
-        789
+        789,
+        791
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3349,7 +3382,8 @@
         "patient-education-data.js"
       ],
       "source_lines": [
-        249
+        249,
+        251
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3386,7 +3420,8 @@
       ],
       "source_lines": [
         315,
-        781
+        781,
+        783
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3447,7 +3482,8 @@
         "research-sources.js"
       ],
       "source_lines": [
-        790
+        790,
+        792
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
@@ -3497,7 +3533,8 @@
       ],
       "source_lines": [
         701,
-        719
+        719,
+        721
       ],
       "classification": "external-destination",
       "verification_status": "not-live-checked",
