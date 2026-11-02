@@ -26,9 +26,16 @@ const fixtures={
 35:[{supineSbp:130,supineDbp:80,standingSbp:105,standingDbp:70},-25],
 36:[{age:60,scr:1,sex:'male'},86.16262077966914],
 37:[{albumin:30,creatinine:100},30],
-38:[{age:40,fio2:21,paco2:40,pao2:80},19.73]
+38:[{age:40,fio2:21,paco2:40,pao2:80},19.73],
+39:[{rr:16,spo2:98,scale:'1',sbp:120,pulse:80,temp:37,oxygen:'0',conscious:'alert'},0],
+40:[{pf:450,respSupport:'0',platelets:200,bilirubin:1,cv:'0',gcs:15,creatinine:1,urine:1000},0],
+41:[{score:'3'},3],
+42:[{intake:'2',weightLoss:'3',mobility:'2',stress:'2',neuro:'2',measure:'bmi',bmi:23},14],
+43:[{feed:'10',bath:'5',groom:'5',dress:'10',bowel:'10',bladder:'10',toilet:'10',transfer:'15',mobility:'15',stairs:'10',iadl_telephone:'1',iadl_shopping:'1',iadl_food:'1',iadl_housekeeping:'1',iadl_laundry:'1',iadl_transport:'1',iadl_medication:'1',iadl_finances:'1'},100],
+44:[{pain:0,tiredness:0,drowsiness:0,nausea:0,appetite:0,breathlessness:0,depression:0,anxiety:0,wellbeing:0},0],
+45:[{pps:'100'},100]
 };
-assert.equal(calculators.length,38);assert.equal(new Set(calculators.map(c=>c.id)).size,30);assert.ok(calculators.every(c=>c.note&&c.note.trim()&&/^https:\/\//.test(c.url)),'Every calculator must include a reference/interpretation note and a source link');const a1c=calculators.find(c=>c.id===5);assert.match(a1c.note,/<5\.7%/);assert.match(a1c.note,/5\.7–6\.4%/);assert.match(a1c.note,/≥6\.5%/);assert.match(a1c.note,/not personal treatment targets/);assert.equal(a1c.interpretationUrl,'https://diabetes.org/about-diabetes/diagnosis');checks+=7;
+assert.equal(calculators.length,45);assert.equal(new Set(calculators.map(c=>c.id)).size,30);assert.ok(calculators.every(c=>c.note&&c.note.trim()&&/^https:\/\//.test(c.url)),'Every calculator must include a reference/interpretation note and a source link');const a1c=calculators.find(c=>c.id===5);assert.match(a1c.note,/<5\.7%/);assert.match(a1c.note,/5\.7–6\.4%/);assert.match(a1c.note,/≥6\.5%/);assert.match(a1c.note,/not personal treatment targets/);assert.equal(a1c.interpretationUrl,'https://diabetes.org/about-diabetes/diagnosis');checks+=7;
 for(const c of calculators){const [v,x]=fixtures[c.id];near(c.id,v,x);reject(c.id,{});for(const field of c.fields){if(field.when&&!field.when(v))continue;for(const bad of ['',null,undefined,'garbage',field.type==='number'?Infinity:'unlisted'])reject(c.id,{...v,[field.key]:bad});if(field.type==='number'){reject(c.id,{...v,[field.key]:field.min-1});if(Number.isFinite(field.max))reject(c.id,{...v,[field.key]:field.max+1});}}}
 near(4,{...fixtures[4][0],sex:'female'},68);
 assert.equal(calculate(6,{eye:'4',verbal:'NT',motor:'6'}).value,null);checks++;
@@ -63,4 +70,4 @@ assert.match(calculate(36,{...fixtures[36][0],scr:0.5}).text,/G1/);assert.match(
 assert.match(calculate(37,{albumin:29,creatinine:100}).text,/A1/);assert.match(calculate(37,{albumin:301,creatinine:100}).text,/A3/);checks+=2;
 assert.match(calculate(38,{...fixtures[38][0],fio2:50}).text,/A–a gradient/);reject(38,{...fixtures[38][0],pao2:300});checks+=1;
 const norton=calculators.find(c=>c.id===25);assert.equal(norton.url,'https://www.ahrq.gov/patient-safety/settings/hospital/resource/pressureulcer/tool/pu7b.html');assert.ok(!norton.url.includes('www26.ha.org.hk'));checks+=2;
-console.log(`${checks} assertions passed across all 38 calculators.`);
+console.log(`${checks} assertions passed across all 45 calculators.`);
