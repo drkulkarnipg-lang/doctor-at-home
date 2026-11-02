@@ -60,8 +60,8 @@ const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Clinic owner login is not configured.'});
-if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
-if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(401,{message:'Cloud sign-in was not accepted.'});
+if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail||typeof body.password!=='string'||body.password.length>1024||('rememberDevice'in body&&typeof body.rememberDevice!=='boolean'))return reply(400,{message:'Enter your clinic username and password.'});
+if(suppliedUsername!==ownerUsername)return reply(401,{message:'Cloud sign-in was not accepted.'});
 const response=await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail,password:body.password})});
 if(!response.ok)return reply(response.status===429?429:401,{message:response.status===429?'Too many login attempts. Try later.':'Cloud sign-in was not accepted.'});
 const data=await response.json();
@@ -115,9 +115,9 @@ const ownerUsername=String(env.CLINIC_OWNER_USERNAME||ownerEmail.split('@')[0]).
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))return reply(503,{message:'Password recovery is not configured. No password was changed.'});
 const suppliedUsername=typeof body.username==='string'?body.username.trim().toLowerCase():'';
 const suppliedEmail=typeof body.email==='string'?body.email.trim().toLowerCase():'';
-if((!suppliedUsername&&!suppliedEmail)||suppliedUsername.length>80||suppliedEmail.length>254)return reply(400,{message:'Enter your clinic username.'});
+if(!suppliedUsername||suppliedUsername.length>80||suppliedEmail)return reply(400,{message:'Enter your clinic username.'});
 const generic='If this is the configured clinic owner account, a recovery email will be sent.';
-if((suppliedUsername&&suppliedUsername!==ownerUsername)||(!suppliedUsername&&suppliedEmail!==ownerEmail))return reply(200,{message:generic});
+if(suppliedUsername!==ownerUsername)return reply(200,{message:generic});
 const redirect='https://home-visiting-icu-doctor.vercel.app/password-reset.html';
 const sent=await api('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:ownerEmail})});
 if(sent.status===429)return reply(429,{message:'Too many recovery requests. Wait before trying again.'});
