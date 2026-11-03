@@ -186,3 +186,8 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 #navDoctorBtn{background:#006a61!important;color:#fff!important;border:1px solid #006a61!important;border-radius:10px!important;padding:8px 12px!important;}
 #navDoctorBtn i{color:#fff!important;}
 #navDoctorBtn:hover,#navDoctorBtn:focus-visible{background:#00564f!important;color:#fff!important;}
+
+/* Doctor Workstation header action must remain readable in every state. */
+#navDoctorBtn,#navDoctorBtn:visited,#navDoctorBtn:hover,#navDoctorBtn:focus{color:#fff!important;background-color:#006a61!important;border-color:#006a61!important;text-shadow:none!important}#navDoctorBtn i{color:#fff!important}#navDoctorBtn:focus-visible{outline:3px solid #0F2942!important;outline-offset:3px!important}
+/* Lab requisition: scoped signature clarity and checkbox cleanup. */
+#pathSlipSheet .doctor-signature-image{width:96px!important;height:auto!important;max-height:48px!important;object-fit:contain!important;object-position:left center!important}#pathSlipSheet .clinical-signoff{min-height:92px}#pathSlipSheet input[type=checkbox]:not(:checked){appearance:none!important;-webkit-appearance:none!important;background:#fff!important;border:1px solid #94a3b8!important;box-shadow:none!important;outline:0!important}#pathSlipSheet input[type=checkbox]:checked{accent-color:#15803d!important}
