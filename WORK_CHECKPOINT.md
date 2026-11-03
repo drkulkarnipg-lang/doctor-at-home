@@ -4,6 +4,27 @@ Updated: 3 November 2026, India time.
 
 ## Current active work — FIX-001
 - Repository: `drkulkarnipg-lang/doctor-at-home`.
+- Draft PR: #132 — https://github.com/drkulkarnipg-lang/doctor-at-home/pull/132
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Branch head tested: `736d055cbe10319dad7c4838f301731031f7aea5`; base main: `1533a013f4fae18e31be25031259003a951625ba`; branch is 4 commits ahead, 0 behind.
+- FIX-001 refines the already-linked `translucent-clinical-luxury.css`; no duplicate stylesheet or Home page rebuild. Adds final cool sky-blue / soft-ivory / pale-sage / powder-blue cascade with subtle blush/lavender accents; overrides prior yellow/custard styling. HTML content, clinical workflows, links, scripts, IDs and Patient Portal / Doctor Workstation separation remain untouched.
+- Focused test `tests/translucent-clinical-luxury.test.cjs` PASSED. GitHub Actions run #1802 / `41619079040`, exact branch head `736d055cbe10319dad7c4838f301731031f7aea5`, SUCCESS; full suite completed 76 regression test files.
+- Vercel preview status SUCCESS; Vercel bot supplied this preview URL: https://home-visiting-icu-doctor-pune-git-fix-706ed2-drkulkarnipg-lang.vercel.app . The associated status target is deployment `3CTAL2VYA4YEQiYti4VU4AW1j8F2`.
+- Visual QA boundary: connected browser could not be used in this session (requires originating browser context); web retrieval returned Internal Error. Neither result proves the preview is down. Real owner phone review at 320/390px and desktop review are still required, including header/Patient Portal visibility, language panel, navigation, booking, cards, call/WhatsApp links and calculators.
+- Production unchanged. PR #132 is a draft and unmerged. No production deploy, DNS, billing, secrets, database or hosting configuration changed.
+- Next action: owner opens the preview on the phone and reports the first visible issue or confirms the Home page visual direction; then refine only demonstrated issues. Keep FIX-001 open until visual review and owner approval. Do not merge or publish to production without explicit release approval.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Code, CI success and a ready preview do not equal production verification.
+
+---
+
+# Current resumable work checkpoint
+
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
+- Repository: `drkulkarnipg-lang/doctor-at-home`.
 - Review branch: `fix/001-translucent-clinical-luxury`.
 - Base main SHA observed at branch creation: `1533a013f4fae18e31be25031259003a951625ba`.
 - Protected backup branches and `main` were not modified.
