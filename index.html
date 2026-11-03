@@ -1082,7 +1082,7 @@ body{
 <div class="border-b-2 border-[#0F2942] pb-2 flex justify-between items-center">
 <div>
 <h2 class="text-xl font-bold serif-brand text-[#0F2942]">Dr. Pramod G. Kulkarni</h2>
-<p class="text-[11px] text-slate-700">BAMS (Pune University, October 1991) · PGDEMS, Emergency Medical Services (Symbiosis, Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
+<p class="text-[11px] text-slate-700">BAMS (Pune University, October 1991) · PGDEMS (Symbiosis, Pune) | Reg: I-24809-A-1 | Dhayari, Pune – 411041</p>
 </div>
 <span class="bg-teal-100 text-teal-900 px-3 py-1 rounded-full font-bold text-xs uppercase">Lab Requisition</span>
 </div>
@@ -1763,16 +1763,68 @@ body{
     }
 
     // EXPORT PDF VIA HTML2PDF
-    function exportToPdf(elementId, filename) {
-      const element = document.getElementById(elementId);
+    async function exportToPdf(elementId, filename) {
+      const source = document.getElementById(elementId);
+      if (!source) return;
       showToast("Generating official A4 PDF...");
-      html2pdf().set({
-        margin: [8, 8, 8, 8],
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(element).save().then(() => showToast("✓ PDF Downloaded successfully!"));
+      let element = source;
+      let exportClone = null;
+      try {
+        if (elementId === 'pathSlipSheet') {
+          exportClone = source.cloneNode(true);
+          exportClone.querySelectorAll('input[type="text"], input:not([type]), textarea').forEach(input => {
+            const value = input.id === 'reqDate' ? (window.ClinicalDocuments?.formatDate?.(input.value) || input.value) : (input.value || '').trim();
+            const replacement = document.createElement('span');
+            replacement.className = 'lab-pdf-field-value';
+            replacement.textContent = value;
+            replacement.style.cssText = 'display:inline-block;min-height:1.35em;white-space:pre-wrap;overflow-wrap:anywhere;';
+            input.replaceWith(replacement);
+          });
+          exportClone.querySelectorAll('input[type="checkbox"]').forEach(input => {
+            const mark = document.createElement('span');
+            mark.className = 'lab-pdf-checkbox' + (input.checked ? ' is-checked' : '');
+            mark.textContent = input.checked ? '✓' : '';
+            mark.setAttribute('aria-hidden', 'true');
+            input.replaceWith(mark);
+          });
+          window.ClinicalDocuments?.refresh?.(exportClone, 'pathSlipSheet');
+          exportClone.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;max-width:none;background:#fff;z-index:-1;';
+          document.body.append(exportClone);
+          element = exportClone;
+          await document.fonts?.ready;
+          const signature = element.querySelector('[data-doctor-signature]');
+          if (!signature) throw new Error('Approved doctor signature is missing from the Lab Requisition.');
+          if (typeof signature.decode === 'function') await signature.decode();
+          else if (!signature.complete) await new Promise((resolve, reject) => { signature.onload = resolve; signature.onerror = reject; });
+          if (!signature.naturalWidth) throw new Error('Approved doctor signature could not be loaded.');
+          // Rasterize the approved SVG into a high-resolution PNG inside the PDF clone.
+          // This avoids html2canvas clipping an externally referenced SVG to a narrow fragment.
+          const signatureCanvas = document.createElement('canvas');
+          signatureCanvas.width = Math.max(signature.naturalWidth, 797);
+          signatureCanvas.height = Math.max(signature.naturalHeight, 454);
+          const signatureContext = signatureCanvas.getContext('2d');
+          if (!signatureContext) throw new Error('Could not prepare the approved signature for PDF rendering.');
+          signatureContext.drawImage(signature, 0, 0, signatureCanvas.width, signatureCanvas.height);
+          signature.src = signatureCanvas.toDataURL('image/png');
+          signature.style.width = '120px';
+          signature.style.height = 'auto';
+          signature.style.maxWidth = 'none';
+          if (typeof signature.decode === 'function') await signature.decode();
+        }
+        await html2pdf().set({
+          margin: [8, 8, 8, 8],
+          filename: filename,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(element).save();
+        showToast("✓ PDF Downloaded successfully!");
+      } catch (error) {
+        console.error('PDF export failed', error);
+        showToast(error.message || "PDF export failed. Please try Print.");
+      } finally {
+        exportClone?.remove();
+      }
     }
     function exportCurrentClinDocPdf() {
       const val = document.getElementById('clinDocSelect').value;
