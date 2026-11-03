@@ -182,7 +182,12 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 }
 
 
-/* Ensure the Doctor Workstation entry remains clearly readable in the public header. */
-#navDoctorBtn{background:#006a61!important;color:#fff!important;border:1px solid #006a61!important;border-radius:10px!important;padding:8px 12px!important;}
-#navDoctorBtn i{color:#fff!important;}
-#navDoctorBtn:hover,#navDoctorBtn:focus-visible{background:#00564f!important;color:#fff!important;}
+
+
+/* Patient Portal and Doctor Workstation are peer navigation tabs. */
+.site-header .workspace-switch-tab{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-height:38px!important;padding:8px 12px!important;border:1px solid var(--line)!important;border-radius:10px!important;background:var(--paper)!important;color:var(--ink)!important;box-shadow:none!important;font:600 12px/1.25 Inter,'Noto Sans Devanagari',sans-serif!important;white-space:nowrap!important;transition:background .18s ease,border-color .18s ease,color .18s ease!important;}
+.site-header .workspace-switch-tab i{color:inherit!important;}
+.site-header .workspace-switch-tab:hover{background:var(--soft)!important;border-color:var(--teal)!important;color:var(--ink)!important;}
+.site-header .workspace-switch-tab.is-active{background:var(--ink)!important;border-color:var(--ink)!important;color:#fff!important;}
+.site-header .workspace-switch-tab.is-active i{color:#fff!important;}
+.site-header .workspace-switch-tab:focus-visible{outline:3px solid #006a6180!important;outline-offset:3px!important;}
