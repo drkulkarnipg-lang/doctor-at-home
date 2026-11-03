@@ -1,5 +1,18 @@
 # Current resumable work checkpoint
 
+Updated: 3 November 2026, 14:05 IST — main ref 64a1e86fe657d5ad6da88f7f6611f276074de2e6; exact-main PUSH run 41500814823 / job 125467499136 SUCCESS; main Vercel status SUCCESS target 45vNbmE7pziyaeJxeRMkoYcT5mwN (status only, not Production proof).
+
+## Latest resume pointer — 3 November 2026, 14:05 IST
+
+- PR #127 and PR #128 are merged. Four section translators and the permanent register protocol are on main. Keep LANG-01 active until real desktop/mobile translator QA; machine translation is not clinically validated and English remains authoritative. OPS-01 is archived.
+- PR #129 remains open/draft, not merged. Branch head 869d4c26486188998bf832a64a123c123bb35a83; compare to main 64a1e86fe657d5ad6da88f7f6611f276074de2e6 is 26 ahead / 0 behind and changes only MASTER_TASK_REGISTER.md and WORK_CHECKPOINT.md. Exact-head Actions run 41599668262 / job 125795154121 SUCCESS; exact checkout, 75 regression files, calculator/lab/triage, research discovery/feed and translator tests passed. Vercel status SUCCESS target 9XyaPbYLzWBu14MwU2hdncvbRxss; Ready preview only. No owner reviews or inline threads; keep draft and unmerged pending owner review.
+- Main exact regression run 41500814823 / job 125467499136 SUCCESS (75 files; 1,437 calculator assertions; 1,064 lab-governance assertions; 50 triage checks). Main Vercel target 45vNbmE7pziyaeJxeRMkoYcT5mwN is a successful status check, not proof of Production environment or exact served SHA.
+- Latest Actions logs include non-failing jsdom diagnostics for unsupported navigation, tailwind undefined and calculator renderer undefined. Real-browser checks remain mandatory.
+- Production/domain verification remains blocked: web opens returned Internal Errors and container curl DNS resolution failed for root, www, preview and vercel.com. This is not evidence of downtime. Production environment, exact deployed SHA, both aliases, served HTML/assets/headers, live research API/feed responses and real desktop/mobile workflows are not verified.
+- Next action: continue independent Vercel Production/deployment/alias verification and live Fetch + desktop/mobile QA using synthetic data. Preserve the original backup, patient articles, external links, approved signature/PDF stamping and clinical/privacy safeguards. No app code, DNS, secrets, payment, billing or hosting settings changed.
+
+---
+
 Updated: 3 November 2026, 13:24 IST — main `64a1e86fe657d5ad6da88f7f6611f276074de2e6`; exact-main PUSH run `41500814823` / job `125467499136` SUCCESS (75 regression files, 1,437 calculator assertions, 1,064 lab-governance assertions, 50 triage checks). Main Vercel status SUCCESS, target `45vNbmE7pziyaeJxeRMkoYcT5mwN`; status evidence only, not Production environment/exact-SHA/alias proof. Owner baseline `3078767b72461fb83f50fabde03f0d796e65d0a8` remains an ancestor.
 
 PR #127 is merged at `138fecef6a18b5e20901dec55e65663d44624d99`; exact-head run `41499629591` SUCCESS. Four section translators are in main; real desktop/mobile QA remains open. Machine translation is not clinically validated; English remains authoritative. PR #128 is merged; OPS-01 remains in the permanent completed archive. Protected backup `backup/baseline-2026-10-31-pre-stitch` remains identical to original commit `ab8855374d376cca6e2158417385f10bebcb4965`.
