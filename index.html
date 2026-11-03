@@ -1797,6 +1797,19 @@ body{
           if (typeof signature.decode === 'function') await signature.decode();
           else if (!signature.complete) await new Promise((resolve, reject) => { signature.onload = resolve; signature.onerror = reject; });
           if (!signature.naturalWidth) throw new Error('Approved doctor signature could not be loaded.');
+          // Rasterize the approved SVG into a high-resolution PNG inside the PDF clone.
+          // This avoids html2canvas clipping an externally referenced SVG to a narrow fragment.
+          const signatureCanvas = document.createElement('canvas');
+          signatureCanvas.width = Math.max(signature.naturalWidth, 797);
+          signatureCanvas.height = Math.max(signature.naturalHeight, 454);
+          const signatureContext = signatureCanvas.getContext('2d');
+          if (!signatureContext) throw new Error('Could not prepare the approved signature for PDF rendering.');
+          signatureContext.drawImage(signature, 0, 0, signatureCanvas.width, signatureCanvas.height);
+          signature.src = signatureCanvas.toDataURL('image/png');
+          signature.style.width = '120px';
+          signature.style.height = 'auto';
+          signature.style.maxWidth = 'none';
+          if (typeof signature.decode === 'function') await signature.decode();
         }
         await html2pdf().set({
           margin: [8, 8, 8, 8],
