@@ -649,3 +649,149 @@ body{
   #portalPanelOverview .care-pathways{grid-template-columns:1fr}
   #portalPanelOverview .care-pathways>a{min-height:88px}
 }
+
+
+/* FIX-001 — HIGH-VISIBILITY FINISH PASS
+   Stronger, unmistakable component-level refinement; public Home page only. */
+:root{
+  --dkl-card-radius:24px;
+  --dkl-card-border:rgba(126,157,181,.30);
+  --dkl-card-shadow:0 16px 42px rgba(39,69,94,.075),0 3px 10px rgba(39,69,94,.035);
+  --dkl-card-shadow-hover:0 22px 52px rgba(39,69,94,.12),0 6px 16px rgba(39,69,94,.055);
+}
+html,body{background:#f7fbff!important;color:#24384b!important}
+body{
+  background-image:radial-gradient(ellipse at 8% 4%,rgba(208,229,245,.55),transparent 34%),
+    radial-gradient(ellipse at 92% 12%,rgba(235,229,245,.40),transparent 30%),
+    linear-gradient(145deg,#f7fbff 0%,#fffefa 52%,#f1f6fa 100%)!important;
+}
+.site-header{
+  background:rgba(248,252,255,.96)!important;
+  border-bottom:1px solid rgba(126,157,181,.28)!important;
+  box-shadow:0 8px 30px rgba(39,69,94,.075)!important;
+}
+.portal-nav{
+  background:rgba(239,246,251,.96)!important;
+  border-bottom:1px solid rgba(126,157,181,.22)!important;
+  box-shadow:0 5px 18px rgba(39,69,94,.035)!important;
+}
+.portal-nav a{font-size:12px!important;font-weight:700!important;letter-spacing:.015em!important}
+#publicPortal{
+  max-width:1360px!important;
+  padding:clamp(22px,3.5vw,46px) clamp(14px,2.5vw,30px) 56px!important;
+  background:linear-gradient(180deg,rgba(247,251,255,.96),rgba(255,254,250,.92) 48%,rgba(242,247,250,.96))!important;
+}
+#portalPanelOverview{gap:clamp(24px,3vw,38px)!important}
+#publicPortal #portalPanelOverview .portal-hero{
+  display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(290px,.75fr)!important;
+  gap:clamp(24px,4vw,52px)!important;align-items:stretch!important;
+  padding:clamp(30px,4.6vw,64px)!important;min-height:440px!important;
+  border:1px solid rgba(123,157,183,.32)!important;border-radius:30px!important;
+  background:linear-gradient(125deg,#fffefa 0%,#edf5fb 58%,#f4f0f8 100%)!important;
+  box-shadow:0 26px 68px rgba(39,69,94,.095),inset 0 1px 0 rgba(255,255,255,.98)!important;
+}
+#publicPortal #portalPanelOverview .hero-copy{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+  min-width:0!important;padding:clamp(4px,1vw,14px)!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+}
+#publicPortal #portalPanelOverview .section-eyebrow{
+  color:#587f99!important;font-size:10px!important;font-weight:800!important;
+  letter-spacing:.18em!important;text-decoration:none!important;
+}
+#publicPortal #portalPanelOverview .original-care-hero{
+  max-width:780px!important;margin:20px 0 18px!important;
+  color:#203e58!important;font-size:clamp(42px,5.4vw,72px)!important;
+  font-weight:650!important;line-height:1.035!important;letter-spacing:-.052em!important;
+  text-wrap:balance!important;text-shadow:0 2px 0 rgba(255,255,255,.8)!important;
+}
+#publicPortal #portalPanelOverview .original-care-hero em{color:#64869b!important}
+#publicPortal #portalPanelOverview .hero-copy>p{
+  max-width:60ch!important;color:#526577!important;font-size:clamp(15px,1.25vw,17px)!important;
+  line-height:1.85!important;
+}
+#publicPortal #portalPanelOverview .dispatch-card{
+  align-self:stretch!important;padding:clamp(24px,3vw,38px)!important;
+  border:1px solid rgba(255,255,255,.94)!important;border-radius:26px!important;
+  background:linear-gradient(150deg,rgba(255,255,255,.96),rgba(231,241,248,.90) 58%,rgba(239,243,239,.88))!important;
+  box-shadow:inset 0 1px 0 #fff,0 18px 48px rgba(39,69,94,.095)!important;
+}
+#publicPortal #portalPanelOverview .care-compass h3{
+  margin:14px 0!important;color:#203e58!important;font-size:clamp(28px,2.7vw,38px)!important;
+  font-weight:650!important;line-height:1.12!important;letter-spacing:-.035em!important;
+}
+#publicPortal #portalPanelOverview .care-compass>p{color:#526577!important;font-size:13px!important;line-height:1.8!important}
+#publicPortal #portalPanelOverview .care-mark{width:min(100%,250px)!important;height:auto!important;color:#7295aa!important}
+#publicPortal #portalPanelOverview .hero-primary-actions{gap:11px!important;margin-top:30px!important}
+#publicPortal #portalPanelOverview .hero-primary-actions a,
+#publicPortal #portalPanelOverview .hero-contact-actions a,
+#publicPortal #portalPanelOverview .compass-credentials{
+  min-height:48px!important;padding:12px 18px!important;border-radius:13px!important;
+  font-size:12px!important;font-weight:750!important;letter-spacing:.01em!important;
+}
+#publicPortal #portalPanelOverview .hero-primary-actions .primary-link{
+  color:#fff!important;background:linear-gradient(120deg,#294f6e,#426f8d 62%,#5b8299)!important;
+  border:1px solid #294f6e!important;box-shadow:0 10px 24px rgba(41,79,110,.22)!important;
+}
+#publicPortal #portalPanelOverview .hero-primary-actions .secondary-link{
+  color:#294b66!important;background:rgba(255,255,255,.92)!important;
+  border:1px solid rgba(119,153,178,.34)!important;box-shadow:0 5px 15px rgba(39,69,94,.045)!important;
+}
+#publicPortal #portalPanelOverview .hero-contact-actions a,
+#publicPortal #portalPanelOverview .compass-credentials{
+  color:#294b66!important;background:rgba(255,255,255,.86)!important;
+  border:1px solid rgba(119,153,178,.30)!important;
+}
+#publicPortal #portalPanelOverview .hero-contact-actions .hero-call{
+  color:#fff!important;background:linear-gradient(120deg,#426f80,#527f8d)!important;
+  border-color:#426f80!important;
+}
+#publicPortal #portalPanelOverview .care-pathways{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;
+}
+#publicPortal #portalPanelOverview .care-pathways>a{
+  position:relative!important;min-height:112px!important;padding:22px 24px 22px 28px!important;
+  border:1px solid var(--dkl-card-border)!important;border-radius:20px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(235,244,250,.88))!important;
+  box-shadow:var(--dkl-card-shadow)!important;
+}
+#publicPortal #portalPanelOverview .care-pathways>a:nth-child(2){background:linear-gradient(145deg,#fffefa,#f2eff8)!important}
+#publicPortal #portalPanelOverview .care-pathways>a:nth-child(3){background:linear-gradient(145deg,#fffefa,#edf4ef)!important}
+#publicPortal #portalPanelOverview .care-pathways strong{color:#294b66!important;font-size:14px!important;font-weight:800!important}
+#publicPortal #portalPanelOverview .care-pathways p{color:#5a6e7e!important;font-size:12px!important;line-height:1.65!important}
+#publicPortal #portalPanelOverview .pathway-number{color:#6c91a9!important;font-size:11px!important;font-weight:800!important}
+#publicPortal #portalPanelOverview .home-care-section,
+#publicPortal #portalPanelOverview .diet-section,
+#publicPortal #portalPanelOverview #exploreHealthResources,
+#publicPortal #bookingSection{
+  border:1px solid var(--dkl-card-border)!important;border-radius:24px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(239,246,250,.88))!important;
+  box-shadow:var(--dkl-card-shadow)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card,#wikiCardsGrid>article){
+  border:1px solid var(--dkl-card-border)!important;border-radius:18px!important;
+  box-shadow:0 10px 28px rgba(39,69,94,.06)!important;
+}
+#publicPortal :is(button,a[href],[role=button]){text-decoration-thickness:1px;text-underline-offset:3px}
+#publicPortal :is(button,a[href],[role=button]):focus-visible,
+#publicPortal :is(input,select,textarea):focus-visible{outline:3px solid #719bb8!important;outline-offset:3px!important}
+@media(max-width:900px){
+  #publicPortal #portalPanelOverview .portal-hero{grid-template-columns:minmax(0,1fr) minmax(250px,.82fr)!important;padding:28px!important}
+  #publicPortal #portalPanelOverview .care-pathways{gap:11px!important}
+}
+@media(max-width:680px){
+  #publicPortal{padding:16px 12px 34px!important}
+  #publicPortal #portalPanelOverview .portal-hero{grid-template-columns:1fr!important;gap:22px!important;padding:24px 20px!important;min-height:0!important;border-radius:22px!important}
+  #publicPortal #portalPanelOverview .original-care-hero{font-size:clamp(38px,10vw,50px)!important}
+  #publicPortal #portalPanelOverview .hero-primary-actions{display:grid!important;grid-template-columns:1fr!important;width:100%!important}
+  #publicPortal #portalPanelOverview .hero-primary-actions a{width:100%!important}
+  #publicPortal #portalPanelOverview .dispatch-card{padding:22px!important}
+  #publicPortal #portalPanelOverview .care-pathways{grid-template-columns:1fr!important}
+  #publicPortal #portalPanelOverview .care-pathways>a{min-height:86px!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  #publicPortal #portalPanelOverview .portal-hero,#publicPortal #portalPanelOverview .dispatch-card,
+  #publicPortal #portalPanelOverview .care-pathways>a{background:#fffefa!important}
+}
+@media(prefers-reduced-motion:reduce){#publicPortal *{transition:none!important}}
