@@ -1773,7 +1773,7 @@ body{
         exportClone = source.cloneNode(true);
         exportClone.removeAttribute('id');
         exportClone.querySelectorAll('input[type="text"], input:not([type]), textarea').forEach(input => {
-          const value = (input.value || '').trim();
+          const value = input.id === 'reqDate' ? (window.ClinicalDocuments?.formatDate?.(input.value) || input.value) : (input.value || '').trim();
           const replacement = document.createElement('span');
           replacement.className = 'lab-pdf-field-value';
           replacement.textContent = value;
@@ -1787,12 +1787,6 @@ body{
           mark.setAttribute('aria-hidden', 'true');
           input.replaceWith(mark);
         });
-        const dateField = exportClone.querySelector('#reqDate');
-        const liveDate = source.querySelector('#reqDate');
-        if (dateField && liveDate) {
-          const dateText = window.ClinicalDocuments?.formatDate?.(liveDate.value) || liveDate.value;
-          dateField.textContent = dateText;
-        }
         exportClone.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;max-width:none;background:#fff;z-index:-1;';
         document.body.append(exportClone);
         element = exportClone;
