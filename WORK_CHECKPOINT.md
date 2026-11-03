@@ -1,5 +1,28 @@
 # Current resumable work checkpoint
 
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
+- Repository: `drkulkarnipg-lang/doctor-at-home`.
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Base main SHA observed at branch creation: `1533a013f4fae18e31be25031259003a951625ba`.
+- Protected backup branches and `main` were not modified.
+- Existing `translucent-clinical-luxury.css` was already linked from `index.html`; do not add a duplicate stylesheet or rebuild the Home page from scratch.
+- FIX-001 adds a final cool sky-blue / ivory / sage / powder-blue cascade, removes the old yellow/custard overrides from precedence, preserves existing HTML/content/JS/IDs/clinical workflows, and tightens public Home mobile card spacing.
+- CSS commit: `75ef0c5bfa2999007c273386edd5a1375b158da9`.
+- Focused regression test commit: `b0382dd6e387a223fa5bcb051acf611f76a8e40e`; test file `tests/translucent-clinical-luxury.test.cjs`.
+- Current status: CODED. The new test has not yet been executed locally or in GitHub Actions. Exact-head CI is pending.
+- Vercel preview: not yet verified. Prior project checkpoint recorded Vercel free-build quota error on 2 November with a 24-hour retry window; do not bypass or repeatedly retry the provider limit. Recheck after the recorded window.
+- Production: unchanged; no merge, deployment, DNS, billing, secrets, database or hosting configuration changes.
+- Next action: run the focused and full repository regression on the exact branch head; obtain an exact-head preview when Vercel quota permits; inspect Home at desktop and 320/390px mobile widths and verify nav, booking, links and public interactions before owner review.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Keep FIX-001 open until preview and owner visual review are complete. Do not mark source code or green CI as production verified.
+
+---
+
+# Current resumable work checkpoint
+
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
