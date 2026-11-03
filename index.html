@@ -1763,7 +1763,7 @@ body{
     }
 
     // EXPORT PDF VIA HTML2PDF
-    function exportToPdf(elementId, filename) {
+    async function exportToPdf(elementId, filename) {
       const source = document.getElementById(elementId);
       if (!source) return;
       showToast("Generating official A4 PDF...");
@@ -1787,8 +1787,19 @@ body{
           input.replaceWith(mark);
         });
         exportClone.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;max-width:none;background:#fff;z-index:-1;';
+        window.ClinicalDocuments?.refresh?.(exportClone, 'pathSlipSheet');
         document.body.append(exportClone);
         element = exportClone;
+      }
+      try {
+        await document.fonts?.ready;
+        if (elementId === 'pathSlipSheet') {
+          const signature = element.querySelector('[data-doctor-signature]');
+          if (!signature) throw new Error('Approved doctor signature is missing from the Lab Requisition.');
+          if (typeof signature.decode === 'function') await signature.decode();
+          else if (!signature.complete) await new Promise((resolve, reject) => { signature.onload = resolve; signature.onerror = reject; });
+          if (!signature.naturalWidth) throw new Error('Approved doctor signature could not be loaded.');
+        }
       }
       html2pdf().set({
         margin: [8, 8, 8, 8],
@@ -1800,10 +1811,14 @@ body{
         exportClone?.remove();
         showToast("✓ PDF Downloaded successfully!");
       }).catch(error => {
-        exportClone?.remove();
         console.error('PDF export failed', error);
         showToast("PDF export failed. Please try Print.");
-      });
+      }).finally(() => exportClone?.remove());
+      } catch (error) {
+        exportClone?.remove();
+        console.error('Lab Requisition PDF preparation failed', error);
+        showToast(error.message || "PDF export failed. Please try Print.");
+      }
     }
     function exportCurrentClinDocPdf() {
       const val = document.getElementById('clinDocSelect').value;
