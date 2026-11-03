@@ -1771,7 +1771,6 @@ body{
       let exportClone = null;
       if (elementId === 'pathSlipSheet') {
         exportClone = source.cloneNode(true);
-        exportClone.removeAttribute('id');
         exportClone.querySelectorAll('input[type="text"], input:not([type]), textarea').forEach(input => {
           const value = input.id === 'reqDate' ? (window.ClinicalDocuments?.formatDate?.(input.value) || input.value) : (input.value || '').trim();
           const replacement = document.createElement('span');
