@@ -87,7 +87,18 @@ function text(s){if(current!=='mr')return s;if(mr[s])return mr[s];const m=s.matc
 function translate(root){const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=walker.nextNode())){if(n.parentElement?.closest('script,style,textarea,#intakeDocument,.patient-section-language'))continue;if(!originals.has(n))originals.set(n,n.nodeValue);const original=originals.get(n),trim=original.trim(),translated=text(trim);const out=translated!==trim?original.replace(trim,translated):original;if(n.nodeValue!==out)n.nodeValue=out;}}
 function status(message){document.querySelectorAll('[data-patient-language-status],#translationStatus,[data-reader-language-status]').forEach(e=>e.textContent=message);}
 function native(code){current=code;const form=document.getElementById('bookingIntake');if(form)translate(form);document.querySelectorAll('[data-patient-language-select]').forEach(e=>e.value=code);}
-function choose(code){const widget=document.querySelector('#google_translate_element .goog-te-combo');if(code==='en'||code==='mr'){if(widget)widget.value='';native(code);window.PatientEducationView?.setLanguage(code);status(code==='mr'?'फॉर्म मराठीत आहे. उत्तरे तुमच्या भाषेत लिहा.':'English original. Enter answers in the language you prefer.');return;}if(!widget||![...widget.options].some(o=>o.value===code)){status('This language is not available from the translation service here. English and Marathi remain available; your entries have been kept.');return;}native('en');widget.value=code;widget.dispatchEvent(new Event('change',{bubbles:true}));document.querySelectorAll('[data-patient-language-select]').forEach(e=>e.value=code);status('Automatic translation requested. Check that the visible text changes; medical translations require review. Your entered answers are not translated.');}
+function choose(code){
+ if(code==='en'||code==='mr'){
+  native(code);
+  window.PatientEducationView?.setLanguage(code);
+  status(code==='mr'?'फॉर्म मराठीत आहे. उत्तरे तुमच्या भाषेत लिहा.':'English original. Enter answers in the language you prefer.');
+  return;
+ }
+ // The free Google Translate website widget is global. Do not invoke it from
+ // this patient-only control: that would unexpectedly translate every page
+ // and could expose entered clinical information to an external service.
+ status('या फॉर्मसाठी सध्या English आणि मराठीचे स्थानिक भाषांतर उपलब्ध आहे. इतर भाषांसाठी मोफत Google Translate हा संपूर्ण वेबसाइट बदलतो; त्यामुळे येथे तो सुरू केलेला नाही. तुमची भरलेली माहिती सुरक्षित ठेवली आहे.');
+}
 window.PatientLanguages={text,choose,get language(){return current;}};
 document.addEventListener('DOMContentLoaded',()=>{const widget=document.getElementById('google_translate_element');if(widget){const labelWidget=()=>{const combo=widget.querySelector('.goog-te-combo');if(combo){combo.setAttribute('aria-label','Translate the website into your preferred language');combo.setAttribute('title','Choose website language');}};labelWidget();new MutationObserver(labelWidget).observe(widget,{childList:true,subtree:true});}const library=document.getElementById('patientLanguageControls'),headerMenu=document.querySelector('.language-control>div');if(library&&headerMenu)headerMenu.append(library);const form=document.getElementById('bookingIntake');if(form)new MutationObserver(()=>{if(current==='mr')translate(form);}).observe(form,{childList:true,subtree:true});});
 })();
