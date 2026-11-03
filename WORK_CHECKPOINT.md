@@ -3,6 +3,27 @@
 Updated: 3 November 2026, India time.
 
 ## Current active work — FIX-001
+- Draft PR #132: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/132
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Latest head: `0af80179550c5b2deb19ea7fb443fd87936523c3`; base main `1533a013f4fae18e31be25031259003a951625ba`.
+- Owner reported no visible change. Root cause found in source: the new design stylesheet was loaded before the later inline `premium-sage-ivory-theme` block, so that inline CSS overrode the design palette. Corrected by moving the single existing design stylesheet link after the final inline theme block. No duplicate stylesheet.
+- Added a strict regression assertion that the design stylesheet must load after the inline theme; retained palette, mobile, focus and contrast assertions.
+- New exact-head Actions runs: `41619668349` and `41619658313` were pending at last check; do not claim tests passed until exact-head results complete.
+- Vercel status SUCCESS for latest head, deployment `2Eev6u1zpMiHatXXt2F2TNJzrmWA`. Branch preview: https://home-visiting-icu-doctor-pune-git-fix-706ed2-drkulkarnipg-lang.vercel.app
+- Owner visual review still pending. Ask owner to hard-refresh the preview (Ctrl+Shift+R on desktop; on phone open in Incognito/private tab) to avoid cached CSS. Browser connector requires originating browser context; do not claim visual QA.
+- Production unchanged. PR #132 remains draft and unmerged. No production deployment, DNS, billing, secrets, database or hosting changes.
+- Next action: verify exact-head Actions completion and ask owner to re-open preview with cache bypass; only then refine further.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Code, CI success and a ready preview do not equal production verification.
+
+---
+
+# Current resumable work checkpoint
+
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
 - Repository: `drkulkarnipg-lang/doctor-at-home`.
 - Draft PR: #132 — https://github.com/drkulkarnipg-lang/doctor-at-home/pull/132
 - Review branch: `fix/001-translucent-clinical-luxury`.
