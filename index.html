@@ -1522,7 +1522,20 @@ body{
       }
       const patientTabs = document.querySelector('.portal-nav');
       if(patientTabs) patientTabs.classList.toggle('hidden', type !== 'public');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (type === 'doctor') {
+        // The doctor workspace is a separate main panel below the public portal.
+        // After switching panels, move the viewport to the workspace itself;
+        // scrolling to page top leaves the user looking at the navigation bar.
+        window.requestAnimationFrame(() => {
+          const workspace = document.getElementById('doctorWorkstation');
+          if (workspace) workspace.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'start'
+          });
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     function switchDocTab(tabId) {
