@@ -186,3 +186,10 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 #navDoctorBtn{background:#006a61!important;color:#fff!important;border:1px solid #006a61!important;border-radius:10px!important;padding:8px 12px!important;}
 #navDoctorBtn i{color:#fff!important;}
 #navDoctorBtn:hover,#navDoctorBtn:focus-visible{background:#00564f!important;color:#fff!important;}
+
+
+/* Accessible dismissal affordance for the native Doctor login modal. */
+#doctorLoginDialog{position:relative}
+#doctorLoginDialog .doctor-dialog-dismiss{position:absolute;top:12px;right:14px;display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+#doctorLoginDialog .doctor-dialog-dismiss:hover{background:var(--soft);border-color:var(--teal)}
+#doctorLoginDialog .doctor-dialog-dismiss:focus-visible{outline:3px solid #006a6180;outline-offset:3px}
