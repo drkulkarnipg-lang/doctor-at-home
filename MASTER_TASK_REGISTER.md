@@ -14,6 +14,13 @@
 6. **No false completion:** Keep an item open if a provider quota, unavailable browser/device, unconfigured integration, missing owner action, real transaction, recipient receipt or clinical sign-off prevents its acceptance criteria from being verified. Record the precise blocker and the next safe action. Never bypass CI, branch protection, access controls, provider limits, payments, DNS or secrets.
 7. **Session handoff:** The first project action in a new conversation is to recover this register and checkpoint, verify live repository state, then continue from the recorded next action. Do not ask the owner to re-state the project or re-list known work.
 
+### Active intake — 4 November 2026
+
+| ID | Priority | State | Request / acceptance criteria | Evidence / next action |
+| --- | --- | --- | --- | --- |
+| UX-20261104 | P1 | CODED | Improve the existing patient experience and prescription editor without removing any feature, URL, link or action. Preserve sage/ivory identity, Georgia brand, two main workspaces, document export and authentication. | Baseline main/production `9b18b27c36715247da0ca506661010e21f8d4618`. Branch `fix/patient-experience-quality-20261104`. Captured 522 IDs, 304 link/action attribute occurrences and 282 tracked paths. First changes: compact hero/contact card, accessible Doctor Workstation button contrast, 44–48px controls, 38 explicit field-label associations, screen-only prescription readability. Preservation check passed; full regression running. Next: inspect test results, exact preview and deployment gates. |
+| FACT-20261104 | P1 | BLOCKED | Publish an accurate professional experience summary. | Owner reports 31 total years, 29 allopathic-practice years, 15 general-practice years and 16 ICU/RMO years. Categories/overlap require clarification before adding new claims; retain existing copy for now. |
+
 ### Active intake — 2 November 2026
 
 | ID | Priority | State | Request / acceptance criteria | Evidence / next action |

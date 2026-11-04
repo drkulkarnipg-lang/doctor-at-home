@@ -1,3 +1,18 @@
+# Latest active checkpoint — 4 November 2026
+
+- Owner explicitly authorized implementation, verification and deployment without routine confirmation, preserving all existing features/pages/URLs/links. Keep brief updates and disclose every release blocker.
+- Repository `drkulkarnipg-lang/doctor-at-home`; branch `fix/patient-experience-quality-20261104`; baseline/main `9b18b27c36715247da0ca506661010e21f8d4618`.
+- Vercel production domain lookup: deployment `dpl_9kFBfgDiN3UupGBhr62JYp1ZStf4`, READY, production, exact baseline SHA; aliases include root and www. This supersedes older quota/deployment notes below for that baseline only.
+- Read current register and open PRs. Existing PRs #143–#137 address workstation/requisition issues and remain separate; no blind merge. Current main includes recent workstation login/header fixes and stamp removal.
+- Live desktop browser observed the homepage. Confirmed excessive hero nesting/spacing pushes visit actions below the fold and Doctor Workstation button has dark text on teal.
+- Saved source preservation inventory: 522 existing IDs, 304 href/src/onclick/onchange occurrences, 282 tracked paths. New preservation check passes.
+- Implemented an additive screen-only CSS refinement, 38 explicit adjacent label associations, actions before translator in both DOM and visual order, and screen-only prescription-editor readability. Existing links/actions and A4 export rules retained.
+- Full regression started; results pending. No production source change yet. Next: finish regression, commit/sync review branch, obtain exact-source Vercel preview and inspect patient navigation/booking/library/prescription constraints before authorized release.
+- Local Chrome extension cannot be used from this conversation context; cloud browser works for public desktop inspection. No actual mobile viewport/device, authenticated patient records, PDF file handoff, payment or recipient receipt verified.
+- Experience facts remain unresolved: 31 overall / 29 allopathic / 15 GP / 16 ICU-RMO need chronology/overlap confirmation before publishing new claims. Do not invent qualifications or new clinical claims.
+
+---
+
 # Current resumable work checkpoint
 
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.

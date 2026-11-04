@@ -392,6 +392,7 @@ body{
 }
 
 </style>
+<link rel="stylesheet" href="patient-experience-refinements.css"/>
 </head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->
@@ -464,7 +465,7 @@ body{
 <div class="hero-copy"><span class="section-eyebrow">Pune, India · Dr. Pramod G. Kulkarni</span>
 <h1 id="portalHeroTitle" class="original-care-hero">Home visits.<br/><em>Care at your bedside.</em></h1>
 <p>Doctor-led home visits in Pune and PCMC. Request a visit, share your latest prescription or discharge summary, and let the doctor confirm availability and the next step.</p>
-<div class="section-translator no-print" data-translator-scope="homeLanguagePicker"><label for="homeLanguagePicker">🌐 Website language — Translate / भाषा बदला</label><select id="homeLanguagePicker" class="section-language-picker" aria-label="Website language language selector"><option value="">Loading languages…</option></select><span>Applies to the whole page. Machine translation; verify clinical meaning against the English original.</span></div><div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="#onlineConsultationNotice" class="secondary-link">Online consultation · ₹500 <span aria-hidden="true">→</span></a><a href="#wikiSection" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div>
+<div class="hero-primary-actions"><a href="#bookingSection" class="primary-link">Request a home visit <span aria-hidden="true">↗</span></a><a href="#onlineConsultationNotice" class="secondary-link">Online consultation · ₹500 <span aria-hidden="true">→</span></a><a href="#wikiSection" class="secondary-link">Explore the health library <span aria-hidden="true">→</span></a></div><div class="section-translator no-print" data-translator-scope="homeLanguagePicker"><label for="homeLanguagePicker">🌐 Website language — Translate / भाषा बदला</label><select id="homeLanguagePicker" class="section-language-picker" aria-label="Website language language selector"><option value="">Loading languages…</option></select><span>Applies to the whole page. Machine translation; verify clinical meaning against the English original.</span></div>
 
 </div>
 <aside class="dispatch-card care-compass"><span class="section-eyebrow">Your care, connected</span>
@@ -582,15 +583,15 @@ body{
 <div class="md:col-span-2 space-y-3.5 text-xs">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border petal-border">
 <div>
-<label class="font-bold text-slate-700">Patient Full Name: *</label>
+<label for="bkPatName" class="font-bold text-slate-700">Patient Full Name: *</label>
 <input class="w-full mt-1 p-2 border rounded-xl bg-white font-bold" id="bkPatName" placeholder="e.g. Ramesh Kulkarni" type="text"/>
 </div>
 <div>
-<label class="font-bold text-slate-700">Patient / Family WhatsApp Mobile: *</label>
+<label for="bkPatPhone" class="font-bold text-slate-700">Patient / Family WhatsApp Mobile: *</label>
 <input class="w-full mt-1 p-2 border rounded-xl bg-white font-mono font-bold" id="bkPatPhone" placeholder="10-digit mobile number" type="tel"/>
 </div>
 <div class="sm:col-span-2">
-<label class="font-bold text-slate-700">Complete Address with Landmark: *</label>
+<label for="bkPatAddress" class="font-bold text-slate-700">Complete Address with Landmark: *</label>
 <textarea class="w-full mt-1 p-2 border rounded-xl bg-white" id="bkPatAddress" placeholder="Building name, Flat no, Wing, Near Landmark, Pune locality..." rows="2"></textarea>
 </div>
 <!-- LIVE GPS CAPTURE BUTTON -->
@@ -625,7 +626,7 @@ body{
 <p class="text-[10px] text-teal-800 font-semibold mt-1" id="liveSlabNotice"></p>
 </div>
 <div>
-<label class="font-bold text-slate-700">Distance from Base (Dhayari 411041):</label>
+<label for="calcDistance" class="font-bold text-slate-700">Distance from Base (Dhayari 411041):</label>
 <select class="w-full mt-1 p-2 border petal-border rounded-xl bg-white font-medium" id="calcDistance" onchange="calculateFee()">
 <option value="0">Within 5 km (Dhayari, Narhe, Vadgaon) — ₹0</option>
 <option value="300">6 to 10 km (Warje, Kothrud, Sinhagad Rd) — +₹300</option>
@@ -789,21 +790,21 @@ body{
 <input class="bg-transparent border-b border-red-400 text-red-900 font-bold px-2 py-0.5 w-2/3 outline-none" id="rxAllergies" type="text" value="" placeholder="Confirm and document allergy status"/>
 </div>
 <div class="grid grid-cols-4 gap-2 bg-slate-50 p-3 rounded-2xl border petal-border">
-<div><label class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Age / Gender:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="e.g. 68 Y / Male" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Date &amp; Time:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text"/></div>
-<div><label class="text-[10px] text-slate-500">Pune Locality:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="e.g. Dhayari, Kothrud" type="text"/></div>
+<div><label for="rxPatName" class="text-[10px] text-slate-500">Patient Name:</label><input class="w-full font-bold bg-white p-1 border rounded-lg" id="rxPatName" placeholder="Full Name" type="text"/></div>
+<div><label for="rxPatAge" class="text-[10px] text-slate-500">Age / Gender:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatAge" placeholder="e.g. 68 Y / Male" type="text"/></div>
+<div><label for="rxDateTime" class="text-[10px] text-slate-500">Date &amp; Time:</label><input class="w-full bg-white p-1 border rounded-lg font-mono" id="rxDateTime" type="text"/></div>
+<div><label for="rxPatLoc" class="text-[10px] text-slate-500">Pune Locality:</label><input class="w-full bg-white p-1 border rounded-lg" id="rxPatLoc" placeholder="e.g. Dhayari, Kothrud" type="text"/></div>
 <div class="col-span-4 grid grid-cols-6 gap-2 pt-2 border-t mt-1 text-center">
-<div><label class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="78" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="130/80" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vSpO2" placeholder="98%" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="98.4" type="text"/></div>
-<div class="bg-amber-100/60 rounded-lg p-0.5"><label class="text-[10px] text-amber-900 font-bold block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold text-amber-950" id="vGRBS" placeholder="140" type="text"/></div>
-<div><label class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="18" type="text"/></div>
+<div><label for="vPulse" class="text-[10px] text-slate-500 block">Pulse (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vPulse" placeholder="78" type="text"/></div>
+<div><label for="vBP" class="text-[10px] text-slate-500 block">BP (mmHg)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vBP" placeholder="130/80" type="text"/></div>
+<div><label for="vSpO2" class="text-[10px] text-slate-500 block">SpO2 (%)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold" id="vSpO2" placeholder="98%" type="text"/></div>
+<div><label for="vTemp" class="text-[10px] text-slate-500 block">Temp (°F)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vTemp" placeholder="98.4" type="text"/></div>
+<div class="bg-amber-100/60 rounded-lg p-0.5"><label for="vGRBS" class="text-[10px] text-amber-900 font-bold block">GRBS (mg/dL)</label><input class="w-full text-center bg-white p-1 border rounded-lg font-bold text-amber-950" id="vGRBS" placeholder="140" type="text"/></div>
+<div><label for="vRR" class="text-[10px] text-slate-500 block">RR (/min)</label><input class="w-full text-center bg-white p-1 border rounded-lg" id="vRR" placeholder="18" type="text"/></div>
 </div>
 </div>
 <div>
-<label class="font-bold text-[#0F2942]">Chief Complaints (C/o) &amp; Bedside Findings:</label>
+<label for="rxComplaints" class="font-bold text-[#0F2942]">Chief Complaints (C/o) &amp; Bedside Findings:</label>
 <textarea class="w-full p-2 border rounded-xl mt-1" id="rxComplaints" placeholder="e.g. Acute breathlessness, bilateral crepitations..." rows="2"></textarea>
 </div>
 <div>
@@ -826,11 +827,11 @@ body{
 </div>
 <!-- ADDITIONAL PATHOLOGY & RADIOLOGY ON PRESCRIPTION -->
 <div class="border p-2.5 rounded-xl bg-slate-50/70 space-y-1">
-<label class="font-bold text-[#0F2942]">🔬 Advised Pathology &amp; Radiology Investigations:</label>
+<label for="rxPathRadAdvised" class="font-bold text-[#0F2942]">🔬 Advised Pathology &amp; Radiology Investigations:</label>
 <input class="w-full bg-white p-1.5 border rounded-lg text-[11px]" id="rxPathRadAdvised" placeholder="e.g. CBC, KFT, Serum Electrolytes, High Sensitivity Troponin-I, Portable Chest X-Ray..." type="text"/>
 </div>
 <div>
-<label class="font-bold text-[#0F2942]">Bedside Nursing &amp; Diet Advice:</label>
+<label for="rxAdvice" class="font-bold text-[#0F2942]">Bedside Nursing &amp; Diet Advice:</label>
 <textarea class="w-full p-2 border rounded-xl mt-1" id="rxAdvice" placeholder="Dietary restrictions, fluid limits, positioning..." rows="2"></textarea>
 </div>
 <div class="pt-4 border-t flex justify-between items-end">
@@ -1123,7 +1124,7 @@ body{
 </div>
 </div>
 <div>
-<label class="font-bold">Additional Specific Tests / Clinical Notes:</label>
+<label for="pathNotes" class="font-bold">Additional Specific Tests / Clinical Notes:</label>
 <textarea class="w-full border p-2 rounded-xl" id="pathNotes" placeholder="e.g. Sputum for AFB/GeneXpert, Urine Culture..." rows="2"></textarea>
 </div>
 <div class="pt-4 border-t flex justify-between items-end">
@@ -1171,7 +1172,7 @@ body{
 <label class="flex items-center gap-2"><input id="rad_mri_spine" type="checkbox" value="MRI Spine (specify region in indication)"/> <strong>MRI Spine (specify region)</strong></label>
 </div>
 <div class="space-y-2">
-<label class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
+<label for="radIndication" class="font-bold">Clinical Indication &amp; Suspected Pathology:</label>
 <textarea class="w-full border p-2 rounded-xl" id="radIndication" placeholder="e.g. Acute breathlessness, pulmonary congestion rule out..." rows="5"></textarea>
 </div>
 </div>
@@ -1324,22 +1325,22 @@ body{
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <section aria-label="Article attachments" class="attachment-panel"><h4>Attach files or add an online article</h4><div class="flex flex-wrap gap-2"><label class="research-upload">Attach files — PC / mobile<input accept=".pdf,.doc,.docx,.txt,.md,.html,.jpg,.jpeg,.png,.webp,.gif,.mp4,.webm" class="sr-only" id="articleAttachFiles" multiple="" type="file"/></label><button id="focusArticleSourceLink" type="button">Add Google Drive / online link</button></div><p>PDF, Word, text, photos and video. Files stay on this device; online links keep their original access permissions.</p><div id="pendingArticleAttachments"></div><p aria-live="polite" id="attachmentStatus" role="status"></p></section><div>
-<label class="font-bold text-slate-800">Article Title:</label>
+<label for="newArtTitle" class="font-bold text-slate-800">Article Title:</label>
 <input class="w-full mt-1 p-2.5 border rounded-xl font-bold bg-white text-sm" id="newArtTitle" placeholder="e.g. Heart Failure: 1.2L Fluid Rule" type="text"/>
 </div>
 <div>
-<label class="font-bold text-slate-800">Category / Condition:</label>
+<label for="newArtCat" class="font-bold text-slate-800">Category / Condition:</label>
 <input class="w-full mt-1 p-2.5 border rounded-xl bg-white text-sm" id="newArtCat" placeholder="e.g. Cardiac / Dialysis / Bedsore Care" type="text"/>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border petal-border">
 <div>
-<label class="font-bold text-teal-900 block">📁 Direct Media File (Photo / Short MP4):</label>
+<label for="newArtFile" class="font-bold text-teal-900 block">📁 Direct Media File (Photo / Short MP4):</label>
 <input accept="image/*,video/*" class="w-full mt-1 p-1.5 border rounded-xl bg-white text-xs" id="newArtFile" onchange="handleDirectFileUpload(this)" type="file"/>
 <span class="text-[10px] text-slate-500 mt-1 block" id="fileUploadStatus">Supported: JPG, PNG, MP4</span>
 </div>
 <div>
-<label class="font-bold text-slate-700 block">🔗 Paste Public Web/Video Link:</label>
+<label for="newArtUrl" class="font-bold text-slate-700 block">🔗 Paste Public Web/Video Link:</label>
 <input class="w-full mt-1 p-2 border rounded-xl bg-white text-xs" id="newArtUrl" placeholder="https://drive.google.com/... or https://publisher.../article" type="url"/><button class="research-upload mt-2" id="addArticleSourceLink" type="button">Attach this link</button>
 </div>
 </div>
@@ -2065,24 +2066,24 @@ Next Review: After 3 Days / SOS | Emergency Call: 9561394341`;
 <button class="text-slate-400 hover:text-slate-700 text-lg" onclick="closeAddDrugModal()">✕</button>
 </div>
 <div>
-<label class="font-bold">Clinical Category / Disease:</label>
+<label for="custDrugCat" class="font-bold">Clinical Category / Disease:</label>
 <input class="w-full mt-1 p-2 border rounded-xl" id="custDrugCat" placeholder="e.g. Antibiotic / Respiratory" type="text"/>
 </div>
 <div>
-<label class="font-bold">Generic Molecule &amp; Strength:</label>
+<label for="custDrugGen" class="font-bold">Generic Molecule &amp; Strength:</label>
 <input class="w-full mt-1 p-2 border rounded-xl font-bold" id="custDrugGen" placeholder="e.g. Meropenem 1g Inj" type="text"/>
 </div>
 <div>
-<label class="font-bold">Standard Indian Brands:</label>
+<label for="custDrugBrand" class="font-bold">Standard Indian Brands:</label>
 <input class="w-full mt-1 p-2 border rounded-xl" id="custDrugBrand" placeholder="e.g. Meronem, Meromac" type="text"/>
 </div>
 <div class="grid grid-cols-2 gap-2">
 <div>
-<label class="font-bold">Timing:</label>
+<label for="custDrugTiming" class="font-bold">Timing:</label>
 <input class="w-full mt-1 p-2 border rounded-xl" id="custDrugTiming" placeholder="e.g. IV Infusion" type="text"/>
 </div>
 <div>
-<label class="font-bold">Frequency:</label>
+<label for="custDrugFreq" class="font-bold">Frequency:</label>
 <input class="w-full mt-1 p-2 border rounded-xl" id="custDrugFreq" placeholder="e.g. 1-0-1 or TDS" type="text"/>
 </div>
 </div>
