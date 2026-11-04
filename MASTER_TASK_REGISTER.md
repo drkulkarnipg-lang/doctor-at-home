@@ -1,3 +1,4 @@
+<!-- Latest5Nov2026IST: PR147 merged4bbb67dd,81 local checks and CI41890217509 passed; exact-preview dialog keyboard/focus verified. Production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY; live root dialog/Escape verified; www exact mapping verified. PR145 reconciled fad43db with86 checks passing; clinical/private/mobile acceptance remains open. New-chat continuation must read latest checkpoint. -->
 # Dr Kulkarni — permanent request and completion register
 
 ## Patient-first incremental release — 4 November 2026

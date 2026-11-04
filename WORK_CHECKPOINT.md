@@ -1,3 +1,13 @@
+# Latest continuation and public-dialog release — 5 November 2026 IST
+
+- Owner requests moving to a new chat if context fills. Agent cannot open a new chat automatically; resume by reading this latest checkpoint and current repository state. Never restart completed work. At quota/context interruption, synchronise exact source, tests, blockers and next action. Hourly168-run schedule was created; future execution/environment remains unverified.
+- PR145 reconciliation commit fad43db25d2d8f7ccff37912c9f6124e32a50dfc has parents aa7a8e32 and released main131a5768. All86 reconciled-source checks pass (62.12s). Other open PRs retained. Current working review checkout /workspace/doctor-review-sync; older /workspace/doctor-performance is stale and must not overwrite latest docs.
+- Bounded qualifications-dialog PR147 source61e0b1f42413d6889f181b97ad5b6c9cfe53436e: all81 local checks pass (57.66s), CI41890217509 SUCCESS. Exact preview dpl_To7TB5TnoU8yFBtd7Fjp1YSZCuw2 READY. Browser observed initial close-button focus/body scroll lock, Tab and Shift+Tab containment, Escape dismissal with opener focus/scroll restoration, and close-button dismissal. Backdrop covered by software test, not separately browser exercised in this batch; actual mobile/screen-reader QA remains open.
+- PR147 merged to main4bbb67dd19afeecc680ea56f4b006db1694eb90e. Production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY at exact main4bbb67dd; live drkulkarnipg.com dialog opens with named close-button focus and Escape restores opener focus. www mapping verified against same deployment. Full PR145 private clinical/PDF/language work remains unmerged.
+- Next: verify PR147 production/root/www and live dialog; reconcile PR145 with new main before future release; finish scoped-language/public PDF acceptance and owner-authenticated clinical documents. Owner passkey/device approval is still required; never weaken authentication. No real patient data or recipient messages sent.
+
+---
+
 # Review branch reconciliation and scheduled continuation — 5 November 2026 IST
 
 - Reverified main131a5768, production dpl_3x18ZNxwCpXH3N8XZCttAWJQE9eq READY with root/www aliases; main Actions41887603495 SUCCESS. PR145 remote aa7a8e32; other open PRs retained untouched.
