@@ -176,7 +176,7 @@
         if ([...sectionPicker.options].some(option => option.value === selected)) sectionPicker.value = selected;
       });
       const libraryCount = document.getElementById('libraryLanguageCount');
-      if (libraryCount) libraryCount.textContent = options.length + ' available languages · applies to the whole page';
+      if (libraryCount) libraryCount.textContent = options.length + ' Google Translate languages · section choice stays separate';
       const cookie = document.cookie.split(';').map(part => part.trim()).find(part => part.startsWith('googtrans=/en/'));
       const saved = cookie ? cookie.slice('googtrans=/en/'.length) : '';
       if (sitePicker && saved && [...sitePicker.options].some(option => option.value === saved)) sitePicker.value = saved;
@@ -214,15 +214,31 @@
         });
       };
       syncSectionLanguagePickers();
+      // Free Google Translate Element is page-wide. Never route a local section
+      // preference through quickTranslate(), which changes the entire document.
       document.addEventListener('change', event => {
         const target = event.target;
         if (!target.matches('.section-language-picker')) return;
         const code = target.value;
         if (!code) return;
-        document.querySelectorAll('.section-language-picker').forEach(select => { select.value = code; });
-        const master = document.getElementById('siteLanguageSelector');
-        if (master) master.value = code;
-        quickTranslate(code);
+        const scope = target.closest('[data-translator-scope]')?.dataset.translatorScope || 'this section';
+        const messages = {
+          homeLanguagePicker: 'The free Google Translate widget translates the whole website, so this local choice has not changed the main website language.',
+          libraryLanguagePicker: 'Your Health Library language choice is local. The free Google Translate widget cannot translate only this section in place; the main website language is unchanged.',
+          doctorLanguagePicker: 'Doctor Workstation language choice is kept separate. Free Google Translate cannot translate only this section in place; no workstation or patient data is sent to Google.',
+          encyclopediaLanguagePicker: 'This reader language choice is local. Free Google Translate cannot translate only this reader in place; the main website language is unchanged.'
+        };
+        const note = messages[scope] || 'This section choice does not change the main website language.';
+        const status = target.closest('.section-translator')?.querySelector('[data-section-translation-status]');
+        if (status) status.textContent = note;
+        else {
+          const feedback = document.createElement('span');
+          feedback.dataset.sectionTranslationStatus = 'true';
+          feedback.setAttribute('role', 'status');
+          feedback.className = 'section-translation-status';
+          feedback.textContent = note;
+          target.closest('.section-translator')?.append(feedback);
+        }
       });
       if (picker) picker.addEventListener('change', () => {
         const code = picker.value;
@@ -272,7 +288,7 @@
 }
 </style>
 <link rel="stylesheet" href="official-research-sources.css"/>
-<link rel="stylesheet" href="translucent-clinical-luxury.css"/>
+
 <style id="premium-sage-ivory-theme">
 /* Premium Sage & Ivory design system — additive visual layer.
    Keeps existing content, IDs, scripts, workflows, links and document styles intact. */
@@ -392,6 +408,7 @@ body{
 }
 
 </style>
+<link rel="stylesheet" href="translucent-clinical-luxury.css"/>
 </head>
 <body class="min-h-screen flex flex-col antialiased relative">
 <!-- TOAST NOTIFICATION -->

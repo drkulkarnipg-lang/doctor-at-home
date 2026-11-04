@@ -1,5 +1,70 @@
 # Current resumable work checkpoint
 
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
+- Draft PR #132: https://github.com/drkulkarnipg-lang/doctor-at-home/pull/132
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Latest head: `0af80179550c5b2deb19ea7fb443fd87936523c3`; base main `1533a013f4fae18e31be25031259003a951625ba`.
+- Owner reported no visible change. Root cause found in source: the new design stylesheet was loaded before the later inline `premium-sage-ivory-theme` block, so that inline CSS overrode the design palette. Corrected by moving the single existing design stylesheet link after the final inline theme block. No duplicate stylesheet.
+- Added a strict regression assertion that the design stylesheet must load after the inline theme; retained palette, mobile, focus and contrast assertions.
+- New exact-head Actions runs: `41619668349` and `41619658313` were pending at last check; do not claim tests passed until exact-head results complete.
+- Vercel status SUCCESS for latest head, deployment `2Eev6u1zpMiHatXXt2F2TNJzrmWA`. Branch preview: https://home-visiting-icu-doctor-pune-git-fix-706ed2-drkulkarnipg-lang.vercel.app
+- Owner visual review still pending. Ask owner to hard-refresh the preview (Ctrl+Shift+R on desktop; on phone open in Incognito/private tab) to avoid cached CSS. Browser connector requires originating browser context; do not claim visual QA.
+- Production unchanged. PR #132 remains draft and unmerged. No production deployment, DNS, billing, secrets, database or hosting changes.
+- Next action: verify exact-head Actions completion and ask owner to re-open preview with cache bypass; only then refine further.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Code, CI success and a ready preview do not equal production verification.
+
+---
+
+# Current resumable work checkpoint
+
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
+- Repository: `drkulkarnipg-lang/doctor-at-home`.
+- Draft PR: #132 — https://github.com/drkulkarnipg-lang/doctor-at-home/pull/132
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Branch head tested: `736d055cbe10319dad7c4838f301731031f7aea5`; base main: `1533a013f4fae18e31be25031259003a951625ba`; branch is 4 commits ahead, 0 behind.
+- FIX-001 refines the already-linked `translucent-clinical-luxury.css`; no duplicate stylesheet or Home page rebuild. Adds final cool sky-blue / soft-ivory / pale-sage / powder-blue cascade with subtle blush/lavender accents; overrides prior yellow/custard styling. HTML content, clinical workflows, links, scripts, IDs and Patient Portal / Doctor Workstation separation remain untouched.
+- Focused test `tests/translucent-clinical-luxury.test.cjs` PASSED. GitHub Actions run #1802 / `41619079040`, exact branch head `736d055cbe10319dad7c4838f301731031f7aea5`, SUCCESS; full suite completed 76 regression test files.
+- Vercel preview status SUCCESS; Vercel bot supplied this preview URL: https://home-visiting-icu-doctor-pune-git-fix-706ed2-drkulkarnipg-lang.vercel.app . The associated status target is deployment `3CTAL2VYA4YEQiYti4VU4AW1j8F2`.
+- Visual QA boundary: connected browser could not be used in this session (requires originating browser context); web retrieval returned Internal Error. Neither result proves the preview is down. Real owner phone review at 320/390px and desktop review are still required, including header/Patient Portal visibility, language panel, navigation, booking, cards, call/WhatsApp links and calculators.
+- Production unchanged. PR #132 is a draft and unmerged. No production deploy, DNS, billing, secrets, database or hosting configuration changed.
+- Next action: owner opens the preview on the phone and reports the first visible issue or confirms the Home page visual direction; then refine only demonstrated issues. Keep FIX-001 open until visual review and owner approval. Do not merge or publish to production without explicit release approval.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Code, CI success and a ready preview do not equal production verification.
+
+---
+
+# Current resumable work checkpoint
+
+Updated: 3 November 2026, India time.
+
+## Current active work — FIX-001
+- Repository: `drkulkarnipg-lang/doctor-at-home`.
+- Review branch: `fix/001-translucent-clinical-luxury`.
+- Base main SHA observed at branch creation: `1533a013f4fae18e31be25031259003a951625ba`.
+- Protected backup branches and `main` were not modified.
+- Existing `translucent-clinical-luxury.css` was already linked from `index.html`; do not add a duplicate stylesheet or rebuild the Home page from scratch.
+- FIX-001 adds a final cool sky-blue / ivory / sage / powder-blue cascade, removes the old yellow/custard overrides from precedence, preserves existing HTML/content/JS/IDs/clinical workflows, and tightens public Home mobile card spacing.
+- CSS commit: `75ef0c5bfa2999007c273386edd5a1375b158da9`.
+- Focused regression test commit: `b0382dd6e387a223fa5bcb051acf611f76a8e40e`; test file `tests/translucent-clinical-luxury.test.cjs`.
+- Current status: CODED. The new test has not yet been executed locally or in GitHub Actions. Exact-head CI is pending.
+- Vercel preview: not yet verified. Prior project checkpoint recorded Vercel free-build quota error on 2 November with a 24-hour retry window; do not bypass or repeatedly retry the provider limit. Recheck after the recorded window.
+- Production: unchanged; no merge, deployment, DNS, billing, secrets, database or hosting configuration changes.
+- Next action: run the focused and full repository regression on the exact branch head; obtain an exact-head preview when Vercel quota permits; inspect Home at desktop and 320/390px mobile widths and verify nav, booking, links and public interactions before owner review.
+
+## Permanent operating rule
+`MASTER_TASK_REGISTER.md` is the authoritative task ledger. Keep FIX-001 open until preview and owner visual review are complete. Do not mark source code or green CI as production verified.
+
+---
+
+# Current resumable work checkpoint
+
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
 
 CURRENT: PR20 Close/A4 correction is LIVE after explicit owner approval (“ho”). Implementation a110d9cb114738f9ae5e40fd49b4329a9b5a1232, production dpl_FaeTguGmF9Qztqqfo45NgjhMaXX7 READY. The earlier automatic approval blocker below is resolved by that approval. Do not repeat the merge or this implementation.
