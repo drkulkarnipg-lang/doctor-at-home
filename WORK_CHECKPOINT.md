@@ -1,3 +1,11 @@
+# Public qualifications-dialog release — 5 November 2026 IST
+
+- Base main131a5768. Isolated credentials dialog semantics, initial focus, Tab/Shift+Tab containment, Escape/backdrop/close and focus/scroll restoration from PR145. Small-screen dialog scroll containment and44px close control added. All existing credentials, links and other features retained; no medical claims altered.
+- Focused dialog and preservation checks pass. Full bounded-source regression and exact preview/CI pending. Clinical/language/PDF-runtime PR145 changes remain separate.
+- Hourly continuation schedule enabled for168 runs (seven days); inherited environment/first-run execution not yet verified. Each run must inspect repository before edits and avoid overlap.
+
+---
+
 # Bounded patient navigation release — 4 November 2026
 
 - Owner approved temporary preview access and incremental publication. PR145 exact source7a35748 CI regression success (run41886554432); preview dpl_7C3hKrFmjcybBNq2avTHvhECJE42 READY. Browser verified tab/action order, seven44px controls, no desktop overflow, booking CTA, qualifications Escape/focus, independent MR Library selection and public PDF-ready panel.
