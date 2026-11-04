@@ -1,3 +1,4 @@
+<!-- Public-dialog release acceptance: source prepared5Nov2026IST; focus/preservation checks pass; full CI/browser/release pending. -->
 # Dr Kulkarni — permanent request and completion register
 
 ## Patient-first incremental release — 4 November 2026
