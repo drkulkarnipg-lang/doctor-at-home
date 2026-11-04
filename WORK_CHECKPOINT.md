@@ -1,3 +1,11 @@
+# Independent language release — 5 November 2026 IST
+
+- Owner reports language switching still incorrect. Verified main488b324a still runs old global synchronisation; scoped fixes remained only in PR145. Isolated language-only source from PR145 onto current main, leaving private clinical/date/PDF-runtime changes out.
+- Independent header/home/library/reader/workstation and booking language; authoredEN/MR guides; entered patient values excluded. Added domain-cookie clearing and icon/arrow-tolerant navigation label matching. Retain entire language catalogue but explicitly report unavailable scoped services; do not claim complete interface or other-language coverage.
+- Full tests, actual preview language isolation and production verification pending. Existing old global-propagation tests updated for owner's explicit independent-scope requirement; no feature/URL/link removed. Before release, verify reader/library independence, English restoration, unsupported option notice and unchanged patient values.
+
+---
+
 # Public PDF-share keyboard batch — 5 November 2026 IST
 
 - Verified main4bbb67dd / production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY and root/www aliases unchanged. Existing168-run hourly automation enabled; peek returns no recorded last run/result or next-run time. No duplicate task created; future execution not confirmed.
