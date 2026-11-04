@@ -17,7 +17,8 @@
 <link rel="alternate" hreflang="x-default" href="https://home-visiting-icu-doctor.vercel.app/"/>
 <meta property="og:url" content="https://home-visiting-icu-doctor.vercel.app/"/>
 <script src="assets/tailwind-config-compat.js"></script>
-<script src="assets/pdf/html2pdf.bundle.min.js"></script>
+<script src="pdf-engine-loader.js"></script>
+<script id="pdfEngineSource" type="application/x-lazy-script" src="assets/pdf/html2pdf.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="assets/icons/css/all.min.css" rel="stylesheet"/>
@@ -1764,7 +1765,8 @@ body{
     }
 
     // EXPORT PDF VIA HTML2PDF
-    function exportToPdf(elementId, filename) {
+    async function exportToPdf(elementId, filename) {
+      try { await window.ensurePdfEngine(); } catch (error) { showToast(error.message); return; }
       const element = document.getElementById(elementId);
       showToast("Generating official A4 PDF...");
       html2pdf().set({

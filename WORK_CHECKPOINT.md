@@ -1,3 +1,38 @@
+# Active startup-performance batch — 4 November 2026
+
+- Owner reiterated mandatory professional/international quality and continued work. Concrete targets and evidence limits are in QUALITY_STANDARD.md; no universal certification or zero-error claim.
+- New branch `fix/startup-resource-reliability-20261104`, base live main `222d0b4b1c758ebf39425ae392e1ad380e93c094`.
+- Identified 946,030-byte html2pdf renderer synchronously loaded from the homepage head. New non-executing script descriptor retains its exact src URL; pdf-engine-loader.js loads it only for rendering. Document-sharing and legacy export paths await it. Prebuilt EN/MR guide PDFs still bypass rendering.
+- Focused tests pass: no eager renderer script, concurrent request deduplication, renderer reuse, retry after failure, timeout, same-origin guard and existing URL preservation. All 522 baseline IDs/304 link-action attributes/282 original paths retained.
+- logo.png was absent, causing the header and Rx logo to request a missing file before falling back. Added a byte-identical copy of the approved fallback logo at that existing URL; no image/content alteration. Existing fallback remains.
+- Full regression and browser/live verification pending. No release of this batch yet; prior PR144 remains LIVE.
+- Owner-authenticated prescription/PDF testing is still blocked on passkey device approval at configured production alias. Do not alter or bypass auth. Work continues on independent public-site performance.
+- Next: complete tests, synchronize branch and review/verify loading behavior before authorized deployment. Keep every deployment/access blocker explicit.
+
+---
+
+# Current sign-in handoff — 4 November 2026
+
+- PR #144 bounded patient-experience improvements are LIVE at main `222d0b4b1c758ebf39425ae392e1ad380e93c094`; production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY; root/www exact mapping and root browser verification completed. The deployment itself has no unresolved blocker.
+- Secure browser-auth choice returned selected_option `passkey`. Custom domain `drkulkarnipg.com` displayed the existing instruction to use passkeys on `https://home-visiting-icu-doctor.vercel.app`; this is an observed custom-domain sign-in limitation. That alias is the same verified production deployment.
+- Opened the configured production alias and continued the already-selected passkey method. Page now reports “Waiting for your device passkey…”, sign-in control disabled. No successful login observed. Device approval/user takeover is required; do not read/enter credentials in chat, bypass auth, change credentials or enrol a new passkey without a separate explicit request.
+- Browser handoff should stay on the existing configured-origin sign-in tab. Resume with fresh visible state after user sign-in; only then test synthetic prescription editor, export/print/long-content cases. Do not read or modify existing real patient records for layout tests.
+- Remaining mobile-device QA, unresolved experience chronology and external-provider setup gates remain open. The next blocker is authentication, not a failed deployment.
+
+---
+
+# Production verification — 4 November 2026, PR #144 released
+
+- Owner granted the narrowly scoped one-hour preview-link access permission (“deto”). It succeeded. Initial use of an automation-bypass query redirected to login; the shareable-link parameter `_vercel_share` correctly opened the approved preview. Do not store the token here. Access expires automatically; production protection was not changed.
+- PR #144 merged at `222d0b4b1c758ebf39425ae392e1ad380e93c094`. Vercel production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY. Independent get_deployment lookups for both `drkulkarnipg.com` and `www.drkulkarnipg.com` resolve to that exact production commit/deployment.
+- Preview browser verified homepage at 1363×936: no horizontal overflow; Request/consultation/library and call actions visible; Doctor Workstation button is white on teal. Request CTA selects booking panel. New name/address labels accept synthetic inputs, which were cleared without sending anything. Library search “dialysis” gives 1 of 10 guides; Read opens article and Back returns. Existing translation controls and PDF/share actions remain present. No claims of clinical translation correctness.
+- Live root browser verified the new stylesheet, explicit prescription name label, white workstation-button text, no horizontal overflow and homepage appearance. Screenshot captured only for release proof; no patient data. Browser error sample contained extension metadata errors; no complete runtime error scan claimed.
+- All 80 sequential software checks pass; exact head `06ea7c14...` Actions runs `41876075060`, `41876075083`, `41876065088` SUCCESS. Existing preservation and contrast evidence below remains applicable. No medical calculations, credentials, data migrations, payment integrations or A4 export rules changed.
+- NEXT BLOCKER: actual Doctor Workstation/prescription/PDF browser testing requires the website's own login, independent of GitHub/Vercel connections. Live Doctor Workstation click opens the owner sign-in dialog. Username/password and passkey methods are visible. Use secure browserAuth for any credential collection; never request passwords/OTP in chat or weaken authentication. Mobile-device/viewport verification also remains open because this browser advertises no viewport capability.
+- UX-20261104 is released for the bounded improvements, not proof that the entire website, authenticated workflows, Indian prescription compliance, all external destinations, clinical governance or every backlog item is complete. Fact chronology and external-service setup items remain open in the register.
+
+---
+
 # Verified checkpoint — 4 November 2026, PR #144
 
 - Saved implementation: PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/144, branch `fix/patient-experience-quality-20261104`, source commit `0a01c6f621e32c07ade98827060e70e5c861b286`.
