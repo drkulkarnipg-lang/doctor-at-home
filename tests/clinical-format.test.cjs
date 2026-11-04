@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
+const dom=new JSDOM('',{runScripts:'outside-only',url:'https://clinic.example/'}),w=dom.window;
+w.eval(fs.readFileSync('clinical-format.js','utf8'));
+const f=w.ClinicalFormat;
+for(const [date,expected] of [['2026-11-01','1st Nov, 2026'],['2026-11-02','2nd Nov, 2026'],['2026-11-03','3rd Nov, 2026'],['2026-11-11','11th Nov, 2026'],['2026-11-12','12th Nov, 2026'],['2026-11-13','13th Nov, 2026'],['2026-11-21','21st Nov, 2026'],['2026-11-25','25th Nov, 2026'],['2024-02-29','29th Feb, 2024']])assert.equal(f.displayDate(date),expected);
+assert.equal(f.displayDate('25/11/2026'),'25th Nov, 2026');
+assert.equal(f.displayDate('2026-02-29'),'2026-02-29','Invalid input is retained, never silently rolled into another date');
+assert.equal(f.displayDate(''),'');
+assert.equal(f.displayDate('unknown'),'unknown');
+assert.equal(f.displayDateTime('25/11/2026 | 12:05 PM'),'25th Nov, 2026 12:05 IST');
+assert.equal(f.displayDateTime('25/11/2026 | 12:05 AM'),'25th Nov, 2026 00:05 IST');
+assert.equal(f.displayDateTime('25/11/2026 | 12:99 PM'),'25/11/2026 | 12:99 PM');
+assert.equal(f.displayDateTime('25/11/2026 afternoon'),'25/11/2026 afternoon');
+assert.equal(f.displayDateTime('25/11/2026 | 13:05 PM'),'25/11/2026 | 13:05 PM');
+assert.equal(f.indiaNow(new Date('2026-11-24T20:30:00Z')).display,'25th Nov, 2026');
+assert.equal(f.indiaNow(new Date('2026-11-24T20:30:00Z')).time,'02:00');
+dom.window.close();console.log('Shared clinical formatting: ordinal dates, leap validation, legacy dates, blank preservation, 12/24h conversion and IST midnight pass.');

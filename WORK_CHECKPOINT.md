@@ -1,24 +1,130 @@
-# Public PDF-share keyboard batch — 5 November 2026 IST
+# Current release and remaining acceptance — 5 November 2026 IST
 
-- Verified main4bbb67dd / production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY and root/www aliases unchanged. Existing168-run hourly automation enabled; peek returns no recorded last run/result or next-run time. No duplicate task created; future execution not confirmed.
-- Isolated pdf-share-focus.js and regression from PR145 onto current main, with one added script reference after existing markup. Preserves rendering/download/share/cleanup and all URLs/actions. Adds initial focus, Tab containment excluding disabled/hidden controls, Escape/backdrop via original close handler, and opener focus/body-scroll restoration.
-- Source is not published yet. Initial full suite found stale inventory source-file list after the new script; regenerated97-file/297-destination inventory. Full rerun and exact-source CI/preview required before release. Other PR145 runtime/private/language work remains separate. Owner login/private clinical and actual mobile acceptance remain open.
-
----
-
-# Public qualifications-dialog release — 5 November 2026 IST
-
-- Base main131a5768. Isolated credentials dialog semantics, initial focus, Tab/Shift+Tab containment, Escape/backdrop/close and focus/scroll restoration from PR145. Small-screen dialog scroll containment and44px close control added. All existing credentials, links and other features retained; no medical claims altered.
-- Focused dialog and preservation checks pass. Full bounded-source regression and exact preview/CI pending. Clinical/language/PDF-runtime PR145 changes remain separate.
-- Hourly continuation schedule enabled for168 runs (seven days); inherited environment/first-run execution not yet verified. Each run must inspect repository before edits and avoid overlap.
+- PR148 bounded PDF dialog source1fa295ad00a8bf10820644ed3929538c5f49a16f: all82 checks pass (55.20s), exact-head CI41891797705 SUCCESS. Initial stale source-file inventory failure corrected by regenerating97-file/297-destination snapshot. No link removed.
+- Exact preview dpl_FVUj5dXjMB7qbpTY2ZSC6x3CN7vu READY: dialysis PDF24KB Ready, initial close focus/body scroll lock, Shift+Tab to WhatsApp and Tab back to close, Escape restores original Share focus and body scroll. No recipient messaging/native sending performed.
+- PR148 merged main488b324a2a5c608815b25157265bcff7a1c7c39d; production dpl_EKgst6K5bz7CZfp4qoyNes89D87p READY. Live root tested same PDF Ready/focus/Escape restoration. Root/www map to exact same488b324a production deployment. Second live heart-failure guide23KB Ready; close-button restores original Share focus. Screenshot /workspace/scratch/drkulkarni-pdf-share-live-20261105.jpg.
+- Reconciled PR145 with released main488b324a. Keep existing scoped-language/unification/runtime changes and released dialog behaviour. Removed auto-merge duplicate credentials CSS by retaining equivalent existing rules; all86 reconciled-source checks pass (57.80s).
+- Existing automation peek: enabled hourly COUNT168; no recorded last_run/result or next_run_time, environment details null. Do not claim actual scheduled execution or create duplicate.
+- Remaining normal guide-download retry for Catheters and feeding tubes hit browser Input.dispatchMouseEvent protocol timeout with one visible enabled button. Download not verified. This is not evidence of bot detection or a site diagnosis. Do not bypass browser download safeguards or retry in a loop. Other five missing physical PDF acceptance items remain open.
+- Next: complete reconciled-source checks/sync; then public language/renderer acceptance where tools permit. Private clinical work requires owner passkey/device approval. Actual mobile/native share acceptance remains open. Agent cannot open a new chat automatically; exact checkpoint is durable continuation source.
 
 ---
 
-# Bounded patient navigation release — 4 November 2026
+# Latest continuation and public-dialog release — 5 November 2026 IST
 
-- Owner approved temporary preview access and incremental publication. PR145 exact source7a35748 CI regression success (run41886554432); preview dpl_7C3hKrFmjcybBNq2avTHvhECJE42 READY. Browser verified tab/action order, seven44px controls, no desktop overflow, booking CTA, qualifications Escape/focus, independent MR Library selection and public PDF-ready panel.
-- Isolated patient navigation release from production222d0b4 to avoid prematurely publishing private clinical/runtime changes. Branch release/patient-first-navigation-20261104 includes only tab/hero reorder, navigation CSS and two adjusted regression files. PR145 remains open for unverified changes.
-- Run exact bounded-source suite and preview; then authorised merge/deployment and domain verification. Do not claim mobile/private clinical acceptance. Owner passkey/device approval still required for private flows; preview-access blocker resolved for this task with one-hour links.
+- Owner requests moving to a new chat if context fills. Agent cannot open a new chat automatically; resume by reading this latest checkpoint and current repository state. Never restart completed work. At quota/context interruption, synchronise exact source, tests, blockers and next action. Hourly168-run schedule was created; future execution/environment remains unverified.
+- PR145 reconciliation commit fad43db25d2d8f7ccff37912c9f6124e32a50dfc has parents aa7a8e32 and released main131a5768. All86 reconciled-source checks pass (62.12s). Other open PRs retained. Current working review checkout /workspace/doctor-review-sync; older /workspace/doctor-performance is stale and must not overwrite latest docs.
+- Bounded qualifications-dialog PR147 source61e0b1f42413d6889f181b97ad5b6c9cfe53436e: all81 local checks pass (57.66s), CI41890217509 SUCCESS. Exact preview dpl_To7TB5TnoU8yFBtd7Fjp1YSZCuw2 READY. Browser observed initial close-button focus/body scroll lock, Tab and Shift+Tab containment, Escape dismissal with opener focus/scroll restoration, and close-button dismissal. Backdrop covered by software test, not separately browser exercised in this batch; actual mobile/screen-reader QA remains open.
+- PR147 merged to main4bbb67dd19afeecc680ea56f4b006db1694eb90e. Production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY at exact main4bbb67dd; live drkulkarnipg.com dialog opens with named close-button focus and Escape restores opener focus. www mapping verified against same deployment. Full PR145 private clinical/PDF/language work remains unmerged.
+- Next: verify PR147 production/root/www and live dialog; reconcile PR145 with new main before future release; finish scoped-language/public PDF acceptance and owner-authenticated clinical documents. Owner passkey/device approval is still required; never weaken authentication. No real patient data or recipient messages sent.
+
+---
+
+# Review branch reconciliation and scheduled continuation — 5 November 2026 IST
+
+- Reverified main131a5768, production dpl_3x18ZNxwCpXH3N8XZCttAWJQE9eq READY with root/www aliases; main Actions41887603495 SUCCESS. PR145 remote aa7a8e32; other open PRs retained untouched.
+- Reconciled PR145 with main131a5768. Overlapping navigation/hero/CSS already matched released behaviour; retained scoped-language and unification changes. Kept current checkpoint history and incorporated the bounded release record; no feature removed.
+- Created enabled hourly continuation schedule with COUNT168 (seven days), timezone Asia/Kolkata. Schedule creation succeeded; inherited environment details/next-run time were not returned, so future run execution is not yet verified. Each run must detect other active work and avoid concurrent edits/releases.
+- Next: verify reconciled source and synchronise merge; then release independently verified public dialog accessibility fixes. Private clinical runtime/document changes remain gated on owner authentication and actual files. Do not release full PR145 without acceptance evidence.
+
+---
+
+# Published patient navigation; access authorised — 4 November 2026
+
+- Owner explicitly authorised one-hour preview access and continued incremental publication. This supersedes earlier preview-access blocker; do not ask again for the same task-scoped one-hour links. Owner workstation passkey/device approval remains pending and cannot be automated away.
+- PR146 merged from bounded branch release/patient-first-navigation-20261104, source ef84257ce9ca6e0e25ee59da74db4bb0df34b220, main131a5768c0659ec97fe9cf49025a0f83a1e110e5. Only tab/hero priority, wrapping44px navigation CSS and matching tests released. No PR145 clinical/language/PDF-runtime features released.
+- All80 exact bounded-source local checks passed (51.39s); exact-head PR Actions41887351417 SUCCESS. Exact-source preview dpl_33qVVLHKRnAbpUEbUF1CPeZoDWNk READY: all7 tabs exercised, one visible panel each; hero booking/library links worked; desktop44px controls/no horizontal overflow visually observed. Actual mobile-device QA remains open.
+- Production dpl_3x18ZNxwCpXH3N8XZCttAWJQE9eq READY at exact main131a5768; deployment aliases include drkulkarnipg.com and www.drkulkarnipg.com. Live root browser verified new tab/hero order and booking entry; settled overview panel inspected. Screenshot /workspace/scratch/drkulkarni-navigation-published-20261104.jpg is QA evidence, not tracked source.
+- PR145 stays draft at7a357483622b05e0072a7a221b4e681f25ba6770 before this documentation checkpoint. CI41886554432 SUCCESS. Its preview dpl_7C3hKrFmjcybBNq2avTHvhECJE42 browser checks confirmed qualifications focus/Escape, Library MR changes only Library while other four selectors stayEN, and dialysis public PDF-ready panel. These are preview-only, not production claims.
+- Next: reconcile PR145 with newly released main before future merge (shared navigation already released; preserve other source). Finish actual PDF renderer/private document, remaining guide downloads, mobile and full language coverage acceptance. Do not merge unverified private/runtime changes merely to accelerate publishing.
+
+---
+
+# Patient-first hierarchy — 4 November 2026
+
+- Owner requests end-to-end facility logic with booking and patient reading first. PATIENT_FIRST_JOURNEYS.md defines entries, inputs, outcomes, failures/recovery and remaining acceptance evidence.
+- Continued existing PR145 from verified remote dbad14f335eb56aa6e6d8fae04ab0053f079e7d0. No production changes. Reordered existing tabs to Overview/Booking/Library/Elderly/Search/Tools/FAQ and hero links to visit/library/consultation; all original destinations retained. CSS wraps labelled 44px navigation controls, two columns on mobile.
+- Focused navigation and preservation checks pass: all522 original IDs,304 link/action occurrences,282 paths retained. Frozen-source full regression:86/86 pass,0 fail,53.76s (/tmp/drkulkarni-qa/patient-first-final-regression.log). Initial run found obsolete consultation-second ordering assertion; updated to owner-requested reading priority, retaining consultation third. Existing jsdom diagnostics are not a clean-browser claim. Actual preview/mobile layout not verified; no perfection claim.
+- Existing preview-access permission and owner device/passkey blockers remain unchanged. Do not bypass either. Next: full suite, source sync, actual preview and private-workflow acceptance before release.
+
+---
+
+# Current unification and independent-language work — 4 November 2026
+
+- Owner added two binding requirements: (1) consistent dates and document creation/save/share/print behaviour throughout; (2) every translator must affect only its own section. This explicitly supersedes earlier whole-page translation/synchronized-selector requirements. Do not reintroduce global language propagation.
+- Continue existing PR #145 / branch fix/startup-resource-reliability-20261104 from remote `1733d155a0569fd6fbceafc6c64addcf70a164a5`. New work is source-only, not live. Prior PR144 remains production.
+- Shared clinical-format.js implements ordinal English display dates, 24h IST, ISO/legacy DMY compatibility, date-only validation/leap years, blanks/unknown preservation and no invented clinical events. Clinical signoffs, clones/certificates and invoice default use the formatter; unchanged source PDFs/native date inputs and ISO storage/filenames are exceptions.
+- clinical-document-workflow.js routes Prepare/Share for 11 clinical document IDs to one ready-PDF panel with explicit download/share. Recipient options and legacy public downloads remain. Text-save label now explicit; complete cloud-save format/toolbar/print harmonization remains pending, not claimed done.
+- section-languages.js keeps independent header/home/library/doctor/reader state. awareness-library.js now separates library and reader languages; booking-form native language no longer changes Library/reader. Unavailable section-only languages do not fall back to whole-page translation. Full authored EN/MR guides exist; Workstation/home translation is only the available labels, with explicit partial-coverage status. No patient field values or clinical document text is translated/transmitted.
+- Focused shared date/workflow, independent-scope, patient-language and clinical-signoff checks pass. Older tests that asserted global provider propagation or DMY display were updated for the owner's new explicit contract. Reader-history test now waits for actual popstate events instead of racing 10ms timers. A preceding whole run passed all 86 checks. After final wording/action-style/teardown guards, one frozen-source all-86 run is running; record its exact result before a final handoff.
+- One teardown-only jsdom observer error was observed after closing the test window; pdf-share-focus sync now guards missing document/body. Verify focused regression and full suite after this guard.
+- UNIFIED_SYSTEM_CONTRACT.md lists actual source rules and incomplete acceptance criteria. Existing hands-on audit remains partial: 5 of 10 downloaded files physically verified; other5 pending; actual mobile/owner-authenticated workflows not complete.
+- Preview-access authorization is still pending for new deployments; previous grant was only one earlier preview. New requests are requirements, not authorization for an access-control change. Legitimate workstation passkey/device approval also remains pending. Do not bypass browser protocol, auth or download restrictions.
+- Next: finish current tests, sync exact source/docs, inspect CI/preview and obtain the narrow pending access before browser QA/release. Continue independent checks without claiming complete site acceptance.
+
+---
+
+# Latest hands-on audit and fix checkpoint — 4 November 2026
+
+- Owner explicitly requires each facility/button be exercised; overlapping UI, duplication, excessive/cramped spacing and actual functionality must be tested, not judged from screenshots alone. New user greetings/quality reminders did not cancel the project.
+- Continue PR #145, branch fix/startup-resource-reliability-20261104. Latest known remote head before this follow-up is `0ebc49ad33709520bba51c06f615a99dce412fab`; no new batch live. Prior PR144 remains live at `222d0b4...`.
+- Canonical actual-results log: INTERACTION_AUDIT_2026-11-04.md. Static control queue: data/control-audit-inventory-2026-11-04.json (520 static controls, NOT 520 browser passes). Dynamic controls are separately listed in the audit.
+- Used all 7 public portal panels, 8 FAQ open/close controls + 5 topic filters/search, all 5 diet toggles, calculators/Clear/methodology/one-way converter cases, language open/search/Escape, all 8 library filters, all 10 guide Read/Back, Download and Share-preparation/Close buttons. Do not report device sending or all PDFs delivered.
+- Confirmed live defects: Qualifications lacks dialog semantics, initial focus/Tab containment/Escape; PDF Share leaves focus behind. Coded fixes: original credential functions now manage focus/scroll/Escape/backdrop, explicit dialog/close labels; pdf-share-focus.js wraps keyboard/focus around existing cleanup/close actions. Also compacted duplicated section context headings/spacing without removing text/links.
+- All 83 local software checks passed sequentially (52.81s), including focused dialog/focus tests. Original IDs/link-action attrs/tracked files retained. Remote CI must still be checked; do not equate local pass with Actions success.
+- 10 guide-download events/paths returned, but only 5 files existed on disk and parsed as 2-page A4 PDFs. Dialysis first page rendered and visually inspected. Other 5 not verified; a retry timed out and reset the browser tool kernel. Do not assert a site root cause or bypass browser download settings. Resume browser from known tab/current state with documented setup if needed.
+- New runtime/performance/keyboard/spacing fixes need protected HTTPS preview access. Earlier owner grant explicitly covered the previous deployment only. Offline file preview was blocked by browser protocol policy; local HTTP preview previously refused. Do not bypass either restriction. Need explicit one-hour access permission for this updated preview (or bounded permission for this task's subsequent previews).
+- Remaining authenticated workstation QA needs owner device/passkey approval; mobile viewport/device unavailable. Continue safe public booking/help/translation audits while possible; remaining detailed queue is in the audit document. No real patient records, payment or message sent.
+- Next: sync current source/tests/audit, inspect CI/new preview; obtain narrow preview permission and legitimate workstation sign-in before remaining gated QA/release. Preserve all prior checkpoint history below as historical only.
+
+---
+
+# Verified startup-performance checkpoint — 4 November 2026, PR #145
+
+- Source saved at `71bd0dda1840f49286fa5a3c13978a1fc768e274`, branch `fix/startup-resource-reliability-20261104`, PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/145 (draft).
+- Local all-81 software checks passed sequentially in 51.43s. GitHub Actions runs `41878827130` and `41878769439` for the source SHA were QUEUED at inspection; remote CI success is not yet established. Dedicated loader tests cover demand-only script insertion, concurrent request deduplication, ready renderer reuse, network-error retry, timeout, same-origin guard and preserved renderer URL. All 522 original IDs, 304 link/action attributes and 282 original tracked paths retained.
+- Current source inventory covers 97 source files and 297 extracted destinations. Original logo resource is copied byte-for-byte to existing logo.png URL; no link or fallback removed. Actual live HTTP/resource timing and render behavior are NOT yet verified.
+- Vercel preview `dpl_3Eg75iaDS1QAEroSowZxAjZCfV97` READY, exact source above, hostname `home-visiting-icu-doctor-pune-hqp8cbl6c-drkulkarnipg-lang.vercel.app`. New batch NOT LIVE. PR144 production remains `222d0b4...` / `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3`.
+- BROWSER QA BLOCKER: prior owner permission explicitly covered one earlier deployment's one-hour access link. Do not infer permission for this different preview. Need bounded explicit authorization for this preview (or one-hour links for subsequent previews of this project/task).
+- Safer offline source preview was prepared in scratch but opening file:///home/oai/share/doctor-perf-qa/index.html was rejected by browser security policy because file protocol is not allowed. Do not retry that file via alternate browser, raw CDP, indirect execution or another workaround. Local http://127.0.0.1 preview was previously connection-refused. Protected HTTPS preview is the appropriate authorized route.
+- Quality targets are in QUALITY_STANDARD.md; WCAG/Core Web Vitals targets do not imply certified compliance or measured Google/Amazon/MSD/ChatGPT-equivalent quality. No new clinical or security certification claim.
+- Workstation passkey remains waiting on user device approval, not signed in. Do not weaken authentication. Full prescription/PDF/private/mobile-device QA remains open.
+- Next: obtain narrow HTTPS-preview access permission, inspect actual initial resource loading and first PDF rendering/retry path, then authorized release and verify exact production/aliases. Do not publish this runtime-loading change based on mocked tests alone.
+
+---
+
+# Active startup-performance batch — 4 November 2026
+
+- Owner reiterated mandatory professional/international quality and continued work. Concrete targets and evidence limits are in QUALITY_STANDARD.md; no universal certification or zero-error claim.
+- New branch `fix/startup-resource-reliability-20261104`, base live main `222d0b4b1c758ebf39425ae392e1ad380e93c094`.
+- Identified 946,030-byte html2pdf renderer synchronously loaded from the homepage head. New non-executing script descriptor retains its exact src URL; pdf-engine-loader.js loads it only for rendering. Document-sharing and legacy export paths await it. Prebuilt EN/MR guide PDFs still bypass rendering.
+- Focused tests pass: no eager renderer script, concurrent request deduplication, renderer reuse, retry after failure, timeout, same-origin guard and existing URL preservation. All 522 baseline IDs/304 link-action attributes/282 original paths retained.
+- logo.png was absent, causing the header and Rx logo to request a missing file before falling back. Added a byte-identical copy of the approved fallback logo at that existing URL; no image/content alteration. Existing fallback remains.
+- Full regression and browser/live verification pending. No release of this batch yet; prior PR144 remains LIVE.
+- Owner-authenticated prescription/PDF testing is still blocked on passkey device approval at configured production alias. Do not alter or bypass auth. Work continues on independent public-site performance.
+- Next: complete tests, synchronize branch and review/verify loading behavior before authorized deployment. Keep every deployment/access blocker explicit.
+
+---
+
+# Current sign-in handoff — 4 November 2026
+
+- PR #144 bounded patient-experience improvements are LIVE at main `222d0b4b1c758ebf39425ae392e1ad380e93c094`; production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY; root/www exact mapping and root browser verification completed. The deployment itself has no unresolved blocker.
+- Secure browser-auth choice returned selected_option `passkey`. Custom domain `drkulkarnipg.com` displayed the existing instruction to use passkeys on `https://home-visiting-icu-doctor.vercel.app`; this is an observed custom-domain sign-in limitation. That alias is the same verified production deployment.
+- Opened the configured production alias and continued the already-selected passkey method. Page now reports “Waiting for your device passkey…”, sign-in control disabled. No successful login observed. Device approval/user takeover is required; do not read/enter credentials in chat, bypass auth, change credentials or enrol a new passkey without a separate explicit request.
+- Browser handoff should stay on the existing configured-origin sign-in tab. Resume with fresh visible state after user sign-in; only then test synthetic prescription editor, export/print/long-content cases. Do not read or modify existing real patient records for layout tests.
+- Remaining mobile-device QA, unresolved experience chronology and external-provider setup gates remain open. The next blocker is authentication, not a failed deployment.
+
+---
+
+# Production verification — 4 November 2026, PR #144 released
+
+- Owner granted the narrowly scoped one-hour preview-link access permission (“deto”). It succeeded. Initial use of an automation-bypass query redirected to login; the shareable-link parameter `_vercel_share` correctly opened the approved preview. Do not store the token here. Access expires automatically; production protection was not changed.
+- PR #144 merged at `222d0b4b1c758ebf39425ae392e1ad380e93c094`. Vercel production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY. Independent get_deployment lookups for both `drkulkarnipg.com` and `www.drkulkarnipg.com` resolve to that exact production commit/deployment.
+- Preview browser verified homepage at 1363×936: no horizontal overflow; Request/consultation/library and call actions visible; Doctor Workstation button is white on teal. Request CTA selects booking panel. New name/address labels accept synthetic inputs, which were cleared without sending anything. Library search “dialysis” gives 1 of 10 guides; Read opens article and Back returns. Existing translation controls and PDF/share actions remain present. No claims of clinical translation correctness.
+- Live root browser verified the new stylesheet, explicit prescription name label, white workstation-button text, no horizontal overflow and homepage appearance. Screenshot captured only for release proof; no patient data. Browser error sample contained extension metadata errors; no complete runtime error scan claimed.
+- All 80 sequential software checks pass; exact head `06ea7c14...` Actions runs `41876075060`, `41876075083`, `41876065088` SUCCESS. Existing preservation and contrast evidence below remains applicable. No medical calculations, credentials, data migrations, payment integrations or A4 export rules changed.
+- NEXT BLOCKER: actual Doctor Workstation/prescription/PDF browser testing requires the website's own login, independent of GitHub/Vercel connections. Live Doctor Workstation click opens the owner sign-in dialog. Username/password and passkey methods are visible. Use secure browserAuth for any credential collection; never request passwords/OTP in chat or weaken authentication. Mobile-device/viewport verification also remains open because this browser advertises no viewport capability.
+- UX-20261104 is released for the bounded improvements, not proof that the entire website, authenticated workflows, Indian prescription compliance, all external destinations, clinical governance or every backlog item is complete. Fact chronology and external-service setup items remain open in the register.
 
 ---
 

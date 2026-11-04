@@ -1,0 +1,4166 @@
+{
+  "baseline": "222d0b4b1c758ebf39425ae392e1ad380e93c094",
+  "scope": "Static markup control queue only. Dynamically generated controls and observed browser results are recorded in INTERACTION_AUDIT_2026-11-04.md. Presence is not a pass.",
+  "controls": [
+    {
+      "index": 0,
+      "tag": "a",
+      "id": null,
+      "label": "Skip to main content",
+      "action": "#publicPortal",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 1,
+      "tag": "a",
+      "id": null,
+      "label": "Dr. Pramod G. Kulkarni — Home",
+      "action": "switchWorkspace('public')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 2,
+      "tag": "button",
+      "id": "navPublicBtn",
+      "label": "🌐 Patient Portal",
+      "action": "switchWorkspace('public')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 3,
+      "tag": "button",
+      "id": "navDoctorBtn",
+      "label": "Doctor Workstation",
+      "action": "verifyAndOpenWorkstation()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 4,
+      "tag": "summary",
+      "id": null,
+      "label": "🌐 Language / भाषा ▾",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 5,
+      "tag": "input",
+      "id": "languageSearchInput",
+      "label": "Search all available translation languages",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 6,
+      "tag": "select",
+      "id": "siteLanguageSelector",
+      "label": "Englishमराठी — Marathiहिन्दी — Hindiગુજરાતી — Gujaratiবাংলা — Bengaliதமிழ் — Tamilతెలుగు — Teluguಕನ್ನಡ — Kannadaമലയാളം — Malayalam",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 7,
+      "tag": "a",
+      "id": null,
+      "label": "Google Translate ↗",
+      "action": "https://translate.google.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 8,
+      "tag": "button",
+      "id": null,
+      "label": "🔓 Access",
+      "action": "openSecuritySettingsModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 9,
+      "tag": "a",
+      "id": null,
+      "label": "GMB: Home ICU",
+      "action": "https://share.google/oNbajE0cqMew0j5Ue",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 10,
+      "tag": "a",
+      "id": null,
+      "label": "GMB: Clinic",
+      "action": "https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&hl=en-IN&q=Dr%20Pramod%20G%20Kulkarni%2CEmergency%20and%20HomeCare%20Specialist",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 11,
+      "tag": "a",
+      "id": null,
+      "label": "9561394341",
+      "action": "tel:+919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 12,
+      "tag": "a",
+      "id": "portalTabOverview",
+      "label": "Overview",
+      "action": "#portalPanelOverview",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 13,
+      "tag": "a",
+      "id": "portalTabElderly",
+      "label": "Elderly care",
+      "action": "#portalPanelElderly",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 14,
+      "tag": "a",
+      "id": "portalTabLibrary",
+      "label": "Health library",
+      "action": "#portalPanelLibrary",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 15,
+      "tag": "a",
+      "id": "portalTabSearch",
+      "label": "Search articles",
+      "action": "#portalPanelSearch",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 16,
+      "tag": "a",
+      "id": "portalTabBooking",
+      "label": "Book a home visit",
+      "action": "#portalPanelBooking",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 17,
+      "tag": "a",
+      "id": "portalTabTools",
+      "label": "Health tools",
+      "action": "#portalPanelTools",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 18,
+      "tag": "a",
+      "id": "portalTabFaq",
+      "label": "Patient FAQ",
+      "action": "#portalPanelFaq",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 19,
+      "tag": "a",
+      "id": null,
+      "label": "Request a home visit ↗",
+      "action": "#bookingSection",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 20,
+      "tag": "a",
+      "id": null,
+      "label": "Online consultation · ₹500 →",
+      "action": "#onlineConsultationNotice",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 21,
+      "tag": "a",
+      "id": null,
+      "label": "Explore the health library →",
+      "action": "#wikiSection",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 22,
+      "tag": "select",
+      "id": "homeLanguagePicker",
+      "label": "Website language language selector",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 23,
+      "tag": "a",
+      "id": null,
+      "label": "Call 9561394341",
+      "action": "tel:+919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 24,
+      "tag": "a",
+      "id": null,
+      "label": "WhatsApp ↗",
+      "action": "https://wa.me/919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 25,
+      "tag": "a",
+      "id": null,
+      "label": "Email doctor ↗",
+      "action": "mailto:doctor@drkulkarnipg.com",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 26,
+      "tag": "button",
+      "id": null,
+      "label": "Qualifications & registration →",
+      "action": "openCredentialsModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 27,
+      "tag": "a",
+      "id": null,
+      "label": "01Elderly carePlan a visit and estimate the fee.↗",
+      "action": "#elderlySection",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 28,
+      "tag": "a",
+      "id": null,
+      "label": "02Understand your healthPractical, referenced guidance.↗",
+      "action": "#wikiSection",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 29,
+      "tag": "a",
+      "id": null,
+      "label": "03Know your numbersSimple tools, clearly explained.↗",
+      "action": "#patientToolsSection",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 30,
+      "tag": "a",
+      "id": null,
+      "label": "Pressure-injury guidance ↗",
+      "action": "https://www.nice.org.uk/guidance/cg179/chapter/Recommendations",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 31,
+      "tag": "a",
+      "id": null,
+      "label": "Swallowing information ↗",
+      "action": "https://www.nhs.uk/conditions/swallowing-problems-dysphagia/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 32,
+      "tag": "a",
+      "id": null,
+      "label": "Kidney-care information ↗",
+      "action": "https://www.niddk.nih.gov/health-information/kidney-disease/kidney-failure/hemodialysis",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 33,
+      "tag": "a",
+      "id": null,
+      "label": "Falls-prevention information ↗",
+      "action": "https://www.nia.nih.gov/health/falls-and-falls-prevention",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 34,
+      "tag": "select",
+      "id": "libraryLanguagePicker",
+      "label": "Choose a language for the Health Library",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 35,
+      "tag": "input",
+      "id": "wikiSearchInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 36,
+      "tag": "select",
+      "id": "sourceTranslateLanguage",
+      "label": "Translate external health source to",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 37,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.cdc.gov/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 38,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.cdc.gov/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 39,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://my.clevelandclinic.org/health",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 40,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://my.clevelandclinic.org/health",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 41,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.mayoclinic.org/patient-care-and-health-information",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 42,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.mayoclinic.org/patient-care-and-health-information",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 43,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.msdmanuals.com/home",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 44,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.msdmanuals.com/home",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 45,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.testing.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 46,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.testing.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 47,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.radiologyinfo.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 48,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.radiologyinfo.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 49,
+      "tag": "a",
+      "id": null,
+      "label": "Original ↗",
+      "action": "https://www.nice.org.uk/guidance",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 50,
+      "tag": "a",
+      "id": null,
+      "label": "मराठी ↗",
+      "action": "https://translate.google.com/translate?sl=auto&tl=mr&u=https://www.nice.org.uk/guidance",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 51,
+      "tag": "input",
+      "id": "healthGlobalSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 52,
+      "tag": "button",
+      "id": null,
+      "label": "Search health topics",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 53,
+      "tag": "a",
+      "id": null,
+      "label": "Call 9561394341 to discuss availability",
+      "action": "tel:+919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 54,
+      "tag": "a",
+      "id": null,
+      "label": "MoHFW telemedicine guidance ↗",
+      "action": "https://www.mohfw.gov.in/pdf/Telemedicine.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 55,
+      "tag": "input",
+      "id": "bkPatName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 56,
+      "tag": "input",
+      "id": "bkPatPhone",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 57,
+      "tag": "textarea",
+      "id": "bkPatAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 58,
+      "tag": "button",
+      "id": null,
+      "label": "Capture My GPS Location",
+      "action": "captureLiveGpsLocation()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 59,
+      "tag": "input",
+      "id": "bkGpsLat",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 60,
+      "tag": "input",
+      "id": "bkGpsLng",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 61,
+      "tag": "input",
+      "id": "bkGpsMapUrl",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 62,
+      "tag": "select",
+      "id": "calcTime",
+      "label": "Daytime (08:00 - 20:00) — ₹1,200 Evening (20:00 - 23:00) — ₹1,440 Late Night Emergency (23:00 - 05:00) — ₹1,680 Early Morning (05:",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 63,
+      "tag": "select",
+      "id": "calcDistance",
+      "label": "Within 5 km (Dhayari, Narhe, Vadgaon) — ₹0 6 to 10 km (Warje, Kothrud, Sinhagad Rd) — +₹300 11 to 15 km (Shivajinagar, Camp, Bibwe",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 64,
+      "tag": "input",
+      "id": "procFoley",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 65,
+      "tag": "input",
+      "id": "procRT",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 66,
+      "tag": "input",
+      "id": "procIV",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 67,
+      "tag": "input",
+      "id": "procEmergency",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 68,
+      "tag": "button",
+      "id": null,
+      "label": "Send visit request on WhatsApp",
+      "action": "bookAndTriggerFullAutomation()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 69,
+      "tag": "a",
+      "id": "upiPaymentLink",
+      "label": "Open UPI app",
+      "action": "upi://pay?pa=drkulkarnipg%40upi&pn=Dr%20Pramod%20G%20Kulkarni&cu=INR",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 70,
+      "tag": "button",
+      "id": "upiCopyId",
+      "label": "Copy UPI ID",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 71,
+      "tag": "button",
+      "id": "upiQrToggle",
+      "label": "Hide QR",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 72,
+      "tag": "button",
+      "id": "razorpayPaymentStatus",
+      "label": "Setup required — not available",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 73,
+      "tag": "button",
+      "id": "billdeskPaymentStatus",
+      "label": "Setup required — not available",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 74,
+      "tag": "button",
+      "id": "bankTransferRequest",
+      "label": "Request transfer instructions",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 75,
+      "tag": "input",
+      "id": "faqSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 76,
+      "tag": "a",
+      "id": "faqAskDoctor",
+      "label": "Ask the doctor on WhatsApp ↗",
+      "action": "https://wa.me/919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 77,
+      "tag": "input",
+      "id": "patientCelsius",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 78,
+      "tag": "input",
+      "id": "patientFahrenheit",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 79,
+      "tag": "input",
+      "id": "patientKilograms",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 80,
+      "tag": "input",
+      "id": "patientPounds",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 81,
+      "tag": "a",
+      "id": null,
+      "label": "Call +91 9561394341",
+      "action": "tel:+919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 82,
+      "tag": "a",
+      "id": null,
+      "label": "doctor@drkulkarnipg.com",
+      "action": "mailto:doctor@drkulkarnipg.com",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 83,
+      "tag": "a",
+      "id": null,
+      "label": "Legal & privacy ↗",
+      "action": "legal-privacy.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 84,
+      "tag": "a",
+      "id": null,
+      "label": "Editorial standards & sources ↗",
+      "action": "editorial-policy.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 85,
+      "tag": "a",
+      "id": null,
+      "label": "Site information: domain, hosting & HTTPS ↗",
+      "action": "site-information.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 86,
+      "tag": "a",
+      "id": null,
+      "label": "Browse published health articles",
+      "action": "/articles",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 87,
+      "tag": "a",
+      "id": null,
+      "label": "Cloud privacy notice",
+      "action": "/patient-privacy.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 88,
+      "tag": "select",
+      "id": "doctorLanguagePicker",
+      "label": "Doctor Workstation language language selector",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 89,
+      "tag": "button",
+      "id": "tabClinicalTools",
+      "label": "🏥 Workstation Home",
+      "action": "switchDocTab('clinicalTools')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 90,
+      "tag": "button",
+      "id": "tabRx",
+      "label": "📝 A4 Prescription",
+      "action": "switchDocTab('rxPad')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 91,
+      "tag": "button",
+      "id": "tabInvoice",
+      "label": "🧾 Invoice / Receipt",
+      "action": "switchDocTab('invoice')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 92,
+      "tag": "button",
+      "id": "tabRegisters",
+      "label": "📒 Practice Registers",
+      "action": "switchDocTab('registers')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 93,
+      "tag": "button",
+      "id": "tabSymptom",
+      "label": "🩺 WebMD Symptom & Interaction Suite",
+      "action": "switchDocTab('symptomChecker')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 94,
+      "tag": "button",
+      "id": "tabJournals",
+      "label": "📡 Live RSS & AI Research Agent",
+      "action": "switchDocTab('journalsHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 95,
+      "tag": "button",
+      "id": "tabEverydayTools",
+      "label": "🌿 Diet & Conversions",
+      "action": "switchDocTab('everydayTools')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 96,
+      "tag": "button",
+      "id": "tabChart",
+      "label": "📈 Patient BP, Sugar & Trends",
+      "action": "switchDocTab('chart20')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 97,
+      "tag": "button",
+      "id": "tabCheat",
+      "label": "🔬 Pathology Cheat Sheet (150+)",
+      "action": "switchDocTab('pathCheatSheet')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 98,
+      "tag": "button",
+      "id": "tabPath",
+      "label": "🩸 Lab Requisition",
+      "action": "switchDocTab('pathReq')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 99,
+      "tag": "button",
+      "id": "tabRad",
+      "label": "☢️ Radiology Requisition",
+      "action": "switchDocTab('radReq')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 100,
+      "tag": "button",
+      "id": "tabCertificates",
+      "label": "📜 Referral, Consent & Fitness",
+      "action": "switchDocTab('clinicalCertificates')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 101,
+      "tag": "button",
+      "id": "tabLegal",
+      "label": "⚖️ Death Certificates (4A, 4, 2)",
+      "action": "switchDocTab('legalForms')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 102,
+      "tag": "button",
+      "id": "tabDrug",
+      "label": "💊 1-Click Formulary & CIMS",
+      "action": "switchDocTab('drugDir')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 103,
+      "tag": "button",
+      "id": "tabArticles",
+      "label": "📑 Article Manager & Moon-Reader",
+      "action": "switchDocTab('articlesHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 104,
+      "tag": "button",
+      "id": "tabSet",
+      "label": "⚙️ Settings",
+      "action": "switchDocTab('settingsTab')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 105,
+      "tag": "button",
+      "id": null,
+      "label": "🔒 Lock Session",
+      "action": "lockWorkstationNow()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 106,
+      "tag": "button",
+      "id": "tabCalculators",
+      "label": "Clinical calculators · 28",
+      "action": "switchDocTab('clinicalCalculators')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 107,
+      "tag": "input",
+      "id": "aiGlobalQuery",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 108,
+      "tag": "a",
+      "id": "btnAiWebmd",
+      "label": "🩺 WebMD ↗",
+      "action": "navigateAI(event, 'webmd')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 109,
+      "tag": "a",
+      "id": "btnAiGemini",
+      "label": "Gemini ↗",
+      "action": "navigateAI(event, 'gemini')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 110,
+      "tag": "a",
+      "id": "btnAiChatgpt",
+      "label": "ChatGPT ↗",
+      "action": "navigateAI(event, 'chatgpt')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 111,
+      "tag": "a",
+      "id": "btnAiClaude",
+      "label": "Claude ↗",
+      "action": "navigateAI(event, 'claude')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 112,
+      "tag": "a",
+      "id": "btnAiCopilot",
+      "label": "Copilot ↗",
+      "action": "navigateAI(event, 'copilot')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 113,
+      "tag": "a",
+      "id": "btnAiScholar",
+      "label": "Scholar ↗",
+      "action": "navigateAI(event, 'scholar')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 114,
+      "tag": "a",
+      "id": "btnAiPubmed",
+      "label": "PubMed ↗",
+      "action": "navigateAI(event, 'pubmed')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 115,
+      "tag": "input",
+      "id": "rxPatPhone",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 116,
+      "tag": "select",
+      "id": "prescriptionDietPreset",
+      "label": "Diet guidance preset",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 117,
+      "tag": "button",
+      "id": "rxSavePrescriptionBtn",
+      "label": "💾 Save Prescription",
+      "action": "saveRecordAsPrompt()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 118,
+      "tag": "button",
+      "id": null,
+      "label": "🧾 Create invoice / receipt",
+      "action": "switchDocTab('invoice')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 119,
+      "tag": "button",
+      "id": "rxSaveCloudBtn",
+      "label": "☁️ Save to private cloud",
+      "action": "PrescriptionActions.saveToPrivateCloud()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 120,
+      "tag": "button",
+      "id": "rxDownloadTextBtn",
+      "label": "Download Text Copy",
+      "action": "downloadPatientPrescriptionText()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 121,
+      "tag": "button",
+      "id": "rxExportPdfBtn",
+      "label": "📥 Export PDF",
+      "action": "exportToPdf('rxSheet', 'Prescription.pdf')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 122,
+      "tag": "button",
+      "id": null,
+      "label": "🖨️ Print",
+      "action": "printClinicalDocument('rxSheet')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 123,
+      "tag": "button",
+      "id": "rxSharePrescriptionBtn",
+      "label": "📤 Share Prescription",
+      "action": "universalShareDocument('rx')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 124,
+      "tag": "input",
+      "id": "rxAllergies",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 125,
+      "tag": "input",
+      "id": "rxPatName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 126,
+      "tag": "input",
+      "id": "rxPatAge",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 127,
+      "tag": "input",
+      "id": "rxDateTime",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 128,
+      "tag": "input",
+      "id": "rxPatLoc",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 129,
+      "tag": "input",
+      "id": "vPulse",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 130,
+      "tag": "input",
+      "id": "vBP",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 131,
+      "tag": "input",
+      "id": "vSpO2",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 132,
+      "tag": "input",
+      "id": "vTemp",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 133,
+      "tag": "input",
+      "id": "vGRBS",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 134,
+      "tag": "input",
+      "id": "vRR",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 135,
+      "tag": "textarea",
+      "id": "rxComplaints",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 136,
+      "tag": "button",
+      "id": null,
+      "label": "+ 1-Click Select from Formulary",
+      "action": "openDrugModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 137,
+      "tag": "button",
+      "id": null,
+      "label": "Add another medicine to the prescription",
+      "action": "addRxRow()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 138,
+      "tag": "input",
+      "id": "rxPathRadAdvised",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 139,
+      "tag": "textarea",
+      "id": "rxAdvice",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 140,
+      "tag": "input",
+      "id": "rxFollowUp",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 141,
+      "tag": "button",
+      "id": null,
+      "label": "Daily patient register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 142,
+      "tag": "button",
+      "id": null,
+      "label": "Death register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 143,
+      "tag": "button",
+      "id": null,
+      "label": "Stock register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 144,
+      "tag": "button",
+      "id": "registerSave",
+      "label": "Save entry",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 145,
+      "tag": "button",
+      "id": "registerCancel",
+      "label": "Cancel edit",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 146,
+      "tag": "button",
+      "id": "registerRefresh",
+      "label": "Refresh register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 147,
+      "tag": "button",
+      "id": "registerExport",
+      "label": "Export CSV",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 148,
+      "tag": "button",
+      "id": "registerPrint",
+      "label": "Print register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 149,
+      "tag": "button",
+      "id": "invoiceFromPrescription",
+      "label": "Copy patient details from prescription",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 150,
+      "tag": "button",
+      "id": "invoiceSharePdf",
+      "label": "Share invoice PDF",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 151,
+      "tag": "button",
+      "id": "invoiceDownloadPdf",
+      "label": "Download invoice PDF",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 152,
+      "tag": "button",
+      "id": "invoicePrint",
+      "label": "Print invoice",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 153,
+      "tag": "input",
+      "id": "invoiceNumber",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 154,
+      "tag": "input",
+      "id": "invoiceDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 155,
+      "tag": "input",
+      "id": "invoicePatientName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 156,
+      "tag": "input",
+      "id": "invoicePatientPhone",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 157,
+      "tag": "input",
+      "id": "invoicePatientAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 158,
+      "tag": "input",
+      "id": "invoiceService",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 159,
+      "tag": "input",
+      "id": "invoiceAmount",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 160,
+      "tag": "select",
+      "id": "invoicePaymentStatus",
+      "label": "Not yet confirmedPendingPaid — manually verifiedUnpaidWaived",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 161,
+      "tag": "select",
+      "id": "invoicePaymentMethod",
+      "label": "Not specifiedUPICashBank transferPayment gatewayOther",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 162,
+      "tag": "textarea",
+      "id": "invoiceNotes",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 163,
+      "tag": "button",
+      "id": null,
+      "label": "📝 A4 PrescriptionWrite, add medicine rows, print and share a prescription.",
+      "action": "switchDocTab('rxPad')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 164,
+      "tag": "button",
+      "id": null,
+      "label": "📒 Practice registersOpen daily patient, death and stock registers (owner cloud login required).",
+      "action": "switchDocTab('registers')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 165,
+      "tag": "button",
+      "id": null,
+      "label": "💊 Drug formularySearch the existing catalogue and import an authorised CSV/JSON catalogue.",
+      "action": "switchDocTab('drugDir')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 166,
+      "tag": "button",
+      "id": null,
+      "label": "🧪 Lab RequisitionSelect tests and prepare the A4 requisition.",
+      "action": "switchDocTab('pathReq')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 167,
+      "tag": "button",
+      "id": null,
+      "label": "🩻 Radiology RequisitionSelect imaging and record the clinical indication.",
+      "action": "switchDocTab('radReq')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 168,
+      "tag": "button",
+      "id": null,
+      "label": "📡 Live RSS & AI ResearchOpen the existing source and research workflow.",
+      "action": "switchDocTab('journalsHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 169,
+      "tag": "a",
+      "id": null,
+      "label": "📚 MSD Manuals ↗Patient and professional reference material.",
+      "action": "https://www.msdmanuals.com/home",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 170,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 Cleveland Clinic ↗Health information and patient education.",
+      "action": "https://my.clevelandclinic.org/health",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 171,
+      "tag": "a",
+      "id": null,
+      "label": "🇮🇳 AIIMS New Delhi ↗Official institutional and patient-service information.",
+      "action": "https://www.aiims.edu/index.php/en",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 172,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 Apollo Hospitals ↗Institutional health information and patient services.",
+      "action": "https://www.apollohospitals.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 173,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 Nanavati Max Hospital ↗Hospital services and patient education.",
+      "action": "https://www.nanavatimaxhospital.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 174,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 Grant Medical College & Sir JJ Hospitals ↗Official institutional information.",
+      "action": "https://gmcjjh.edu.in/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 175,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 Mayo Clinic ↗Patient health information and care guidance.",
+      "action": "https://www.mayoclinic.org/patient-care-and-health-information",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 176,
+      "tag": "a",
+      "id": null,
+      "label": "🩻 Radiopaedia ↗Radiology learning reference; verify findings clinically.",
+      "action": "https://radiopaedia.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 177,
+      "tag": "a",
+      "id": null,
+      "label": "💊 National Formulary of India ↗2016 edition; verify against current approved information.",
+      "action": "https://www.ipc.gov.in/images/news/NFI-0414979118.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 178,
+      "tag": "a",
+      "id": null,
+      "label": "🇮🇳 CDSCO ↗Indian drug-regulatory information and notices.",
+      "action": "https://cdsco.mohfw.gov.in/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 179,
+      "tag": "button",
+      "id": null,
+      "label": "📡 Live RSS & AI Research AgentOpen the existing research workflow. External references are not auto-imported into prescriptions.",
+      "action": "switchDocTab('journalsHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 180,
+      "tag": "button",
+      "id": null,
+      "label": "📄 Death Forms 2 / 4 / 4AOpen the government-form reference and editable working layouts.",
+      "action": "switchDocTab('legalForms')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 181,
+      "tag": "button",
+      "id": null,
+      "label": "✍️ Referral, Consent, FitnessOpen referral, consent, fitness and unfitness documents.",
+      "action": "switchDocTab('clinicalCertificates')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 182,
+      "tag": "button",
+      "id": null,
+      "label": "🧾 Invoice / ReceiptPrepare a draft invoice, then verify the amount and payment status.",
+      "action": "switchDocTab('invoice')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 183,
+      "tag": "button",
+      "id": null,
+      "label": "🧮 Clinical calculatorsUse calculators with visible interpretation notes and sources.",
+      "action": "switchDocTab('clinicalCalculators')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 184,
+      "tag": "button",
+      "id": null,
+      "label": "📈 Patient trendsReview measurements and trends.",
+      "action": "switchDocTab('chart20')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 185,
+      "tag": "button",
+      "id": null,
+      "label": "🌡️ Unit convertersAutomatic temperature and weight conversion.",
+      "action": "switchDocTab('everydayTools')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 186,
+      "tag": "button",
+      "id": null,
+      "label": "📚 Article ManagerDraft, review and publish patient education.",
+      "action": "switchDocTab('articlesHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 187,
+      "tag": "button",
+      "id": null,
+      "label": "⚙️ SettingsOpen workstation settings and available controls.",
+      "action": "switchDocTab('settingsTab')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 188,
+      "tag": "a",
+      "id": null,
+      "label": "Open Interactive Body Map ↗",
+      "action": "https://symptoms.webmd.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 189,
+      "tag": "a",
+      "id": null,
+      "label": "Drug Interaction Engine ↗",
+      "action": "https://www.webmd.com/interaction-checker/default.htm",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 190,
+      "tag": "a",
+      "id": null,
+      "label": "Launch Symptom Checker ↗",
+      "action": "https://symptoms.webmd.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 191,
+      "tag": "a",
+      "id": null,
+      "label": "Launch Interaction Matrix ↗",
+      "action": "https://www.webmd.com/interaction-checker/default.htm",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 192,
+      "tag": "textarea",
+      "id": "webmdFindingsInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 193,
+      "tag": "button",
+      "id": null,
+      "label": "✓ Insert into Prescription Sheet",
+      "action": "injectWebmdFindingsToRx()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 194,
+      "tag": "input",
+      "id": "researchImport",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 195,
+      "tag": "button",
+      "id": "researchExport",
+      "label": "Export review backup",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 196,
+      "tag": "a",
+      "id": null,
+      "label": "Connection guide ↗",
+      "action": "RESEARCH_AGENT_SETUP.md",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 197,
+      "tag": "select",
+      "id": "rssFeedSource",
+      "label": "NEJM (New England Journal of Medicine) Nature Medicine — journal feedCritical Care - latest journal feed The Lancet Online First C",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 198,
+      "tag": "button",
+      "id": "rssFetchLatest",
+      "label": "🔄 Fetch Latest Feeds",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 199,
+      "tag": "a",
+      "id": "rxNormReference",
+      "label": "RxNorm — drug names and terminology ↗",
+      "action": "https://www.nlm.nih.gov/research/umls/rxnorm/index.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 200,
+      "tag": "a",
+      "id": "openFDAReference",
+      "label": "openFDA — FDA public data and APIs ↗",
+      "action": "https://open.fda.gov/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 201,
+      "tag": "a",
+      "id": null,
+      "label": "🇺🇸 CDC.gov (Infection Control & Triage) ↗",
+      "action": "https://www.cdc.gov/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 202,
+      "tag": "a",
+      "id": null,
+      "label": "📰 NEJM Journal Watch (Clinical Summaries) ↗",
+      "action": "https://www.jwatch.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 203,
+      "tag": "a",
+      "id": null,
+      "label": "📖 UpToDate (Clinical Decision Support) ↗",
+      "action": "https://www.uptodate.com/contents/search",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 204,
+      "tag": "a",
+      "id": null,
+      "label": "🩺 Medscape Clinical Reference ↗",
+      "action": "https://www.medscape.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 205,
+      "tag": "a",
+      "id": null,
+      "label": "☢️ RadiologyInfo.org ↗",
+      "action": "https://www.radiologyinfo.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 206,
+      "tag": "a",
+      "id": null,
+      "label": "🔬 The Pathologist.com ↗",
+      "action": "https://thepathologist.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 207,
+      "tag": "a",
+      "id": null,
+      "label": "🩸 CAP TODAY ↗",
+      "action": "https://www.captodayonline.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 208,
+      "tag": "a",
+      "id": null,
+      "label": "☢️ AuntMinnie.com ↗",
+      "action": "https://www.auntminnie.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 209,
+      "tag": "a",
+      "id": null,
+      "label": "📰 Feedly RSS Reader ↗",
+      "action": "https://feedly.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 210,
+      "tag": "a",
+      "id": "medicalXpressUpdates",
+      "label": "⚡ Medical Xpress Updates ↗",
+      "action": "https://medicalxpress.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 211,
+      "tag": "a",
+      "id": null,
+      "label": "Medical Xpress RSS feeds ↗",
+      "action": "https://medicalxpress.com/feeds/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 212,
+      "tag": "a",
+      "id": null,
+      "label": "📜 The New England Journal of Medicine (NEJM) ↗",
+      "action": "https://www.nejm.org/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 213,
+      "tag": "a",
+      "id": null,
+      "label": "🏛️ The Lancet ↗",
+      "action": "https://www.thelancet.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 214,
+      "tag": "a",
+      "id": null,
+      "label": "🏥 JAMA Network ↗",
+      "action": "https://jamanetwork.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 215,
+      "tag": "a",
+      "id": null,
+      "label": "GMB",
+      "action": "https://www.google.com/search?kgmid=%2Fg%2F11x___3_lw&q=Dr+Pramod+G+Kulkarni%2CEmergency+and+HomeCare+Specialist",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 216,
+      "tag": "a",
+      "id": null,
+      "label": "WhatsApp Dr. Kulkarni",
+      "action": "https://wa.me/919561394341?text=Hello%20Dr.%20Kulkarni,%20requesting%20urgent%20home%20ICU%20consultation%20in%20Pune.",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 217,
+      "tag": "a",
+      "id": null,
+      "label": "📚 MSD Manuals (Professional Edition)",
+      "action": "https://www.msdmanuals.com/professional",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 218,
+      "tag": "a",
+      "id": null,
+      "label": "🩺 Medscape Reference & Drug Interactions",
+      "action": "https://reference.medscape.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 219,
+      "tag": "a",
+      "id": null,
+      "label": "⚡ Medical Xpress Updates",
+      "action": "https://medicalxpress.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 220,
+      "tag": "input",
+      "id": "cheatSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 221,
+      "tag": "button",
+      "id": null,
+      "label": "📥 Export Official PDF",
+      "action": "exportToPdf('pathSlipSheet', 'Lab_Requisition.pdf')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 222,
+      "tag": "button",
+      "id": null,
+      "label": "📤 Share Full Slip",
+      "action": "universalShareDocument('path')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 223,
+      "tag": "button",
+      "id": null,
+      "label": "🖨️ Print Slip",
+      "action": "printClinicalDocument('pathSlipSheet')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 224,
+      "tag": "button",
+      "id": null,
+      "label": "Clear All Selections",
+      "action": "clearAllPathTests()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 225,
+      "tag": "button",
+      "id": null,
+      "label": "🌡️ AFI / Fever Bundle",
+      "action": "applyTestBundle('fever')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 226,
+      "tag": "button",
+      "id": null,
+      "label": "🫁 Breathlessness / Chest",
+      "action": "applyTestBundle('chest')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 227,
+      "tag": "button",
+      "id": null,
+      "label": "❤️ Acute Cardiac / ACS",
+      "action": "applyTestBundle('cardiac')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 228,
+      "tag": "button",
+      "id": null,
+      "label": "🧠 Stroke / Altered Sensorium",
+      "action": "applyTestBundle('stroke')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 229,
+      "tag": "button",
+      "id": null,
+      "label": "🩸 Sepsis / Septic Shock",
+      "action": "applyTestBundle('sepsis')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 230,
+      "tag": "button",
+      "id": null,
+      "label": "🧪 Diabetic Coma / DKA",
+      "action": "applyTestBundle('dka')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 231,
+      "tag": "button",
+      "id": null,
+      "label": "🩺 Liver Failure / Ascites",
+      "action": "applyTestBundle('cirrhosis')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 232,
+      "tag": "input",
+      "id": "reqPatName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 233,
+      "tag": "input",
+      "id": "reqPatAge",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 234,
+      "tag": "input",
+      "id": "reqDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 235,
+      "tag": "input",
+      "id": "t_cbc",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 236,
+      "tag": "input",
+      "id": "t_esr",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 237,
+      "tag": "input",
+      "id": "t_pt",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 238,
+      "tag": "input",
+      "id": "t_ddimer",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 239,
+      "tag": "input",
+      "id": "t_dengue",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 240,
+      "tag": "input",
+      "id": "t_widal",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 241,
+      "tag": "input",
+      "id": "t_kft",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 242,
+      "tag": "input",
+      "id": "t_lytes",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 243,
+      "tag": "input",
+      "id": "t_lft",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 244,
+      "tag": "input",
+      "id": "t_sugar",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 245,
+      "tag": "input",
+      "id": "t_hba1c",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 246,
+      "tag": "input",
+      "id": "t_lipid",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 247,
+      "tag": "input",
+      "id": "t_iron",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 248,
+      "tag": "input",
+      "id": "t_ammonia",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 249,
+      "tag": "input",
+      "id": "t_trop",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 250,
+      "tag": "input",
+      "id": "t_bnp",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 251,
+      "tag": "input",
+      "id": "t_pct",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 252,
+      "tag": "input",
+      "id": "t_abg",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 253,
+      "tag": "input",
+      "id": "t_blood_cx",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 254,
+      "tag": "input",
+      "id": "t_urine",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 255,
+      "tag": "textarea",
+      "id": "pathNotes",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 256,
+      "tag": "button",
+      "id": null,
+      "label": "📥 Export Official PDF",
+      "action": "exportToPdf('radSlipSheet', 'Radiology_Requisition.pdf')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 257,
+      "tag": "button",
+      "id": null,
+      "label": "📤 Share Full Slip",
+      "action": "universalShareDocument('rad')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 258,
+      "tag": "button",
+      "id": null,
+      "label": "🖨️ Print Slip",
+      "action": "printClinicalDocument('radSlipSheet')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 259,
+      "tag": "input",
+      "id": "rad_cxr",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 260,
+      "tag": "input",
+      "id": "rad_usg",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 261,
+      "tag": "input",
+      "id": "rad_dop_v",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 262,
+      "tag": "input",
+      "id": "rad_dop_a",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 263,
+      "tag": "input",
+      "id": "rad_echo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 264,
+      "tag": "input",
+      "id": "rad_ct_brain",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 265,
+      "tag": "input",
+      "id": "rad_ct_chest",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 266,
+      "tag": "input",
+      "id": "rad_mri_brain",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 267,
+      "tag": "input",
+      "id": "rad_mri_spine",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 268,
+      "tag": "textarea",
+      "id": "radIndication",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 269,
+      "tag": "a",
+      "id": null,
+      "label": "Government leave / return-to-duty format reference ↗",
+      "action": "https://ccsniah.gov.in/download/format/Medical_Certificate_Form_4_and_Fitness_Certificate_Form_5.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 270,
+      "tag": "select",
+      "id": "clinDocSelect",
+      "label": "High-Risk Procedural Consent (द्विभाषिक संमतीपत्र) Tertiary ICU Referral & Transfer Letter Medical Fitness Certificate (तंदुरुस्ती",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 271,
+      "tag": "button",
+      "id": null,
+      "label": "📥 Export PDF",
+      "action": "exportCurrentClinDocPdf()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 272,
+      "tag": "button",
+      "id": null,
+      "label": "🖨️ Print",
+      "action": "printActiveCertificate('clinical')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 273,
+      "tag": "input",
+      "id": null,
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 274,
+      "tag": "input",
+      "id": null,
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 275,
+      "tag": "input",
+      "id": null,
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 276,
+      "tag": "input",
+      "id": "fitNo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 277,
+      "tag": "input",
+      "id": "fitExamDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 278,
+      "tag": "input",
+      "id": "fitName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 279,
+      "tag": "input",
+      "id": "fitAgeSex",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 280,
+      "tag": "input",
+      "id": "fitRelative",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 281,
+      "tag": "input",
+      "id": "fitPurpose",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 282,
+      "tag": "textarea",
+      "id": "fitAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 283,
+      "tag": "textarea",
+      "id": "fitDiagnosis",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 284,
+      "tag": "input",
+      "id": "fitTreatmentFrom",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 285,
+      "tag": "input",
+      "id": "fitTreatmentTo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 286,
+      "tag": "textarea",
+      "id": "fitRecords",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 287,
+      "tag": "select",
+      "id": "fitAssessment",
+      "label": "Fit to resume the stated dutiesFit with the restrictions specified belowFurther assessment required - fitness not certified",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 288,
+      "tag": "input",
+      "id": "fitResumeDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 289,
+      "tag": "input",
+      "id": "fitReviewDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 290,
+      "tag": "textarea",
+      "id": "fitRestrictions",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 291,
+      "tag": "input",
+      "id": "fitIssueDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 292,
+      "tag": "input",
+      "id": "fitPlace",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 293,
+      "tag": "input",
+      "id": "leaveNo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 294,
+      "tag": "input",
+      "id": "leaveExamDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 295,
+      "tag": "input",
+      "id": "leaveName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 296,
+      "tag": "input",
+      "id": "leaveAgeSex",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 297,
+      "tag": "input",
+      "id": "leaveRelative",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 298,
+      "tag": "input",
+      "id": "leavePurpose",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 299,
+      "tag": "textarea",
+      "id": "leaveAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 300,
+      "tag": "textarea",
+      "id": "leaveDiagnosis",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 301,
+      "tag": "input",
+      "id": "leaveFrom",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 302,
+      "tag": "input",
+      "id": "leaveTo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 303,
+      "tag": "input",
+      "id": "leaveDays",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 304,
+      "tag": "input",
+      "id": "leaveReview",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 305,
+      "tag": "textarea",
+      "id": "leaveAdvice",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 306,
+      "tag": "textarea",
+      "id": "leaveNotes",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 307,
+      "tag": "input",
+      "id": "leaveIssueDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 308,
+      "tag": "input",
+      "id": "leavePlace",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 309,
+      "tag": "a",
+      "id": null,
+      "label": "Download original Form 4 + 4A",
+      "action": "assets/forms/crs-form4-4a-original.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 310,
+      "tag": "a",
+      "id": null,
+      "label": "Open / print Form 4 (page 1)",
+      "action": "assets/forms/crs-form4-4a-original.pdf#page=1",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 311,
+      "tag": "a",
+      "id": null,
+      "label": "Open / print Form 4A (page 3)",
+      "action": "assets/forms/crs-form4-4a-original.pdf#page=3",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 312,
+      "tag": "a",
+      "id": null,
+      "label": "Download Form 2 — GHMC reference",
+      "action": "assets/forms/form2-government-reference.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 313,
+      "tag": "a",
+      "id": null,
+      "label": "Open / print Form 2 reference",
+      "action": "assets/forms/form2-government-reference.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 314,
+      "tag": "a",
+      "id": null,
+      "label": "Open complete official CRS forms PDF (Form 2, 4, 4A + instructions) ↗",
+      "action": "https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 315,
+      "tag": "a",
+      "id": null,
+      "label": "Form 2 government source ↗",
+      "action": "https://www.ghmc.gov.in/Menu_Files/Form%20No.2.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 316,
+      "tag": "a",
+      "id": null,
+      "label": "PDF sources and checksums ↗",
+      "action": "assets/forms/sources.json",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 317,
+      "tag": "a",
+      "id": null,
+      "label": "Official CRS full forms PDF (Form 4 / 4A + instructions) ↗",
+      "action": "https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 318,
+      "tag": "a",
+      "id": null,
+      "label": "Maharashtra CRS handbook (2026) ↗",
+      "action": "https://cdnbbsr.s3waas.gov.in/s3f3ac63c91272f19ce97c7397825cc15f/uploads/2026/03/2026032088191524.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 319,
+      "tag": "select",
+      "id": "certTypeSelect",
+      "label": "Form 4A — Non-Institutional Home Death (Sec. 10(3) RBD Act) Form 4 — Hospital / In-Patient Death (Sec. 10(2) RBD Act) Form 2 — Dea",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 320,
+      "tag": "button",
+      "id": null,
+      "label": "📥 Export PDF",
+      "action": "exportCurrentDeathFormPdf()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 321,
+      "tag": "button",
+      "id": null,
+      "label": "🖨️ Print Form",
+      "action": "printActiveCertificate('death')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 322,
+      "tag": "button",
+      "id": "saveDeathToRegister",
+      "label": "Save to Death Register",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 323,
+      "tag": "input",
+      "id": "deathRegisterActualPlace",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 324,
+      "tag": "button",
+      "id": null,
+      "label": "Download Form 4 PDF",
+      "action": "exportCertificateFormPdf('form4')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 325,
+      "tag": "button",
+      "id": null,
+      "label": "Download Form 4A PDF",
+      "action": "exportCertificateFormPdf('form4a')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 326,
+      "tag": "button",
+      "id": null,
+      "label": "Download Form 2 PDF",
+      "action": "exportCertificateFormPdf('form2')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 327,
+      "tag": "button",
+      "id": null,
+      "label": "Share Form 4 PDF",
+      "action": "shareCertificateFormPdf('form4')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 328,
+      "tag": "button",
+      "id": null,
+      "label": "Share Form 4A PDF",
+      "action": "shareCertificateFormPdf('form4a')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 329,
+      "tag": "button",
+      "id": null,
+      "label": "Share Form 2 PDF",
+      "action": "shareCertificateFormPdf('form2')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 330,
+      "tag": "a",
+      "id": null,
+      "label": "Download official Form 2",
+      "action": "/api/official-form-pdf?form=2",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 331,
+      "tag": "a",
+      "id": null,
+      "label": "Download official Form 4",
+      "action": "/api/official-form-pdf?form=4",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 332,
+      "tag": "a",
+      "id": null,
+      "label": "Download official Form 4A",
+      "action": "/api/official-form-pdf?form=4a",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 333,
+      "tag": "input",
+      "id": "f4aRelative",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 334,
+      "tag": "textarea",
+      "id": "f4aAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 335,
+      "tag": "input",
+      "id": "f4aTreatmentFrom",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 336,
+      "tag": "input",
+      "id": "f4aTreatmentTo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 337,
+      "tag": "input",
+      "id": "f4aName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 338,
+      "tag": "select",
+      "id": "f4aSex",
+      "label": "MaleFemaleTransgender person",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 339,
+      "tag": "input",
+      "id": "f4aAge",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 340,
+      "tag": "select",
+      "id": "f4aAgeUnit",
+      "label": "Completed yearsCompleted months (under 1 year)Completed days (under 1 month)Hours (under 1 day)",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 341,
+      "tag": "input",
+      "id": "f4aDeathDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 342,
+      "tag": "input",
+      "id": "f4aDeathTime",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 343,
+      "tag": "textarea",
+      "id": "f4aA",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 344,
+      "tag": "input",
+      "id": "f4aAInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 345,
+      "tag": "textarea",
+      "id": "f4aB",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 346,
+      "tag": "input",
+      "id": "f4aBInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 347,
+      "tag": "textarea",
+      "id": "f4aC",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 348,
+      "tag": "input",
+      "id": "f4aCInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 349,
+      "tag": "textarea",
+      "id": "f4aPartII",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 350,
+      "tag": "select",
+      "id": "f4aPregnancy",
+      "label": "YesNoNot applicableUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 351,
+      "tag": "select",
+      "id": "f4aDelivery",
+      "label": "YesNoNot applicableUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 352,
+      "tag": "input",
+      "id": "f4aVerifyDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 353,
+      "tag": "input",
+      "id": "f4aStatisticalCode",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 354,
+      "tag": "input",
+      "id": "f4Hospital",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 355,
+      "tag": "input",
+      "id": "f4Ward",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 356,
+      "tag": "input",
+      "id": "f4Name",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 357,
+      "tag": "select",
+      "id": "f4Sex",
+      "label": "MaleFemaleTransgender person",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 358,
+      "tag": "input",
+      "id": "f4Age",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 359,
+      "tag": "select",
+      "id": "f4AgeUnit",
+      "label": "Completed yearsCompleted months (under 1 year)Completed days (under 1 month)Hours (under 1 day)",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 360,
+      "tag": "input",
+      "id": "f4DeathDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 361,
+      "tag": "input",
+      "id": "f4DeathTime",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 362,
+      "tag": "textarea",
+      "id": "f4A",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 363,
+      "tag": "input",
+      "id": "f4AInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 364,
+      "tag": "textarea",
+      "id": "f4B",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 365,
+      "tag": "input",
+      "id": "f4BInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 366,
+      "tag": "textarea",
+      "id": "f4C",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 367,
+      "tag": "input",
+      "id": "f4CInterval",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 368,
+      "tag": "textarea",
+      "id": "f4PartII",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 369,
+      "tag": "select",
+      "id": "f4Manner",
+      "label": "NaturalAccidentSuicideHomicidePending investigation",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 370,
+      "tag": "textarea",
+      "id": "f4Injury",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 371,
+      "tag": "select",
+      "id": "f4Pregnancy",
+      "label": "YesNoNot applicableUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 372,
+      "tag": "select",
+      "id": "f4Delivery",
+      "label": "YesNoNot applicableUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 373,
+      "tag": "input",
+      "id": "f4VerifyDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 374,
+      "tag": "input",
+      "id": "f4StatisticalCode",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 375,
+      "tag": "input",
+      "id": "f2Name",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 376,
+      "tag": "select",
+      "id": "f2Sex",
+      "label": "MaleFemaleTransgender person",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 377,
+      "tag": "input",
+      "id": "f2Age",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 378,
+      "tag": "select",
+      "id": "f2AgeUnit",
+      "label": "Completed yearsCompleted months (under 1 year)Completed days (under 1 month)Hours (under 1 day)",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 379,
+      "tag": "input",
+      "id": "f2DeathDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 380,
+      "tag": "input",
+      "id": "f2DeathTime",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 381,
+      "tag": "input",
+      "id": "f2DOB",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 382,
+      "tag": "input",
+      "id": "f2Aadhaar",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 383,
+      "tag": "input",
+      "id": "f2MotherName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 384,
+      "tag": "input",
+      "id": "f2MotherAadhaar",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 385,
+      "tag": "input",
+      "id": "f2MotherMobile",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 386,
+      "tag": "input",
+      "id": "f2MotherEmail",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 387,
+      "tag": "input",
+      "id": "f2FatherName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 388,
+      "tag": "input",
+      "id": "f2FatherAadhaar",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 389,
+      "tag": "input",
+      "id": "f2FatherMobile",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 390,
+      "tag": "input",
+      "id": "f2FatherEmail",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 391,
+      "tag": "input",
+      "id": "f2SpouseName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 392,
+      "tag": "input",
+      "id": "f2SpouseAadhaar",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 393,
+      "tag": "input",
+      "id": "f2SpouseMobile",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 394,
+      "tag": "input",
+      "id": "f2SpouseEmail",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 395,
+      "tag": "textarea",
+      "id": "f2CurrentAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 396,
+      "tag": "textarea",
+      "id": "f2PermanentAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 397,
+      "tag": "select",
+      "id": "f2PlaceType",
+      "label": "Hospital / institutionHouseOther place",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 398,
+      "tag": "textarea",
+      "id": "f2PlaceAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 399,
+      "tag": "input",
+      "id": "f2Informant",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 400,
+      "tag": "input",
+      "id": "f2InformantPhone",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 401,
+      "tag": "textarea",
+      "id": "f2InformantAddress",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 402,
+      "tag": "input",
+      "id": "f2ReportDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 403,
+      "tag": "input",
+      "id": "f2UsualTown",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 404,
+      "tag": "select",
+      "id": "f2UsualType",
+      "label": "TownVillage",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 405,
+      "tag": "input",
+      "id": "f2UsualSubdistrict",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 406,
+      "tag": "input",
+      "id": "f2UsualDistrict",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 407,
+      "tag": "input",
+      "id": "f2UsualState",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 408,
+      "tag": "input",
+      "id": "f2Religion",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 409,
+      "tag": "input",
+      "id": "f2Occupation",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 410,
+      "tag": "select",
+      "id": "f2Attention",
+      "label": "InstitutionalMedical attention outside an institutionNo medical attentionUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 411,
+      "tag": "select",
+      "id": "f2Certified",
+      "label": "YesNoUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 412,
+      "tag": "textarea",
+      "id": "f2Cause",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 413,
+      "tag": "select",
+      "id": "f2Pregnancy",
+      "label": "YesNoNot applicableUnknown",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 414,
+      "tag": "input",
+      "id": "f2Smoking",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 415,
+      "tag": "input",
+      "id": "f2Tobacco",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 416,
+      "tag": "input",
+      "id": "f2Arecanut",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 417,
+      "tag": "input",
+      "id": "f2Alcohol",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 418,
+      "tag": "input",
+      "id": "f2RegistrationNo",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 419,
+      "tag": "input",
+      "id": "f2RegistrationDate",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 420,
+      "tag": "input",
+      "id": "f2RegistrationUnit",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 421,
+      "tag": "input",
+      "id": "f2RegistrarArea",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 422,
+      "tag": "textarea",
+      "id": "f2RegistrarRemarks",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 423,
+      "tag": "a",
+      "id": null,
+      "label": "Check all 287 requested names, corrections and review status ↗",
+      "action": "formulary-coverage.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 424,
+      "tag": "input",
+      "id": "formularyImport",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 425,
+      "tag": "button",
+      "id": "formularyTemplate",
+      "label": "Download CSV template",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 426,
+      "tag": "button",
+      "id": "formularyExport",
+      "label": "Export catalogue backup",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 427,
+      "tag": "a",
+      "id": null,
+      "label": "National Formulary of India — 5th edition (2016) ↗",
+      "action": "https://www.ipc.gov.in/images/news/NFI-0414979118.pdf",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 428,
+      "tag": "a",
+      "id": null,
+      "label": "Central Drugs Standard Control Organisation (CDSCO) ↗",
+      "action": "https://cdsco.mohfw.gov.in/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 429,
+      "tag": "button",
+      "id": "formularyPrev",
+      "label": "Previous 100",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 430,
+      "tag": "button",
+      "id": "formularyNext",
+      "label": "Next 100",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 431,
+      "tag": "button",
+      "id": null,
+      "label": "+ Add custom medicine",
+      "action": "openAddDrugModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 432,
+      "tag": "a",
+      "id": null,
+      "label": "🇮🇳 CIMS India ↗",
+      "action": "https://www.mims.com/india",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 433,
+      "tag": "a",
+      "id": null,
+      "label": "🌐 Drugs.com ↗",
+      "action": "https://www.drugs.com/",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 434,
+      "tag": "input",
+      "id": "dirSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 435,
+      "tag": "button",
+      "id": "bundledCatalogueRetry",
+      "label": "Load / Retry RxNorm catalogue",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 436,
+      "tag": "button",
+      "id": null,
+      "label": "📡 Open Live RSS & AI Research Agent",
+      "action": "switchDocTab('journalsHub')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 437,
+      "tag": "input",
+      "id": "importArticleFileInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 438,
+      "tag": "button",
+      "id": null,
+      "label": "📂 Import File (.txt / .json / .md / .html)",
+      "action": "document.getElementById('importArticleFileInput').click()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 439,
+      "tag": "input",
+      "id": "articleAttachFiles",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 440,
+      "tag": "button",
+      "id": "focusArticleSourceLink",
+      "label": "Add Google Drive / online link",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 441,
+      "tag": "input",
+      "id": "newArtTitle",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 442,
+      "tag": "input",
+      "id": "newArtCat",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 443,
+      "tag": "input",
+      "id": "newArtFile",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 444,
+      "tag": "input",
+      "id": "newArtUrl",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 445,
+      "tag": "button",
+      "id": "addArticleSourceLink",
+      "label": "Attach this link",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 446,
+      "tag": "button",
+      "id": null,
+      "label": "📂 Import text / HTML into article",
+      "action": "document.getElementById('importArticleFileInput').click()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 447,
+      "tag": "textarea",
+      "id": "newArtBody",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 448,
+      "tag": "button",
+      "id": null,
+      "label": "Save local reader copy",
+      "action": "publishNewArticle()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 449,
+      "tag": "input",
+      "id": "webhookUrlInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 450,
+      "tag": "input",
+      "id": "clinicalCalculatorSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 451,
+      "tag": "button",
+      "id": null,
+      "label": "Open prescription & review advice",
+      "action": "switchDocTab('rxPad')",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 452,
+      "tag": "input",
+      "id": "doctorCelsius",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 453,
+      "tag": "input",
+      "id": "doctorFahrenheit",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 454,
+      "tag": "input",
+      "id": "doctorKilograms",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 455,
+      "tag": "input",
+      "id": "doctorPounds",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 456,
+      "tag": "input",
+      "id": "cloudLoginEmail",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 457,
+      "tag": "input",
+      "id": "cloudLoginPassword",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 458,
+      "tag": "button",
+      "id": null,
+      "label": "Sign in to cloud",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 459,
+      "tag": "button",
+      "id": "cloudSavePatient",
+      "label": "Save selected patient to cloud",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 460,
+      "tag": "button",
+      "id": "cloudRefreshPatients",
+      "label": "Refresh cloud patient list",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 461,
+      "tag": "select",
+      "id": "cloudPatientSelect",
+      "label": "Choose cloud patient",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 462,
+      "tag": "button",
+      "id": "cloudOpenPatient",
+      "label": "Open selected cloud patient",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 463,
+      "tag": "button",
+      "id": "cloudSignOut",
+      "label": "Sign out of cloud",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 464,
+      "tag": "button",
+      "id": "cloudCheckConnection",
+      "label": "Check cloud connection",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 465,
+      "tag": "a",
+      "id": null,
+      "label": "Cloud setup guide ↗",
+      "action": "CLOUD_RECORDS_SETUP.md",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 466,
+      "tag": "select",
+      "id": "trendPatientSelect",
+      "label": "Choose patient",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 467,
+      "tag": "input",
+      "id": "trendNewPatientName",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 468,
+      "tag": "button",
+      "id": null,
+      "label": "Add patient",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 469,
+      "tag": "button",
+      "id": "trendExportAll",
+      "label": "Backup all patients (JSON)",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 470,
+      "tag": "input",
+      "id": "trendRestoreFile",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 471,
+      "tag": "button",
+      "id": "trendDownloadLegacy",
+      "label": "Download original unassigned backup",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 472,
+      "tag": "button",
+      "id": "trendImportLegacy",
+      "label": "Copy into a new “Legacy - verify identity” record",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 473,
+      "tag": "select",
+      "id": "trendMetricSelect",
+      "label": "Blood pressure · mmHgBlood glucose · mg/dLWeight · kgBMI · kg/m²Pulse · /minSpO₂ · %Temperature · °CCreatinine · mg/dLHbA1c · %",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 474,
+      "tag": "button",
+      "id": null,
+      "label": "Save this patient",
+      "action": "saveTrendReadings()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 475,
+      "tag": "button",
+      "id": null,
+      "label": "Export this patient (JSON)",
+      "action": "exportTrendReadings()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 476,
+      "tag": "button",
+      "id": "trendAddReading",
+      "label": "Add reading",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 477,
+      "tag": "button",
+      "id": null,
+      "label": "Print trend",
+      "action": "window.print()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 478,
+      "tag": "select",
+      "id": "encyclopediaLanguagePicker",
+      "label": "Knowledge Encyclopedia language language selector",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 479,
+      "tag": "button",
+      "id": "wikiReaderBack",
+      "label": "← Health library / लेखसूचीकडे परत",
+      "action": "closeWikiModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 480,
+      "tag": "button",
+      "id": null,
+      "label": "Close device lock settings",
+      "action": "closeSecuritySettingsModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 481,
+      "tag": "input",
+      "id": "secModeOpen",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 482,
+      "tag": "input",
+      "id": "secModePin",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 483,
+      "tag": "input",
+      "id": "secModeBiometric",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 484,
+      "tag": "input",
+      "id": "deviceCurrentPassword",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 485,
+      "tag": "input",
+      "id": "customPinInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 486,
+      "tag": "input",
+      "id": "deviceConfirmPassword",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 487,
+      "tag": "button",
+      "id": null,
+      "label": "Lock now",
+      "action": "lockWorkstationNow(); closeSecuritySettingsModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 488,
+      "tag": "button",
+      "id": "deviceLockSave",
+      "label": "Save device passphrase",
+      "action": "saveSecuritySettings()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 489,
+      "tag": "a",
+      "id": null,
+      "label": "Privacy and access limitations ↗",
+      "action": "legal-privacy.html",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 490,
+      "tag": "input",
+      "id": "doctorLoginEmail",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 491,
+      "tag": "input",
+      "id": "doctorLoginPassword",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 492,
+      "tag": "button",
+      "id": "doctorLoginSubmit",
+      "label": "Sign in",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 493,
+      "tag": "button",
+      "id": "doctorLoginCancel",
+      "label": "Return to patient portal",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 494,
+      "tag": "input",
+      "id": "deviceUnlockPassword",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 495,
+      "tag": "button",
+      "id": "deviceUnlockSubmit",
+      "label": "Unlock on this tab",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 496,
+      "tag": "button",
+      "id": "deviceUnlockCancel",
+      "label": "Return to patient portal",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 497,
+      "tag": "button",
+      "id": null,
+      "label": "✕",
+      "action": "closeDrugModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 498,
+      "tag": "input",
+      "id": "modalDrugSearch",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 499,
+      "tag": "button",
+      "id": null,
+      "label": "✕",
+      "action": "closeAddDrugModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 500,
+      "tag": "input",
+      "id": "custDrugCat",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 501,
+      "tag": "input",
+      "id": "custDrugGen",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 502,
+      "tag": "input",
+      "id": "custDrugBrand",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 503,
+      "tag": "input",
+      "id": "custDrugTiming",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 504,
+      "tag": "input",
+      "id": "custDrugFreq",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 505,
+      "tag": "button",
+      "id": null,
+      "label": "💾 Save Molecule to Formulary",
+      "action": "saveCustomDrug()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 506,
+      "tag": "button",
+      "id": null,
+      "label": "Close qualifications and registration",
+      "action": "closeCredentialsModal()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 507,
+      "tag": "button",
+      "id": "chatbotToggleBtn",
+      "label": "💬 Patient help",
+      "action": "toggleChatbot()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 508,
+      "tag": "button",
+      "id": null,
+      "label": "✕",
+      "action": "toggleChatbot()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 509,
+      "tag": "input",
+      "id": "chatInput",
+      "label": "",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 510,
+      "tag": "button",
+      "id": null,
+      "label": "Send",
+      "action": "sendChatMessage()",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 511,
+      "tag": "button",
+      "id": "pdfShareClose",
+      "label": "Close PDF share",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 512,
+      "tag": "button",
+      "id": "pdfNativeShare",
+      "label": "Share PDF - choose app",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 513,
+      "tag": "button",
+      "id": "pdfDownload",
+      "label": "Download PDF",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 514,
+      "tag": "a",
+      "id": "pdfWhatsApp",
+      "label": "Open WhatsApp",
+      "action": "https://api.whatsapp.com/send",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 515,
+      "tag": "button",
+      "id": "contactClose",
+      "label": "Close contact options",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 516,
+      "tag": "input",
+      "id": "contactNumber",
+      "label": "Doctor phone number",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 517,
+      "tag": "a",
+      "id": "contactDial",
+      "label": "Open phone dialler ↗",
+      "action": "tel:+919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 518,
+      "tag": "a",
+      "id": null,
+      "label": "Open WhatsApp ↗",
+      "action": "https://wa.me/919561394341",
+      "status": "NOT_YET_BROWSER_TESTED"
+    },
+    {
+      "index": 519,
+      "tag": "button",
+      "id": "contactCopy",
+      "label": "Copy phone number",
+      "action": null,
+      "status": "NOT_YET_BROWSER_TESTED"
+    }
+  ]
+}
