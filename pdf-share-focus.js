@@ -7,6 +7,7 @@
     if (!dialog || !close) return;
     let active = false, returnFocus = null, previousOverflow = '';
     function sync() {
+      if (typeof document === 'undefined' || !document?.body) return;
       if (!dialog.hidden && !active) {
         active = true;
         returnFocus = document.activeElement;

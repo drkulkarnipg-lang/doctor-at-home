@@ -1,3 +1,18 @@
+# Current unification and independent-language work — 4 November 2026
+
+- Owner added two binding requirements: (1) consistent dates and document creation/save/share/print behaviour throughout; (2) every translator must affect only its own section. This explicitly supersedes earlier whole-page translation/synchronized-selector requirements. Do not reintroduce global language propagation.
+- Continue existing PR #145 / branch fix/startup-resource-reliability-20261104 from remote `1733d155a0569fd6fbceafc6c64addcf70a164a5`. New work is source-only, not live. Prior PR144 remains production.
+- Shared clinical-format.js implements ordinal English display dates, 24h IST, ISO/legacy DMY compatibility, date-only validation/leap years, blanks/unknown preservation and no invented clinical events. Clinical signoffs, clones/certificates and invoice default use the formatter; unchanged source PDFs/native date inputs and ISO storage/filenames are exceptions.
+- clinical-document-workflow.js routes Prepare/Share for 11 clinical document IDs to one ready-PDF panel with explicit download/share. Recipient options and legacy public downloads remain. Text-save label now explicit; complete cloud-save format/toolbar/print harmonization remains pending, not claimed done.
+- section-languages.js keeps independent header/home/library/doctor/reader state. awareness-library.js now separates library and reader languages; booking-form native language no longer changes Library/reader. Unavailable section-only languages do not fall back to whole-page translation. Full authored EN/MR guides exist; Workstation/home translation is only the available labels, with explicit partial-coverage status. No patient field values or clinical document text is translated/transmitted.
+- Focused shared date/workflow, independent-scope, patient-language and clinical-signoff checks pass. Older tests that asserted global provider propagation or DMY display were updated for the owner's new explicit contract. Reader-history test now waits for actual popstate events instead of racing 10ms timers. A preceding whole run passed all 86 checks. After final wording/action-style/teardown guards, one frozen-source all-86 run is running; record its exact result before a final handoff.
+- One teardown-only jsdom observer error was observed after closing the test window; pdf-share-focus sync now guards missing document/body. Verify focused regression and full suite after this guard.
+- UNIFIED_SYSTEM_CONTRACT.md lists actual source rules and incomplete acceptance criteria. Existing hands-on audit remains partial: 5 of 10 downloaded files physically verified; other5 pending; actual mobile/owner-authenticated workflows not complete.
+- Preview-access authorization is still pending for new deployments; previous grant was only one earlier preview. New requests are requirements, not authorization for an access-control change. Legitimate workstation passkey/device approval also remains pending. Do not bypass browser protocol, auth or download restrictions.
+- Next: finish current tests, sync exact source/docs, inspect CI/preview and obtain the narrow pending access before browser QA/release. Continue independent checks without claiming complete site acceptance.
+
+---
+
 # Latest hands-on audit and fix checkpoint — 4 November 2026
 
 - Owner explicitly requires each facility/button be exercised; overlapping UI, duplication, excessive/cramped spacing and actual functionality must be tested, not judged from screenshots alone. New user greetings/quality reminders did not cancel the project.

@@ -67,3 +67,9 @@ No cause is asserted for the five missing download files. The final retry timed 
 ## Software verification
 
 After the new dialog/focus/compact-heading changes, all 83 software checks passed sequentially in 52.81 seconds. These include dedicated credentials-dialog and PDF-share-focus tests. All original 522 IDs, 304 href/src/onclick/onchange occurrences and 282 original tracked paths remain. This does not replace any pending browser/device check.
+
+## Additional owner requirements and source implementation
+
+- Uniform clinical display date (`25th Nov, 2026`), 24h IST, consistent PDF-ready Save/Share path for 11 document types, explicit text-save wording and consistent action styling are implemented in the shared modules. Native date-picker/source-PDF/ISO storage representations remain distinct for fidelity. Full cloud-storage format/toolbar/print/device acceptance remains open.
+- Every translator is now required to be independent. Added separate library and reader state, scoped header/home/workstation navigation state, and isolated booking-language actions. Changing one selector must not alter another section or patient entries. Authored EN/MR guides work; only available MR navigation labels are translated in Workstation/home. Additional full scoped translations remain unconnected, with explicit notices.
+- These changes have focused software tests; they have NOT yet been exercised in an authorized new browser preview. Do not overwrite baseline browser results above with claims about the new source.

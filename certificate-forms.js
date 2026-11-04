@@ -20,7 +20,7 @@
       const original = originals[i];
       const output = document.createElement('span'); output.className = 'certificate-value';
       let value = original.value;
-      if (original.type === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(value)) value = value.split('-').reverse().join('-');
+      if (original.type === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(value)) value = window.ClinicalFormat?window.ClinicalFormat.displayDate(value):value.split('-').reverse().join('-');
       if (original.tagName === 'SELECT') value = original.selectedOptions[0]?.textContent || '';
       output.textContent = value || '\u00a0'; control.replaceWith(output);
     });
@@ -47,6 +47,7 @@
   async function exportCertificate(group) {
     const id = activeId(group), source = document.getElementById(id);
     if (!source.dataset.certificateTemplate) return originalClinicalExport();
+    if (window.ensurePdfEngine) { try { await window.ensurePdfEngine(); } catch (error) { window.showToast?.(error.message); return; } }
     if (typeof window.html2pdf !== 'function') { window.printActiveCertificate(group); return; }
     const copy = printableClone(id);
     const holder = document.createElement('div'); holder.setAttribute('aria-hidden','true');
