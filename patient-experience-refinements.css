@@ -148,3 +148,18 @@
 @media (prefers-reduced-motion: reduce) {
   #publicPortal *, .site-header * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Patient task priority: preserve every destination and expose all seven choices. */
+@media screen {
+  .site-header .portal-nav { display:flex; flex-wrap:wrap; gap:8px; overflow:visible; }
+  .site-header .portal-nav [role="tab"] {
+    min-height:44px; padding:10px 14px; white-space:normal;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:14px; line-height:1.4; overflow-wrap:anywhere;
+  }
+  #publicPortal :is(.wiki-content, .wiki-reader-body) { overflow-wrap:anywhere; }
+}
+@media screen and (max-width:640px) {
+  .site-header .portal-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .site-header .portal-nav [role="tab"] { min-width:0; text-align:center; }
+}

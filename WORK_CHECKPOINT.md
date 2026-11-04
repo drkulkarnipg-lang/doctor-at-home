@@ -1,3 +1,11 @@
+# Bounded patient navigation release — 4 November 2026
+
+- Owner approved temporary preview access and incremental publication. PR145 exact source7a35748 CI regression success (run41886554432); preview dpl_7C3hKrFmjcybBNq2avTHvhECJE42 READY. Browser verified tab/action order, seven44px controls, no desktop overflow, booking CTA, qualifications Escape/focus, independent MR Library selection and public PDF-ready panel.
+- Isolated patient navigation release from production222d0b4 to avoid prematurely publishing private clinical/runtime changes. Branch release/patient-first-navigation-20261104 includes only tab/hero reorder, navigation CSS and two adjusted regression files. PR145 remains open for unverified changes.
+- Run exact bounded-source suite and preview; then authorised merge/deployment and domain verification. Do not claim mobile/private clinical acceptance. Owner passkey/device approval still required for private flows; preview-access blocker resolved for this task with one-hour links.
+
+---
+
 # Verified checkpoint — 4 November 2026, PR #144
 
 - Saved implementation: PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/144, branch `fix/patient-experience-quality-20261104`, source commit `0a01c6f621e32c07ade98827060e70e5c861b286`.
