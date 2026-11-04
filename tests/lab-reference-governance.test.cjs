@@ -188,7 +188,7 @@ const sourceInventory=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/ex
 assert.ok(sourceInventory.source_files_scanned.includes('clinical-diet-presets.js'));checks++;
 assert.ok(sourceInventory.source_files_scanned.includes('lab-reference-governance.js'));checks++;
 const indianStudyInventory=sourceInventory.links.find(x=>x.url==='https://doi.org/10.1515/cclm-2018-0152');
-assert.ok(indianStudyInventory&&indianStudyInventory.source_files.includes('clinical-calculators.js')&&indianStudyInventory.source_lines.includes(81));checks++;
+assert.ok(indianStudyInventory&&indianStudyInventory.source_files.includes('clinical-calculators.js')&&calculatorSource.split('\n').some((line,index)=>line.includes(indianStudyInventory.url)&&indianStudyInventory.source_lines.includes(index+1)));checks++;
 const mayoInventoryLines=[
  ['https://www.mayocliniclabs.com/test-catalog/overview/619953',[132,133,134]],
  ['https://www.mayocliniclabs.com/test-catalog/Overview/8725',[135]],
@@ -208,7 +208,9 @@ const mayoInventoryLines=[
  ['https://www.mayocliniclabs.com/test-catalog/Overview/614422',[150,151]],
  ['https://www.mayocliniclabs.com/test-catalog/overview/616856',[152,153,154,155,156,157]]
 ];
-for(const [url,expectedLines] of mayoInventoryLines){
+for(const [url] of mayoInventoryLines){
+ const expectedLines=calculatorSource.split('\n').flatMap((line,index)=>line.includes(url)?[index+1]:[]);
+ assert.ok(expectedLines.length,'Clinical source must retain '+url);checks++;
  const link=sourceInventory.links.find(x=>x.url===url);assert.ok(link,'Source inventory must contain '+url);
  assert.ok(link.source_files.includes('clinical-calculators.js'),'Inventory must cite clinical-calculators.js for '+url);
  for(const line of expectedLines){assert.ok(link.source_lines.includes(line),'Inventory must retain exact source line '+line+' for '+url);checks++;}

@@ -1,0 +1,150 @@
+/* Patient experience refinement. Screen only: exported/printed clinical documents
+   continue to use their existing A4 rules. No controls or content are hidden. */
+@media screen {
+  .site-header #navDoctorBtn {
+    color: #fff !important;
+    background: #17665e !important;
+    border: 1px solid #12544d !important;
+  }
+  .site-header #navDoctorBtn:hover { background: #12544d !important; }
+  .site-header #navDoctorBtn i { color: inherit !important; }
+  .site-header :is(#navPublicBtn, #navDoctorBtn) {
+    min-height: 44px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+  #publicPortal #portalPanelOverview { gap: 24px !important; }
+  #publicPortal #portalPanelOverview .portal-hero {
+    grid-template-columns: minmax(0, 1.5fr) minmax(290px, 1fr);
+    align-items: stretch;
+    gap: clamp(20px, 3vw, 40px);
+    padding: clamp(20px, 2.5vw, 36px) !important;
+  }
+  #publicPortal #portalPanelOverview .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: clamp(20px, 2.4vw, 32px) !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+  #publicPortal #portalPanelOverview .original-care-hero {
+    max-width: 16ch;
+    margin: 18px 0 !important;
+    font-size: clamp(38px, 4.1vw, 58px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.035em !important;
+  }
+  #publicPortal #portalPanelOverview .hero-copy > p {
+    margin: 0;
+    max-width: 60ch;
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+  }
+  #publicPortal #portalPanelOverview .hero-primary-actions {
+    order: 1;
+    margin-top: 22px !important;
+    width: 100%;
+    gap: 10px !important;
+  }
+  #publicPortal #portalPanelOverview .hero-copy > .section-translator {
+    order: 2;
+    margin: 18px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  #publicPortal #portalPanelOverview .hero-primary-actions a {
+    min-height: 48px;
+    font-size: 14px !important;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  #publicPortal #portalPanelOverview .hero-primary-actions .primary-link {
+    background: #365b49 !important;
+    color: #fff !important;
+  }
+  #publicPortal #portalPanelOverview .care-compass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: clamp(22px, 2.5vw, 34px) !important;
+  }
+  #publicPortal #portalPanelOverview .care-mark {
+    width: 150px;
+    height: 98px;
+    margin: 14px 0 0;
+    align-self: center;
+  }
+  #publicPortal #portalPanelOverview .care-compass h3 {
+    font-size: clamp(26px, 2.6vw, 34px) !important;
+    margin: 14px 0 !important;
+  }
+  #publicPortal #portalPanelOverview .hero-contact-actions a {
+    min-height: 48px;
+    font-size: 14px !important;
+  }
+  #publicPortal #portalPanelOverview .hero-contact-actions .hero-call {
+    color: #fff !important;
+    background: #365b49 !important;
+    border-color: #365b49 !important;
+  }
+  #publicPortal #portalPanelOverview .compass-credentials {
+    min-height: 44px;
+    font-size: 13px !important;
+  }
+  #publicPortal :is(.wiki-card-actions button, .library-topic-filters button) {
+    min-height: 44px;
+  }
+  #publicPortal :is(input, textarea, select) { font-size: max(16px, 1em); }
+  #publicPortal :is(input, textarea)::placeholder { color: #637267 !important; }
+  #publicPortal :is(.section-translator, .section-language-picker) { max-width: 100%; }
+  :is(.site-header, #publicPortal, #doctorPortal) :is(button, a[href], summary, input, select, textarea):focus-visible {
+    outline: 3px solid #215e53 !important;
+    outline-offset: 3px !important;
+  }
+  /* Desktop prescription editing: larger writing controls without changing PDF geometry. */
+  #viewRxPad > .no-print :is(button, select, input) { min-height: 44px; }
+  #rxSheet :is(input, select, textarea) {
+    min-height: 40px;
+    color: #172f43;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  #rxSheet label { color: #3f5360; font-size: 12px; line-height: 1.5; }
+  #rxSheet #rxTable th { padding: 10px 6px; font-size: 12px; }
+  #rxSheet #rxTable td { padding: 6px; vertical-align: top; }
+  #rxSheet #rxTable :is(input, select) { width: 100%; min-width: 0; }
+}
+@media screen and (max-width: 900px) {
+  #publicPortal #portalPanelOverview .portal-hero {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 18px !important;
+    gap: 18px;
+  }
+  #publicPortal #portalPanelOverview .hero-copy { padding: 12px !important; }
+  #publicPortal #portalPanelOverview .original-care-hero {
+    max-width: 18ch;
+    font-size: clamp(36px, 6vw, 52px) !important;
+  }
+  #publicPortal #portalPanelOverview .care-compass { padding: 24px !important; }
+}
+@media screen and (max-width: 640px) {
+  #publicPortal #portalPanelOverview .portal-hero { padding: 12px !important; }
+  #publicPortal #portalPanelOverview .original-care-hero {
+    font-size: clamp(32px, 8.5vw, 46px) !important;
+  }
+  #publicPortal #portalPanelOverview .hero-primary-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #publicPortal #portalPanelOverview .hero-primary-actions a { width: 100%; box-sizing: border-box; }
+  #publicPortal #portalPanelOverview .hero-copy > p { font-size: 16px !important; }
+  #publicPortal #portalPanelOverview .care-compass { padding: 20px !important; }
+  #rxSheet :is(input, textarea, select) { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #publicPortal *, .site-header * { scroll-behavior: auto !important; transition: none !important; }
+}

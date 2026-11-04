@@ -1,3 +1,33 @@
+# Verified checkpoint — 4 November 2026, PR #144
+
+- Saved implementation: PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/144, branch `fix/patient-experience-quality-20261104`, source commit `0a01c6f621e32c07ade98827060e70e5c861b286`.
+- Vercel preview: `dpl_8HMkon4rtrXmj8PnoqMYLZv22PZH`, READY, exact source commit above, hostname `home-visiting-icu-doctor-pune-k3taorpol-drkulkarnipg-lang.vercel.app`. Preview protection is intact. No production release of this batch.
+- All 80 checks passed with `node --test --test-concurrency=1 tests/*.test.cjs` (50.07s). Separate lab governance test passed 1,081 assertions. Parallel execution exposed a timing-dependent pre-existing reader-history test; serial execution matches the repository CI approach. Existing jsdom console diagnostics remain; no claim of error-free real browser execution.
+- GitHub Actions exact-source regression run `41875600375` SUCCESS; lab governance run `41875670083` SUCCESS. PR-triggered regression `41875670071` was still running when inspected.
+- Remote blob hashes match the tested local source for all eight changed files. CSS parses; white text contrast is 6.78:1 on #17665e and 7.64:1 on #365b49. Preservation check retains all 522 original IDs, 304 link/action attribute occurrences and 282 original tracked paths. Current external-link inventory covers 96 source files and 297 destinations; destinations have NOT all been network-tested.
+- Push from shell lacked GitHub credentials. Native GitHub branch creation was initially rejected by automatic approval review for potential remote overwrite. Read-only GET of the exact remote ref returned 404; creation was then approved and succeeded. No existing branch overwritten, no force push.
+- RELEASE BLOCKER: automatic approval review rejected creation of a 1-hour Vercel preview protection-bypass link: preview testing authorization did not explicitly authorize that access-control change/audience. Do not call another tool to obtain a bypass or disable protection. Need owner's explicit permission for this one deployment's 1-hour access link, then test preview before release.
+- Safer local preview attempted: Python static server on port 8765; cloud browser returned ERR_CONNECTION_REFUSED. Chrome extension also requires originating browser context. These are environment limitations, not proof of website downtime. No mobile viewport, private workstation, actual exported PDF or device workflow validation claimed.
+- Exact production baseline remains `9b18b27c36715247da0ca506661010e21f8d4618`, deployment `dpl_9kFBfgDiN3UupGBhr62JYp1ZStf4`, root/www aliases. Old open PRs remain untouched.
+- Next action: obtain only the explicit 1-hour preview-access permission; inspect homepage/actions/library/booking at the preview without patient records, resolve visual issues, then authorized release and verify exact production commit/aliases. Remaining facts/integrations in the register are not certified complete.
+
+---
+
+# Latest active checkpoint — 4 November 2026
+
+- Owner explicitly authorized implementation, verification and deployment without routine confirmation, preserving all existing features/pages/URLs/links. Keep brief updates and disclose every release blocker.
+- Repository `drkulkarnipg-lang/doctor-at-home`; branch `fix/patient-experience-quality-20261104`; baseline/main `9b18b27c36715247da0ca506661010e21f8d4618`.
+- Vercel production domain lookup: deployment `dpl_9kFBfgDiN3UupGBhr62JYp1ZStf4`, READY, production, exact baseline SHA; aliases include root and www. This supersedes older quota/deployment notes below for that baseline only.
+- Read current register and open PRs. Existing PRs #143–#137 address workstation/requisition issues and remain separate; no blind merge. Current main includes recent workstation login/header fixes and stamp removal.
+- Live desktop browser observed the homepage. Confirmed excessive hero nesting/spacing pushes visit actions below the fold and Doctor Workstation button has dark text on teal.
+- Saved source preservation inventory: 522 existing IDs, 304 href/src/onclick/onchange occurrences, 282 tracked paths. New preservation check passes.
+- Implemented an additive screen-only CSS refinement, 38 explicit adjacent label associations, actions before translator in both DOM and visual order, and screen-only prescription-editor readability. Existing links/actions and A4 export rules retained.
+- Full regression started; results pending. No production source change yet. Next: finish regression, commit/sync review branch, obtain exact-source Vercel preview and inspect patient navigation/booking/library/prescription constraints before authorized release.
+- Local Chrome extension cannot be used from this conversation context; cloud browser works for public desktop inspection. No actual mobile viewport/device, authenticated patient records, PDF file handoff, payment or recipient receipt verified.
+- Experience facts remain unresolved: 31 overall / 29 allopathic / 15 GP / 16 ICU-RMO need chronology/overlap confirmation before publishing new claims. Do not invent qualifications or new clinical claims.
+
+---
+
 # Current resumable work checkpoint
 
 Updated: 1 November 2026, India time — source tree 820219a5a22ce089ae3701f9ac0cfb0920e99e16; docs-only main commit 27c7f910c56656ca8e500e2a0f153d7d95ae2172; Actions and Vercel status SUCCESS; device verification remains open.
