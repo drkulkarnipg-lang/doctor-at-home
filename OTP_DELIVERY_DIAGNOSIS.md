@@ -8,3 +8,7 @@ Verified gap: the existing UI says a code was sent although it has no delivery r
 Potential causes needing evidence: sender configuration/restrictions, provider email template using a Magic Link instead of a numeric token, delivery failure or filtering. These are not established diagnoses.
 
 Next action: connect Supabase for the website project; inspect relevant Auth request, SMTP/hook/template, error and delivery records. User can confirm receipt without sharing the code. Never request secrets in chat or bypass account verification.
+
+## Updated after Supabase connection
+
+Project matched production. Auth200/user_recovery_requested and confirmed-owner recovery_sent_at2026-11-04T19:10:21.409999Z verified without reading tokens. Owner confirms receipt of a Sign in link email; numericOTP receipt remains unverified. Supabase docs prescribe displaying{{ .Token }} in the relevant email template. Actual dashboard settings require secure dashboard sign-in; connector supports logs/database but no Auth config endpoint. No second send/password change performed.

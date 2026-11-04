@@ -1,3 +1,13 @@
+# OTP email content confirmed; provider connected — 5 November 2026 IST
+
+- Supabase connected successfully; project xqhhxnehrjkpyffdvxdm is ACTIVE_HEALTHY and production SUPABASE_URL matches. Do not repeat prior connector blocker.
+- Auth logs for19:05–19:13UTC show user_recovery_requested with request_completed200; configured owner has email_confirmed=true, recovery_sent_at2026-11-04T19:10:21.409999Z and no banned_until. No secret fields read; no second OTP requested.
+- Owner now confirms email arrives as a Sign in email/link and explicitly needs a numericOTP. Email receipt therefore confirmed by owner; existing template/token presentation is the next issue. Do not claim numericOTP delivered yet. Supabase docs require{{ .Token }} for numeric emailOTP; current provider template not yet inspected.
+- Connector supports database/logs, not Auth template/SMTP configuration. Dashboard template URL redirects to Supabase sign-in in cloud browser. Need secure dashboard authentication to inspect actual MagicLink/recovery template and preserve original before updating OTP-primary content. Do not alter passwords or generate replacement codes.
+- Next: secure dashboard sign-in choice, inspect actual email templates and expiration settings, add real provider token display while preserving useful links/branding, save only verified template, then one justified website OTP request after cooldown and owner receipt confirmation. Verification/new password stays with owner.
+
+---
+
 # OTP delivery investigation — 5 November 2026 IST
 
 - Current production maincb891203e2e2565b48eb78390b1967ac7d809c34, Vercel dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY, root/www aliases mapped. Language PR149 is released:83 checks (55.71s), CI41893557182 SUCCESS, exact preview isolated Library/Reader/OverviewEN/MR and English restoration; unsupportedHindi leaves state unchanged with notice. Full MR interface/further language service remains incomplete.
