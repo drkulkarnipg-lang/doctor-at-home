@@ -1,3 +1,12 @@
+# Review branch reconciliation and scheduled continuation — 5 November 2026 IST
+
+- Reverified main131a5768, production dpl_3x18ZNxwCpXH3N8XZCttAWJQE9eq READY with root/www aliases; main Actions41887603495 SUCCESS. PR145 remote aa7a8e32; other open PRs retained untouched.
+- Reconciled PR145 with main131a5768. Overlapping navigation/hero/CSS already matched released behaviour; retained scoped-language and unification changes. Kept current checkpoint history and incorporated the bounded release record; no feature removed.
+- Created enabled hourly continuation schedule with COUNT168 (seven days), timezone Asia/Kolkata. Schedule creation succeeded; inherited environment details/next-run time were not returned, so future run execution is not yet verified. Each run must detect other active work and avoid concurrent edits/releases.
+- Next: verify reconciled source and synchronise merge; then release independently verified public dialog accessibility fixes. Private clinical runtime/document changes remain gated on owner authentication and actual files. Do not release full PR145 without acceptance evidence.
+
+---
+
 # Published patient navigation; access authorised — 4 November 2026
 
 - Owner explicitly authorised one-hour preview access and continued incremental publication. This supersedes earlier preview-access blocker; do not ask again for the same task-scoped one-hour links. Owner workstation passkey/device approval remains pending and cannot be automated away.

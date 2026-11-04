@@ -1,5 +1,11 @@
 # Dr Kulkarni — permanent request and completion register
 
+## Patient-first incremental release — 4 November 2026
+
+- PATIENT-FIRST-20261104: source prepared on release/patient-first-navigation-20261104 from verified production222d0b4. Existing Booking/Library actions moved earlier; all seven tabs/URLs retained. CI/preview/release pending.
+- PR145 remains review-only, including unification, independent language and lazy PDF renderer. Exact head7a35748 regression CI passed. Public preview checks recorded in WORK_CHECKPOINT.md. Private and actual mobile QA incomplete.
+- Owner authorised one-hour preview links and continued incremental publishing; no repeat routine approval needed. Passkey device approval remains outside agent control.
+
 ## Permanent automatic task-register protocol — effective 2 November 2026
 
 **This file is the single source of truth for project work.** Do not create parallel personal checklists or ask the owner to repeat recorded requirements. At the start of every work session/conversation, read this register and `WORK_CHECKPOINT.md`, inspect current GitHub main/PRs/Actions and Vercel status, then resume the oldest highest-priority actionable item. Reconcile stale historical status against current evidence before acting.
@@ -14,7 +20,11 @@
 6. **No false completion:** Keep an item open if a provider quota, unavailable browser/device, unconfigured integration, missing owner action, real transaction, recipient receipt or clinical sign-off prevents its acceptance criteria from being verified. Record the precise blocker and the next safe action. Never bypass CI, branch protection, access controls, provider limits, payments, DNS or secrets.
 7. **Session handoff:** The first project action in a new conversation is to recover this register and checkpoint, verify live repository state, then continue from the recorded next action. Do not ask the owner to re-state the project or re-list known work.
 
-### Current access authorisation — 4 November 2026
+### Scheduled continuation — 5 November 2026 IST
+
+Hourly schedule enabled for168 runs; creation confirmed, future execution/environment not yet verified. Resume repository checkpoints and avoid concurrent edits. Reconciled PR145 with released main131a5768; tests pending for reconciled source.
+
+## Current access authorisation — 4 November 2026
 
 Owner authorised one-hour preview links for this continuing task and incremental publication of verified improvements. Earlier preview-access blockers are superseded; owner-device passkey/private-workflow acceptance remains pending. PR146 navigation is live; PR145 unification/language/runtime changes remain under review.
 
