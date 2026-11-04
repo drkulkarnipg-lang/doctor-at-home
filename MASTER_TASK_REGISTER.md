@@ -1,3 +1,4 @@
+<!-- OTP-DELIVERY-20261105 P1 BLOCKED ON PROVIDER ACCESS: one live configured-owner request accepted; SMTP/inbox delivery unverified; Supabase connection suggested/not connected. No password changed. Next: correlate Supabase Auth/template/SMTP logs, then fix verified cause. PR149 language release LIVE cb891203. -->
 <!-- LANGUAGE-RELEASE-20261105: isolated scoped language source; tests/preview/release pending. Full MR interface and further automatic languages remain incomplete, explicitly labelled. -->
 <!-- PDF-SHARE-FOCUS-20261105: source prepared from main4bbb67dd; test/preview/release pending. Automation enabled but recorded execution unavailable. -->
 <!-- Public-dialog release acceptance: source prepared5Nov2026IST; focus/preservation checks pass; full CI/browser/release pending. -->

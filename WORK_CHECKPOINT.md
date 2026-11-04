@@ -1,3 +1,15 @@
+# OTP delivery investigation — 5 November 2026 IST
+
+- Current production maincb891203e2e2565b48eb78390b1967ac7d809c34, Vercel dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY, root/www aliases mapped. Language PR149 is released:83 checks (55.71s), CI41893557182 SUCCESS, exact preview isolated Library/Reader/OverviewEN/MR and English restoration; unsupportedHindi leaves state unchanged with notice. Full MR interface/further language service remains incomplete.
+- Owner authorises one real password-reset email OTP request, only to configured clinic owner; no password changes by agent. Normal live Workstation > Create/change password with email OTP > Send email OTP clicked exactly once. Pending state became generic success message; no second request. No code/password read or entered; no password changed.
+- Source api/clinical-cloud.js password-otp-request uses configuredCLINIC_OWNER_EMAIL only, create_user:false, Supabase /auth/v1/otp; success UI follows sent.ok. Evidence supports app/provider request acceptance, NOT independent SMTP/inbox delivery verification. Environment metadata confirms production owner-email/auth settings exist; no secret values retrieved or exposed.
+- Vercel runtime query for /api/clinical-cloud over15m returned no matching log entries. Cannot infer absence of send/error from this. Supabase template/SMTP settings and Auth/delivery logs are not accessible through currently connected tools.
+- Plugin discovery confirmed Supabase, Gmail and Outlook uninstalled in this session. Suggested only Supabase as the smallest needed connection. It is NOT yet connected. Do not use browser fallback to evade this available sufficient provider connector, retrieve service secrets, alter auth settings blindly, or generate replacement codes.
+- BLOCKER: connect Supabase for the existing website project to inspect Auth email template, SMTP/SendEmailHook and delivery/error logs; ask owner only whether email arrived (never pasteOTP). A /otp request may use MagicLink vs numericOTP according to provider email template, but current template is unverified; this is a hypothesis, not diagnosed cause.
+- Next: after confirmed connection, correlate exactly one observed request with Supabase logs, inspect configured template/sender/cooldown without secrets, fix only verified cause, use a separate branch/tests/preview/release for any code change; request a further OTP only when cooldown permits and new verification is justified. Leave OTP/new-password entry to owner securely.
+
+---
+
 # Independent language release — 5 November 2026 IST
 
 - Owner reports language switching still incorrect. Verified main488b324a still runs old global synchronisation; scoped fixes remained only in PR145. Isolated language-only source from PR145 onto current main, leaving private clinical/date/PDF-runtime changes out.
