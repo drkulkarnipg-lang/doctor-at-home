@@ -1,3 +1,12 @@
+# Patient-first hierarchy — 4 November 2026
+
+- Owner requests end-to-end facility logic with booking and patient reading first. PATIENT_FIRST_JOURNEYS.md defines entries, inputs, outcomes, failures/recovery and remaining acceptance evidence.
+- Continued existing PR145 from verified remote dbad14f335eb56aa6e6d8fae04ab0053f079e7d0. No production changes. Reordered existing tabs to Overview/Booking/Library/Elderly/Search/Tools/FAQ and hero links to visit/library/consultation; all original destinations retained. CSS wraps labelled 44px navigation controls, two columns on mobile.
+- Focused navigation and preservation checks pass: all522 original IDs,304 link/action occurrences,282 paths retained. Frozen-source full regression:86/86 pass,0 fail,53.76s (/tmp/drkulkarni-qa/patient-first-final-regression.log). Initial run found obsolete consultation-second ordering assertion; updated to owner-requested reading priority, retaining consultation third. Existing jsdom diagnostics are not a clean-browser claim. Actual preview/mobile layout not verified; no perfection claim.
+- Existing preview-access permission and owner device/passkey blockers remain unchanged. Do not bypass either. Next: full suite, source sync, actual preview and private-workflow acceptance before release.
+
+---
+
 # Current unification and independent-language work — 4 November 2026
 
 - Owner added two binding requirements: (1) consistent dates and document creation/save/share/print behaviour throughout; (2) every translator must affect only its own section. This explicitly supersedes earlier whole-page translation/synchronized-selector requirements. Do not reintroduce global language propagation.
