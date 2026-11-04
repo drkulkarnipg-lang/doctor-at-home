@@ -1,3 +1,18 @@
+# Verified checkpoint — 4 November 2026, PR #144
+
+- Saved implementation: PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/144, branch `fix/patient-experience-quality-20261104`, source commit `0a01c6f621e32c07ade98827060e70e5c861b286`.
+- Vercel preview: `dpl_8HMkon4rtrXmj8PnoqMYLZv22PZH`, READY, exact source commit above, hostname `home-visiting-icu-doctor-pune-k3taorpol-drkulkarnipg-lang.vercel.app`. Preview protection is intact. No production release of this batch.
+- All 80 checks passed with `node --test --test-concurrency=1 tests/*.test.cjs` (50.07s). Separate lab governance test passed 1,081 assertions. Parallel execution exposed a timing-dependent pre-existing reader-history test; serial execution matches the repository CI approach. Existing jsdom console diagnostics remain; no claim of error-free real browser execution.
+- GitHub Actions exact-source regression run `41875600375` SUCCESS; lab governance run `41875670083` SUCCESS. PR-triggered regression `41875670071` was still running when inspected.
+- Remote blob hashes match the tested local source for all eight changed files. CSS parses; white text contrast is 6.78:1 on #17665e and 7.64:1 on #365b49. Preservation check retains all 522 original IDs, 304 link/action attribute occurrences and 282 original tracked paths. Current external-link inventory covers 96 source files and 297 destinations; destinations have NOT all been network-tested.
+- Push from shell lacked GitHub credentials. Native GitHub branch creation was initially rejected by automatic approval review for potential remote overwrite. Read-only GET of the exact remote ref returned 404; creation was then approved and succeeded. No existing branch overwritten, no force push.
+- RELEASE BLOCKER: automatic approval review rejected creation of a 1-hour Vercel preview protection-bypass link: preview testing authorization did not explicitly authorize that access-control change/audience. Do not call another tool to obtain a bypass or disable protection. Need owner's explicit permission for this one deployment's 1-hour access link, then test preview before release.
+- Safer local preview attempted: Python static server on port 8765; cloud browser returned ERR_CONNECTION_REFUSED. Chrome extension also requires originating browser context. These are environment limitations, not proof of website downtime. No mobile viewport, private workstation, actual exported PDF or device workflow validation claimed.
+- Exact production baseline remains `9b18b27c36715247da0ca506661010e21f8d4618`, deployment `dpl_9kFBfgDiN3UupGBhr62JYp1ZStf4`, root/www aliases. Old open PRs remain untouched.
+- Next action: obtain only the explicit 1-hour preview-access permission; inspect homepage/actions/library/booking at the preview without patient records, resolve visual issues, then authorized release and verify exact production commit/aliases. Remaining facts/integrations in the register are not certified complete.
+
+---
+
 # Latest active checkpoint — 4 November 2026
 
 - Owner explicitly authorized implementation, verification and deployment without routine confirmation, preserving all existing features/pages/URLs/links. Keep brief updates and disclose every release blocker.
