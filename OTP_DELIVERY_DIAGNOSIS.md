@@ -12,3 +12,7 @@ Next action: connect Supabase for the website project; inspect relevant Auth req
 ## Updated after Supabase connection
 
 Project matched production. Auth200/user_recovery_requested and confirmed-owner recovery_sent_at2026-11-04T19:10:21.409999Z verified without reading tokens. Owner confirms receipt of a Sign in link email; numericOTP receipt remains unverified. Supabase docs prescribe displaying{{ .Token }} in the relevant email template. Actual dashboard settings require secure dashboard sign-in; connector supports logs/database but no Auth config endpoint. No second send/password change performed.
+
+## Verified configuration fix
+
+Dashboard access succeeded. Actual MagicLinkOTP template lackedToken and only renderedConfirmationURL. Saved OTP-primary subject/body, preserving fallbacklink and originalbackup. Independent reload and completeeditor clipboard comparison exactly matched intendedHTML. One post-fix live request accepted after cooldown. Numeric-code inbox receipt awaits owner confirmation; no password changed.

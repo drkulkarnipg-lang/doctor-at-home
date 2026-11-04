@@ -1,3 +1,20 @@
+# Owner confirms post-fix email/code arrived — 5 November 2026 IST
+
+- After persistedOTP template fix and one post-change accepted request, owner replied aala, mi check karato (arrived, checking). Receipt is owner-confirmed; actual code verification/password change is still being checked by owner. Do not claim password reset completed or read/request code/password. Do not send another code while owner verifies this one.
+- Template backup, exact persisted comparison, HTML checks and post-change provider200/configuration-reload evidence remain below. Next: await owner report of verification success or exact non-secret error, then investigate that step only if needed.
+
+---
+
+# OTP-primary email template saved and post-change request accepted — 5 November 2026 IST
+
+- Dashboard access completed securely after explicit owner permission. Actual MagicLinkOTP template was link-only (subjectYour sign-in link, noToken). Original backed up; provider template updated to subjectYour verification code — Dr. Kulkarni with real{{ .Token }} prominent32px, bilingual instructions and preservedConfirmationURL fallback. Password unchanged.
+- Automatic save review initially rejected ambiguous Monaco DOM text (visual line numbers/stale rendered lines). Resolved safely by keyboardSelectAll/Copy and exactclipboard comparison against intended source; exactMatch=true. Never saved corrupted DOM text. Mouse save attempts did not persist; removed product banner and used keyboardEnter onSave. Fresh separate canonical tab/reload shows new subject/body; complete persisted source copied and compared exactMatch=true. Save disabled/Reset template now visible. This is verified provider configuration, not a Vercel source deployment.
+- Source HTML checks: exactlyone Token placeholder, one preservedConfirmationURL, parseableHTML, no script. Proof screenshot /workspace/scratch/drkulkarni-otp-template-saved-20261105.jpg. No generated code or password read; template literalToken placeholder is not a secret.
+- Requested exactlyone post-change OTP from normal live website Send emailOTP after prior request cooldown elapsed by>20minutes. Pending state completed with generic accepted success message at about19:37UTC. No repeat after that. Inbox receipt of numericOTP still needs owner confirmation; do not claim delivered yet.
+- Post-change Auth logs confirm configuration reload and user_recovery_requested request200, request_id01a1a810-de54-71c4-b580-d9ec47e4d461. Next: ask only whether newest email contains numericOTP (never pastecode), then owner enters code/new password securely in website. Existing recovery-link template/flow intentionally unchanged; no need to alter unrelated templates. Preserve originalbackup and sourcebranch PR150.
+
+---
+
 # Dashboard authenticated; actual OTP template defect identified — 5 November 2026 IST
 
 - Owner explicitly permitted Google→GitHub→Supabase dashboard login. Secure credential/device-verification flow completed; one OAuth-state expiry recovered with a clean selectedGitHub OAuth request. Fresh canonical project dashboard positively shows doctor-at-home production. No credential/token values copied into source; no password changed.
