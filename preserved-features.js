@@ -42,8 +42,47 @@ const LIVE_SITE_DRUGS = [
       { cat: "Topical Bedsore", generic: "Silver Sulfadiazine 1% + Chlorhexidine", brands: "Silvazine, Silverex Ionic, Rexil", timing: "External", freq: "BD", days: 14, advice: "Apply on ulcer after sterile NS wash" }
     ];
     function toggleChatbot() { document.getElementById('chatbotWindow').classList.toggle('hidden'); }
-    function openCredentialsModal() { document.getElementById('credentialsModal').classList.remove('hidden'); }
-    function closeCredentialsModal() { document.getElementById('credentialsModal').classList.add('hidden'); }
+    let credentialsReturnFocus = null;
+    let credentialsPreviousOverflow = '';
+    function openCredentialsModal() {
+      const modal = document.getElementById('credentialsModal');
+      if (modal.classList.contains('hidden')) {
+        credentialsReturnFocus = document.activeElement;
+        credentialsPreviousOverflow = document.body.style.overflow;
+      }
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('button').focus();
+    }
+    function closeCredentialsModal() {
+      const modal = document.getElementById('credentialsModal');
+      if (modal.classList.contains('hidden')) return;
+      modal.classList.add('hidden');
+      document.body.style.overflow = credentialsPreviousOverflow;
+      if (credentialsReturnFocus?.isConnected) credentialsReturnFocus.focus();
+      credentialsReturnFocus = null;
+    }
+    document.addEventListener('keydown', event => {
+      const modal = document.getElementById('credentialsModal');
+      if (!modal || modal.classList.contains('hidden')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        closeCredentialsModal();
+      } else if (event.key === 'Tab') {
+        const controls = [...modal.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')].filter(el => el.getClientRects().length);
+        const first = controls[0], last = controls[controls.length - 1];
+        if (!first) return;
+        if (event.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) {
+          event.preventDefault(); first.focus();
+        }
+      }
+    }, true);
+    document.addEventListener('click', event => {
+      if (event.target.id === 'credentialsModal') closeCredentialsModal();
+    });
     function sendChatMessage() {
       const input = document.getElementById('chatInput');
       const val = input.value.trim();
