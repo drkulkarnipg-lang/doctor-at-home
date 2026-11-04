@@ -1,3 +1,15 @@
+# Current release and remaining acceptance — 5 November 2026 IST
+
+- PR148 bounded PDF dialog source1fa295ad00a8bf10820644ed3929538c5f49a16f: all82 checks pass (55.20s), exact-head CI41891797705 SUCCESS. Initial stale source-file inventory failure corrected by regenerating97-file/297-destination snapshot. No link removed.
+- Exact preview dpl_FVUj5dXjMB7qbpTY2ZSC6x3CN7vu READY: dialysis PDF24KB Ready, initial close focus/body scroll lock, Shift+Tab to WhatsApp and Tab back to close, Escape restores original Share focus and body scroll. No recipient messaging/native sending performed.
+- PR148 merged main488b324a2a5c608815b25157265bcff7a1c7c39d; production dpl_EKgst6K5bz7CZfp4qoyNes89D87p READY. Live root tested same PDF Ready/focus/Escape restoration. Root/www map to exact same488b324a production deployment. Second live heart-failure guide23KB Ready; close-button restores original Share focus. Screenshot /workspace/scratch/drkulkarni-pdf-share-live-20261105.jpg.
+- Reconciled PR145 with released main488b324a. Keep existing scoped-language/unification/runtime changes and released dialog behaviour. Removed auto-merge duplicate credentials CSS by retaining equivalent existing rules; all86 reconciled-source checks pass (57.80s).
+- Existing automation peek: enabled hourly COUNT168; no recorded last_run/result or next_run_time, environment details null. Do not claim actual scheduled execution or create duplicate.
+- Remaining normal guide-download retry for Catheters and feeding tubes hit browser Input.dispatchMouseEvent protocol timeout with one visible enabled button. Download not verified. This is not evidence of bot detection or a site diagnosis. Do not bypass browser download safeguards or retry in a loop. Other five missing physical PDF acceptance items remain open.
+- Next: complete reconciled-source checks/sync; then public language/renderer acceptance where tools permit. Private clinical work requires owner passkey/device approval. Actual mobile/native share acceptance remains open. Agent cannot open a new chat automatically; exact checkpoint is durable continuation source.
+
+---
+
 # Latest continuation and public-dialog release — 5 November 2026 IST
 
 - Owner requests moving to a new chat if context fills. Agent cannot open a new chat automatically; resume by reading this latest checkpoint and current repository state. Never restart completed work. At quota/context interruption, synchronise exact source, tests, blockers and next action. Hourly168-run schedule was created; future execution/environment remains unverified.
