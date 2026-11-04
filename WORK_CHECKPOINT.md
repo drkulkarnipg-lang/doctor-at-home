@@ -1,3 +1,12 @@
+# Verified continuity update — 5 November 2026 IST
+
+- Owner subsequently replied done after testing the numeric OTP/password-change flow. Mark OTP delivery and password-change outcome OWNER-CONFIRMED; do not claim an independent signed-in browser verification. No additional OTP or password operation is required.
+- Fresh repository/production check: main cb891203e2e2565b48eb78390b1967ac7d809c34; exact-main Actions41894039573 SUCCESS; Vercel dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY with root/www aliases. PR149 section-language changes are live. Full authored interface coverage/further languages remain incomplete.
+- Open PR150 before this checkpoint b7ef7bd41fd070e4d52abc96eebfd5e666d5d639 holds template backup and delivery evidence; PR145 head5c12a4acdfdef68a55b6df97636b55fb007fcaee still contains unmerged clinical/runtime work. No active ownership marker or newer competing PR head observed. No deployment performed in this documentation-only update.
+- Main checkpoint/register still carry historical pending-release statements; this current verified section supersedes them. Next: reconcile main ledger through reviewed documentation PR150, then isolate remaining patient readability improvements and actual clinical/PDF acceptance. Preserve every feature/link; no changes to auth settings or patient records.
+
+---
+
 # Owner confirms post-fix email/code arrived — 5 November 2026 IST
 
 - After persistedOTP template fix and one post-change accepted request, owner replied aala, mi check karato (arrived, checking). Receipt is owner-confirmed; actual code verification/password change is still being checked by owner. Do not claim password reset completed or read/request code/password. Do not send another code while owner verifies this one.

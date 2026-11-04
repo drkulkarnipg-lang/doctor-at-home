@@ -1,3 +1,9 @@
+# Current verified delta — 5 November 2026 IST
+
+- OTP-DELIVERY-20261105: OWNER-CONFIRMED SUCCESS. Owner reports numeric email arrived and subsequently done after testing password change. No independent subsequent login claim; no further OTP requested.
+- PR146 navigation, PR147 credentials dialog, PR148 PDF share keyboard, PR149 independent language scopes: RELEASED. Current main cb891203; production dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY, root/www mapped; exact-main CI41894039573 SUCCESS. Historical pending-release notes below are superseded for these bounded changes only.
+- Remaining: complete interface language coverage, actual mobile/native-file/private clinical acceptance, PR145 clinical uniformity/runtime verification. Preserve existing backlog and no blanket completion.
+
 <!-- OTP RECEIPT OWNER-CONFIRMED5Nov2026IST: owner reports arrived/checking after template fix; verification/password-change success remains pending. No further OTP send. -->
 <!-- OTP5Nov2026IST: provider MagicLinkOTP template fixed/persisted exact-match verified; one post-fix live request accepted; numericOTP inbox receipt awaiting owner confirmation. No password change. Original backed up in auth-email-templates. -->
 <!-- OTP TEMPLATE DEFECT CONFIRMED5Nov2026IST: dashboard authenticated; Magic link body lackedToken. Original backed up; OTP-primary replacement prepared, save/persistence/real-email verification pending. -->
