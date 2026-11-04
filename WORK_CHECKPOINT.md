@@ -1,3 +1,13 @@
+# Current sign-in handoff — 4 November 2026
+
+- PR #144 bounded patient-experience improvements are LIVE at main `222d0b4b1c758ebf39425ae392e1ad380e93c094`; production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY; root/www exact mapping and root browser verification completed. The deployment itself has no unresolved blocker.
+- Secure browser-auth choice returned selected_option `passkey`. Custom domain `drkulkarnipg.com` displayed the existing instruction to use passkeys on `https://home-visiting-icu-doctor.vercel.app`; this is an observed custom-domain sign-in limitation. That alias is the same verified production deployment.
+- Opened the configured production alias and continued the already-selected passkey method. Page now reports “Waiting for your device passkey…”, sign-in control disabled. No successful login observed. Device approval/user takeover is required; do not read/enter credentials in chat, bypass auth, change credentials or enrol a new passkey without a separate explicit request.
+- Browser handoff should stay on the existing configured-origin sign-in tab. Resume with fresh visible state after user sign-in; only then test synthetic prescription editor, export/print/long-content cases. Do not read or modify existing real patient records for layout tests.
+- Remaining mobile-device QA, unresolved experience chronology and external-provider setup gates remain open. The next blocker is authentication, not a failed deployment.
+
+---
+
 # Production verification — 4 November 2026, PR #144 released
 
 - Owner granted the narrowly scoped one-hour preview-link access permission (“deto”). It succeeded. Initial use of an automation-bypass query redirected to login; the shareable-link parameter `_vercel_share` correctly opened the approved preview. Do not store the token here. Access expires automatically; production protection was not changed.
