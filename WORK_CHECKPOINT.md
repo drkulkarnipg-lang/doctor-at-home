@@ -1,3 +1,17 @@
+# Verified startup-performance checkpoint — 4 November 2026, PR #145
+
+- Source saved at `71bd0dda1840f49286fa5a3c13978a1fc768e274`, branch `fix/startup-resource-reliability-20261104`, PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/145 (draft).
+- All 81 software checks passed sequentially in 51.43s. Dedicated loader tests cover demand-only script insertion, concurrent request deduplication, ready renderer reuse, network-error retry, timeout, same-origin guard and preserved renderer URL. All 522 original IDs, 304 link/action attributes and 282 original tracked paths retained.
+- Current source inventory covers 97 source files and 297 extracted destinations. Original logo resource is copied byte-for-byte to existing logo.png URL; no link or fallback removed. Actual live HTTP/resource timing and render behavior are NOT yet verified.
+- Vercel preview `dpl_3Eg75iaDS1QAEroSowZxAjZCfV97` READY, exact source above, hostname `home-visiting-icu-doctor-pune-hqp8cbl6c-drkulkarnipg-lang.vercel.app`. New batch NOT LIVE. PR144 production remains `222d0b4...` / `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3`.
+- BROWSER QA BLOCKER: prior owner permission explicitly covered one earlier deployment's one-hour access link. Do not infer permission for this different preview. Need bounded explicit authorization for this preview (or one-hour links for subsequent previews of this project/task).
+- Safer offline source preview was prepared in scratch but opening file:///home/oai/share/doctor-perf-qa/index.html was rejected by browser security policy because file protocol is not allowed. Do not retry that file via alternate browser, raw CDP, indirect execution or another workaround. Local http://127.0.0.1 preview was previously connection-refused. Protected HTTPS preview is the appropriate authorized route.
+- Quality targets are in QUALITY_STANDARD.md; WCAG/Core Web Vitals targets do not imply certified compliance or measured Google/Amazon/MSD/ChatGPT-equivalent quality. No new clinical or security certification claim.
+- Workstation passkey remains waiting on user device approval, not signed in. Do not weaken authentication. Full prescription/PDF/private/mobile-device QA remains open.
+- Next: obtain narrow HTTPS-preview access permission, inspect actual initial resource loading and first PDF rendering/retry path, then authorized release and verify exact production/aliases. Do not publish this runtime-loading change based on mocked tests alone.
+
+---
+
 # Active startup-performance batch — 4 November 2026
 
 - Owner reiterated mandatory professional/international quality and continued work. Concrete targets and evidence limits are in QUALITY_STANDARD.md; no universal certification or zero-error claim.
