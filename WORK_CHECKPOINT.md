@@ -1,3 +1,15 @@
+# Production verification — 4 November 2026, PR #144 released
+
+- Owner granted the narrowly scoped one-hour preview-link access permission (“deto”). It succeeded. Initial use of an automation-bypass query redirected to login; the shareable-link parameter `_vercel_share` correctly opened the approved preview. Do not store the token here. Access expires automatically; production protection was not changed.
+- PR #144 merged at `222d0b4b1c758ebf39425ae392e1ad380e93c094`. Vercel production `dpl_7bEveXLtHdSYNbdxDTnU1X89faZ3` READY. Independent get_deployment lookups for both `drkulkarnipg.com` and `www.drkulkarnipg.com` resolve to that exact production commit/deployment.
+- Preview browser verified homepage at 1363×936: no horizontal overflow; Request/consultation/library and call actions visible; Doctor Workstation button is white on teal. Request CTA selects booking panel. New name/address labels accept synthetic inputs, which were cleared without sending anything. Library search “dialysis” gives 1 of 10 guides; Read opens article and Back returns. Existing translation controls and PDF/share actions remain present. No claims of clinical translation correctness.
+- Live root browser verified the new stylesheet, explicit prescription name label, white workstation-button text, no horizontal overflow and homepage appearance. Screenshot captured only for release proof; no patient data. Browser error sample contained extension metadata errors; no complete runtime error scan claimed.
+- All 80 sequential software checks pass; exact head `06ea7c14...` Actions runs `41876075060`, `41876075083`, `41876065088` SUCCESS. Existing preservation and contrast evidence below remains applicable. No medical calculations, credentials, data migrations, payment integrations or A4 export rules changed.
+- NEXT BLOCKER: actual Doctor Workstation/prescription/PDF browser testing requires the website's own login, independent of GitHub/Vercel connections. Live Doctor Workstation click opens the owner sign-in dialog. Username/password and passkey methods are visible. Use secure browserAuth for any credential collection; never request passwords/OTP in chat or weaken authentication. Mobile-device/viewport verification also remains open because this browser advertises no viewport capability.
+- UX-20261104 is released for the bounded improvements, not proof that the entire website, authenticated workflows, Indian prescription compliance, all external destinations, clinical governance or every backlog item is complete. Fact chronology and external-service setup items remain open in the register.
+
+---
+
 # Verified checkpoint — 4 November 2026, PR #144
 
 - Saved implementation: PR https://github.com/drkulkarnipg-lang/doctor-at-home/pull/144, branch `fix/patient-experience-quality-20261104`, source commit `0a01c6f621e32c07ade98827060e70e5c861b286`.
