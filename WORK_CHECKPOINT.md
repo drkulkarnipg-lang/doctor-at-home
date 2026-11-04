@@ -1,3 +1,14 @@
+# Published patient navigation; access authorised — 4 November 2026
+
+- Owner explicitly authorised one-hour preview access and continued incremental publication. This supersedes earlier preview-access blocker; do not ask again for the same task-scoped one-hour links. Owner workstation passkey/device approval remains pending and cannot be automated away.
+- PR146 merged from bounded branch release/patient-first-navigation-20261104, source ef84257ce9ca6e0e25ee59da74db4bb0df34b220, main131a5768c0659ec97fe9cf49025a0f83a1e110e5. Only tab/hero priority, wrapping44px navigation CSS and matching tests released. No PR145 clinical/language/PDF-runtime features released.
+- All80 exact bounded-source local checks passed (51.39s); exact-head PR Actions41887351417 SUCCESS. Exact-source preview dpl_33qVVLHKRnAbpUEbUF1CPeZoDWNk READY: all7 tabs exercised, one visible panel each; hero booking/library links worked; desktop44px controls/no horizontal overflow visually observed. Actual mobile-device QA remains open.
+- Production dpl_3x18ZNxwCpXH3N8XZCttAWJQE9eq READY at exact main131a5768; deployment aliases include drkulkarnipg.com and www.drkulkarnipg.com. Live root browser verified new tab/hero order and booking entry; settled overview panel inspected. Screenshot /workspace/scratch/drkulkarni-navigation-published-20261104.jpg is QA evidence, not tracked source.
+- PR145 stays draft at7a357483622b05e0072a7a221b4e681f25ba6770 before this documentation checkpoint. CI41886554432 SUCCESS. Its preview dpl_7C3hKrFmjcybBNq2avTHvhECJE42 browser checks confirmed qualifications focus/Escape, Library MR changes only Library while other four selectors stayEN, and dialysis public PDF-ready panel. These are preview-only, not production claims.
+- Next: reconcile PR145 with newly released main before future merge (shared navigation already released; preserve other source). Finish actual PDF renderer/private document, remaining guide downloads, mobile and full language coverage acceptance. Do not merge unverified private/runtime changes merely to accelerate publishing.
+
+---
+
 # Patient-first hierarchy — 4 November 2026
 
 - Owner requests end-to-end facility logic with booking and patient reading first. PATIENT_FIRST_JOURNEYS.md defines entries, inputs, outcomes, failures/recovery and remaining acceptance evidence.
