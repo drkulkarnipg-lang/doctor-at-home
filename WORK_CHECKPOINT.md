@@ -1,3 +1,11 @@
+# Public PDF-share keyboard batch — 5 November 2026 IST
+
+- Verified main4bbb67dd / production dpl_6mvgy3xcbA59TK59Z43cuAjSAuE1 READY and root/www aliases unchanged. Existing168-run hourly automation enabled; peek returns no recorded last run/result or next-run time. No duplicate task created; future execution not confirmed.
+- Isolated pdf-share-focus.js and regression from PR145 onto current main, with one added script reference after existing markup. Preserves rendering/download/share/cleanup and all URLs/actions. Adds initial focus, Tab containment excluding disabled/hidden controls, Escape/backdrop via original close handler, and opener focus/body-scroll restoration.
+- Source is not published yet. Initial full suite found stale inventory source-file list after the new script; regenerated97-file/297-destination inventory. Full rerun and exact-source CI/preview required before release. Other PR145 runtime/private/language work remains separate. Owner login/private clinical and actual mobile acceptance remain open.
+
+---
+
 # Public qualifications-dialog release — 5 November 2026 IST
 
 - Base main131a5768. Isolated credentials dialog semantics, initial focus, Tab/Shift+Tab containment, Escape/backdrop/close and focus/scroll restoration from PR145. Small-screen dialog scroll containment and44px close control added. All existing credentials, links and other features retained; no medical claims altered.

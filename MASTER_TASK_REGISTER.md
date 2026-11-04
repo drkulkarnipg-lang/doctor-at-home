@@ -1,3 +1,4 @@
+<!-- PDF-SHARE-FOCUS-20261105: source prepared from main4bbb67dd; test/preview/release pending. Automation enabled but recorded execution unavailable. -->
 <!-- Public-dialog release acceptance: source prepared5Nov2026IST; focus/preservation checks pass; full CI/browser/release pending. -->
 # Dr Kulkarni — permanent request and completion register
 
