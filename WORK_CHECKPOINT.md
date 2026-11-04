@@ -1,3 +1,12 @@
+# Dashboard authenticated; actual OTP template defect identified — 5 November 2026 IST
+
+- Owner explicitly permitted Google→GitHub→Supabase dashboard login. Secure credential/device-verification flow completed; one OAuth-state expiry recovered with a clean selectedGitHub OAuth request. Fresh canonical project dashboard positively shows doctor-at-home production. No credential/token values copied into source; no password changed.
+- Actual Magic link or OTP subject is Your sign-in link; body contains only ConfirmationURL link and NO Token placeholder. This confirms link-only template presentation explains owner's receivedSign-in email. Backed up original subject/body in auth-email-templates/magic-link-before-20261105.json.
+- Prepared OTP-primary subject Your verification code — Dr. Kulkarni and bilingual body using real{{ .Token }} at32px, preserving original ConfirmationURL fallback. Exact intended source is auth-email-templates/magic-link-otp.html. Editor visually verified; template NOT YET saved at this checkpoint.
+- Next: save and reopen to verify persistence; inspect Reset password template separately because Auth logs record recovery event; verify relevant template coverage before one justified post-change website request after cooldown. Owner enters any code/new password securely; numericOTP receipt confirmation still required. Do not read codes or fake delivery success.
+
+---
+
 # Dashboard authentication approval blocker — 5 November 2026 IST
 
 - Supabase connector is connected and working. Owner confirms receipt of Sign in-link email instead of numericOTP. One observed Auth request/recovery metadata verified; no secondOTP or password change.
