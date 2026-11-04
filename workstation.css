@@ -186,3 +186,9 @@ input,select,textarea{max-width:100%;font-variant-numeric:tabular-nums}
 #navDoctorBtn{background:#006a61!important;color:#fff!important;border:1px solid #006a61!important;border-radius:10px!important;padding:8px 12px!important;}
 #navDoctorBtn i{color:#fff!important;}
 #navDoctorBtn:hover,#navDoctorBtn:focus-visible{background:#00564f!important;color:#fff!important;}
+
+/* Doctor Workstation navigation: force readable white text in every state. */
+#navDoctorBtn,#navDoctorBtn:link,#navDoctorBtn:visited,#navDoctorBtn:hover,#navDoctorBtn:focus,#navDoctorBtn:active{color:#fff!important;background:#006a61!important;border-color:#006a61!important;text-shadow:none!important;opacity:1!important}#navDoctorBtn *{color:#fff!important}
+/* Lab requisition: empty boxes must have no faint line or inset shadow. */
+#pathSlipSheet input[type=checkbox]:not(:checked){appearance:none!important;-webkit-appearance:none!important;background:#fff!important;background-image:none!important;border:1.25px solid #64748b!important;box-shadow:none!important;outline:0!important;border-radius:2px!important}
+#pathSlipSheet input[type=checkbox]:checked{accent-color:#15803d!important;box-shadow:none!important}
