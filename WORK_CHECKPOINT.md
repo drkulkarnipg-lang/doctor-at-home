@@ -1,3 +1,12 @@
+# Dashboard authentication approval blocker — 5 November 2026 IST
+
+- Supabase connector is connected and working. Owner confirms receipt of Sign in-link email instead of numericOTP. One observed Auth request/recovery metadata verified; no secondOTP or password change.
+- Dashboard templates require separate browser authentication. Secure browserAuth choice returned GitHub for Supabase, then Google for GitHub. Immediately following selectedGoogle, getAXState was rejected by automatic approval review: inspecting the transition could expose/advance privateGoogle access without explicit verified permission. No Google page state read and no further auth action attempted. Do not bypass via another tab/API/session.
+- Required next user action: explicit permission to continue Google authentication solely for GitHub→Supabase dashboard access, then legitimate secure authentication. No credentials/OTP in chat. After authorised access, inspect real MagicLink/recovery template, preserve original, show real{{ .Token }} prominently, and perform one justified request after cooldown. Current template has not been changed; numericOTP delivery remains unverified.
+- Exact previous checkpoint/log evidence remains below. Continue from this blocker; do not repeat connector installation or claim delivery fixed.
+
+---
+
 # OTP email content confirmed; provider connected — 5 November 2026 IST
 
 - Supabase connected successfully; project xqhhxnehrjkpyffdvxdm is ACTIVE_HEALTHY and production SUPABASE_URL matches. Do not repeat prior connector blocker.
