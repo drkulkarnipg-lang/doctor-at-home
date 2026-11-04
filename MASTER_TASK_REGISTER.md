@@ -1,5 +1,11 @@
 # Dr Kulkarni — permanent request and completion register
 
+## Patient-first incremental release — 4 November 2026
+
+- PATIENT-FIRST-20261104: source prepared on release/patient-first-navigation-20261104 from verified production222d0b4. Existing Booking/Library actions moved earlier; all seven tabs/URLs retained. CI/preview/release pending.
+- PR145 remains review-only, including unification, independent language and lazy PDF renderer. Exact head7a35748 regression CI passed. Public preview checks recorded in WORK_CHECKPOINT.md. Private and actual mobile QA incomplete.
+- Owner authorised one-hour preview links and continued incremental publishing; no repeat routine approval needed. Passkey device approval remains outside agent control.
+
 ## Permanent automatic task-register protocol — effective 2 November 2026
 
 **This file is the single source of truth for project work.** Do not create parallel personal checklists or ask the owner to repeat recorded requirements. At the start of every work session/conversation, read this register and `WORK_CHECKPOINT.md`, inspect current GitHub main/PRs/Actions and Vercel status, then resume the oldest highest-priority actionable item. Reconcile stale historical status against current evidence before acting.

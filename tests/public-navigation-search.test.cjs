@@ -11,7 +11,8 @@ assert.equal(form.querySelector('button[type="submit"]')?.textContent.trim(),'Se
 const heroLinks=[...w.document.querySelectorAll('.hero-primary-actions a')];
 assert.ok(heroLinks.length>=3,'Home-visit, consultation and library actions remain visible');
 assert.match(heroLinks[0].textContent,/Request a home visit/,'Home visit is the first hero action.');
-assert.match(heroLinks[1].textContent,/Online consultation/,'Online consultation is the second hero action.');
+assert.match(heroLinks[1].textContent,/health library/,'Patient reading is the second hero action.');
+assert.match(heroLinks[2].textContent,/Online consultation/,'Online consultation remains the third hero action.');
 for(const link of heroLinks){const href=link.getAttribute('href');assert.ok(href,'Hero action needs a destination');if(href.startsWith('#'))assert.ok(w.document.getElementById(href.slice(1)),'Hero action target '+href+' must exist');}
 for(const href of ['#bookingSection','#wikiSection','#onlineConsultationNotice','#patientToolsSection','#patientFaq','#elderlySection'])assert.ok(w.document.getElementById(href.slice(1)),'Public navigation target '+href+' must exist');
 assert.ok(w.document.querySelector('.hero-contact-actions a[href^="tel:"]'),'Phone action must open the dialer');
