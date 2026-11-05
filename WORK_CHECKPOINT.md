@@ -1,3 +1,12 @@
+# PDF-share control target refinement — 5 November 2026 IST
+
+- Reverified main663b8421e6ef2dbb4cd579549217cfd0f209695c / production dpl_AzKhquAW7GPKJRXhfeh2YT5X5HcL READY with root/www aliases. PR150 is merged; OTP/password outcome remains owner-confirmed. No newer competing review head or active-run marker observed.
+- Bounded CSS-only change adds44px minimum PDF-share actions/close target and consistent3px focus-visible outline under @media screen. Existing CSS retained byte-for-byte before appended rules; document export/print geometry, links and action handlers unchanged.
+- Source inspection confirms close previously used only5px11px padding. Actual preview/browser geometry and keyboard visual acceptance remain pending; do not call this production-ready or merge until verified. Relevant CI must pass for exact source.
+- Next: inspect new PR exact-source CI and protected preview, exercise PDF-ready dialog, measure44px close target and keyboard focus outline, then authorised bounded release. Remaining full language/private clinical/mobile/device acceptance stays open.
+
+---
+
 # Verified continuity update — 5 November 2026 IST
 
 - Owner subsequently replied done after testing the numeric OTP/password-change flow. Mark OTP delivery and password-change outcome OWNER-CONFIRMED; do not claim an independent signed-in browser verification. No additional OTP or password operation is required.
