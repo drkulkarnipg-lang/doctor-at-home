@@ -1,7 +1,7 @@
-/* Interactive service FAQ. No external AI model and no patient-chat storage. */
+/* Patient website navigation with local shortcuts and a server-side AI fallback. */
 (()=>{'use strict';const $=id=>document.getElementById(id),topics=[['Booking','booking'],['Fees','fees'],['Reports','reports'],['Articles','articles'],['PDF sharing','pdf']];
 function add(text,who='assistant',actions=[]){const el=document.createElement('div');el.className='helper-message '+who;const p=document.createElement('p');p.textContent=text;el.append(p);if(actions.length){const area=document.createElement('div');area.className='helper-actions';for(const a of actions){const b=document.createElement(a.url?'a':'button');b.textContent=a.label;if(a.url){b.href=a.url;b.target='_blank';b.rel='noopener noreferrer';}else{b.type='button';b.onclick=a.run;}area.append(b);}el.append(area);}$('chatMessages').append(el);$('chatMessages').scrollTop=$('chatMessages').scrollHeight;while($('chatMessages').children.length>40)$('chatMessages').firstChild.remove();}
-function go(id){window.switchWorkspace('public');$(id)?.scrollIntoView({behavior:'smooth',block:'start'});$('chatbotWindow').classList.add('hidden');}
+function go(id){window.switchWorkspace('public');const target=$(id),panel=target?.closest('[data-public-panel]');if(panel&&window.switchPublicTab)window.switchPublicTab(panel.id,{hashTarget:id,focusTarget:target});else target?.scrollIntoView({behavior:'smooth',block:'start'});$('chatbotWindow').classList.add('hidden');}
 const action=(label,id)=>({label,run:()=>go(id)}),contact={label:'Contact doctor',url:'https://wa.me/919561394341'};
 const AI_ENDPOINT='https://xqhhxnehrjkpyffdvxdm.supabase.co/functions/v1/patient-site-assistant';
 const SUPABASE_PUBLIC_KEY='sb_publishable_OFMVXJ9KlVwUlmcsItX9jw_Sk0dnGy6';
@@ -21,7 +21,8 @@ if(/report|अहवाल|तपासण/.test(q)){add('Keep a clear PDF or ph
 if(/gps|address|location|पत्ता|लोकेशन/.test(q)){add('If GPS is unavailable, enter the full address, building, floor, flat and nearby landmark. Booking uses GPS only after you grant permission.','assistant',[action('Booking and address','bookingSection')]);return;}
 if(/article|library|education|लेख|वाचन/.test(q)){add('Explore the Health library and Patient guidance library. Article PDF download and sharing options let you keep or send the guidance.','assistant',[action('Health library','wikiSection'),action('Patient articles','publicGuidanceSection')]);return;}
 if(/medicine|dose|treatment|diagnos|औषध|डोस|उपचार|आजार/.test(q)){add('Individual diagnosis and medicine doses require your doctor. I can help with booking, fees, reports, articles and using the website.','assistant',[contact]);return;}
-const words=q.split(/\s+/).filter(w=>w.length>2),faq=typeof serviceFaq!=='undefined'?serviceFaq:[],ranked=faq.map(f=>({f,n:words.filter(w=>(f.q+' '+f.keywords).toLowerCase().includes(w)).length})).sort((a,b)=>b.n-a.n);if(ranked[0]?.n>0){add(ranked[0].f.a);return;}requestAi(input).then(data=>add(data.reply)).catch(error=>{
+if(/\blanguage\b|भाषा/.test(q)){add('Use Language / भाषा in the website header. The Health Library also has its own language control.','assistant',[action('Open Health Library','wikiSection')]);return;}
+const words=q.split(/\s+/).filter(w=>w.length>2),faq=typeof serviceFaq!=='undefined'?serviceFaq:[],ranked=faq.map(f=>({f,n:words.filter(w=>(f.q+' '+f.keywords).toLowerCase().includes(w)).length})).sort((a,b)=>b.n-a.n);if(ranked[0]?.f.q.toLowerCase().trim()===q){add(ranked[0].f.a);return;}requestAi(input).then(data=>add(data.reply)).catch(error=>{
   if(error.code==='AI_SETUP_REQUIRED')add('AI setup is not complete yet. The website shortcuts still work. The clinic owner needs to add the AI provider secret in Supabase before AI-generated navigation answers can start.');
   else add(error.message||'AI help is temporarily unavailable. Please use the shortcuts below or contact the clinic.');
 });}
