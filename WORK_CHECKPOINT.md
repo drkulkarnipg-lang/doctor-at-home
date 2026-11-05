@@ -1,3 +1,7 @@
+# Pointer-trigger focus correction — 5 November 2026 IST
+
+Actual preview a5a1e354 still returned focus to Library panel. Prior deferred restoration alone did not pass acceptance. Guide-card click now explicitly passes event.currentTarget through openWikiModal/showArticle so the originating control is retained independently of activeElement. CI and browser retest pending. Do not publish yet. Next verify exact updated preview Close and browser Back focus, cover published-article triggers, then mobile/all-guide checks.
+
 # Reader focus correction — 5 November 2026 IST
 
 Implementation 8ff184986c7be9d1050176d7d8e659a33c1beecd defers trigger focus restoration until synchronous popstate routing completes, only for a pending reader close. Existing immediate restoration remains for non-history closes. Added regression simulating a later router focusing the Library panel. CI and exact preview retest pending; do not merge until successful. Desktop wheel scrolling previously verified 632px. Next verify close focus with all production scripts in preview, then mobile reader/all guide acceptance. No production release in this step.
