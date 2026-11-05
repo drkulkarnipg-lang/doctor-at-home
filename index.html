@@ -1781,12 +1781,14 @@ body{
 
       let medText = "";
       document.querySelectorAll('#rxTableBody tr').forEach((r, idx) => {
-        const medName = r.cells[1].querySelector('input').value;
-        const timing = r.cells[2].querySelector('input').value;
-        const freq = r.cells[3].querySelector('input').value;
-        const days = r.cells[4].querySelector('input').value;
-        const note = r.cells[5].querySelector('input').value;
-        if(medName.trim()) medText += `\n${idx + 1}. ${medName} | Dose: ${freq} (${timing}) for ${days} days ${note ? ' | ' + note : ''}`;
+        const [medicine, strength, frequency, duration, instructions] = [...r.querySelectorAll('input')].map(input => input.value.trim());
+        const timing = r.querySelector('select')?.selectedOptions[0]?.value
+          ? r.querySelector('select').selectedOptions[0].textContent.trim()
+          : '';
+        if (medicine) {
+          const details = [strength, frequency, timing, duration, instructions].filter(Boolean);
+          medText += '\n' + (idx + 1) + '. ' + [medicine, ...details].join(' | ');
+        }
       });
 
       return `DR. PRAMOD G. KULKARNI (BAMS, PGDEMS, MCIM: I-24809-A-1)

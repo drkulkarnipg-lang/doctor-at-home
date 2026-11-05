@@ -16,6 +16,7 @@
  function close(){ticket++;$('pdfShareDialog').hidden=true;release();}
  window.shareDocumentPdf=async(id,name,options={})=>{const current=++ticket;release();const direct=options.direct===true;const recipientPhone=String(options.recipientPhone||'').replace(/\D/g,'');$('pdfShareTitle').textContent=id==='rxSheet'?'Share prescription':id==='intakeDocument'?'Share pre-visit history':'Share document as PDF';const attachments=Array.isArray(options.attachments)?options.attachments.filter(f=>typeof File!=='undefined'&&f instanceof File):[];activeAttachments=attachments;$('pdfShareDialog').hidden=direct;$('pdfShareStatus').textContent='Preparing your PDF on this device…';$('pdfShareError').textContent='';$('pdfShareHelp').textContent='';$('pdfNativeShare').disabled=true;$('pdfNativeShare').hidden=false;$('pdfDownload').disabled=true;
   try{const file=await prepare(id,datedName(name));if(current!==ticket)return;activeFile=file;activeUrl=URL.createObjectURL(file);$('pdfDownload').disabled=false;const shareFiles=[file,...attachments];const can=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:shareFiles}));$('pdfNativeShare').disabled=!can;$('pdfNativeShare').hidden=!can;$('pdfShareStatus').textContent=file.name+' · '+Math.round(file.size/1024)+' KB'+(attachments.length?' · '+attachments.length+' attached file(s)':'')+' · Ready';$('pdfShareHelp').textContent=can?'Choose WhatsApp, email, Drive or another app offered by your device. Verify the recipient and attached files before sending.':(id==='intakeDocument'?'1. Download the complete history PDF. 2. Choose “Open WhatsApp to doctor”. 3. In that chat, attach the PDF'+(attachments.length?' and the selected original files':'')+'. The website does not upload or auto-attach files.':id==='rxSheet'?'1. Download the prescription PDF. 2. Choose “Open WhatsApp to share PDF” and select the patient. 3. Attach the downloaded PDF in that chat. The website cannot attach it automatically.':'1. Download the PDF. Open WhatsApp, select the recipient, and attach the PDF'+(attachments.length?' and the original prescription/discharge files':'')+' separately. The WhatsApp link cannot attach files automatically.');if(id==='intakeDocument'){const patientName=$('bkPatName')?.value?.trim()||'';const note='Pre-visit patient history'+(patientName?' for '+patientName:'')+'. I am attaching the complete history PDF'+(attachments.length?' and the selected original documents':'')+'. Please confirm receipt and visit availability.';$('pdfWhatsApp').href='https://wa.me/919561394341?text='+encodeURIComponent(note);$('pdfWhatsApp').textContent='Open WhatsApp to doctor';$('pdfWhatsApp').target='_blank';$('pdfWhatsApp').rel='noopener noreferrer';}else if(id==='rxSheet'){const patientName=$('rxPatName')?.value?.trim()||'the patient';const note='Prescription for '+patientName+'. I will attach the prescription PDF separately. Please review the attached prescription.';const recipient=recipientPhone.length>=10?'phone=91'+recipientPhone.slice(-10)+'&':'';$('pdfWhatsApp').href='https://api.whatsapp.com/send?'+recipient+'text='+encodeURIComponent(note);$('pdfWhatsApp').textContent='Open WhatsApp to share PDF';$('pdfWhatsApp').target='_blank';$('pdfWhatsApp').rel='noopener noreferrer';}else{$('pdfWhatsApp').href='https://api.whatsapp.com/send?text='+encodeURIComponent('Patient guidance from Dr. Pramod G. Kulkarni. I will attach the PDF separately.');$('pdfWhatsApp').textContent='Open WhatsApp';}if(direct&&can){try{await navigator.share({files:shareFiles,title:file.name});if(current===ticket){$('pdfShareDialog').hidden=true;release();window.showToast?.('PDF passed to the selected sharing app.');}return;}catch(shareError){if(shareError.name==='AbortError'){if(current===ticket)window.showToast?.('Sharing cancelled. No document was sent.');return;}if(current===ticket){$('pdfShareDialog').hidden=false;$('pdfShareError').textContent='Direct sharing was unavailable; use the ready PDF below.';}}}else if(direct){$('pdfShareDialog').hidden=false;}}catch(e){if(current===ticket){$('pdfShareDialog').hidden=false;$('pdfShareStatus').textContent='PDF not ready';$('pdfShareError').textContent=e.message;$('pdfShareHelp').textContent='Use the document’s Print button and choose Save as PDF.';}}};
+ window.prepareClinicalDocumentPdf=(id,name)=>prepare(id,datedName(name));
  window.exportToPdf=async(id,name)=>{try{const file=await prepare(id,datedName(name)),url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}catch(e){window.showToast?.(e.message);}};
  const selected=g=>g==='clinical'?'cdoc-'+$('clinDocSelect').value:'cert-'+$('certTypeSelect').value;
  function dateStamp(){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));return p.year+'-'+p.month+'-'+p.day;}
@@ -49,12 +50,136 @@ const markup=`<section id="viewShareDesk" class="hidden share-desk space-y-5" ar
 </div>
 <section class="share-desk-card share-desk-any"><div><span class="share-desk-icon">📎</span><h3>Share any file from this device</h3><p>Choose a PDF, image, report or other file. It stays on this device until you select a sharing app and recipient.</p></div><input type="file" id="shareDeskFile" aria-label="Choose a file to share"><button type="button" id="shareDeskAnyButton" onclick="shareDeskAnyFile()">Share selected file</button><p id="shareDeskStatus" role="status" aria-live="polite">No file selected.</p></section>
 <p class="share-desk-safety"><strong>Privacy:</strong> no public link is created and no patient document is uploaded automatically.</p></section>`;
+const cloudDocuments={
+  rx:{id:'rxSheet',name:'Prescription',type:'prescription'},
+  path:{id:'pathSlipSheet',name:'Laboratory_Requisition',type:'lab_requisition'},
+  rad:{id:'radSlipSheet',name:'Radiology_Requisition',type:'radiology_requisition'},
+  invoice:{id:'invoiceSheet',name:'Invoice_Receipt',type:'invoice'}
+ };
+const cloudCertificates={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
+function addInlineCloudActions(){
+ const targets=[
+  ...Object.entries(cloudDocuments),
+  ...Object.entries(cloudCertificates).map(([kind,[id,name,type]])=>['certificate:'+kind,{id,name,type}])
+ ];
+ for(const [kind,{id,name}] of targets){
+  const sheet=document.getElementById(id);
+  if(!sheet||sheet.querySelector('[data-inline-cloud-status]'))continue;
+  const controls=document.createElement('div');
+  controls.className='no-print flex flex-wrap items-center gap-2 border-t border-slate-200 pt-3 mt-4';
+  controls.setAttribute('role','group');
+  controls.setAttribute('aria-label','Document actions');
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='research-upload min-h-[44px]';
+  button.textContent='Save to private cloud';
+  button.addEventListener('click',()=>kind==='rx'
+   ? window.PrescriptionActions.saveToPrivateCloud()
+   : window.saveDeskDocument(kind,button));
+  const exportButton=document.createElement('button');
+  exportButton.type='button';
+  exportButton.className='research-upload min-h-[44px]';
+  exportButton.textContent='Download or share PDF';
+  exportButton.addEventListener('click',()=>kind==='rx'
+   ? window.PrescriptionActions.exportPdf()
+   : window.shareDocumentPdf(id,name));
+  const status=document.createElement('p');
+  status.setAttribute('role','status');
+  status.setAttribute('data-inline-cloud-status','');
+  controls.append(button,exportButton,status);
+  sheet.append(controls);
+ }
+}
+function addVaultBrowser(desk){
+ const section=document.createElement('section');
+ section.className='share-desk-card no-print';
+ section.innerHTML='<h3>Saved cloud documents</h3><button type="button">Load saved documents</button><p role="status"></p><ul></ul>';
+ const button=section.querySelector('button');
+ const status=section.querySelector('[role="status"]');
+ const list=section.querySelector('ul');
+ button.onclick=async()=>{
+  list.replaceChildren();
+  button.disabled=true;
+  status.textContent='Loading saved documents…';
+  try{
+   const {documents}=await window.ClinicCloud.listDocuments();
+   for(const doc of documents){
+    const row=document.createElement('li');
+    const open=document.createElement('button');
+    open.type='button';
+    open.textContent='Get file link';
+    row.append(document.createTextNode(doc.title+' · '+new Date(doc.created_at).toLocaleDateString('en-IN',{timeZone:'Asia/Kolkata'})+' '),open);
+    open.onclick=async()=>{
+     open.disabled=true;
+     try{
+      const {url}=await window.ClinicCloud.downloadDocument(doc.id);
+      const link=document.createElement('a');
+      link.href=url;
+      link.target='_blank';
+      link.rel='noopener noreferrer';
+      link.textContent='Open saved file (link expires in 90 seconds)';
+      open.replaceWith(link);
+      link.focus();
+      window.setTimeout(()=>{if(link.isConnected)link.replaceWith(open);},90000);
+     }catch(error){status.textContent=error.message||'Could not open the saved document.';}
+     finally{open.disabled=false;}
+    };
+    list.append(row);
+   }
+   status.textContent=documents.length?documents.length+' recent saved documents.':'No saved documents found.';
+  }catch(error){status.textContent=error.message||'Could not load saved documents.';}
+  finally{button.disabled=false;}
+ };
+ desk.append(section);
+}
+function addFormsCentre(desk){
+ const heading=desk.querySelector('.share-desk-heading');
+ heading.querySelector('.section-eyebrow').textContent='Doctor Workstation';
+ heading.querySelector('h2').textContent='Forms Centre';
+ heading.querySelector('p').textContent='Choose a form to fill or edit. Find saved files below.';
+ const picker=document.createElement('form');
+ picker.className='flex flex-wrap items-center gap-2';
+ picker.innerHTML='<label for="formsCentreSelect">Choose a form</label><select id="formsCentreSelect" required><option value="">Select a document</option></select><button type="submit" class="research-upload">Open editor</button>';
+ const select=picker.querySelector('select');
+ const entries=[
+  ['Prescription','rxPad'],['Invoice / Receipt','invoice'],
+  ['Lab Requisition','pathReq'],['Radiology Requisition','radReq'],
+  ...[...document.querySelectorAll('#clinDocSelect option')].map(option=>[option.textContent.trim(),'clinicalCertificates','clinDocSelect',option.value]),
+  ...[...document.querySelectorAll('#certTypeSelect option')].map(option=>[option.textContent.trim(),'legalForms','certTypeSelect',option.value])
+ ];
+ entries.forEach(([label],index)=>select.add(new Option(label,String(index))));
+ picker.onsubmit=event=>{
+  event.preventDefault();
+  if(select.value==='')return;
+  const [,tab,selector,value]=entries[Number(select.value)];
+  window.switchDocTab(tab);
+  if(selector){
+   const choice=document.getElementById(selector);
+   choice.value=value;
+   choice.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+ };
+ const sharing=document.createElement('details');
+ const summary=document.createElement('summary');
+ summary.textContent='Sharing and file tools';
+ sharing.append(summary);
+ for(const child of [...desk.children])if(child!==heading)sharing.append(child);
+ desk.append(picker);
+ addVaultBrowser(desk);
+ desk.append(sharing);
+}
 function build(){
+ addInlineCloudActions();
  if(document.getElementById('viewShareDesk'))return;
  const nav=document.querySelector('.doctor-tabs'),anchor=document.getElementById('tabSet'),launch=document.getElementById('aiLaunchBar');
  if(!nav||!launch)return;
- const b=document.createElement('button');b.type='button';b.id='tabShareDesk';b.className='px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl';b.textContent='📤 Share Desk';b.addEventListener('click',()=>window.switchDocTab('shareDesk'));nav.insertBefore(b,anchor||null);
+ const b=document.createElement('button');b.type='button';b.id='tabShareDesk';b.className='px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl';b.textContent='Forms Centre';b.addEventListener('click',()=>window.switchDocTab('shareDesk'));nav.insertBefore(b,anchor||null);
  const holder=document.createElement('div');holder.innerHTML=markup;launch.parentNode.insertBefore(holder.firstElementChild,launch);
+ addFormsCentre(document.getElementById('viewShareDesk'));
+ for(const id of ['tabRx','tabInvoice','tabPath','tabRad','tabCertificates','tabLegal']){
+  const button=document.getElementById(id);
+  if(button)button.style.display='none';
+ }
  const original=window.switchDocTab;
  if(typeof original==='function'&&!original.__shareDeskWrapped){const wrapped=function(tabId){const desk=document.getElementById('viewShareDesk');if(tabId!=='shareDesk')desk?.classList.add('hidden');const result=original.apply(this,arguments);if(tabId==='shareDesk'){desk?.classList.remove('hidden');window.shareDeskLoadArticles?.();}return result;};wrapped.__shareDeskWrapped=true;window.switchDocTab=wrapped;}
  window.shareDeskLoadArticles?.();
@@ -68,21 +193,17 @@ window.shareDeskAnyFile=async function(){const input=document.getElementById('sh
 
 window.saveDeskDocument=async function(kind,button){
  const cloud=window.ClinicCloud;
- const status=document.getElementById('shareDeskStatus');
+ const status=button?.parentElement?.querySelector('[data-inline-cloud-status]')||document.getElementById('shareDeskStatus');
  const say=(message)=>{if(status)status.textContent=message;window.showToast?.(message);};
  if(!cloud||typeof cloud.uploadDocument!=='function'){say('Private cloud vault is unavailable. No document was uploaded.');return;}
  if(!cloud.isSignedIn?.()||!window.WorkstationAuth?.isOwnerSession?.()){say('Sign in to the Doctor Workstation first. No document was uploaded.');window.WorkstationAuth?.open();return;}
- const docs={
-  rx:{id:'rxSheet',name:'Prescription',type:'prescription'},
-  path:{id:'pathSlipSheet',name:'Laboratory_Requisition',type:'lab_requisition'},
-  rad:{id:'radSlipSheet',name:'Radiology_Requisition',type:'radiology_requisition'},
-  invoice:{id:'invoiceSheet',name:'Invoice_Receipt',type:'invoice'}
- };
- let doc=docs[kind];
- if(kind==='certificate'){
-  const type=document.getElementById('shareDeskCertificate')?.value||'';
-  const choices={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
-  const v=choices[type];if(v)doc={id:v[0],name:v[1],type:v[2]};
+ let doc=cloudDocuments[kind];
+ const certificateKey=kind==='certificate'
+  ? document.getElementById('shareDeskCertificate')?.value
+  : kind.startsWith('certificate:') ? kind.slice('certificate:'.length) : '';
+ if(certificateKey&&Object.hasOwn(cloudCertificates,certificateKey)){
+  const [id,name,type]=cloudCertificates[certificateKey];
+  doc={id,name,type};
  }
  if(kind==='article'){
   const id=document.getElementById('shareDeskArticle')?.value||'';
@@ -94,7 +215,7 @@ window.saveDeskDocument=async function(kind,button){
  if(!window.confirm('This PDF may contain confidential patient health information. Save it to the clinic owner’s private cloud vault only if you are authorised to store this record. Continue?'))return;
  if(button){button.disabled=true;button.setAttribute('aria-busy','true');}
  try{
-  const file=await prepare(doc.id,datedName(doc.name));
+  const file=await window.prepareClinicalDocumentPdf(doc.id,doc.name);
   if(file.size>7864320)throw Error('The PDF exceeds the private-vault 7.5 MB limit.');
   if(!window.crypto?.subtle)throw Error('Secure SHA-256 verification is unavailable in this browser.');
   const bytes=new Uint8Array(await file.arrayBuffer());
