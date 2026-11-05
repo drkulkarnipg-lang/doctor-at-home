@@ -1,3 +1,7 @@
+# Focus acceptance still failing — 5 November 2026 IST
+
+Actual preview f4c61272 (dpl_A6Q3PoR49SWuqZG1oz1MtQHeRZQC) Close retest still leaves activeElement at SECTION.public-portal-panel, even with explicit currentTarget. Do not claim fixed or publish. Exact-head CI42024355103 was pending at initial lookup. Next reproduce locally with all scripts and event-order instrumentation before further changes; investigate panel routing and trigger connectivity rather than guessing another delay. Published article read handlers in preserved-features.js also still omit the explicit trigger. Source corrections remain unverified. Desktop wheel scroll evidence remains valid. No release.
+
 # Pointer-trigger focus correction — 5 November 2026 IST
 
 Actual preview a5a1e354 still returned focus to Library panel. Prior deferred restoration alone did not pass acceptance. Guide-card click now explicitly passes event.currentTarget through openWikiModal/showArticle so the originating control is retained independently of activeElement. CI and browser retest pending. Do not publish yet. Next verify exact updated preview Close and browser Back focus, cover published-article triggers, then mobile/all-guide checks.
