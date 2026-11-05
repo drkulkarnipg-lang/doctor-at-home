@@ -196,7 +196,18 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 1fr;
   }
-  .site-header .portal-nav [role="tab"] { min-width: 0; text-align: center; }
+  .site-header .portal-nav [role="tab"] {
+    min-width: 0;
+    text-align: center;
+    border: 1px solid #788f9f !important;
+    background: #fff !important;
+  }
+  .site-header .portal-nav [role="tab"][aria-selected="true"] {
+    border-color: #315b7b !important;
+    background: #e1eef8 !important;
+    box-shadow: inset 0 -3px #315b7b;
+  }
+  .site-header .portal-nav [role="tab"]:hover { background: #ebf3f9 !important; }
   .site-header .portal-nav [role="tab"]:focus-visible {
     outline: 3px solid #215e53 !important;
     outline-offset: 2px !important;

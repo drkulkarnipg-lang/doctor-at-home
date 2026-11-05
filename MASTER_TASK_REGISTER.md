@@ -1,3 +1,8 @@
+# Patient tab outline request — 5 November 2026 IST
+
+- NAV-OUTLINE-20261105 — PREVIEW VERIFIED. Owner requests a visible enclosure for every Patient Portal tab from Overview through Patient FAQ. PR158 / c1d71744 adds outlined inactive surfaces and distinct selected state. CI41969437870 and four local navigation checks pass. Actual desktop click/Enter/geometry/focus verified. Fresh mobile visual check remains open. Next production publication and verification.
+- LIBRARY-READER-20261105 — Follow-up #156 records desktop reader scrolling/Back and scoped Marathi card selection. Library title/search/interface translation remains incomplete. Resume after the requested tab outline release.
+
 # Forms Centre language versions — 5 November 2026 IST
 
 - FORMS-LANG-20261105 — TODO. All eleven Forms Centre editors and generated outputs need authored English, Marathi and Hindi labels, options and instructions. Language selection stays within forms and preserves entered patient values. Preserve original statutory wording and format for Forms 2, 4 and 4A, with Marathi/Hindi assistance clearly distinguished from official text until approved editions are verified. Verify all editor choices and PDF rendering, including Devanagari glyphs and cloud retrieval. Current section-languages.js translates Workstation navigation only. Keep this separate from PR #155 cloud save acceptance.

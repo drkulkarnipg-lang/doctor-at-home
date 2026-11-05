@@ -1,3 +1,9 @@
+# Patient tab outline preview — 5 November 2026 IST
+
+PR #158 source c1d71744ab8712de29568b2fd462afb180ebfd3f adds visible borders and white surfaces to all seven Patient Portal tabs. Selected tab has a darker border and inset underline. Vercel preview dpl_FznWd9QXa6ihmi34iTkPf3h1bXtj READY. Exact-head regression CI 41969437870 SUCCESS. Four local navigation regression files passed. Actual preview Chrome at 1348px: all seven controls 44px high and 171.42–171.44px wide, every click opened its intended panel, Enter on Overview restored selection and a 3px focus ring. Screenshot visually inspected. Current browser cannot resize viewport, so a fresh mobile visual check remains unverified. CSS preserves grid, spacing, wrapping and control dimensions.
+
+Next: merge tested bounded CSS change, verify production commit/aliases and outlines. Then resume #156 Library interface translations. PR157 cloud-document opening remains separate. Current base 40beafe8d4dd524adaf21418ad061f34e1b46ba3 production READY with apex/www aliases. No active competing patient-tab PR observed.
+
 # PR #153 preview findings — 5 November 2026 IST
 
 Exact preview da785cf0, Vercel dpl_4dWwUAD2fpbYX1dFmEAPnBokbXqc, CI 41958310627 and 41958305234 successful. Chromium at 1440/1024/390/360: all seven tabs opened intended panels by click and Enter; solid focus ring and 44px height. ArrowRight moved focus and selection from Overview to Booking. Space failed to select Library. Width at 1024 varied 238–242px across panel changes; compare simultaneous widths and scrollbar/viewport geometry before changing CSS.
