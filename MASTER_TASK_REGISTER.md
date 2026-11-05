@@ -1,3 +1,8 @@
+# Whole-site audit scope — 5 November 2026 IST
+
+- Patient Portal navigation sizing/keyboard batch — **PRODUCTION VERIFIED**, PR #153 / 742ba4e7, CI 41960995646, Vercel dpl_6TbRNnBbSQt7NGh6PsuPk3gCUYg6. Four Chromium widths; evidence in WORK_CHECKPOINT.md. Other navigation groups remain open.
+- SITEWIDE-HISTORY-20261105 — **IN PROGRESS**. Audit release history from Oct 20 onward and public and authenticated workflows, protocols, accessibility, compatibility, presentation and relevance. Compare original and current URL/feature inventories. Record regressions and missing tests, and retest each fix on production. Initial CI gaps recorded in checkpoint.
+
 # Ordered patient UX follow-up — 5 November 2026 IST
 
 - DESKTOP-SPACING-20261105 — **PRODUCTION VERIFIED** (completed archive): PR #152 / `0045df82`, Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F`; exact-head CI `41955257301`; live desktop and mobile evidence in WORK_CHECKPOINT.md.
