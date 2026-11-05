@@ -1,3 +1,7 @@
+# PDF-SHARE-TARGETS-20261105 — CODED / PREVIEW PENDING
+
+Screen-only44px PDF-share targets and consistent keyboard focus outline added. Existing rendering/actions/links retained. Exact-source CI and actual browser measurements required before release; no current production change.
+
 # Current verified delta — 5 November 2026 IST
 
 - OTP-DELIVERY-20261105: OWNER-CONFIRMED SUCCESS. Owner reports numeric email arrived and subsequently done after testing password change. No independent subsequent login claim; no further OTP requested.
