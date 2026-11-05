@@ -50,6 +50,18 @@ assert.equal(d.activeElement.dataset.publicTab, 'booking', 'Arrow keys move focu
 assert.equal(d.querySelector('[data-public-tab="booking"]').getAttribute('aria-selected'), 'true');
 w.switchPublicTab('booking');
 assert.deepEqual(visible().map(p => p.id), ['portalPanelBooking']);
+for (const key of [' ', 'Enter']) {
+  for (const [index, tab] of tabs.entries()) {
+    w.switchPublicTab(tabs[(index + 1) % tabs.length].dataset.publicTab);
+    tab.focus();
+    const event = new w.KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+    tab.dispatchEvent(event);
+    assert.equal(event.defaultPrevented, true, `${JSON.stringify(key)} should be handled by the tab`);
+    assert.deepEqual(visible().map(panel => panel.id), [tab.getAttribute('aria-controls')]);
+    assert.equal(tab.getAttribute('aria-selected'), 'true');
+    assert.equal(d.activeElement, tab, 'Keyboard activation must keep focus on the selected tab');
+  }
+}
 dom.window.close();
 const direct = new JSDOM(html, { url: 'https://clinic.example.test/#bookingSection', runScripts: 'outside-only' });
 direct.window.eval(script);
