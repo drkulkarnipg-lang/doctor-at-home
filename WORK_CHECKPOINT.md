@@ -1,3 +1,7 @@
+# Stitch implementation started — 6 November 2026
+
+Source4c40bfa1c6e528306bd9297077d1520f5f23e346 updates existing CSS colours toward supplied Aura design. Inspected Patient Portal screenshot: sidebar, rounded white cards, blue/teal/lavender tiles; telemetry/chat examples are mock content and must not become false live features. Only palette foundation implemented, not full screenshot parity. Remaining legacy warm rgba gradients and component layout require consolidation. No HTML/JS/auth/clinical/link changes in this commit. Browser and CI acceptance pending; no production release. Master backup unchanged. Next complete all reference screen inspection, finish existing-rule palette consolidation, then preview visual comparison and functional regression. Keep draft until accepted.
+
 # Stitch visual migration — owner authorised 6 November 2026
 
 Owner supplied stitch_multilingual_icu_care_portal(1).zip and requests live site match its design while preserving master. Backup backup/master-before-stitch-20261106 remains b34c203a. Dedicated migration branch created from b34c203a; no deployment or runtime change yet. Automatic improvement schedule remains paused; this request authorises this migration, not schedule resumption.
