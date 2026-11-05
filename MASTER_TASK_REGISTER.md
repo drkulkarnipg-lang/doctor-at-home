@@ -1,3 +1,15 @@
+# Current verified delta — 5 November 2026 IST
+
+- OTP-DELIVERY-20261105: OWNER-CONFIRMED SUCCESS. Owner reports numeric email arrived and subsequently done after testing password change. No independent subsequent login claim; no further OTP requested.
+- PR146 navigation, PR147 credentials dialog, PR148 PDF share keyboard, PR149 independent language scopes: RELEASED. Current main cb891203; production dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY, root/www mapped; exact-main CI41894039573 SUCCESS. Historical pending-release notes below are superseded for these bounded changes only.
+- Remaining: complete interface language coverage, actual mobile/native-file/private clinical acceptance, PR145 clinical uniformity/runtime verification. Preserve existing backlog and no blanket completion.
+
+<!-- OTP RECEIPT OWNER-CONFIRMED5Nov2026IST: owner reports arrived/checking after template fix; verification/password-change success remains pending. No further OTP send. -->
+<!-- OTP5Nov2026IST: provider MagicLinkOTP template fixed/persisted exact-match verified; one post-fix live request accepted; numericOTP inbox receipt awaiting owner confirmation. No password change. Original backed up in auth-email-templates. -->
+<!-- OTP TEMPLATE DEFECT CONFIRMED5Nov2026IST: dashboard authenticated; Magic link body lackedToken. Original backed up; OTP-primary replacement prepared, save/persistence/real-email verification pending. -->
+<!-- OTP DASHBOARD AUTH BLOCKED5Nov2026IST: Supabase connected. Sign-in-link email received, numericOTP not yet verified. Automatic approval review rejected reading Google auth transition; explicit Google→GitHub→Supabase login permission needed. No template/password change or secondOTP. -->
+<!-- OTP-20261105 UPDATE: Supabase connected; matched project and Auth200/recovery timestamp verified. Owner confirms Sign-in email receipt, needs numeric code. Next inspect/update actual email template via securely authenticated dashboard; no second request/password change. -->
+<!-- OTP-DELIVERY-20261105 P1 BLOCKED ON PROVIDER ACCESS: one live configured-owner request accepted; SMTP/inbox delivery unverified; Supabase connection suggested/not connected. No password changed. Next: correlate Supabase Auth/template/SMTP logs, then fix verified cause. PR149 language release LIVE cb891203. -->
 <!-- LANGUAGE-RELEASE-20261105: isolated scoped language source; tests/preview/release pending. Full MR interface and further automatic languages remain incomplete, explicitly labelled. -->
 <!-- PDF-SHARE-FOCUS-20261105: source prepared from main4bbb67dd; test/preview/release pending. Automation enabled but recorded execution unavailable. -->
 <!-- Public-dialog release acceptance: source prepared5Nov2026IST; focus/preservation checks pass; full CI/browser/release pending. -->

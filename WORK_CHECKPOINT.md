@@ -1,3 +1,69 @@
+# Verified continuity update — 5 November 2026 IST
+
+- Owner subsequently replied done after testing the numeric OTP/password-change flow. Mark OTP delivery and password-change outcome OWNER-CONFIRMED; do not claim an independent signed-in browser verification. No additional OTP or password operation is required.
+- Fresh repository/production check: main cb891203e2e2565b48eb78390b1967ac7d809c34; exact-main Actions41894039573 SUCCESS; Vercel dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY with root/www aliases. PR149 section-language changes are live. Full authored interface coverage/further languages remain incomplete.
+- Open PR150 before this checkpoint b7ef7bd41fd070e4d52abc96eebfd5e666d5d639 holds template backup and delivery evidence; PR145 head5c12a4acdfdef68a55b6df97636b55fb007fcaee still contains unmerged clinical/runtime work. No active ownership marker or newer competing PR head observed. No deployment performed in this documentation-only update.
+- Main checkpoint/register still carry historical pending-release statements; this current verified section supersedes them. Next: reconcile main ledger through reviewed documentation PR150, then isolate remaining patient readability improvements and actual clinical/PDF acceptance. Preserve every feature/link; no changes to auth settings or patient records.
+
+---
+
+# Owner confirms post-fix email/code arrived — 5 November 2026 IST
+
+- After persistedOTP template fix and one post-change accepted request, owner replied aala, mi check karato (arrived, checking). Receipt is owner-confirmed; actual code verification/password change is still being checked by owner. Do not claim password reset completed or read/request code/password. Do not send another code while owner verifies this one.
+- Template backup, exact persisted comparison, HTML checks and post-change provider200/configuration-reload evidence remain below. Next: await owner report of verification success or exact non-secret error, then investigate that step only if needed.
+
+---
+
+# OTP-primary email template saved and post-change request accepted — 5 November 2026 IST
+
+- Dashboard access completed securely after explicit owner permission. Actual MagicLinkOTP template was link-only (subjectYour sign-in link, noToken). Original backed up; provider template updated to subjectYour verification code — Dr. Kulkarni with real{{ .Token }} prominent32px, bilingual instructions and preservedConfirmationURL fallback. Password unchanged.
+- Automatic save review initially rejected ambiguous Monaco DOM text (visual line numbers/stale rendered lines). Resolved safely by keyboardSelectAll/Copy and exactclipboard comparison against intended source; exactMatch=true. Never saved corrupted DOM text. Mouse save attempts did not persist; removed product banner and used keyboardEnter onSave. Fresh separate canonical tab/reload shows new subject/body; complete persisted source copied and compared exactMatch=true. Save disabled/Reset template now visible. This is verified provider configuration, not a Vercel source deployment.
+- Source HTML checks: exactlyone Token placeholder, one preservedConfirmationURL, parseableHTML, no script. Proof screenshot /workspace/scratch/drkulkarni-otp-template-saved-20261105.jpg. No generated code or password read; template literalToken placeholder is not a secret.
+- Requested exactlyone post-change OTP from normal live website Send emailOTP after prior request cooldown elapsed by>20minutes. Pending state completed with generic accepted success message at about19:37UTC. No repeat after that. Inbox receipt of numericOTP still needs owner confirmation; do not claim delivered yet.
+- Post-change Auth logs confirm configuration reload and user_recovery_requested request200, request_id01a1a810-de54-71c4-b580-d9ec47e4d461. Next: ask only whether newest email contains numericOTP (never pastecode), then owner enters code/new password securely in website. Existing recovery-link template/flow intentionally unchanged; no need to alter unrelated templates. Preserve originalbackup and sourcebranch PR150.
+
+---
+
+# Dashboard authenticated; actual OTP template defect identified — 5 November 2026 IST
+
+- Owner explicitly permitted Google→GitHub→Supabase dashboard login. Secure credential/device-verification flow completed; one OAuth-state expiry recovered with a clean selectedGitHub OAuth request. Fresh canonical project dashboard positively shows doctor-at-home production. No credential/token values copied into source; no password changed.
+- Actual Magic link or OTP subject is Your sign-in link; body contains only ConfirmationURL link and NO Token placeholder. This confirms link-only template presentation explains owner's receivedSign-in email. Backed up original subject/body in auth-email-templates/magic-link-before-20261105.json.
+- Prepared OTP-primary subject Your verification code — Dr. Kulkarni and bilingual body using real{{ .Token }} at32px, preserving original ConfirmationURL fallback. Exact intended source is auth-email-templates/magic-link-otp.html. Editor visually verified; template NOT YET saved at this checkpoint.
+- Next: save and reopen to verify persistence; inspect Reset password template separately because Auth logs record recovery event; verify relevant template coverage before one justified post-change website request after cooldown. Owner enters any code/new password securely; numericOTP receipt confirmation still required. Do not read codes or fake delivery success.
+
+---
+
+# Dashboard authentication approval blocker — 5 November 2026 IST
+
+- Supabase connector is connected and working. Owner confirms receipt of Sign in-link email instead of numericOTP. One observed Auth request/recovery metadata verified; no secondOTP or password change.
+- Dashboard templates require separate browser authentication. Secure browserAuth choice returned GitHub for Supabase, then Google for GitHub. Immediately following selectedGoogle, getAXState was rejected by automatic approval review: inspecting the transition could expose/advance privateGoogle access without explicit verified permission. No Google page state read and no further auth action attempted. Do not bypass via another tab/API/session.
+- Required next user action: explicit permission to continue Google authentication solely for GitHub→Supabase dashboard access, then legitimate secure authentication. No credentials/OTP in chat. After authorised access, inspect real MagicLink/recovery template, preserve original, show real{{ .Token }} prominently, and perform one justified request after cooldown. Current template has not been changed; numericOTP delivery remains unverified.
+- Exact previous checkpoint/log evidence remains below. Continue from this blocker; do not repeat connector installation or claim delivery fixed.
+
+---
+
+# OTP email content confirmed; provider connected — 5 November 2026 IST
+
+- Supabase connected successfully; project xqhhxnehrjkpyffdvxdm is ACTIVE_HEALTHY and production SUPABASE_URL matches. Do not repeat prior connector blocker.
+- Auth logs for19:05–19:13UTC show user_recovery_requested with request_completed200; configured owner has email_confirmed=true, recovery_sent_at2026-11-04T19:10:21.409999Z and no banned_until. No secret fields read; no second OTP requested.
+- Owner now confirms email arrives as a Sign in email/link and explicitly needs a numericOTP. Email receipt therefore confirmed by owner; existing template/token presentation is the next issue. Do not claim numericOTP delivered yet. Supabase docs require{{ .Token }} for numeric emailOTP; current provider template not yet inspected.
+- Connector supports database/logs, not Auth template/SMTP configuration. Dashboard template URL redirects to Supabase sign-in in cloud browser. Need secure dashboard authentication to inspect actual MagicLink/recovery template and preserve original before updating OTP-primary content. Do not alter passwords or generate replacement codes.
+- Next: secure dashboard sign-in choice, inspect actual email templates and expiration settings, add real provider token display while preserving useful links/branding, save only verified template, then one justified website OTP request after cooldown and owner receipt confirmation. Verification/new password stays with owner.
+
+---
+
+# OTP delivery investigation — 5 November 2026 IST
+
+- Current production maincb891203e2e2565b48eb78390b1967ac7d809c34, Vercel dpl_7A6rSAyXsWPexbSbvSFGqs3Mfco2 READY, root/www aliases mapped. Language PR149 is released:83 checks (55.71s), CI41893557182 SUCCESS, exact preview isolated Library/Reader/OverviewEN/MR and English restoration; unsupportedHindi leaves state unchanged with notice. Full MR interface/further language service remains incomplete.
+- Owner authorises one real password-reset email OTP request, only to configured clinic owner; no password changes by agent. Normal live Workstation > Create/change password with email OTP > Send email OTP clicked exactly once. Pending state became generic success message; no second request. No code/password read or entered; no password changed.
+- Source api/clinical-cloud.js password-otp-request uses configuredCLINIC_OWNER_EMAIL only, create_user:false, Supabase /auth/v1/otp; success UI follows sent.ok. Evidence supports app/provider request acceptance, NOT independent SMTP/inbox delivery verification. Environment metadata confirms production owner-email/auth settings exist; no secret values retrieved or exposed.
+- Vercel runtime query for /api/clinical-cloud over15m returned no matching log entries. Cannot infer absence of send/error from this. Supabase template/SMTP settings and Auth/delivery logs are not accessible through currently connected tools.
+- Plugin discovery confirmed Supabase, Gmail and Outlook uninstalled in this session. Suggested only Supabase as the smallest needed connection. It is NOT yet connected. Do not use browser fallback to evade this available sufficient provider connector, retrieve service secrets, alter auth settings blindly, or generate replacement codes.
+- BLOCKER: connect Supabase for the existing website project to inspect Auth email template, SMTP/SendEmailHook and delivery/error logs; ask owner only whether email arrived (never pasteOTP). A /otp request may use MagicLink vs numericOTP according to provider email template, but current template is unverified; this is a hypothesis, not diagnosed cause.
+- Next: after confirmed connection, correlate exactly one observed request with Supabase logs, inspect configured template/sender/cooldown without secrets, fix only verified cause, use a separate branch/tests/preview/release for any code change; request a further OTP only when cooldown permits and new verification is justified. Leave OTP/new-password entry to owner securely.
+
+---
+
 # Independent language release — 5 November 2026 IST
 
 - Owner reports language switching still incorrect. Verified main488b324a still runs old global synchronisation; scoped fixes remained only in PR145. Isolated language-only source from PR145 onto current main, leaving private clinical/date/PDF-runtime changes out.
