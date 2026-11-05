@@ -1,3 +1,7 @@
+# Browser runner wait corrected — 5 November 2026 IST
+
+Reader browser run42025769114 failed because its locator wait requested visibility of #wikiModal.hidden. Logs explicitly confirm modal was hidden64 times. Corrected wait to state attached for the closed-state selector. First mobile reader opened, passed title/body/reading-height/overflow checks and wheel scroll, then Escape closed it before this runner error. Complete widths remain pending rerun. Actual preview Escape also closes and restores wiki-card-read focus. Next inspect corrected runner result and finish mobile acceptance. No release.
+
 # Mobile acceptance runner added — 5 November 2026 IST
 
 Commit7b3cf7fb adds reader-browser workflow using Chromium/Playwright1.56.1 with a local source HTTP server. Tests all13 read actions at360,390,768,1440 widths, title/body correspondence, reading viewport height, horizontal overflow, wheel scroll, returns, Escape and browser Back focus. No patient data or backend auth used. This is automated real-browser source acceptance, distinct from Vercel preview/device testing. Results pending. Next inspect reader-browser job, fix any observed failure, rerun and inspect mobile screenshot before release. Desktop preview13 actions and Back focus already passed. Full regression prior4b97381 passed. No production release.
