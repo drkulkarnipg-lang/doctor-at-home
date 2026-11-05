@@ -1,3 +1,9 @@
+# Verified resume state — 5 November 2026, 21:10 IST
+
+Fresh checks: PR161 remains draft/open at 3dd67e511f50ab73c34e761f52ea90565595d9e3, base main b34c203a17405daa733a87ad2dad6561197d2722. Exact-head regression42028031084 and reader-browser42028030688 both SUCCESS. Production dpl_3fyGvdDvYh126W5Qnyhh1iNY8Tet READY at b34c203a; apex alias and www-to-apex redirect independently rechecked. No production change this run.
+
+Palette/mobile-header item remains CI VERIFIED, not preview accepted. Prior temporary /tmp/palette2 screenshots are absent in this execution environment; no new visual check claimed. Next recover artifact13415360072 from browser run42028030688 and review all28 screenshots, especially1440 Overview and mobile Booking/Library. Protected-preview access remains blocked: automatic review previously denied anyone-with-link access creation; do not retry or bypass protection. Legitimate authenticated preview verification is still required before release. Open-PR search returned issue records rather than a usable PR inventory; concurrency inventory is incomplete, so no application edits were made. PR161 exact head is unchanged since recorded work; no active ownership can be inferred solely from this. Additional languages and private document acceptance remain open. Execution limit reached after read-only verification and checkpoint synchronization; work is not running in background.
+
 # Approved pastel system — 5 November 2026 IST
 
 Reader PR160 production b34c203a READY; final source088da400 regression42026041459 and Chromium42026041516 pass. Actual live full-viewport reader and Close focus verified. Release evidence also saved on docs/reader-release-20261105.
