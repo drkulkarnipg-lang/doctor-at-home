@@ -32,6 +32,8 @@ jobs:
               await page.getByRole('tab',{name:'Health library',exact:true}).click();
               for(const name of ['Overview','Book a home visit','Health library','Elderly care','Search articles','Health tools','Patient FAQ']){
                 await page.getByRole('tab',{name,exact:true}).click();
+                await page.evaluate(()=>window.scrollTo(0,0));
+                console.log(JSON.stringify(await page.locator('.skip-link').evaluate(e=>({skipTop:getComputedStyle(e).top,skipPosition:getComputedStyle(e).position,focused:e===document.activeElement}))));
                 await page.screenshot({path:'reader-screenshots/'+width+'-'+name.replaceAll(' ','-')+'.png',fullPage:true});
               }
               await page.getByRole('tab',{name:'Health library',exact:true}).click();
