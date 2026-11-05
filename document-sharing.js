@@ -90,6 +90,48 @@ function addInlineCloudActions(){
   sheet.append(controls);
  }
 }
+function addVaultBrowser(desk){
+ const section=document.createElement('section');
+ section.className='share-desk-card no-print';
+ section.innerHTML='<h3>Saved cloud documents</h3><button type="button">Load saved documents</button><p role="status"></p><ul></ul>';
+ const button=section.querySelector('button');
+ const status=section.querySelector('[role="status"]');
+ const list=section.querySelector('ul');
+ button.onclick=async()=>{
+  list.replaceChildren();
+  button.disabled=true;
+  status.textContent='Loading saved documents…';
+  try{
+   const {documents}=await window.ClinicCloud.listDocuments();
+   for(const doc of documents){
+    const row=document.createElement('li');
+    const open=document.createElement('button');
+    open.type='button';
+    open.textContent='Get file link';
+    row.append(document.createTextNode(doc.title+' · '+new Date(doc.created_at).toLocaleDateString('en-IN',{timeZone:'Asia/Kolkata'})+' '),open);
+    open.onclick=async()=>{
+     open.disabled=true;
+     try{
+      const {url}=await window.ClinicCloud.downloadDocument(doc.id);
+      const link=document.createElement('a');
+      link.href=url;
+      link.target='_blank';
+      link.rel='noopener noreferrer';
+      link.textContent='Open saved file (link expires in 90 seconds)';
+      open.replaceWith(link);
+      link.focus();
+      window.setTimeout(()=>{if(link.isConnected)link.replaceWith(open);},90000);
+     }catch(error){status.textContent=error.message||'Could not open the saved document.';}
+     finally{open.disabled=false;}
+    };
+    list.append(row);
+   }
+   status.textContent=documents.length?documents.length+' recent saved documents.':'No saved documents found.';
+  }catch(error){status.textContent=error.message||'Could not load saved documents.';}
+  finally{button.disabled=false;}
+ };
+ desk.append(section);
+}
 function build(){
  addInlineCloudActions();
  if(document.getElementById('viewShareDesk'))return;
@@ -97,6 +139,7 @@ function build(){
  if(!nav||!launch)return;
  const b=document.createElement('button');b.type='button';b.id='tabShareDesk';b.className='px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl';b.textContent='📤 Share Desk';b.addEventListener('click',()=>window.switchDocTab('shareDesk'));nav.insertBefore(b,anchor||null);
  const holder=document.createElement('div');holder.innerHTML=markup;launch.parentNode.insertBefore(holder.firstElementChild,launch);
+ addVaultBrowser(document.getElementById('viewShareDesk'));
  const original=window.switchDocTab;
  if(typeof original==='function'&&!original.__shareDeskWrapped){const wrapped=function(tabId){const desk=document.getElementById('viewShareDesk');if(tabId!=='shareDesk')desk?.classList.add('hidden');const result=original.apply(this,arguments);if(tabId==='shareDesk'){desk?.classList.remove('hidden');window.shareDeskLoadArticles?.();}return result;};wrapped.__shareDeskWrapped=true;window.switchDocTab=wrapped;}
  window.shareDeskLoadArticles?.();
