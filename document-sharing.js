@@ -132,14 +132,54 @@ function addVaultBrowser(desk){
  };
  desk.append(section);
 }
+function addFormsCentre(desk){
+ const heading=desk.querySelector('.share-desk-heading');
+ heading.querySelector('.section-eyebrow').textContent='Doctor Workstation';
+ heading.querySelector('h2').textContent='Forms Centre';
+ heading.querySelector('p').textContent='Choose a form to fill or edit. Find saved files below.';
+ const picker=document.createElement('form');
+ picker.className='flex flex-wrap items-center gap-2';
+ picker.innerHTML='<label for="formsCentreSelect">Choose a form</label><select id="formsCentreSelect" required><option value="">Select a document</option></select><button type="submit" class="research-upload">Open editor</button>';
+ const select=picker.querySelector('select');
+ const entries=[
+  ['Prescription','rxPad'],['Invoice / Receipt','invoice'],
+  ['Lab Requisition','pathReq'],['Radiology Requisition','radReq'],
+  ...[...document.querySelectorAll('#clinDocSelect option')].map(option=>[option.textContent.trim(),'clinicalCertificates','clinDocSelect',option.value]),
+  ...[...document.querySelectorAll('#certTypeSelect option')].map(option=>[option.textContent.trim(),'legalForms','certTypeSelect',option.value])
+ ];
+ entries.forEach(([label],index)=>select.add(new Option(label,String(index))));
+ picker.onsubmit=event=>{
+  event.preventDefault();
+  if(select.value==='')return;
+  const [,tab,selector,value]=entries[Number(select.value)];
+  window.switchDocTab(tab);
+  if(selector){
+   const choice=document.getElementById(selector);
+   choice.value=value;
+   choice.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+ };
+ const sharing=document.createElement('details');
+ const summary=document.createElement('summary');
+ summary.textContent='Sharing and file tools';
+ sharing.append(summary);
+ for(const child of [...desk.children])if(child!==heading)sharing.append(child);
+ desk.append(picker);
+ addVaultBrowser(desk);
+ desk.append(sharing);
+}
 function build(){
  addInlineCloudActions();
  if(document.getElementById('viewShareDesk'))return;
  const nav=document.querySelector('.doctor-tabs'),anchor=document.getElementById('tabSet'),launch=document.getElementById('aiLaunchBar');
  if(!nav||!launch)return;
- const b=document.createElement('button');b.type='button';b.id='tabShareDesk';b.className='px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl';b.textContent='📤 Share Desk';b.addEventListener('click',()=>window.switchDocTab('shareDesk'));nav.insertBefore(b,anchor||null);
+ const b=document.createElement('button');b.type='button';b.id='tabShareDesk';b.className='px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] text-xs font-bold rounded-xl';b.textContent='Forms Centre';b.addEventListener('click',()=>window.switchDocTab('shareDesk'));nav.insertBefore(b,anchor||null);
  const holder=document.createElement('div');holder.innerHTML=markup;launch.parentNode.insertBefore(holder.firstElementChild,launch);
- addVaultBrowser(document.getElementById('viewShareDesk'));
+ addFormsCentre(document.getElementById('viewShareDesk'));
+ for(const id of ['tabRx','tabInvoice','tabPath','tabRad','tabCertificates','tabLegal']){
+  const button=document.getElementById(id);
+  if(button)button.style.display='none';
+ }
  const original=window.switchDocTab;
  if(typeof original==='function'&&!original.__shareDeskWrapped){const wrapped=function(tabId){const desk=document.getElementById('viewShareDesk');if(tabId!=='shareDesk')desk?.classList.add('hidden');const result=original.apply(this,arguments);if(tabId==='shareDesk'){desk?.classList.remove('hidden');window.shareDeskLoadArticles?.();}return result;};wrapped.__shareDeskWrapped=true;window.switchDocTab=wrapped;}
  window.shareDeskLoadArticles?.();
