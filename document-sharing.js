@@ -49,7 +49,37 @@ const markup=`<section id="viewShareDesk" class="hidden share-desk space-y-5" ar
 </div>
 <section class="share-desk-card share-desk-any"><div><span class="share-desk-icon">📎</span><h3>Share any file from this device</h3><p>Choose a PDF, image, report or other file. It stays on this device until you select a sharing app and recipient.</p></div><input type="file" id="shareDeskFile" aria-label="Choose a file to share"><button type="button" id="shareDeskAnyButton" onclick="shareDeskAnyFile()">Share selected file</button><p id="shareDeskStatus" role="status" aria-live="polite">No file selected.</p></section>
 <p class="share-desk-safety"><strong>Privacy:</strong> no public link is created and no patient document is uploaded automatically.</p></section>`;
+const cloudDocuments={
+  rx:{id:'rxSheet',name:'Prescription',type:'prescription'},
+  path:{id:'pathSlipSheet',name:'Laboratory_Requisition',type:'lab_requisition'},
+  rad:{id:'radSlipSheet',name:'Radiology_Requisition',type:'radiology_requisition'},
+  invoice:{id:'invoiceSheet',name:'Invoice_Receipt',type:'invoice'}
+ };
+const cloudCertificates={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
+function addInlineCloudActions(){
+ const targets=[
+  ...Object.entries(cloudDocuments).filter(([kind])=>kind!=='rx').map(([kind,doc])=>[kind,doc.id]),
+  ...Object.entries(cloudCertificates).map(([kind,[id]])=>['certificate:'+kind,id])
+ ];
+ for(const [kind,id] of targets){
+  const sheet=document.getElementById(id);
+  if(!sheet||sheet.querySelector('[data-inline-cloud-status]'))continue;
+  const controls=document.createElement('div');
+  controls.className='no-print';
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='research-upload';
+  button.textContent='Save to private cloud';
+  button.addEventListener('click',()=>window.saveDeskDocument(kind,button));
+  const status=document.createElement('p');
+  status.setAttribute('role','status');
+  status.setAttribute('data-inline-cloud-status','');
+  controls.append(button,status);
+  sheet.append(controls);
+ }
+}
 function build(){
+ addInlineCloudActions();
  if(document.getElementById('viewShareDesk'))return;
  const nav=document.querySelector('.doctor-tabs'),anchor=document.getElementById('tabSet'),launch=document.getElementById('aiLaunchBar');
  if(!nav||!launch)return;
@@ -68,21 +98,17 @@ window.shareDeskAnyFile=async function(){const input=document.getElementById('sh
 
 window.saveDeskDocument=async function(kind,button){
  const cloud=window.ClinicCloud;
- const status=document.getElementById('shareDeskStatus');
+ const status=button?.parentElement?.querySelector('[data-inline-cloud-status]')||document.getElementById('shareDeskStatus');
  const say=(message)=>{if(status)status.textContent=message;window.showToast?.(message);};
  if(!cloud||typeof cloud.uploadDocument!=='function'){say('Private cloud vault is unavailable. No document was uploaded.');return;}
  if(!cloud.isSignedIn?.()||!window.WorkstationAuth?.isOwnerSession?.()){say('Sign in to the Doctor Workstation first. No document was uploaded.');window.WorkstationAuth?.open();return;}
- const docs={
-  rx:{id:'rxSheet',name:'Prescription',type:'prescription'},
-  path:{id:'pathSlipSheet',name:'Laboratory_Requisition',type:'lab_requisition'},
-  rad:{id:'radSlipSheet',name:'Radiology_Requisition',type:'radiology_requisition'},
-  invoice:{id:'invoiceSheet',name:'Invoice_Receipt',type:'invoice'}
- };
- let doc=docs[kind];
- if(kind==='certificate'){
-  const type=document.getElementById('shareDeskCertificate')?.value||'';
-  const choices={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
-  const v=choices[type];if(v)doc={id:v[0],name:v[1],type:v[2]};
+ let doc=cloudDocuments[kind];
+ const certificateKey=kind==='certificate'
+  ? document.getElementById('shareDeskCertificate')?.value
+  : kind.startsWith('certificate:') ? kind.slice('certificate:'.length) : '';
+ if(certificateKey&&Object.hasOwn(cloudCertificates,certificateKey)){
+  const [id,name,type]=cloudCertificates[certificateKey];
+  doc={id,name,type};
  }
  if(kind==='article'){
   const id=document.getElementById('shareDeskArticle')?.value||'';
