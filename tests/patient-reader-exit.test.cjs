@@ -13,6 +13,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require
  for(const close of ['wikiReaderClose','wikiReaderBack','backdrop','escape']){
   w.openWikiModal(9);assert.equal(w.document.body.style.overflow,'hidden');assert.equal(w.document.getElementById('publicPortal').inert,true);assert.equal(modal.classList.contains('hidden'),false);
   await historyChange(()=>{if(close==='escape')w.document.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));else if(close==='backdrop')modal.click();else{const b=w.document.getElementById(close);b.onclick=w.closeWikiModal;b.click();}});
+  if(w.document.activeElement!==read)await new Promise((resolve,reject)=>{const done=()=>{if(w.document.activeElement!==read)return;clearTimeout(timer);w.document.removeEventListener('focusin',done);resolve();};const timer=setTimeout(()=>{w.document.removeEventListener('focusin',done);reject(Error('Reader focus was not restored'));},2000);w.document.addEventListener('focusin',done);});
   assert.equal(modal.classList.contains('hidden'),true,close+' closes article');assert.equal(w.document.body.style.overflow,'');assert.equal(w.document.activeElement,read);
  }
  assert.equal(w.document.querySelectorAll('#wikiReaderBack').length,1);assert.equal(w.document.querySelectorAll('#wikiReaderClose').length,1);assert.ok(w.document.querySelectorAll('#wikiCardsGrid [data-guide-action]').length>0);
