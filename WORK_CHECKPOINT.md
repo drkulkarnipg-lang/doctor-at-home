@@ -1,3 +1,21 @@
+# PR #153 preview findings — 5 November 2026 IST
+
+Exact preview da785cf0, Vercel dpl_4dWwUAD2fpbYX1dFmEAPnBokbXqc, CI 41958310627 and 41958305234 successful. Chromium at 1440/1024/390/360: all seven tabs opened intended panels by click and Enter; solid focus ring and 44px height. ArrowRight moved focus and selection from Overview to Booking. Space failed to select Library. Width at 1024 varied 238–242px across panel changes; compare simultaneous widths and scrollbar/viewport geometry before changing CSS.
+
+Source 9b4e1ae51cf1e888a622f4e7a2c340f4dcec2a54 handles Space and Enter and retains tab focus. Next: verify exact head CI and preview with Space, Enter, arrows, Home/End, Back and clicks at the four widths, then publish and retest on domain if checks pass. Production remained 0045df82 on Vercel dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F. Cross-engine, private flows, library and HTTP audit remain open.
+
+# Live site audit — 5 November 2026 IST
+
+Live Chromium: all seven patient tabs opened the intended panels with Enter; widths 99–155 px, heights 44 px. All 13 guide actions opened the corresponding body in a scrollable reader and the Library return closed it. Three topics are repeated in Patient guidance: heart failure daily weight, coconut water/potassium, pressure injury. Reader Back behavior, actual scrolling and mobile not yet tested. Source robots.txt and sitemap files point to the Vercel host; validate live HTTP/TLS, sitemap and canonicals before a separate fix that preserves aliases and paths. Source Vercel config declares nosniff, frame denial, referrer policy and a limited CSP; live delivery unverified.
+
+PR #153 draft, CSS source commit `e5eab9024e580ed667ee18150b548d1bc3f6bd41`: equal patient tab tracks and explicit focus ring. No source behavior or URLs changed. Next check exact updated head CI and preview, test dimensions, keyboard focus and destinations at desktop and mobile, then publish only after checks pass. Workspace and signed-in groups, Library isolation and Back, duplicate topics, cross-engine compatibility and professional content review are open.
+
+# Desktop release verified — 5 November 2026 IST
+
+PR #152 merged at `0045df82b7838b77f5812e197588fb9ef1244fa8`; Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F` READY on production. Exact PR head `22aad29c` passed Actions `41955257301`. Live browser hero heights at viewport 1440 and 1024: 770.18 → 587.18 px and 739.07 → 591.74 px, matching preview. Next-section gap stayed 4 px. At 390 and 360 widths, height matched baseline, no horizontal overflow, Request a home visit opened Booking, and Enter on Overview returned to it. Desktop-only CSS; no auth, destinations or clinical changes.
+
+Next: on `fix/navigation-tab-sizing-20261105`, reproduce navigation sizing and focus across groups; compare PR #139 with current main before reusing any code. Then verify every affected navigation interaction before release. Library and duplication follow.
+
 ## PR152 desktop preview verified
 
 At 1348px, hero height fell from 763.625px on production to 584.5px on preview a1ffff08. Gap to next section was 4px on both. Regression run 41953610822 passed. Mobile viewport verification remains required before merging. The current browser interface exposes no viewport resize operation. Next use a browser with a mobile viewport to compare wrapping, overflow, booking entry and section navigation. Keep remaining work in requested order.
