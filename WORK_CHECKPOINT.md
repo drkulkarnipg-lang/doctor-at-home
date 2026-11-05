@@ -1,3 +1,7 @@
+# Reader browser findings — 5 November 2026 IST
+
+Actual Chrome preview at 38ec48ae (dpl_91ojQpbjHpR9wnRjUMEVkS6KZWQt), 1363x936 viewport: first guide opens a full viewport reader; article pane 632px tall; top Close visible at y10 with 44px height. Close hides the reader. However final focus lands on Library panel instead of originating Read button after history processing. PageDown experiment reported scrollTop 0, so scrolling is not yet accepted and needs wheel/keyboard diagnosis. No merge or release. Next fix/verify focus restoration through public-portal popstate interaction, test real scrolling and all guide returns, then mobile geometry. Other translation languages remain unconfigured. This run ends with browser acceptance incomplete.
+
 # Reader CI verification — 5 November 2026 IST
 
 PR160 implementation e9c114eca583cf340114fcf52c00077887608001 passed exact-head regression run 42005396730. PR remains draft, open and mergeable. Current main/production remains d37fd20da1bba12ece25571bd27fcb47733437a3, Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY; apex alias and www redirect verified. No new publication. This check did not execute browser acceptance. Next executable action: obtain one-hour access to PR160 exact preview, verify reader geometry, article scrolling, Close/Back and keyboard controls, and complete mobile viewport checks before merge. Other languages remain unconfigured. Execution ended before browser acceptance; do not mark reader complete.
