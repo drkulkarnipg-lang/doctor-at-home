@@ -1,3 +1,10 @@
+# Ordered patient UX follow-up — 5 November 2026 IST
+
+- DESKTOP-SPACING-20261105 — **PRODUCTION VERIFIED** (completed archive): PR #152 / `0045df82`, Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F`; exact-head CI `41955257301`; live desktop and mobile evidence in WORK_CHECKPOINT.md.
+- NAV-SIZING-20261105 — **IN PROGRESS**: equal sizes within each navigation group, visible active and keyboard focus, correct content and return/close. Next: reproduce current behavior on `fix/navigation-tab-sizing-20261105`.
+- LIBRARY-READER-20261105 — **TODO**: isolated in-site language and each guide readable/scrollable in dedicated view with return.
+- TOPIC-DEDUPE-20261105 — **TODO**: primary location per topic; preserve unique information and destinations.
+
 # Current verified delta — 5 November 2026 IST
 
 - OTP-DELIVERY-20261105: OWNER-CONFIRMED SUCCESS. Owner reports numeric email arrived and subsequently done after testing password change. No independent subsequent login claim; no further OTP requested.
