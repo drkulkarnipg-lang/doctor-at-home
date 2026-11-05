@@ -1,3 +1,19 @@
+# Stitch gradient consolidation — 6 November 2026
+
+Implementation37499c8e079b8a3fe5d3c95156e01650f225d5ea replaces ten remaining warm decorative rgba colours with supplied blue/white/teal surfaces and blue-grey borders. All154 CSS selector blocks retained; brace counts balanced. No DOM, links, handlers or clinical changes. Previous head662af36 regression42097026584 SUCCESS; do not treat it as exact-new-head acceptance. Latest browser and CI checks remain pending. No release; full Stitch layout migration unfinished. Next inspect calculator/workstation references, map existing components and perform visual acceptance at desktop/mobile; preserve backup and avoid unsupported template telemetry/claims.
+
+# Stitch implementation started — 6 November 2026
+
+Source4c40bfa1c6e528306bd9297077d1520f5f23e346 updates existing CSS colours toward supplied Aura design. Inspected Patient Portal screenshot: sidebar, rounded white cards, blue/teal/lavender tiles; telemetry/chat examples are mock content and must not become false live features. Only palette foundation implemented, not full screenshot parity. Remaining legacy warm rgba gradients and component layout require consolidation. No HTML/JS/auth/clinical/link changes in this commit. Browser and CI acceptance pending; no production release. Master backup unchanged. Next complete all reference screen inspection, finish existing-rule palette consolidation, then preview visual comparison and functional regression. Keep draft until accepted.
+
+# Stitch visual migration — owner authorised 6 November 2026
+
+Owner supplied stitch_multilingual_icu_care_portal(1).zip and requests live site match its design while preserving master. Backup backup/master-before-stitch-20261106 remains b34c203a. Dedicated migration branch created from b34c203a; no deployment or runtime change yet. Automatic improvement schedule remains paused; this request authorises this migration, not schedule resumption.
+
+Archive inventory: Home, Doctor Workstation, Clinical Calculators and Patient Portal each have code.html and screen.png; aura_intensive_care/DESIGN.md supplies tokens. Extracted and read design specification; visually inspected Home screenshot. Reference uses blue006194, teal006a61, lavender6b38d4, canvasf8f9ff, white rounded cards and serif display headings in screenshot. Preserve approved Georgia/logo/signature and working original controls. Reference contains placeholder Dr Arthur Evans, foreign contact numbers, fabricated-looking telemetry,99.4% outcomes,24/7, response promises and certification claims. Do not copy those as facts; use existing verified clinic content. Preserve independent Library/article/workstation languages, rather than template global translation claims. No claim100+ working languages.
+
+Next: inspect other three screenshots and map each reference component onto existing authenticated/clinical modules; inventory original IDs/actions/links; consolidate existing conflicting CSS into matching tokens and layouts, test actual desktop/mobile journeys and files. Keep master backup immutable. Preview protection must remain intact. Required preview and regression acceptance before any live publication. This checkpoint records intake/reference inspection only, not implementation completion.
+
 # Browser runner wait corrected — 5 November 2026 IST
 
 Reader browser run42025769114 failed because its locator wait requested visibility of #wikiModal.hidden. Logs explicitly confirm modal was hidden64 times. Corrected wait to state attached for the closed-state selector. First mobile reader opened, passed title/body/reading-height/overflow checks and wheel scroll, then Escape closed it before this runner error. Complete widths remain pending rerun. Actual preview Escape also closes and restores wiki-card-read focus. Next inspect corrected runner result and finish mobile acceptance. No release.
