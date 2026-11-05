@@ -20,6 +20,12 @@
     'A4 Prescription':'A4 औषधपत्र','Invoice / Receipt':'बिल / पावती',
     'Patient Portal':'रुग्ण विभाग','Doctor Workstation':'डॉक्टर कार्यक्षेत्र',
     'Overview':'आढावा','Elderly care':'ज्येष्ठांची काळजी','Health library':'आरोग्य ग्रंथालय',
+    'Health Library':'आरोग्य ग्रंथालय',
+    'Referenced educational guides; check source and review status within each guide.':'संदर्भांसह आरोग्यविषयक लेख. प्रत्येक लेखातील मूळ स्रोत आणि पुनरावलोकनाची माहिती तपासा.',
+    'Understanding changes':'समजून घेतल्याने','everything.':'दृष्टिकोन बदलतो.',
+    'Find practical answers, recognise warning signs and prepare better questions for your doctor.':'उपयुक्त उत्तरे शोधा, धोक्याची लक्षणे ओळखा आणि डॉक्टरांना विचारायचे प्रश्न तयार करा.',
+    'Search by condition, symptom or everyday concern':'आजार, लक्षण किंवा रोजच्या आरोग्यविषयक प्रश्नानुसार शोधा',
+    'No matching topic yet. Try another term or ask the doctor.':'जुळणारा विषय सापडला नाही. दुसरा शब्द वापरा किंवा डॉक्टरांना विचारा.',
     'Search articles':'लेख शोधा','Book a home visit':'घरभेटीची विनंती','Health tools':'आरोग्य साधने','Patient FAQ':'रुग्णांचे प्रश्न',
     'Home visits.':'घरभेटी.','Care at your bedside.':'तुमच्या शेजारी वैद्यकीय काळजी.',
     'Request a home visit':'घरभेटीची विनंती करा','Explore the health library':'आरोग्य ग्रंथालय पाहा',
@@ -36,7 +42,7 @@
       const walker = document.createTreeWalker(host,NodeFilter.SHOW_TEXT);
       let node;
       while ((node = walker.nextNode())) {
-        if (node.parentElement?.closest('script,style,input,textarea,select,[contenteditable],.printable-sheet,.section-translator,.language-control')) continue;
+        if (node.parentElement?.closest('script,style,input,textarea,select,[contenteditable],.printable-sheet,.section-translator,.language-control,#wikiCardsGrid,#libraryTopicFilters,#libraryResultCount')) continue;
         if (!originals.has(node)) originals.set(node,node.nodeValue);
         const original = originals.get(node), text = original.trim();
         const label = text.replace(/^[^\p{L}\p{N}]+/u, '').replace(/\s*[→↗]$/, '');
@@ -63,7 +69,14 @@
     }
     const root = document.querySelector(scope.root);
     if (!root) return false;
-    if (scope.kind === 'library') window.PatientEducationView?.setLibraryLanguage(code);
+    if (scope.kind === 'library') {
+      translateLabels(root,code,scope.kind);
+      const search = root.querySelector('#wikiSearchInput');
+      if (search) search.placeholder = code === 'mr' ? 'आरोग्य ग्रंथालयात शोधा…' : 'Search the library…';
+      const filters = root.querySelector('#libraryTopicFilters');
+      if (filters) filters.setAttribute('aria-label',code === 'mr' ? 'आरोग्यविषयक विषय निवडा' : 'Filter health topics');
+      window.PatientEducationView?.setLibraryLanguage(code);
+    }
     else if (scope.kind === 'reader') window.PatientEducationView?.setReaderLanguage(code);
     else translateLabels(root,code,scope.kind);
     states[id]=code;
