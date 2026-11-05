@@ -1,3 +1,9 @@
+# Patient assistant release and next audit — 5 November 2026 IST
+
+- PR #154 navigation **PRODUCTION VERIFIED**: preview c5644dc5 / dpl_32hwhkDckHYRawYFL8Hx43guhEKo, CI 41961649534 success, merge f33b99f8, live dpl_55LtViMPSnwGQgJzcKsACQSux4TM. Chromium preview and live: language question yields correct directions, Health Library/Booking/Fees/Articles/PDF shortcuts select intended panels; dose question routes to doctor.
+- Generative AI **BLOCKED**: registration-details question returned AI_SETUP_REQUIRED on preview and production. Configure the provider secret securely in existing Supabase function environment and retest real provider response. Do not record credentials.
+- Booking accessibility **IN PROGRESS**: live Chromium Booking exposed calcTime select with neither associated label nor aria-label. Next inspect corresponding markup and language handling, bind the existing visible label and verify accessible name on preview and live. Other public forms and authenticated workflows remain open.
+
 # Whole-site audit scope — 5 November 2026 IST
 
 - Patient Portal navigation sizing/keyboard batch — **PRODUCTION VERIFIED**, PR #153 / 742ba4e7, CI 41960995646, Vercel dpl_6TbRNnBbSQt7NGh6PsuPk3gCUYg6. Four Chromium widths; evidence in WORK_CHECKPOINT.md. Other navigation groups remain open.
