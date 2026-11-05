@@ -1,3 +1,7 @@
+# Booking-first implementation — 6 November 2026 IST
+
+Isolated branch fix/booking-first-20261106 from b34c203a; implementation3072df4f1b13f9d5d613f4764c404a2c53eb55df moves existing1929-byte onlineConsultationNotice after the8616-byte bookingSection. Both sections unchanged internally. Sorted inventory of819 id/href/src/onclick attributes identical before/after. No content, warning, link or clinical fact removed. PR161 palette branch remains separate, last observed0ce90313. Full open-PR inventory remains incomplete; isolated branch avoids editing its application source. Status CODED ONLY: no browser/CI/preview acceptance or deployment claimed. Next create draft PR for booking branch, run regressions and browser at360/390/768/1440, verify direct #bookingSection and #onlineConsultationNotice links, tab entry, input preservation, keyboard and source-order effects from enhancement scripts. Protected-preview access remains required and must not be bypassed. Production last verifiedb34c203a; not freshly rechecked in this implementation step.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
