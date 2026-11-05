@@ -1,3 +1,9 @@
+# Reader follow-up — 5 November 2026 IST
+
+PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
+
+Current branch fix/library-reader-fullscreen-20261105 changes reader to opaque full viewport, adds top Close, collapses supplementary language options and excludes collapsed controls from keyboard trap. Local reader-exit and all ten bilingual guide regressions passed. Preview, exact-head CI and mobile visual checks PENDING. Not released. Other languages still require configured section-only translation and reviewed medical translations. Next: obtain exact preview, verify all reader open/scroll/Close/Back and keyboard interactions at desktop/mobile, then publish only after checks pass. Existing clinical PR157 remains independent.
+
 # Patient tab outline preview — 5 November 2026 IST
 
 PR #158 source c1d71744ab8712de29568b2fd462afb180ebfd3f adds visible borders and white surfaces to all seven Patient Portal tabs. Selected tab has a darker border and inset underline. Vercel preview dpl_FznWd9QXa6ihmi34iTkPf3h1bXtj READY. Exact-head regression CI 41969437870 SUCCESS. Four local navigation regression files passed. Actual preview Chrome at 1348px: all seven controls 44px high and 171.42–171.44px wide, every click opened its intended panel, Enter on Overview restored selection and a 3px focus ring. Screenshot visually inspected. Current browser cannot resize viewport, so a fresh mobile visual check remains unverified. CSS preserves grid, spacing, wrapping and control dimensions.

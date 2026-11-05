@@ -8,12 +8,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require
  const read=w.document.querySelector('#wikiCardsGrid button'),modal=w.document.getElementById('wikiModal');
  function historyChange(action){return new Promise((resolve,reject)=>{const listener=()=>{clearTimeout(timer);resolve();};const timer=setTimeout(()=>{w.removeEventListener('popstate',listener);reject(Error('Expected browser history transition'));},2000);w.addEventListener('popstate',listener,{once:true});action();});}
  read.focus();
- for(const close of ['wikiReaderBack','backdrop','escape']){
+ for(const close of ['wikiReaderClose','wikiReaderBack','backdrop','escape']){
   w.openWikiModal(9);assert.equal(w.document.body.style.overflow,'hidden');assert.equal(w.document.getElementById('publicPortal').inert,true);assert.equal(modal.classList.contains('hidden'),false);
   await historyChange(()=>{if(close==='escape')w.document.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));else if(close==='backdrop')modal.click();else{const b=w.document.getElementById(close);b.onclick=w.closeWikiModal;b.click();}});
   assert.equal(modal.classList.contains('hidden'),true,close+' closes article');assert.equal(w.document.body.style.overflow,'');assert.equal(w.document.activeElement,read);
  }
- assert.equal(w.document.querySelectorAll('#wikiReaderBack').length,1);assert.equal(w.document.querySelectorAll('#wikiReaderClose').length,0);assert.ok(w.document.querySelectorAll('#wikiCardsGrid [data-guide-action]').length>0);
+ assert.equal(w.document.querySelectorAll('#wikiReaderBack').length,1);assert.equal(w.document.querySelectorAll('#wikiReaderClose').length,1);assert.ok(w.document.querySelectorAll('#wikiCardsGrid [data-guide-action]').length>0);
  read.focus();w.openWikiModal(9);assert.equal(w.history.state.hvicWikiReader.id,9);
  await historyChange(()=>w.history.back());assert.equal(modal.classList.contains('hidden'),true,'browser Back should return to the library');
  await historyChange(()=>w.history.forward());assert.equal(modal.classList.contains('hidden'),false,'browser Forward should reopen the article');
