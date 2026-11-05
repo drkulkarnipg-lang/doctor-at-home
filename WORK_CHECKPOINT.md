@@ -1,3 +1,9 @@
+# Desktop release verified — 5 November 2026 IST
+
+PR #152 merged at `0045df82b7838b77f5812e197588fb9ef1244fa8`; Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F` READY on production. Exact PR head `22aad29c` passed Actions `41955257301`. Live browser hero heights at viewport 1440 and 1024: 770.18 → 587.18 px and 739.07 → 591.74 px, matching preview. Next-section gap stayed 4 px. At 390 and 360 widths, height matched baseline, no horizontal overflow, Request a home visit opened Booking, and Enter on Overview returned to it. Desktop-only CSS; no auth, destinations or clinical changes.
+
+Next: on `fix/navigation-tab-sizing-20261105`, reproduce navigation sizing and focus across groups; compare PR #139 with current main before reusing any code. Then verify every affected navigation interaction before release. Library and duplication follow.
+
 ## PR152 desktop preview verified
 
 At 1348px, hero height fell from 763.625px on production to 584.5px on preview a1ffff08. Gap to next section was 4px on both. Regression run 41953610822 passed. Mobile viewport verification remains required before merging. The current browser interface exposes no viewport resize operation. Next use a browser with a mobile viewport to compare wrapping, overflow, booking entry and section navigation. Keep remaining work in requested order.
