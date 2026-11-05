@@ -1,3 +1,7 @@
+# Stitch implementation started — 6 November 2026
+
+Source4c40bfa1c6e528306bd9297077d1520f5f23e346 updates existing CSS colours toward supplied Aura design. Inspected Patient Portal screenshot: sidebar, rounded white cards, blue/teal/lavender tiles; telemetry/chat examples are mock content and must not become false live features. Only palette foundation implemented, not full screenshot parity. Remaining legacy warm rgba gradients and component layout require consolidation. No HTML/JS/auth/clinical/link changes in this commit. Browser and CI acceptance pending; no production release. Master backup unchanged. Next complete all reference screen inspection, finish existing-rule palette consolidation, then preview visual comparison and functional regression. Keep draft until accepted.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
