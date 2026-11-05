@@ -1,3 +1,9 @@
+# Approved pastel system — 5 November 2026 IST
+
+Reader PR160 production b34c203a READY; final source088da400 regression42026041459 and Chromium42026041516 pass. Actual live full-viewport reader and Close focus verified. Release evidence also saved on docs/reader-release-20261105.
+
+Current design branch design/pastel-palette-20261105, implementation bf4a12eb: found late warm-palette block redefining ivory/glass and replacing sky background with cream/yellow. Edited existing rules to consume original approved pastel tokens and removed conflicting duplicate token values. Scope patient/header surfaces only; stylesheet-only, no markup/URLs/auth/clinical files changed. Inventory existing selectors retained. CI, actual preview colour/contrast, all seven panels and mobile/desktop acceptance PENDING. Not live. Next verify exact preview, detect remaining legacy style conflicts, check contrast/text/interaction and required regression before publication. Additional languages, clinical documents, duplicate topics and cross-engine/device checks stay open.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
