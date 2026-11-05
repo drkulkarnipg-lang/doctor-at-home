@@ -1,0 +1,66 @@
+name: Reader browser acceptance
+on:
+  push:
+    branches: [fix/library-reader-fullscreen-20261105]
+  pull_request:
+    paths: [awareness-library.js, patient-experience-refinements.css, index.html, .github/workflows/reader-browser.yml]
+permissions:
+  contents: read
+jobs:
+  reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --package-lock=false playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Verify actual reader interactions
+        run: |
+          python3 -m http.server 8080 >/tmp/reader-server.log 2>&1 &
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const browser=await chromium.launch();
+            for(const width of [360,390,768,1440]){
+              const page=await browser.newPage({viewport:{width,height:900}});
+              await page.goto('http://127.0.0.1:8080/');
+              await page.getByRole('tab',{name:'Health library',exact:true}).click();
+              const guides=page.getByRole('button',{name:'Read the complete guide →',exact:true});
+              assert.equal(await guides.count(),13);
+              for(let i=0;i<13;i++){
+                await guides.nth(i).click();
+                await page.locator('#wikiModal:not(.hidden)').waitFor();
+                const shape=await page.evaluate(()=>{
+                  const modal=document.querySelector('#wikiModal'),body=document.querySelector('#wikiModalContent');
+                  const r=modal.getBoundingClientRect();
+                  return {width:r.width,height:r.height,viewport:innerWidth,bodyHeight:body.clientHeight,
+                    title:document.querySelector('#wikiModalTitle').textContent,
+                    article:body.querySelector('h1').textContent,overflow:body.scrollWidth>body.clientWidth};
+                });
+                assert.equal(shape.title,shape.article);
+                assert.equal(shape.width,shape.viewport);
+                assert.ok(shape.bodyHeight>150,JSON.stringify(shape));
+                assert.equal(shape.overflow,false);
+                await page.locator('#wikiModalContent').hover();
+                await page.mouse.wheel(0,500);
+                await page.waitForFunction(()=>document.querySelector('#wikiModalContent').scrollTop>0);
+                if(i===0){
+                  await page.locator('#wikiReaderClose').focus();
+                  await page.keyboard.press('Escape');
+                }else await page.locator('#wikiReaderBack').click();
+                await page.locator('#wikiModal.hidden').waitFor();
+              }
+              await guides.first().click();
+              await page.goBack();
+              await page.locator('#wikiModal.hidden').waitFor();
+              await page.waitForFunction(()=>document.activeElement?.classList.contains('wiki-card-read'));
+              console.log('PASS width '+width+': 13 guides, title/body, reading space, wheel scrolling, return, Escape and browser Back focus');
+              await page.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
