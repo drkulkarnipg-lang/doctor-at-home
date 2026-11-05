@@ -1,3 +1,7 @@
+# Mobile acceptance runner added — 5 November 2026 IST
+
+Commit7b3cf7fb adds reader-browser workflow using Chromium/Playwright1.56.1 with a local source HTTP server. Tests all13 read actions at360,390,768,1440 widths, title/body correspondence, reading viewport height, horizontal overflow, wheel scroll, returns, Escape and browser Back focus. No patient data or backend auth used. This is automated real-browser source acceptance, distinct from Vercel preview/device testing. Results pending. Next inspect reader-browser job, fix any observed failure, rerun and inspect mobile screenshot before release. Desktop preview13 actions and Back focus already passed. Full regression prior4b97381 passed. No production release.
+
 # All desktop guide actions verified — 5 November 2026 IST
 
 Actual preview application source 5a2a462b: all thirteen Read Guide actions opened visible readers with matching title/body, and each footer Library return closed it. Browser Back on sampled first guide closed reader and restored BUTTON.wiki-card-read focus. Prior mouse timeout was recovered by fresh AX inspection showing reader had opened. All ten unique titles verified plus three repeated published cards. Desktop wheel scrolling and top Close focus already passed. Mobile viewport and full keyboard trap acceptance remain required before release. CI4b97381 checked separately; no release.
