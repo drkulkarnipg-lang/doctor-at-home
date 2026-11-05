@@ -1,9 +1,9 @@
 name: Reader browser acceptance
 on:
   push:
-    branches: [fix/library-reader-fullscreen-20261105]
+    branches: [fix/library-reader-fullscreen-20261105, design/pastel-palette-20261105]
   pull_request:
-    paths: [awareness-library.js, patient-experience-refinements.css, index.html, .github/workflows/reader-browser.yml]
+    paths: [translucent-clinical-luxury.css, awareness-library.js, patient-experience-refinements.css, index.html, .github/workflows/reader-browser.yml]
 permissions:
   contents: read
 jobs:
