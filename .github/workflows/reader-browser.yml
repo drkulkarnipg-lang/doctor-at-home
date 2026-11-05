@@ -52,11 +52,11 @@ jobs:
                   await page.locator('#wikiReaderClose').focus();
                   await page.keyboard.press('Escape');
                 }else await page.locator('#wikiReaderBack').click();
-                await page.locator('#wikiModal.hidden').waitFor();
+                await page.locator('#wikiModal.hidden').waitFor({state:'attached'});
               }
               await guides.first().click();
               await page.goBack();
-              await page.locator('#wikiModal.hidden').waitFor();
+              await page.locator('#wikiModal.hidden').waitFor({state:'attached'});
               await page.waitForFunction(()=>document.activeElement?.classList.contains('wiki-card-read'));
               console.log('PASS width '+width+': 13 guides, title/body, reading space, wheel scrolling, return, Escape and browser Back focus');
               await page.close();
