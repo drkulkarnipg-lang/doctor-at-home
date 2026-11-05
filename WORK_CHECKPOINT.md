@@ -1,3 +1,7 @@
+# Close focus browser acceptance passes — 5 November 2026 IST
+
+Actual exact preview 5a2a462b, deployment dpl_Eo1m5ANsQ8T6X9X23ej32rPKyu9y: opening first guide and clicking top Close returned activeElement BUTTON.wiki-card-read. The zero-delay history-completion task resolves this sampled desktop Close defect. Subsequent reopen for browser Back test hit Input.dispatchMouseEvent timeout; that check remains unverified. Next inspect fresh browser state and retry the interrupted normal interaction once, verify all guide Close/Back/keyboard flows and mobile geometry, and confirm final CI before release. No production publication.
+
 # History restoration diagnosis — 5 November 2026 IST
 
 MDN Window popstate_event documents persisted user-state restoration after popstate and recommends a zero-delay task for work requiring the final document state. The previous microtask can precede browser restoration. Changed only reader return-focus scheduling to a guarded zero-delay task. This is a source-supported hypothesis pending actual browser confirmation, not a successful fix claim. Exact preview and regression acceptance remain required. Source https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event . No release.
