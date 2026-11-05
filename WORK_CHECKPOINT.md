@@ -1,3 +1,7 @@
+# Palette browser results and screenshots — 5 November 2026 IST
+
+Final tested source f6da71e8: regression42027340045 SUCCESS; Chromium42027340405 SUCCESS. Artifact13414945744 contains28 screenshots (seven patient panels x360/390/768/1440). Downloaded and visually inspected360 Overview,1440 Overview and360 Booking. Text wraps; booking fields/actions visible. Remaining screenshots need review. Observed oversized mobile header with lock occupying entire row. Skip link appears in screenshots after scripted navigation; determine focus state versus actual persistent visibility before changing.1440 full-page capture shows sticky header overlapping top hero at captured scroll position; reproduce at scrollY0 and actual navigation before declaring layout defect. Do not publish until those visual questions resolved. Token contrast calculations recorded below. Protected Vercel open-link preview access remains rejected pending specific audience approval; do not bypass. Next inspect remaining screenshots and source skip-link/header rules, capture normal unfocused top-of-page state and make bounded fixes if reproduced. Production remains b34c203a. No patient data used.
+
 # Pastel acceptance and preview blocker — 5 November 2026 IST
 
 PR161 source65216a6 regression42027024738 SUCCESS. Shared tokens each defined once, no self-references. Calculated opaque token colour pairs: muted526577 vs sky/ivory/powder/sage5.28–5.97:1; ink24384b10.56–11.94:1; heading203e589.73–11.00:1. These are token calculations, not measured whole-page compliance.
