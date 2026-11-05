@@ -1,3 +1,9 @@
+# Pastel acceptance and preview blocker — 5 November 2026 IST
+
+PR161 source65216a6 regression42027024738 SUCCESS. Shared tokens each defined once, no self-references. Calculated opaque token colour pairs: muted526577 vs sky/ivory/powder/sage5.28–5.97:1; ink24384b10.56–11.94:1; heading203e589.73–11.00:1. These are token calculations, not measured whole-page compliance.
+
+Automatic approval review rejected creation of one-hour Vercel preview share link, citing missing explicit authorization for anyone-with-link audience. Do not retry equivalent bypass without specific approval. Continue authorised local-source CI browser verification. Extended runner to capture all seven panels at360/390/768/1440 and upload screenshots for visual review. Next inspect browser/regression results and screenshots, fix failures, then resolve protected preview audience approval or legitimate authenticated access before release. No production publication. Existing preview dpl_HLUAS3pPyH5RtzQziKuP63mHYC7Q READY. Current production reader b34c203a.
+
 # Approved pastel system — 5 November 2026 IST
 
 Reader PR160 production b34c203a READY; final source088da400 regression42026041459 and Chromium42026041516 pass. Actual live full-viewport reader and Close focus verified. Release evidence also saved on docs/reader-release-20261105.
