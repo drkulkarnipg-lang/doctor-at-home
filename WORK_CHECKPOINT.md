@@ -1,3 +1,11 @@
+# Whole-site audit and patient navigation release — 5 November 2026 IST
+
+Patient navigation PR #153: preview source a6cf0e911df3f04089b047eeccd6c5aa686b05ab, Actions 41960995646 SUCCESS, merge 742ba4e71a4c3bb23138dc06a5a15abff43a8918, live Vercel dpl_6TbRNnBbSQt7NGh6PsuPk3gCUYg6. Chromium preview and live at 1440/1024/390/360: each of seven tabs activates intended panel by Space, Enter and click; keyboard focus retained with visible ring; widths equal within current panel and no horizontal overflow in measured state; Home/ArrowRight/End sequence and Back returned to Booking. Signed-out Doctor Workstation displayed login dialog; Escape from Sign in dismissed it. Cross-engine and signed-in flows remain open.
+
+Evidence gap: old patient tab test covered clicks and ArrowRight but omitted Space. Added a regression for Space/Enter, panel selection and retained focus across all seven tabs. Existing live-contact test only reads local source, and site-preservation compares against Nov 4 snapshot, not original history. The main CI checkout uses moving branch refs, so historical run metadata alone does not prove which source checkout executed. Repository created Oct 20; initial Oct 21 history includes approved spacious design and clinical certificate/research releases, not yet individually audited.
+
+Next: build chronological public/clinical release inventory from Oct 20 onward with source SHA, deployment, actual browser checks and coverage gaps. Start live URL/alias/robots/sitemap verification and public booking, payment display, search, tools, FAQ, contact and guide flows. Then authenticated document, passkey, vault and clinical workflows using synthetic data and approved access. Audit cross-engine; record access/device blocks separately. Keep releases bounded and verify each after production.
+
 # PR #153 preview findings — 5 November 2026 IST
 
 Exact preview da785cf0, Vercel dpl_4dWwUAD2fpbYX1dFmEAPnBokbXqc, CI 41958310627 and 41958305234 successful. Chromium at 1440/1024/390/360: all seven tabs opened intended panels by click and Enter; solid focus ring and 44px height. ArrowRight moved focus and selection from Overview to Booking. Space failed to select Library. Width at 1024 varied 238–242px across panel changes; compare simultaneous widths and scrollbar/viewport geometry before changing CSS.
