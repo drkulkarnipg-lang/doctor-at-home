@@ -47,9 +47,14 @@
     activate(panelByKey.get(tab.dataset.publicTab), { history: true, focusPanel: true });
   });
   nav.addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     const current = tabs.indexOf(document.activeElement);
     if (current < 0) return;
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      activate(panelByKey.get(tabs[current].dataset.publicTab), { history: true });
+      return;
+    }
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
     const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
       (current + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
