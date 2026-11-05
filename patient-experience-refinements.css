@@ -169,3 +169,22 @@
   #credentialsModal button { min-width:44px; min-height:44px; color:#365247; }
   #credentialsModal button:focus-visible { outline:3px solid #215e53; outline-offset:3px; }
 }
+
+/* Let desktop home-visit content determine the hero height. */
+@media screen and (min-width: 901px) {
+  #publicPortal #portalPanelOverview .portal-hero { min-height: 0; }
+}
+
+@media screen and (min-width: 901px) {
+  #publicPortal #portalPanelOverview .portal-hero { padding: 20px !important; }
+  #publicPortal #portalPanelOverview :is(.hero-copy, .care-compass) {
+    gap: 10px;
+    padding: 20px !important;
+  }
+  #publicPortal #portalPanelOverview :is(.hero-copy, .care-compass) > .section-eyebrow { margin-bottom: 0; }
+  #publicPortal #portalPanelOverview :is(.original-care-hero, .care-compass h3) { margin: 8px 0 !important; }
+  #publicPortal #portalPanelOverview :is(.hero-primary-actions, .hero-copy > .section-translator, .hero-contact-actions, .care-mark, .compass-credentials) {
+    margin-top: 8px !important;
+    margin-bottom: 0;
+  }
+}
