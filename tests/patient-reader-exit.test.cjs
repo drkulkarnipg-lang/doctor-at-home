@@ -7,6 +7,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require
  if(w.document.readyState==='loading')await new Promise(resolve=>w.document.addEventListener('DOMContentLoaded',resolve,{once:true}));
  const read=w.document.querySelector('#wikiCardsGrid button'),modal=w.document.getElementById('wikiModal');
  function historyChange(action){return new Promise((resolve,reject)=>{const listener=()=>{clearTimeout(timer);resolve();};const timer=setTimeout(()=>{w.removeEventListener('popstate',listener);reject(Error('Expected browser history transition'));},2000);w.addEventListener('popstate',listener,{once:true});action();});}
+ // Simulate the later page router restoring panel focus during the same history event.
+ w.addEventListener('popstate',()=>w.document.getElementById('portalPanelLibrary').focus());
  read.focus();
  for(const close of ['wikiReaderClose','wikiReaderBack','backdrop','escape']){
   w.openWikiModal(9);assert.equal(w.document.body.style.overflow,'hidden');assert.equal(w.document.getElementById('publicPortal').inert,true);assert.equal(modal.classList.contains('hidden'),false);
