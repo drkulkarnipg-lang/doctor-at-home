@@ -1,3 +1,7 @@
+# Regression timing corrected — 5 November 2026 IST
+
+CI42024777120 job127236169704 failed at reader-exit line16 because assertion ran at popstate before the intentionally deferred focus task. Actual preview Close focus passed. Updated test to await actual focusin on original Read button with bounded failure timeout; assertion remains strict. All earlier tests including bilingual guide test passed in failed run. Next await new CI, inspect browser timeout state, complete Back/all-guide/mobile acceptance. No release.
+
 # Close focus browser acceptance passes — 5 November 2026 IST
 
 Actual exact preview 5a2a462b, deployment dpl_Eo1m5ANsQ8T6X9X23ej32rPKyu9y: opening first guide and clicking top Close returned activeElement BUTTON.wiki-card-read. The zero-delay history-completion task resolves this sampled desktop Close defect. Subsequent reopen for browser Back test hit Input.dispatchMouseEvent timeout; that check remains unverified. Next inspect fresh browser state and retry the interrupted normal interaction once, verify all guide Close/Back/keyboard flows and mobile geometry, and confirm final CI before release. No production publication.
