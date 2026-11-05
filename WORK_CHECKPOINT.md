@@ -1,3 +1,9 @@
+# Live site audit — 5 November 2026 IST
+
+Live Chromium: all seven patient tabs opened the intended panels with Enter; widths 99–155 px, heights 44 px. All 13 guide actions opened the corresponding body in a scrollable reader and the Library return closed it. Three topics are repeated in Patient guidance: heart failure daily weight, coconut water/potassium, pressure injury. Reader Back behavior, actual scrolling and mobile not yet tested. Source robots.txt and sitemap files point to the Vercel host; validate live HTTP/TLS, sitemap and canonicals before a separate fix that preserves aliases and paths. Source Vercel config declares nosniff, frame denial, referrer policy and a limited CSP; live delivery unverified.
+
+PR #153 draft, CSS source commit `e5eab9024e580ed667ee18150b548d1bc3f6bd41`: equal patient tab tracks and explicit focus ring. No source behavior or URLs changed. Next check exact updated head CI and preview, test dimensions, keyboard focus and destinations at desktop and mobile, then publish only after checks pass. Workspace and signed-in groups, Library isolation and Back, duplicate topics, cross-engine compatibility and professional content review are open.
+
 # Desktop release verified — 5 November 2026 IST
 
 PR #152 merged at `0045df82b7838b77f5812e197588fb9ef1244fa8`; Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F` READY on production. Exact PR head `22aad29c` passed Actions `41955257301`. Live browser hero heights at viewport 1440 and 1024: 770.18 → 587.18 px and 739.07 → 591.74 px, matching preview. Next-section gap stayed 4 px. At 390 and 360 widths, height matched baseline, no horizontal overflow, Request a home visit opened Booking, and Enter on Overview returned to it. Desktop-only CSS; no auth, destinations or clinical changes.
