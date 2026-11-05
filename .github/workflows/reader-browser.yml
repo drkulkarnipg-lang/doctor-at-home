@@ -1,9 +1,9 @@
 name: Reader browser acceptance
 on:
   push:
-    branches: [fix/library-reader-fullscreen-20261105]
+    branches: [fix/library-reader-fullscreen-20261105, design/pastel-palette-20261105]
   pull_request:
-    paths: [awareness-library.js, patient-experience-refinements.css, index.html, .github/workflows/reader-browser.yml]
+    paths: [translucent-clinical-luxury.css, awareness-library.js, patient-experience-refinements.css, index.html, .github/workflows/reader-browser.yml]
 permissions:
   contents: read
 jobs:
@@ -23,11 +23,19 @@ jobs:
           node <<'NODE'
           const {chromium}=require('playwright');
           const assert=require('node:assert/strict');
+          require('node:fs').mkdirSync('reader-screenshots',{recursive:true});
           (async()=>{
             const browser=await chromium.launch();
             for(const width of [360,390,768,1440]){
               const page=await browser.newPage({viewport:{width,height:900}});
               await page.goto('http://127.0.0.1:8080/');
+              await page.getByRole('tab',{name:'Health library',exact:true}).click();
+              for(const name of ['Overview','Book a home visit','Health library','Elderly care','Search articles','Health tools','Patient FAQ']){
+                await page.getByRole('tab',{name,exact:true}).click();
+                await page.evaluate(()=>window.scrollTo(0,0));
+                console.log(JSON.stringify(await page.locator('.skip-link').evaluate(e=>({skipTop:getComputedStyle(e).top,skipPosition:getComputedStyle(e).position,focused:e===document.activeElement}))));
+                await page.screenshot({path:'reader-screenshots/'+width+'-'+name.replaceAll(' ','-')+'.png',fullPage:true});
+              }
               await page.getByRole('tab',{name:'Health library',exact:true}).click();
               const guides=page.getByRole('button',{name:'Read the complete guide →',exact:true});
               assert.equal(await guides.count(),13);
@@ -64,3 +72,9 @@ jobs:
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: patient-palette-screenshots
+          path: reader-screenshots
+          retention-days: 7
