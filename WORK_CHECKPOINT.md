@@ -1,3 +1,9 @@
+# All desktop guide actions verified — 5 November 2026 IST
+
+Actual preview application source 5a2a462b: all thirteen Read Guide actions opened visible readers with matching title/body, and each footer Library return closed it. Browser Back on sampled first guide closed reader and restored BUTTON.wiki-card-read focus. Prior mouse timeout was recovered by fresh AX inspection showing reader had opened. All ten unique titles verified plus three repeated published cards. Desktop wheel scrolling and top Close focus already passed. Mobile viewport and full keyboard trap acceptance remain required before release. CI4b97381 checked separately; no release.
+
+Next execute mobile layout/scroll/close checks through supported browser resizing or repository CI browser runner, then publish only after required checks pass. Other language provider and topic dedupe remain open.
+
 # Regression timing corrected — 5 November 2026 IST
 
 CI42024777120 job127236169704 failed at reader-exit line16 because assertion ran at popstate before the intentionally deferred focus task. Actual preview Close focus passed. Updated test to await actual focusin on original Read button with bounded failure timeout; assertion remains strict. All earlier tests including bilingual guide test passed in failed run. Next await new CI, inspect browser timeout state, complete Back/all-guide/mobile acceptance. No release.
