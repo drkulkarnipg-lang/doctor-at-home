@@ -1,3 +1,9 @@
+# Patient assistant release and next audit — 5 November 2026 IST
+
+- PR #154 navigation **PRODUCTION VERIFIED**: preview c5644dc5 / dpl_32hwhkDckHYRawYFL8Hx43guhEKo, CI 41961649534 success, merge f33b99f8, live dpl_55LtViMPSnwGQgJzcKsACQSux4TM. Chromium preview and live: language question yields correct directions, Health Library/Booking/Fees/Articles/PDF shortcuts select intended panels; dose question routes to doctor.
+- Generative AI **BLOCKED**: registration-details question returned AI_SETUP_REQUIRED on preview and production. Configure the provider secret securely in existing Supabase function environment and retest real provider response. Do not record credentials.
+- Booking accessibility **IN PROGRESS**: live Chromium Booking exposed calcTime select with neither associated label nor aria-label. Next inspect corresponding markup and language handling, bind the existing visible label and verify accessible name on preview and live. Other public forms and authenticated workflows remain open.
+
 # Whole-site audit and patient navigation release — 5 November 2026 IST
 
 Patient navigation PR #153: preview source a6cf0e911df3f04089b047eeccd6c5aa686b05ab, Actions 41960995646 SUCCESS, merge 742ba4e71a4c3bb23138dc06a5a15abff43a8918, live Vercel dpl_6TbRNnBbSQt7NGh6PsuPk3gCUYg6. Chromium preview and live at 1440/1024/390/360: each of seven tabs activates intended panel by Space, Enter and click; keyboard focus retained with visible ring; widths equal within current panel and no horizontal overflow in measured state; Home/ArrowRight/End sequence and Back returned to Booking. Signed-out Doctor Workstation displayed login dialog; Escape from Sign in dismissed it. Cross-engine and signed-in flows remain open.
