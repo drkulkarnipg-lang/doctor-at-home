@@ -1,3 +1,7 @@
+## PR152 desktop preview verified
+
+At 1348px, hero height fell from 763.625px on production to 584.5px on preview a1ffff08. Gap to next section was 4px on both. Regression run 41953610822 passed. Mobile viewport verification remains required before merging. The current browser interface exposes no viewport resize operation. Next use a browser with a mobile viewport to compare wrapping, overflow, booking entry and section navigation. Keep remaining work in requested order.
+
 # Desktop spacing measurement — 5 November 2026 IST
 
 At 1348px, production and initial PR152 preview both measured 763.625px hero height and 4px to the next section. Removing the 480px minimum alone had no effect. The two inner columns measured about 694px with 32–34px padding and 16–22px gaps plus child margins. Added desktop-only spacing reductions. Next verify revised preview geometry, mobile and relevant CI before merge. Other layout items remain queued.
