@@ -1,3 +1,7 @@
+# Reader release verified — 5 November 2026 IST
+
+PR160 released at b34c203a17405daa733a87ad2dad6561197d2722. Vercel dpl_3fyGvdDvYh126W5Qnyhh1iNY8Tet production READY. Full regression42026041459 and Chromium42026041516 successful on final source088da400. Chromium360/390/768/1440:13 guide actions each, title/body, reading space, no body horizontal overflow, wheel scrolling, returns, Escape and browser Back focus passed. Actual live drkulkarnipg.com first reader fills1363px viewport with632px article pane; Close restores wiki-card-read focus. Physical devices/cross-engine and additional languages remain unverified/unconfigured. Next ordered item: audit three repeated published topics and preserve their unique content/PDF/link destinations while establishing primary Library locations. No claim of project-wide completion.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
