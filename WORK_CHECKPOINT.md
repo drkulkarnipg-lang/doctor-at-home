@@ -1,3 +1,9 @@
+# Reader scrolling verified — 5 November 2026 IST
+
+Resumed from PR152 as requested. Fresh PR152 metadata confirms merged; existing desktop and 390/360px evidence remains recorded below and is not repeated. Main production remains d37fd20d READY. PR160 head df4dc8c remains open. Actual browser on exact application source preview 38ec48ae: wheel scroll in #wikiModalContent moved scrollTop from 0 to 632px, with 632px clientHeight and 2545px content. Prior PageDown=0 is not evidence of broken scrolling. Scrolling passes for sampled first guide on desktop. Focus return after history still needs correction; mobile reader and all thirteen actions remain unverified for this release. No new production release.
+
+Next executable action: reproduce full-page popstate focus override with page-identity and public portal scripts loaded, fix focus restoration, then verify all guide Close/Back routes and mobile reader before merge. This execution ended after the concrete desktop scroll acceptance check.
+
 # Reader browser findings — 5 November 2026 IST
 
 Actual Chrome preview at 38ec48ae (dpl_91ojQpbjHpR9wnRjUMEVkS6KZWQt), 1363x936 viewport: first guide opens a full viewport reader; article pane 632px tall; top Close visible at y10 with 44px height. Close hides the reader. However final focus lands on Library panel instead of originating Read button after history processing. PageDown experiment reported scrollTop 0, so scrolling is not yet accepted and needs wheel/keyboard diagnosis. No merge or release. Next fix/verify focus restoration through public-portal popstate interaction, test real scrolling and all guide returns, then mobile geometry. Other translation languages remain unconfigured. This run ends with browser acceptance incomplete.
