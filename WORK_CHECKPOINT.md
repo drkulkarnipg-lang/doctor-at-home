@@ -1,3 +1,7 @@
+# Reader CI verification — 5 November 2026 IST
+
+PR160 implementation e9c114eca583cf340114fcf52c00077887608001 passed exact-head regression run 42005396730. PR remains draft, open and mergeable. Current main/production remains d37fd20da1bba12ece25571bd27fcb47733437a3, Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY; apex alias and www redirect verified. No new publication. This check did not execute browser acceptance. Next executable action: obtain one-hour access to PR160 exact preview, verify reader geometry, article scrolling, Close/Back and keyboard controls, and complete mobile viewport checks before merge. Other languages remain unconfigured. Execution ended before browser acceptance; do not mark reader complete.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
