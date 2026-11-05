@@ -1,3 +1,7 @@
+# Reader focus correction — 5 November 2026 IST
+
+Implementation 8ff184986c7be9d1050176d7d8e659a33c1beecd defers trigger focus restoration until synchronous popstate routing completes, only for a pending reader close. Existing immediate restoration remains for non-history closes. Added regression simulating a later router focusing the Library panel. CI and exact preview retest pending; do not merge until successful. Desktop wheel scrolling previously verified 632px. Next verify close focus with all production scripts in preview, then mobile reader/all guide acceptance. No production release in this step.
+
 # Reader scrolling verified — 5 November 2026 IST
 
 Resumed from PR152 as requested. Fresh PR152 metadata confirms merged; existing desktop and 390/360px evidence remains recorded below and is not repeated. Main production remains d37fd20d READY. PR160 head df4dc8c remains open. Actual browser on exact application source preview 38ec48ae: wheel scroll in #wikiModalContent moved scrollTop from 0 to 632px, with 632px clientHeight and 2545px content. Prior PageDown=0 is not evidence of broken scrolling. Scrolling passes for sampled first guide on desktop. Focus return after history still needs correction; mobile reader and all thirteen actions remain unverified for this release. No new production release.
