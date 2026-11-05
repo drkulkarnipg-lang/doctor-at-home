@@ -1,3 +1,7 @@
+# Reader release verified — 5 November 2026 IST
+
+PR160 released at b34c203a17405daa733a87ad2dad6561197d2722. Vercel dpl_3fyGvdDvYh126W5Qnyhh1iNY8Tet production READY. Full regression42026041459 and Chromium42026041516 successful on final source088da400. Chromium360/390/768/1440:13 guide actions each, title/body, reading space, no body horizontal overflow, wheel scrolling, returns, Escape and browser Back focus passed. Actual live drkulkarnipg.com first reader fills1363px viewport with632px article pane; Close restores wiki-card-read focus. Physical devices/cross-engine and additional languages remain unverified/unconfigured. Next ordered item: audit three repeated published topics and preserve their unique content/PDF/link destinations while establishing primary Library locations. No claim of project-wide completion.
+
 # Browser runner wait corrected — 5 November 2026 IST
 
 Reader browser run42025769114 failed because its locator wait requested visibility of #wikiModal.hidden. Logs explicitly confirm modal was hidden64 times. Corrected wait to state attached for the closed-state selector. First mobile reader opened, passed title/body/reading-height/overflow checks and wheel scroll, then Escape closed it before this runner error. Complete widths remain pending rerun. Actual preview Escape also closes and restores wiki-card-read focus. Next inspect corrected runner result and finish mobile acceptance. No release.
