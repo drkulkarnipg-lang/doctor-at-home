@@ -1,3 +1,7 @@
+# History restoration diagnosis — 5 November 2026 IST
+
+MDN Window popstate_event documents persisted user-state restoration after popstate and recommends a zero-delay task for work requiring the final document state. The previous microtask can precede browser restoration. Changed only reader return-focus scheduling to a guarded zero-delay task. This is a source-supported hypothesis pending actual browser confirmation, not a successful fix claim. Exact preview and regression acceptance remain required. Source https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event . No release.
+
 # Focus acceptance still failing — 5 November 2026 IST
 
 Actual preview f4c61272 (dpl_A6Q3PoR49SWuqZG1oz1MtQHeRZQC) Close retest still leaves activeElement at SECTION.public-portal-panel, even with explicit currentTarget. Do not claim fixed or publish. Exact-head CI42024355103 was pending at initial lookup. Next reproduce locally with all scripts and event-order instrumentation before further changes; investigate panel routing and trigger connectivity rather than guessing another delay. Published article read handlers in preserved-features.js also still omit the explicit trigger. Source corrections remain unverified. Desktop wheel scroll evidence remains valid. No release.
