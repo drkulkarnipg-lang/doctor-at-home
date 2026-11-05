@@ -169,3 +169,8 @@
   #credentialsModal button { min-width:44px; min-height:44px; color:#365247; }
   #credentialsModal button:focus-visible { outline:3px solid #215e53; outline-offset:3px; }
 }
+
+/* Let desktop home-visit content determine the hero height. */
+@media screen and (min-width: 901px) {
+  #publicPortal #portalPanelOverview .portal-hero { min-height: 0; }
+}

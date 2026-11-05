@@ -1,3 +1,7 @@
+# Desktop layout first — 5 November 2026 IST
+
+Owner prioritised excess desktop space below Doctor Visit. Found existing 480px hero minimum. Isolated desktop override to let content determine height. Browser confirmation pending, including whether this addresses the reported gap. Preserve all content and controls. Next compare desktop before/after, narrow further if gap remains, check mobile and CI before release. Then verify equal tab sizes, consistent interactions, Library-only language, readable independent guide view and duplicate topics. PR151 remains separate.
+
 # Verified continuity update — 5 November 2026 IST
 
 - Owner subsequently replied done after testing the numeric OTP/password-change flow. Mark OTP delivery and password-change outcome OWNER-CONFIRMED; do not claim an independent signed-in browser verification. No additional OTP or password operation is required.
