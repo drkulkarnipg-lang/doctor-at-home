@@ -1,3 +1,61 @@
+# Browser runner wait corrected — 5 November 2026 IST
+
+Reader browser run42025769114 failed because its locator wait requested visibility of #wikiModal.hidden. Logs explicitly confirm modal was hidden64 times. Corrected wait to state attached for the closed-state selector. First mobile reader opened, passed title/body/reading-height/overflow checks and wheel scroll, then Escape closed it before this runner error. Complete widths remain pending rerun. Actual preview Escape also closes and restores wiki-card-read focus. Next inspect corrected runner result and finish mobile acceptance. No release.
+
+# Mobile acceptance runner added — 5 November 2026 IST
+
+Commit7b3cf7fb adds reader-browser workflow using Chromium/Playwright1.56.1 with a local source HTTP server. Tests all13 read actions at360,390,768,1440 widths, title/body correspondence, reading viewport height, horizontal overflow, wheel scroll, returns, Escape and browser Back focus. No patient data or backend auth used. This is automated real-browser source acceptance, distinct from Vercel preview/device testing. Results pending. Next inspect reader-browser job, fix any observed failure, rerun and inspect mobile screenshot before release. Desktop preview13 actions and Back focus already passed. Full regression prior4b97381 passed. No production release.
+
+# All desktop guide actions verified — 5 November 2026 IST
+
+Actual preview application source 5a2a462b: all thirteen Read Guide actions opened visible readers with matching title/body, and each footer Library return closed it. Browser Back on sampled first guide closed reader and restored BUTTON.wiki-card-read focus. Prior mouse timeout was recovered by fresh AX inspection showing reader had opened. All ten unique titles verified plus three repeated published cards. Desktop wheel scrolling and top Close focus already passed. Mobile viewport and full keyboard trap acceptance remain required before release. CI4b97381 checked separately; no release.
+
+Next execute mobile layout/scroll/close checks through supported browser resizing or repository CI browser runner, then publish only after required checks pass. Other language provider and topic dedupe remain open.
+
+# Regression timing corrected — 5 November 2026 IST
+
+CI42024777120 job127236169704 failed at reader-exit line16 because assertion ran at popstate before the intentionally deferred focus task. Actual preview Close focus passed. Updated test to await actual focusin on original Read button with bounded failure timeout; assertion remains strict. All earlier tests including bilingual guide test passed in failed run. Next await new CI, inspect browser timeout state, complete Back/all-guide/mobile acceptance. No release.
+
+# Close focus browser acceptance passes — 5 November 2026 IST
+
+Actual exact preview 5a2a462b, deployment dpl_Eo1m5ANsQ8T6X9X23ej32rPKyu9y: opening first guide and clicking top Close returned activeElement BUTTON.wiki-card-read. The zero-delay history-completion task resolves this sampled desktop Close defect. Subsequent reopen for browser Back test hit Input.dispatchMouseEvent timeout; that check remains unverified. Next inspect fresh browser state and retry the interrupted normal interaction once, verify all guide Close/Back/keyboard flows and mobile geometry, and confirm final CI before release. No production publication.
+
+# History restoration diagnosis — 5 November 2026 IST
+
+MDN Window popstate_event documents persisted user-state restoration after popstate and recommends a zero-delay task for work requiring the final document state. The previous microtask can precede browser restoration. Changed only reader return-focus scheduling to a guarded zero-delay task. This is a source-supported hypothesis pending actual browser confirmation, not a successful fix claim. Exact preview and regression acceptance remain required. Source https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event . No release.
+
+# Focus acceptance still failing — 5 November 2026 IST
+
+Actual preview f4c61272 (dpl_A6Q3PoR49SWuqZG1oz1MtQHeRZQC) Close retest still leaves activeElement at SECTION.public-portal-panel, even with explicit currentTarget. Do not claim fixed or publish. Exact-head CI42024355103 was pending at initial lookup. Next reproduce locally with all scripts and event-order instrumentation before further changes; investigate panel routing and trigger connectivity rather than guessing another delay. Published article read handlers in preserved-features.js also still omit the explicit trigger. Source corrections remain unverified. Desktop wheel scroll evidence remains valid. No release.
+
+# Pointer-trigger focus correction — 5 November 2026 IST
+
+Actual preview a5a1e354 still returned focus to Library panel. Prior deferred restoration alone did not pass acceptance. Guide-card click now explicitly passes event.currentTarget through openWikiModal/showArticle so the originating control is retained independently of activeElement. CI and browser retest pending. Do not publish yet. Next verify exact updated preview Close and browser Back focus, cover published-article triggers, then mobile/all-guide checks.
+
+# Reader focus correction — 5 November 2026 IST
+
+Implementation 8ff184986c7be9d1050176d7d8e659a33c1beecd defers trigger focus restoration until synchronous popstate routing completes, only for a pending reader close. Existing immediate restoration remains for non-history closes. Added regression simulating a later router focusing the Library panel. CI and exact preview retest pending; do not merge until successful. Desktop wheel scrolling previously verified 632px. Next verify close focus with all production scripts in preview, then mobile reader/all guide acceptance. No production release in this step.
+
+# Reader scrolling verified — 5 November 2026 IST
+
+Resumed from PR152 as requested. Fresh PR152 metadata confirms merged; existing desktop and 390/360px evidence remains recorded below and is not repeated. Main production remains d37fd20d READY. PR160 head df4dc8c remains open. Actual browser on exact application source preview 38ec48ae: wheel scroll in #wikiModalContent moved scrollTop from 0 to 632px, with 632px clientHeight and 2545px content. Prior PageDown=0 is not evidence of broken scrolling. Scrolling passes for sampled first guide on desktop. Focus return after history still needs correction; mobile reader and all thirteen actions remain unverified for this release. No new production release.
+
+Next executable action: reproduce full-page popstate focus override with page-identity and public portal scripts loaded, fix focus restoration, then verify all guide Close/Back routes and mobile reader before merge. This execution ended after the concrete desktop scroll acceptance check.
+
+# Reader browser findings — 5 November 2026 IST
+
+Actual Chrome preview at 38ec48ae (dpl_91ojQpbjHpR9wnRjUMEVkS6KZWQt), 1363x936 viewport: first guide opens a full viewport reader; article pane 632px tall; top Close visible at y10 with 44px height. Close hides the reader. However final focus lands on Library panel instead of originating Read button after history processing. PageDown experiment reported scrollTop 0, so scrolling is not yet accepted and needs wheel/keyboard diagnosis. No merge or release. Next fix/verify focus restoration through public-portal popstate interaction, test real scrolling and all guide returns, then mobile geometry. Other translation languages remain unconfigured. This run ends with browser acceptance incomplete.
+
+# Reader CI verification — 5 November 2026 IST
+
+PR160 implementation e9c114eca583cf340114fcf52c00077887608001 passed exact-head regression run 42005396730. PR remains draft, open and mergeable. Current main/production remains d37fd20da1bba12ece25571bd27fcb47733437a3, Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY; apex alias and www redirect verified. No new publication. This check did not execute browser acceptance. Next executable action: obtain one-hour access to PR160 exact preview, verify reader geometry, article scrolling, Close/Back and keyboard controls, and complete mobile viewport checks before merge. Other languages remain unconfigured. Execution ended before browser acceptance; do not mark reader complete.
+
+# Reader follow-up — 5 November 2026 IST
+
+PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.
+
+Current branch fix/library-reader-fullscreen-20261105 changes reader to opaque full viewport, adds top Close, collapses supplementary language options and excludes collapsed controls from keyboard trap. Local reader-exit and all ten bilingual guide regressions passed. Preview, exact-head CI and mobile visual checks PENDING. Not released. Other languages still require configured section-only translation and reviewed medical translations. Next: obtain exact preview, verify all reader open/scroll/Close/Back and keyboard interactions at desktop/mobile, then publish only after checks pass. Existing clinical PR157 remains independent.
+
 # Patient tab outline preview — 5 November 2026 IST
 
 PR #158 source c1d71744ab8712de29568b2fd462afb180ebfd3f adds visible borders and white surfaces to all seven Patient Portal tabs. Selected tab has a darker border and inset underline. Vercel preview dpl_FznWd9QXa6ihmi34iTkPf3h1bXtj READY. Exact-head regression CI 41969437870 SUCCESS. Four local navigation regression files passed. Actual preview Chrome at 1348px: all seven controls 44px high and 171.42–171.44px wide, every click opened its intended panel, Enter on Overview restored selection and a 3px focus ring. Screenshot visually inspected. Current browser cannot resize viewport, so a fresh mobile visual check remains unverified. CSS preserves grid, spacing, wrapping and control dimensions.

@@ -219,3 +219,41 @@
 @media screen and (max-width: 640px) {
   .site-header .portal-nav:not(.hidden) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Give an open guide its own viewport above the Library and site navigation. */
+@media screen {
+  #wikiModal { padding: 0 !important; background: #fff !important; }
+  #wikiModal > div {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100dvh;
+    max-height: 100dvh !important;
+    border: 0;
+    border-radius: 0 !important;
+  }
+  #wikiModal .wiki-reader-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    padding: 10px 20px;
+  }
+  #wikiModalTitle { grid-column: 1; grid-row: 1; }
+  #wikiReaderClose { grid-column: 2; grid-row: 1; }
+  #wikiModal .wiki-reader-header .section-translator {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    padding: 8px 12px;
+  }
+  #wikiModal #articleLanguageControls { padding: 8px 20px; }
+  #articleLanguageControls > summary {
+    cursor: pointer;
+    min-height: 44px;
+    align-content: center;
+    font: 600 14px/1.5 system-ui;
+  }
+  #articleLanguageControls > summary:focus-visible {
+    outline: 3px solid #215e53;
+    outline-offset: 2px;
+  }
+}
