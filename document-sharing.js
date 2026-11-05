@@ -107,22 +107,22 @@ function addVaultBrowser(desk){
     const row=document.createElement('li');
     const open=document.createElement('button');
     open.type='button';
-    open.textContent='Get file link';
+    open.textContent='Open';
     row.append(document.createTextNode(doc.title+' · '+new Date(doc.created_at).toLocaleDateString('en-IN',{timeZone:'Asia/Kolkata'})+' '),open);
     open.onclick=async()=>{
+     const fileTab=window.open('about:blank','_blank');
+     if(fileTab)fileTab.opener=null;
      open.disabled=true;
      try{
       const {url}=await window.ClinicCloud.downloadDocument(doc.id);
-      const link=document.createElement('a');
-      link.href=url;
-      link.target='_blank';
-      link.rel='noopener noreferrer';
-      link.textContent='Open saved file (link expires in 90 seconds)';
-      open.replaceWith(link);
-      link.focus();
-      window.setTimeout(()=>{if(link.isConnected)link.replaceWith(open);},90000);
-     }catch(error){status.textContent=error.message||'Could not open the saved document.';}
-     finally{open.disabled=false;}
+      const fileUrl=new URL(url);
+      if(fileUrl.protocol!=='https:')throw Error('Invalid saved document link.');
+      if(fileTab&&!fileTab.closed)fileTab.location.replace(fileUrl.href);
+      else if(!fileTab)window.location.assign(fileUrl.href);
+     }catch(error){
+      fileTab?.close();
+      status.textContent=error.message||'Could not open the saved document.';
+     }finally{open.disabled=false;}
     };
     list.append(row);
    }
