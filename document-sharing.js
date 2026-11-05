@@ -58,23 +58,34 @@ const cloudDocuments={
 const cloudCertificates={referral:['cdoc-referral','Referral_Letter','referral'],consent:['cdoc-consent','Consent_Form','consent'],fitness:['cdoc-fitness','Fitness_Certificate','fitness'],leave:['cdoc-leave','Unfitness_Certificate','unfitness'],form4:['cert-form4','Form_4','other'],form4a:['cert-form4a','Form_4A','other'],form2:['cert-form2','Form_2','other']};
 function addInlineCloudActions(){
  const targets=[
-  ...Object.entries(cloudDocuments).filter(([kind])=>kind!=='rx').map(([kind,doc])=>[kind,doc.id]),
-  ...Object.entries(cloudCertificates).map(([kind,[id]])=>['certificate:'+kind,id])
+  ...Object.entries(cloudDocuments),
+  ...Object.entries(cloudCertificates).map(([kind,[id,name,type]])=>['certificate:'+kind,{id,name,type}])
  ];
- for(const [kind,id] of targets){
+ for(const [kind,{id,name}] of targets){
   const sheet=document.getElementById(id);
   if(!sheet||sheet.querySelector('[data-inline-cloud-status]'))continue;
   const controls=document.createElement('div');
-  controls.className='no-print';
+  controls.className='no-print flex flex-wrap items-center gap-2 border-t border-slate-200 pt-3 mt-4';
+  controls.setAttribute('role','group');
+  controls.setAttribute('aria-label','Document actions');
   const button=document.createElement('button');
   button.type='button';
-  button.className='research-upload';
+  button.className='research-upload min-h-[44px]';
   button.textContent='Save to private cloud';
-  button.addEventListener('click',()=>window.saveDeskDocument(kind,button));
+  button.addEventListener('click',()=>kind==='rx'
+   ? window.PrescriptionActions.saveToPrivateCloud()
+   : window.saveDeskDocument(kind,button));
+  const exportButton=document.createElement('button');
+  exportButton.type='button';
+  exportButton.className='research-upload min-h-[44px]';
+  exportButton.textContent='Download or share PDF';
+  exportButton.addEventListener('click',()=>kind==='rx'
+   ? window.PrescriptionActions.exportPdf()
+   : window.shareDocumentPdf(id,name));
   const status=document.createElement('p');
   status.setAttribute('role','status');
   status.setAttribute('data-inline-cloud-status','');
-  controls.append(button,status);
+  controls.append(button,exportButton,status);
   sheet.append(controls);
  }
 }
