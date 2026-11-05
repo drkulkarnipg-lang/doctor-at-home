@@ -1,3 +1,7 @@
+# Forms Centre language versions — 5 November 2026 IST
+
+- FORMS-LANG-20261105 — TODO. All eleven Forms Centre editors and generated outputs need authored English, Marathi and Hindi labels, options and instructions. Language selection stays within forms and preserves entered patient values. Preserve original statutory wording and format for Forms 2, 4 and 4A, with Marathi/Hindi assistance clearly distinguished from official text until approved editions are verified. Verify all editor choices and PDF rendering, including Devanagari glyphs and cloud retrieval. Current section-languages.js translates Workstation navigation only. Keep this separate from PR #155 cloud save acceptance.
+
 # Ordered patient UX follow-up — 5 November 2026 IST
 
 - DESKTOP-SPACING-20261105 — **PRODUCTION VERIFIED** (completed archive): PR #152 / `0045df82`, Vercel `dpl_EF8g46W7NeCzVMAzKgDbyWzt3y9F`; exact-head CI `41955257301`; live desktop and mobile evidence in WORK_CHECKPOINT.md.
