@@ -1,3 +1,7 @@
+# Stitch gradient consolidation — 6 November 2026
+
+Implementation37499c8e079b8a3fe5d3c95156e01650f225d5ea replaces ten remaining warm decorative rgba colours with supplied blue/white/teal surfaces and blue-grey borders. All154 CSS selector blocks retained; brace counts balanced. No DOM, links, handlers or clinical changes. Previous head662af36 regression42097026584 SUCCESS; do not treat it as exact-new-head acceptance. Latest browser and CI checks remain pending. No release; full Stitch layout migration unfinished. Next inspect calculator/workstation references, map existing components and perform visual acceptance at desktop/mobile; preserve backup and avoid unsupported template telemetry/claims.
+
 # Stitch implementation started — 6 November 2026
 
 Source4c40bfa1c6e528306bd9297077d1520f5f23e346 updates existing CSS colours toward supplied Aura design. Inspected Patient Portal screenshot: sidebar, rounded white cards, blue/teal/lavender tiles; telemetry/chat examples are mock content and must not become false live features. Only palette foundation implemented, not full screenshot parity. Remaining legacy warm rgba gradients and component layout require consolidation. No HTML/JS/auth/clinical/link changes in this commit. Browser and CI acceptance pending; no production release. Master backup unchanged. Next complete all reference screen inspection, finish existing-rule palette consolidation, then preview visual comparison and functional regression. Keep draft until accepted.
