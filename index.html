@@ -675,14 +675,7 @@ body{
 </div>
 </div>
 <p class="text-center text-slate-500 text-[11px]"><a href="legal-privacy.html" target="_blank" rel="noopener noreferrer">Legal &amp; privacy ↗</a> · <a href="editorial-policy.html">Editorial standards &amp; sources ↗</a> · <a class="site-info-link" href="site-information.html">Site information: domain, hosting &amp; HTTPS ↗</a><br/>© 2026 Dr. Pramod G. Kulkarni. </p>
-<p><a href="/articles">Browse published health articles</a> · <a href="/patient-privacy.html">Cloud privacy notice</a></p></footer>
-</section>
-</main>
-<!-- ================= 2. DOCTOR CLINICAL WORKSTATION ================= -->
-<main class="hidden flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6" id="doctorWorkstation"><div class="workstation-heading no-print"><span class="section-eyebrow">Dr. Kulkarni · clinical workspace</span><p class="workspace-area-label">Doctor Workstation</p><p>Prescriptions, investigations, clinical references and research — together at your desk.</p><div class="section-translator no-print" data-translator-scope="doctorLanguagePicker"><label for="doctorLanguagePicker">🌐 Doctor Workstation language — Translate / भाषा बदला</label><select id="doctorLanguagePicker" class="section-language-picker" aria-label="Doctor Workstation language language selector"><option value="">Loading languages…</option></select><span>Changes only this section. Available authored translations are used; other languages require a section-only service.</span></div></div>
-<!-- Doctor Sub-Tabs Navigation -->
-<div aria-label="Doctor workstation tools" class="flex flex-wrap gap-2 border-b petal-border pb-3 no-print doctor-tabs">
-<button class="px-3.5 py-1.5 bg-[#275f4b] text-white rounded-xl text-xs font-bold shadow" id="tabClinicalTools" onclick="switchDocTab('clinicalTools')">🏥 Workstation Home</button><button class="px-3.5 py-1.5 bg-[#0F2942] text-white rounded-xl text-xs font-bold shadow" id="tabRx" onclick="switchDocTab('rxPad')">📝 A4 Prescription</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabInvoice" onclick="switchDocTab('invoice')">🧾 Invoice / Receipt</button><button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold" id="tabRegisters" onclick="switchDocTab('registers')">📒 Practice Registers</button><a class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="openDiseaseMonitoringCentre" href="/api/disease-monitoring-page" target="_blank" rel="noopener noreferrer" aria-label="Open secure Disease Monitoring Centre">🩺 Disease Monitoring Centre ↗</a>
+<p><a href="/articles">Browse published health articles</a> · <button type="button" class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabDiseaseMonitoring" onclick="switchDocTab('diseaseMonitoring')">🩺 Disease Monitoring Centre</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm" id="tabSymptom" onclick="switchDocTab('symptomChecker')">🩺 WebMD Symptom &amp; Interaction Suite</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1" id="tabJournals" onclick="switchDocTab('journalsHub')">📡 Live RSS &amp; AI Research Agent</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabEverydayTools" onclick="switchDocTab('everydayTools')">🌿 Diet &amp; Conversions</button><button class="px-3 py-2 rounded-xl text-xs font-bold" id="tabChart" onclick="switchDocTab('chart20')">📈 Patient BP, Sugar &amp; Trends</button>
 <button class="px-3.5 py-1.5 bg-white border petal-border text-[#0F2942] rounded-xl text-xs font-bold hover:bg-slate-50" id="tabCheat" onclick="switchDocTab('pathCheatSheet')">🔬 Pathology Cheat Sheet (150+)</button>
@@ -849,6 +842,11 @@ body{
 <button type="button" class="research-upload" id="registerPrint">Print register</button>
 </div>
 <div class="overflow-x-auto"><table class="w-full text-sm register-table"><thead id="registerTableHead"></thead><tbody id="registerTableBody"></tbody></table></div>
+</section>
+<section class="hidden space-y-4" id="viewDiseaseMonitoring">
+<header class="no-print"><span class="section-eyebrow">Doctor Workstation · private clinical module</span><h3>Disease Monitoring Centre</h3><p>Owner-authenticated disease-wise watchlist, trend review, investigation guides and alerts. Patient records are stored only in the secure clinic cloud; use coded patient identifiers, never names or contact details.</p></header>
+<div class="no-print flex flex-wrap gap-2 items-center"><button type="button" class="research-upload" id="reloadDiseaseMonitoring">Reload monitoring workspace</button><p id="diseaseMonitoringStatus" class="text-sm text-slate-600" role="status" aria-live="polite">Owner login required. Opening the module will verify the Doctor Workstation session.</p></div>
+<iframe id="diseaseMonitoringFrame" title="Disease Monitoring Centre" class="w-full rounded-2xl border border-slate-200 bg-white" style="width:100%;height:calc(100vh - 230px);min-height:900px" loading="lazy" referrerpolicy="no-referrer"></iframe>
 </section>
 <!-- Invoice / receipt draft -->
 <section class="hidden space-y-4" id="viewInvoice">
@@ -1524,7 +1522,7 @@ body{
           placeholder.parentNode.insertBefore(research, placeholder.nextSibling);
         }
       }
-      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'registers', 'clinicalTools'].forEach(t => {
+      ['rxPad', 'symptomChecker', 'journalsHub', 'pathCheatSheet', 'pathReq', 'radReq', 'clinicalCertificates', 'legalForms', 'drugDir', 'articlesHub', 'settingsTab', 'clinicalCalculators', 'everydayTools', 'chart20', 'invoice', 'registers', 'diseaseMonitoring', 'clinicalTools'].forEach(t => {
         const elem = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
         if (elem) elem.classList.add('hidden');
       });
