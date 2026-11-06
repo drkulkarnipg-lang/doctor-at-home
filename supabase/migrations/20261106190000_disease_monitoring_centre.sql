@@ -52,7 +52,8 @@ begin
   insert into public.clinic_disease_monitoring_audit(owner_id,patient_id,actor_id,action,revision,snapshot) values(v_owner,v_row.id,v_owner,'updated',v_row.revision,pg_catalog.jsonb_build_object('before',v_before,'after',pg_catalog.jsonb_build_object('patient_code',v_row.patient_code,'record',v_row.record)));
  end if;
  return next v_row;
-end;$$;
+exception when unique_violation then raise exception 'PATIENT_CODE_EXISTS';
+end;$;
 create or replace function public.archive_clinic_disease_monitoring(p_id uuid,p_expected_revision uuid)
 returns void language plpgsql security invoker set search_path='' as $$
 declare v_owner uuid:=(select auth.uid()); v_row public.clinic_disease_monitoring;
