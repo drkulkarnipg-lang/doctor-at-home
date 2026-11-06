@@ -527,3 +527,126 @@ body{
 #publicPortal :is(.bg-amber-50,.bg-yellow-50){
   background-color:#fff2ce!important;
 }
+
+
+/* CHAMPAGNE GOLD EDITION — inspired by the supplied visual reference.
+   Scope: public-facing presentation only. No content, IDs, links, forms or workflows changed. */
+:root{
+  --dkl-gold:#bd9250;
+  --dkl-gold-deep:#98703a;
+  --dkl-gold-soft:#ead7b6;
+  --dkl-gold-line:rgba(189,146,80,.38);
+  --dkl-ivory:#fbf8f3;
+  --dkl-cream:#f5f0e8;
+  --dkl-paper:#fffdf9;
+  --dkl-ink:#282722;
+  --dkl-muted:#62615c;
+  --dkl-line:rgba(150,125,88,.20);
+  --dkl-shadow:0 18px 48px rgba(76,59,35,.075),0 3px 10px rgba(76,59,35,.035);
+  --dkl-shadow-hover:0 24px 58px rgba(76,59,35,.12),0 7px 18px rgba(76,59,35,.06);
+}
+html,body{background:#f8f5ef!important;color:var(--dkl-ink)}
+body{background-image:radial-gradient(ellipse at 8% 6%,rgba(231,211,177,.30),transparent 34%),radial-gradient(ellipse at 92% 22%,rgba(224,231,224,.30),transparent 32%),linear-gradient(135deg,#faf8f4 0%,#f5f1ea 52%,#fbf8f2 100%)!important}
+.site-header{
+  background:rgba(251,248,243,.96)!important;
+  border-bottom:1px solid var(--dkl-gold-line)!important;
+  box-shadow:0 8px 28px rgba(80,62,38,.075)!important;
+}
+.site-header .doctor-wordmark{color:var(--dkl-gold-deep)!important;letter-spacing:.012em}
+.site-header .doctor-brand p{color:#76664f!important}
+.site-header .doctor-brand>div:first-child{
+  border-color:var(--dkl-gold-line)!important;
+  box-shadow:0 5px 18px rgba(129,96,48,.10)!important;
+}
+.site-header>div>div:last-child>.bg-white{
+  border-color:var(--dkl-gold-line)!important;background:#fffdf9!important;
+}
+.site-header #navPublicBtn{
+  background:linear-gradient(135deg,#b98b4c,#d0aa70)!important;
+  color:#241d13!important;box-shadow:0 7px 18px rgba(166,123,61,.18)!important;
+}
+.site-header #navDoctorBtn{color:#5b4a31!important}
+.site-header .language-control>summary,.site-header .site-language-picker{
+  border-color:var(--dkl-gold-line)!important;background:#fffdf9!important;color:#55452e!important;
+}
+.site-header a[href^="tel:"]{
+  background:linear-gradient(135deg,#b98b4c,#d0aa70)!important;color:#241d13!important;
+  box-shadow:0 7px 18px rgba(166,123,61,.18)!important;
+}
+.portal-nav{border-top-color:var(--dkl-gold-line)!important}
+.portal-nav a{color:#6b604f!important}
+.portal-nav a[aria-selected="true"]{
+  color:#624821!important;background:linear-gradient(135deg,#f4e8d2,#fffaf1)!important;
+  border-color:var(--dkl-gold-line)!important;
+}
+.portal-nav a:hover{background:#f5ead8!important;color:#624821!important}
+#publicPortal{
+  color:var(--dkl-ink)!important;
+  background:radial-gradient(ellipse at 8% 4%,rgba(232,211,177,.32),transparent 35%),radial-gradient(ellipse at 92% 18%,rgba(221,230,219,.34),transparent 32%),linear-gradient(180deg,#fbf8f3 0%,#f4eee4 52%,#faf7f1 100%)!important;
+}
+#portalPanelOverview .portal-hero{
+  border:1px solid var(--dkl-gold-line)!important;
+  background:linear-gradient(118deg,rgba(255,253,249,.97),rgba(247,239,225,.94) 62%,rgba(238,234,222,.90))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .section-eyebrow{color:#a17b43!important;letter-spacing:.18em!important}
+#portalPanelOverview .original-care-hero{color:#302a20!important;text-shadow:0 1px rgba(255,255,255,.85)}
+#portalPanelOverview .original-care-hero em{color:#ad854c!important}
+#portalPanelOverview .hero-copy>p,#portalPanelOverview .care-compass>p{color:#666159!important}
+#portalPanelOverview .dispatch-card{
+  border:1px solid rgba(189,146,80,.28)!important;
+  background:linear-gradient(145deg,rgba(255,253,249,.98),rgba(246,237,222,.92))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.95),var(--dkl-shadow)!important;
+}
+#portalPanelOverview .care-compass h3{color:#6d512d!important}
+#portalPanelOverview .care-mark{color:#b58a4e!important}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(115deg,#b48649,#d0a86d)!important;color:#241d13!important;
+  border:1px solid rgba(145,103,43,.35)!important;
+  box-shadow:0 9px 22px rgba(156,113,55,.20)!important;
+}
+#portalPanelOverview .hero-primary-actions .secondary-link,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials{
+  background:#fffdf9!important;color:#6b512d!important;border-color:var(--dkl-gold-line)!important;
+}
+#portalPanelOverview .care-pathways>a{
+  border:1px solid rgba(189,146,80,.25)!important;
+  background:linear-gradient(145deg,#fffdf9,#f5ecdc)!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .care-pathways>a:before{background:linear-gradient(180deg,#c49a5d,#ead8b9)!important}
+#portalPanelOverview .care-pathways strong{color:#604927!important}
+#portalPanelOverview .care-pathways p{color:#716b61!important}
+#portalPanelOverview .care-pathways>a>span:last-child{color:#a57d43!important}
+#portalPanelOverview .home-care-section,#portalPanelOverview .diet-section,#portalPanelOverview #exploreHealthResources{
+  border-color:var(--dkl-gold-line)!important;
+  background:linear-gradient(145deg,rgba(255,253,249,.97),rgba(246,239,228,.92))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#publicPortal :is(input,select,textarea){
+  border-color:rgba(165,137,94,.38)!important;color:#39342c!important;background:#fffdf9!important;
+}
+#publicPortal :is(input,select,textarea):focus{
+  border-color:#bd9250!important;box-shadow:0 0 0 4px rgba(189,146,80,.14)!important;
+}
+#publicPortal :is(section,article)[data-surface="warm"]{background:linear-gradient(145deg,#fffdf9,#f5ead8)!important}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card){
+  border-color:rgba(165,137,94,.24)!important;box-shadow:0 10px 28px rgba(76,59,35,.055)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(even){background:linear-gradient(145deg,#fffdf9,#f4eadb)!important}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(odd){background:linear-gradient(145deg,#fffefa,#f7f3eb)!important}
+#publicPortal :is(button,a,[role="button"]):focus-visible,.site-header :is(button,a,summary):focus-visible{
+  outline:3px solid rgba(189,146,80,.65)!important;outline-offset:3px!important;
+}
+#publicPortal img{border-radius:16px}
+@media(max-width:680px){
+  #publicPortal{padding:16px 12px 32px!important}
+  #portalPanelOverview .portal-hero{border-radius:22px!important}
+  #portalPanelOverview .care-pathways>a{border-radius:17px!important}
+  .portal-nav{border-bottom:1px solid rgba(189,146,80,.16)}
+}
+@media(prefers-reduced-transparency:reduce){
+  .site-header{background:#fbf8f3!important}
+  #portalPanelOverview .dispatch-card{background:#fffdf9!important}
+}
