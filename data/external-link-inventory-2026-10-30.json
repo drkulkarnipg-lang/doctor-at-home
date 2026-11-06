@@ -60,6 +60,7 @@
     "password-reset.html",
     "patient-age.css",
     "patient-age.js",
+    "patient-education-ckd.js",
     "patient-education-data.js",
     "patient-education.css",
     "patient-experience-refinements.css",

@@ -1,162 +1,146 @@
 {
-  "dialysis-en.pdf": {
-    "sha256": "16c2b7332a77acefe651df94c1aa214fe5f919ec3a1cc7f384d65f38f80bd961",
-    "size": 24835,
-    "key": "dialysis",
-    "language": "en",
-    "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
-  },
-  "dialysis-mr.pdf": {
-    "sha256": "c2970619e57214a7b191717c731e2d74c29f88ba8f76ade2ef52f68726bb6a37",
-    "size": 34320,
-    "key": "dialysis",
-    "language": "mr",
-    "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
-  },
   "heart-en.pdf": {
-    "sha256": "732ca715e72cb8035a4cf8c0c219770611cc3134d4330a5769b69f57cc3bc9fa",
-    "size": 23789,
+    "sha256": "788badaf139b4b146aed9407a0964af2458a93013a2f75feb15d0f005050c069",
+    "size": 23784,
     "key": "heart",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "heart-mr.pdf": {
-    "sha256": "c8190af090fd53e05ff991e32992fec4713e69f7d8f88d21b842f4943620cefe",
-    "size": 35547,
+    "sha256": "859b2e73739be17e1ec5456fc71b765d300c1e41effd4fac11779fb8d6ef2910",
+    "size": 35544,
     "key": "heart",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "tubes-en.pdf": {
-    "sha256": "d0955c722e07ce54b488445f697471ed11092a0409b4f3559458fd0aaf6d764e",
-    "size": 23704,
+    "sha256": "f1b521ccd68d9fcc214e8de3c2cbcda5eb4a8f7c07d0e6ea06a66d113b3a7597",
+    "size": 23699,
     "key": "tubes",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "tubes-mr.pdf": {
-    "sha256": "fae8fc0501b3a977c5d0758a6d2c43dae5c0c38853c85dfd5902f1801b74cecb",
-    "size": 33513,
+    "sha256": "de0131195f5e504e3e8aff02edbd7716cbd2040af29dc92184f997939e761d80",
+    "size": 33507,
     "key": "tubes",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "swallow-en.pdf": {
-    "sha256": "9e9713c574bdd7fb59a984993c4d4cda9bca062a69f1902e9ce64706dad510df",
-    "size": 24276,
+    "sha256": "2fea935f827d0db6c87adf59cad9d597336e334939e3a261e89ea7f5ee8cd2b9",
+    "size": 24273,
     "key": "swallow",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "swallow-mr.pdf": {
-    "sha256": "15164ac87b72fe761cfa264366ec228b60d07d88ce651596752cd29bdefc1cfb",
-    "size": 34699,
+    "sha256": "7f689babe5762e9f896dbc563298cf0190c1ae866c98a76bbdc41e7301e8b4bb",
+    "size": 34696,
     "key": "swallow",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "pressure-en.pdf": {
-    "sha256": "1aae21af2a116b3c1d7c0c478b80b0ac25d653655a2af86b3f24c5a6adac13ef",
+    "sha256": "fdd370cb92691e51e93e0e431edf8bba36d27e7cec9427cf766a5138dc715ad8",
     "size": 23981,
     "key": "pressure",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "pressure-mr.pdf": {
-    "sha256": "ac168c5498b854260a05ef386e9c24b2214c463e39efac642ea746a03ef6c2aa",
-    "size": 33352,
+    "sha256": "8bf9444bf055b7c616f339b5f608a6ffdb9edb16b93c07cd169a3e9288db6887",
+    "size": 33342,
     "key": "pressure",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "falls-en.pdf": {
-    "sha256": "4c4a7d5d052c264c3d91da30e90f4d9dfdff1606b9938748ffb60b4fac8d628a",
-    "size": 24281,
+    "sha256": "d4bc1542b189c880a76f88e6962708115d2b65c022e89a2f02fc661e37bcac48",
+    "size": 24277,
     "key": "falls",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "falls-mr.pdf": {
-    "sha256": "0b343cac23125da3b78d2ffa66f9b700aaa77feebeff839966f1ded1445d0733",
-    "size": 34199,
+    "sha256": "e4782e732a41d70826658d5e77e791e560728e1d54a815ab8020f96bcdce7da5",
+    "size": 34197,
     "key": "falls",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "medicines-en.pdf": {
-    "sha256": "adaf60d327a93c6e478b7a0546474d1c1265f864b67b982732d455c13e84c46d",
-    "size": 24344,
+    "sha256": "d2e18fbe07de1c6050fc29c8a71554ca5d553610a8d847a093426bc6d4685c5c",
+    "size": 24342,
     "key": "medicines",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "medicines-mr.pdf": {
-    "sha256": "1ca8d153e93fee2a7b80b993a4b10b5c0d65b6655e11a06fc6e4a47eee1459a9",
-    "size": 34331,
+    "sha256": "baef4da5d9035ddb6706cbf11ab705bff07be63ab4487819730a26264708ca31",
+    "size": 34330,
     "key": "medicines",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "bp-en.pdf": {
-    "sha256": "cf2c32002ffd5dddce7483b0fef7c5d4b4d0fbcaf9b60fa5a0c543aabafa70ea",
-    "size": 24026,
+    "sha256": "572c2fc4cd8376f19122b2e16eb3d9a6593e8f93721c17438c6f4fc0efe5a3fd",
+    "size": 24022,
     "key": "bp",
     "language": "en",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "bp-mr.pdf": {
-    "sha256": "b6fdf8520d0ca9c917dcf8734d7b08cc8178e3a419ddec8c8abe7352c84225ba",
-    "size": 35668,
+    "sha256": "3e92d12812cc55bf0515598f6d1efa113479d00f4d1e8d6b1436b4956a148ea1",
+    "size": 35665,
     "key": "bp",
     "language": "mr",
     "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
-  },
-  "potassium-en.pdf": {
-    "sha256": "1ca68001977f6d7abed0484dfd6a04e3f7d3cd20a919b3ef2ce671172cb48a74",
-    "size": 25148,
-    "key": "potassium",
-    "language": "en",
-    "pages": 2,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
-  },
-  "potassium-mr.pdf": {
-    "sha256": "204a42b29242eed8a79e0d28089d4e65150e42bdd4e6418ba0cbef6c323822cd",
-    "size": 36069,
-    "key": "potassium",
-    "language": "mr",
-    "pages": 3,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "daily-living-en.pdf": {
-    "sha256": "184a8f1eb6e13f981fc0b48fc6085f1d89d9930a25e7f08180bd75c48e04c568",
-    "size": 32749,
+    "sha256": "1548631f0aeb8f857a8b1fa6d391c55b32f84ab3fe6fb6d7cb56ebb12400a344",
+    "size": 32747,
     "key": "daily-living",
     "language": "en",
     "pages": 4,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   },
   "daily-living-mr.pdf": {
-    "sha256": "26c92627d94fc2779828b2012163d2efbc08e9ee59752eb2e7d0d3ba3099f983",
-    "size": 47646,
+    "sha256": "010f52d80c684d3243bf012782ab9948be5fe557ba329947eee4d877f54ccc56",
+    "size": 47645,
     "key": "daily-living",
     "language": "mr",
     "pages": 4,
-    "source_sha256": "d75fa7c8bf7c20b831586bee28ecfaa1dca2b3664956eb30d9dbd584df981a2e"
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
+  },
+  "ckd-kdigo-en.pdf": {
+    "sha256": "a919e5539e130187b804ee43c89972b4e980997132a67074b1eb7490b7cea00a",
+    "size": 56343,
+    "key": "ckd-kdigo",
+    "language": "en",
+    "pages": 7,
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
+  },
+  "ckd-kdigo-mr.pdf": {
+    "sha256": "b5fa0992e7c2f3aec5d35506d0c94e1e742e24e52ff15779bcf4a4272247dcf1",
+    "size": 66381,
+    "key": "ckd-kdigo",
+    "language": "mr",
+    "pages": 7,
+    "source_sha256": "2808c58ee08ca71806c805ff465926793c09c78a1d6d1f72521209e9383ae262"
   }
 }
