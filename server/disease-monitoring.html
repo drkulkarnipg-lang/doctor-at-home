@@ -996,7 +996,7 @@ document.addEventListener('click',async ev=>{
     const a=analyze(p); toast(a.status==='red'?'Saved. Urgent alert raised.':a.status==='amber'?'Saved. Review today.':'Saved.');
   }
   else if(act==='delr'){
-    if(b.dataset.arm){ const p=clone(find(selId)); p.readings=p.readings.filter(r=>r.id!==b.dataset.id); await commit(p); renderAll(); }
+    if(b.dataset.arm){ const p=clone(find(selId)); p.readings=p.readings.filter(r=>r.id!==b.dataset.id); if(!await commit(p))return; renderAll(); }
     else { b.dataset.arm='1'; b.textContent='Confirm delete'; setTimeout(()=>{ if(b.isConnected){ delete b.dataset.arm; b.textContent='Delete'; } },3000); }
   }
   else if(act==='delp'){
