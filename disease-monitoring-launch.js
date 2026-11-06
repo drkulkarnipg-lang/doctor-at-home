@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    window.WorkstationAuth?.open?.();
    return false;
   }
-  frame.src='/api/disease-monitoring-page';
+  frame.src='/api/disease-monitoring?view=page';
   frame.dataset.loaded='1';
   if(status)status.textContent='Loading the private monitoring workspace…';
   return true;

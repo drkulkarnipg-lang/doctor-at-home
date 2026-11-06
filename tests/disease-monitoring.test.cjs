@@ -1,8 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
-const {validatePatient,createHandler}=require('../api/disease-monitoring');
-const html=require('../api/disease-monitoring-page.js').PAGE_HTML;
+const {validatePatient,createHandler,PAGE_HTML:html}=require('../api/disease-monitoring');
 const index=fs.readFileSync(require.resolve('../index.html'),'utf8');
 assert.match(index,/id="tabDiseaseMonitoring"[^>]*switchDocTab\('diseaseMonitoring'\)/);
 assert.match(index,/id="viewDiseaseMonitoring"[\s\S]*?id="diseaseMonitoringFrame"/);
