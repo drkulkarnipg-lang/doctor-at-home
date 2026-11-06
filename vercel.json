@@ -53,6 +53,9 @@
     },
     "api/article-format.js": {
       "maxDuration": 45
+    },
+    "api/disease-monitoring-page.js": {
+      "includeFiles": "server/disease-monitoring.html"
     }
   }
 }
