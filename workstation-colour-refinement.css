@@ -182,3 +182,36 @@
   #calc30Grid>*{padding:12px!important;border-radius:14px!important}
   #patientToolsSection .conversion-panel{padding:14px!important}
 }
+
+/* PERMANENT BRAND SAFETY LAYER — red is prohibited across the entire website.
+   Preserve warning/urgent semantics while expressing them with clinical blue and amber. */
+:root{
+  --brand-alert-bg:#edf5fb;
+  --brand-alert-border:#8eb6d0;
+  --brand-alert-ink:#234f6b;
+  --brand-caution-bg:#fff6df;
+  --brand-caution-border:#dfc27a;
+  --brand-caution-ink:#70551b;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is([class*="bg-red"],[class*="text-red"],[class*="border-red"],[class*="ring-red"],[class*="outline-red"],[class*="decoration-red"]){
+  background-color:var(--brand-alert-bg)!important;
+  border-color:var(--brand-alert-border)!important;
+  color:var(--brand-alert-ink)!important;
+  --tw-text-opacity:1;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is(.triage-result.red,.triage-badge.red,.status-red,.alert-red,.text-danger,.bg-danger){
+  background:var(--brand-alert-bg)!important;
+  border-color:var(--brand-alert-border)!important;
+  color:var(--brand-alert-ink)!important;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is([class*="bg-red"],[class*="text-red"],[class*="border-red"]) :is(svg,[class*="icon"]){
+  color:var(--brand-alert-ink)!important;
+  fill:currentColor!important;
+  stroke:currentColor!important;
+}
+/* Legacy semantic red state classes now use the non-red clinical alert palette. */
+.triage-result.red{background:var(--brand-alert-bg)!important;border-color:var(--brand-alert-border)!important;color:var(--brand-alert-ink)!important}
+.triage-badge.red{background:#dcecf7!important;border-color:#8eb6d0!important;color:#234f6b!important}
