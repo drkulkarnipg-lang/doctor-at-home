@@ -5,7 +5,8 @@ module.exports=async function(req,res){
  res.setHeader('Cache-Control','private, no-store');
  res.setHeader('Vercel-CDN-Cache-Control','no-store');
  res.setHeader('X-Content-Type-Options','nosniff');
- res.setHeader('X-Frame-Options','DENY');
+ res.setHeader('X-Frame-Options','SAMEORIGIN');
+ res.setHeader('Content-Security-Policy',"base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests");
  res.setHeader('Referrer-Policy','no-referrer');
  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).send('Method not allowed.');}
  const session=await owner(req).catch(()=>null);
