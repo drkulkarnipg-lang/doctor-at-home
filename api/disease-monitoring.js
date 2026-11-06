@@ -23,7 +23,7 @@ function validatePatient(input){
   if(!r.v||typeof r.v!=='object'||Array.isArray(r.v)||Object.keys(r.v).length>Object.keys(LIMITS).length)throw Error('Invalid reading measurements.');
   const values={};for(const [key,value] of Object.entries(r.v)){if(!(key in LIMITS)||typeof value!=='number'||!Number.isFinite(value)||value<LIMITS[key][0]||value>LIMITS[key][1])throw Error('Invalid measurement: '+key+'.');values[key]=value;}
   if(!Array.isArray(r.flags)||r.flags.length>40||r.flags.some(f=>typeof f!=='string'||!/^[a-z0-9_]{1,60}$/.test(f)))throw Error('Invalid symptom flags.');
-  if(r.note!=null&&(typeof r.note!=='string'||r.note.length>200||/[\r\n]/.test(r.note)))throw Error('Notes must be short and must not contain names or contact details.');
+  if(r.note!=null&&(typeof r.note!=='string'||r.note.length>200||/[0-9]{10}/.test(r.note)||/@/.test(r.note)||/[\r\n]/.test(r.note)))throw Error('Notes must be short and must not contain names or contact details.');
   return{id:r.id,t:r.t,v:values,flags:r.flags,note:r.note||''};
  });
  const record={age:input.age??null,sex,diseases:[...input.diseases],chemo:input.chemo===true,baselines,readings,created:Number.isFinite(input.created)?input.created:Date.now()};
