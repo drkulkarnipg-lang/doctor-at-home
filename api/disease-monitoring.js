@@ -8,6 +8,7 @@ const LIMITS={sbp:[50,280],dbp:[30,160],pulse:[20,220],spo2:[50,100],rr:[4,60],t
 const BASELINES=new Set(['spo2','pefr','creat','egfr','bili','weight']);
 function validatePatient(input){
  if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Invalid patient record.');
+ const allowedPatientFields=new Set(['id','code','age','sex','diseases','chemo','baselines','readings','created','revision','updatedAt']);if(Object.keys(input).some(k=>!allowedPatientFields.has(k)))throw Error('Unexpected patient field. Do not submit names, phone numbers or addresses.');
  const id=input.id==null||input.id===''?randomUUID():String(input.id);if(!UUID.test(id))throw Error('Invalid patient record identifier.');
  const code=typeof input.code==='string'?input.code.trim():'';if(!CODE.test(code))throw Error('Use a short patient code only. Do not enter a patient name, phone or address.');
  if(input.age!==null&&input.age!==undefined&&(!Number.isInteger(input.age)||input.age<0||input.age>120))throw Error('Enter a valid age from 0 to 120.');
@@ -18,7 +19,7 @@ function validatePatient(input){
  for(const [key,value] of Object.entries(input.baselines||{})){if(!BASELINES.has(key)||typeof value!=='number'||!Number.isFinite(value)||value<LIMITS[key][0]||value>LIMITS[key][1])throw Error('Invalid baseline value.');baselines[key]=value;}
  if(!Array.isArray(input.readings)||input.readings.length>2000)throw Error('A patient history may contain at most 2,000 readings.');
  const readings=input.readings.map(r=>{
-  if(!r||typeof r!=='object'||Array.isArray(r)||typeof r.id!=='string'||!/^[A-Za-z0-9_-]{1,40}$/.test(r.id)||!Number.isFinite(r.t)||r.t<0||r.t>Date.now()+366*86400000)throw Error('Invalid reading entry.');
+  if(!r||typeof r!=='object'||Array.isArray(r)||Object.keys(r).some(k=>!['id','t','v','flags','note'].includes(k))||typeof r.id!=='string'||!/^[A-Za-z0-9_-]{1,40}$/.test(r.id)||!Number.isFinite(r.t)||r.t<0||r.t>Date.now()+366*86400000)throw Error('Invalid reading entry.');
   if(!r.v||typeof r.v!=='object'||Array.isArray(r.v)||Object.keys(r.v).length>Object.keys(LIMITS).length)throw Error('Invalid reading measurements.');
   const values={};for(const [key,value] of Object.entries(r.v)){if(!(key in LIMITS)||typeof value!=='number'||!Number.isFinite(value)||value<LIMITS[key][0]||value>LIMITS[key][1])throw Error('Invalid measurement: '+key+'.');values[key]=value;}
   if(!Array.isArray(r.flags)||r.flags.length>40||r.flags.some(f=>typeof f!=='string'||!/^[a-z0-9_]{1,60}$/.test(f)))throw Error('Invalid symptom flags.');
