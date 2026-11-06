@@ -1,6 +1,6 @@
 # Original PDF articles — 6 November 2026 IST
 
-ART-PDF-20261106 — CODED. Owner explicitly requests immediate publication of three original PDFs unchanged. Added original-byte copies under assets/articles with Open and Download links in the Patient Library article section and /articles index. SHA-256 and byte equality against all three supplied originals verified locally. Publication and live verification pending. Current base b34c203; unrelated reader work remains untouched. Next: validate links/rendering, publish bounded change, verify production PDFs and update this entry.
+ART-PDF-20261106 — PRODUCTION VERIFIED. Owner explicitly requests immediate publication of three original PDFs unchanged. Added original-byte copies under assets/articles with Open and Download links in the Patient Library article section and /articles index. SHA-256 and byte equality against all three supplied originals verified locally. Published implementation 6ecd3d13f6b41cf1cee2beb4c699cb029ba746ed; Vercel production dpl_EdQmoKTYrDJ9t3rqfEPR6muuW4QD READY with drkulkarnipg.com and www aliases. Actual live /articles shows all three Open/Download pairs. All three live PDFs opened and visually verified: toolkit 19 pages, encyclopedia 92 pages, elderly care 15 pages. Git blob SHAs match exact original bytes. Article API, Markdown and SEO/privacy regression checks and git diff --check passed. Unrelated backlog unchanged.
 
 # Reader follow-up — 5 November 2026 IST
 
