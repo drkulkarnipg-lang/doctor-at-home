@@ -26,5 +26,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(frame.dataset.loaded!=='1')load();
  });
  reload?.addEventListener('click',()=>load());
- frame.addEventListener('load',()=>{if(status)status.textContent='Disease Monitoring Centre loaded. Cloud records remain owner-protected.';});
+ frame.addEventListener('load',()=>{
+  if(!status)return;
+  let body='';
+  try{body=frame.contentDocument?.body?.innerText||'';}catch{}
+  if(/owner login required/i.test(body))status.textContent='Owner session expired. Sign in again and reload the monitoring workspace.';
+  else if(/could not be loaded/i.test(body))status.textContent='The private monitoring page could not be loaded. Check deployment logs.';
+  else status.textContent='Disease Monitoring Centre loaded. Cloud records remain owner-protected.';
+ });
 });
