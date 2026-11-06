@@ -1,3 +1,7 @@
+# Original PDF articles — 6 November 2026 IST
+
+ART-PDF-20261106 — CODED. Owner explicitly requests immediate publication of three original PDFs unchanged. Added original-byte copies under assets/articles with Open and Download links in the Patient Library article section and /articles index. SHA-256 and byte equality against all three supplied originals verified locally. Publication and live verification pending. Current base b34c203; unrelated reader work remains untouched. Next: validate links/rendering, publish bounded change, verify production PDFs and update this entry.
+
 # Reader follow-up — 5 November 2026 IST
 
 PR158 tab outlines released at dff2ab6d; desktop preview all seven clicks, 44px targets, visible borders and focus passed; live Booking/Back passed. CI41969687714 success. PR159 Library headings/search Marathi and English restoration merged at d37fd20da1bba12ece25571bd27fcb47733437a3; CI41970018504 success, actual preview query preservation, empty-result translation and scope isolation passed; Vercel dpl_8QzKH1YaJLf4ynPdF7as2eVMKnNT READY. Live language retest pending.

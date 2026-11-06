@@ -1,3 +1,7 @@
+# Original PDF articles — 6 November 2026 IST
+
+ART-PDF-20261106 — CODED. Owner explicitly requests immediate publication of three original PDFs unchanged. Added original-byte copies under assets/articles with Open and Download links in the Patient Library article section and /articles index. SHA-256 and byte equality against all three supplied originals verified locally. Publication and live verification pending. Current base b34c203; unrelated reader work remains untouched. Next: validate links/rendering, publish bounded change, verify production PDFs and update this entry.
+
 # Browser runner wait corrected — 5 November 2026 IST
 
 Reader browser run42025769114 failed because its locator wait requested visibility of #wikiModal.hidden. Logs explicitly confirm modal was hidden64 times. Corrected wait to state attached for the closed-state selector. First mobile reader opened, passed title/body/reading-height/overflow checks and wheel scroll, then Escape closed it before this runner error. Complete widths remain pending rerun. Actual preview Escape also closes and restores wiki-card-read focus. Next inspect corrected runner result and finish mobile acceptance. No release.
