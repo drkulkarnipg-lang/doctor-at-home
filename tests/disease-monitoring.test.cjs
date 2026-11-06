@@ -1,7 +1,13 @@
 'use strict';
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const {validatePatient,createHandler}=require('../api/disease-monitoring');
 const html=require('../api/disease-monitoring-page.js').PAGE_HTML;
+const index=fs.readFileSync(require.resolve('../index.html'),'utf8');
+assert.match(index,/id="tabDiseaseMonitoring"[^>]*switchDocTab\('diseaseMonitoring'\)/);
+assert.match(index,/id="viewDiseaseMonitoring"[\s\S]*?id="diseaseMonitoringFrame"/);
+assert.match(index,/Browse published health articles/);
+assert.match(index,/src="disease-monitoring-launch.js"/);
 assert.doesNotMatch(html, /localStorage|window\.claude|collection\('patients'\)/, 'Patient records must never fall back to browser storage or an unrelated page database.');
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
 assert.equal(scripts.length,1,'The isolated module should contain one application script.');
