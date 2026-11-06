@@ -10,6 +10,9 @@ data.sources.ckdBp2021=['KDIGO 2021 — Blood Pressure in CKD guideline','https:
 data.sources.ckdAnemia2026=['KDIGO 2026 — Anemia in CKD guideline','https://kdigo.org/guidelines/anemia-in-ckd/'];
 data.sources.ckdGeneral2024=['KDIGO 2024 — CKD Evaluation and Management guideline','https://kdigo.org/guidelines/ckd-evaluation-and-management/'];
 const S=(heading,text,refs,kind='text')=>({heading,text,refs,kind});
+// Consolidate the two existing kidney guides into this single integral CKD article.
+const legacyKidneyGuides=data.articles.filter(a=>['dialysis','potassium'].includes(a.key));
+legacyKidneyGuides.forEach(a=>{const i=data.articles.indexOf(a);if(i>=0)data.articles.splice(i,1);});
 data.articles.push({
  id:'ckd-kdigo', key:'ckd-kdigo',
  cat:{mr:'किडनीचे आरोग्य',en:'Kidney health'},
@@ -52,9 +55,9 @@ data.articles.push({
  S('7. Salt, food and staying active','For people with high BP and CKD, keeping salt below about 5 grams a day may help. This advice is not right for everyone, so do not make major diet changes without advice. Some low-sodium salts contain potassium and can be unsafe in kidney disease. Keep moving in a way that suits your strength and general health. If possible, aim for about 150 minutes of moderate activity each week.',['ckdBp2021']),
  S('8. Anaemia (low blood count) in CKD','Some people with CKD develop anaemia. Tell your clinician if you feel unusually tired, weak or breathless. Tests may include a full blood count (CBC), reticulocyte count, ferritin and TSAT. KDIGO 2026 suggests checking at least once a year in G3, twice a year in G4, and every 3 months in G5 or dialysis. You may need testing sooner if symptoms or bleeding occur.',['ckdAnemia2026']),
  S('9. Iron treatment thresholds — haemodialysis','In anaemic CKD G5 haemodialysis, consider iron when ferritin is at or below 500 ng/mL and TSAT is at or below 30% (2D). IV iron is suggested over oral iron when initiating therapy.',['ckdAnemia2026']),
- S('१०. Dialysis नसल्यास किंवा peritoneal dialysis असल्यास','Dialysis नसलेल्या CKD रुग्णांत किंवा peritoneal dialysis घेत असताना ferritin 100 पेक्षा कमी आणि TSAT 40% पेक्षा कमी, किंवा ferritin 100 ते 300 दरम्यान आणि TSAT 25% पेक्षा कमी असेल तर iron देण्याचा विचार होतो. Iron गोळ्यांनी द्यायचे की शिरेतून, हे त्रासाची तीव्रता, औषध सहन होते का, उपलब्धता आणि खर्च पाहून ठरवले जाते.',['ckdAnemia2026']),
- S('११. Iron कधी थांबवण्याचा विचार करतात?','Ferritin 700 पेक्षा जास्त किंवा TSAT 40% किंवा अधिक असल्यास नेहमीचे iron उपचार थांबवण्याचा विचार केला जातो. हे मार्गदर्शक तत्त्वांतील निकष आहेत. एका रिपोर्टवरून स्वतःहून iron सुरू किंवा बंद करू नका.',['ckdAnemia2026']),
- S('१२. अ‍ॅनिमियासाठी पुढील उपचार','Iron घेत असल्यास Hb, ferritin आणि TSAT पुन्हा तपासावे लागतात. गोळ्यांनी फायदा होत नसेल किंवा त्या सहन होत नसतील तर डॉक्टर शिरेतून iron देण्याचा विचार करू शकतात. पुढील उपचार ठरवण्यापूर्वी रक्तस्राव, iron कमी असणे, B12/folate ची कमतरता किंवा इतर कारणे तपासली जातात. काही रुग्णांना ESA इंजेक्शनची गरज लागू शकते. Hb किती आहे एवढेच न पाहता लक्षणे, इतर आजार आणि रक्त देण्याची गरज यांचा एकत्र विचार केला जातो. हे उपचार डॉक्टरांच्या देखरेखीखालीच घ्यावेत.',['ckdAnemia2026']),
+ S('10. If you are not on haemodialysis, or you are on peritoneal dialysis','For people with CKD who are not receiving haemodialysis, including those on peritoneal dialysis, iron may be considered when ferritin is below 100 ng/mL with TSAT below 40%, or when ferritin is 100 to below 300 ng/mL with TSAT below 25%. The decision to use tablets or intravenous iron depends on symptoms, severity, tolerance, likely response, availability and cost. Do not start iron solely from one number without reviewing the full blood count and clinical context.',['ckdAnemia2026']),
+ S('11. When should routine iron be withheld?','During routine iron treatment, consider withholding iron when ferritin is above 700 ng/mL or TSAT is 40% or higher. These are treatment-monitoring thresholds, not targets to chase. Your clinician will also consider infection, inflammation, recent iron doses, haemoglobin trend and the reason for anaemia. Do not start, stop or change iron treatment yourself.',['ckdAnemia2026']),
+ S('12. Monitoring and other anaemia treatments','After starting iron, haemoglobin, ferritin and TSAT need repeat monitoring. If oral iron is not tolerated or does not work well enough after an appropriate trial, your clinician may consider intravenous iron. Before an ESA or HIF-prolyl hydroxylase inhibitor is considered, look for treatable causes such as iron deficiency, blood loss, infection or inflammation, and vitamin B12 or folate deficiency. ESA treatment is generally preferred over HIF-PHI after correctable causes are addressed. For adults receiving an ESA, the haemoglobin target should remain below 11.5 g/dL. Transfusion decisions depend on symptoms, urgency and clinical context—not a single haemoglobin number alone.',['ckdAnemia2026']),
  S('१३. रोजच्या उपचारात काळजी घ्या','किडनीवर परिणाम करू शकणारी painkiller औषधे (विशेषतः NSAIDs) डॉक्टरांचा सल्ला न घेता घेऊ नका. काही औषधांची मात्रा किडनीच्या कामानुसार बदलावी लागते. BP, creatinine/eGFR, potassium आणि लघवीतील प्रथिने यांचे रिपोर्ट वेळोवेळी पाहा. लघवी अचानक खूप कमी होणे, सूज किंवा दम झपाट्याने वाढणे, छातीत दुखणे, बेशुद्ध पडणे किंवा potassium खूप वाढल्याचा संशय असल्यास तातडीने वैद्यकीय मदत घ्या.',['ckdGeneral2024','ckdBp2021','ckdAnemia2026'],'urgent'),
  S('१४. पुढच्या भेटीपूर्वी ही यादी पाहा','□ किडनीचा त्रास ३ महिन्यांपेक्षा जास्त काळ आहे का हे स्पष्ट आहे? □ eGFR आणि urine ACR चे रिपोर्ट आहेत का? □ BP योग्य पद्धतीने मोजला आहे का? □ औषधे आणि त्यांची मात्रा डॉक्टरांनी तपासली आहे का? □ Hb, ferritin आणि TSAT तपासण्यांची तारीख ठरली आहे का? □ किडनी तज्ज्ञांचा सल्ला कधी घ्यायचा हे ठरले आहे का?',['ckdGeneral2024','ckdBp2021','ckdAnemia2026'])
  ],
@@ -66,5 +69,12 @@ data.articles.push({
  ],
  takeaway:'Use both eGFR and urine ACR to understand CKD. Set blood pressure and treatment goals according to the person, not just one report. Keep follow-up tests on time and never change medicines on your own.'
  }
+});
+const integral=data.get('ckd-kdigo');
+legacyKidneyGuides.forEach(old=>{
+  integral.mr.sections.push(...old.mr.sections.map(s=>({...s,heading:'डायलिसिस आणि किडनीची रोजची काळजी — '+s.heading})));
+  integral.en.sections.push(...old.en.sections.map(s=>({...s,heading:'Dialysis and everyday kidney care — '+s.heading})));
+  integral.mr.faq.push(...old.mr.faq);
+  integral.en.faq.push(...old.en.faq);
 });
 })(typeof window==='object'?window:globalThis);
