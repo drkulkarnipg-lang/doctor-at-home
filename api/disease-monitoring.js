@@ -2,7 +2,7 @@
 const {randomUUID}=require('node:crypto');
 const {owner:defaultOwner}=require('../server/owner-session');
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const CODE=/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/;
+const CODE=/^(?=.{2,24}$)[A-Za-z0-9][A-Za-z0-9._-]*[0-9][A-Za-z0-9._-]*$/;
 const DISEASES=new Set(['dm','htn','ihd','hf','copd','ckd','cir','eld','onc']);
 const LIMITS={sbp:[50,280],dbp:[30,160],pulse:[20,220],spo2:[50,100],rr:[4,60],temp:[32,43],weight:[15,250],glucF:[20,700],glucP:[20,700],pefr:[30,800],puffs:[0,80],angina:[0,40],gtn:[0,12],pillows:[0,8],creat:[0.2,20],egfr:[1,150],k:[2,9],na:[100,170],hb:[3,20],bili:[0.1,40],inr:[0.8,8],girth:[40,200],enc:[0,4],falls:[0,20],barthel:[0,100],pain:[0,10],pps:[10,100],bm:[0,30],bt:[0,20]};
 const BASELINES=new Set(['spo2','pefr','creat','egfr','bili','weight']);
