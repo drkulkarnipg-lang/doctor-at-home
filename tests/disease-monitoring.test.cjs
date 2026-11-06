@@ -1,6 +1,13 @@
 'use strict';
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const {validatePatient,createHandler}=require('../api/disease-monitoring');
+const html=fs.readFileSync(require.resolve('../server/disease-monitoring.html'),'utf8');
+assert.doesNotMatch(html,/localStorage|window\\.claude|collection\\('patients'\\)/,'Patient records must never fall back to browser storage or an unrelated page database.');
+const scripts=[...html.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)];
+assert.equal(scripts.length,1,'The isolated module should contain one application script.');
+assert.doesNotThrow(()=>new Function(scripts[0][1]),'Disease Monitoring Centre browser script must parse before deployment.');
+assert.match(html,/Owner-authenticated private clinic cloud/);
 const valid={id:'2c9b4602-27a7-718e-e5b8-ff2e730a0034',code:'PT-001',age:68,sex:'M',diseases:['hf','htn'],chemo:false,baselines:{spo2:94},readings:[{id:'r1',t:Date.now(),v:{sbp:132,dbp:82,spo2:96},flags:[],note:'Stable'}]};
 const clean=validatePatient(valid);assert.equal(clean.code,'PT-001');assert.deepEqual(clean.record.diseases,['hf','htn']);assert.equal(clean.record.readings[0].v.spo2,96);
 for(const bad of [{...valid,code:'Patient Name'},{...valid,code:'Pramod'},{...valid,age:140},{...valid,diseases:['unknown']},{...valid,readings:[{id:'r1',t:Date.now(),v:{spo2:120},flags:[],note:''}]},{...valid,baselines:{spo2:101}},{...valid,name:'Real patient name'},{...valid,patientName:'Real patient name'},{...valid,phone:'9876543210'},{...valid,address:'Street address'},{...valid,readings:[{id:'r1',t:Date.now(),v:{sbp:120},flags:[],note:'Call 9876543210'}]}])assert.throws(()=>validatePatient(bad));
