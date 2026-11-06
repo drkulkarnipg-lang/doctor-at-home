@@ -924,7 +924,7 @@ function readingForm(p,keys,fl){
 function patientForm(p){
   p=p||{diseases:[],baselines:{}}; const sel=p.diseases||[];
   return `<div class="panel"><h2>${p.id?'Edit patient':'New patient'}</h2>
-  <p class="sub">Use a patient code such as a file number. Do not type the patient’s name, phone or address.</p>
+  <p class="sub">Use a coded identifier containing digits (for example, PT-001 or a file number). Never type the patient’s name, phone or address.</p>
   <div class="form" style="margin:12px 0"><label class="f">Patient code<input type="text" id="np-code" maxlength="24" value="${esc(p.code||'')}"></label>
    <label class="f">Age<input type="number" id="np-age" min="0" max="120" value="${esc(p.age||'')}"></label>
    <label class="f">Sex<select id="np-sex">${['','M','F','Other'].map(x=>`<option ${x===(p.sex||'')?'selected':''}>${x}</option>`).join('')}</select></label></div>
