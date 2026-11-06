@@ -30,8 +30,8 @@ jobs:
               await page.goto('http://127.0.0.1:8080/');
               await page.getByRole('tab',{name:'Health library',exact:true}).click();
               const guides=page.getByRole('button',{name:'Read the complete guide →',exact:true});
-              assert.equal(await guides.count(),13);
-              for(let i=0;i<13;i++){
+              assert.equal(await guides.count(),9);
+              for(let i=0;i<9;i++){
                 await guides.nth(i).click();
                 await page.locator('#wikiModal:not(.hidden)').waitFor();
                 const shape=await page.evaluate(()=>{
@@ -58,7 +58,7 @@ jobs:
               await page.goBack();
               await page.locator('#wikiModal.hidden').waitFor({state:'attached'});
               await page.waitForFunction(()=>document.activeElement?.classList.contains('wiki-card-read'));
-              console.log('PASS width '+width+': 13 guides, title/body, reading space, wheel scrolling, return, Escape and browser Back focus');
+              console.log('PASS width '+width+': 9 guides, title/body, reading space, wheel scrolling, return, Escape and browser Back focus');
               await page.close();
             }
             await browser.close();

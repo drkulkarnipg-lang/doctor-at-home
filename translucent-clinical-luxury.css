@@ -527,3 +527,285 @@ body{
 #publicPortal :is(.bg-amber-50,.bg-yellow-50){
   background-color:#fff2ce!important;
 }
+
+
+/* CHAMPAGNE GOLD EDITION — inspired by the supplied visual reference.
+   Scope: public-facing presentation only. No content, IDs, links, forms or workflows changed. */
+:root{
+  --dkl-gold:#bd9250;
+  --dkl-gold-deep:#98703a;
+  --dkl-gold-soft:#ead7b6;
+  --dkl-gold-line:rgba(189,146,80,.38);
+  --dkl-ivory:#fbf8f3;
+  --dkl-cream:#f5f0e8;
+  --dkl-paper:#fffdf9;
+  --dkl-ink:#282722;
+  --dkl-muted:#62615c;
+  --dkl-line:rgba(150,125,88,.20);
+  --dkl-shadow:0 18px 48px rgba(76,59,35,.075),0 3px 10px rgba(76,59,35,.035);
+  --dkl-shadow-hover:0 24px 58px rgba(76,59,35,.12),0 7px 18px rgba(76,59,35,.06);
+}
+html,body{background:#f8f5ef!important;color:var(--dkl-ink)}
+body{background-image:radial-gradient(ellipse at 8% 6%,rgba(231,211,177,.30),transparent 34%),radial-gradient(ellipse at 92% 22%,rgba(224,231,224,.30),transparent 32%),linear-gradient(135deg,#faf8f4 0%,#f5f1ea 52%,#fbf8f2 100%)!important}
+.site-header{
+  background:rgba(251,248,243,.96)!important;
+  border-bottom:1px solid var(--dkl-gold-line)!important;
+  box-shadow:0 8px 28px rgba(80,62,38,.075)!important;
+}
+.site-header .doctor-wordmark{color:var(--dkl-gold-deep)!important;letter-spacing:.012em}
+.site-header .doctor-brand p{color:#76664f!important}
+.site-header .doctor-brand>div:first-child{
+  border-color:var(--dkl-gold-line)!important;
+  box-shadow:0 5px 18px rgba(129,96,48,.10)!important;
+}
+.site-header>div>div:last-child>.bg-white{
+  border-color:var(--dkl-gold-line)!important;background:#fffdf9!important;
+}
+.site-header #navPublicBtn{
+  background:linear-gradient(135deg,#b98b4c,#d0aa70)!important;
+  color:#241d13!important;box-shadow:0 7px 18px rgba(166,123,61,.18)!important;
+}
+.site-header #navDoctorBtn{color:#5b4a31!important}
+.site-header .language-control>summary,.site-header .site-language-picker{
+  border-color:var(--dkl-gold-line)!important;background:#fffdf9!important;color:#55452e!important;
+}
+.site-header a[href^="tel:"]{
+  background:linear-gradient(135deg,#b98b4c,#d0aa70)!important;color:#241d13!important;
+  box-shadow:0 7px 18px rgba(166,123,61,.18)!important;
+}
+.portal-nav{border-top-color:var(--dkl-gold-line)!important}
+.portal-nav a{color:#6b604f!important}
+.portal-nav a[aria-selected="true"]{
+  color:#624821!important;background:linear-gradient(135deg,#f4e8d2,#fffaf1)!important;
+  border-color:var(--dkl-gold-line)!important;
+}
+.portal-nav a:hover{background:#f5ead8!important;color:#624821!important}
+#publicPortal{
+  color:var(--dkl-ink)!important;
+  background:radial-gradient(ellipse at 8% 4%,rgba(232,211,177,.32),transparent 35%),radial-gradient(ellipse at 92% 18%,rgba(221,230,219,.34),transparent 32%),linear-gradient(180deg,#fbf8f3 0%,#f4eee4 52%,#faf7f1 100%)!important;
+}
+#portalPanelOverview .portal-hero{
+  border:1px solid var(--dkl-gold-line)!important;
+  background:linear-gradient(118deg,rgba(255,253,249,.97),rgba(247,239,225,.94) 62%,rgba(238,234,222,.90))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .section-eyebrow{color:#a17b43!important;letter-spacing:.18em!important}
+#portalPanelOverview .original-care-hero{color:#302a20!important;text-shadow:0 1px rgba(255,255,255,.85)}
+#portalPanelOverview .original-care-hero em{color:#ad854c!important}
+#portalPanelOverview .hero-copy>p,#portalPanelOverview .care-compass>p{color:#666159!important}
+#portalPanelOverview .dispatch-card{
+  border:1px solid rgba(189,146,80,.28)!important;
+  background:linear-gradient(145deg,rgba(255,253,249,.98),rgba(246,237,222,.92))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.95),var(--dkl-shadow)!important;
+}
+#portalPanelOverview .care-compass h3{color:#6d512d!important}
+#portalPanelOverview .care-mark{color:#b58a4e!important}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(115deg,#b48649,#d0a86d)!important;color:#241d13!important;
+  border:1px solid rgba(145,103,43,.35)!important;
+  box-shadow:0 9px 22px rgba(156,113,55,.20)!important;
+}
+#portalPanelOverview .hero-primary-actions .secondary-link,
+#portalPanelOverview .hero-contact-actions a,
+#portalPanelOverview .compass-credentials{
+  background:#fffdf9!important;color:#6b512d!important;border-color:var(--dkl-gold-line)!important;
+}
+#portalPanelOverview .care-pathways>a{
+  border:1px solid rgba(189,146,80,.25)!important;
+  background:linear-gradient(145deg,#fffdf9,#f5ecdc)!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#portalPanelOverview .care-pathways>a:before{background:linear-gradient(180deg,#c49a5d,#ead8b9)!important}
+#portalPanelOverview .care-pathways strong{color:#604927!important}
+#portalPanelOverview .care-pathways p{color:#716b61!important}
+#portalPanelOverview .care-pathways>a>span:last-child{color:#a57d43!important}
+#portalPanelOverview .home-care-section,#portalPanelOverview .diet-section,#portalPanelOverview #exploreHealthResources{
+  border-color:var(--dkl-gold-line)!important;
+  background:linear-gradient(145deg,rgba(255,253,249,.97),rgba(246,239,228,.92))!important;
+  box-shadow:var(--dkl-shadow)!important;
+}
+#publicPortal :is(input,select,textarea){
+  border-color:rgba(165,137,94,.38)!important;color:#39342c!important;background:#fffdf9!important;
+}
+#publicPortal :is(input,select,textarea):focus{
+  border-color:#bd9250!important;box-shadow:0 0 0 4px rgba(189,146,80,.14)!important;
+}
+#publicPortal :is(section,article)[data-surface="warm"]{background:linear-gradient(145deg,#fffdf9,#f5ead8)!important}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card){
+  border-color:rgba(165,137,94,.24)!important;box-shadow:0 10px 28px rgba(76,59,35,.055)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(even){background:linear-gradient(145deg,#fffdf9,#f4eadb)!important}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(odd){background:linear-gradient(145deg,#fffefa,#f7f3eb)!important}
+#publicPortal :is(button,a,[role="button"]):focus-visible,.site-header :is(button,a,summary):focus-visible{
+  outline:3px solid rgba(189,146,80,.65)!important;outline-offset:3px!important;
+}
+#publicPortal img{border-radius:16px}
+@media(max-width:680px){
+  #publicPortal{padding:16px 12px 32px!important}
+  #portalPanelOverview .portal-hero{border-radius:22px!important}
+  #portalPanelOverview .care-pathways>a{border-radius:17px!important}
+  .portal-nav{border-bottom:1px solid rgba(189,146,80,.16)}
+}
+@media(prefers-reduced-transparency:reduce){
+  .site-header{background:#fbf8f3!important}
+  #portalPanelOverview .dispatch-card{background:#fffdf9!important}
+}
+
+
+/* FULL-COLOUR EDITION — richer, visibly colour-filled clinical luxury.
+   Overrides the muted champagne-only pass while retaining legibility and calm contrast. */
+:root{
+  --dkl-teal:#176b70;
+  --dkl-ocean:#245d86;
+  --dkl-sky:#dceefa;
+  --dkl-sage:#e0f0e5;
+  --dkl-lilac:#eee7fb;
+  --dkl-rose:#f8e5e9;
+  --dkl-peach:#fbe8d7;
+  --dkl-gold:#b7863f;
+}
+html,body{
+  background:#eaf2f5!important;
+}
+body{
+  background-image:
+    radial-gradient(ellipse at 4% 8%,rgba(122,190,205,.32),transparent 31%),
+    radial-gradient(ellipse at 94% 10%,rgba(188,169,224,.30),transparent 29%),
+    radial-gradient(ellipse at 78% 78%,rgba(238,190,172,.22),transparent 32%),
+    linear-gradient(128deg,#eaf4f7 0%,#f5eff8 42%,#f8f0e6 100%)!important;
+}
+.site-header{
+  background:linear-gradient(105deg,rgba(226,242,247,.98),rgba(245,237,249,.98) 54%,rgba(255,242,225,.98))!important;
+  border-bottom:1px solid rgba(75,125,145,.25)!important;
+  box-shadow:0 10px 32px rgba(39,82,105,.12)!important;
+}
+.site-header .doctor-wordmark{color:#164f68!important}
+.site-header .doctor-brand p{color:#456c79!important}
+.site-header #navPublicBtn,
+.site-header a[href^="tel:"]{
+  background:linear-gradient(120deg,#176b70,#287e91 55%,#397ca5)!important;
+  color:#fff!important;
+  box-shadow:0 8px 20px rgba(23,107,112,.24)!important;
+}
+.site-header #navDoctorBtn{
+  background:linear-gradient(120deg,#eee7fb,#f8e7ed)!important;
+  color:#563d72!important;
+  border:1px solid rgba(132,101,164,.25)!important;
+}
+.site-header .language-control>summary,.site-header .site-language-picker{
+  background:linear-gradient(120deg,#fff,#e8f3f7)!important;
+  border-color:rgba(70,128,148,.30)!important;color:#24566a!important;
+}
+.portal-nav{
+  background:linear-gradient(90deg,#e4f1f5,#f0eafa 52%,#f9eee5)!important;
+  border-top:1px solid rgba(90,133,155,.18)!important;
+  border-bottom:1px solid rgba(90,133,155,.18)!important;
+}
+.portal-nav a:nth-child(4n+1){background:#dceefa!important;color:#245b7c!important}
+.portal-nav a:nth-child(4n+2){background:#e1f0e5!important;color:#28644e!important}
+.portal-nav a:nth-child(4n+3){background:#eee6fa!important;color:#634a83!important}
+.portal-nav a:nth-child(4n+4){background:#f9e8e2!important;color:#89533e!important}
+.portal-nav a[aria-selected="true"]{
+  background:linear-gradient(120deg,#176b70,#347f91)!important;
+  color:#fff!important;border-color:transparent!important;
+  box-shadow:0 5px 14px rgba(23,107,112,.20)!important;
+}
+#publicPortal{
+  background:
+    radial-gradient(ellipse at 5% 3%,rgba(144,205,219,.34),transparent 33%),
+    radial-gradient(ellipse at 96% 8%,rgba(202,184,231,.32),transparent 30%),
+    radial-gradient(ellipse at 80% 88%,rgba(244,204,177,.24),transparent 34%),
+    linear-gradient(145deg,#edf6f7 0%,#f2eef9 45%,#fbf1e8 100%)!important;
+}
+#portalPanelOverview .portal-hero{
+  background:
+    radial-gradient(ellipse at 90% 10%,rgba(190,219,231,.72),transparent 36%),
+    linear-gradient(118deg,#e0f0f4 0%,#eee8f8 54%,#fae9e2 100%)!important;
+  border:1px solid rgba(83,139,158,.28)!important;
+  box-shadow:0 24px 58px rgba(50,91,112,.13)!important;
+}
+#portalPanelOverview .section-eyebrow{color:#176b70!important}
+#portalPanelOverview .original-care-hero{color:#194b64!important}
+#portalPanelOverview .original-care-hero em{color:#8b5b91!important}
+#portalPanelOverview .hero-copy>p{color:#3f6170!important}
+#portalPanelOverview .dispatch-card{
+  background:linear-gradient(145deg,#dceef2 0%,#e9e5f6 100%)!important;
+  border:1px solid rgba(91,131,164,.30)!important;
+  box-shadow:0 18px 42px rgba(48,83,111,.12)!important;
+}
+#portalPanelOverview .care-compass h3{color:#245d70!important}
+#portalPanelOverview .care-mark{color:#287e83!important}
+#portalPanelOverview .hero-primary-actions .primary-link{
+  background:linear-gradient(115deg,#176b70,#287f91 58%,#397ba1)!important;
+  color:#fff!important;border:0!important;
+}
+#portalPanelOverview .hero-primary-actions .secondary-link{
+  background:linear-gradient(120deg,#f0e8fb,#f9e8ee)!important;
+  color:#634879!important;border-color:rgba(132,101,164,.28)!important;
+}
+#portalPanelOverview .hero-contact-actions a:nth-child(odd){
+  background:linear-gradient(120deg,#e0f0e5,#f0f7ed)!important;color:#28644e!important;
+}
+#portalPanelOverview .hero-contact-actions a:nth-child(even){
+  background:linear-gradient(120deg,#dceefa,#edf5fc)!important;color:#245b7c!important;
+}
+#portalPanelOverview .compass-credentials{
+  background:linear-gradient(120deg,#fff0df,#f9e7e9)!important;color:#80513e!important;
+}
+#portalPanelOverview .care-pathways>a:nth-child(3n+1){
+  background:linear-gradient(145deg,#dceefa,#eef6fb)!important;border-color:#b9d8e8!important;
+}
+#portalPanelOverview .care-pathways>a:nth-child(3n+2){
+  background:linear-gradient(145deg,#e0f0e5,#f0f7ef)!important;border-color:#c1ddc9!important;
+}
+#portalPanelOverview .care-pathways>a:nth-child(3n+3){
+  background:linear-gradient(145deg,#eee6fa,#f7f0fb)!important;border-color:#d4c5e8!important;
+}
+#portalPanelOverview .care-pathways>a:nth-child(3n+1):before{background:linear-gradient(180deg,#4b9ab5,#9ccbd8)!important}
+#portalPanelOverview .care-pathways>a:nth-child(3n+2):before{background:linear-gradient(180deg,#4e9a70,#a8d4b3)!important}
+#portalPanelOverview .care-pathways>a:nth-child(3n+3):before{background:linear-gradient(180deg,#9271b5,#c6afe0)!important}
+#portalPanelOverview .care-pathways strong{color:#244f65!important}
+#portalPanelOverview .care-pathways p{color:#4c6875!important}
+#portalPanelOverview .care-pathways>a>span:last-child{color:#267b82!important}
+#portalPanelOverview .home-care-section{
+  background:linear-gradient(135deg,#e0f0f5,#e8f2e9)!important;
+  border-color:#bdd9dd!important;
+}
+#portalPanelOverview .diet-section{
+  background:linear-gradient(135deg,#f9e8e2,#fff0d9)!important;
+  border-color:#e8cbb9!important;
+}
+#portalPanelOverview #exploreHealthResources{
+  background:linear-gradient(135deg,#eee8fa,#e2eff7)!important;
+  border-color:#d0c4e5!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card){
+  border:1px solid rgba(92,133,155,.24)!important;
+  box-shadow:0 12px 30px rgba(43,79,102,.08)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(4n+1){
+  background:linear-gradient(145deg,#e0f0f5,#f0f7fa)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(4n+2){
+  background:linear-gradient(145deg,#e4f1e6,#f2f8ef)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(4n+3){
+  background:linear-gradient(145deg,#eee7f8,#f7f1fb)!important;
+}
+#publicPortal :is(.content-card,.info-card,.education-card,.calculator-card):nth-of-type(4n+4){
+  background:linear-gradient(145deg,#fae9e2,#fff3e4)!important;
+}
+#publicPortal :is(input,select,textarea){
+  background:#fffdfb!important;border-color:rgba(70,126,147,.34)!important;
+}
+#publicPortal :is(input,select,textarea):focus{
+  border-color:#287e83!important;box-shadow:0 0 0 4px rgba(40,126,131,.16)!important;
+}
+#publicPortal :is(button,a,[role="button"]):focus-visible,
+.site-header :is(button,a,summary):focus-visible{
+  outline:3px solid rgba(40,126,131,.65)!important;outline-offset:3px!important;
+}
+@media(max-width:680px){
+  .portal-nav{background:linear-gradient(90deg,#e4f1f5,#f0eafa 52%,#f9eee5)!important}
+  #portalPanelOverview .portal-hero{background:linear-gradient(145deg,#e0f0f4,#eee8f8 65%,#fae9e2)!important}
+}

@@ -1,0 +1,217 @@
+/* Doctor Station — full-colour clinical workspace refinement.
+   Scoped to existing workstation panels; no markup, clinical content, forms or workflows changed. */
+:root{
+  --ws-ink:#20384d;
+  --ws-muted:#52697b;
+  --ws-line:rgba(75,126,153,.25);
+  --ws-teal:#dff2ef;
+  --ws-blue:#e7f1fb;
+  --ws-sage:#eaf3e9;
+  --ws-lavender:#f0edfa;
+  --ws-peach:#fff0e3;
+  --ws-rose:#faedf0;
+  --ws-gold:#f7efdE;
+  --ws-paper:#fffefa;
+  --ws-shadow:0 12px 30px rgba(35,66,89,.075);
+}
+#viewRxPad,#viewRegisters,#viewInvoice,#viewClinicalTools,#viewSymptomChecker,
+#viewJournalsHub,#viewPathCheatSheet,#viewPathReq,#viewRadiologyReq,
+#viewClinicalDocuments,#viewPatientTrends,#viewEvidenceWorkflow{
+  color:var(--ws-ink);
+}
+#viewRxPad>*,#viewRegisters>*,#viewInvoice>*,#viewClinicalTools>*,
+#viewSymptomChecker>*,#viewJournalsHub>*,#viewPathCheatSheet>*,
+#viewPathReq>*,#viewRadiologyReq>*{
+  border-color:var(--ws-line);
+}
+#viewRxPad .bg-white,#viewRegisters .bg-white,#viewInvoice .bg-white,
+#viewClinicalTools .bg-white,#viewSymptomChecker .bg-white,
+#viewJournalsHub .bg-white,#viewPathCheatSheet .bg-white,
+#viewPathReq .bg-white,#viewRadiologyReq .bg-white{
+  background:linear-gradient(145deg,#fffefa,#f1f7fa)!important;
+  border-color:var(--ws-line)!important;
+  box-shadow:var(--ws-shadow);
+}
+#viewRxPad :is(h2,h3,h4),#viewRegisters :is(h2,h3,h4),
+#viewInvoice :is(h2,h3,h4),#viewClinicalTools :is(h2,h3,h4),
+#viewSymptomChecker :is(h2,h3,h4),#viewJournalsHub :is(h2,h3,h4),
+#viewPathCheatSheet :is(h2,h3,h4),#viewPathReq :is(h2,h3,h4),
+#viewRadiologyReq :is(h2,h3,h4){
+  color:#244d68;
+}
+#viewClinicalTools .clinical-tool-card,.clinical-tools-grid .clinical-tool-card{
+  min-height:112px;
+  padding:18px!important;
+  border:1px solid rgba(74,133,158,.28)!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#fffefa,#e9f4f5)!important;
+  color:#24475d!important;
+  box-shadow:var(--ws-shadow);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+#viewClinicalTools .clinical-tool-card:nth-child(6n+2),.clinical-tools-grid .clinical-tool-card:nth-child(6n+2){background:linear-gradient(145deg,#fffefa,#eaf1fb)!important}
+#viewClinicalTools .clinical-tool-card:nth-child(6n+3),.clinical-tools-grid .clinical-tool-card:nth-child(6n+3){background:linear-gradient(145deg,#fffefa,#edf4e9)!important}
+#viewClinicalTools .clinical-tool-card:nth-child(6n+4),.clinical-tools-grid .clinical-tool-card:nth-child(6n+4){background:linear-gradient(145deg,#fffefa,#f1edfa)!important}
+#viewClinicalTools .clinical-tool-card:nth-child(6n+5),.clinical-tools-grid .clinical-tool-card:nth-child(6n+5){background:linear-gradient(145deg,#fffefa,#fff0e5)!important}
+#viewClinicalTools .clinical-tool-card:nth-child(6n),.clinical-tools-grid .clinical-tool-card:nth-child(6n){background:linear-gradient(145deg,#fffefa,#faedf0)!important}
+#viewClinicalTools .clinical-tool-card:hover,.clinical-tools-grid .clinical-tool-card:hover{transform:translateY(-2px);box-shadow:0 17px 34px rgba(35,66,89,.13)}
+#viewRegisters .register-type-controls button{
+  border-color:#b9d2d5!important;background:#e9f3f5!important;color:#244d68!important;
+}
+#viewRegisters .register-type-controls button[aria-pressed="true"]{
+  background:linear-gradient(135deg,#d9eee8,#e8f2dc)!important;border-color:#8ab9a6!important;color:#24543e!important;
+}
+#viewRegisters .register-field{color:#31566d!important}
+#viewRegisters .register-field input,#viewRegisters .register-field select,#viewRegisters .register-field textarea{
+  background:#fffefa!important;border-color:#b8d0dc!important;color:#20384d!important;
+}
+#viewRegisters .register-table th{background:#e2f0f3!important;color:#234c65!important}
+#viewRegisters .register-table tbody tr:nth-child(even){background:#f0f5fa}
+#viewRegisters .register-table tbody tr:nth-child(odd){background:#fffefa}
+#viewRegisters .register-table td{border-color:#d7e4e9!important;color:#314b5e}
+#viewInvoice label,#viewRxPad label,#viewPathReq label,#viewRadiologyReq label{color:#31566d}
+#viewInvoice :is(input,select,textarea),#viewRxPad :is(input,select,textarea),
+#viewPathReq :is(input,select,textarea),#viewRadiologyReq :is(input,select,textarea),
+#viewSymptomChecker :is(input,select,textarea){
+  border-color:#bdd0dc!important;background:#fffefa!important;color:#20384d!important;
+}
+#viewInvoice :is(input,select,textarea):focus,#viewRxPad :is(input,select,textarea):focus,
+#viewPathReq :is(input,select,textarea):focus,#viewRadiologyReq :is(input,select,textarea):focus,
+#viewSymptomChecker :is(input,select,textarea):focus{
+  outline:0!important;border-color:#4f9a9c!important;box-shadow:0 0 0 3px rgba(79,154,156,.16)!important;
+}
+#viewRxPad button,#viewRegisters button,#viewInvoice button,#viewClinicalTools button,
+#viewSymptomChecker button,#viewJournalsHub button,#viewPathReq button,#viewRadiologyReq button{
+  transition:filter .16s ease,transform .16s ease;
+}
+#viewRxPad button:hover,#viewRegisters button:hover,#viewInvoice button:hover,
+#viewClinicalTools button:hover,#viewSymptomChecker button:hover,
+#viewJournalsHub button:hover,#viewPathReq button:hover,#viewRadiologyReq button:hover{
+  filter:saturate(1.12);transform:translateY(-1px);
+}
+#viewJournalsHub a[href],#viewClinicalTools a[href]{text-underline-offset:3px}
+#viewRxPad :is(.border-t,.border-b),#viewInvoice :is(.border-t,.border-b){border-color:#d8e4e8!important}
+#viewPathCheatSheet table th,#viewPathReq table th,#viewRadiologyReq table th{
+  background:#e4f0f5!important;color:#234b64!important;
+}
+#viewPathCheatSheet table tbody tr:nth-child(even),#viewPathReq table tbody tr:nth-child(even),
+#viewRadiologyReq table tbody tr:nth-child(even){background:#f1f6f8}
+#viewPathCheatSheet table tbody tr:nth-child(odd),#viewPathReq table tbody tr:nth-child(odd),
+#viewRadiologyReq table tbody tr:nth-child(odd){background:#fffefa}
+#viewRxPad :focus-visible,#viewRegisters :focus-visible,#viewInvoice :focus-visible,
+#viewClinicalTools :focus-visible,#viewSymptomChecker :focus-visible,
+#viewJournalsHub :focus-visible,#viewPathReq :focus-visible,#viewRadiologyReq :focus-visible{
+  outline:3px solid rgba(73,145,157,.55)!important;outline-offset:2px!important;
+}
+@media(max-width:680px){
+  #viewClinicalTools .clinical-tool-card,.clinical-tools-grid .clinical-tool-card{min-height:96px;padding:14px!important;border-radius:15px!important}
+  #viewRegisters .register-table{font-size:12px}
+}
+@media print{
+  #viewRxPad *,#viewRegisters *,#viewInvoice *{box-shadow:none!important}
+}
+
+/* Patient Portal — Everyday Health Tools / Know Your Numbers.
+   The calculator grid is populated dynamically; style its generated cards as well. */
+#portalPanelTools{
+  color:#24445a!important;
+  background:
+    radial-gradient(ellipse at 8% 5%,rgba(207,234,239,.62),transparent 34%),
+    radial-gradient(ellipse at 92% 18%,rgba(229,221,246,.48),transparent 32%),
+    linear-gradient(145deg,#f5fafb 0%,#f5f2fa 48%,#f7f8f1 100%)!important;
+  border:1px solid rgba(104,153,171,.22)!important;
+  border-radius:26px!important;
+  padding:clamp(14px,3vw,30px)!important;
+}
+#patientToolsSection{
+  border:1px solid rgba(90,145,164,.30)!important;
+  background:linear-gradient(135deg,#fffefa 0%,#eaf5f5 42%,#f1eef9 100%)!important;
+  box-shadow:0 16px 38px rgba(42,83,105,.09)!important;
+  border-radius:24px!important;
+}
+#patientToolsSection .section-eyebrow{color:#397d83!important;letter-spacing:.14em}
+#patientToolsSection h3{color:#214d67!important}
+#patientToolsSection p{color:#536a7a!important}
+#calc30Grid{
+  align-items:stretch;
+}
+#calc30Grid>*{
+  min-width:0;
+  border:1px solid rgba(91,145,165,.28)!important;
+  border-radius:17px!important;
+  background:linear-gradient(145deg,#fffefa,#e6f3f4)!important;
+  color:#24475d!important;
+  box-shadow:0 9px 23px rgba(40,79,101,.065)!important;
+  padding:15px!important;
+}
+#calc30Grid>*:nth-child(6n+2){background:linear-gradient(145deg,#fffefa,#e8f0fb)!important;border-color:rgba(105,139,185,.30)!important}
+#calc30Grid>*:nth-child(6n+3){background:linear-gradient(145deg,#fffefa,#eaf3e7)!important;border-color:rgba(117,157,119,.30)!important}
+#calc30Grid>*:nth-child(6n+4){background:linear-gradient(145deg,#fffefa,#f0edfa)!important;border-color:rgba(142,126,185,.30)!important}
+#calc30Grid>*:nth-child(6n+5){background:linear-gradient(145deg,#fffefa,#fff0e4)!important;border-color:rgba(195,146,105,.30)!important}
+#calc30Grid>*:nth-child(6n){background:linear-gradient(145deg,#fffefa,#faedf0)!important;border-color:rgba(190,132,151,.30)!important}
+#calc30Grid :is(input,select,textarea){
+  background:rgba(255,255,255,.94)!important;border:1px solid #bfd3dc!important;color:#20384d!important;
+  border-radius:9px!important;min-height:39px;
+}
+#calc30Grid :is(input,select,textarea):focus{
+  outline:0!important;border-color:#4c9699!important;box-shadow:0 0 0 3px rgba(76,150,153,.15)!important;
+}
+#calc30Grid :is(button,[role="button"]){
+  border-radius:10px!important;border:1px solid rgba(74,137,151,.32)!important;
+  background:linear-gradient(135deg,#dcefee,#e8effa)!important;color:#244b62!important;font-weight:700!important;
+}
+#patientToolsSection .conversion-panel{
+  margin-top:18px!important;padding:20px!important;border:1px solid rgba(137,127,177,.28)!important;
+  border-radius:19px!important;background:linear-gradient(135deg,#f1effa,#eaf4f5 58%,#fffefa)!important;
+  box-shadow:0 9px 24px rgba(57,74,105,.065)!important;
+}
+#patientToolsSection .conversion-panel h4{color:#3f5e78!important;font-weight:750}
+#patientToolsSection .conversion-panel label{color:#36596d!important;font-weight:650}
+#patientToolsSection .conversion-panel input{
+  display:block;width:100%;margin-top:6px;padding:10px;border:1px solid #bfd2dd!important;
+  border-radius:10px!important;background:#fffefa!important;color:#20384d!important;min-height:42px;
+}
+#portalPanelTools footer{
+  border:1px solid rgba(82,126,151,.24)!important;
+  background:linear-gradient(135deg,#234d68,#315d73 55%,#496a76)!important;
+  border-radius:22px!important;box-shadow:0 14px 32px rgba(34,71,95,.13)!important;
+}
+@media(max-width:680px){
+  #portalPanelTools{border-radius:18px!important;padding:12px!important}
+  #patientToolsSection{padding:16px!important;border-radius:18px!important}
+  #calc30Grid>*{padding:12px!important;border-radius:14px!important}
+  #patientToolsSection .conversion-panel{padding:14px!important}
+}
+
+/* PERMANENT BRAND SAFETY LAYER — red is prohibited across the entire website.
+   Preserve warning/urgent semantics while expressing them with clinical blue and amber. */
+:root{
+  --brand-alert-bg:#edf5fb;
+  --brand-alert-border:#8eb6d0;
+  --brand-alert-ink:#234f6b;
+  --brand-caution-bg:#fff6df;
+  --brand-caution-border:#dfc27a;
+  --brand-caution-ink:#70551b;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is([class*="bg-red"],[class*="text-red"],[class*="border-red"],[class*="ring-red"],[class*="outline-red"],[class*="decoration-red"]){
+  background-color:var(--brand-alert-bg)!important;
+  border-color:var(--brand-alert-border)!important;
+  color:var(--brand-alert-ink)!important;
+  --tw-text-opacity:1;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is(.triage-result.red,.triage-badge.red,.status-red,.alert-red,.text-danger,.bg-danger){
+  background:var(--brand-alert-bg)!important;
+  border-color:var(--brand-alert-border)!important;
+  color:var(--brand-alert-ink)!important;
+}
+:is(#publicPortal,#doctorWorkstation,#bookingSection,#portalPanelBooking,#portalPanelTools,#doctorStation)
+:is([class*="bg-red"],[class*="text-red"],[class*="border-red"]) :is(svg,[class*="icon"]){
+  color:var(--brand-alert-ink)!important;
+  fill:currentColor!important;
+  stroke:currentColor!important;
+}
+/* Legacy semantic red state classes now use the non-red clinical alert palette. */
+.triage-result.red{background:var(--brand-alert-bg)!important;border-color:var(--brand-alert-border)!important;color:var(--brand-alert-ink)!important}
+.triage-badge.red{background:#dcecf7!important;border-color:#8eb6d0!important;color:#234f6b!important}
