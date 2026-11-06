@@ -23,3 +23,25 @@
 .intake-quick-grid label:has(textarea){grid-column:1/-1}
 .intake-quick-grid input[readonly]{background:#edf3f7!important;font-weight:700}
 @media(max-width:640px){.intake-quick-grid{grid-template-columns:minmax(0,1fr)}.intake-quick-grid label:has(textarea){grid-column:auto}.intake-quick-essentials{padding:12px}}
+
+
+/* SITE-WIDE BRAND RULE: red is prohibited. Booking-page urgent notices use calm clinical blue. */
+#portalPanelBooking .online-consultation-warning,
+#portalPanelBooking .booking-intake .intake-urgent{
+  background:#edf6fc!important;
+  border-color:#78a8c2!important;
+  border-left-color:#397b9b!important;
+  color:#214b63!important;
+}
+#portalPanelBooking .online-consultation-warning :is(h1,h2,h3,h4,p,strong),
+#portalPanelBooking .booking-intake .intake-urgent :is(h1,h2,h3,h4,p,strong){
+  color:#214b63!important;
+}
+#portalPanelBooking :is([class*="bg-red"],[class*="text-red"],[class*="border-red"]){
+  background-color:#edf6fc!important;
+  border-color:#78a8c2!important;
+  color:#214b63!important;
+}
+#portalPanelBooking :focus-visible{
+  outline-color:#4c8eaa!important;
+}
