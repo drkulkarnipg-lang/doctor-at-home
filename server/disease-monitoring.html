@@ -1,0 +1,1028 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Disease Monitoring Centre · Dr Kulkarni</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<style>
+/* Layout: summary strip, then a patient watchlist beside a detail pane; disease guides as a second tab. */
+:root{
+  --bg:#f3f6f5; --surface:#fcfcfb; --surface2:#eef2f1; --ink:#10201f; --ink2:#46585a; --muted:#6f7f7d; --line:#d8e0de;
+  --accent:#256abf; --accent-ink:#ffffff; --accent-soft:#e3edf9;
+  --red:#d03b3b; --red-ink:#9d2222; --red-bg:#fbe8e8;
+  --amber:#fab219; --amber-ink:#7a5000; --amber-bg:#fdf1d2;
+  --ok:#0ca30c; --ok-ink:#006300; --ok-bg:#e2f3e2;
+  --info:#256abf; --info-ink:#1c4f93; --info-bg:#e4edf8;
+  --grid:#e1e6e4; --focus:#256abf;
+  --f-disp:'Bricolage Grotesque','Noto Sans Devanagari',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans','Noto Sans Devanagari',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1514; --surface:#172120; --surface2:#1e2b29; --ink:#eaf1ef; --ink2:#b7c5c2; --muted:#8a9a97; --line:#2b3a38;
+  --accent:#6da7ec; --accent-ink:#0b1a2c; --accent-soft:#1c2e45;
+  --red:#e66767; --red-ink:#f4a1a1; --red-bg:#3a2020;
+  --amber:#fab219; --amber-ink:#f6cd6a; --amber-bg:#3a2f12;
+  --ok:#0ca30c; --ok-ink:#6fd36f; --ok-bg:#17301a;
+  --info:#6da7ec; --info-ink:#9cc4f3; --info-bg:#1c2e45;
+  --grid:#2a3634; --focus:#6da7ec; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1514; --surface:#172120; --surface2:#1e2b29; --ink:#eaf1ef; --ink2:#b7c5c2; --muted:#8a9a97; --line:#2b3a38;
+  --accent:#6da7ec; --accent-ink:#0b1a2c; --accent-soft:#1c2e45;
+  --red:#e66767; --red-ink:#f4a1a1; --red-bg:#3a2020;
+  --amber:#fab219; --amber-ink:#f6cd6a; --amber-bg:#3a2f12;
+  --ok:#0ca30c; --ok-ink:#6fd36f; --ok-bg:#17301a;
+  --info:#6da7ec; --info-ink:#9cc4f3; --info-bg:#1c2e45;
+  --grid:#2a3634; --focus:#6da7ec; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-disp);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:28px;line-height:1.15}
+h2{font-size:19px} h3{font-size:15px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;padding-bottom:14px}
+.sub{color:var(--ink2);font-size:14px;margin-top:4px}
+.store{font-size:12px;color:var(--muted);max-width:340px;text-align:right}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;cursor:pointer;color:var(--ink2);font-weight:500;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.sumb{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.sumb[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.sumb .n{font-family:var(--f-disp);font-size:26px;font-weight:700;line-height:1}
+.sumb .l{font-size:12px;color:var(--ink2)}
+.grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;align-items:start}
+#detail,#plist{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.pl{display:flex;flex-direction:column;gap:8px}
+.pi{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;width:100%}
+.pi[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pi .r1{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.code{font-weight:600;font-variant-numeric:tabular-nums}
+.meta{font-size:12.5px;color:var(--ink2)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:11.5px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:1px 8px;color:var(--ink2)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px 2px 7px;white-space:nowrap}
+.pill svg{width:12px;height:12px;flex:none}
+.pill.red{background:var(--red-bg);color:var(--red-ink)} .pill.red svg{color:var(--red)}
+.pill.amber{background:var(--amber-bg);color:var(--amber-ink)} .pill.amber svg{color:var(--amber)}
+.pill.ok{background:var(--ok-bg);color:var(--ok-ink)} .pill.ok svg{color:var(--ok)}
+.pill.info{background:var(--info-bg);color:var(--info-ink)} .pill.info svg{color:var(--info)}
+.one{font-size:12.5px;color:var(--ink2)}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500}
+.btn:hover{background:var(--surface2)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.warn{color:var(--red-ink);border-color:var(--red)}
+.btn.sm{padding:3px 8px;font-size:12.5px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px}
+.al{display:flex;flex-direction:column;gap:8px;margin:10px 0 16px;padding:0;list-style:none}
+.al li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--surface)}
+.al li.red{background:var(--red-bg);border-color:var(--red)}
+.al li.amber{background:var(--amber-bg);border-color:var(--amber)}
+.al li.info{background:var(--info-bg)}
+.al .t{font-weight:600} .al .d{font-size:13px;color:var(--ink2)}
+.act{font-size:14px;border-radius:10px;padding:9px 12px;margin-bottom:12px}
+.act.red{background:var(--red-bg);color:var(--red-ink)} .act.amber{background:var(--amber-bg);color:var(--amber-ink)} .act.ok{background:var(--ok-bg);color:var(--ok-ink)} .act.info{background:var(--info-bg);color:var(--info-ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:10px 0 16px}
+.pc{border:1px solid var(--line);border-radius:10px;padding:10px 12px 8px;background:var(--surface);min-width:0}
+.pc.red{border-color:var(--red)} .pc.amber{border-color:var(--amber)}
+.pc .h{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.pc .nm{font-size:12.5px;color:var(--ink2)}
+.pc .v{font-family:var(--f-disp);font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.pc .v small{font-family:var(--f-body);font-size:12px;font-weight:400;color:var(--muted);margin-left:3px}
+.tr{font-size:12px;color:var(--ink2);min-height:18px}
+svg.sp{width:100%;height:auto;display:block;touch-action:pan-y}
+.sp text{fill:var(--muted);font-size:9px;font-family:var(--f-body)}
+.sp .gl{stroke:var(--grid);stroke-width:1}
+.sp .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.sp .pt{fill:var(--accent)}
+.sp .end{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.sp .cross{stroke:var(--ink2);stroke-width:1;stroke-dasharray:2 2}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:4px 8px;border-radius:6px;white-space:nowrap}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--ink2);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.form{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--ink2)}
+input[type=number],input[type=text],input[type=datetime-local],select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 9px;width:100%;min-width:0;color:var(--ink)}
+.ck{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;padding:3px 0}
+.ck input{margin-top:3px}
+.err{color:var(--red-ink);font-size:13px;margin-top:6px}
+.banner{background:var(--info-bg);color:var(--info-ink);border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}
+.disc{font-size:12.5px;color:var(--muted);margin-top:18px;max-width:80ch}
+details.sec{border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
+details.sec>summary{cursor:pointer;font-family:var(--f-disp);font-weight:600;font-size:16px;margin-bottom:10px}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.gc{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13.5px}
+.gc[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.gg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.gb{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface);min-width:0}
+.gb h3{margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
+.gb h3 span{font-family:var(--f-body);font-weight:400;font-size:12.5px;color:var(--muted)}
+.gb ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.gb.red{background:var(--red-bg);border-color:var(--red)} .gb.amber{background:var(--amber-bg);border-color:var(--amber)}
+.gw{grid-column:1/-1}
+.rl{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.rl li{display:flex;gap:8px;align-items:baseline;font-size:13.5px}
+.mut{color:var(--muted)}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}.sum{grid-template-columns:repeat(2,minmax(0,1fr))}.store{text-align:left}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="wrap">
+  <header class="top">
+    <div><h1>Disease Monitoring Centre</h1>
+    <div class="sub">रोगनिहाय मॉनिटरिंग केंद्र · Dr Kulkarni, Home Visiting ICU Doctor, Pune</div></div>
+    <div class="store" id="store" aria-live="polite"></div>
+  </header>
+  <div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="watch">Patient watchlist</button><button class="tab" role="tab" data-tab="guides">Disease guides</button></div>
+  <section id="v-watch">
+    <div class="sum" id="sum"></div>
+    <div class="grid"><div id="plist"></div><div id="detail"></div></div>
+  </section>
+  <section id="v-guides" hidden><div id="guide"></div></section>
+  <p class="disc">Decision support for the treating doctor, not a diagnosis. Thresholds are typical adult values and are applied the same way to every patient, so confirm and adjust them before clinical use. Alerts compare each new reading with the patient’s own earlier readings as well as with fixed limits. Keep patient codes free of names and contact details.</p>
+</div>
+<div class="tip" id="tip" hidden></div>
+<div class="tip" id="toast" hidden style="left:50%;transform:translateX(-50%);bottom:24px;top:auto"></div>
+<script>
+/* ---------- Parameters that can be logged ---------- */
+const PARAMS = {
+  sbp:{l:'Systolic BP',u:'mmHg',min:50,max:280,dp:0},
+  dbp:{l:'Diastolic BP',u:'mmHg',min:30,max:160,dp:0},
+  pulse:{l:'Pulse',u:'bpm',min:20,max:220,dp:0},
+  spo2:{l:'SpO₂',u:'%',min:50,max:100,dp:0},
+  rr:{l:'Respiratory rate',u:'/min',min:4,max:60,dp:0},
+  temp:{l:'Temperature',u:'°C',min:32,max:43,dp:1},
+  weight:{l:'Weight',u:'kg',min:15,max:250,dp:1},
+  glucF:{l:'Fasting glucose',u:'mg/dL',min:20,max:700,dp:0},
+  glucP:{l:'Post-meal glucose',u:'mg/dL',min:20,max:700,dp:0},
+  pefr:{l:'Peak flow',u:'L/min',min:30,max:800,dp:0},
+  puffs:{l:'Reliever puffs',u:'/day',min:0,max:80,dp:0},
+  angina:{l:'Angina episodes',u:'/day',min:0,max:40,dp:0},
+  gtn:{l:'GTN doses',u:'/day',min:0,max:12,dp:0},
+  pillows:{l:'Pillows to sleep',u:'',min:0,max:8,dp:0},
+  creat:{l:'Creatinine',u:'mg/dL',min:0.2,max:20,dp:2},
+  egfr:{l:'eGFR',u:'mL/min',min:1,max:150,dp:0},
+  k:{l:'Potassium',u:'mmol/L',min:2,max:9,dp:1},
+  na:{l:'Sodium',u:'mmol/L',min:100,max:170,dp:0},
+  hb:{l:'Haemoglobin',u:'g/dL',min:3,max:20,dp:1},
+  bili:{l:'Bilirubin',u:'mg/dL',min:0.1,max:40,dp:1},
+  inr:{l:'INR',u:'',min:0.8,max:8,dp:2},
+  girth:{l:'Abdominal girth',u:'cm',min:40,max:200,dp:0},
+  enc:{l:'Confusion grade (West Haven 0–4)',u:'',min:0,max:4,dp:0},
+  falls:{l:'Falls since last entry',u:'',min:0,max:20,dp:0},
+  barthel:{l:'Barthel index',u:'/100',min:0,max:100,dp:0},
+  pain:{l:'Pain score',u:'/10',min:0,max:10,dp:0},
+  pps:{l:'Palliative performance (PPS)',u:'%',min:10,max:100,dp:0},
+  bm:{l:'Days since bowel movement',u:'d',min:0,max:30,dp:0},
+  bt:{l:'Breakthrough analgesic doses',u:'/day',min:0,max:20,dp:0}
+};
+
+/* ---------- Diseases ---------- */
+const DIS = {
+ dm:{
+  name:'Diabetes Mellitus', mr:'मधुमेह', gap:7,
+  params:['glucF','glucP','weight'],
+  flags:[
+   {id:'dm_sev_hypo',l:'Severe low sugar (needed help or lost consciousness)',sev:'red'},
+   {id:'dm_dka',l:'Vomiting, abdominal pain, fast breathing or drowsiness with high sugar',sev:'red'},
+   {id:'dm_hypo',l:'Low-sugar symptoms (sweating, shaking, confusion)',sev:'amber'},
+   {id:'dm_foot',l:'New foot wound, blister or colour change',sev:'amber'}
+  ],
+  rules:[
+   {t:'lvl',p:'glucF',op:'<',v:70,sev:'amber',m:'Low fasting sugar'},
+   {t:'lvl',p:'glucF',op:'<',v:54,sev:'red',m:'Severe low fasting sugar'},
+   {t:'lvl',p:'glucP',op:'<',v:70,sev:'amber',m:'Low sugar after meal'},
+   {t:'lvl',p:'glucP',op:'<',v:54,sev:'red',m:'Severe low sugar'},
+   {t:'lvl',p:'glucF',op:'>=',v:250,sev:'amber',m:'High fasting sugar'},
+   {t:'lvl',p:'glucF',op:'>=',v:300,sev:'red',m:'Very high fasting sugar: check ketones and symptoms'},
+   {t:'lvl',p:'glucP',op:'>=',v:300,sev:'amber',m:'High post-meal sugar'},
+   {t:'lvl',p:'glucP',op:'>=',v:400,sev:'red',m:'Very high sugar: check ketones and symptoms'},
+   {t:'sus',p:'glucF',op:'>=',v:130,n:4,of:7,sev:'amber',m:'Fasting sugar persistently above target'},
+   {t:'mean',p:'glucF',days:7,dir:'up',abs:20,sev:'amber',m:'Fasting sugar average rising week on week'},
+   {t:'chg',p:'weight',days:30,dir:'down',pct:5,sev:'amber',m:'Unintended weight loss'}
+  ],
+  guide:{
+   monitor:[
+    ['Fasting / pre-meal glucose','Daily on insulin; 3 to 4 times a week otherwise','80–130 mg/dL for most adults'],
+    ['Post-meal glucose (2 h)','2 to 3 times a week, more when treatment is changing','Under 180 mg/dL'],
+    ['Hypoglycaemia episodes','Every episode, with the time and cause','None; any value under 70 needs action'],
+    ['Weight and appetite','Weekly','Stable; watch for unintended loss'],
+    ['Feet','Daily look by patient or carer','No wounds, blisters or colour change'],
+    ['Blood pressure','At each visit, weekly if also hypertensive','Under 130/80 mmHg when tolerated']],
+   invest:[
+    ['HbA1c','Every 3 months until stable, then 6-monthly','Average control; set an individual target (often 7–8% in the elderly)'],
+    ['Kidney function and urine albumin-creatinine ratio','Yearly, 3–6 monthly if abnormal','Early diabetic kidney disease'],
+    ['Lipid profile','Yearly','Cardiovascular risk'],
+    ['Eye examination (fundus)','Yearly','Retinopathy'],
+    ['Foot examination with monofilament','Yearly, every visit if high risk','Neuropathy and ulcer risk'],
+    ['Vitamin B12 if on metformin','Every 1–2 years','Neuropathy mimic']],
+   trends:[
+    'Fasting readings creeping up over two weeks even when each value looks acceptable',
+    'Rising HbA1c across two consecutive tests',
+    'Increasing variability: highs and lows in the same week',
+    'Nocturnal or early-morning lows that start after a dose change or reduced eating',
+    'Falling weight with rising sugars suggests insulin deficiency; falling appetite with lows suggests too much treatment',
+    'Falling eGFR: metformin and sulfonylurea doses may need review'],
+   warn:['Excess thirst, passing urine often, blurred vision','Sweating, shaking, sudden hunger or confusion','Non-healing wound or new numbness in the feet','Vomiting or not eating on usual tablets or insulin (sick day)'],
+   call:['Two readings under 70 mg/dL in a week','Fasting readings above 250 mg/dL on two days, or above 130 on most days for a week','Any foot wound, blister or discoloured toe','Fever, vomiting or diarrhoea: sick-day plan needs adjusting','Unintended weight loss'],
+   urgent:['Sugar under 54 mg/dL or low sugar that needs another person’s help or does not recover after treatment','Sugar above 300 mg/dL with vomiting, abdominal pain, fast deep breathing, drowsiness or ketones','Confusion, seizure or unconsciousness','Spreading redness, black tissue or foul discharge in the foot']
+  }},
+ htn:{
+  name:'Hypertension', mr:'उच्च रक्तदाब', gap:7,
+  params:['sbp','dbp','pulse'],
+  flags:[
+   {id:'htn_emerg',l:'Severe headache, vision change, chest pain, weakness or speech difficulty',sev:'red'},
+   {id:'htn_dizzy',l:'Dizziness on standing or a fall',sev:'amber'},
+   {id:'htn_swell',l:'New ankle swelling after starting a BP drug',sev:'amber'}
+  ],
+  rules:[
+   {t:'lvl',p:'sbp',op:'>=',v:160,sev:'amber',m:'Systolic BP high'},
+   {t:'lvl',p:'sbp',op:'>=',v:180,sev:'red',m:'Severe systolic BP elevation'},
+   {t:'lvl',p:'dbp',op:'>=',v:100,sev:'amber',m:'Diastolic BP high'},
+   {t:'lvl',p:'dbp',op:'>=',v:120,sev:'red',m:'Severe diastolic BP elevation'},
+   {t:'lvl',p:'sbp',op:'<',v:100,sev:'amber',m:'Low systolic BP'},
+   {t:'lvl',p:'sbp',op:'<',v:90,sev:'red',m:'Very low systolic BP'},
+   {t:'sus',p:'sbp',op:'>=',v:140,n:4,of:7,sev:'amber',m:'BP persistently above target'},
+   {t:'mean',p:'sbp',days:7,dir:'up',abs:10,sev:'amber',m:'Average systolic BP rising week on week'},
+   {t:'lvl',p:'pulse',op:'>=',v:110,sev:'amber',m:'Fast pulse'},
+   {t:'lvl',p:'pulse',op:'<=',v:50,sev:'amber',m:'Slow pulse'}
+  ],
+  guide:{
+   monitor:[
+    ['Home BP (seated, after 5 min rest)','Twice daily for 7 days after any change; then 2–3 times a week','Under 130/80 mmHg for most; individualise in the frail elderly'],
+    ['Standing BP (elderly, diabetics, on several drugs)','At each visit and after any dose change','Fall of 20 mmHg or more is significant'],
+    ['Pulse rate and rhythm','With every BP reading','60–100 bpm and regular'],
+    ['Weight and salt intake','Weekly','Stable'],
+    ['Drug adherence and side effects','Each visit','Cough, ankle swelling, dizziness']],
+   invest:[
+    ['Creatinine, eGFR and electrolytes','Baseline, 1–2 weeks after starting or changing ACEi/ARB/diuretic, then yearly','Kidney function and potassium'],
+    ['Urine albumin-creatinine ratio','Yearly','Kidney damage'],
+    ['ECG','Baseline, then as needed','Left ventricular hypertrophy, arrhythmia'],
+    ['Lipid profile and HbA1c','Yearly','Total cardiovascular risk'],
+    ['Echocardiogram','If heart failure signs or resistant hypertension','Structural disease']],
+   trends:[
+    'Seven-day average rising by 10 mmHg or more',
+    'Morning readings higher than evening ones (poor overnight control)',
+    'Growing gap between sitting and standing readings',
+    'New low readings after drug escalation',
+    'Rising creatinine or potassium after ACEi/ARB or diuretic changes'],
+   warn:['Morning headache or blurred vision','Dizziness on standing, near-fainting','Breathlessness or ankle swelling','Palpitations'],
+   call:['Average above 140/90 for a week despite adherence','Any reading at or above 160/100 that does not settle after resting','Standing dizziness or systolic under 100 with symptoms','New swelling, cough or rash after a drug change'],
+   urgent:['180/120 mmHg or more with headache, chest pain, breathlessness, confusion, weakness, speech or vision change','Systolic under 90 with dizziness or fainting','Chest pain lasting over 15 minutes']
+  }},
+ ihd:{
+  name:'Ischaemic Heart Disease', mr:'हृदयविकार (इस्केमिक)', gap:7,
+  params:['sbp','pulse','angina','gtn'],
+  flags:[
+   {id:'ihd_rest',l:'Chest pain at rest, lasting over 15 min, or not relieved by GTN',sev:'red'},
+   {id:'ihd_syn',l:'Fainting or near-fainting',sev:'red'},
+   {id:'ihd_sob',l:'New or worse breathlessness on effort',sev:'amber'},
+   {id:'ihd_palp',l:'Palpitations',sev:'amber'}
+  ],
+  rules:[
+   {t:'lvl',p:'gtn',op:'>=',v:2,sev:'amber',m:'Repeated GTN use in a day'},
+   {t:'lvl',p:'gtn',op:'>=',v:3,sev:'red',m:'Three or more GTN doses in a day'},
+   {t:'mean',p:'angina',days:7,dir:'up',pct:50,sev:'amber',m:'Angina episodes becoming more frequent'},
+   {t:'lvl',p:'angina',op:'>=',v:4,sev:'amber',m:'Frequent angina in a day'},
+   {t:'lvl',p:'sbp',op:'<',v:90,sev:'red',m:'Low BP in a patient on nitrates'},
+   {t:'lvl',p:'pulse',op:'>=',v:110,sev:'amber',m:'Fast pulse'},
+   {t:'lvl',p:'pulse',op:'>=',v:130,sev:'red',m:'Very fast pulse'},
+   {t:'lvl',p:'pulse',op:'<=',v:50,sev:'amber',m:'Slow pulse'},
+   {t:'lvl',p:'pulse',op:'<=',v:40,sev:'red',m:'Very slow pulse'}
+  ],
+  guide:{
+   monitor:[
+    ['Angina episodes (number, trigger, duration)','Daily diary','Stable or fewer; note any new pattern'],
+    ['GTN tablets used','Daily count','Rare; rising use means unstable disease'],
+    ['Effort tolerance (distance or stairs)','Weekly','Stable'],
+    ['BP and pulse','2–3 times a week and with symptoms','BP under 130/80; resting pulse 55–80'],
+    ['Weight','Weekly','Stable'],
+    ['Adherence: aspirin, statin, beta-blocker, antiplatelet','Each visit','No missed doses']],
+   invest:[
+    ['ECG','Baseline; repeat with any new symptom pattern','Ischaemia, rhythm change'],
+    ['Lipid profile (LDL)','6–12 weeks after starting, then yearly','LDL goal set by risk, often under 70 mg/dL'],
+    ['HbA1c, kidney function, liver enzymes','Yearly or as indicated by drugs','Risk factors and drug safety'],
+    ['Echocardiogram','After an event and when symptoms change','Pump function'],
+    ['Stress test or angiography','Cardiologist decision when symptoms change','Revascularisation need']],
+   trends:[
+    'Angina episodes per week rising or occurring at lower effort',
+    'GTN use increasing',
+    'Shorter distance before chest tightness or breathlessness',
+    'Resting pulse creeping up, or new irregular rhythm',
+    'Falling BP after drug escalation'],
+   warn:['Chest tightness, heaviness or pain spreading to arm, jaw or back','Breathlessness on effort that is new','Sweating, nausea or unusual fatigue','Palpitations or fainting'],
+   call:['Angina that is more frequent, longer or comes on with less effort','Using GTN two or more times in a day','New breathlessness or ankle swelling','Dizziness, pulse above 110 or below 50 at rest'],
+   urgent:['Chest pain at rest or lasting more than 15 minutes, or not relieved by two GTN doses 5 minutes apart: call an ambulance and chew aspirin 300 mg unless contraindicated','Fainting, severe breathlessness or cold sweat','Pulse above 130 or below 40 with symptoms']
+  }},
+ hf:{
+  name:'Heart Failure', mr:'हृदय अपयश', gap:2,
+  params:['weight','sbp','pulse','spo2','pillows'],
+  flags:[
+   {id:'hf_rest',l:'Breathless at rest or unable to lie flat',sev:'red'},
+   {id:'hf_syn',l:'Fainting, chest pain or sudden severe breathlessness',sev:'red'},
+   {id:'hf_swell',l:'New or worse leg or abdominal swelling',sev:'amber'},
+   {id:'hf_pnd',l:'Waking at night breathless',sev:'amber'},
+   {id:'hf_urine',l:'Passing much less urine',sev:'amber'}
+  ],
+  rules:[
+   {t:'chg',p:'weight',days:3,dir:'up',abs:2,sev:'amber',m:'Rapid weight gain: fluid build-up likely'},
+   {t:'chg',p:'weight',days:7,dir:'up',abs:3,sev:'red',m:'Weight up 3 kg or more in a week'},
+   {t:'chg',p:'pillows',days:7,dir:'up',abs:1,sev:'amber',m:'Needing more pillows to sleep'},
+   {t:'lvl',p:'spo2',op:'<',v:92,sev:'amber',m:'Low oxygen saturation'},
+   {t:'lvl',p:'spo2',op:'<',v:90,sev:'red',m:'Oxygen saturation under 90%'},
+   {t:'lvl',p:'sbp',op:'<',v:90,sev:'amber',m:'Low systolic BP'},
+   {t:'lvl',p:'pulse',op:'>=',v:110,sev:'amber',m:'Fast pulse'},
+   {t:'lvl',p:'pulse',op:'>=',v:130,sev:'red',m:'Very fast pulse'},
+   {t:'lvl',p:'pulse',op:'<=',v:45,sev:'amber',m:'Slow pulse'}
+  ],
+  guide:{
+   monitor:[
+    ['Weight (same scale, after passing urine, before breakfast)','Every morning','Dry weight set by the doctor; gain of 2 kg in 3 days is a signal'],
+    ['Breathlessness, pillows needed, night-time waking','Daily','No change from baseline'],
+    ['Leg and abdominal swelling','Daily look, weekly girth if ascites','None or stable'],
+    ['BP and pulse','Daily if drugs are being titrated, else 3 times a week','SBP above 90–100; resting pulse 55–100'],
+    ['SpO₂','With any breathlessness; daily if unstable','94% or above (or patient baseline)'],
+    ['Fluid and salt intake, urine output','Daily','As advised, often 1.5 L fluid in advanced disease']],
+   invest:[
+    ['Creatinine, sodium, potassium','1–2 weeks after any diuretic, ACEi/ARB/ARNI, MRA change; otherwise 3–6 monthly','Kidney function and electrolytes'],
+    ['NT-proBNP or BNP','At diagnosis and when status is unclear','Congestion and prognosis'],
+    ['Echocardiogram','At diagnosis and with clinical change','Ejection fraction'],
+    ['Haemoglobin and iron studies (ferritin, transferrin saturation)','Yearly','Iron deficiency worsens symptoms'],
+    ['ECG','Baseline and with palpitations','Rhythm']],
+   trends:[
+    'Weight rising over several days before breathlessness appears',
+    'Pillow count or night-time waking increasing',
+    'Falling BP or rising creatinine after diuretic or vasodilator changes',
+    'Resting pulse rising',
+    'Falling SpO₂ at rest or on walking',
+    'Falling weight with poor appetite may signal cardiac cachexia'],
+   warn:['Breathlessness lying flat or waking at night','Swelling of ankles, legs or abdomen','Persistent cough, especially at night','Tiredness, reduced exercise ability, reduced urine'],
+   call:['Weight gain of 2 kg or more in 3 days, or 3 kg in a week','Needing extra pillows or new night-time breathlessness','New or worse swelling','Dizziness, SBP under 90, or pulse above 110 at rest','Vomiting or diarrhoea (diuretic and ACEi doses may need holding)'],
+   urgent:['Breathless at rest or unable to speak full sentences','SpO₂ under 90% or cold, clammy and drowsy','Chest pain, fainting, or pulse above 130','Frothy or pink sputum']
+  }},
+ copd:{
+  name:'COPD / Asthma', mr:'सीओपीडी / दमा', gap:3,
+  params:['spo2','rr','pefr','puffs','pulse','temp'],
+  flags:[
+   {id:'copd_rest',l:'Cannot speak full sentences, or struggling to breathe at rest',sev:'red'},
+   {id:'copd_blue',l:'Blue lips, drowsiness or confusion',sev:'red'},
+   {id:'copd_spu',l:'More sputum, or sputum turned yellow or green',sev:'amber'},
+   {id:'copd_wheeze',l:'More wheeze or cough than usual',sev:'amber'},
+   {id:'copd_night',l:'Night waking from cough or breathlessness',sev:'amber'}
+  ],
+  rules:[
+   {t:'lvl',p:'spo2',op:'<',v:92,sev:'amber',m:'Low oxygen saturation'},
+   {t:'lvl',p:'spo2',op:'<',v:88,sev:'red',m:'Oxygen saturation under 88%'},
+   {t:'base',p:'spo2',dir:'down',abs:3,sev:'amber',m:'SpO₂ lower than this patient’s usual'},
+   {t:'lvl',p:'rr',op:'>=',v:24,sev:'amber',m:'Fast breathing'},
+   {t:'lvl',p:'rr',op:'>=',v:30,sev:'red',m:'Very fast breathing'},
+   {t:'base',p:'pefr',dir:'down',pct:20,sev:'amber',m:'Peak flow 20% below personal best'},
+   {t:'base',p:'pefr',dir:'down',pct:50,sev:'red',m:'Peak flow 50% below personal best'},
+   {t:'lvl',p:'puffs',op:'>=',v:4,sev:'amber',m:'Reliever use above 4 puffs a day'},
+   {t:'lvl',p:'puffs',op:'>=',v:8,sev:'red',m:'Heavy reliever use'},
+   {t:'mean',p:'puffs',days:7,dir:'up',pct:50,sev:'amber',m:'Reliever use rising week on week'},
+   {t:'lvl',p:'temp',op:'>=',v:38,sev:'amber',m:'Fever'},
+   {t:'lvl',p:'pulse',op:'>=',v:120,sev:'amber',m:'Fast pulse'}
+  ],
+  guide:{
+   monitor:[
+    ['SpO₂ (resting, and after walking if possible)','Daily if unstable, otherwise 2–3 times a week','94–98%; 88–92% target if CO₂ retainer on oxygen; know the patient’s usual'],
+    ['Peak flow (asthma, and COPD with variable symptoms)','Morning and evening; record the personal best','Above 80% of personal best'],
+    ['Reliever inhaler use','Daily count','Under 3–4 puffs a day'],
+    ['Respiratory rate','With every observation','12–20 per minute'],
+    ['Sputum colour, volume; cough; night waking','Daily','Unchanged from baseline'],
+    ['Inhaler technique and adherence','Every visit','Correct technique, spacer if needed'],
+    ['Temperature','When unwell','Under 37.8 °C']],
+   invest:[
+    ['Spirometry','At diagnosis, then yearly','Obstruction severity'],
+    ['Chest X-ray','At diagnosis and with new symptoms','Pneumonia, pneumothorax, mass'],
+    ['Haemoglobin, eosinophils','Yearly','Polycythaemia, steroid response'],
+    ['ABG or venous gas','When drowsy, SpO₂ under 90%, or in exacerbation','CO₂ retention'],
+    ['Echocardiogram','If swelling or severe disease','Right-heart strain'],
+    ['Sputum culture','Frequent or severe exacerbations','Organism and resistance']],
+   trends:[
+    'Peak flow falling over several days, or morning dips',
+    'SpO₂ lower than the patient’s usual by 3 points or more',
+    'Reliever use climbing over a week',
+    'Exacerbations getting closer together',
+    'Resting respiratory rate creeping upward',
+    'Weight loss and falling exercise capacity in advanced COPD'],
+   warn:['More breathless than usual or reduced walking distance','Change in sputum colour or amount','Waking at night with cough or wheeze','Ankle swelling'],
+   call:['Reliever needed more than 4 puffs a day for 2 days','Peak flow under 80% of personal best','Sputum yellow or green, or fever','SpO₂ 3 points below usual','Rescue pack (steroid or antibiotic) started: call the same day'],
+   urgent:['Cannot speak full sentences, or severe breathlessness at rest','SpO₂ under 88% (or under 90% in asthma), blue lips','Drowsiness, confusion or morning headache (CO₂ retention)','Peak flow under 50% of best or no response to reliever','Chest pain']
+  }},
+ ckd:{
+  name:'Chronic Kidney Disease', mr:'दीर्घकालीन मूत्रपिंड विकार', gap:14,
+  params:['creat','egfr','k','hb','sbp','weight'],
+  flags:[
+   {id:'ckd_oliguria',l:'Very little or no urine',sev:'red'},
+   {id:'ckd_weak',l:'Muscle weakness or palpitations (possible high potassium)',sev:'red'},
+   {id:'ckd_dehyd',l:'Vomiting, diarrhoea or poor drinking (kidney injury risk)',sev:'amber'},
+   {id:'ckd_nsaid',l:'Took painkillers such as diclofenac or ibuprofen',sev:'amber'},
+   {id:'ckd_swell',l:'New swelling or breathlessness',sev:'amber'},
+   {id:'ckd_uraemic',l:'Itching, nausea, taste change or hiccups',sev:'amber'}
+  ],
+  rules:[
+   {t:'chg',p:'creat',days:2,dir:'up',abs:0.3,sev:'red',m:'Creatinine up 0.3 mg/dL or more within 48 h (acute kidney injury)'},
+   {t:'chg',p:'creat',days:7,dir:'up',pct:50,sev:'red',m:'Creatinine up 50% or more within 7 days'},
+   {t:'base',p:'creat',dir:'up',pct:25,sev:'amber',m:'Creatinine 25% or more above baseline'},
+   {t:'base',p:'egfr',dir:'down',pct:25,sev:'amber',m:'eGFR 25% or more below baseline'},
+   {t:'lvl',p:'egfr',op:'<=',v:15,sev:'amber',m:'eGFR 15 or below (stage 5): plan kidney replacement discussion'},
+   {t:'lvl',p:'k',op:'>=',v:5.5,sev:'amber',m:'Potassium raised'},
+   {t:'lvl',p:'k',op:'>=',v:6,sev:'red',m:'Potassium 6.0 or above'},
+   {t:'lvl',p:'k',op:'<',v:3.5,sev:'amber',m:'Potassium low'},
+   {t:'lvl',p:'hb',op:'<',v:10,sev:'amber',m:'Anaemia'},
+   {t:'lvl',p:'hb',op:'<',v:8,sev:'red',m:'Severe anaemia'},
+   {t:'sus',p:'sbp',op:'>=',v:140,n:4,of:7,sev:'amber',m:'BP persistently above target'},
+   {t:'lvl',p:'sbp',op:'<',v:90,sev:'amber',m:'Low systolic BP'},
+   {t:'chg',p:'weight',days:3,dir:'up',abs:2,sev:'amber',m:'Rapid weight gain: fluid retention'}
+  ],
+  guide:{
+   monitor:[
+    ['Blood pressure','Home readings 3 times a week','Under 130/80 mmHg (individualise)'],
+    ['Weight and swelling','Weekly; daily if on dialysis or oedematous','Stable dry weight'],
+    ['Urine output and colour','Daily awareness; record if reduced','No marked fall'],
+    ['Fluid intake','As advised for stage','Individual'],
+    ['Medicines review (NSAIDs, contrast, nephrotoxins, dose by eGFR)','Every visit','No NSAIDs; renal dosing'],
+    ['Blood sugar if diabetic','As per diabetes plan','Per plan']],
+   invest:[
+    ['Creatinine and eGFR','3–6 monthly in stage 3; 1–3 monthly in stage 4–5','Rate of decline'],
+    ['Potassium, bicarbonate, sodium','Same visit as creatinine','Hyperkalaemia, acidosis'],
+    ['Urine albumin-creatinine ratio','At least yearly','Progression risk'],
+    ['Haemoglobin, ferritin, transferrin saturation','3–6 monthly in stage 3b onward','Anaemia of CKD'],
+    ['Calcium, phosphate, PTH, vitamin D','6–12 monthly from stage 3b','Bone-mineral disorder'],
+    ['Renal ultrasound','Baseline; repeat if rapid decline','Size, obstruction']],
+   trends:[
+    'eGFR falling by more than 5 mL/min per year, or 25% from baseline',
+    'Creatinine rising 0.3 mg/dL within 48 hours (acute injury on chronic disease)',
+    'Potassium creeping up after ACEi/ARB or MRA',
+    'Haemoglobin falling steadily',
+    'Rising albuminuria',
+    'Weight gain with rising BP suggests volume overload'],
+   warn:['Reduced urine, puffy face or swelling','Nausea, itching, poor appetite, metallic taste','Muscle cramps, weakness, palpitations','Drowsiness or breathlessness'],
+   call:['Vomiting, diarrhoea or poor intake for more than a day (hold ACEi/ARB, diuretics, metformin per sick-day rules)','Any NSAID or contrast exposure','Creatinine up 25% from baseline, or potassium 5.5 or above','BP persistently above target or SBP under 90','Weight up 2 kg in 3 days'],
+   urgent:['Little or no urine for 12 hours or more','Potassium 6.0 or above, or ECG changes, or weakness with palpitations','Breathless with swelling, confusion, drowsiness, seizures or chest pain (pericarditis)','Creatinine up 0.3 mg/dL in 48 h or 50% in a week with illness']
+  }},
+ cir:{
+  name:'Cirrhosis', mr:'यकृत सिरोसिस', gap:3,
+  params:['weight','girth','enc','temp','bili','inr','na','creat'],
+  flags:[
+   {id:'cir_bleed',l:'Vomiting blood, black stools or fresh rectal bleeding',sev:'red'},
+   {id:'cir_sbp',l:'Fever with abdominal pain or tenderness',sev:'red'},
+   {id:'cir_conf',l:'New confusion, day–night reversal or drowsiness',sev:'red'},
+   {id:'cir_urine',l:'Passing much less urine',sev:'amber'},
+   {id:'cir_jaund',l:'Jaundice deeper than usual',sev:'amber'},
+   {id:'cir_const',l:'No bowel movement for 2 days or fewer than 2 soft stools a day on lactulose',sev:'amber'},
+   {id:'cir_swell',l:'Belly or leg swelling worse',sev:'amber'}
+  ],
+  rules:[
+   {t:'chg',p:'weight',days:3,dir:'up',abs:2,sev:'amber',m:'Rapid weight gain: ascites or fluid retention'},
+   {t:'chg',p:'weight',days:7,dir:'up',abs:3,sev:'red',m:'Weight up 3 kg or more in a week'},
+   {t:'chg',p:'girth',days:7,dir:'up',abs:3,sev:'amber',m:'Abdominal girth up 3 cm in a week'},
+   {t:'chg',p:'girth',days:7,dir:'up',abs:5,sev:'red',m:'Abdominal girth up 5 cm in a week'},
+   {t:'lvl',p:'enc',op:'>=',v:1,sev:'amber',m:'Early hepatic encephalopathy'},
+   {t:'lvl',p:'enc',op:'>=',v:2,sev:'red',m:'Hepatic encephalopathy grade 2 or higher'},
+   {t:'lvl',p:'temp',op:'>=',v:38,sev:'red',m:'Fever: exclude spontaneous bacterial peritonitis'},
+   {t:'lvl',p:'na',op:'<',v:130,sev:'amber',m:'Low sodium'},
+   {t:'lvl',p:'na',op:'<',v:125,sev:'red',m:'Sodium under 125'},
+   {t:'chg',p:'creat',days:2,dir:'up',abs:0.3,sev:'red',m:'Creatinine up 0.3 mg/dL within 48 h (kidney injury or hepatorenal)'},
+   {t:'chg',p:'creat',days:7,dir:'up',pct:50,sev:'red',m:'Creatinine up 50% or more within 7 days'},
+   {t:'base',p:'creat',dir:'up',pct:25,sev:'amber',m:'Creatinine 25% or more above baseline'},
+   {t:'base',p:'bili',dir:'up',pct:50,sev:'amber',m:'Bilirubin 50% or more above baseline'},
+   {t:'chg',p:'inr',days:14,dir:'up',abs:0.3,sev:'amber',m:'INR rising'}
+  ],
+  guide:{
+   monitor:[
+    ['Weight (and ankle oedema)','Daily if ascites; otherwise weekly','Loss of 0.5 kg a day on diuretics is the upper limit with ascites'],
+    ['Abdominal girth at the umbilicus','Weekly','Stable or falling'],
+    ['Mental state: sleep pattern, orientation, handwriting, West Haven grade','Daily by carer','Grade 0'],
+    ['Stool frequency on lactulose','Daily','2–3 soft stools a day'],
+    ['Temperature, abdominal pain','Daily when ascites present','No fever or tenderness'],
+    ['Urine output and alcohol abstinence','Daily; each visit','No alcohol']],
+   invest:[
+    ['Liver function tests, INR, albumin','Monthly to 3 monthly','Synthetic function (Child-Pugh and MELD-Na)'],
+    ['Creatinine and sodium','Weekly after diuretic change; otherwise monthly','Hepatorenal risk and dilutional hyponatraemia'],
+    ['Complete blood count','3 monthly','Platelets (portal hypertension), anaemia'],
+    ['Ultrasound abdomen with alpha-fetoprotein','6-monthly','Hepatocellular carcinoma surveillance'],
+    ['Upper GI endoscopy','At diagnosis; repeat per variceal status','Varices'],
+    ['Diagnostic paracentesis (cell count)','Any new ascites or admission, fever, or deterioration','Spontaneous bacterial peritonitis']],
+   trends:[
+    'Weight and girth climbing despite diuretics',
+    'Sodium drifting down',
+    'Creatinine rising even within the normal range',
+    'Bilirubin and INR rising together',
+    'More sleep during the day, slower speech, or altered handwriting',
+    'Platelets falling over time'],
+   warn:['Increasing belly swelling','Sleep reversal, forgetfulness, tremor','Deepening yellow colour of eyes or skin','Black stools or vomiting blood','Fever or abdominal pain'],
+   call:['Weight gain of 2 kg in 3 days or girth up 3 cm','Constipation or fewer than 2 stools a day on lactulose','Early confusion or day–night reversal','Reduced urine or poor drinking, vomiting or diarrhoea','Sodium under 130'],
+   urgent:['Vomiting blood, black or bloody stool','Fever with abdominal pain, or any fever with ascites','Confusion progressing to drowsiness (grade 2 or more)','Little urine, creatinine up 0.3 in 48 h','Sodium under 125']
+  }},
+ eld:{
+  name:'Elderly with Multimorbidity', mr:'वृद्ध रुग्ण (अनेक आजार)', gap:7,
+  params:['weight','sbp','pulse','spo2','temp','falls','barthel'],
+  flags:[
+   {id:'eld_delir',l:'New confusion or sudden change in alertness',sev:'red'},
+   {id:'eld_fallinj',l:'Fall with injury, or unable to get up',sev:'red'},
+   {id:'eld_intake',l:'Poor eating or drinking for more than 24 hours',sev:'amber'},
+   {id:'eld_swallow',l:'Coughing or choking with food',sev:'amber'},
+   {id:'eld_cont',l:'New urinary retention or incontinence',sev:'amber'},
+   {id:'eld_skin',l:'New pressure area or skin breakdown',sev:'amber'},
+   {id:'eld_low',l:'Low mood or withdrawal',sev:'amber'}
+  ],
+  rules:[
+   {t:'chg',p:'weight',days:30,dir:'down',pct:5,sev:'amber',m:'Weight down 5% or more in a month'},
+   {t:'chg',p:'weight',days:90,dir:'down',pct:10,sev:'red',m:'Weight down 10% or more in 3 months'},
+   {t:'chg',p:'barthel',days:30,dir:'down',abs:10,sev:'amber',m:'Function declining (Barthel down 10 points)'},
+   {t:'chg',p:'barthel',days:30,dir:'down',abs:20,sev:'red',m:'Sharp functional decline (Barthel down 20 points)'},
+   {t:'sum',p:'falls',days:30,op:'>=',v:1,sev:'amber',m:'Fall in the last month'},
+   {t:'sum',p:'falls',days:30,op:'>=',v:2,sev:'red',m:'Two or more falls in a month'},
+   {t:'lvl',p:'sbp',op:'<',v:100,sev:'amber',m:'Low systolic BP'},
+   {t:'lvl',p:'sbp',op:'<',v:90,sev:'red',m:'Very low systolic BP'},
+   {t:'lvl',p:'sbp',op:'>=',v:180,sev:'red',m:'Severe systolic BP elevation'},
+   {t:'lvl',p:'temp',op:'>=',v:37.8,sev:'amber',m:'Temperature raised (older adults may not mount a high fever)'},
+   {t:'lvl',p:'temp',op:'>=',v:38.5,sev:'red',m:'High fever'},
+   {t:'lvl',p:'temp',op:'<',v:35.5,sev:'red',m:'Low body temperature: possible sepsis'},
+   {t:'lvl',p:'spo2',op:'<',v:92,sev:'amber',m:'Low oxygen saturation'},
+   {t:'lvl',p:'spo2',op:'<',v:90,sev:'red',m:'Oxygen saturation under 90%'},
+   {t:'lvl',p:'pulse',op:'>=',v:100,sev:'amber',m:'Fast pulse'},
+   {t:'lvl',p:'pulse',op:'>=',v:120,sev:'red',m:'Very fast pulse'},
+   {t:'lvl',p:'pulse',op:'<=',v:50,sev:'amber',m:'Slow pulse'}
+  ],
+  guide:{
+   monitor:[
+    ['Weight and appetite','Weekly (monthly if stable)','Loss of 5% in a month needs action'],
+    ['Function: Barthel index (activities of daily living)','Monthly','Stable; note any decline'],
+    ['Falls and near-falls','Record every event','None'],
+    ['Cognition and delirium watch (CAM or carer report)','Weekly; at once with any acute change','Stable orientation'],
+    ['BP sitting and standing, pulse','Weekly','Avoid postural drop of 20 mmHg'],
+    ['Temperature and SpO₂','When unwell, otherwise weekly','Temperature 36–37.5 °C'],
+    ['Medicine count and review','Every visit','Reduce or stop drugs that no longer help (Beers/STOPP)'],
+    ['Bladder, bowel, sleep, mood, skin, swallowing','Weekly check','No new problem']],
+   invest:[
+    ['Complete blood count, kidney, liver, sodium, calcium','3–6 monthly','Drug safety and early disease'],
+    ['HbA1c, lipid profile','Per disease plan; avoid over-treatment','Individual targets'],
+    ['TSH, vitamin B12, vitamin D','Yearly or with new symptoms','Reversible causes of decline'],
+    ['ECG','Baseline; with dizziness or palpitations','Arrhythmia, conduction'],
+    ['Urine culture only with symptoms','When symptomatic','Avoid treating bacteriuria without symptoms'],
+    ['DEXA, hearing and vision check','Every 1–2 years as appropriate','Fracture and fall risk']],
+   trends:[
+    'Slow weight loss across months despite stable numbers',
+    'Barthel score drifting downward, even by 5 points',
+    'Falls clustering, or near-falls increasing',
+    'Standing BP lower than sitting, or systolic gradually falling',
+    'More medicines added with each visit',
+    'Increasing sleep, reduced speech or reduced appetite',
+    'Hospital or emergency visits becoming more frequent'],
+   warn:['Sudden confusion or drowsiness','Not eating or drinking','New incontinence or retention','Fall, dizziness or unsteadiness','Cough with meals'],
+   call:['Any fall, near-fall, or new dizziness','Weight down 5% in a month or reduced appetite for a week','Sudden change in thinking, sleep or behaviour','New pressure area, swallowing difficulty or incontinence','Fever 37.8 °C or above, or a general decline'],
+   urgent:['Acute confusion with drowsiness, fever, or low BP (delirium and sepsis)','Fall with head injury, hip pain or inability to bear weight','Not drinking for 24 hours, or very little urine','SpO₂ under 90%, chest pain or severe breathlessness','Temperature under 35.5 °C']
+  }},
+ onc:{
+  name:'Cancer & Palliative Care', mr:'कर्करोग आणि उपशामक काळजी', gap:3,
+  params:['pain','bt','pps','weight','temp','spo2','rr','bm'],
+  flags:[
+   {id:'onc_pain',l:'Pain not controlled despite usual medicines',sev:'red'},
+   {id:'onc_conf',l:'New confusion or drowsiness',sev:'red'},
+   {id:'onc_bleed',l:'Bleeding that does not stop',sev:'red'},
+   {id:'onc_cord',l:'New back pain with leg weakness, numbness or bladder or bowel change',sev:'red'},
+   {id:'onc_seiz',l:'Seizure',sev:'red'},
+   {id:'onc_vomit',l:'Persistent vomiting or unable to take oral medicines',sev:'amber'},
+   {id:'onc_swallow',l:'New difficulty swallowing',sev:'amber'},
+   {id:'onc_breath',l:'Breathlessness worse than usual',sev:'amber'},
+   {id:'onc_distress',l:'Severe anxiety, agitation or low mood',sev:'amber'},
+   {id:'onc_care',l:'Family or carer exhausted or unable to cope',sev:'amber'}
+  ],
+  rules:[
+   {t:'lvl',p:'pain',op:'>=',v:7,sev:'red',m:'Severe pain'},
+   {t:'sus',p:'pain',op:'>=',v:4,n:2,of:3,sev:'amber',m:'Pain repeatedly above 4'},
+   {t:'lvl',p:'bt',op:'>=',v:3,sev:'amber',m:'Three or more breakthrough doses in a day'},
+   {t:'lvl',p:'bt',op:'>=',v:5,sev:'red',m:'Five or more breakthrough doses: background analgesia needs review'},
+   {t:'lvl',p:'bm',op:'>=',v:3,sev:'amber',m:'Three days without a bowel movement'},
+   {t:'lvl',p:'bm',op:'>=',v:5,sev:'red',m:'Five days without a bowel movement'},
+   {t:'chg',p:'pps',days:14,dir:'down',abs:10,sev:'amber',m:'Performance status falling'},
+   {t:'lvl',p:'pps',op:'<=',v:40,sev:'amber',m:'Mostly bedbound: review goals of care and home plan'},
+   {t:'chg',p:'weight',days:30,dir:'down',pct:5,sev:'amber',m:'Weight down 5% or more in a month'},
+   {t:'lvl',p:'temp',op:'>=',v:38,sev:'red',cond:'chemo',m:'Fever on chemotherapy: treat as neutropenic sepsis until proven otherwise'},
+   {t:'lvl',p:'temp',op:'>=',v:38,sev:'amber',ncond:'chemo',m:'Fever'},
+   {t:'lvl',p:'spo2',op:'<',v:92,sev:'amber',m:'Low oxygen saturation'},
+   {t:'lvl',p:'spo2',op:'<',v:88,sev:'red',m:'Oxygen saturation under 88%'},
+   {t:'lvl',p:'rr',op:'>=',v:24,sev:'amber',m:'Fast breathing'},
+   {t:'lvl',p:'rr',op:'>=',v:30,sev:'red',m:'Very fast breathing'}
+  ],
+  guide:{
+   monitor:[
+    ['Pain score at rest and on movement (0–10)','Twice daily, and 1 hour after any breakthrough dose','Mostly 3 or below; patient-defined comfort'],
+    ['Breakthrough analgesic doses','Daily count','Under 3 a day; more means the regular dose is too low'],
+    ['Bowels','Daily','Opened at least every 2 days; laxative with every opioid'],
+    ['Nausea, appetite, oral intake, swallowing','Daily','Able to take medicines orally'],
+    ['Breathlessness, cough, secretions','Daily','Comfortable at rest'],
+    ['Alertness and confusion','Daily by carer','Stable'],
+    ['Palliative Performance Scale (PPS)','Weekly','Trend matters more than the number'],
+    ['Weight','Weekly if practical','Unplanned loss over 5% in a month'],
+    ['Temperature, mouth and skin; carer wellbeing','Daily if on chemotherapy; otherwise as needed','Under 38 °C']],
+   invest:[
+    ['Complete blood count (with neutrophils)','Before each chemotherapy cycle; with any fever on treatment','Neutropenia'],
+    ['Kidney function, sodium, potassium, calcium','Every 2–4 weeks or with new symptoms','Hypercalcaemia causes confusion, constipation, thirst'],
+    ['Liver function tests','3–4 weekly if on hepatotoxic therapy or liver metastases','Hepatic dysfunction'],
+    ['Imaging and tumour markers','Oncologist-directed','Response to treatment'],
+    ['Only tests that change management in advanced illness','Goal-directed','Avoid investigations that will not alter care']],
+   trends:[
+    'Rising pain scores or more breakthrough doses over several days',
+    'PPS falling by 10 points over two weeks',
+    'Weight and appetite sliding',
+    'Increasing sleep, confusion or reduced oral intake',
+    'More breathlessness at rest',
+    'Constipation building up on opioids',
+    'Carer strain rising'],
+   warn:['Pain that wakes the patient or is not settled by the usual dose','New confusion, drowsiness or agitation','Vomiting, constipation or inability to swallow tablets','Fever on chemotherapy','Bleeding','Back pain with leg weakness or bladder trouble'],
+   call:['Pain over 4 on most readings, or 3 or more breakthrough doses in a day','No bowel movement for 3 days','Vomiting, or unable to take oral medicines (change of route is needed)','Increasing breathlessness, cough or secretions','New confusion or sleepiness','Carer exhaustion or distress','Time to discuss goals of care, hospice or home-based end-of-life plan'],
+   urgent:['Fever 38 °C or above in a patient on chemotherapy (same-hour assessment)','Uncontrolled severe pain that does not settle despite breakthrough doses','Bleeding that does not stop','Suspected spinal cord compression: new back pain with leg weakness, numbness or bladder or bowel change','Seizure, or sudden severe breathlessness or chest pain, when hospital care matches the patient’s wishes','Hypercalcaemia: marked confusion, thirst, vomiting']
+  }}
+};
+const DIS_ORDER=['dm','htn','ihd','hf','copd','ckd','cir','eld','onc'];
+/* ---------- Analysis engine ---------- */
+const DAY = 86400000;
+const OPS = {'>':(a,b)=>a>b,'>=':(a,b)=>a>=b,'<':(a,b)=>a<b,'<=':(a,b)=>a<=b};
+const SEVRANK = {red:3,amber:2,info:1,ok:0};
+
+function fnum(v,k){ const d=PARAMS[k]?PARAMS[k].dp:1; return (+v).toFixed(d).replace(/\.0+$/,'').replace(/(\.\d*[1-9])0+$/,'$1'); }
+function fdate(t){ const d=new Date(t); return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]; }
+function series(p,k){
+  return (p.readings||[]).filter(r=>r.v&&r.v[k]!==undefined&&r.v[k]!==null&&r.v[k]!==''&&!isNaN(+r.v[k]))
+    .map(r=>({t:r.t,v:+r.v[k]})).sort((a,b)=>a.t-b.t);
+}
+function median(a){ const s=[...a].sort((x,y)=>x-y); const m=s.length>>1; return s.length%2?s[m]:(s[m-1]+s[m])/2; }
+function mean(a){ return a.reduce((x,y)=>x+y,0)/a.length; }
+function baselineOf(p,k,s){
+  const b=p.baselines&&p.baselines[k];
+  if(b!==undefined&&b!==null&&b!==''&&!isNaN(+b)) return {v:+b,src:'set by doctor'};
+  if(s.length>=4) return {v:median(s.slice(0,3).map(x=>x.v)),src:'median of first 3 readings'};
+  return null;
+}
+function ruleApplies(r,p){
+  if(r.cond==='chemo'&&!p.chemo) return false;
+  if(r.ncond==='chemo'&&p.chemo) return false;
+  return true;
+}
+/* Evaluate one rule. Returns {detail} when it fires, otherwise null. */
+function evalRule(r,p){
+  const s=series(p,r.p); if(!s.length) return null;
+  const last=s[s.length-1], u=PARAMS[r.p].u, L=PARAMS[r.p].l, lc=x=>x.charAt(0).toLowerCase()+x.slice(1);
+  const val=x=>fnum(x,r.p)+(u?' '+u:'');
+  if(r.t==='lvl'){
+    return OPS[r.op](last.v,r.v)?{detail:`${L} ${val(last.v)} on ${fdate(last.t)}`}:null;
+  }
+  if(r.t==='chg'){
+    const win=s.slice(0,-1).filter(x=>x.t>=last.t-r.days*DAY); if(!win.length) return null;
+    const ref=win[0], amt=r.dir==='up'?last.v-ref.v:ref.v-last.v;
+    const meas=r.pct!==undefined?amt/ref.v*100:amt, thr=r.pct!==undefined?r.pct:r.abs;
+    if(meas<thr-1e-9) return null;
+    const dd=Math.max(1,Math.round((last.t-ref.t)/DAY));
+    return {detail:`${L} ${val(ref.v)} on ${fdate(ref.t)} to ${val(last.v)} on ${fdate(last.t)} (${r.dir==='up'?'up':'down'} ${r.pct!==undefined?meas.toFixed(0)+'%':fnum(amt,r.p)+(u?' '+u:'')} in ${dd} day${dd>1?'s':''})`};
+  }
+  if(r.t==='sus'){
+    const w=s.slice(-r.of), c=w.filter(x=>OPS[r.op](x.v,r.v)).length;
+    return c>=r.n?{detail:`${c} of the last ${w.length} ${lc(L)} readings ${r.op} ${r.v}${u?' '+u:''}`}:null;
+  }
+  if(r.t==='mean'){
+    const cur=s.filter(x=>x.t>last.t-r.days*DAY), prev=s.filter(x=>x.t<=last.t-r.days*DAY&&x.t>last.t-2*r.days*DAY);
+    if(cur.length<2||prev.length<2) return null;
+    const a=mean(cur.map(x=>x.v)), b=mean(prev.map(x=>x.v)), amt=r.dir==='up'?a-b:b-a;
+    const meas=r.pct!==undefined?amt/b*100:amt, thr=r.pct!==undefined?r.pct:r.abs;
+    if(meas<thr-1e-9) return null;
+    return {detail:`${r.days}-day average of ${lc(L)} ${fnum(a,r.p)} vs ${fnum(b,r.p)} in the ${r.days} days before (${r.dir==='up'?'up':'down'} ${r.pct!==undefined?meas.toFixed(0)+'%':fnum(amt,r.p)+(u?' '+u:'')})`};
+  }
+  if(r.t==='base'){
+    const b=baselineOf(p,r.p,s); if(!b) return null;
+    const amt=r.dir==='up'?last.v-b.v:b.v-last.v;
+    const meas=r.pct!==undefined?amt/b.v*100:amt, thr=r.pct!==undefined?r.pct:r.abs;
+    if(meas<thr-1e-9) return null;
+    return {detail:`${L} ${val(last.v)} on ${fdate(last.t)} vs baseline ${fnum(b.v,r.p)}${u?' '+u:''} (${b.src}; ${r.dir==='up'?'up':'down'} ${r.pct!==undefined?meas.toFixed(0)+'%':fnum(amt,r.p)+(u?' '+u:'')})`};
+  }
+  if(r.t==='sum'){
+    const tot=s.filter(x=>x.t>last.t-r.days*DAY).reduce((a,x)=>a+x.v,0);
+    return OPS[r.op](tot,r.v)?{detail:`${tot} recorded in the last ${r.days} days`}:null;
+  }
+  return null;
+}
+function patientRules(p){
+  const out=[]; (p.diseases||[]).forEach(d=>{ if(DIS[d]) DIS[d].rules.forEach(r=>{ if(ruleApplies(r,p)) out.push({...r,dis:d}); }); });
+  return out;
+}
+function patientParams(p){
+  const ks=[]; (p.diseases||[]).forEach(d=>{ if(DIS[d]) DIS[d].params.forEach(k=>{ if(!ks.includes(k)) ks.push(k); }); });
+  return ks;
+}
+function patientFlags(p){
+  const out=[]; (p.diseases||[]).forEach(d=>{ if(DIS[d]) DIS[d].flags.forEach(f=>{ if(!out.find(x=>x.id===f.id)) out.push(f); }); });
+  return out;
+}
+const GROUPKEY=r=>[r.t,r.p,r.op||r.dir].join('|');
+function analyze(p,now){
+  now=now||Date.now();
+  const alerts=[], best={};
+  patientRules(p).forEach(r=>{
+    const hit=evalRule(r,p); if(!hit) return;
+    const a={sev:r.sev,title:r.m,detail:hit.detail,p:r.p,dis:r.dis,kind:'rule'};
+    const g=GROUPKEY(r), cur=best[g];
+    if(!cur||SEVRANK[a.sev]>SEVRANK[cur.sev]) best[g]=a;
+  });
+  Object.values(best).forEach(a=>alerts.push(a));
+  /* symptom flags: reported within 3 days of the newest reading */
+  const rs=(p.readings||[]).slice().sort((a,b)=>a.t-b.t);
+  if(rs.length){
+    const anchor=rs[rs.length-1].t, fl=patientFlags(p), seen={};
+    rs.filter(r=>r.t>=anchor-3*DAY).forEach(r=>(r.flags||[]).forEach(id=>{
+      const f=fl.find(x=>x.id===id); if(f&&!seen[id]){ seen[id]=1; alerts.push({sev:f.sev,title:f.l,detail:'Reported on '+fdate(r.t),kind:'flag'}); }
+    }));
+    /* monitoring gap */
+    const gap=Math.min(...(p.diseases||[]).filter(d=>DIS[d]).map(d=>DIS[d].gap),30);
+    const idle=(now-anchor)/DAY;
+    if(idle>gap) alerts.push({sev:'info',title:'Monitoring overdue',detail:`No reading for ${Math.floor(idle)} days (expected every ${gap} days or sooner)`,kind:'gap'});
+  } else alerts.push({sev:'info',title:'No readings yet',detail:'Add the first reading to start tracking',kind:'gap'});
+  alerts.sort((a,b)=>SEVRANK[b.sev]-SEVRANK[a.sev]);
+  const top=alerts.find(a=>a.sev==='red')?'red':alerts.find(a=>a.sev==='amber')?'amber':alerts.find(a=>a.sev==='info')?'info':'ok';
+  return {alerts,status:top};
+}
+/* Week-on-week trend of one parameter, for the arrow on each card */
+function trendOf(s){
+  if(s.length<2) return null;
+  const last=s[s.length-1];
+  const cur=s.filter(x=>x.t>last.t-7*DAY), prev=s.filter(x=>x.t<=last.t-7*DAY&&x.t>last.t-14*DAY);
+  if(cur.length>=2&&prev.length>=2){ const a=mean(cur.map(x=>x.v)), b=mean(prev.map(x=>x.v)); return {d:a-b,pct:b?(a-b)/b*100:0,basis:'7-day average vs previous 7 days'}; }
+  const pr=s[s.length-2]; return {d:last.v-pr.v,pct:pr.v?(last.v-pr.v)/pr.v*100:0,basis:'latest vs previous reading'};
+}
+function describeRule(r){
+  const lc=x=>x.charAt(0).toLowerCase()+x.slice(1);
+  const P=PARAMS[r.p], u=P.u?' '+P.u:'';
+  if(r.t==='lvl') return `${P.l} ${r.op} ${r.v}${u}`;
+  const amt=(r.pct!==undefined?r.pct+'%':r.abs+u);
+  if(r.t==='chg') return `${P.l} ${r.dir==='up'?'rises':'falls'} by ${amt} or more within ${r.days} days`;
+  if(r.t==='sus') return `${r.n} of the last ${r.of} ${lc(P.l)} readings ${r.op} ${r.v}${u}`;
+  if(r.t==='mean') return `${r.days}-day average of ${lc(P.l)} ${r.dir==='up'?'higher':'lower'} by ${amt} than the ${r.days} days before`;
+  if(r.t==='base') return `${P.l} ${r.dir==='up'?'above':'below'} the patient’s own baseline by ${amt} or more`;
+  if(r.t==='sum') return `${P.l} total over ${r.days} days ${r.op} ${r.v}`;
+  return '';
+}
+/* ---------- State & storage ---------- */
+let patients=[], examples=[], mode='view', view='watch', selId=null, filter='all', gkey='hf', storeNote='Checking secure clinic cloud…', hideEx=false, storageReady=false;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SVG={red:'<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="currentColor"/><rect x="5.2" y="2.6" width="1.6" height="4.2" rx=".8" fill="#fff"/><circle cx="6" cy="8.8" r=".9" fill="#fff"/></svg>',
+ amber:'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 .8 11.6 10.6H.4Z" fill="currentColor"/><rect x="5.3" y="4" width="1.4" height="3.4" rx=".7" fill="#1a1100"/><circle cx="6" cy="8.9" r=".8" fill="#1a1100"/></svg>',
+ ok:'<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="6" fill="currentColor"/><path d="M3.2 6.2 5.2 8.2 8.9 4.2" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ info:'<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.4V6.4L7.8 7.5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>'};
+const SL={red:'Urgent',amber:'Review today',ok:'Stable',info:'Overdue'};
+const pill=s=>`<span class="pill ${s}">${SVG[s]}${SL[s]}</span>`;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const uid=()=>crypto.randomUUID();
+async function cloud(action,payload){
+  const response=await fetch('/api/disease-monitoring?action='+encodeURIComponent(action),{method:payload?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:payload?{'Content-Type':'application/json'}:{},body:payload?JSON.stringify(payload):undefined});
+  let data={};try{data=await response.json();}catch{}
+  if(!response.ok)throw Error(data.message||'Secure clinic cloud request failed.');
+  return data;
+}
+async function commit(p){
+  if(!storageReady){toast('NOT SAVED: secure clinic cloud is unavailable. No browser-only copy was created.');return false;}
+  try{
+    const result=await cloud('save',{patient:p}),saved=result.patient;
+    const i=patients.findIndex(x=>x.id===saved.id);
+    if(i>=0)patients[i]=saved;else patients.push(saved);
+    storeNote='Saved securely in the authenticated clinic cloud';
+    return true;
+  }catch(e){toast('NOT SAVED: '+e.message+' No local fallback was used.');return false;}
+}
+async function removePatient(id){
+  const p=patients.find(x=>x.id===id);if(!p)return;
+  try{await cloud('archive',{id:p.id,revision:p.revision});patients=patients.filter(x=>x.id!==id);selId=null;mode='view';storeNote='Patient record archived in the clinic cloud; audit history retained.';renderAll();}
+  catch(e){toast('NOT ARCHIVED: '+e.message+' The cloud record is unchanged.');}
+}
+let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,3500); }
+
+/* ---------- Example patients (read-only, generated relative to today) ---------- */
+function makeExamples(){
+  const now=new Date(); now.setHours(8,0,0,0); const t0=now.getTime();
+  const day=(n)=>t0-n*DAY, nz=(i,a)=>Math.round(Math.sin(i*12.9898)*a*100)/100;
+  const hf={id:'ex1',example:true,code:'EX-01',age:68,sex:'M',diseases:['hf','htn','ckd'],readings:[]};
+  for(let i=13;i>=0;i--){ const k=13-i; const w=72+nz(k,.25)+(k>=9?(k-8)*.85:0);
+    hf.readings.push({id:'a'+i,t:day(i),v:{weight:+w.toFixed(1),sbp:Math.round(132+nz(k+3,5)-(k>=9?(k-8)*2:0)),dbp:Math.round(82+nz(k+1,3)),pulse:Math.round(76+nz(k,4)+(k>=9?(k-8)*3:0)),spo2:Math.round(96-(k>=11?(k-10)*1.2:0)+nz(k,.4)),pillows:k>=10?3:2},flags:(i===0?['hf_pnd']:[])}); }
+  hf.readings.push({id:'a99',t:day(1)+3600000,v:{creat:1.9,k:4.9}}); hf.readings.push({id:'a98',t:day(10),v:{creat:1.7,k:4.6}});
+  const ck={id:'ex2',example:true,code:'EX-02',age:74,sex:'F',diseases:['ckd','dm'],readings:[]};
+  [[84,1.6,4.6,150],[70,1.6,4.7,142],[56,1.7,4.9,160],[42,1.8,5.0,155],[28,1.9,5.1,171],[14,2.1,5.3,168],[3,2.3,5.7,182]].forEach((r,i)=>ck.readings.push({id:'b'+i,t:day(r[0]),v:{creat:r[1],k:r[2],glucF:r[3],egfr:Math.round(95/r[1]*0.6)}}));
+  const el={id:'ex3',example:true,code:'EX-03',age:82,sex:'F',diseases:['eld','htn'],readings:[]};
+  [[80,56.2,80,128],[65,55.6,80,130],[50,55.1,75,126],[35,54.4,75,122],[20,53.8,70,118],[8,53.1,65,112],[2,52.7,65,108]].forEach((r,i)=>el.readings.push({id:'c'+i,t:day(r[0]),v:{weight:r[1],barthel:r[2],sbp:r[3],falls:i===5?1:0}}));
+  const cp={id:'ex4',example:true,code:'EX-04',age:63,sex:'M',diseases:['copd'],baselines:{spo2:93},readings:[]};
+  for(let i=9;i>=0;i--) cp.readings.push({id:'d'+i,t:day(i),v:{spo2:Math.round(93+nz(i,1)),pefr:Math.round(310+nz(i,12)),puffs:1+(i%2),rr:Math.round(18+nz(i,1.5))}});
+  return [hf,ck,el,cp];
+}
+const all=()=>patients.length||hideEx?patients:examples;
+const find=id=>all().find(p=>p.id===id);
+
+/* ---------- Sparkline ---------- */
+const SP=[];
+function spark(p,k){
+  const s=series(p,k).slice(-40); if(!s.length) return '<div class="mut" style="padding:20px 0;font-size:12px">No readings yet</div>';
+  const W=240,H=76,L=6,R=34,T=8,B=16, pw=W-L-R, ph=H-T-B;
+  let lo=Math.min(...s.map(x=>x.v)), hi=Math.max(...s.map(x=>x.v)); const span0=Math.max(hi-lo,Math.abs(hi)*.04,.5);
+  const refs=[]; patientRules(p).filter(r=>r.p===k&&r.t==='lvl').forEach(r=>{ if(r.v>=lo-span0*.8&&r.v<=hi+span0*.8&&!refs.find(x=>x.v===r.v)) refs.push(r); });
+  const bl=baselineOf(p,k,series(p,k)); const hasBase=patientRules(p).some(r=>r.p===k&&r.t==='base');
+  refs.forEach(r=>{lo=Math.min(lo,r.v);hi=Math.max(hi,r.v)}); if(hasBase&&bl){ if(bl.v>=lo-span0&&bl.v<=hi+span0){lo=Math.min(lo,bl.v);hi=Math.max(hi,bl.v);} }
+  const pad=(hi-lo||1)*.12; lo-=pad; hi+=pad;
+  const t0=s[0].t, t1=s[s.length-1].t, tx=t=>L+(t1===t0?pw/2:(t-t0)/(t1-t0)*pw), vy=v=>T+(hi-v)/(hi-lo)*ph;
+  let g=`<line class="gl" x1="${L}" x2="${W-R}" y1="${T+ph}" y2="${T+ph}"/>`;
+  refs.forEach(r=>{ const y=vy(r.v), c=r.sev==='red'?'var(--red)':'var(--amber)'; g+=`<line x1="${L}" x2="${W-R+4}" y1="${y}" y2="${y}" stroke="${c}" stroke-width="1" stroke-dasharray="4 3"/><text x="${W-R+6}" y="${y+3}">${r.v}</text>`; });
+  if(hasBase&&bl&&bl.v>=lo&&bl.v<=hi){ const y=vy(bl.v); g+=`<line x1="${L}" x2="${W-R+4}" y1="${y}" y2="${y}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="1 3"/><text x="${W-R+6}" y="${y+3}">base</text>`; }
+  const d=s.map((x,i)=>(i?'L':'M')+tx(x.t).toFixed(1)+' '+vy(x.v).toFixed(1)).join('');
+  g+=`<path class="ln" d="${d}"/>`;
+  if(s.length<=20) s.slice(0,-1).forEach(x=>g+=`<circle class="pt" cx="${tx(x.t).toFixed(1)}" cy="${vy(x.v).toFixed(1)}" r="2"/>`);
+  const e=s[s.length-1]; g+=`<circle class="end" cx="${tx(e.t).toFixed(1)}" cy="${vy(e.v).toFixed(1)}" r="4"/>`;
+  g+=`<text x="${L}" y="${H-3}">${fdate(t0)}</text><text x="${W-R}" y="${H-3}" text-anchor="end">${fdate(t1)}</text>`;
+  g+=`<line class="cross" x1="0" x2="0" y1="${T}" y2="${T+ph}" style="display:none"/>`;
+  const id=SP.push({s,k,tx0:L,pw,t0,t1})-1;
+  return `<svg class="sp" data-sp="${id}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(PARAMS[k].l)} trend, ${s.length} readings, latest ${fnum(e.v,k)} ${esc(PARAMS[k].u)}">${g}</svg>`;
+}
+document.addEventListener('pointermove',ev=>{
+  const sv=ev.target.closest&&ev.target.closest('svg.sp'); const tip=$('#tip');
+  if(!sv){ tip.hidden=true; document.querySelectorAll('.cross').forEach(c=>c.style.display='none'); return; }
+  const m=SP[+sv.dataset.sp]; if(!m) return; const r=sv.getBoundingClientRect(), sc=240/r.width, x=(ev.clientX-r.left)*sc;
+  let best=0,bd=1e9; m.s.forEach((p,i)=>{ const px=m.t1===m.t0?m.tx0+m.pw/2:m.tx0+(p.t-m.t0)/(m.t1-m.t0)*m.pw; const dd=Math.abs(px-x); if(dd<bd){bd=dd;best=i;} });
+  const p=m.s[best], px=m.t1===m.t0?m.tx0+m.pw/2:m.tx0+(p.t-m.t0)/(m.t1-m.t0)*m.pw;
+  const c=sv.querySelector('.cross'); c.setAttribute('x1',px); c.setAttribute('x2',px); c.style.display='';
+  tip.textContent=fdate(p.t)+' · '+fnum(p.v,m.k)+(PARAMS[m.k].u?' '+PARAMS[m.k].u:''); tip.hidden=false;
+  tip.style.left=Math.min(ev.clientX+12,innerWidth-tip.offsetWidth-8)+'px'; tip.style.top=(ev.clientY-34)+'px';
+});
+
+/* ---------- Rendering ---------- */
+function ago(t){ const d=Math.floor((Date.now()-t)/DAY); return d<=0?'today':d===1?'yesterday':d+' days ago'; }
+function lastT(p){ return p.readings&&p.readings.length?Math.max(...p.readings.map(r=>r.t)):null; }
+function renderSummary(){
+  const cnt={red:0,amber:0,info:0,ok:0}; all().forEach(p=>cnt[analyze(p).status]++);
+  const items=[['all','All patients',all().length],['red','Urgent',cnt.red],['amber','Review today',cnt.amber],['info','Overdue',cnt.info],['ok','Stable',cnt.ok]];
+  $('#sum').innerHTML=items.filter(i=>i[0]!=='all').map(i=>`<button class="sumb" data-act="filter" data-v="${i[0]}" aria-pressed="${filter===i[0]}"><span class="n">${i[2]}</span><span class="l">${pill(i[0])}</span></button>`).join('');
+}
+function renderList(){
+  let ps=all().map(p=>({p,a:analyze(p)}));
+  if(filter!=='all') ps=ps.filter(x=>x.a.status===filter);
+  ps.sort((x,y)=>SEVRANK[y.a.status]-SEVRANK[x.a.status]||(lastT(y.p)||0)-(lastT(x.p)||0));
+  const h=ps.map(({p,a})=>{ const top=a.alerts[0]; const lt=lastT(p);
+    return `<button class="pi" data-act="sel" data-id="${esc(p.id)}" aria-current="${p.id===selId}">
+      <div class="r1"><span class="code">${esc(p.code)}${p.example?' <span class="chip">example</span>':''}</span>${pill(a.status)}</div>
+      <div class="meta">${esc(p.age||'')}${p.age?' y ':''}${esc(p.sex||'')} · ${lt?'last reading '+ago(lt):'no readings'}</div>
+      <div class="chips">${(p.diseases||[]).map(d=>`<span class="chip">${esc(DIS[d]?DIS[d].name:d)}</span>`).join('')}</div>
+      ${top&&a.status!=='ok'?`<div class="one">${esc(top.title)}</div>`:''}</button>`; }).join('');
+  $('#plist').innerHTML=`<div class="row" style="margin-bottom:10px">${storageReady?'<button class="btn pri" data-act="new">+ Add patient</button>':''}</div><div class="pl">${h||'<div class="mut" style="padding:8px">No patients match this filter.</div>'}</div>`;
+}
+function actionLine(st){
+  return {red:'<strong>Act now.</strong> Review the red items below; use the “refer urgently” list in the disease guide.',
+    amber:'<strong>Contact the doctor today.</strong> Something has changed. Review the amber items below.',
+    info:'<strong>Check in.</strong> A reading is overdue.',ok:'<strong>No alert.</strong> Readings are inside the rules and trends are flat.'}[st];
+}
+function renderDetail(){
+  const el=$('#detail'); const p=find(selId);
+  if(mode==='new'||mode==='edit'){ el.innerHTML=patientForm(mode==='edit'?p:null); return; }
+  if(!p){ el.innerHTML=`<div class="panel"><h2>Select a patient</h2><p class="sub">Choose a patient on the left, or add one. Each reading you log is checked against threshold rules and against the patient’s own trend.</p></div>`; return; }
+  const a=analyze(p), allKeys=patientParams(p), keys=allKeys.filter(k=>series(p,k).length), missing=allKeys.filter(k=>!series(p,k).length), ro=!!p.example;
+  const alerts=a.alerts.length?`<ul class="al">${a.alerts.map(x=>`<li class="${x.sev}"><span class="pill ${x.sev}">${SVG[x.sev]}${x.sev==='red'?'Urgent':x.sev==='amber'?'Review':'Note'}</span><div><div class="t">${esc(x.title)}</div><div class="d">${esc(x.detail)}</div></div></li>`).join('')}</ul>`:'';
+  const byP={}; a.alerts.forEach(x=>{ if(x.p&&(!byP[x.p]||SEVRANK[x.sev]>SEVRANK[byP[x.p]])) byP[x.p]=x.sev; });
+  const cards=keys.map(k=>{ const s=series(p,k), last=s[s.length-1], tr=trendOf(s), P=PARAMS[k];
+    let tt='<span class="mut">needs 2 readings</span>';
+    if(tr){ const arrow=Math.abs(tr.d)<1e-9?'→':tr.d>0?'▲':'▼'; tt=`${arrow} ${tr.d>0?'+':''}${fnum(tr.d,k)}${P.u?' '+esc(P.u):''} <span class="mut">${esc(tr.basis)}</span>`; }
+    return `<div class="pc ${byP[k]||''}"><div class="h"><span class="nm">${esc(P.l)}</span>${byP[k]?`<span class="pill ${byP[k]}">${SVG[byP[k]]}${byP[k]==='red'?'Urgent':'Review'}</span>`:''}</div>
+      <div class="v">${last?fnum(last.v,k):'–'}<small>${esc(P.u)}</small></div>${spark(p,k)}<div class="tr">${tt}</div></div>`; }).join('');
+  const rd=(p.readings||[]).slice().sort((x,y)=>y.t-x.t).slice(0,14);
+  const hdr=['Date',...keys.map(k=>PARAMS[k].l),'Symptoms'];
+  const fl=patientFlags(p);
+  const rows=rd.map(r=>`<tr><td class="n">${new Date(r.t).toLocaleDateString('en-GB',{day:'2-digit',month:'short'})} ${new Date(r.t).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</td>${keys.map(k=>`<td class="n">${r.v&&r.v[k]!==undefined&&r.v[k]!==''?fnum(r.v[k],k):''}</td>`).join('')}<td>${esc((r.flags||[]).map(id=>(fl.find(f=>f.id===id)||{}).l||id).join('; '))}${r.note?(r.flags&&r.flags.length?' · ':'')+esc(r.note):''}</td>${ro?'':`<td><button class="btn sm" data-act="delr" data-id="${esc(r.id)}">Delete</button></td>`}</tr>`).join('');
+  el.innerHTML=`<div class="panel">
+    <div class="dh"><div><h2>${esc(p.code)} ${pill(a.status)}</h2><div class="meta">${esc(p.age||'')}${p.age?' years, ':''}${esc(p.sex||'')}${p.chemo?' · on chemotherapy':''}</div>
+      <div class="chips" style="margin-top:6px">${(p.diseases||[]).map(d=>`<button class="chip" style="cursor:pointer" data-act="guide" data-d="${d}">${esc(DIS[d]?DIS[d].name:d)} guide</button>`).join('')}</div></div>
+      ${ro?'':`<div class="row"><button class="btn" data-act="edit">Edit</button><button class="btn warn" data-act="delp">Delete</button></div>`}</div>
+    ${ro?'<div class="banner">Example patient with generated readings, read only. Add your own patient to start logging.</div>':''}
+    <div class="act ${a.status}">${actionLine(a.status)}</div>
+    <h3>What changed</h3>${alerts||'<p class="sub">Nothing to report.</p>'}
+    ${ro?'':readingForm(p,allKeys,fl)}
+    <h3>Trends</h3><div class="cards">${cards}</div>${missing.length?`<p class="meta" style="margin:-8px 0 14px">Not recorded yet: ${missing.map(k=>esc(PARAMS[k].l)).join(', ')}</p>`:''}
+    <h3>Recent readings</h3>
+    <div class="scroll"><table><thead><tr>${hdr.map(h=>`<th>${esc(h)}</th>`).join('')}${ro?'':'<th></th>'}</tr></thead><tbody>${rows||`<tr><td colspan="${hdr.length+1}" class="mut">No readings yet.</td></tr>`}</tbody></table></div>
+    ${p.baselines&&Object.keys(p.baselines).length?`<p class="meta" style="margin-top:10px">Baselines set by doctor: ${Object.entries(p.baselines).filter(e=>e[1]!=='').map(([k,v])=>esc(PARAMS[k].l)+' '+esc(v)).join(', ')}</p>`:''}
+  </div>`;
+}
+function localNow(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); }
+function readingForm(p,keys,fl){
+  return `<details class="sec" open><summary>Log a reading</summary>
+    <div class="form"><label class="f">Date and time<input type="datetime-local" id="rd-t" value="${localNow()}"></label>
+    ${keys.map(k=>{ const P=PARAMS[k]; return `<label class="f">${esc(P.l)}${P.u?' ('+esc(P.u)+')':''}<input type="number" inputmode="decimal" id="rd-${k}" min="${P.min}" max="${P.max}" step="${P.dp?Math.pow(10,-P.dp):1}"></label>`; }).join('')}</div>
+    <div style="margin-top:10px"><div class="meta" style="margin-bottom:4px">Symptoms present today (tick any)</div>${fl.map(f=>`<label class="ck"><input type="checkbox" id="fl-${f.id}"><span>${esc(f.l)}</span></label>`).join('')}</div>
+    <label class="f" style="margin-top:8px">Note (no names)<input type="text" id="rd-note" maxlength="200"></label>
+    <div class="row" style="margin-top:10px"><button class="btn pri" data-act="addr">Save reading</button><span class="err" id="rd-err" role="alert"></span></div></details>`;
+}
+function patientForm(p){
+  p=p||{diseases:[],baselines:{}}; const sel=p.diseases||[];
+  return `<div class="panel"><h2>${p.id?'Edit patient':'New patient'}</h2>
+  <p class="sub">Use a patient code such as a file number. Do not type the patient’s name, phone or address.</p>
+  <div class="form" style="margin:12px 0"><label class="f">Patient code<input type="text" id="np-code" maxlength="24" value="${esc(p.code||'')}"></label>
+   <label class="f">Age<input type="number" id="np-age" min="0" max="120" value="${esc(p.age||'')}"></label>
+   <label class="f">Sex<select id="np-sex">${['','M','F','Other'].map(x=>`<option ${x===(p.sex||'')?'selected':''}>${x}</option>`).join('')}</select></label></div>
+  <div class="meta" style="margin-bottom:4px">Conditions (tick all that apply)</div>
+  ${DIS_ORDER.map(d=>`<label class="ck"><input type="checkbox" class="np-d" value="${d}" ${sel.includes(d)?'checked':''}><span>${esc(DIS[d].name)} <span class="mut">${esc(DIS[d].mr)}</span></span></label>`).join('')}
+  <label class="ck"><input type="checkbox" id="np-chemo" ${p.chemo?'checked':''}><span>Currently on chemotherapy (fever then counts as urgent)</span></label>
+  <div class="meta" style="margin:10px 0 4px">Personal baselines (optional). Leave blank to use the median of the first 3 readings.</div>
+  <div class="form">${['spo2','pefr','creat','egfr','bili','weight'].map(k=>`<label class="f">${esc(PARAMS[k].l)}${PARAMS[k].u?' ('+esc(PARAMS[k].u)+')':''}<input type="number" step="any" id="np-b-${k}" value="${esc((p.baselines||{})[k]||'')}"></label>`).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn pri" data-act="savep" data-id="${esc(p.id||'')}">Save patient</button><button class="btn" data-act="cancel">Cancel</button><span class="err" id="np-err" role="alert"></span></div></div>`;
+}
+/* ---------- Guides ---------- */
+function renderGuides(){
+  const d=DIS[gkey], g=d.guide;
+  const tbl=(rows,h)=>`<div class="scroll"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const ul=a=>`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+  const rules=d.rules.map(r=>`<li><span class="pill ${r.sev}">${SVG[r.sev]}${r.sev==='red'?'Urgent':'Review'}</span><span>${esc(describeRule(r))}${r.cond?' (on chemotherapy)':''}${r.ncond?' (not on chemotherapy)':''}</span></li>`).join('');
+  $('#guide').innerHTML=`<div class="gchips">${DIS_ORDER.map(k=>`<button class="gc" data-act="gsel" data-d="${k}" aria-pressed="${k===gkey}">${esc(DIS[k].name)} · ${esc(DIS[k].mr)}</button>`).join('')}</div>
+  <h2 style="margin-bottom:12px">${esc(d.name)} <span class="mut" style="font-weight:400">${esc(d.mr)}</span></h2>
+  <div class="gg">
+   <div class="gb gw"><h3>What to monitor, and how often <span>काय आणि किती वेळा</span></h3>${tbl(g.monitor,['Measure','How often','Typical target'])}</div>
+   <div class="gb gw"><h3>Investigations <span>तपासण्या</span></h3>${tbl(g.invest,['Test','How often','What it tells you'])}</div>
+   <div class="gb"><h3>Trends that matter <span>कल</span></h3>${ul(g.trends)}</div>
+   <div class="gb"><h3>Warning signs <span>धोक्याची लक्षणे</span></h3>${ul(g.warn)}</div>
+   <div class="gb amber"><h3>Contact the doctor <span>डॉक्टरांशी संपर्क</span></h3>${ul(g.call)}</div>
+   <div class="gb red"><h3>Refer to hospital urgently <span>तातडीने रुग्णालयात पाठवा</span></h3>${ul(g.urgent)}</div>
+   <div class="gb gw"><h3>Rules this page applies automatically <span>स्वयंचलित नियम</span></h3><ul class="rl">${rules}</ul>
+     <p class="meta" style="margin-top:8px">Rules are checked each time a reading is saved. A rule that fires at both review and urgent level shows only the urgent one.</p></div>
+  </div>`;
+}
+/* ---------- Actions ---------- */
+function renderAll(){
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===view));
+  $('#v-watch').hidden=view!=='watch'; $('#v-guides').hidden=view!=='guides';
+  $('#store').textContent=storeNote;
+  SP.length=0;
+  if(view==='watch'){ renderSummary(); renderList(); renderDetail(); } else renderGuides();
+}
+function numOrNull(id){ const e=$('#'+id); if(!e||e.value==='') return null; return +e.value; }
+document.addEventListener('click',async ev=>{
+  const b=ev.target.closest('[data-act]'); if(!b) return; const act=b.dataset.act;
+  if(act==='filter'){ filter=filter===b.dataset.v?'all':b.dataset.v; renderAll(); }
+  else if(act==='sel'){ selId=b.dataset.id; mode='view'; renderAll(); if(innerWidth<860) $('#detail').scrollIntoView({behavior:'smooth'}); }
+  else if(act==='new'){ mode='new'; selId=null; renderAll(); }
+  else if(act==='edit'){ mode='edit'; renderAll(); }
+  else if(act==='cancel'){ mode='view'; renderAll(); }
+  else if(act==='guide'){ gkey=b.dataset.d; view='guides'; location.hash='guides'; renderAll(); scrollTo(0,0); }
+  else if(act==='gsel'){ gkey=b.dataset.d; renderGuides(); }
+  else if(act==='savep'){
+    const code=$('#np-code').value.trim(), ds=[...document.querySelectorAll('.np-d:checked')].map(x=>x.value);
+    if(!code){ $('#np-err').textContent='Enter a patient code.'; return; }
+    if(/\s/.test(code)&&code.split(/\s+/).length>2){ $('#np-err').textContent='Use a short code, not a name.'; return; }
+    if(!ds.length){ $('#np-err').textContent='Tick at least one condition.'; return; }
+    const old=b.dataset.id?clone(find(b.dataset.id)):null;
+    const p=old||{id:uid(),readings:[],created:Date.now()};
+    p.code=code; p.age=numOrNull('np-age'); p.sex=$('#np-sex').value; p.diseases=ds; p.chemo=ds.includes('onc')&&$('#np-chemo').checked;
+    p.baselines={}; ['spo2','pefr','creat','egfr','bili','weight'].forEach(k=>{ const v=numOrNull('np-b-'+k); if(v!==null) p.baselines[k]=v; });
+    selId=p.id; mode='view'; if(!await commit(p))return; renderAll();
+  }
+  else if(act==='addr'){
+    const p=clone(find(selId)), keys=patientParams(p), v={}, err=[];
+    keys.forEach(k=>{ const x=numOrNull('rd-'+k); if(x===null) return; const P=PARAMS[k]; if(x<P.min||x>P.max) err.push(`${P.l} should be between ${P.min} and ${P.max}`); else v[k]=x; });
+    const flags=patientFlags(p).filter(f=>$('#fl-'+f.id)&&$('#fl-'+f.id).checked).map(f=>f.id);
+    const t=new Date($('#rd-t').value).getTime();
+    if(!t||isNaN(t)) err.push('Enter a valid date and time');
+    if(!err.length&&!Object.keys(v).length&&!flags.length) err.push('Enter at least one value or tick a symptom');
+    if(err.length){ $('#rd-err').textContent=err.join('. ')+'.'; return; }
+    p.readings=p.readings||[]; p.readings.push({id:'r'+Date.now().toString(36),t,v,flags,note:$('#rd-note').value.trim()});
+    if(!await commit(p))return; renderAll();
+    const a=analyze(p); toast(a.status==='red'?'Saved. Urgent alert raised.':a.status==='amber'?'Saved. Review today.':'Saved.');
+  }
+  else if(act==='delr'){
+    if(b.dataset.arm){ const p=clone(find(selId)); p.readings=p.readings.filter(r=>r.id!==b.dataset.id); await commit(p); renderAll(); }
+    else { b.dataset.arm='1'; b.textContent='Confirm delete'; setTimeout(()=>{ if(b.isConnected){ delete b.dataset.arm; b.textContent='Delete'; } },3000); }
+  }
+  else if(act==='delp'){
+    if(b.dataset.arm) removePatient(selId);
+    else { b.dataset.arm='1'; b.textContent='Confirm delete patient'; setTimeout(()=>{ if(b.isConnected){ delete b.dataset.arm; b.textContent='Delete'; } },3500); }
+  }
+});
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{ view=b.dataset.tab; location.hash=view; renderAll(); }));
+function fromHash(){ const h=location.hash.replace('#',''); if(h==='guides'||h==='watch') view=h; }
+addEventListener('hashchange',()=>{ fromHash(); renderAll(); });
+
+/* ---------- Secure clinic-cloud boot ---------- */
+examples=makeExamples(); selId=examples[0].id; fromHash(); renderAll();
+(async()=>{
+  try{
+    const result=await cloud('list');
+    patients=Array.isArray(result.patients)?result.patients:[];
+    storageReady=true;
+    storeNote='Owner-authenticated private clinic cloud · no local patient storage';
+    if(patients.length)selId=patients[0].id;
+  }catch(error){
+    storageReady=false;patients=[];
+    storeNote='Cloud unavailable. Real patient records are not loaded or saved here. Showing read-only synthetic examples only.';
+  }
+  renderAll();
+})();
+</script>
+
+</body></html>
