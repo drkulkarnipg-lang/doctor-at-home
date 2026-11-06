@@ -2,7 +2,8 @@
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const {validatePatient,createHandler}=require('../api/disease-monitoring');
-const html=fs.readFileSync(require.resolve('../server/disease-monitoring.html'),'utf8');
+const pageModule=fs.readFileSync(require.resolve('../api/disease-monitoring-page.js'),'utf8');
+const html=Buffer.from(pageModule.match(/const PAGE_HTML=Buffer.from\\('([^']+)'/)[1],'base64').toString('utf8');
 assert.doesNotMatch(html, /localStorage|window\.claude|collection\('patients'\)/, 'Patient records must never fall back to browser storage or an unrelated page database.');
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
 assert.equal(scripts.length,1,'The isolated module should contain one application script.');
