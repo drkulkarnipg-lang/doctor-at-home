@@ -23,3 +23,18 @@
 .intake-quick-grid label:has(textarea){grid-column:1/-1}
 .intake-quick-grid input[readonly]{background:#edf3f7!important;font-weight:700}
 @media(max-width:640px){.intake-quick-grid{grid-template-columns:minmax(0,1fr)}.intake-quick-grid label:has(textarea){grid-column:auto}.intake-quick-essentials{padding:12px}}
+
+
+/* OWNER-MANDATED BOOK VISIT PALETTE: red is prohibited throughout this section. */
+#bookingSection .booking-intake .intake-urgent{
+  border-left:4px solid #83a9c8!important;
+  background:#eef6fc!important;
+  color:#294b63!important;
+}
+#bookingSection .booking-intake .intake-urgent :is(strong,b,em){color:#294b63!important}
+#bookingSection .booking-intake :is(.intake-urgent,[class*="urgent"],[class*="warning"],[class*="danger"]){
+  border-color:#a9c6dc!important;
+  background-color:#eef6fc!important;
+  color:#294b63!important;
+}
+#bookingSection .booking-intake :is(.intake-urgent,[class*="urgent"],[class*="warning"],[class*="danger"]) :is(a,strong,b,em){color:#294b63!important}
