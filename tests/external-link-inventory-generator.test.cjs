@@ -39,7 +39,7 @@ try{
 
  assert.ok(committed.source_files_scanned.every(file=>current.source_files_scanned.includes(file)),'The dated audit snapshot must remain a subset of current active sources');
  const additions=current.source_files_scanned.filter(file=>!committed.source_files_scanned.includes(file));
- assert.deepEqual(additions,['api/disease-monitoring-page.js','api/disease-monitoring.js','disease-monitoring-launch.js','server/disease-monitoring.html'],'New active sources must be explicitly reconciled with the dated inventory snapshot');
+ assert.deepEqual(additions,['api/disease-monitoring-page.js','api/disease-monitoring.js','disease-monitoring-launch.js'],'New active sources must be explicitly reconciled with the dated inventory snapshot');
  const stableLinks=links=>links.map(({source_lines,...link})=>link);
  // The committed inventory is a dated audit snapshot; source line numbers naturally move as HTML evolves.
  // Keep strict parity for destinations, source files and classifications without freezing obsolete line offsets.
